@@ -1,0 +1,35 @@
+/*该皮肤参考lhgdialog插件皮肤，并在此基础上进行了修改 （原皮肤作者：一丝冰凉，QQ：50167214）*/
+/* lhgdialog : http://bbs.lhgcore.com/lhg4/index.html */
+
+/*窗口*/
+.window-container{border-radius:3px;border:1px solid #666;background:#6E6E6E}
+/*当前窗口*/
+.window-current{background:#6E6E6E}
+/*标题*/
+.title-bar,
+.window-current .title-bar{background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3 );background:-o-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
+/*标题文字*/
+.title-bar .title{text-shadow:0 1px 1px #fff}
+/*窗口右上角操作按钮*/
+.title-handle a{color:#505050}
+.title-handle .ha-hide .hide-b{border-bottom:2px solid #505050}
+.title-handle .ha-max .max-b{border:1px solid #505050;border-top-width:3px;top:8px}
+.title-handle .ha-revert .revert-b{border:1px solid #505050;border-top-width:3px}
+.title-handle .ha-revert .revert-t{border:1px solid #505050;border-top-width:3px;background:#D2D2D2}
+.title-handle .ha-hide:hover b,
+.title-handle .ha-max:hover b,
+.title-handle .ha-revert:hover b{border-color:#2492FF}
+.title-handle .ha-fullscreen{color:#505050}
+.title-handle .ha-fullscreen:hover{color:#2492FF}
+.title-handle .ha-close{color:#BF160B}
+.title-handle .ha-close:hover{color:#BF160B}
+/*窗口内部iframe*/
+.window-frame{border-top:1px solid #666;border-bottom:1px solid #666}
+/*底部*/
+.set-bar,
+.window-current .set-bar{background:#E8E8E8;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3);background:-o-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
+.set-bar .btn,
+.window-current .set-bar .btn{border:none;width:30px;margin-top:4px}
+.set-bar .btn:hover,
+.window-current .set-bar .btn:hover{border:none;background:none}
+.set-bar .btn .btn-con{display:none}

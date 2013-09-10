@@ -1,0 +1,61 @@
+/*该皮肤参考lhgdialog插件皮肤，并在此基础上进行了修改 （原皮肤作者：一丝冰凉，QQ：50167214）*/
+/* lhgdialog : http://bbs.lhgcore.com/lhg4/index.html */
+
+/*窗口*/
+.window-container{border-radius:3px;border:1px solid #666;background:#6E6E6E}
+/*当前窗口*/
+.window-current{background:#6E6E6E}
+/*标题*/
+.title-bar,
+.window-current .title-bar{border-radius:4px 4px 0 0;background:linear-gradient(left, #3992be, #95d7f1);background:-webkit-gradient(linear, 0% 0%, 100% 0%, from(#3992be), to(#95d7f1));background:-moz-linear-gradient(left, #3992be, #95d7f1);background:-o-linear-gradient(left, #3992be, #95d7f1);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3992be', endColorstr='#95d7f1', gradientType=1);*background:#DDD}
+/*标题图标*/
+.title-bar .icon{border-radius:3px}
+/*标题文字*/
+.title-bar .title{text-shadow:0 1px 1px #fff}
+/*窗口右上角操作按钮*/
+.title-handle{top:0px;right:5px}
+.title-handle a{color:#fff;width:30px;height:20px;line-height:20px;border-left:1px solid #64a0b4;border-bottom:1px solid #6db0c1}
+.title-handle .ha-hide{border-radius:0 0 0 4px}
+.title-handle .ha-hide .hide-b{top:10px;left:10px;width:10px;height:2px;border-bottom:2px solid #fff}
+.title-handle .ha-max .max-b{top:7px;left:9px;width:10px;height:5px;border:1px solid #fff;border-top-width:3px}
+.title-handle .ha-revert .revert-b{top:4px;left:9px;width:10px;height:5px;border:1px solid #fff;border-top-width:3px}
+.title-handle .ha-revert .revert-t{top:8px;left:7px;width:10px;height:5px;border:1px solid #fff;border-top-width:3px;background:#95d7f1}
+.title-handle .ha-hide:hover,
+.title-handle .ha-max:hover,
+.title-handle .ha-revert:hover,
+.title-handle .ha-fullscreen:hover{
+	outline:0 none;
+	box-shadow:0 0 10px #00adfe;
+	-moz-transition:-moz-box-shadow linear .2s;
+	-webkit-transition: -webkit-box-shadow linear .2s;
+	transition: -webkit-box-shadow linear .2s;
+	background:#2c7fb1;/*不写会造出ie9以下背景闪动*/
+	background: linear-gradient(top, #3fcafd, #52bfe6);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3fcafd), to(#52bfe6));
+	background: -moz-linear-gradient(top, #0bbdfd, #52bfe6);
+	background:-o-linear-gradient(top, #3fcafd, #76c0e0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3fcafd', endColorstr='#52bfe6')}
+.title-handle .ha-close{border-radius:0 0 4px 0;border-right:1px solid #3d90b5;width:36px;color:#fff}
+.title-handle .ha-close:hover{
+	text-decoration:none;
+	outline:0 none;
+	box-shadow:0 0 10px #e56e51;
+	-moz-transition:-moz-box-shadow linear .2s;/*按钮阴影动画*/
+	-webkit-transition: -webkit-box-shadow linear .2s;
+	transition: -webkit-box-shadow linear .2s;
+	background:#dd5538;/*不写会造出ie9以下背景闪动*/
+	background: linear-gradient(top, #dd5538, #ab9a9d);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dd5538), to(#ab9a9d));
+	background: -moz-linear-gradient(top, #dd5538, #ab9a9d);
+	background:	-o-linear-gradient(top, #dd5538, #ab9a9d);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dd5538', endColorstr='#ab9a9d')}
+/*窗口内部iframe*/
+.window-frame{border-top:1px solid #666;border-bottom:1px solid #666}
+/*底部*/
+.set-bar,
+.window-current .set-bar{background:#E8E8E8;background:linear-gradient(left, #95d7f1, #3992be);background:-webkit-gradient(linear, 0% 0%, 100% 0%, from(#95d7f1), to(#3992be));background:-moz-linear-gradient(left, #95d7f1, #3992be);background:-o-linear-gradient(left, #95d7f1, #3992be);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#95d7f1', endColorstr='#3992be', gradientType=1);*background:#DDD}
+.set-bar .btn,
+.window-current .set-bar .btn{margin-top:3px;margin-right:5px;border:1px solid #E8E8E8;border-radius:3px 3px 3px 3px;color:#fff;cursor:pointer;display:inline-block;height:20px;padding:1px;position:relative}
+.set-bar .btn:hover{border:1px solid #7D7D7D;background:#FFF;color:#333;text-decoration:none}
+.set-bar .btn .icon{display:none}
+.set-bar .btn .btn-con{height:20px;line-height:21px;overflow:hidden;padding:0 10px 0 10px}

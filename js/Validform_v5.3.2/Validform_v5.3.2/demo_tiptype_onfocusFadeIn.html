@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo - Validform - 一行代码搞定整站的表单验证！ &copy;瑞金佬的前端路</title>
+<link rel="stylesheet" href="demo/css/style.css" type="text/css" media="all" />
+<link href="demo/css/demo.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+td{line-height:38px;}
+.Validform_checktip{margin-left:0;}
+.info{
+	border:1px solid #ccc; 
+	padding:2px 20px 2px 5px; 
+	color:#666; 
+	position:absolute;
+	display:none;
+	line-height:20px;
+	background-color:#fff;
+}
+.dec {
+    bottom: -8px;
+    display: block;
+    height: 8px;
+    overflow: hidden;
+    position: absolute;
+    left: 10px;
+    width: 17px;
+}
+.dec s {
+    font-family: simsun;
+    font-size: 16px;
+    height: 19px;
+    left: 0;
+    line-height: 21px;
+    position: absolute;
+    text-decoration: none;
+    top: -9px;
+    width: 17px;
+}
+.dec .dec1 {
+    color: #ccc;
+}
+.dec .dec2 {
+    color: #fff;
+    top: -10px;
+}
+</style>
+</head>
+
+<body>  
+<div class="header">
+    <div class="wraper">
+    	<h1><a href="http://validform.rjboy.cn">Validform</a></h1>
+        <ul class="nav">
+            <li><a href="http://validform.rjboy.cn/">关于Validform</a></li>
+            <li><a href="demo.html" class="current">Demo</a></li>
+            <li><a href="document.html">文档</a></li>
+            <li><a href="help.html">帮助</a></li>
+            <li><a href="http://validform.rjboy.cn/?p=1">网友讨论</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="wraper">
+        <p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>
+        
+    	<h2 class="green">提示效果七：【自定义提示效果】让提示信息滑入显示</h2>
+        <form class="registerform" method="post" action="demo/ajax_post.php">
+            <table width="100%" style="table-layout:fixed;">
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:70px;">昵称：</td>
+                    <td style="width:202px;"><input type="text" value="" name="name" class="inputxt" datatype="s6-18" ajaxurl="demo/valid.php" nullmsg="请输入您的昵称！" errormsg="昵称至少6个字符,最多18个字符！" /></td>
+                    <td>
+                        <div class="info"><span class="Validform_checktip">昵称至少6个字符,最多18个字符</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:70px;">密码：</td>
+                    <td style="width:210px;">
+                        <input type="password" value="" name="password" class="inputxt" plugin="passwordStrength"  datatype="*6-18" nullmsg="请输入密码！" errormsg="密码至少6个字符,最多18个字符！" />
+                    </td>
+                    <td>
+                        <div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span class="last">强</span></div>
+                        <div class="info"><span class="Validform_checktip">密码至少6个字符,最多18个字符</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>确认密码：</td>
+                    <td><input type="password" value="" name="repassword" class="inputxt" recheck="password"  datatype="*6-18" nullmsg="请确认密码！" errormsg="两次输入的密码不一致！" /></td>
+                    <td>
+                    	<div class="info"><span class="Validform_checktip">请确认您的密码</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>移动电话：</td>
+                    <td><input type="text" value="" name="tel" class="inputxt" datatype="m" nullmsg="请输入您的手机号码！" errormsg="请输入您的手机号码！"  /></td>
+                    <td>
+                        <div class="info"><span class="Validform_checktip">请输入您的手机号码</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>所在城市：</td>
+                    <td><select name="province" datatype="*" nullmsg="请选择所在城市！" errormsg="请选择所在城市！"><option value="">请选择城市</option><option value="1">瑞金市</option></select></td>
+                    <td>
+                        <div class="info"><span class="Validform_checktip">请选择您所在的城市</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>性别：</td>
+                    <td><input type="radio" value="1" name="gender" id="male" class="pr1" datatype="*" nullmsg="请选择性别！" errormsg="请选择性别！" /><label for="male">男</label> <input type="radio" value="2" name="gender" id="female" class="pr1" /><label for="female">女</label></td>
+                    <td>
+                        <div class="info"><span class="Validform_checktip">请告诉我们您的性别</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>购物网：</td>
+                    <td>
+                        <input name="shoppingsite2" class="rt2" id="shoppingsite21" type="checkbox"  value="1" datatype="*" nullmsg="请选择您常去的购物网站！" errormsg="请选择您常去的购物网站！" /><label for="shoppingsite21">新蛋</label>
+                        <input name="shoppingsite2" class="rt2" id="shoppingsite22" type="checkbox"  value="2" /><label for="shoppingsite22">淘宝</label>
+                        <input name="shoppingsite2" class="rt2" id="shoppingsite23" type="checkbox"  value="3" /><label for="shoppingsite23">京东</label>
+                    </td>
+                    <td>
+                        <div class="info"><span class="Validform_checktip">请选择您常去的购物网站</span><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td>备注：</td>
+                    <td colspan="2">
+                        <textarea tip="请在这里输入您的意见。" altercss="gray" class="gray" name="msg" value="">请在这里输入您的意见。</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td></td>
+                    <td colspan="2" style="padding:10px 0 18px 0;">
+                        <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <h2>说明：</h2>
+        <div class="tipmsg">
+        	<p>使用自定义tiptype，可以实现几乎你想要的任何提示效果。</p>
+        </div>
+        
+    </div>
+</div>
+
+<div class="footer">
+    <div class="wraper">
+        <p class="fl">Copyright &copy; <a href="http://www.eloocor.com" target="_blank">易罗客</a></p>
+        <p class="fr"><a href="http://www.rjboy.cn" target="_blank">瑞金佬的前端路</a><b> | </b><a href="http://validform.rjboy.cn">Validform</a><b> | </b><a href="http://www.rjboy.cn/?p=789" target="_blank">hScrollpane</a><b> | </b><a href="http://www.rjboy.cn/?p=708" target="_blank">Xslider</a></p>
+    </div>
+</div>
+
+<script type="text/javascript" src="demo/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="demo/js/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript" src="demo/plugin/passwordStrength/passwordStrength-min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+
+	$(".registerform").Validform({
+		tiptype:function(msg,o,cssctl){
+			//msg：提示信息;
+			//o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
+			//cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
+			
+			if(!o.obj.is("form")){//验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;
+				var objtip=o.obj.parents("td").next().find(".Validform_checktip");
+				cssctl(objtip,o.type);
+				objtip.text(msg);
+				
+				var infoObj=o.obj.parents("td").next().find(".info");
+				if(o.type==2){
+					infoObj.fadeOut(200);
+				}else{
+					if(infoObj.is(":visible")){return;}
+					var left=o.obj.offset().left,
+						top=o.obj.offset().top;
+	
+					infoObj.css({
+						left:left+170,
+						top:top-45
+					}).show().animate({
+						top:top-35	
+					},200);
+				}
+				
+			}	
+		},
+		usePlugin:{
+			passwordstrength:{
+				minLen:6,
+				maxLen:18,
+				trigger:function(obj,error){
+					if(error){
+						obj.parents("td").next().find(".passwordStrength").hide();
+					}else{
+						obj.parents("td").next().find(".info").hide();
+						obj.parents("td").next().find(".passwordStrength").show();	
+					}
+				}
+			}
+		}
+	});
+})
+</script>
+</body>
+</html>

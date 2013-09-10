@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo - Validform - 一行代码搞定整站的表单验证！ &copy;瑞金佬的前端路</title>
+<link rel="stylesheet" href="demo/css/style.css" type="text/css" media="all" />
+<link href="demo/css/demo.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>  
+<div class="header">
+    <div class="wraper">
+    	<h1><a href="http://validform.rjboy.cn">Validform</a></h1>
+        <ul class="nav">
+            <li><a href="http://validform.rjboy.cn/">关于Validform</a></li>
+            <li><a href="demo.html" class="current">Demo</a></li>
+            <li><a href="document.html">文档</a></li>
+            <li><a href="help.html">帮助</a></li>
+            <li><a href="http://validform.rjboy.cn/?p=1">网友讨论</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="wraper">
+        <p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>
+        
+    	<h2 class="green">逐条验证与一次验证显示所有错误信息</h2>
+        
+        <h3 class="orange">提交表单时逐条验证：</h3>
+        <form class="registerform" action="demo/ajax_post.php">
+            <table width="100%" style="table-layout:fixed;">
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:70px;">昵称：</td>
+                    <td style="width:205px;"><input type="text" value="" name="name" class="inputxt" datatype="s6-18" nullmsg="请输入昵称！" errormsg="昵称至少6个字符,最多18个字符！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>密码：</td>
+                    <td><input type="password" value="" name="userpassword" class="inputxt" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td style="width:205px;">确认密码：</td>
+                    <td><input type="password" value="" name="userpassword2" class="inputxt" datatype="*" recheck="userpassword" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td></td>
+                    <td colspan="2" style="padding:10px 0 18px 0;">
+                        <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <h3 class="orange">提交表单时验证显示所有错误信息：</h3>
+        <form class="registerform" action="demo/ajax_post.php">
+            <table width="100%" style="table-layout:fixed;">
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:70px;">昵称：</td>
+                    <td style="width:205px;"><input type="text" value="" name="name" class="inputxt" datatype="s6-18" nullmsg="请输入昵称！" errormsg="昵称至少6个字符,最多18个字符！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>密码：</td>
+                    <td><input type="password" value="" name="userpassword" class="inputxt" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td style="width:205px;">确认密码：</td>
+                    <td><input type="password" value="" name="userpassword2" class="inputxt" datatype="*" recheck="userpassword" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td></td>
+                    <td colspan="2" style="padding:10px 0 18px 0;">
+                        <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <h2>说明：</h2>
+        <div class="tipmsg">
+        	<p><strong>showAllError：</strong>默认值为false，即逐条验证。</p>
+        </div>
+        
+    </div>
+</div>
+
+<div class="footer">
+    <div class="wraper">
+        <p class="fl">Copyright &copy; <a href="http://www.eloocor.com" target="_blank">易罗客</a></p>
+        <p class="fr"><a href="http://www.rjboy.cn" target="_blank">瑞金佬的前端路</a><b> | </b><a href="http://validform.rjboy.cn">Validform</a><b> | </b><a href="http://www.rjboy.cn/?p=789" target="_blank">hScrollpane</a><b> | </b><a href="http://www.rjboy.cn/?p=708" target="_blank">Xslider</a></p>
+    </div>
+</div>
+
+<script type="text/javascript" src="demo/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="demo/js/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+	
+	$(".registerform:eq(0)").Validform({
+		tiptype:2
+	});
+	
+	$(".registerform:eq(1)").Validform({
+		tiptype:2,
+		showAllError:true
+	});
+})
+</script>
+</body>
+</html>

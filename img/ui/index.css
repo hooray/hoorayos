@@ -1,0 +1,967 @@
+*{margin:0;padding:0}
+form,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,p{list-style:none outside none}
+a{text-decoration:none;color:#ccc;outline:none}
+a:hover{text-decoration:none}
+a img{border:none}
+.fr{float:right}
+.fl{float:left}
+.disn{display:none}
+
+/*webkit滚动条样式*/
+::-webkit-scrollbar-track-piece{background-color:#f5f5f5;border-left:1px solid #d2d2d2}
+::-webkit-scrollbar{width:13px;height:13px}
+::-webkit-scrollbar-thumb{background-color:#c2c2c2;background-clip:padding-box;border:1px solid #979797;min-height:28px}
+::-webkit-scrollbar-thumb:hover{border:1px solid #636363;background-color:#929292}
+
+*{-moz-user-select:none;-webkit-user-select:none;user-select:none}
+html{height:100%;overflow:hidden}
+body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
+input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
+#desktop{position:absolute;z-index:1;width:100%;height:100%;display:none}
+#accessory_zoom{position:absolute}
+
+.loading{background:url(loading_48.gif) no-repeat center center #fff;position:absolute;z-index:9999;top:0;left:0;width:100%;height:100%}
+
+/*浏览器缩放提示*/
+#zoom-tip{display:none;width:100%;background:#FEF8E3;position:relative;z-index:99}
+#zoom-tip div{width:960px;height:50px;line-height:50px;font-size:14px;margin:0 auto;color:#984B12;position:relative}
+#zoom-tip div i{width:27px;height:27px;background:url(warning.png) no-repeat;position:absolute;top:12px}
+#zoom-tip div span{padding-left:30px}
+#zoom-tip .close{font-size:6px;position:absolute;right:10px;top:6px;text-decoration:none}
+
+/**
+ * 浏览器升级提示
+ * 5个浏览器图片为MorchaDesign版权所有，本项目使用已得到官方授权
+ * 9 Browsers Icons Designed by Morcha Design
+ * http://www.morcha.net/post/46.html
+ */
+#update_browser_box{display:none;background:url(update_browser_bg.png) repeat;position:absolute;z-index:9998;top:0;left:0;width:100%;height:100%;_height:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight))}
+.update_browser{width:640px;height:350px;position:absolute;left:50%;top:50%;margin-left:-320px;margin-top:-175px}
+.update_browser .subtitle{width:640px;height:36px;line-height:18px;font-size:14px;color:#777}
+.update_browser .title{width:640px;height:106px;line-height:96px;font-size:48px;text-align:center;color:#009AD9}
+.update_browser .title span{font-size:60px;color:#F33}
+.update_browser .browser{background:url(browser.png) no-repeat;width:640px;height:128px;overflow:hidden}
+.update_browser .browser a{display:block;width:128px;height:128px;float:left;text-indent:-999em}
+.update_browser .bottomtitle{width:640px;height:78px;line-height:78px;text-align:center;font-size:14px;color:#777}
+.update_browser .bottomtitle a{color:#777}
+.update_browser .bottomtitle a:hover{color:#999}
+
+/*登录*/
+#lrbox{background:url(loginbg.jpg) no-repeat center;position:absolute;z-index:9997;top:-200%;left:0;width:100%;height:100%}
+#lrbox .title{position:absolute;top:50%;margin-top:-250px;width:100%;height:100px;line-height:100px;text-align:center;font-size:68px;color:#fff;text-shadow:2px 2px 2px #000}
+#lrbox .back{position:absolute;right:10px;bottom:5px;display:block;color:#fff;text-shadow:1px 1px 1px #000}
+.lrbox{display:none;width:420px;overflow:hidden;position:absolute;top:50%;left:50%;margin-left:-211px;border:1px solid #0FF;border-radius:10px}
+.lrbox .bg{position:absolute;z-index:-1;width:100%;height:100%;background:url(loginbg.jpg) no-repeat center;background-color:rgba(255, 255, 255, .5);-webkit-filter:blur(5px);filter:blur(5px)}
+.lrbox .loginbox,
+.lrbox .registerbox{float:left;padding:0 10px 10px 10px}
+.lrbox .middle{margin-top:10px;height:130px}
+.lrbox .left{width:100px;height:100px;float:left}
+.lrbox .left img{width:100px;height:100px;border:none}
+.lrbox .right{width:300px;float:left}
+.lrbox .right .input_box{width:100%;height:50px;position:relative}
+.loginbox .right .password{height:49px;border-top:1px solid #0f82f5}
+.registerbox .right .password{height:49px;border-top:1px solid #FF8000}
+.lrbox .right .input_box input{font-family:'Segoe UI','微软雅黑',sans-serif;border:none;outline:none;width:280px;height:50px;line-height:50px;padding:0 10px;font-size:24px;color:#333;float:left}
+.lrbox .right .password input{height:49px}
+.lrbox .right .input_box .tip{display:none;height:36px;position:absolute;right:-1px;top:50px;z-index:1}
+.lrbox .right .password .tip{top:49px}
+.lrbox .right .input_box .tip .text{position:relative;height:16px;line-height:16px;padding:10px;border:1px solid red;background:#fff}
+.lrbox .right .input_box .tip .text .arrow{position:absolute;top:-8px;right:10px;font-size:12px;color:red}
+.lrbox .right .input_box .tip .text .arrow1{top:-7px;color:#fff}
+.lrbox .right .input_box .tip .text p{font-size:12px}
+.lrbox .right .input_box button{position:absolute;right:-70px;width:60px;height:60px;border:none;float:left;color:#999;background:none;font-size:12px;cursor:pointer;text-shadow:0 0 5px #ccc;-webkit-transition:all 300ms}
+.lrbox .right .password button{height:55px}
+.lrbox .right .input_box button:hover{color:#333}
+.lrbox .right .label-box{height:30px;padding-left:10px}
+.lrbox .right .label-box label{float:left;height:30px;line-height:30px;color:#eee;text-shadow:1px 1px 1px #000}
+.lrbox .right .label-box input[type='checkbox']{width:auto;height:30px;margin-right:5px;float:left}
+.lrbox .all{width:400px}
+.lrbox .all .input_box input{width:380px}
+.lrbox .all .username input{width:380px;padding-right:10px}
+.lrbox .bottom{height:50px}
+.lrbox .bottom button{border:none;height:50px;line-height:50px;float:left;text-align:center;font-size:16px;color:#eee;cursor:pointer;-webkit-transition:all 500ms}
+.loginbox .bottom .login_btn{width:300px;background:#0f82f5}
+.loginbox .bottom .login_btn:hover{background:#0072e6;color:#fff}
+.loginbox .bottom .login_btn.disabled{background:#C6C6C6}
+.loginbox .bottom .register_btn{width:100px;background:#FF8000;font-size:12px}
+.loginbox .bottom .register_btn:hover{background:#E74002;color:#fff}
+.registerbox .bottom .register_btn{width:300px;background:#FF8000}
+.registerbox .bottom .register_btn:hover{background:#E74002;color:#fff}
+.registerbox .bottom .register_btn.disabled{background:#C6C6C6}
+.registerbox .bottom .login_btn{width:100px;background:#0f82f5;font-size:12px}
+.registerbox .bottom .login_btn:hover{background:#0072e6;color:#fff}
+.lrbox .disanfangdenglu{float:left;margin:0 50px 10px 50px;width:320px;height:30px}
+.disanfangdenglu label{color:#eee;text-shadow:1px 1px 1px #000;width:50px;line-height:15px;margin-right:15px;float:left}
+.disanfangdenglu div{float:left;margin-top:3px}
+.disanfangdenglu div a{float:left;width:24px;height:24px;margin-right:12px;font-size:0;background:url(login_icon.png) no-repeat;border-radius:5px}
+.disanfangdenglu div a.sinaweibo{background-position:0 0}
+.disanfangdenglu div a.tweibo{background-position:0 -24px}
+.disanfangdenglu div a.t163weibo{background-position:0 -48px}
+.disanfangdenglu div a.sohuweibo{background-position:0 -72px}
+.disanfangdenglu div a.qq{background-position:0 -96px}
+.disanfangdenglu div a.qzone{background-position:0 -120px}
+.disanfangdenglu div a.renren{background-position:0 -144px}
+.disanfangdenglu div a.douban{background-position:0 -168px}
+.disanfangdenglu div a.baidu{background-position:0 -192px}
+.lrbox .disanfangdenglutip{float:left;margin:0 10px 10px 10px;border:1px solid #000;width:398px;height:28px;line-height:30px;background:#FF0;display:none}
+.disanfangdenglutip span{font-weight:bold;padding:0 5px 0 10px}
+.disanfangdenglutip .cancel{float:right;margin-right:10px;color:#999}
+.disanfangdenglutip .cancel:hover{color:#333}
+
+/*遮罩层*/
+#maskbox,
+#maskbox-copyright{z-index:9000000;display:none;cursor:default;background:none;width:100%;height:100%;position:absolute;top:0;left:0}
+#maskbox-copyright{background:none rgba(0, 0, 0, 0.7)}
+
+/*关于我们*/
+#copyright{z-index:9999999;display:none;position:absolute;width:330px;height:200px;background:url(desk_sprite.png) no-repeat -200px -600px;top:50%;left:50%;margin-top:-100px;margin-left:-165px; box-shadow:0 0 300px #fff}
+#copyright .close{display:block;position:absolute;top:6px;right:4px;width:24px;height:24px;background:url(desk_sprite.png) no-repeat -510px -390px}
+#copyright .close:hover{background-position:-540px -390px}
+#copyright .title{padding-left:20px;height:56px;line-height:56px;color:#fff;font-size:28px}
+#copyright .body{padding:10px 30px;color:#fff}
+#copyright .body p{margin-bottom:5px}
+#copyright .body a{color:#fff}
+#copyright .body a:hover{color:#ccc;text-decoration:underline}
+
+/*图标*/
+.appbtn,
+#shortcut_shadow{width:86px;height:88px;text-align:center;position:absolute;z-index:0;cursor:pointer}
+.appbtn:hover{background:url(desk_sprite.png) no-repeat -250px -100px}
+.appbtn i.addicon{display:block;margin:auto;width:50px;height:50px;margin-top:5px;background:url(desk_sprite.png) no-repeat -420px -100px;cursor:pointer}
+.appbtn div{cursor:pointer;height:48px;width:48px;overflow:hidden;position:relative;margin:0 auto;margin-top:6px}
+#shortcut_shadow,
+#shortcut_shadow2{z-index:9999999;display:none}
+.appbtn img,
+#shortcut_shadow img{border-radius:3px 3px 3px 3px;display:block;height:48px;width:48px;margin:auto}
+#shortcut_shadow img,
+#shortcut_shadow span,
+#shortcut_shadow2 img,
+#shortcut_shadow2 span{filter:alpha(opacity=50);opacity:0.5}
+.appbtn span,
+#shortcut_shadow span{background:none repeat scroll 0 0 rgba(0, 0, 0, 0.3);border-radius:10px;filter:none;color:#fff;display:inline-block;max-width:60px;height:20px;line-height:20px;margin-top:8px;overflow:hidden;padding:0 8px;position:relative;text-align:center;text-overflow:ellipsis;white-space:nowrap;z-index:1;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ui/shortcut_text.png', sizingMethod='scale')}
+
+.smallIcon .desktop-container .appbtn,
+.smallIcon #shortcut_shadow{width:58px;height:58px}
+.smallIcon .desktop-container .appbtn:hover{background:url(desk_sprite.png) no-repeat -350px -100px}
+.smallIcon .desktop-container .appbtn i.addicon{width:32px;height:32px;margin-top:3px;background:url(desk_sprite.png) no-repeat -420px -160px}
+.smallIcon .desktop-container .appbtn div{height:32px;width:32px;margin-top:2px}
+.smallIcon .desktop-container .appbtn img,
+.smallIcon #shortcut_shadow img{height:32px;width:32px}
+.smallIcon .desktop-container .appbtn span,
+.smallIcon #shortcut_shadow span{max-width:50px;height:20px;line-height:20px;margin-top:3px;padding:0 4px}
+
+/*桌面*/
+#desk{position:absolute;z-index:1;top:0;bottom:30px;left:0;right:0;width:100%;height:100%;overflow:hidden}
+#desk .desktop-container{width:100%;height:100%;overflow:hidden;position:absolute}
+#desk .desktop-container .scrollbar{position:absolute;z-index:2;background:#ccc;display:none;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}
+#desk .desktop-container .scrollbar:hover{background:#999}
+#desk .desktop-container .scrollbar-x{bottom:0;height:10px}
+#desk .desktop-container .scrollbar-y{right:0;width:10px}
+
+/*文件夹窗口*/
+.folder_body{width:100%;height:100%;overflow-y:scroll;position:absolute}
+.folder_body .appbtn{position:relative;float:left;margin:5px}
+
+/*窗口*/
+.window-container{position:absolute;background:#ccc;border:1px solid #000}
+/*当前窗口*/
+.window-current{background:#fff}
+/*最大化窗口*/
+.window-maximize{border:none !important}
+/*标题*/
+.title-bar{position:relative;z-index:1;height:30px;line-height:30px;overflow:hidden;cursor:default;background:#ccc}
+/*当前窗口标题*/
+.window-current .title-bar{background:#fff}
+/*标题图标*/
+.title-bar .icon{position:absolute;top:7px;left:7px;width:16px;height:16px}
+/*标题文字*/
+.title-bar .title{display:inline-block;width:100%;text-align:center;color:#000;font-size:14px}
+/*窗口右上角操作按钮*/
+.title-handle{position:absolute;z-index:1;top:4px;right:4px;font-size:0;cursor:pointer}
+.title-handle a{position:relative;text-decoration:none;letter-spacing:normal;text-align:center;display:inline-block;*display:inline;zoom:1;vertical-align:top;font-family:tahoma,arial,\5b8b\4f53,sans-serif;color:#000;font-size:22px;width:22px;height:22px;line-height:22px}
+.title-handle a b{display:block;position:absolute;overflow:hidden;cursor:pointer}
+.title-handle .ha-close{}
+.title-handle .ha-close:hover{color:#03F}
+.title-handle .ha-fullscreen{}
+.title-handle .ha-fullscreen:hover{color:#03F}
+.title-handle .ha-max .max-b{top:6px;left:4px;width:10px;height:5px;border:2px solid #000;border-top-width:4px}
+.title-handle .ha-max:hover .max-b{border-color:#03F}
+.title-handle .ha-revert .revert-b{top:5px;left:6px;width:8px;height:4px;border:2px solid #000;border-top-width:3px}
+.title-handle .ha-revert .revert-t{top:9px;left:3px;width:8px;height:4px;border:2px solid #000;border-top-width:3px;background:#fff}
+.title-handle .ha-revert:hover .revert-b,
+.title-handle .ha-revert:hover .revert-t{border-color:#03F}
+.title-handle .ha-hide .hide-b{top:12px;left:5px;width:12px;height:2px;border-bottom:2px solid #000}
+.title-handle .ha-hide:hover .hide-b{border-color:#03F}
+/*窗口内部iframe*/
+.window-frame{position:absolute;top:30px;right:0;bottom:30px;left:0;background:#fff;border-top:1px solid #000;border-bottom:1px solid #000}
+*html .window-frame{
+	height:expression((function(el){
+		el.style.height=el.parentNode.clientHeight-60+"px";
+	})(this));
+}
+.window-frame iframe{position:absolute;border:0;height:100%;width:100%;top:0;bottom:0;left:0;right:0}
+/*遮罩层*/
+.window-mask{position:absolute;z-index:9998;height:100%;width:100%;display:none;overflow:hidden;background:url(window_mask_bg.png) repeat-x}
+.window-mask div{width:100%;text-align:center;margin-top:20px}
+.window-mask .maskbg{margin-top:70px;height:75px;background:url(window_mask_icon.png) no-repeat center}
+.window-loading{position:absolute;z-index:9999;width:100%;height:100%;background:#fff url(loading_48.gif) center center no-repeat}
+.window-mask-noflash{background:none;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+.window-resize{position:absolute;overflow:hidden;background:url(transparent.gif) repeat;display:block}
+.window-resize-t{left:0;top:-8px;width:100%;height:10px;z-index:1;cursor:n-resize}
+.window-resize-r{right:-8px;top:0;width:10px;height:100%;z-index:1;cursor:e-resize}
+.window-resize-b{left:0;bottom:-8px;width:100%;height:10px;z-index:1;cursor:s-resize}
+.window-resize-l{left:-8px;top:0;width:10px;height:100%;z-index:1;cursor:w-resize}
+.window-resize-rt{right:-8px;top:-8px;width:10px;height:10px;z-index:2;cursor:ne-resize}
+.window-resize-rb{right:-8px;bottom:-8px;width:10px;height:10px;z-index:2;cursor:se-resize}
+.window-resize-lt{left:-8px;top:-8px;width:10px;height:10px;z-index:2;cursor:nw-resize}
+.window-resize-lb{left:-8px;bottom:-8px;width:10px;height:10px;z-index:2;cursor:sw-resize}
+/*底部*/
+.set-bar .btn .icon{position:absolute;width:18px;height:18px;left:6px;top:2px;background-image:url(google_ui_sprite.png)}
+.set-bar{position:absolute;background:#ccc;height:30px;left:0;right:0;bottom:0}
+.window-current .set-bar{background:#fff}
+.set-bar .btn{position:relative;margin-top:3px;margin-right:5px;border:1px solid #ccc;color:#000;cursor:pointer;display:inline-block;height:22px;text-decoration:none}
+.window-current .set-bar .btn{border:1px solid #fff}
+.set-bar .btn:hover{border:1px solid #000;background:#fff}
+.set-bar .btn .btn-con{height:20px;line-height:20px;overflow:hidden;padding:0 6px 0 30px}
+
+/*小挂件*/
+.widget{position:absolute}
+.widget .move{width:100%;height:29px;background:url(widget_title_bg.png) repeat-x;cursor:move;border-radius:5px;display:none}
+.widget a{position:absolute;top:4px;width:21px;height:21px;background:url(desk_sprite.png) no-repeat}
+.widget a.ha-close{right:5px;background-position:-350px -500px}
+.widget a.ha-close:hover{background-position:-380px -500px}
+.widget a.ha-star{right:30px;background-position:-350px -560px}
+.widget a.ha-star:hover{background-position:-380px -560px}
+.widget a.ha-share{right:55px;background-position:-350px -530px}
+.widget a.ha-share:hover{background-position:-380px -530px}
+.widget .frame{position:absolute;top:30px;bottom:0;left:0;right:0}
+.widget .frame iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+
+/*文件夹预览*/
+.quick_view_container{position:absolute;z-index:9000;width:340px}
+.quick_view_container .perfect_nine_t,
+.quick_view_container .perfect_nine_b{font-size:0;padding-left:15px;padding-right:15px}
+.quick_view_container .perfect_nine_t_m{font-size:0;width:100%;height:10px;background:url(quick_view.png) center top;line-height:0;overflow:hidden}
+.quick_view_container .perfect_nine_b_m{font-size:0;width:100%;height:10px;background:url(quick_view.png) center bottom;line-height:0;overflow:hidden}
+.quick_view_container .perfect_nine_t_l,
+.quick_view_container .perfect_nine_t_r,
+.quick_view_container .perfect_nine_b_l,
+.quick_view_container .perfect_nine_b_r{font-size:0;line-height:0;overflow:hidden;width:15px;height:10px;margin-top:-10px}
+.quick_view_container .perfect_nine_t_l{float:left;background:url(quick_view.png) left top}
+.quick_view_container .perfect_nine_t_r{float:right;background:url(quick_view.png) right top}
+.quick_view_container .perfect_nine_b_l{float:left;background:url(quick_view.png) left bottom}
+.quick_view_container .perfect_nine_b_r{float:right;background:url(quick_view.png) right bottom}
+.quick_view_container .perfect_nine_middle{overflow:hidden;zoom:1}
+.quick_view_container .perfect_nine_m_l{width:15px;position:relative;float:left}
+.quick_view_container .perfect_nine_m_r{width:15px;position:relative;float:right}
+.quick_view_container .perfect_nine_m_l_t{position:absolute;font-size:0;line-height:0;background:url(quick_view_body.png) repeat-y left;width:100%}
+.quick_view_container .perfect_nine_m_l_m{position:absolute;font-size:0;line-height:0;background:url(quick_view.png) 0 -14px;width:100%}
+.quick_view_container .perfect_nine_m_l_b{position:absolute;font-size:0;line-height:0;background:url(quick_view_body.png) repeat-y left;width:100%}
+.quick_view_container .perfect_nine_m_r_t{position:absolute;font-size:0;line-height:0;background:url(quick_view_body.png) repeat-y right;width:100%}
+.quick_view_container .perfect_nine_m_r_m{position:absolute;font-size:0;line-height:0;background:url(quick_view.png) right -14px;width:100%}
+.quick_view_container .perfect_nine_m_r_b{position:absolute;font-size:0;line-height:0;background:url(quick_view_body.png) repeat-y right;width:100%}
+.quick_view_container .perfect_nine_context{background:url(quick_view_body.png) repeat-y center -35px;border:0;margin-left:15px;margin-right:15px}
+.quick_view_container_control{overflow:hidden}
+.quick_view_container_open{float:right;display:block;width:40px;padding:2px 0 0 25px;height:22px;background:url(open.png) -80px 0 no-repeat;color:white;position:relative}
+.quick_view_container_open:hover{background-position:0 0}
+.quick_view_container_list{margin-top:2px;width:100%;position:relative;overflow:hidden}
+.quick_view_container_list_in{width:100%;text-align:center;color:#fff;overflow-y:hidden}
+.quick_view_container_list_in .appbtn{position:relative;margin-left:12px;margin-top:2px;width:48px;height:48px;padding:5px;float:left}
+.quick_view_container_list_in .appbtn:hover{background:url(desk_sprite.png) no-repeat -500px -100px}
+.quick_view_container_list_in .appbtn div{margin-top:1px;margin-left:1px;height:32px}
+.quick_view_container_list_in .appbtn img{width:32px;height:32px}
+.quick_view_container_list_in .appbtn span{background:none;margin-top:0;padding:0;width:48px}
+.quick_view_container_list .scrollBar{position:absolute;right:7px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10}
+.quick_view_container_list .scrollBar_bgc{position:absolute;right:8px;top:0;width:5px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;height:100%;background:url(scrollbar_bg.png) repeat-y;display:none}
+
+/*应用码头*/
+#dock-bar{position:absolute;display:none}
+.top-bar{width:100%;height:73px;left:0;top:0}
+.left-bar{width:73px;height:100%;left:0;top:0}
+.right-bar{width:73px;height:100%;right:0;top:0}
+#dock-container{position:absolute}
+.dock-middle{background:url(desk_sprite.png) no-repeat 0 0}
+.dock-top{width:547px;height:73px;top:0;left:50%;margin:0 0 0 -274px}
+.dock-left{width:73px;height:547px;top:50%;left:0;margin:-274px 0 0 0}
+.dock-right{width:73px;height:547px;top:50%;left:0;margin:-274px 0 0 0}
+.dock-top .dock-middle{width:537px;height:69px;padding-top:0;padding-left:10px;background-position:0 0}
+.dock-left .dock-middle{height:537px;padding-top:10px;background-position:0 -100px}
+.dock-right .dock-middle{height:537px;padding-top:10px;padding-left:5px;background-position:-100px -100px}
+#dock-container .appbtn{width:58px;height:58px}
+#dock-container .appbtn:hover{background:url(desk_sprite.png) no-repeat -350px -100px}
+#dock-container .appbtn span{display:none}
+.dock-applist{position:relative}
+.dock-top .dock-applist{width:443px;height:64px;float:left;margin-top:3px;margin-left:3px}
+.dock-left .dock-applist{width:64px;height:443px;float:left;margin-top:3px;margin-left:3px}
+.dock-right .dock-applist{width:64px;height:443px;float:left;margin-top:3px;margin-left:3px}
+.dock-top .dock-toollist{margin-left:2px;margin-top:8px;width:30px;height:58px;float:left;overflow:hidden}
+.dock-left .dock-toollist{margin-left:3px;margin-top:8px;width:64px;height:22px;float:left;overflow:hidden}
+.dock-right .dock-toollist{margin-left:3px;margin-top:8px;width:64px;height:22px;float:left;overflow:hidden}
+.dock-toollist a{float:left;display:block;width:20px;height:20px;cursor:pointer;background:url(desk_sprite.png) no-repeat}
+.dock-toollist .dock-tool-setting{background-position:-220px -100px;margin:0 4px 8px 5px;_margin:0 4px 8px 3px}
+.dock-tool-setting:hover{background-position:-220px -120px}
+.dock-toollist .dock-tool-style{background-position:-200px -100px;margin:0 4px 8px 5px;_margin:0 4px 8px 3px}
+.dock-tool-style:hover{background-position:-200px -120px}
+.dock-top .dock-toollist2{height:60px;width:50px;float:left;margin-left:2px}
+.dock-left .dock-toollist2{height:50px;width:60px;float:left;margin-left:2px}
+.dock-right .dock-toollist2{height:50px;width:60px;float:left;margin-left:6px}
+.dock-tool-start{display:block;width:40px;height:40px;cursor:pointer;margin:0 auto;background:url(logo.png) no-repeat -40px 0}
+.dock-tool-start:hover{background-position:0 0}
+.dock-top .dock-tool-start{margin-top:12px}
+.dock-left .dock-tool-start{margin-top:9px}
+.dock-right .dock-tool-start{margin-top:9px}
+
+.dock-top .dock-applist .appbtn{margin-top:1px}
+.dock-left .dock-applist .appbtn{margin-left:1px}
+.dock-right .dock-applist .appbtn{margin-left:3px}
+
+.dock_drap_effect{border:3px solid #3C9DFF;z-index:4000000}
+.dock_drap_effect_top{width:539px;height:66px;margin:0 0 0 -273px;position:absolute;top:-3px;left:50%}
+.dock_drap_effect_left{height:539px;width:66px;margin:-273px 0 0;position:absolute;left:-3px;top:50%}
+.dock_drap_effect_right{height:539px;width:66px;margin:-273px 0 0;position:absolute;right:-3px;top:50%}
+.dock_drap_effect_top.hover,
+.dock_drap_effect_left.hover,
+.dock_drap_effect_right.hover{border-color:#E1F0FD}
+.dock_drap_mask{width:100%;height:100%;top:0;left:0;position:absolute;z-index:300000}
+.dock_drop_region_top{border-bottom:1px dashed #333333;width:100%;height:20%;top:0;left:0;position:absolute}
+.dock_drop_region_left{border-right:1px dashed #333333;width:50%;height:80%;bottom:0;left:0;position:absolute}
+.dock_drop_region_right{width:50%;height:80%;bottom:0;right:0;position:absolute}
+
+#startmenu-container{position:absolute;z-index:21;color:#fff;width:182px;display:none}
+#startmenu-container .startmenu-selfinfo{float:left;width:177px;height:30px;padding:5px 0 5px 5px;background:url(desk_sprite.png) no-repeat -410px -200px}
+#startmenu-container .startmenu-selfinfo .startmenu-nick{float:left;margin:5px 0 0 10px;overflow:hidden;width:95px;height:18px;display:inline;color:#4CE4FF}
+#startmenu-container .startmenu-selfinfo .startmenu-nick a{color:#4CE4FF}
+#startmenu-container .startmenu{float:left;width:182px}
+#startmenu-container .startmenu li{list-style:none;background:url(desk_sprite.png) no-repeat -410px -300px}
+#startmenu-container .startmenu li a{display:block;color:#fff;padding:4px 10px 6px 15px;line-height:22px}
+#startmenu-container .startmenu li a:hover{background:url(desk_sprite.png) no-repeat -410px -465px}
+#startmenu-container .startmenu-exit{float:left;width:182px;height:44px;background:url(desk_sprite.png) no-repeat -410px -250px;margin-top:-1px}
+#startmenu-container .startmenu-exit a{display:block;width:36px;height:30px;margin:7px auto 0;background:url(desk_sprite.png) no-repeat -500px -350px}
+#startmenu-container .startmenu-exit a:hover{background-position:-450px -350px}
+#startmenu-container .startmenu-feedback{display:block;float:left;margin-left:40px;margin-top:5px;height:24px;width:24px;background:url(desk_sprite.png) no-repeat -450px -390px}
+#startmenu-container .startmenu-feedback:hover{background-position:-480px -390px}
+
+/*分页切换栏*/
+#nav-bar{position:relative;z-index:11;text-align:center;top:10px;width:239px;height:40px;cursor:pointer;display:none}
+#nav-bar.min-zIndex{z-index:-1}
+#nav-bar .nav-wrapper{height:100%;background:url(nav_bar.png) no-repeat}
+#nav-bar .nav-container{height:100%}
+.indicator,
+.indicator-icon-bg,
+.indicator-icon{background-image:url(nav_bar.png)}
+.indicator{background-position:-190px -70px;color:#0DBBF1;cursor:pointer;display:inline-block;float:left;font-size:18px;font-weight:bold;height:20px;line-height:1.5;margin:4px 2px 0;outline:0 none;position:relative;text-indent:-999em;width:20px}
+.indicator-icon{float:left;height:100%;overflow:hidden;position:relative;width:100%;z-index:1}
+.indicator-header{background-position:-122px -64px;display:inline;width:32px;height:32px;margin:-10px 0 0 6px;margin-right:6px}
+.indicator-header-img{display:inline;float:left;height:24px;margin:4px 0 0 4px;width:24px;background-color:#FFF}
+.indicator-icon-bg{display:none;height:26px;left:-6px;position:absolute;top:-6px;width:26px;z-index:1}
+#nav-bar .indicator-icon-1{background-position:-100px -44px}
+#nav-bar .indicator-icon-2{background-position:-120px -44px}
+#nav-bar .indicator-icon-3{background-position:-140px -44px}
+#nav-bar .indicator-icon-4{background-position:-160px -44px}
+#nav-bar .indicator-icon-5{background-position:-180px -44px}
+#nav-bar .indicator-icon-1:hover{background-position:0 -44px}
+#nav-bar .indicator-icon-2:hover{background-position:-20px -44px}
+#nav-bar .indicator-icon-3:hover{background-position:-40px -44px}
+#nav-bar .indicator-icon-4:hover{background-position:-60px -44px}
+#nav-bar .indicator-icon-5:hover{background-position:-80px -44px}
+#nav-bar .nav-current-1 .indicator-1 .indicator-icon-bg,
+#nav-bar .nav-current-2 .indicator-2 .indicator-icon-bg,
+#nav-bar .nav-current-3 .indicator-3 .indicator-icon-bg,
+#nav-bar .nav-current-4 .indicator-4 .indicator-icon-bg,
+#nav-bar .nav-current-5 .indicator-5 .indicator-icon-bg{background-position:0 -64px;display:block}
+#nav-bar .nav-current-1 .indicator-icon-1{background-position:0 -44px}
+#nav-bar .nav-current-2 .indicator-icon-2{background-position:-20px -44px}
+#nav-bar .nav-current-3 .indicator-icon-3{background-position:-40px -44px}
+#nav-bar .nav-current-4 .indicator-icon-4{background-position:-60px -44px}
+#nav-bar .nav-current-5 .indicator-icon-5{background-position:-80px -44px}
+.indicator-manage{float:right;height:24px;width:24px;background-position:-50px -63px;margin:2px 5px}
+.indicator-manage:hover{background-position:-26px -63px}
+.indicator-search{float:right;height:24px;width:24px;background-position:-98px -63px;margin:2px 8px 2px 0}
+.indicator-search:hover{background-position:-74px -63px}
+
+/*搜索*/
+#search-bar{height:33px;width:212px;position:absolute;z-index:20;background:url(nav_bar.png) no-repeat 0 -100px;display:none}
+#search-bar.above{background-position:0 -136px}
+#pageletSearchInput{outline:none;border:0;width:170px!important;height:20px;line-height:20px;margin:6px 0 0 7px;padding:0;float:left;color:#fff;background:transparent;-moz-user-select:text;-webkit-user-select:text;user-select:text}
+#pageletSearchInput::-webkit-input-placeholder,
+#pageletSearchInput::-moz-placeholder{color:#ccc}
+#pageletSearchButton{border:0;float:right;width:24px!important;height:24px;cursor:pointer;margin:5px 5px 0 0;padding:0;background:url(nav_bar.png) no-repeat -98px -63px}
+#pageletSearchButton:hover{background-position:-74px -63px}
+#search-suggest{width:212px;position:absolute;z-index:20;display:none}
+#search-suggest .resultBox{width:212px;background:url(suggess_list_bg.png) repeat-y;margin:0;padding:0;line-height:0;color:#FFF}
+#search-suggest .resultList{overflow:hidden;vertical-align:middle}
+#search-suggest .resultList a{display:block;width:210px;height:28px;outline:0;color:#FFF;margin-left:1px}
+#search-suggest .resultList a:hover{background:url(nav_bar.png) no-repeat 0 -170px}
+#search-suggest .resultList a div{height:28px;line-height:28px;vertical-align:middle;padding-left:12px;width:190px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;cursor:pointer}
+#search-suggest .openAppMarket{width:212px;height:34px;padding-top:10px;background:url(nav_bar.png) no-repeat 0 -200px;position:absolute}
+#search-suggest .openAppMarket.above{padding:5px 0;background-position:0 -250px}
+
+/*任务栏*/
+#task-bar-bg1{width:100%;height:130px;position:absolute;z-index:-1;bottom:0;background:url(task_bg1.png) repeat-x}
+#task-bar-bg2{width:100%;height:64px;position:absolute;z-index:-1;bottom:0;background:url(task_bg2.png) repeat-x 0 41px}
+#task-bar{height:64px;position:absolute;bottom:0;right:0}
+#task-bar.min-zIndex{z-index:-1}
+#task-next,
+#task-pre{width:54px;height:100%;float:right;margin:0 1px;overflow:hidden;display:none}
+#task-next{position:relative;z-index:9990;background:url(desk_sprite.png) no-repeat -200px -264px}
+#task-next a{display:block;width:45px;height:35px;margin-top:20px;margin-left:15px;background:url(desk_sprite.png) no-repeat -265px -450px;cursor:pointer}
+#task-next a:hover{background-position:-265px -402px}
+#task-next a.disable{background-position:-265px -497px;cursor:default}
+#task-pre{position:relative;z-index:9990;background:url(desk_sprite.png) no-repeat -350px -195px}
+#task-pre a{display:block;width:20px;height:35px;margin-top:20px;margin-left:17px;background:url(desk_sprite.png) no-repeat -215px -450px;cursor:pointer}
+#task-pre a:hover{background-position:-215px -402px}
+#task-pre a.disable{background-position:-215px -497px;cursor:default}
+#task-content{height:64px;float:right;overflow:hidden}
+#task-content-inner{height:100%;float:right}
+#task-content-inner.fl{float:left}
+.task-item{position:relative;z-index:9990;display:block;width:112px;height:100%;float:right;margin:0 1px;vertical-align:middle;overflow:hidden;cursor:pointer;background:url(desk_sprite.png) no-repeat -200px -200px}
+.task-item:hover{background-position:-200px -328px}
+.task-item-current{background-position:-200px -264px}
+.task-item-icon{width:32px;height:32px;margin:22px 5px;float:left}
+.task-item-icon img{width:32px;height:32px;float:left}
+.task-item-txt{width:70px;height:36px;line-height:36px;margin-top:27px;color:#fff;float:left;overflow:hidden}
+
+/*全局视图*/
+#appmanage{display:none;height:100%;left:0;overflow:hidden;position:absolute;top:0;width:100%;z-index:1000}
+#appmanage .amg_close{background:url(desk_sprite.png) no-repeat -350px -350px;cursor:pointer;width:90px;height:37px;position:absolute;top:25px;right:10px}
+#appmanage .amg_close:hover{background-position:-350px -387px}
+#appmanage .amg_close:active{background-position:-350px -424px}
+#amg_dock_container{background:url(amg_top.png) repeat-x;height:60px;overflow:hidden;padding:10px}
+#amg_dock_container .appbtn{width:58px;height:58px}
+#amg_dock_container .appbtn:hover{background:url(desk_sprite.png) no-repeat -350px -100px}
+#amg_dock_container .appbtn span{display:none}
+#appmanage .amg_line_x{border-bottom:1px solid #666666;font-size:0;height:0;width:100%}
+#appmanage .amg_line_y{background:url(amg_line_y.png) repeat-y;height:100%;left:-1px;position:absolute;top:0;width:3px}
+#amg_folder_container{background:url(amg_body.png) repeat;overflow:hidden;height:100%}
+#amg_folder_container .folderItem{width:20%;height:100%;overflow:hidden;float:left;position:relative;-webkit-transform:rotateY(70deg);-moz-transform:rotateY(70deg);-o-transform:rotateY(70deg);transform:rotateY(70deg);-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;transform-origin:center center;-webkit-transition:-webkit-transform .8s linear;-moz-transition:-moz-transform .8s linear;-o-transition:-o-transform .8s linear;transition:transform .8s linear}
+#amg_folder_container .folderItem_turn{-webkit-transform:rotateY(0deg);-moz-transform:rotateY(0deg);-o-transform:rotateY(0deg);transform:rotateY(0deg)}
+#amg_folder_container .folder_bg{height:100px;position:absolute;right:0;top:0;width:70px}
+#amg_folder_container .folder_bg1{background:url(amg_1.png) no-repeat right top}
+#amg_folder_container .folder_bg2{background:url(amg_2.png) no-repeat right top}
+#amg_folder_container .folder_bg3{background:url(amg_3.png) no-repeat right top}
+#amg_folder_container .folder_bg4{background:url(amg_4.png) no-repeat right top}
+#amg_folder_container .folder_bg5{background:url(amg_5.png) no-repeat right top}
+#amg_folder_container .folderOuter{height:100%;overflow:hidden;position:relative}
+#amg_folder_container .folderInner{margin:5px 0;min-width:180px;position:relative;z-index:1;height:100%;overflow:hidden}
+#amg_folder_container .scrollBar{position:absolute;right:2px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10}
+#amg_folder_container .appbtn,
+#shortcut_shadow2{display:block;height:30px;width:100%;position:absolute}
+#amg_folder_container .appbtn:hover{background:url(amg_shortcut_hover.png) repeat-x}
+#amg_folder_container .appbtn div,
+#shortcut_shadow2 div{cursor:pointer;height:30px;padding:2px 0;width:100%;overflow:hidden;position:relative;margin:0 auto}
+#amg_folder_container .appbtn img,
+#shortcut_shadow2 img{width:26px;height:26px;margin-left:20px;}
+#amg_folder_container .appbtn span,
+#shortcut_shadow2 span{color:#fff;margin-top:-30px;margin-left:50px;float:left;text-align:left;background:none}
+
+/*评分*/
+.grade-box{width:200px}
+.star-box,
+.star-box i,
+.star-box a{background-image:url(app_spr_img.png);_background-image:url(app_spr_img.gif);background-repeat:no-repeat}
+.grade-box .star-box{float:right}
+.grade-box .star-num{float:right;margin:-3px 30px 0 4px}
+.star-box{position:relative;display:inline-block;width:85px;height:15px;background-position:0 -62px}
+.star-box div{width:40px;height:18px;line-height:18px;float:left;position:relative;left:-40px}
+.star-box i{position:absolute;top:0;left:0;height:15px;overflow:hidden;background-position:0 -78px;font-style:normal}
+.star-box ul,
+.star-box li{position:absolute}
+.star-box a{display:block;height:15px;background-position:100px 100px}
+.star-box a:hover{background-position:0 -94px}
+.star-box a em{visibility:hidden;position:absolute;top:-2px;left:-84px;width:80px;text-align:right;color:#999;font-style:normal;background-color:#fff}
+.star-box a:hover em{visibility:visible}
+.grade-1{width:17px;z-index:10}
+.grade-2{width:34px;z-index:9}
+.grade-3{width:51px;z-index:8}
+.grade-4{width:68px;z-index:7}
+.grade-5{width:85px;z-index:6}
+.star-num{display:inline-block;height:21px;line-height:21px;font-family:Georgia;font-weight:bold;font-size:16px;color:#F60}
+
+/*分享*/
+#share a{display:block;float:left;padding-left:20px;margin:5px 0;width:60px;height:16px;line-height:16px;background:url(share_icon.png) no-repeat;cursor:pointer;color:#333}
+#share a:hover{opacity:0.8}
+#share a.tsina{background-position:0 0}
+#share a.tqq{background-position:0 -16px}
+#share a.qzone{background-position:0 -32px}
+#share a.renren{background-position:0 -48px}
+#share a.baidu{background-position:0 -64px}
+#share a.tsohu{background-position:0 -80px}
+#share a.douban{background-position:0 -96px}
+#share a.twangyi{background-position:0 -112px}
+
+/*新建文件夹*/
+#addfolder{width:380px;height:100px;position:relative}
+.folderSelector{width:54px;height:50px;position:absolute;top:30px;left:30px;cursor:pointer;background:url(forder_selector.png) no-repeat}
+.folderSelector:hover{background-position:0 -50px}
+.folderSelector img{width:38px;height:38px;margin:6px}
+.folderNameTxt{left:100px;position:absolute;top:28px;color:#333;font-size:14px}
+.folderInput{left:100px;position:absolute;top:53px}
+.folderName{height:22px;width:210px;padding:0 5px;border:1px solid #BDBDBD}
+.folderNameError{color:red;left:100px;position:absolute;top:80px;display:none}
+.fcDropdown{width:300px;height:120px;position:absolute;left:30px;top:84px;border:1px solid #86A1A3;background:#FFF;display:none}
+.fcDropdown_item{float:left;margin:5px;cursor:pointer;width:50px;height:50px}
+.fcDropdown_item:hover{background:url(forder_selector.png) no-repeat 0 -100px;}
+.fcDropdown_img{width:38px;height:38px;margin:6px}
+
+/*新建私人应用*/
+#addpapp{width:320px}
+#addpapp td.tar{text-align:right}
+#addpapp input[type='text']{height:22px}
+
+/*文件上传*/
+#uploadfilebtnbox{width:80px;height:20px;line-height:20px;border:1px solid #bbb;margin:10px 0 10px 10px;position:relative;overflow:hidden;text-align:center;color:#666;cursor:pointer;background:#eff}
+#uploadfilebtnbox:hover{border:1px solid #666}
+#uploadfilebtnbox:active{border:1px solid #999}
+#uploadfilebtnbox input{cursor:pointer;position:absolute;left:0;top:0;font-size:48px;opacity:0}
+#uploadfile{width:390px;height:200px;border-top:1px solid #DADEE5;overflow-y:scroll;overflow-x:hidden}
+#uploadfile .filelist{width:380px;height:24px;line-height:24px;position:relative}
+#uploadfile .filelist:hover{background:#eee}
+#uploadfile .filelist .name{width:240px;float:left;padding-left:10px;overflow:hidden}
+#uploadfile .filelist .size{width:75px;float:left;text-align:right;padding:0 10px}
+#uploadfile .filelist .do{width:35px;float:left}
+#uploadfile .filelist .do a{color:#999}
+#uploadfile .filelist .do a:hover{color:#666}
+
+@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
+#uploadfile .filelist .progress{width:0;height:24px;color:#fff;text-align:center;text-shadow:0 -1px 0 rgba(0,0,0,0.25);background-color:#5bc0de;background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,0.15)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,0.15)),color-stop(0.75,rgba(255,255,255,0.15)),color-stop(0.75,transparent),to(transparent));background-image:-webkit-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-moz-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-ms-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-repeat:repeat-x;filter:progid:dximagetransform.microsoft.gradient(startColorstr='#5bc0de',endColorstr='#339bb9',GradientType=0);-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);-moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;-webkit-transition:width .6s ease;-moz-transition:width .6s ease;-ms-transition:width .6s ease;-o-transition:width .6s ease;transition:width .6s ease;-webkit-background-size:40px 40px;-moz-background-size:40px 40px;-o-background-size:40px 40px;background-size:40px 40px;-webkit-animation:progress-bar-stripes 2s linear infinite;-moz-animation:progress-bar-stripes 2s linear infinite;-ms-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite}
+
+/*右键提示*/
+.popup-menu{position:absolute;z-index:9990;background:url(popup_menu.gif) repeat-y scroll 0 0 #FFFFFF;border:1px solid #AEAEAE;box-shadow:0 0 6px rgba(0, 0, 0, 0.4);width:125px;display:none}
+.popup-menu ul{padding:1px;position:relative}
+.popup-menu li{height:24px;position:relative;vertical-align:middle}
+.popup-menu a{background-position:100px 100px;border-radius:2px 2px 2px 2px;color:#333333;display:block;height:24px;line-height:24px;overflow:hidden;padding-left:35px}
+.popup-menu a:hover,
+.popup-menu a.focus{background-color:#3B7CE6;background-position:0 -780px;color:#FFFFFF;text-decoration:none}
+.popup-menu a.disabled,
+.popup-menu a.disabled:hover{background-color:transparent;background-position:100px 100px;color:#ccc}
+.popup-menu b{position:absolute;top:4px;left:5px;height:16px;width:16px;background:url(icon_main.png) no-repeat}
+.popup-menu .arrow{background:none;top:0;left:108px;height:20px;line-height:20px;font-size:14px}
+.popup-menu .folder{background-position:0 0}
+.popup-menu .edit{background-position:0 -16px}
+.popup-menu .setting{background-position:0 -32px}
+.popup-menu .themes{background-position:0 -48px}
+.popup-menu .hook{background-position:0 -64px;display:none}
+.popup-menu .refresh{background-position:0 -80px}
+.popup-menu .uninstall{background-position:0 -96px}
+.popup-menu .del{background-position:0 -112px}
+.popup-menu .upload{background-position:0 -128px}
+.popup-menu .customapp{background-position:0 -144px}
+
+/*iconButton for window*/
+.btn .icon1{background-position:-0px -180px}
+.btn .icon2{background-position:-18px -180px}
+.btn .icon3{background-position:-36px -180px}
+.btn .icon4{background-position:-54px -180px}
+.btn .icon5{background-position:-72px -180px}
+.btn .icon6{background-position:-90px -180px}
+.btn .icon7{background-position:-108px -180px}
+.btn .icon8{background-position:-126px -180px}
+.btn .icon9{background-position:-144px -180px}
+.btn .icon10{background-position:-162px -180px}
+.btn .icon11{background-position:-180px -180px}
+.btn .icon12{background-position:-198px -180px}
+.btn .icon13{background-position:-216px -180px}
+.btn .icon14{background-position:-234px -180px}
+.btn .icon15{background-position:-252px -180px}
+.btn .icon16{background-position:-270px -180px}
+.btn .icon17{background-position:-288px -180px}
+.btn .icon18{background-position:-306px -180px}
+.btn .icon19{background-position:-324px -180px}
+.btn .icon20{background-position:-342px -180px}
+.btn .icon21{background-position:-0px -198px}
+.btn .icon22{background-position:-18px -198px}
+.btn .icon23{background-position:-36px -198px}
+.btn .icon24{background-position:-54px -198px}
+.btn .icon25{background-position:-72px -198px}
+.btn .icon26{background-position:-90px -198px}
+.btn .icon27{background-position:-108px -198px}
+.btn .icon28{background-position:-126px -198px}
+.btn .icon29{background-position:-144px -198px}
+.btn .icon30{background-position:-162px -198px}
+.btn .icon31{background-position:-180px -198px}
+.btn .icon32{background-position:-198px -198px}
+.btn .icon33{background-position:-216px -198px}
+.btn .icon34{background-position:-234px -198px}
+.btn .icon35{background-position:-252px -198px}
+.btn .icon36{background-position:-270px -198px}
+.btn .icon37{background-position:-288px -198px}
+.btn .icon38{background-position:-306px -198px}
+.btn .icon39{background-position:-324px -198px}
+.btn .icon40{background-position:-342px -198px}
+.btn .icon41{background-position:-0px -216px}
+.btn .icon42{background-position:-18px -216px}
+.btn .icon43{background-position:-36px -216px}
+.btn .icon44{background-position:-54px -216px}
+.btn .icon45{background-position:-72px -216px}
+.btn .icon46{background-position:-90px -216px}
+.btn .icon47{background-position:-108px -216px}
+.btn .icon48{background-position:-126px -216px}
+.btn .icon49{background-position:-144px -216px}
+.btn .icon50{background-position:-162px -216px}
+.btn .icon51{background-position:-180px -216px}
+.btn .icon52{background-position:-198px -216px}
+.btn .icon53{background-position:-216px -216px}
+.btn .icon54{background-position:-234px -216px}
+.btn .icon55{background-position:-252px -216px}
+.btn .icon56{background-position:-270px -216px}
+.btn .icon57{background-position:-288px -216px}
+.btn .icon58{background-position:-306px -216px}
+.btn .icon59{background-position:-324px -216px}
+.btn .icon60{background-position:-342px -216px}
+.btn .icon61{background-position:-0px -234px}
+.btn .icon62{background-position:-18px -234px}
+.btn .icon63{background-position:-36px -234px}
+.btn .icon64{background-position:-54px -234px}
+.btn .icon65{background-position:-72px -234px}
+.btn .icon66{background-position:-90px -234px}
+.btn .icon67{background-position:-108px -234px}
+.btn .icon68{background-position:-126px -234px}
+.btn .icon69{background-position:-144px -234px}
+.btn .icon70{background-position:-162px -234px}
+.btn .icon71{background-position:-180px -234px}
+.btn .icon72{background-position:-198px -234px}
+.btn .icon73{background-position:-216px -234px}
+.btn .icon74{background-position:-234px -234px}
+.btn .icon75{background-position:-252px -234px}
+.btn .icon76{background-position:-270px -234px}
+.btn .icon77{background-position:-288px -234px}
+.btn .icon78{background-position:-306px -234px}
+.btn .icon79{background-position:-324px -234px}
+.btn .icon80{background-position:-342px -234px}
+.btn .icon81{background-position:-0px -252px}
+.btn .icon82{background-position:-18px -252px}
+.btn .icon83{background-position:-36px -252px}
+.btn .icon84{background-position:-54px -252px}
+.btn .icon85{background-position:-72px -252px}
+.btn .icon86{background-position:-90px -252px}
+.btn .icon87{background-position:-108px -252px}
+.btn .icon88{background-position:-126px -252px}
+.btn .icon89{background-position:-144px -252px}
+.btn .icon90{background-position:-162px -252px}
+.btn .icon91{background-position:-180px -252px}
+.btn .icon92{background-position:-198px -252px}
+.btn .icon93{background-position:-216px -252px}
+.btn .icon94{background-position:-234px -252px}
+.btn .icon95{background-position:-252px -252px}
+.btn .icon96{background-position:-270px -252px}
+.btn .icon97{background-position:-288px -252px}
+.btn .icon98{background-position:-306px -252px}
+.btn .icon99{background-position:-324px -252px}
+.btn .icon100{background-position:-342px -252px}
+.btn .icon101{background-position:-0px -270px}
+.btn .icon102{background-position:-18px -270px}
+.btn .icon103{background-position:-36px -270px}
+.btn .icon104{background-position:-54px -270px}
+.btn .icon105{background-position:-72px -270px}
+.btn .icon106{background-position:-90px -270px}
+.btn .icon107{background-position:-108px -270px}
+.btn .icon108{background-position:-126px -270px}
+.btn .icon109{background-position:-144px -270px}
+.btn .icon110{background-position:-162px -270px}
+.btn .icon111{background-position:-180px -270px}
+.btn .icon112{background-position:-198px -270px}
+.btn .icon113{background-position:-216px -270px}
+.btn .icon114{background-position:-234px -270px}
+.btn .icon115{background-position:-252px -270px}
+.btn .icon116{background-position:-270px -270px}
+.btn .icon117{background-position:-288px -270px}
+.btn .icon118{background-position:-306px -270px}
+.btn .icon119{background-position:-324px -270px}
+.btn .icon120{background-position:-342px -270px}
+.btn .icon121{background-position:-0px -288px}
+.btn .icon122{background-position:-18px -288px}
+.btn .icon123{background-position:-36px -288px}
+.btn .icon124{background-position:-54px -288px}
+.btn .icon125{background-position:-72px -288px}
+.btn .icon126{background-position:-90px -288px}
+.btn .icon127{background-position:-108px -288px}
+.btn .icon128{background-position:-126px -288px}
+.btn .icon129{background-position:-144px -288px}
+.btn .icon130{background-position:-162px -288px}
+.btn .icon131{background-position:-180px -288px}
+.btn .icon132{background-position:-198px -288px}
+.btn .icon133{background-position:-216px -288px}
+.btn .icon134{background-position:-234px -288px}
+.btn .icon135{background-position:-252px -288px}
+.btn .icon136{background-position:-270px -288px}
+.btn .icon137{background-position:-288px -288px}
+.btn .icon138{background-position:-306px -288px}
+.btn .icon139{background-position:-324px -288px}
+.btn .icon140{background-position:-342px -288px}
+.btn .icon141{background-position:-0px -306px}
+.btn .icon142{background-position:-18px -306px}
+.btn .icon143{background-position:-36px -306px}
+.btn .icon144{background-position:-54px -306px}
+.btn .icon145{background-position:-72px -306px}
+.btn .icon146{background-position:-90px -306px}
+.btn .icon147{background-position:-108px -306px}
+.btn .icon148{background-position:-126px -306px}
+.btn .icon149{background-position:-144px -306px}
+.btn .icon150{background-position:-162px -306px}
+.btn .icon151{background-position:-180px -306px}
+.btn .icon152{background-position:-198px -306px}
+.btn .icon153{background-position:-216px -306px}
+.btn .icon154{background-position:-234px -306px}
+.btn .icon155{background-position:-252px -306px}
+.btn .icon156{background-position:-270px -306px}
+.btn .icon157{background-position:-288px -306px}
+.btn .icon158{background-position:-306px -306px}
+.btn .icon159{background-position:-324px -306px}
+.btn .icon160{background-position:-342px -306px}
+.btn .icon161{background-position:-0px -324px}
+.btn .icon162{background-position:-18px -324px}
+.btn .icon163{background-position:-36px -324px}
+.btn .icon164{background-position:-54px -324px}
+.btn .icon165{background-position:-72px -324px}
+.btn .icon166{background-position:-90px -324px}
+.btn .icon167{background-position:-108px -324px}
+.btn .icon168{background-position:-126px -324px}
+.btn .icon169{background-position:-144px -324px}
+.btn .icon170{background-position:-162px -324px}
+.btn .icon171{background-position:-180px -324px}
+.btn .icon172{background-position:-198px -324px}
+.btn .icon173{background-position:-216px -324px}
+.btn .icon174{background-position:-234px -324px}
+.btn .icon175{background-position:-252px -324px}
+.btn .icon176{background-position:-270px -324px}
+.btn .icon177{background-position:-288px -324px}
+.btn .icon178{background-position:-306px -324px}
+.btn .icon179{background-position:-324px -324px}
+.btn .icon180{background-position:-342px -324px}
+.btn .icon181{background-position:-0px -342px}
+.btn .icon182{background-position:-18px -342px}
+.btn .icon183{background-position:-36px -342px}
+.btn .icon184{background-position:-54px -342px}
+.btn .icon185{background-position:-72px -342px}
+.btn .icon186{background-position:-90px -342px}
+.btn .icon187{background-position:-108px -342px}
+.btn .icon188{background-position:-126px -342px}
+.btn .icon189{background-position:-144px -342px}
+.btn .icon190{background-position:-162px -342px}
+.btn .icon191{background-position:-180px -342px}
+.btn .icon192{background-position:-198px -342px}
+.btn .icon193{background-position:-216px -342px}
+.btn .icon194{background-position:-234px -342px}
+.btn .icon195{background-position:-252px -342px}
+.btn .icon196{background-position:-270px -342px}
+.btn .icon197{background-position:-288px -342px}
+.btn .icon198{background-position:-306px -342px}
+.btn .icon199{background-position:-324px -342px}
+.btn .icon200{background-position:-342px -342px}
+.btn:hover .icon1{background-position:-0px -0px}
+.btn:hover .icon2{background-position:-18px -0px}
+.btn:hover .icon3{background-position:-36px -0px}
+.btn:hover .icon4{background-position:-54px -0px}
+.btn:hover .icon5{background-position:-72px -0px}
+.btn:hover .icon6{background-position:-90px -0px}
+.btn:hover .icon7{background-position:-108px -0px}
+.btn:hover .icon8{background-position:-126px -0px}
+.btn:hover .icon9{background-position:-144px -0px}
+.btn:hover .icon10{background-position:-162px -0px}
+.btn:hover .icon11{background-position:-180px -0px}
+.btn:hover .icon12{background-position:-198px -0px}
+.btn:hover .icon13{background-position:-216px -0px}
+.btn:hover .icon14{background-position:-234px -0px}
+.btn:hover .icon15{background-position:-252px -0px}
+.btn:hover .icon16{background-position:-270px -0px}
+.btn:hover .icon17{background-position:-288px -0px}
+.btn:hover .icon18{background-position:-306px -0px}
+.btn:hover .icon19{background-position:-324px -0px}
+.btn:hover .icon20{background-position:-342px -0px}
+.btn:hover .icon21{background-position:-0px -18px}
+.btn:hover .icon22{background-position:-18px -18px}
+.btn:hover .icon23{background-position:-36px -18px}
+.btn:hover .icon24{background-position:-54px -18px}
+.btn:hover .icon25{background-position:-72px -18px}
+.btn:hover .icon26{background-position:-90px -18px}
+.btn:hover .icon27{background-position:-108px -18px}
+.btn:hover .icon28{background-position:-126px -18px}
+.btn:hover .icon29{background-position:-144px -18px}
+.btn:hover .icon30{background-position:-162px -18px}
+.btn:hover .icon31{background-position:-180px -18px}
+.btn:hover .icon32{background-position:-198px -18px}
+.btn:hover .icon33{background-position:-216px -18px}
+.btn:hover .icon34{background-position:-234px -18px}
+.btn:hover .icon35{background-position:-252px -18px}
+.btn:hover .icon36{background-position:-270px -18px}
+.btn:hover .icon37{background-position:-288px -18px}
+.btn:hover .icon38{background-position:-306px -18px}
+.btn:hover .icon39{background-position:-324px -18px}
+.btn:hover .icon40{background-position:-342px -18px}
+.btn:hover .icon41{background-position:-0px -36px}
+.btn:hover .icon42{background-position:-18px -36px}
+.btn:hover .icon43{background-position:-36px -36px}
+.btn:hover .icon44{background-position:-54px -36px}
+.btn:hover .icon45{background-position:-72px -36px}
+.btn:hover .icon46{background-position:-90px -36px}
+.btn:hover .icon47{background-position:-108px -36px}
+.btn:hover .icon48{background-position:-126px -36px}
+.btn:hover .icon49{background-position:-144px -36px}
+.btn:hover .icon50{background-position:-162px -36px}
+.btn:hover .icon51{background-position:-180px -36px}
+.btn:hover .icon52{background-position:-198px -36px}
+.btn:hover .icon53{background-position:-216px -36px}
+.btn:hover .icon54{background-position:-234px -36px}
+.btn:hover .icon55{background-position:-252px -36px}
+.btn:hover .icon56{background-position:-270px -36px}
+.btn:hover .icon57{background-position:-288px -36px}
+.btn:hover .icon58{background-position:-306px -36px}
+.btn:hover .icon59{background-position:-324px -36px}
+.btn:hover .icon60{background-position:-342px -36px}
+.btn:hover .icon61{background-position:-0px -54px}
+.btn:hover .icon62{background-position:-18px -54px}
+.btn:hover .icon63{background-position:-36px -54px}
+.btn:hover .icon64{background-position:-54px -54px}
+.btn:hover .icon65{background-position:-72px -54px}
+.btn:hover .icon66{background-position:-90px -54px}
+.btn:hover .icon67{background-position:-108px -54px}
+.btn:hover .icon68{background-position:-126px -54px}
+.btn:hover .icon69{background-position:-144px -54px}
+.btn:hover .icon70{background-position:-162px -54px}
+.btn:hover .icon71{background-position:-180px -54px}
+.btn:hover .icon72{background-position:-198px -54px}
+.btn:hover .icon73{background-position:-216px -54px}
+.btn:hover .icon74{background-position:-234px -54px}
+.btn:hover .icon75{background-position:-252px -54px}
+.btn:hover .icon76{background-position:-270px -54px}
+.btn:hover .icon77{background-position:-288px -54px}
+.btn:hover .icon78{background-position:-306px -54px}
+.btn:hover .icon79{background-position:-324px -54px}
+.btn:hover .icon80{background-position:-342px -54px}
+.btn:hover .icon81{background-position:-0px -72px}
+.btn:hover .icon82{background-position:-18px -72px}
+.btn:hover .icon83{background-position:-36px -72px}
+.btn:hover .icon84{background-position:-54px -72px}
+.btn:hover .icon85{background-position:-72px -72px}
+.btn:hover .icon86{background-position:-90px -72px}
+.btn:hover .icon87{background-position:-108px -72px}
+.btn:hover .icon88{background-position:-126px -72px}
+.btn:hover .icon89{background-position:-144px -72px}
+.btn:hover .icon90{background-position:-162px -72px}
+.btn:hover .icon91{background-position:-180px -72px}
+.btn:hover .icon92{background-position:-198px -72px}
+.btn:hover .icon93{background-position:-216px -72px}
+.btn:hover .icon94{background-position:-234px -72px}
+.btn:hover .icon95{background-position:-252px -72px}
+.btn:hover .icon96{background-position:-270px -72px}
+.btn:hover .icon97{background-position:-288px -72px}
+.btn:hover .icon98{background-position:-306px -72px}
+.btn:hover .icon99{background-position:-324px -72px}
+.btn:hover .icon100{background-position:-342px -72px}
+.btn:hover .icon101{background-position:-0px -90px}
+.btn:hover .icon102{background-position:-18px -90px}
+.btn:hover .icon103{background-position:-36px -90px}
+.btn:hover .icon104{background-position:-54px -90px}
+.btn:hover .icon105{background-position:-72px -90px}
+.btn:hover .icon106{background-position:-90px -90px}
+.btn:hover .icon107{background-position:-108px -90px}
+.btn:hover .icon108{background-position:-126px -90px}
+.btn:hover .icon109{background-position:-144px -90px}
+.btn:hover .icon110{background-position:-162px -90px}
+.btn:hover .icon111{background-position:-180px -90px}
+.btn:hover .icon112{background-position:-198px -90px}
+.btn:hover .icon113{background-position:-216px -90px}
+.btn:hover .icon114{background-position:-234px -90px}
+.btn:hover .icon115{background-position:-252px -90px}
+.btn:hover .icon116{background-position:-270px -90px}
+.btn:hover .icon117{background-position:-288px -90px}
+.btn:hover .icon118{background-position:-306px -90px}
+.btn:hover .icon119{background-position:-324px -90px}
+.btn:hover .icon120{background-position:-342px -90px}
+.btn:hover .icon121{background-position:-0px -108px}
+.btn:hover .icon122{background-position:-18px -108px}
+.btn:hover .icon123{background-position:-36px -108px}
+.btn:hover .icon124{background-position:-54px -108px}
+.btn:hover .icon125{background-position:-72px -108px}
+.btn:hover .icon126{background-position:-90px -108px}
+.btn:hover .icon127{background-position:-108px -108px}
+.btn:hover .icon128{background-position:-126px -108px}
+.btn:hover .icon129{background-position:-144px -108px}
+.btn:hover .icon130{background-position:-162px -108px}
+.btn:hover .icon131{background-position:-180px -108px}
+.btn:hover .icon132{background-position:-198px -108px}
+.btn:hover .icon133{background-position:-216px -108px}
+.btn:hover .icon134{background-position:-234px -108px}
+.btn:hover .icon135{background-position:-252px -108px}
+.btn:hover .icon136{background-position:-270px -108px}
+.btn:hover .icon137{background-position:-288px -108px}
+.btn:hover .icon138{background-position:-306px -108px}
+.btn:hover .icon139{background-position:-324px -108px}
+.btn:hover .icon140{background-position:-342px -108px}
+.btn:hover .icon141{background-position:-0px -126px}
+.btn:hover .icon142{background-position:-18px -126px}
+.btn:hover .icon143{background-position:-36px -126px}
+.btn:hover .icon144{background-position:-54px -126px}
+.btn:hover .icon145{background-position:-72px -126px}
+.btn:hover .icon146{background-position:-90px -126px}
+.btn:hover .icon147{background-position:-108px -126px}
+.btn:hover .icon148{background-position:-126px -126px}
+.btn:hover .icon149{background-position:-144px -126px}
+.btn:hover .icon150{background-position:-162px -126px}
+.btn:hover .icon151{background-position:-180px -126px}
+.btn:hover .icon152{background-position:-198px -126px}
+.btn:hover .icon153{background-position:-216px -126px}
+.btn:hover .icon154{background-position:-234px -126px}
+.btn:hover .icon155{background-position:-252px -126px}
+.btn:hover .icon156{background-position:-270px -126px}
+.btn:hover .icon157{background-position:-288px -126px}
+.btn:hover .icon158{background-position:-306px -126px}
+.btn:hover .icon159{background-position:-324px -126px}
+.btn:hover .icon160{background-position:-342px -126px}
+.btn:hover .icon161{background-position:-0px -144px}
+.btn:hover .icon162{background-position:-18px -144px}
+.btn:hover .icon163{background-position:-36px -144px}
+.btn:hover .icon164{background-position:-54px -144px}
+.btn:hover .icon165{background-position:-72px -144px}
+.btn:hover .icon166{background-position:-90px -144px}
+.btn:hover .icon167{background-position:-108px -144px}
+.btn:hover .icon168{background-position:-126px -144px}
+.btn:hover .icon169{background-position:-144px -144px}
+.btn:hover .icon170{background-position:-162px -144px}
+.btn:hover .icon171{background-position:-180px -144px}
+.btn:hover .icon172{background-position:-198px -144px}
+.btn:hover .icon173{background-position:-216px -144px}
+.btn:hover .icon174{background-position:-234px -144px}
+.btn:hover .icon175{background-position:-252px -144px}
+.btn:hover .icon176{background-position:-270px -144px}
+.btn:hover .icon177{background-position:-288px -144px}
+.btn:hover .icon178{background-position:-306px -144px}
+.btn:hover .icon179{background-position:-324px -144px}
+.btn:hover .icon180{background-position:-342px -144px}
+.btn:hover .icon181{background-position:-0px -162px}
+.btn:hover .icon182{background-position:-18px -162px}
+.btn:hover .icon183{background-position:-36px -162px}
+.btn:hover .icon184{background-position:-54px -162px}
+.btn:hover .icon185{background-position:-72px -162px}
+.btn:hover .icon186{background-position:-90px -162px}
+.btn:hover .icon187{background-position:-108px -162px}
+.btn:hover .icon188{background-position:-126px -162px}
+.btn:hover .icon189{background-position:-144px -162px}
+.btn:hover .icon190{background-position:-162px -162px}
+.btn:hover .icon191{background-position:-180px -162px}
+.btn:hover .icon192{background-position:-198px -162px}
+.btn:hover .icon193{background-position:-216px -162px}
+.btn:hover .icon194{background-position:-234px -162px}
+.btn:hover .icon195{background-position:-252px -162px}
+.btn:hover .icon196{background-position:-270px -162px}
+.btn:hover .icon197{background-position:-288px -162px}
+.btn:hover .icon198{background-position:-306px -162px}
+.btn:hover .icon199{background-position:-324px -162px}
+.btn:hover .icon200{background-position:-342px -162px}
+
+/*新手帮助*/
+#help{position:absolute;z-index:5555;width:100%;height:100%;background:none rgba(0, 0, 0, 0.7)}
+#help .close{float:right;font-size:40px;color:#fff;width:40px;height:40px;line-height:36px;text-align:center;background:none}
+#help .close:hover{background:none rgba(0, 0, 0, 0.7)}
+#help .step{position:absolute;color:#eee;padding:0 20px 15px;background:none rgba(0, 0, 0, 0.7);border-radius:5px;display:none}
+#help .step .jt{font-size:0;height:0;border:20px solid rgba(0, 0, 0, 0);position:absolute}
+#help .step .jt_left{border-right:20px solid rgba(0, 0, 0, 0.7)}
+#help .step .jt_right{border-left:20px solid rgba(0, 0, 0, 0.7)}
+#help .step .jt_top{border-bottom:20px solid rgba(0, 0, 0, 0.7)}
+#help .step .jt_bottom{border-top:20px solid rgba(0, 0, 0, 0.7)}
+#help .step .h1{font-size:40px;font-weight:bold}
+#help .step .h2{font-size:28px;font-weight:bold;padding-left:10px}
+#help .step .next,
+#help .step .over{border:1px solid #fff;color:#fff;padding:0 5px;float:right;margin-top:10px}
+#help .step .next:hover,
+#help .step .over:hover{background:none rgba(50, 50, 50, 0.7)}

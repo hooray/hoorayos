@@ -1,0 +1,34 @@
+/*窗口*/
+.window-container{background:#E0E0E0;border:1px solid #BCB1B0;border-radius:5px}
+/*当前窗口*/
+.window-current{background:#E0E0E0}
+/*标题*/
+.title-bar{height:28px;line-height:28px;padding-left:30px;background:#E0E0E0}
+/*当前窗口标题*/
+.window-current .title-bar{background:#E0E0E0}
+/*标题图标*/
+.title-bar .icon{top:6px;left:6px;border-radius:3px}
+/*标题文字*/
+.title-bar .title{text-align:left;color:#333;font-weight:bold}
+/*窗口右上角操作按钮*/
+.title-handle{top:7px;right:7px}
+.title-handle a{background:url(ext/ext.png) no-repeat;width:15px;height:15px;line-height:15px;font-size:0;margin-right:1px}
+.title-handle a b{display:none}
+.title-handle .ha-hide{background-position:0 -15px}
+.title-handle .ha-hide:hover{background-position:-15px -15px}
+.title-handle .ha-max{background-position:0 -30px}
+.title-handle .ha-max:hover{background-position:-15px -30px}
+.title-handle .ha-revert{background-position:0 -45px}
+.title-handle .ha-revert:hover{background-position:-15px -45px}
+.title-handle .ha-fullscreen{background-position:0 -60px}
+.title-handle .ha-fullscreen:hover{background-position:-15px -60px}
+.title-handle .ha-close{background-position:0 0}
+.title-handle .ha-close:hover{background-position:-15px 0}
+/*窗口内部iframe*/
+.window-frame{top:28px;border-top:1px solid #ccc;border-bottom:1px solid #ccc}
+/*底部*/
+.set-bar{background:#E0E0E0}
+.window-current .set-bar{background:#E0E0E0}
+.set-bar .btn{border:1px solid #E0E0E0;background:#E0E0E0}
+.window-current .set-bar .btn{border:1px solid #E0E0E0;background:#E0E0E0}
+.set-bar .btn:hover{border:1px solid #E0E0E0;background:#fff}

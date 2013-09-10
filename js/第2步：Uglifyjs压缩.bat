@@ -1,0 +1,1 @@
+uglifyjs hros.min.js -m -o hros.min.js
