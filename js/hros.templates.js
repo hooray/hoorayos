@@ -1,6 +1,6 @@
 //桌面应用
 var appbtnTemp = template(
-	'<li class="appbtn" id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" top="<%=top%>" left="<%=left%>" style="top:<%=top%>px;left:<%=left%>px">'+
+	'<li id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" top="<%=top%>" left="<%=left%>" style="top:<%=top%>px;left:<%=left%>px">'+
 		'<div><img src="<%=imgsrc%>" alt="<%=title%>"></div>'+
 		'<span><%=title%></span>'+
 	'</li>'
@@ -14,7 +14,7 @@ var addbtnTemp = template(
 );
 //任务栏
 var taskTemp = template(
-	'<a id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" class="task-item task-item-current">'+
+	'<a id="<%=id%>" class="task-item task-item-current" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
 		'<div class="task-item-icon">'+
 			'<img src="<%=imgsrc%>">'+
 		'</div>'+
@@ -23,7 +23,7 @@ var taskTemp = template(
 );
 //小挂件
 var widgetWindowTemp = template(
-	'<div id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" class="widget" style="z-index:<%=zIndex%>;width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;right:<%=right%>px">'+
+	'<div id="<%=id%>" class="widget" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="z-index:<%=zIndex%>;width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;right:<%=right%>px">'+
 		'<div class="move">'+
 			'<a class="ha-close" href="javascript:;" title="关闭"></a>'+
 			'<% if(issetbar){ %>'+
@@ -38,7 +38,7 @@ var widgetWindowTemp = template(
 );
 //应用窗口
 var windowTemp = template(
-	'<div id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" style="<% if(isopenmax){ %>width:100%;height:100%;left:0;top:0;<% }else{ %>width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
+	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;left:0;top:0;<% }else{ %>width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
 				'<img class="icon" src="<%=imgsrc%>"><span class="title"><%=title%></span>'+
@@ -86,7 +86,7 @@ var windowTemp = template(
 );
 //文件夹窗口
 var folderWindowTemp = template(
-	'<div id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" class="folder-window window-container window-current" style="width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;z-index:<%=zIndex%>">'+
+	'<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;z-index:<%=zIndex%>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
 				'<img class="icon" src="<%=imgsrc%>"><span class="title"><%=title%></span>'+
@@ -120,7 +120,7 @@ var folderWindowTemp = template(
 );
 //文件夹预览
 var folderViewTemp = template(
-	'<div id="<%=id%>" appid="<%=appid%>" realappid="<%=realappid%>" class="quick_view_container" style="top:<%=top%>px;left:<%=left%>px">'+
+	'<div id="<%=id%>" class="quick_view_container" appid="<%=appid%>" realappid="<%=realappid%>" style="top:<%=top%>px;left:<%=left%>px">'+
 		'<div class="perfect_nine_box">'+
 			'<div class="perfect_nine_t">'+
 				'<div class="perfect_nine_t_m"></div>'+
