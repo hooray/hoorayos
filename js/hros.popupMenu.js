@@ -392,6 +392,41 @@ HROS.popupMenu = (function(){
 			return TEMP.popupMenuFolder;
 		},
 		/*
+		**  应用码头右键
+		*/
+		dock : function(){
+			HROS.window.show2under();
+			if(!TEMP.popupMenuDock){
+				TEMP.popupMenuDock = $('<div class="popup-menu dock-menu"><ul><li><a menu="dockpos" pos="top" href="javascript:;"><b class="hook"></b>向上停靠</a></li><li><a menu="dockpos" pos="left" href="javascript:;"><b class="hook"></b>向左停靠</a></li><li><a menu="dockpos" pos="right" href="javascript:;"><b class="hook"></b>向右停靠</a></li><li><a menu="dockpos" pos="none" href="javascript:;">隐藏</a></li></ul></div>');
+				$('body').append(TEMP.popupMenuDock);
+				//绑定事件
+				$('.dock-menu a[menu="dockpos"]').on('click', function(){
+					if($(this).attr('pos') == 'none'){
+						$.dialog({
+							title : '隐藏应用码头',
+							content : '<p>如果应用码头存在应用，隐藏后会将应用转移到当前桌面。</p><p>如果需要再次开启，可在桌面空白处右键，进入“桌面设置”里开启。</p>',
+							ok : function(){
+								HROS.dock.updatePos('none');
+							},
+							okVal : '确认隐藏',
+							cancel : true
+						});
+					}else{
+						HROS.dock.updatePos($(this).attr('pos'));
+					}
+					$('.popup-menu').hide();
+				});
+			}
+			$('.dock-menu a[menu="dockpos"]').each(function(){
+				$(this).children('.hook').hide();
+				if($(this).attr('pos') == HROS.CONFIG.dockPos){
+					$(this).children('.hook').show();
+				}
+				$('.popup-menu').hide();
+			});
+			return TEMP.popupMenuDock;
+		},
+		/*
 		**  任务栏右键
 		*/
 		task : function(obj){

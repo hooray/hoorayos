@@ -10,6 +10,20 @@ HROS.dock = (function(){
 			HROS.dock.setPos();
 			//绑定应用码头拖动事件
 			HROS.dock.move();
+			$('body').on('contextmenu', '#dock-container', function(e){
+				HROS.popupMenu.hide();
+				HROS.folderView.hide();
+				HROS.searchbar.hide();
+				HROS.startmenu.hide();
+				var popupmenu = HROS.popupMenu.dock();
+				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
+				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+				popupmenu.css({
+					left : l,
+					top : t
+				}).show();
+				return false;
+			});
 			//绑定应用码头3个按钮的点击事件
 			$('.dock-tool-setting').on('mousedown', function(){
 				return false;
