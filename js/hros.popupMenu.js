@@ -43,7 +43,7 @@ HROS.popupMenu = (function(){
 				$('body').append(TEMP.popupMenuApp);
 			}
 			$('.app-menu a[menu="moveto"]').removeClass('disabled');
-			if(obj.parent().hasClass('desktop-container')){
+			if(obj.parent().hasClass('desktop-apps-container')){
 				$('.app-menu a[menu="moveto"]').each(function(){
 					if($(this).attr('desk') == HROS.CONFIG.desk){
 						$(this).addClass('disabled');
@@ -53,11 +53,11 @@ HROS.popupMenu = (function(){
 			//绑定事件
 			$('.app-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
-					from = obj.index(),
-					to = -1,
-					todesk = $(this).attr('desk'),
-					fromdesk = HROS.CONFIG.desk,
-					fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
+				from = obj.index(),
+				to = -1,
+				todesk = $(this).attr('desk'),
+				fromdesk = HROS.CONFIG.desk,
+				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
 				if(HROS.base.checkLogin()){
 					if(!HROS.app.checkIsMoving()){
 						var rtn = false;
@@ -71,8 +71,7 @@ HROS.popupMenu = (function(){
 									HROS.VAR.isAppMoving = false;
 								});
 							}
-						}else if(obj.parent().hasClass('desktop-container')){
-							from -= 2;
+						}else if(obj.parent().hasClass('desktop-apps-container')){
 							if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
 								$.ajax({
 									type : 'POST',
@@ -97,8 +96,7 @@ HROS.popupMenu = (function(){
 				}else{
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
-					}else if(obj.parent().hasClass('desktop-container')){
-						from -= 2;
+					}else if(obj.parent().hasClass('desktop-apps-container')){
 						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
@@ -147,7 +145,7 @@ HROS.popupMenu = (function(){
 				$('body').append(TEMP.popupMenuPapp);
 			}
 			$('.papp-menu a[menu="moveto"]').removeClass('disabled');
-			if(obj.parent().hasClass('desktop-container')){
+			if(obj.parent().hasClass('desktop-apps-container')){
 				$('.papp-menu a[menu="moveto"]').each(function(){
 					if($(this).attr('desk') == HROS.CONFIG.desk){
 						$(this).addClass('disabled');
@@ -157,11 +155,11 @@ HROS.popupMenu = (function(){
 			//绑定事件
 			$('.papp-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
-					from = obj.index(),
-					to = -1,
-					todesk = $(this).attr('desk'),
-					fromdesk = HROS.CONFIG.desk,
-					fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
+				from = obj.index(),
+				to = -1,
+				todesk = $(this).attr('desk'),
+				fromdesk = HROS.CONFIG.desk,
+				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
 				if(HROS.base.checkLogin()){
 					var rtn = false;
 					if(obj.parent().hasClass('dock-applist')){
@@ -175,7 +173,6 @@ HROS.popupMenu = (function(){
 							});
 						}
 					}else if(obj.parent().hasClass('desktop-container')){
-						from -= 2;
 						if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
 							$.ajax({
 								type : 'POST',
@@ -199,8 +196,7 @@ HROS.popupMenu = (function(){
 				}else{
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
-					}else if(obj.parent().hasClass('desktop-container')){
-						from -= 2;
+					}else if(obj.parent().hasClass('desktop-apps-container')){
 						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
@@ -259,7 +255,7 @@ HROS.popupMenu = (function(){
 				$('body').append(TEMP.popupMenuFolder);
 			}
 			$('.folder-menu a[menu="moveto"]').removeClass('disabled');
-			if(obj.parent().hasClass('desktop-container')){
+			if(obj.parent().hasClass('desktop-apps-container')){
 				$('.folder-menu a[menu="moveto"]').each(function(){
 					if($(this).attr('desk') == HROS.CONFIG.desk){
 						$(this).addClass('disabled');
@@ -277,11 +273,11 @@ HROS.popupMenu = (function(){
 			});
 			$('.folder-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
-					from = obj.index(),
-					to = -1,
-					todesk = $(this).attr('desk'),
-					fromdesk = HROS.CONFIG.desk,
-					fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
+				from = obj.index(),
+				to = -1,
+				todesk = $(this).attr('desk'),
+				fromdesk = HROS.CONFIG.desk,
+				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
 				if(HROS.base.checkLogin()){
 					var rtn = false;
 					if(obj.parent().hasClass('dock-applist')){
@@ -294,8 +290,7 @@ HROS.popupMenu = (function(){
 								HROS.VAR.isAppMoving = false;
 							});
 						}
-					}else if(obj.parent().hasClass('desktop-container')){
-						from -= 2;
+					}else if(obj.parent().hasClass('desktop-apps-container')){
 						if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
 							$.ajax({
 								type : 'POST',
@@ -319,8 +314,7 @@ HROS.popupMenu = (function(){
 				}else{
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
-					}else if(obj.parent().hasClass('desktop-container')){
-						from -= 2;
+					}else if(obj.parent().hasClass('desktop-apps-container')){
 						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);

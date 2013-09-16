@@ -175,11 +175,26 @@
 <div id="desktop">
 	<div id="zoom-tip"><div><i>​</i>​<span></span></div><a href="javascript:;" class="close" onClick="HROS.zoom.close();">×</a></div>
 	<div id="desk">
-		<div id="desk-1" class="desktop-container"><div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div></div>
-		<div id="desk-2" class="desktop-container"><div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div></div>
-		<div id="desk-3" class="desktop-container"><div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div></div>
-		<div id="desk-4" class="desktop-container"><div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div></div>
-		<div id="desk-5" class="desktop-container"><div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div></div>
+		<div id="desk-1" class="desktop-container">
+			<div class="desktop-apps-container"></div>
+			<div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div>
+		</div>
+		<div id="desk-2" class="desktop-container">
+			<div class="desktop-apps-container"></div>
+			<div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div>
+		</div>
+		<div id="desk-3" class="desktop-container">
+			<div class="desktop-apps-container"></div>
+			<div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div>
+		</div>
+		<div id="desk-4" class="desktop-container">
+			<div class="desktop-apps-container"></div>
+			<div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div>
+		</div>
+		<div id="desk-5" class="desktop-container">
+			<div class="desktop-apps-container"></div>
+			<div class="scrollbar scrollbar-x"></div><div class="scrollbar scrollbar-y"></div>
+		</div>
 		<div id="dock-bar">
 			<div id="dock-container">
 				<div class="dock-middle">

@@ -17,6 +17,10 @@ HROS.appmanage = (function(){
 			HROS.appmanage.moveScrollbar();
 		},
 		set : function(){
+			$('#desktop').hide();
+			$('#appmanage').show();
+			$('#amg_folder_container .folderItem').show().addClass('folderItem_turn');
+			$('#amg_folder_container .folderInner').height($(window).height() - 80);
 			//加载应用码头应用
 			var dock_append = '';
 			if(HROS.VAR.dock != ''){
@@ -55,10 +59,6 @@ HROS.appmanage = (function(){
 				}
 				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner').html(desk_append);
 			}
-			$('#desktop').hide();
-			$('#appmanage').show();
-			$('#amg_folder_container .folderItem').show().addClass('folderItem_turn');
-			$('#amg_folder_container .folderInner').height($(window).height() - 80);
 			HROS.appmanage.getScrollbar();
 		},
 		move : function(){
@@ -115,8 +115,8 @@ HROS.appmanage = (function(){
 							icon2 = icon2 > appLength ? appLength : icon2;
 							if(icon2 != oldobj.index()){
 								var id = oldobj.attr('appid'),
-									from = oldobj.index(),
-									to = icon2;
+								from = oldobj.index(),
+								to = icon2;
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToDock(id, from, to)){
@@ -136,12 +136,12 @@ HROS.appmanage = (function(){
 						}else{
 							var movedesk = parseInt(cx / ($(window).width() / 5));
 							var appLength = $('#amg_folder_container .folderItem:eq(' + movedesk + ') .folderInner li').length - 1;
-							icon = HROS.grid.searchManageAppGrid(cy - 80);
+							icon = HROS.grid.searchManageAppGrid(cy - 80 + $('#amg_folder_container .folderItem:eq(' + movedesk + ') .folderInner').scrollTop());
 							icon = icon > appLength ? appLength : icon;
 							var id = oldobj.attr('appid'),
-								from = oldobj.index(),
-								to = icon + 1,
-								desk = movedesk + 1;
+							from = oldobj.index(),
+							to = icon + 1,
+							desk = movedesk + 1;
 							if(HROS.base.checkLogin()){
 								if(!HROS.app.checkIsMoving()){
 									if(HROS.app.dataDockToDesk(id, from, to, desk)){
@@ -212,9 +212,9 @@ HROS.appmanage = (function(){
 								icon2 = HROS.grid.searchManageDockAppGrid(cx);
 								icon2 = icon2 > appLength ? appLength : icon2;
 								var id = oldobj.attr('appid'),
-									from = oldobj.index(),
-									to = icon2 + 1,
-									desk = oldobj.parent().attr('desk');
+								from = oldobj.index(),
+								to = icon2 + 1,
+								desk = oldobj.parent().attr('desk');
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDeskToDock(id, from, to, desk)){
@@ -237,7 +237,7 @@ HROS.appmanage = (function(){
 									icon : 'warning',
 									content : '当前应用码头处于停用状态，是否开启？',
 									ok : function(){
-										HROS.CONFIG.dockPos = 'top';
+										HROS.dock.updatePos('top');
 										next();
 									},
 									cancel : true
@@ -248,15 +248,15 @@ HROS.appmanage = (function(){
 						}else{
 							var movedesk = parseInt(cx / ($(window).width() / 5));
 							var appLength = $('#amg_folder_container .folderItem:eq(' + movedesk + ') .folderInner li').length - 1;
-							icon = HROS.grid.searchManageAppGrid(cy - 80);
+							icon = HROS.grid.searchManageAppGrid(cy - 80 + $('#amg_folder_container .folderItem:eq(' + movedesk + ') .folderInner').scrollTop());
 							//判断是在同一桌面移动，还是跨桌面移动
 							if(movedesk + 1 == oldobj.parent().attr('desk')){
 								icon = icon > appLength ? appLength : icon;
 								if(icon != oldobj.index()){
 									var id = oldobj.attr('appid'),
-										from = oldobj.index(),
-										to = icon,
-										desk = movedesk + 1;
+									from = oldobj.index(),
+									to = icon,
+									desk = movedesk + 1;
 									if(HROS.base.checkLogin()){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDesk(id, from, to, desk)){
@@ -276,10 +276,10 @@ HROS.appmanage = (function(){
 							}else{
 								icon = icon > appLength ? appLength : icon;
 								var id = oldobj.attr('appid'),
-									from = oldobj.index(),
-									to = icon,
-									todesk = movedesk + 1,
-									fromdesk = oldobj.parent().attr('desk');
+								from = oldobj.index(),
+								to = icon,
+								todesk = movedesk + 1,
+								fromdesk = oldobj.parent().attr('desk');
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
@@ -306,11 +306,16 @@ HROS.appmanage = (function(){
 			$('#amg_folder_container .folderInner').height($(window).height() - 80);
 			$('#amg_folder_container .folderItem').each(function(){
 				var desk = $(this).find('.folderInner'), deskrealh = parseInt(desk.children('.appbtn:last').css('top')) + 41, scrollbar = desk.next('.scrollBar');
+				//记录下滚动条更新前的位置，用于更新后的复原
+				var scrollbarTop = scrollbar.position().top;
 				//先清空所有附加样式
 				scrollbar.hide();
 				desk.scrollTop(0);
 				if(desk.height() / deskrealh < 1){
-					scrollbar.height(desk.height() / deskrealh * desk.height()).css('top', 0).show();
+					scrollbar.height(desk.height() / deskrealh * desk.height());
+					scrollbarTop = scrollbarTop + scrollbar.height() > desk.height() ? desk.height() - scrollbar.height() : scrollbarTop;
+					scrollbar.css('top', scrollbarTop).show();
+					desk.scrollTop(scrollbarTop / desk.height() * deskrealh);
 				}
 			});
 		},
