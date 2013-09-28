@@ -450,7 +450,7 @@ HROS.app = (function(){
 								var dock_w = HROS.CONFIG.dockPos == 'left' ? 73 : 0, dock_h = HROS.CONFIG.dockPos == 'top' ? 73 : 0;
 								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft(), deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
 								icon = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
-								if(icon != null && icon != (oldobj.index() - 2)){
+								if(icon != null && icon != oldobj.index()){
 									var id = oldobj.attr('appid'),
 										from = oldobj.index(),
 										to = icon,

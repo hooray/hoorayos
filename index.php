@@ -42,6 +42,7 @@
 <title><?php echo $setting['title']; ?></title>
 <meta name="description" content="<?php echo $setting['description']; ?>" />
 <meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo $skin; ?>.css" id="window-skin">
