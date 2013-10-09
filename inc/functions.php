@@ -545,11 +545,11 @@
 					'name = "'.$opt['name'].'"',
 					'url = "'.$opt['url'].'"',
 					'type = "'.$opt['type'].'"',
-					'width = '.$opt['width'],
-					'height = '.$opt['height'],
-					'isresize = '.$opt['isresize'],
-					'isopenmax = '.$opt['isopenmax'],
-					'isflash = '.$opt['isflash'],
+					'width = '.(int)$opt['width'],
+					'height = '.(int)$opt['height'],
+					'isresize = '.(int)$opt['isresize'],
+					'isopenmax = '.(int)$opt['isopenmax'],
+					'isflash = '.(int)$opt['isflash'],
 					'dt = now()',
 					'lastdt = now()',
 					'member_id = '.session('member_id')
@@ -558,10 +558,10 @@
 				break;
 			default:
 				//检查应用是否已安装
-				$count = $db->select(0, 2, 'tb_member_app', '*', 'and realid = '.$opt['id'].' and member_id = '.session('member_id'));
+				$count = $db->select(0, 2, 'tb_member_app', '*', 'and realid = '.(int)$opt['id'].' and member_id = '.session('member_id'));
 				if($count == 0){
 					//查找应用信息
-					$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.$opt['id']);
+					$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.(int)$opt['id']);
 					//在安装应用表里更新一条记录
 					$set = array(
 						'realid = '.$opt['id'],
@@ -569,51 +569,51 @@
 						'icon = "'.$app['icon'].'"',
 						'url = "'.$app['url'].'"',
 						'type = "'.$app['type'].'"',
-						'width = '.$app['width'],
-						'height = '.$app['height'],
-						'isresize = '.$app['isresize'],
-						'isopenmax = '.$app['isopenmax'],
-						'issetbar = '.$app['issetbar'],
-						'isflash = '.$app['isflash'],
+						'width = '.(int)$app['width'],
+						'height = '.(int)$app['height'],
+						'isresize = '.(int)$app['isresize'],
+						'isopenmax = '.(int)$app['isopenmax'],
+						'issetbar = '.(int)$app['issetbar'],
+						'isflash = '.(int)$app['isflash'],
 						'dt = now()',
 						'lastdt = now()',
 						'member_id = '.session('member_id')
 					);
 					$appid = $db->insert(0, 2, 'tb_member_app', $set);
 					//更新使用人数
-					$db->update(0, 0, 'tb_app', 'usecount = usecount + 1', 'and tbid = '.$opt['id']);
+					$db->update(0, 0, 'tb_app', 'usecount = usecount + 1', 'and tbid = '.(int)$opt['id']);
 				}
 		}
-		if(!empty($appid)){
+		if(!empty($appid) && (int)$opt['desk'] >= 1 && (int)$opt['desk'] <= 5){
 			//将安装应用表返回的id记录到用户表
-			$rs = $db->select(0, 1, 'tb_member', 'desk'.$opt['desk'], 'and tbid='.session('member_id'));
-			$deskapp = $rs['desk'.$opt['desk']] == '' ? $appid : $rs['desk'.$opt['desk']].','.$appid;
-			$db->update(0, 0, 'tb_member', 'desk'.$opt['desk'].'="'.$deskapp.'"', 'and tbid='.session('member_id'));
+			$rs = $db->select(0, 1, 'tb_member', 'desk'.(int)$opt['desk'], 'and tbid='.session('member_id'));
+			$deskapp = $rs['desk'.(int)$opt['desk']] == '' ? $appid : $rs['desk'.(int)$opt['desk']].','.$appid;
+			$db->update(0, 0, 'tb_member', 'desk'.(int)$opt['desk'].'="'.$deskapp.'"', 'and tbid='.session('member_id'));
 		}
 	}
 	//删除应用
 	function delApp($id){
 		global $db;
-		$member_app = $db->select(0, 1, 'tb_member_app', 'realid, type, folder_id', 'and tbid = '.$id.' and member_id = '.session('member_id'));
+		$member_app = $db->select(0, 1, 'tb_member_app', 'realid, type, folder_id', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 		//如果不是文件夹，则直接删除，反之先删除文件夹内的应用，再删除文件夹
 		switch($member_app['type']){
 			case 'folder':
-				$rs = $db->select(0, 0, 'tb_member_app', 'tbid', 'and folder_id = '.$id);
+				$rs = $db->select(0, 0, 'tb_member_app', 'tbid', 'and folder_id = '.(int)$id);
 				if($rs != NULL){
 					foreach($rs as $v){
 						delApp($v['tbid']);
 					}
 				}
-				delAppStr($id);
+				delAppStr((int)$id);
 				break;
 			case 'app':
 			case 'widget':
-				delAppStr($id);
+				delAppStr((int)$id);
 				$db->update(0, 0, 'tb_app', 'usecount = usecount - 1', 'and tbid = '.$member_app['realid']);
 				break;
 			case 'papp':
 			case 'pwidget':
-				delAppStr($id);
+				delAppStr((int)$id);
 				break;
 		}
 	}
@@ -625,7 +625,7 @@
 		if($rs['dock'] != ''){
 			$dockapp = explode(',', $rs['dock']);
 			foreach($dockapp as $k => $v){
-				if($v == $id){
+				if($v == (int)$id){
 					$flag = true;
 					unset($dockapp[$k]);
 					break;
@@ -635,11 +635,11 @@
 		}else{
 			$set .= 'dock = ""';
 		}
-		for($i=1; $i<=5; $i++){
+		for($i = 1; $i <= 5; $i++){
 			if($rs['desk'.$i] != ''){
 				$deskapp = explode(',', $rs['desk'.$i]);
 				foreach($deskapp as $k => $v){
-					if($v == $id){
+					if($v == (int)$id){
 						$flag = true;
 						unset($deskapp[$k]);
 						break;
@@ -653,12 +653,12 @@
 		if($flag){
 			$db->update(0, 0, 'tb_member', $set, 'and tbid = '.session('member_id'));
 		}
-		$db->delete(0, 0, 'tb_member_app', 'and tbid = '.$id.' and member_id = '.session('member_id'));
+		$db->delete(0, 0, 'tb_member_app', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 	}
 	//强制格式化appid，如：'10,13,,17,4,6,'，格式化后：'10,13,17,4,6'
 	function formatAppidArray($arr){
 		foreach($arr as $k => $v){
-			if($v==''){
+			if($v == ''){
 				unset($arr[$k]);
 			}
 		}

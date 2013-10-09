@@ -4,7 +4,7 @@
 	switch($ac){
 		case 'edit':
 			$set = array(
-				'isforcedlogin = '.$val_isforcedlogin,
+				'isforcedlogin = '.(int)$val_isforcedlogin,
 				'dock = "'.$val_dock.'"',
 				'desk1 = "'.$val_desk1.'"',
 				'desk2 = "'.$val_desk2.'"',

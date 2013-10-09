@@ -28,7 +28,7 @@
 					'isopenmax = '.$val_isopenmax,
 					'isflash = '.$val_isflash
 				);
-				$db->update(0, 0, 'tb_member_app', $set, 'and tbid = '.$id.' and member_id = '.session('member_id'));
+				$db->update(0, 0, 'tb_member_app', $set, 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 			}
 			echo json_encode(array(
 				'info' => '',

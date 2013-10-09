@@ -3,21 +3,17 @@
 		
 	switch($ac){
 		case 'getList':
-			$orderby = 'dt desc limit '.$from.','.$to;
+			$orderby = 'dt desc limit '.(int)$from.','.(int)$to;
 			if($search_1 != ''){
 				$sqlwhere[] = 'name like "%'.$search_1.'%"';
 			}
 			if($search_2 != ''){
-				$sqlwhere[] = 'kindid = '.$search_2;
+				$sqlwhere[] = 'kindid = '.(int)$search_2;
 			}
 			if($search_3 != ''){
 				$sqlwhere[] = 'type = "'.$search_3.'"';
 			}
-			if($search_4 == 1){
-				$sqlwhere[] = 'verifytype = 1';
-			}else{
-				$sqlwhere[] = 'verifytype = 2';
-			}
+			$sqlwhere[] = $search_4 == 1 ? 'verifytype = 1' : 'verifytype = 2';
 			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
 			echo $c.'<{|*|}>';
 			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);
@@ -46,11 +42,11 @@
 			}
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_app', 'and tbid='.$appid);
+			$db->delete(0, 0, 'tb_app', 'and tbid = '.(int)$appid);
 			break;
 		case 'recommend':
-			$db->update(0, 0, 'tb_app', 'isrecommend = 0');
-			$db->update(0, 0, 'tb_app', 'isrecommend = 1', 'and tbid = '.$appid);
+			$db->update(0, 0, 'tb_app', 'isrecommend = 0', 'and isrecommend = 1');
+			$db->update(0, 0, 'tb_app', 'isrecommend = 1', 'and tbid = '.(int)$appid);
 			break;
 	}
 ?>

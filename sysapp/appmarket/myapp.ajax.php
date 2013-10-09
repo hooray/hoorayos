@@ -3,18 +3,18 @@
 		
 	switch($ac){
 		case 'getList':
-			$orderby = 'dt desc limit '.$from.','.$to;
+			$orderby = 'dt desc limit '.(int)$from.','.(int)$to;
 			$sqlwhere[] = 'member_id = '.session('member_id');
 			if($search_1 != ''){
 				$sqlwhere[] = 'name like "%'.$search_1.'%"';
 			}
-			if($search_2 != ''){
-				$sqlwhere[] = 'kindid = '.$search_2;
+			if((int)$search_2 != ''){
+				$sqlwhere[] = 'kindid = '.(int)$search_2;
 			}
 			if($search_3 != ''){
 				$sqlwhere[] = 'type = "'.$search_3.'"';
 			}
-			$sqlwhere[] = 'verifytype = '.$search_4;
+			$sqlwhere[] = 'verifytype = '.(int)$search_4;
 			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
 			echo $c.'<{|*|}>';
 			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);
@@ -36,14 +36,14 @@
 			$set = array(
 				'icon = "'.$val_icon.'"',
 				'name = "'.$val_name.'"',
-				'kindid = '.$val_kindid,
+				'kindid = '.(int)$val_kindid,
 				'url = "'.$val_url.'"',
-				'width = '.$val_width,
-				'height = '.$val_height,
-				'isresize = '.$val_isresize,
-				'isopenmax = '.$val_isopenmax,
+				'width = '.(int)$val_width,
+				'height = '.(int)$val_height,
+				'isresize = '.(int)$val_isresize,
+				'isopenmax = '.(int)$val_isopenmax,
 				'issetbar = 1',
-				'isflash = '.$val_isflash,
+				'isflash = '.(int)$val_isflash,
 				'remark = "'.$val_remark.'"'
 			);
 			if($id == ''){
@@ -54,7 +54,7 @@
 				$db->insert(0, 0, 'tb_app', $set);
 			}else{
 				$set[] = 'verifytype = 2';
-				$db->update(0, 0, 'tb_app', $set, 'and tbid = '.$id.' and member_id = '.session('member_id'));
+				$db->update(0, 0, 'tb_app', $set, 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 			}
 			echo json_encode(array(
 				'info' => '',

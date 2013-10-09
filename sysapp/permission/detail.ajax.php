@@ -4,13 +4,13 @@
 	switch($ac){
 		case 'edit':
 			$set = array(
-				"name = '$val_name'",
-				"apps_id = '$val_apps_id'"
+				'name = "'.$val_name.'"',
+				'apps_id = "'.$val_apps_id.'"'
 			);
 			if($id == ''){
 				$db->insert(0, 0, 'tb_permission', $set);
 			}else{
-				$db->update(0, 0, 'tb_permission', $set, 'and tbid = '.$id);
+				$db->update(0, 0, 'tb_permission', $set, 'and tbid = '.(int)$id);
 			}
 			echo json_encode(array(
 				'info' => '',

@@ -15,7 +15,7 @@
 	}
 	
 	if(isset($appid)){
-		$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.$appid);
+		$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.(int)$appid);
 	}else{
 		//给个初始值
 		$app = array(

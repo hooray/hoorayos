@@ -12,18 +12,18 @@
 					$myapplist2[$value['realid']] = $value['tbid'];
 				}
 			}
-			if($search_1 == -1){
+			if((int)$search_1 == -1){
 				if($myapplist != NULL){
 					$sqlwhere[] = 'tbid in('.implode(',', $myapplist).')';
 				}
 			}else{
-				if($search_1 != 0){
-					if($search_1 == 1 && $mytype['type'] == 1){
-						$sqlwhere[] = 'kindid = '.$search_1;
+				if((int)$search_1 != 0){
+					if((int)$search_1 == 1 && $mytype['type'] == 1){
+						$sqlwhere[] = 'kindid = '.(int)$search_1;
 					}else{
-						$sqlwhere[] = 'kindid = '.$search_1;
+						$sqlwhere[] = 'kindid = '.(int)$search_1;
 					}
-				}else if($search_1 == 0 && $mytype['type'] == 0){
+				}else if((int)$search_1 == 0 && $mytype['type'] == 0){
 					$sqlwhere[] = 'kindid != 1';
 				}
 			}
@@ -42,7 +42,7 @@
 					$orderby = 'starnum desc';
 					break;
 			}
-			$orderby .= ' limit '.$from.','.$to;
+			$orderby .= ' limit '.(int)$from.','.(int)$to;
 			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
 			echo $c.'<{|*|}>';
 			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);

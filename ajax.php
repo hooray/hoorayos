@@ -26,19 +26,17 @@
 		//更新主题
 		case 'setWallpaper':
 			$set = array(
-				'wallpaperstate = '.$wpstate,
+				'wallpaperstate = '.(int)$wpstate,
 				'wallpapertype = "'.$wptype.'"'
 			);
-			switch($wpstate){
+			switch((int)$wpstate){
 				case '0':
-					$set = array(
-						'wallpapertype = "'.$wptype.'"'
-					);
+					$set[] = 'wallpapertype = "'.$wptype.'"';
 					break;
 				case '1':
 				case '2':
-					if($wp != ''){
-						$set[] = 'wallpaper_id = '.$wp;
+					if($wp != '' && (int)$wp != 0){
+						$set[] = 'wallpaper_id = '.(int)$wp;
 					}					
 					break;
 				case '3':
@@ -76,7 +74,9 @@
 			break;
 		//更新默认桌面
 		case 'setDesk':
-			$db->update(0, 0, 'tb_member', 'desk = '.$desk, 'and tbid = '.session('member_id'));
+			if($desk != '' && (int)$desk >= 1 && (int)$desk <= 5){
+				$db->update(0, 0, 'tb_member', 'desk = '.(int)$desk, 'and tbid = '.session('member_id'));
+			}
 			break;
 		//获取桌面图标
 		case 'getMyApp':
@@ -190,7 +190,7 @@
 				switch($type){
 					case 'app':
 					case 'widget':
-						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and realid = '.$id.' and member_id = '.session('member_id'));
+						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and realid = '.(int)$id.' and member_id = '.session('member_id'));
 						if($rs != NULL){
 							$ishas = $db->select(0, 2, 'tb_app', '*', 'and tbid = '.$rs['realid']);
 							if($ishas == 0){
@@ -220,7 +220,7 @@
 					case 'papp':
 					case 'pwidget':
 					case 'folder':
-						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and tbid = '.$id.' and member_id = '.session('member_id'));
+						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 						if($rs != NULL){
 							$app['type'] = $rs['type'];
 							$app['appid'] = $rs['tbid'];
@@ -249,8 +249,8 @@
 						$appids[] = $appid['desk'.$i];
 					}
 				}
-				if(in_array($id, explode(',', implode(',', $appids)))){
-					$rs = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.$id);
+				if(in_array((int)$id, explode(',', implode(',', $appids)))){
+					$rs = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.(int)$id);
 					$app['type'] = $rs['type'];
 					$app['appid'] = $rs['tbid'];
 					$app['realappid'] = $rs['tbid'];
@@ -273,13 +273,13 @@
 		case 'addMyApp':
 			addApp(array(
 				'type' => '',
-				'id' => $id,
-				'desk' => $desk
+				'id' => (int)$id,
+				'desk' => (int)$desk
 			));
 			break;
 		//删除桌面图标
 		case 'delMyApp':
-			delApp($id);
+			delApp((int)$id);
 			break;
 		//更新桌面图标
 		case 'moveMyApp':
@@ -445,31 +445,31 @@
 				'type' => 'folder',
 				'icon' => $icon,
 				'name' => $name,
-				'desk' => $desk
+				'desk' => (int)$desk
 			));
 			break;
 		//文件夹重命名
 		case 'updateFolder':
-			$db->update(0, 0, 'tb_member_app', 'icon = "'.$icon.'", name = "'.$name.'"', 'and tbid = '.$id.' and member_id = '.session('member_id'));
+			$db->update(0, 0, 'tb_member_app', 'icon = "'.$icon.'", name = "'.$name.'"', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 			break;
 		//获取应用评分
 		case 'getAppStar':
-			$rs = $db->select(0, 1, 'tb_app', 'starnum', 'and tbid = '.$id);
+			$rs = $db->select(0, 1, 'tb_app', 'starnum', 'and tbid = '.(int)$id);
 			echo $rs['starnum'];
 			break;
 		//更新应用评分
 		case 'updateAppStar':
-			$isscore = $db->select(0, 2, 'tb_app_star', 'tbid', 'and app_id = '.$id.' and member_id = '.session('member_id'));
+			$isscore = $db->select(0, 2, 'tb_app_star', 'tbid', 'and app_id = '.(int)$id.' and member_id = '.session('member_id'));
 			if($isscore == 0){
 				$set = array(
-					'app_id = '.$id,
+					'app_id = '.(int)$id,
 					'member_id = '.session('member_id'),
-					'starnum = '.$starnum,
+					'starnum = '.(int)$starnum,
 					'dt = now()'
 				);
 				$db->insert(0, 0, 'tb_app_star', $set);
-				$scoreavg = $db->select(0, 1, 'tb_app_star', 'avg(starnum) as starnum', 'and app_id = '.$id);
-				$db->update(0, 0, 'tb_app', 'starnum = "'.$scoreavg['starnum'].'"', 'and tbid = '.$id);
+				$scoreavg = $db->select(0, 1, 'tb_app_star', 'avg(starnum) as starnum', 'and app_id = '.(int)$id);
+				$db->update(0, 0, 'tb_app', 'starnum = "'.$scoreavg['starnum'].'"', 'and tbid = '.(int)$id);
 				echo true;
 			}else{
 				echo false;

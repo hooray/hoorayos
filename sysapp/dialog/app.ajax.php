@@ -6,13 +6,13 @@
 			$set = array(
 				'icon = "'.$val_icon.'"',
 				'name = "'.$val_name.'"',
-				'width = '.$val_width,
-				'height = '.$val_height,
-				'isresize = '.$val_isresize,
-				'isopenmax = '.$val_isopenmax,
-				'isflash = '.$val_isflash
+				'width = '.(int)$val_width,
+				'height = '.(int)$val_height,
+				'isresize = '.(int)$val_isresize,
+				'isopenmax = '.(int)$val_isopenmax,
+				'isflash = '.(int)$val_isflash
 			);
-			$db->update(0, 0, 'tb_member_app', $set, 'and tbid = '.$id.' and member_id = '.session('member_id'));
+			$db->update(0, 0, 'tb_member_app', $set, 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
 			echo json_encode(array(
 				'info' => '',
 				'status' => 'y'

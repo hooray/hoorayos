@@ -3,7 +3,7 @@
 	
 	switch($ac){
 		case 'getList':
-			$orderby = 'tbid desc limit '.$from.','.$to;
+			$orderby = 'tbid desc limit '.(int)$from.','.(int)$to;
 			if($search_1 != ''){
 				$sqlwhere[] = 'name like "%'.$search_1.'%"';
 			}
@@ -20,7 +20,7 @@
 			}
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_permission', 'and tbid = '.$permissionid);
+			$db->delete(0, 0, 'tb_permission', 'and tbid = '.(int)$permissionid);
 			break;
 	}
 ?>

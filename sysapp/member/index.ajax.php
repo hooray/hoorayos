@@ -3,12 +3,12 @@
 		
 	switch($ac){
 		case 'getList':
-			$orderby = 'tbid desc limit '.$from.','.$to;
+			$orderby = 'tbid desc limit '.(int)$from.','.(int)$to;
 			if($search_1 != ''){
 				$sqlwhere[] = 'username like "%'.$search_1.'%"';
 			}
-			if($search_2 != ''){
-				$sqlwhere[] = 'type = '.$search_2;
+			if((int)$search_2 != ''){
+				$sqlwhere[] = 'type = '.(int)$search_2;
 			}
 			$c = $db->select(0, 2, 'tb_member', '*', $sqlwhere);
 			echo $c.'<{|*|}>';
@@ -30,7 +30,7 @@
 			}
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_member', 'and tbid = '.$memberid);
+			$db->delete(0, 0, 'tb_member', 'and tbid = '.(int)$memberid);
 			break;
 	}
 ?>
