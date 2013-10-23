@@ -110,7 +110,9 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 
 /*遮罩层*/
 #maskbox,
-#maskbox-copyright{z-index:9000000;display:none;cursor:default;background:none;width:100%;height:100%;position:absolute;top:0;left:0}
+#maskbox-copyright,
+#maskbox-dockdrap{z-index:9000000;display:none;cursor:default;background:none;width:100%;height:100%;position:absolute;top:0;left:0}
+#maskbox-dockdrap,
 #maskbox-copyright{background:none rgba(0, 0, 0, 0.7)}
 
 /*关于我们*/
@@ -324,9 +326,12 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .dock_drap_effect_left.hover,
 .dock_drap_effect_right.hover{border-color:#E1F0FD}
 .dock_drap_mask{width:100%;height:100%;top:0;left:0;position:absolute;z-index:300000}
-.dock_drop_region_top{border-bottom:1px dashed #333333;width:100%;height:20%;top:0;left:0;position:absolute}
-.dock_drop_region_left{border-right:1px dashed #333333;width:50%;height:80%;bottom:0;left:0;position:absolute}
+.dock_drop_region_top{border-bottom:1px dashed #eee;width:100%;height:20%;top:0;left:0;position:absolute}
+.dock_drop_region_left{border-right:1px dashed #eee;width:50%;height:80%;bottom:0;left:0;position:absolute}
 .dock_drop_region_right{width:50%;height:80%;bottom:0;right:0;position:absolute}
+.dock_drop_region_top .text,
+.dock_drop_region_left .text,
+.dock_drop_region_right .text{position:relative;top:40%;text-align:center;color:#fff;font-size:32px}
 
 #startmenu-container{position:absolute;z-index:21;color:#fff;width:182px;display:none}
 #startmenu-container .startmenu-selfinfo{float:left;width:177px;height:30px;padding:5px 0 5px 5px;background:url(desk_sprite.png) no-repeat -410px -200px}
