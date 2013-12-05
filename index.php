@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo $skin; ?>.css" id="window-skin">
+<script type="text/javascript">var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';</script>
 </head>
 
 <body>
@@ -68,7 +69,7 @@
 <!-- 登录 -->
 <div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="top:0"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
 	<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
-	<div class="title"><?php echo $setting['title']; ?></div>
+	<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
 	<div class="lrbox">
 		<div class="bg"></div>
 		<div style="width:1000px">

@@ -4,7 +4,7 @@
 	switch($ac){
 		case 'getList':
 			$mytype = $db->select(0, 1, 'tb_member', 'type', 'and tbid = '.session('member_id'));
-			$myapplist = array();
+			$myapplist = array(0);
 			$myapplist2 = array();
 			foreach($db->select(0, 0, 'tb_member_app', 'tbid, realid', 'and member_id = '.session('member_id')) as $value){
 				if($value['realid'] != ''){

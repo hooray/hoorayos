@@ -96,6 +96,7 @@
 	 * @return mixed
 	 */
 	function session($name, $value = ''){
+		$prefix = getconfig('SESSION_PREFIX');
 		if(is_array($name)){ // session初始化，在session_start之前调用
 			if(isset($name['id'])){
 				session_id($name['id']);
@@ -110,7 +111,7 @@
 			if(isset($name['cache_limiter']))   session_cache_limiter($name['cache_limiter']);
 			if(isset($name['cache_expire']))    session_cache_expire($name['cache_expire']);
 		}elseif('' === $value){
-			if(0 === strpos($name,'[')){ // session操作
+			if(0 === strpos($name, '[')){ // session操作
 				if('[pause]' == $name){ // 暂停session
 					session_write_close();
 				}elseif('[start]' == $name){ // 启动session
@@ -122,18 +123,50 @@
 				}elseif('[regenerate]' == $name){ // 重新生成id
 					session_regenerate_id();
 				}
-			}elseif(0 === strpos($name,'?')){ // 检查session
+			}elseif(0 === strpos($name, '?')){ // 检查session
 				$name = substr($name, 1);
-				return isset($_SESSION[$name]);
+				if(strpos($name, '.')){ // 支持数组
+					list($name1, $name2) = explode('.', $name);
+					return $prefix ? isset($_SESSION[$prefix][$name1][$name2]) : isset($_SESSION[$name1][$name2]);
+				}else{
+					return $prefix ? isset($_SESSION[$prefix][$name]) : isset($_SESSION[$name]);
+				}
 			}elseif(is_null($name)){ // 清空session
-				$_SESSION = array();
+				if($prefix){
+					unset($_SESSION[$prefix]);
+				}else{
+					$_SESSION = array();
+				}
+			}elseif($prefix){ // 获取session
+				if(strpos($name, '.')){
+					list($name1, $name2) = explode('.', $name);
+					return isset($_SESSION[$prefix][$name1][$name2]) ? $_SESSION[$prefix][$name1][$name2] : null;  
+				}else{
+					return isset($_SESSION[$prefix][$name]) ? $_SESSION[$prefix][$name] : null;                
+				}
 			}else{
-				return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+				if(strpos($name, '.')){
+					list($name1, $name2) = explode('.', $name);
+					return isset($_SESSION[$name1][$name2]) ? $_SESSION[$name1][$name2] : null;  
+				}else{
+					return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+				}
 			}
 		}elseif(is_null($value)){ // 删除session
-			unset($_SESSION[$name]);
+			if($prefix){
+				unset($_SESSION[$prefix][$name]);
+			}else{
+				unset($_SESSION[$name]);
+			}
 		}else{ // 设置session
-			$_SESSION[$name] = $value;
+			if($prefix){
+				if(!is_array($_SESSION[$prefix])){
+					$_SESSION[$prefix] = array();
+				}
+				$_SESSION[$prefix][$name] = $value;
+			}else{
+				$_SESSION[$name] = $value;
+			}
 		}
 	}
 	/**
@@ -147,10 +180,10 @@
 	function cookie($name, $value = '', $option = NULL){
 		// 默认设置
 		$config = array(
-			'prefix' => '', // cookie 名称前缀
-			'expire' => 0, // cookie 保存时间
-			'path' => '/', // cookie 保存路径
-			'domain' => '', // cookie 有效域名
+			'prefix' => getconfig('COOKIE_PREFIX'), // cookie 名称前缀
+			'expire' => getconfig('COOKIE_EXPIRE'), // cookie 保存时间
+			'path' => getconfig('COOKIE_PATH'), // cookie 保存路径
+			'domain' => getconfig('COOKIE_DOMAIN'), // cookie 有效域名
 		);
 		// 参数设置(会覆盖黙认设置)
 		if(!is_null($option)){

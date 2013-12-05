@@ -65,6 +65,9 @@ HROS.app = (function(){
 				}
 			}
 		},
+		/*
+		**  更新应用显示尺寸
+		*/
 		updateSize : function(i){
 			if(HROS.CONFIG.appSize != i){
 				HROS.CONFIG.appSize = i;
@@ -78,6 +81,9 @@ HROS.app = (function(){
 				}
 			}
 		},
+		/*
+		**  获取桌面应用数据
+		*/
 		get : function(){
 			//获取json数组并循环输出每个应用
 			$.ajax({
@@ -102,7 +108,7 @@ HROS.app = (function(){
 			});
 		},
 		/*
-		**  输出应用
+		**  渲染桌面，输出应用
 		*/
 		set : function(){
 			if($('#desktop').css('display') !== 'none'){

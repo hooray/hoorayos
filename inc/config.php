@@ -27,9 +27,14 @@ trim(@extract($_POST));
 trim(@extract($_GET));
 trim(@extract($_REQUEST));
 
-$_CONFIG = array();
-//站点安全设置
-$_CONFIG['authkey'] = 'hoorayos'; //站点加密密钥，可随意更改
+$_CONFIG = array(
+	'authkey' => 'hoorayos', //站点加密密钥，可随意更改
+	'COOKIE_PREFIX' => '',
+	'COOKIE_EXPIRE' => 0,
+	'COOKIE_PATH' => '/',
+	'COOKIE_DOMAIN' => '',
+	'SESSION_PREFIX' => 'hoorayos'
+);
 
 //文件上传大小限制，单位MB
 $uploadFileMaxSize = 20;

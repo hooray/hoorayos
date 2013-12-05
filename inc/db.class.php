@@ -31,13 +31,13 @@ class HRDB{
 	
 	public function query($sql){
 		$res = $this->pdo->query($sql);
-		if($res){
+		if(isset($res)){
 			$this->res = $res;
 		}
 	}
 	public function exec($sql){
 		$res = $this->pdo->exec($sql);
-		if($res){
+		if(isset($res)){
 			$this->res = $res;
 		}
 	}
