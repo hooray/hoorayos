@@ -108,6 +108,12 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .disanfangdenglutip .cancel{float:right;margin-right:10px;color:#999}
 .disanfangdenglutip .cancel:hover{color:#333}
 
+@-webkit-keyframes radi{
+	0%{-webkit-mask-size:0%;-webkit-animation-timing-function:ease-in-out}
+	100%{-webkit-mask-size:300%}
+}
+.radi{-webkit-mask-image:url('circle_mask.png');-webkit-mask-repeat:no-repeat;-webkit-mask-position:50% 50%;-webkit-mask-size:300%;-webkit-animation:radi 1.5s}
+
 /*遮罩层*/
 #maskbox,
 #maskbox-copyright,
@@ -397,7 +403,8 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #search-suggest .resultBox{width:212px;background:url(suggess_list_bg.png) repeat-y;margin:0;padding:0;line-height:0;color:#FFF}
 #search-suggest .resultList{overflow:hidden;vertical-align:middle}
 #search-suggest .resultList a{display:block;width:210px;height:28px;outline:0;color:#FFF;margin-left:1px}
-#search-suggest .resultList a:hover{background:url(nav_bar.png) no-repeat 0 -170px}
+#search-suggest .resultList a:hover,
+#search-suggest .resultList a.selected{background:url(nav_bar.png) no-repeat 0 -170px}
 #search-suggest .resultList a div{height:28px;line-height:28px;vertical-align:middle;padding-left:12px;width:190px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;cursor:pointer}
 #search-suggest .openAppMarket{width:212px;height:34px;padding-top:10px;background:url(nav_bar.png) no-repeat 0 -200px;position:absolute}
 #search-suggest .openAppMarket.above{padding:5px 0;background-position:0 -250px}
@@ -451,7 +458,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #amg_folder_container .folderInner{margin:5px 0;min-width:180px;position:relative;z-index:1;height:100%;overflow:hidden}
 #amg_folder_container .scrollBar{position:absolute;right:2px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10}
 #amg_folder_container .appbtn,
-#shortcut_shadow2{display:block;height:30px;width:100%;position:absolute}
+#shortcut_shadow2{height:30px;width:100%;position:absolute}
 #amg_folder_container .appbtn:hover{background:url(amg_shortcut_hover.png) repeat-x}
 #amg_folder_container .appbtn div,
 #shortcut_shadow2 div{cursor:pointer;height:30px;padding:2px 0;width:100%;overflow:hidden;position:relative;margin:0 auto}

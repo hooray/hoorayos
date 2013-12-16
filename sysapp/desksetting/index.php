@@ -41,7 +41,7 @@
 	</div>
 </div>
 <div class="input-label">
-	<label class="label-text">图标尺寸：</label>
+	<label class="label-text">显示尺寸：</label>
 	<div class="label-box form-inline control-group">
 		<label class="radio" style="margin-right:10px"><input type="radio" name="appsize" value="s" <?php if($size == 's'){echo 'checked';} ?>>小图标</label>
 		<label class="radio"><input type="radio" name="appsize" value="m" <?php if($size == 'm'){echo 'checked';} ?>>大图标</label>

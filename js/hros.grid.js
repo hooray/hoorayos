@@ -146,8 +146,6 @@ HROS.grid = (function(){
 				});
 				_left += (i == 0 ? 29 : 72);
 			}
-			//调试代码
-			//for(var i = 0; i < 100; i++){$('body').append('<div style="position:absolute;width:1px;height:80px;border-left:1px solid #000;top:0;left:'+manageDockAppGrid[i].startX+'px"></div>');}
 			return manageDockAppGrid;
 		},
 		searchManageDockAppGrid : function(x){

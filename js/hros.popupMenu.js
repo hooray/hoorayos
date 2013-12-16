@@ -39,7 +39,23 @@ HROS.popupMenu = (function(){
 		app : function(obj){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuApp){
-				TEMP.popupMenuApp = $('<div class="popup-menu app-menu"><ul><li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开应用</a></li><li><a menu="move" href="javascript:;">移动应用到<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li><li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li><li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li><li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li><li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li></ul></div></li><li><a menu="edit" href="javascript:;"><b class="edit"></b>编辑</a></li><li><a menu="del" href="javascript:;"><b class="uninstall"></b>卸载应用</a></li></ul></div>');
+				TEMP.popupMenuApp = $(
+					'<div class="popup-menu app-menu"><ul>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li>'+
+							'<a menu="move" href="javascript:;">移动到<b class="arrow">»</b></a>'+
+							'<div class="popup-menu"><ul>'+
+								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
+								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
+								'<li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li>'+
+								'<li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li>'+
+								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
+							'</ul></div>'+
+						'</li>'+
+						'<li><a menu="edit" href="javascript:;"><b class="edit"></b>编辑</a></li>'+
+						'<li><a menu="del" href="javascript:;"><b class="uninstall"></b>卸载</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuApp);
 			}
 			$('.app-menu a[menu="moveto"]').removeClass('disabled');
@@ -141,7 +157,23 @@ HROS.popupMenu = (function(){
 		papp : function(obj){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuPapp){
-				TEMP.popupMenuPapp = $('<div class="popup-menu papp-menu"><ul><li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开应用</a></li><li><a menu="move" href="javascript:;">移动应用到<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li><li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li><li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li><li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li><li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li></ul></div></li><li><a menu="edit" href="javascript:;"><b class="edit"></b>编辑</a></li><li><a menu="del" href="javascript:;"><b class="del"></b>删除应用</a></li></ul></div>');
+				TEMP.popupMenuPapp = $(
+					'<div class="popup-menu papp-menu"><ul>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li>'+
+							'<a menu="move" href="javascript:;">移动到<b class="arrow">»</b></a>'+
+							'<div class="popup-menu"><ul>'+
+								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
+								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
+								'<li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li>'+
+								'<li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li>'+
+								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
+							'</ul></div>'+
+						'</li>'+
+						'<li><a menu="edit" href="javascript:;"><b class="edit"></b>编辑</a></li>'+
+						'<li><a menu="del" href="javascript:;"><b class="del"></b>删除</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuPapp);
 			}
 			$('.papp-menu a[menu="moveto"]').removeClass('disabled');
@@ -251,7 +283,24 @@ HROS.popupMenu = (function(){
 		folder : function(obj){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuFolder){
-				TEMP.popupMenuFolder = $('<div class="popup-menu folder-menu"><ul><li><a menu="view" href="javascript:;">预览</a></li><li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开</a></li><li><a menu="move" href="javascript:;">移动应用到<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li><li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li><li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li><li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li><li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li></ul></div></li><li><a menu="rename" href="javascript:;"><b class="edit"></b>重命名</a></li><li><a menu="del" href="javascript:;"><b class="del"></b>删除</a></li></ul></div>');
+				TEMP.popupMenuFolder = $(
+					'<div class="popup-menu folder-menu"><ul>'+
+						'<li><a menu="view" href="javascript:;">预览</a></li>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li>'+
+							'<a menu="move" href="javascript:;">移动到<b class="arrow">»</b></a>'+
+							'<div class="popup-menu"><ul>'+
+								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
+								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
+								'<li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li>'+
+								'<li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li>'+
+								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
+							'</ul></div>'+
+						'</li>'+
+						'<li><a menu="rename" href="javascript:;"><b class="edit"></b>重命名</a></li>'+
+						'<li><a menu="del" href="javascript:;"><b class="del"></b>删除</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuFolder);
 			}
 			$('.folder-menu a[menu="moveto"]').removeClass('disabled');
@@ -391,7 +440,14 @@ HROS.popupMenu = (function(){
 		dock : function(){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuDock){
-				TEMP.popupMenuDock = $('<div class="popup-menu dock-menu"><ul><li><a menu="dockpos" pos="top" href="javascript:;"><b class="hook"></b>向上停靠</a></li><li><a menu="dockpos" pos="left" href="javascript:;"><b class="hook"></b>向左停靠</a></li><li><a menu="dockpos" pos="right" href="javascript:;"><b class="hook"></b>向右停靠</a></li><li><a menu="dockpos" pos="none" href="javascript:;">隐藏</a></li></ul></div>');
+				TEMP.popupMenuDock = $(
+					'<div class="popup-menu dock-menu"><ul>'+
+						'<li><a menu="dockpos" pos="top" href="javascript:;"><b class="hook"></b>向上停靠</a></li>'+
+						'<li><a menu="dockpos" pos="left" href="javascript:;"><b class="hook"></b>向左停靠</a></li>'+
+						'<li><a menu="dockpos" pos="right" href="javascript:;"><b class="hook"></b>向右停靠</a></li>'+
+						'<li><a menu="dockpos" pos="none" href="javascript:;">隐藏</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuDock);
 				//绑定事件
 				$('.dock-menu a[menu="dockpos"]').on('click', function(){
@@ -426,7 +482,13 @@ HROS.popupMenu = (function(){
 		task : function(obj){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuTask){
-				TEMP.popupMenuTask = $('<div class="popup-menu task-menu"><ul><li><a menu="max" href="javascript:;">最大化</a></li><li style="border-bottom:1px solid #F0F0F0"><a menu="hide" href="javascript:;">最小化</a></li><li><a menu="close" href="javascript:;">关闭</a></li></ul></div>');
+				TEMP.popupMenuTask = $(
+					'<div class="popup-menu task-menu"><ul>'+
+						'<li><a menu="max" href="javascript:;">最大化</a></li>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="hide" href="javascript:;">最小化</a></li>'+
+						'<li><a menu="close" href="javascript:;">关闭</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuTask);
 			}
 			//绑定事件
@@ -450,7 +512,42 @@ HROS.popupMenu = (function(){
 		desk : function(){
 			HROS.window.show2under();
 			if(!TEMP.popupMenuDesk){
-				TEMP.popupMenuDesk = $('<div class="popup-menu desk-menu"><ul><li><a menu="hideall" href="javascript:;">显示桌面</a></li><li style="border-bottom:1px solid #F0F0F0"><a menu="closeall" href="javascript:;">关闭所有应用</a></li><li><a href="javascript:;">新建<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="addfolder" href="javascript:;"><b class="folder"></b>新建文件夹</a></li><li><a menu="addpapp" href="javascript:;"><b class="customapp"></b>新建私人应用</a></li></ul></div></li><!--li style="border-bottom:1px solid #F0F0F0"><b class="upload"></b><a menu="uploadfile" href="javascript:;">上传文件</a></li--><li><a menu="themes" href="javascript:;"><b class="themes"></b>主题设置</a></li><li><a menu="setting" href="javascript:;"><b class="setting"></b>桌面设置</a></li><li style="border-bottom:1px solid #F0F0F0"><a href="javascript:;">图标设置<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a href="javascript:;">排列<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="orderby" orderby="x" href="javascript:;"><b class="hook"></b>横向排列</a></li><li><a menu="orderby" orderby="y" href="javascript:;"><b class="hook"></b>纵向排列</a></li></ul></div></li><li><a href="javascript:;">尺寸<b class="arrow">»</b></a><div class="popup-menu"><ul><li><a menu="size" size="s" href="javascript:;"><b class="hook"></b>小图标</a></li><li><a menu="size" size="m" href="javascript:;"><b class="hook"></b>大图标</a></li></ul></div></li></ul></div></li><li><a menu="logout" href="javascript:;">注销</a></li></ul></div>');
+				TEMP.popupMenuDesk = $(
+					'<div class="popup-menu desk-menu"><ul>'+
+						'<li><a menu="hideall" href="javascript:;">显示桌面</a></li>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="closeall" href="javascript:;">关闭所有窗口</a></li>'+
+						'<li>'+
+							'<a href="javascript:;">新建<b class="arrow">»</b></a>'+
+							'<div class="popup-menu"><ul>'+
+								'<li><a menu="addfolder" href="javascript:;"><b class="folder"></b>新建文件夹</a></li>'+
+								'<li><a menu="addpapp" href="javascript:;"><b class="customapp"></b>新建私人应用</a></li>'+
+							'</ul></div>'+
+						'</li>'+
+						'<!--li style="border-bottom:1px solid #F0F0F0"><b class="upload"></b><a menu="uploadfile" href="javascript:;">上传文件</a></li-->'+
+						'<li><a menu="themes" href="javascript:;"><b class="themes"></b>主题设置</a></li>'+
+						'<li><a menu="setting" href="javascript:;"><b class="setting"></b>桌面设置</a></li>'+
+						'<li style="border-bottom:1px solid #F0F0F0">'+
+							'<a href="javascript:;">图标设置<b class="arrow">»</b></a>'+
+							'<div class="popup-menu"><ul>'+
+								'<li>'+
+									'<a href="javascript:;">排列<b class="arrow">»</b></a>'+
+									'<div class="popup-menu"><ul>'+
+										'<li><a menu="orderby" orderby="x" href="javascript:;"><b class="hook"></b>横向排列</a></li>'+
+										'<li><a menu="orderby" orderby="y" href="javascript:;"><b class="hook"></b>纵向排列</a></li>'+
+									'</ul></div>'+
+								'</li>'+
+								'<li>'+
+									'<a href="javascript:;">尺寸<b class="arrow">»</b></a>'+
+									'<div class="popup-menu"><ul>'+
+										'<li><a menu="size" size="s" href="javascript:;"><b class="hook"></b>小图标</a></li>'+
+										'<li><a menu="size" size="m" href="javascript:;"><b class="hook"></b>大图标</a></li>'+
+									'</ul></div>'+
+								'</li>'+
+							'</ul></div>'+
+						'</li>'+
+						'<li><a menu="logout" href="javascript:;">注销</a></li>'+
+					'</ul></div>'
+				);
 				$('body').append(TEMP.popupMenuDesk);
 				//绑定事件
 				$('.desk-menu a[menu="orderby"]').on('click', function(){

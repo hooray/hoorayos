@@ -31,7 +31,9 @@
 			);
 			switch((int)$wpstate){
 				case '0':
-					$set[] = 'wallpapertype = "'.$wptype.'"';
+					$set = array(
+						'wallpapertype = "'.$wptype.'"'
+					);
 					break;
 				case '1':
 				case '2':

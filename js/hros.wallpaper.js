@@ -49,7 +49,11 @@ HROS.wallpaper = (function(){
 			*/
 			var isreload = typeof(isreload) == 'undefined' ? true : isreload;
 			if(isreload){
-				$('#zoomWallpaperGrid').remove();
+				$('#zoomWallpaperGrid').attr('id', 'zoomWallpaperGrid-ready2remove').css('zIndex', -11);
+				setTimeout(function(){
+					$('#zoomWallpaperGrid-ready2remove').remove();
+					$('#zoomWallpaperGrid').removeClass('radi');
+				}, 1500);
 			}
 			var w = $(window).width(), h = $(window).height();
 			switch(HROS.CONFIG.wallpaperState){
@@ -59,23 +63,20 @@ HROS.wallpaper = (function(){
 						//平铺
 						case 'pingpu':
 							if(isreload){
-								$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;background:url(' + HROS.CONFIG.wallpaper + ') repeat"></div>');
+								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;background:#fff url(' + HROS.CONFIG.wallpaper + ') repeat"></div>');
 							}
 							break;
 						//居中
 						case 'juzhong':
 							if(isreload){
-								$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;background:url(' + HROS.CONFIG.wallpaper + ') no-repeat 50% 50%"></div>');
+								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;background:#fff url(' + HROS.CONFIG.wallpaper + ') no-repeat 50% 50%"></div>');
 							}
 							break;
 						//填充
 						case 'tianchong':
 							var t = (h - HROS.CONFIG.wallpaperHeight) / 2, l = (w - HROS.CONFIG.wallpaperWidth) / 2;
 							if(isreload){
-								$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px"><img id="zoomWallpaper" style="position:absolute;height:' + HROS.CONFIG.wallpaperHeight + 'px;width:' + HROS.CONFIG.wallpaperWidth + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
-								$('#zoomWallpaper').attr('src', HROS.CONFIG.wallpaper).on('load', function(){
-									$(this).show();
-								});
+								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + HROS.CONFIG.wallpaperHeight + 'px;width:' + HROS.CONFIG.wallpaperWidth + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid, #zoomWallpaperGrid div').css({
 									height : h + 'px',
@@ -106,10 +107,7 @@ HROS.wallpaper = (function(){
 								t = l = 0;
 							}
 							if(isreload){
-								$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px"><img id="zoomWallpaper" style="position:absolute;height:' + imgH + 'px;width:' + imgW + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
-								$('#zoomWallpaper').attr('src', HROS.CONFIG.wallpaper).on('load', function(){
-									$(this).show();
-								});
+								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + imgH + 'px;width:' + imgW + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid, #zoomWallpaperGrid div').css({
 									height : h + 'px',
@@ -126,10 +124,7 @@ HROS.wallpaper = (function(){
 						//拉伸
 						case 'lashen':
 							if(isreload){
-								$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px"><img id="zoomWallpaper" style="position:absolute;height:' + h + 'px;width:' + w + 'px;top:0;left:0"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
-								$('#zoomWallpaper').attr('src', HROS.CONFIG.wallpaper).on('load', function(){
-									$(this).show();
-								});
+								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + h + 'px;width:' + w + 'px;top:0;left:0"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid').css({
 									height : h + 'px',
@@ -144,7 +139,7 @@ HROS.wallpaper = (function(){
 					break;
 				case 3:
 					if(isreload){
-						$('body').append('<div id="zoomWallpaperGrid" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;overflow:hidden"><div></div><iframe id="iframeWallpaper" frameborder="no" border="0" scrolling="no" class="iframeWallpaper" style="position:absolute;left:0;top:0;overflow:hidden;width:100%;height:100%" src="' + HROS.CONFIG.wallpaper + '"></iframe></div>');
+						$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;top:0;left:0;height:100%;width:100%;overflow:hidden"><div></div><iframe id="iframeWallpaper" frameborder="no" border="0" scrolling="no" class="iframeWallpaper" style="position:absolute;left:0;top:0;overflow:hidden;width:100%;height:100%" src="' + HROS.CONFIG.wallpaper + '"></iframe></div>');
 					}
 					break;
 			}

@@ -25,7 +25,11 @@ HROS.searchbar = (function(){
 			});
 			$('#pageletSearchInput').on('keydown', function(e){
 				if(e.keyCode == '13'){
-					HROS.searchbar.openAppMarket($(this).val());
+					if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
+						HROS.searchbar.openAppMarket($(this).val());
+					}else{
+						$('#search-suggest .resultList a.selected').click();
+					}
 				}
 			});
 		},
@@ -55,6 +59,7 @@ HROS.searchbar = (function(){
 				'top' : $('#nav-bar').offset().top + 68
 			});
 			$('#search-suggest .openAppMarket').css('top', $('#search-suggest .resultBox').height()).removeClass('above');
+			$('#search-suggest .resultList a').removeClass('selected');
 			$('#pageletSearchInput').focus();
 			//如果导航条距离桌面底部小于50px，则向上显示
 			if($('#nav-bar').offset().top + 35 + $('#search-suggest .resultBox').height() + 44 + 50 > $(window).height()){
@@ -65,6 +70,62 @@ HROS.searchbar = (function(){
 					$('#search-suggest .openAppMarket').css('top', -44);
 				}
 			}
+			Mousetrap.bind(['up'], function(){
+				if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
+					$('#search-suggest > .resultList:last a').addClass('selected');
+				}else{
+					if($('#search-suggest .resultBox .resultList:first a').hasClass('selected')){
+						$('#search-suggest .resultList a').removeClass('selected');
+					}else{
+						if($('#search-suggest > .resultList a.selected').length != 0){
+							var i = $('#search-suggest > .resultList a.selected').parent('.resultList').index();
+							$('#search-suggest .resultList a').removeClass('selected');
+							if(i > 1){
+								$('#search-suggest > .resultList:eq(' + (i - 1) + ') a').addClass('selected');
+							}else{
+								$('#search-suggest .resultBox .resultList:last a').addClass('selected');
+							}
+						}else{
+							var i = $('#search-suggest .resultBox .resultList a.selected').parent('.resultList').index();
+							$('#search-suggest .resultList a').removeClass('selected');
+							if(i > 0){
+								$('#search-suggest .resultBox .resultList:eq(' + (i - 1) + ') a').addClass('selected');
+							}
+						}
+					}
+				}
+			});
+			Mousetrap.bind(['down'], function(){
+				if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
+					if($('#search-suggest .resultBox .resultList').length == 0){
+						$('#search-suggest > .resultList:first a').addClass('selected');
+					}else{
+						$('#search-suggest .resultBox .resultList:first a').addClass('selected');
+					}
+				}else{
+					if($('#search-suggest > .resultList:last a').hasClass('selected')){
+						$('#search-suggest .resultList a').removeClass('selected');
+					}else{
+						if($('#search-suggest .resultBox .resultList a.selected').length != 0){
+							var i = $('#search-suggest .resultBox .resultList a.selected').parent('.resultList').index();
+							$('#search-suggest .resultList a').removeClass('selected');
+							if(i < $('#search-suggest .resultBox .resultList').length - 1){
+								$('#search-suggest .resultBox .resultList:eq(' + (i + 1) + ') a').addClass('selected');
+							}else{
+								$('#search-suggest > .resultList:first a').addClass('selected');
+							}
+						}else{
+							var i = $('#search-suggest > .resultList a.selected').parent('.resultList').index();
+							$('#search-suggest .resultList a').removeClass('selected');
+							if(i < $('#search-suggest > .resultList').length - 1){
+								$('#search-suggest > .resultList:eq(' + (i + 1) + ') a').addClass('selected');
+							}else{
+								$('#search-suggest .resultBox .resultList:first a').addClass('selected');
+							}
+						}
+					}
+				}
+			});
 		},
 		getSuggest : function(val){
 			var apps = [];
@@ -123,6 +184,8 @@ HROS.searchbar = (function(){
 			$('#search-bar, #search-suggest').hide();
 			$('#pageletSearchInput').val('');
 			$('#search-suggest .resultBox').html('');
+			Mousetrap.unbind(['up']);
+			Mousetrap.unbind(['down']);
 		}
 	}
 })();

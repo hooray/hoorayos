@@ -11,42 +11,8 @@ HROS.navbar = (function(){
 				'left' : $(window).width() / 2 - 105,
 				'top' : 80
 			}).show();
-			HROS.navbar.hotkey();
 			HROS.navbar.getAvatar();
 			HROS.navbar.move();
-		},
-		/*
-		**  快捷键
-		*/
-		hotkey : function(){
-			Mousetrap.bind(['ctrl+up', 'command+up'], function(){
-				HROS.appmanage.init();
-				return false;
-			});
-			Mousetrap.bind(['ctrl+f', 'command+f'], function(){
-				HROS.searchbar.get();
-				return false;
-			});
-			Mousetrap.bind(['ctrl+1', 'command+1'], function(){
-				HROS.navbar.switchDesk(1);
-				return false;
-			});
-			Mousetrap.bind(['ctrl+2', 'command+2'], function(){
-				HROS.navbar.switchDesk(2);
-				return false;
-			});
-			Mousetrap.bind(['ctrl+3', 'command+3'], function(){
-				HROS.navbar.switchDesk(3);
-				return false;
-			});
-			Mousetrap.bind(['ctrl+4', 'command+4'], function(){
-				HROS.navbar.switchDesk(4);
-				return false;
-			});
-			Mousetrap.bind(['ctrl+5', 'command+5'], function(){
-				HROS.navbar.switchDesk(5);
-				return false;
-			});
 		},
 		/*
 		**  获取头像

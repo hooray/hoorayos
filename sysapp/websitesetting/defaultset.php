@@ -184,6 +184,76 @@
 		<span class="help-inline"></span>
 	</div>
 </div>
+<div class="input-label">
+	<label class="label-text">默认显示桌面：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_desk" value="1" <?php if($set['desk'] == 1){echo 'checked';} ?>>第1屏桌面</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_desk" value="2" <?php if($set['desk'] == 2){echo 'checked';} ?>>第2屏桌面</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_desk" value="3" <?php if($set['desk'] == 3){echo 'checked';} ?>>第3屏桌面</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_desk" value="4" <?php if($set['desk'] == 4){echo 'checked';} ?>>第4屏桌面</label>
+		<label class="radio"><input type="radio" name="val_desk" value="5" <?php if($set['desk'] == 5){echo 'checked';} ?>>第5屏桌面</label>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">图标排列方式：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_appxy" value="x" <?php if($set['appxy'] == 'x'){echo 'checked';} ?>>横向排列</label>
+		<label class="radio"><input type="radio" name="val_appxy" value="y" <?php if($set['appxy'] == 'y'){echo 'checked';} ?>>纵向排列</label>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">图标显示尺寸：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_appsize" value="s" <?php if($set['appsize'] == 's'){echo 'checked';} ?>>小图标</label>
+		<label class="radio"><input type="radio" name="val_appsize" value="m" <?php if($set['appsize'] == 'm'){echo 'checked';} ?>>大图标</label>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">应用码头位置：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_dockpos" value="top" <?php if($set['dockpos'] == 'top'){echo 'checked';} ?>>顶部</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_dockpos" value="left" <?php if($set['dockpos'] == 'left'){echo 'checked';} ?>>左侧</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_dockpos" value="right" <?php if($set['dockpos'] == 'right'){echo 'checked';} ?>>右侧</label>
+		<label class="radio"><input type="radio" name="val_dockpos" value="none" <?php if($set['dockpos'] == 'none'){echo 'checked';} ?>>隐藏</label>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">默认窗口皮肤：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_skin" value="default" <?php if($set['skin'] == 'default'){echo 'checked';} ?>>默认皮肤</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_skin" value="chrome" <?php if($set['skin'] == 'chrome'){echo 'checked';} ?>>chrome皮肤</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_skin" value="ext" <?php if($set['skin'] == 'ext'){echo 'checked';} ?>>ext皮肤</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_skin" value="mac" <?php if($set['skin'] == 'mac'){echo 'checked';} ?>>mac皮肤</label>
+		<label class="radio"><input type="radio" name="val_skin" value="none" <?php if($set['skin'] == 'qq'){echo 'checked';} ?>>qq皮肤</label>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">默认壁纸：</label>
+	<div class="label-box form-inline control-group">
+		<select name="val_wallpaper_id">
+		<?php
+			$wallpaperList = $db->select(0, 0, 'tb_wallpaper', '*', '', 'tbid asc');
+			foreach($wallpaperList as $w){
+				if($w['tbid'] == $set['wallpaper_id']){
+					echo '<option value="'.$w['tbid'].'" selected>'.$w['title'].'</option>';
+				}else{
+					echo '<option value="'.$w['tbid'].'">'.$w['title'].'</option>';
+				}
+			}
+		?>
+		</select>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">壁纸显示方式：</label>
+	<div class="label-box form-inline control-group">
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_wallpapertype" value="tianchong" <?php if($set['wallpapertype'] == 'tianchong'){echo 'checked';} ?>>填充</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_wallpapertype" value="shiying" <?php if($set['wallpapertype'] == 'shiying'){echo 'checked';} ?>>适应</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_wallpapertype" value="pingpu" <?php if($set['wallpapertype'] == 'pingpu'){echo 'checked';} ?>>平铺</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_wallpapertype" value="lashen" <?php if($set['wallpapertype'] == 'lashen'){echo 'checked';} ?>>拉伸</label>
+		<label class="radio"><input type="radio" name="val_wallpapertype" value="juzhong" <?php if($set['wallpapertype'] == 'juzhong'){echo 'checked';} ?>>居中</label>
+	</div>
+</div>
 <div class="input-label" style="background:none;padding-left:0;text-align:center">
 	<a class="btn" id="form-submit" href="javascript:;">应用</a>
 </div>

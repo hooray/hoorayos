@@ -49,7 +49,7 @@ body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
 .wallpaper li{width:150px;height:110px;float:left;margin-right:10px;border:5px solid #fff;background:#fff;cursor:pointer}
 .wallpaper li.three{margin-right:0}
 .wallpaper li:hover{border-color:#9FF;background:#9FF}
-.wallpaper li div{width:150px;height:20px;line-height:20px;text-align:center}
+.wallpaper li div{width:150px;height:30px;line-height:30px;text-align:center}
 .wapppapercustom{width:500px;margin:auto;margin-top:10px;border:1px solid #ccc}
 .wapppapercustom .tip{padding:10px}
 .wapppapercustom .view{width:500px;height:250px}

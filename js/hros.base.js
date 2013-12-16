@@ -20,7 +20,7 @@ HROS.base = (function(){
 				window.onbeforeunload = HROS.util.confirmExit;
 			}
 			//更新当前用户ID
-			HROS.CONFIG.memberID = $.cookie('memberID');
+			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
 			//文件上传
 			//HROS.uploadFile.init();
 			//阻止弹出浏览器默认右键菜单
@@ -70,6 +70,8 @@ HROS.base = (function(){
 			HROS.appmanage.init();
 			//初始化右键菜单
 			HROS.popupMenu.init();
+			//初始化快捷键
+			HROS.hotkey.init();
 			//页面加载后运行
 			HROS.base.run();
 			//绑定ajax全局验证

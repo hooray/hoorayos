@@ -11,6 +11,13 @@
 				'desk3 = "'.$val_desk3.'"',
 				'desk4 = "'.$val_desk4.'"',
 				'desk5 = "'.$val_desk5.'"',
+				'desk = '.$val_desk,
+				'appxy = "'.$val_appxy.'"',
+				'appsize = "'.$val_appsize.'"',
+				'dockpos = "'.$val_dockpos.'"',
+				'skin = "'.$val_skin.'"',
+				'wallpaper_id = '.$val_wallpaper_id,
+				'wallpapertype = "'.$val_wallpapertype.'"'
 			);
 			$db->update(0, 0, 'tb_setting', $set);
 			echo json_encode(array(

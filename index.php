@@ -28,12 +28,6 @@
 			}
 		}
 	}
-	if(checkLogin()){
-		$rs_member = $db->select(0, 1, 'tb_member', 'skin', 'and tbid = '.session('member_id'));
-		$skin = $rs_member['skin'];
-	}else{
-		$skin = 'default';
-	}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -45,7 +39,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
-<link rel="stylesheet" href="img/skins/<?php echo $skin; ?>.css" id="window-skin">
+<link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 <script type="text/javascript">var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';</script>
 </head>
 
@@ -271,8 +265,8 @@
 		</div>
 	</div>
 	<div id="search-bar">
-		<input id="pageletSearchInput" placeholder="搜索应用...">
-		<input type="buttom" value="" id="pageletSearchButton" title="搜索...">
+		<input id="pageletSearchInput" class="mousetrap" placeholder="搜索应用...">
+		<input type="button" value="" id="pageletSearchButton" title="搜索...">
 	</div>
 	<div id="search-suggest">
 		<ul class="resultBox"></ul>
@@ -348,6 +342,7 @@
 <script src="js/hros.dock.js"></script>
 <script src="js/hros.folderView.js"></script>
 <script src="js/hros.grid.js"></script>
+<script src="js/hros.hotkey.js"></script>
 <script src="js/hros.maskBox.js"></script>
 <script src="js/hros.navbar.js"></script>
 <script src="js/hros.popupMenu.js"></script>
@@ -387,11 +382,10 @@ $(function(){
 		});
 	});
 	//初始化登录用户
-	if($.parseJSON($.cookie('userinfo')) != '' && $.parseJSON($.cookie('userinfo')) != null){
-		var userinfo = $.parseJSON($.cookie('userinfo'));
+	if($.parseJSON($.cookie(cookie_prefix + 'userinfo')) != '' && $.parseJSON($.cookie(cookie_prefix + 'userinfo')) != null){
+		var userinfo = $.parseJSON($.cookie(cookie_prefix + 'userinfo'));
 		$('#avatar').attr('src', userinfo.avatar);
 		$('#username').val(userinfo.username);
-		$('#password').focus();
 	}
 	//表单登录初始化
 	var loginForm = $('#loginForm').Validform({
@@ -481,7 +475,7 @@ $(function(){
 		childWindow = window.open('connect/' + $(this).data('type') + '/redirect.php', 'LoginWindow', 'width=850,height=520,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
 	});
 	$('.disanfangdenglutip .cancel').click(function(){
-		$.removeCookie('fromsite', {path:'/'});
+		$.removeCookie(cookie_prefix + 'fromsite');
 		$('.disanfangdenglutip').hide();
 		$('.disanfangdenglu').show();
 	});
@@ -492,22 +486,30 @@ function changeTabindex(mode){
 		$('#username').attr('tabindex', 1);
 		$('#password').attr('tabindex', 2);
 		$('#submit_login_btn').attr('tabindex', 3);
-		$('#username').focus();
+		if($('#username').val() == ''){
+			$('#username').focus();
+		}else{
+			$('#password').focus();
+		}
 	}else{
 		$('#reg_username').attr('tabindex', 1);
 		$('#reg_password').attr('tabindex', 2);
 		$('#submit_register_btn').attr('tabindex', 3);
-		$('#reg_username').focus();
+		if($('#reg_username').val() == ''){
+			$('#reg_username').focus();
+		}else{
+			$('#reg_password').focus();
+		}
 	}
 }
 function checkUserLogin(){
-	$.removeCookie('fromsite', {path:'/'});
+	$.removeCookie(cookie_prefix + 'fromsite');
 	interval = setInterval(function(){
 		getLoginCookie(interval);
 	}, 500);
 }
 function getLoginCookie(){
-	if($.cookie('fromsite')){
+	if($.cookie(cookie_prefix + 'fromsite')){
 		childWindow.close();
 		window.clearInterval(interval);
 		//验证该三方登录账号是否已绑定过本地账号，有则直接登录，否则执行绑定账号流程
@@ -519,7 +521,7 @@ function getLoginCookie(){
 					ZENG.msgbox.show('未知错误，建议重启浏览器后重新操作', 1, 2000);
 				}else if(msg == 'ERROR_NOT_BIND'){
 					var title;
-					switch($.cookie('fromsite')){
+					switch($.cookie(cookie_prefix + 'fromsite')){
 						case 'sinaweibo': title = '新浪微博'; break;
 						case 'tweibo': title = '腾讯微博'; break;
 						case 't163weibo': title = '网易微博'; break;
@@ -554,7 +556,7 @@ $(function(){
 		}
 		$('#update_browser_box').show();
 	}else{
-		if($('#lrbox').data('isforcedlogin') == 0 || $.cookie('memberID') != 0){
+		if($('#lrbox').data('isforcedlogin') == 0 || $.cookie(cookie_prefix + 'memberID') != 0){
 			$('#desktop').show();
 			//初始化一些桌面信息
 			HROS.CONFIG.sinaweiboAppkey = '<?php echo SINAWEIBO_AKEY; ?>';

@@ -181,7 +181,10 @@ HROS.appmanage = (function(){
 						_l = cx - x;
 						_t = cy - y;
 						if(dx != cx || dy != cy){
-							obj.css({left:_l, top:_t}).show();
+							obj.css({
+								left : _l,
+								top : _t
+							}).show();
 						}
 					}).on('mouseup', function(){
 						$(document).off('mousemove').off('mouseup');

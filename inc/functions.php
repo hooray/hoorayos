@@ -491,7 +491,15 @@
 					break;
 			}
 		}else{
-			$wallpaper_array = array(1, 'img/wallpaper/wallpaper7.jpg', 'juzhong', 1920, 1080);
+			$set = $db->select(0, 1, 'tb_setting', 'wallpaper_id, wallpapertype');
+			$wallpaper = $db->select(0, 1, 'tb_wallpaper', 'url, width, height', 'and tbid = '.$set['wallpaper_id']);
+			$wallpaper_array = array(
+				1,
+				$wallpaper['url'],
+				$set['wallpapertype'],
+				$wallpaper['width'],
+				$wallpaper['height']
+			);
 		}
 		return implode('<{|}>', $wallpaper_array);
 	}
@@ -502,7 +510,8 @@
 			$member = $db->select(0, 1, 'tb_member', 'skin', 'and tbid = '.session('member_id'));
 			$skin = $member['skin'];
 		}else{
-			$skin = 'default';
+			$setting = $db->select(0, 1, 'tb_setting', 'skin');
+			$skin = $setting['skin'];
 		}
 		return $skin;
 	}
@@ -513,7 +522,8 @@
 			$member = $db->select(0, 1, 'tb_member', 'dockpos', 'and tbid = '.session('member_id'));
 			$dockpos = $member['dockpos'];
 		}else{
-			$dockpos = 'top';
+			$setting = $db->select(0, 1, 'tb_setting', 'dockpos');
+			$dockpos = $setting['dockpos'];
 		}
 		return $dockpos;
 	}
@@ -524,7 +534,8 @@
 			$member = $db->select(0, 1, 'tb_member', 'appxy', 'and tbid = '.session('member_id'));
 			$appxy = $member['appxy'];
 		}else{
-			$appxy = 'x';
+			$setting = $db->select(0, 1, 'tb_setting', 'appxy');
+			$appxy = $setting['appxy'];
 		}
 		return $appxy;
 	}
@@ -535,7 +546,8 @@
 			$member = $db->select(0, 1, 'tb_member', 'appsize', 'and tbid = '.session('member_id'));
 			$appsize = $member['appsize'];
 		}else{
-			$appsize = 'm';
+			$setting = $db->select(0, 1, 'tb_setting', 'appsize');
+			$appsize = $setting['appsize'];
 		}
 		return $appsize;
 	}
@@ -546,7 +558,8 @@
 			$member = $db->select(0, 1, 'tb_member', 'desk', 'and tbid = '.session('member_id'));
 			$desk = $member['desk'];
 		}else{
-			$desk = 3;
+			$setting = $db->select(0, 1, 'tb_setting', 'desk');
+			$desk = $setting['desk'];
 		}
 		return $desk;
 	}
