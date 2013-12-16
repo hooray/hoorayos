@@ -296,6 +296,13 @@ CREATE TABLE `tb_setting` (
   `desk3` longtext COMMENT '[桌面3]应用id，用","相连',
   `desk4` longtext COMMENT '[桌面4]应用id，用","相连',
   `desk5` longtext COMMENT '[桌面5]应用id，用","相连',
+  `desk` tinyint(1) DEFAULT '1',
+  `appxy` varchar(255) DEFAULT 'x' COMMENT '图标排列方式，参数：x,y',
+  `appsize` varchar(255) DEFAULT 'm' COMMENT '图标展示尺寸，参数：s,m',
+  `dockpos` varchar(255) DEFAULT 'top' COMMENT '应用码头位置，参数：top,left,right,none',
+  `skin` varchar(255) DEFAULT 'default' COMMENT '窗口皮肤',
+  `wallpaper_id` int(11) DEFAULT '1',
+  `wallpapertype` varchar(255) DEFAULT 'juzhong' COMMENT '壁纸显示方式：tianchong,shiying,pingpu,lashen,juzhong',
   `isforcedlogin` tinyint(1) DEFAULT '1' COMMENT '是否强制登录',
   PRIMARY KEY (`tbid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -303,7 +310,7 @@ CREATE TABLE `tb_setting` (
 -- ----------------------------
 -- Records of tb_setting
 -- ----------------------------
-INSERT INTO `tb_setting` VALUES ('1', 'HoorayOS桌面应用框架', 'HoorayOS是一套web桌面应用框架，你可以用它开发出类似于Q+web这类的桌面应用网站，也可以在它的基础上二次开发出适合项目的桌面式管理系统。', 'HoorayOS,web桌面,免费开源,桌面管理系统', '14', '55,54,53,52,51', '50,49,48,47,46', '45,44,43,41,42', '30,29,28,27,26', '20,19,18,17,16', '0');
+INSERT INTO `tb_setting` VALUES ('1', 'HoorayOS桌面应用框架', 'HoorayOS是一套web桌面应用框架，你可以用它开发出类似于Q+web这类的桌面应用网站，也可以在它的基础上二次开发出适合项目的桌面式管理系统。', 'HoorayOS,web桌面,免费开源,桌面管理系统', '14', '55,54,53,52,51', '50,49,48,47,46', '45,44,43,41,42', '30,29,28,27,26', '20,19,18,17,16', '1', 'x', 'm', 'top', 'default', '1', 'juzhong', '0');
 
 -- ----------------------------
 -- Table structure for `tb_wallpaper`
