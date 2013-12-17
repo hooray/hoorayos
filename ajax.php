@@ -299,16 +299,23 @@
 					$dock_arr = explode(',', $rs['dock']);
 					//判断传入的应用id和数据库里的id是否吻合
 					if($dock_arr[$from] == $id){
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($dock_arr, 0, 0, $id);
+							}else{
+								array_splice($dock_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($dock_arr, $to, 0, $id);
+							}else{
+								array_splice($dock_arr, $to + 1, 0, $id);
+							}
+						}
 						if($from > $to){
-							for($i = $from; $i > $to; $i--){
-								$dock_arr[$i] = $dock_arr[$i-1];
-							}
-							$dock_arr[$to] = $id;
-						}else if($to > $from){
-							for($i = $from; $i < $to; $i++){
-								$dock_arr[$i] = $dock_arr[$i+1];
-							}
-							$dock_arr[$to] = $id;
+							unset($dock_arr[$from + 1]);
+						}else{
+							unset($dock_arr[$from]);
 						}
 						$dock_arr = formatAppidArray($dock_arr);
 						$db->update(0, 0, 'tb_member', 'dock = "'.implode(',', $dock_arr).'"', 'and tbid = '.session('member_id'));
@@ -322,7 +329,19 @@
 					if($desk_arr[0] == ''){
 						$desk_arr[0] = $id;
 					}else{
-						array_splice($desk_arr, $to, 0, $id);
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($desk_arr, 0, 0, $id);
+							}else{
+								array_splice($desk_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($desk_arr, $to, 0, $id);
+							}else{
+								array_splice($desk_arr, $to + 1, 0, $id);
+							}
+						}
 					}
 					$db->update(0, 0, 'tb_member', 'dock = "'.implode(',', $dock_arr).'", desk'.$desk.' = "'.implode(',', $desk_arr).'"', 'and tbid = '.session('member_id'));
 					break;
@@ -354,7 +373,19 @@
 					if($dock_arr[0] == ''){
 						$dock_arr[0] = $id;
 					}else{
-						array_splice($dock_arr, $to, 0, $id);						
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($dock_arr, 0, 0, $id);
+							}else{
+								array_splice($dock_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($dock_arr, $to, 0, $id);
+							}else{
+								array_splice($dock_arr, $to + 1, 0, $id);
+							}
+						}
 					}
 					if(count($dock_arr) > 7){
 						$desk_arr[] = $dock_arr[7];
@@ -367,16 +398,23 @@
 					$desk_arr = explode(',', $rs['desk'.$desk]);
 					//判断传入的应用id和数据库里的id是否吻合
 					if($desk_arr[$from] == $id){
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($desk_arr, 0, 0, $id);
+							}else{
+								array_splice($desk_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($desk_arr, $to, 0, $id);
+							}else{
+								array_splice($desk_arr, $to + 1, 0, $id);
+							}
+						}
 						if($from > $to){
-							for($i = $from; $i > $to; $i--){
-								$desk_arr[$i] = $desk_arr[$i-1];
-							}
-							$desk_arr[$to] = $id;
-						}else if($to > $from){
-							for($i = $from; $i < $to; $i++){
-								$desk_arr[$i] = $desk_arr[$i+1];
-							}
-							$desk_arr[$to] = $id;
+							unset($desk_arr[$from + 1]);
+						}else{
+							unset($desk_arr[$from]);
 						}
 						$desk_arr = formatAppidArray($desk_arr);
 						$db->update(0, 0, 'tb_member', 'desk'.$desk.' = "'.implode(',', $desk_arr).'"', 'and tbid = '.session('member_id'));
@@ -408,7 +446,19 @@
 					if($dock_arr[0] == ''){
 						$dock_arr[0] = $id;
 					}else{
-						array_splice($dock_arr, $to, 0, $id);
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($dock_arr, 0, 0, $id);
+							}else{
+								array_splice($dock_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($dock_arr, $to, 0, $id);
+							}else{
+								array_splice($dock_arr, $to + 1, 0, $id);
+							}
+						}
 					}
 					if(count($dock_arr) > 7){
 						$desk_arr[] = $dock_arr[7];
@@ -423,7 +473,19 @@
 					if($desk_arr[0] == ''){
 						$desk_arr[0] = $id;
 					}else{
-						array_splice($desk_arr, $to, 0, $id);
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($desk_arr, 0, 0, $id);
+							}else{
+								array_splice($desk_arr, 1, 0, $id);
+							}
+						}else{
+							if($boa == 'b'){
+								array_splice($desk_arr, $to, 0, $id);
+							}else{
+								array_splice($desk_arr, $to + 1, 0, $id);
+							}
+						}
 					}
 					$db->update(0, 0, 'tb_member', 'desk'.$desk.' = "'.implode(',', $desk_arr).'"', 'and tbid = '.session('member_id'));
 					$db->update(0, 0, 'tb_member_app', 'folder_id = 0', 'and tbid = '.$id.' and member_id = '.session('member_id'));

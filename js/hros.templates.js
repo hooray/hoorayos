@@ -142,7 +142,7 @@ var folderViewTemp = template(
 					'<div class="quick_view_container_control">'+
 						'<a href="javascript:;" class="quick_view_container_open">打开</a>'+
 					'</div>'+
-					'<div class="quick_view_container_list folder-window" id="quick_view_container_list_<%=appid%>" realid="<%=appid%>">'+
+					'<div class="quick_view_container_list" id="quick_view_container_list_<%=appid%>" realid="<%=appid%>">'+
 						'<div class="quick_view_container_list_in" id="quick_view_container_list_in_<%=appid%>" style="height:<%=height%>px">'+
 							'<%==apps%>'+
 						'</div>'+
