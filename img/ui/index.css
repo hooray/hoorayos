@@ -461,11 +461,11 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #shortcut_shadow2{height:30px;width:100%;position:absolute}
 #amg_folder_container .appbtn:hover{background:url(amg_shortcut_hover.png) repeat-x}
 #amg_folder_container .appbtn div,
-#shortcut_shadow2 div{cursor:pointer;height:30px;padding:2px 0;width:100%;overflow:hidden;position:relative;margin:0 auto}
+#shortcut_shadow2 div{cursor:pointer;height:26px;padding:2px 0;width:100%;overflow:hidden;position:relative;margin:0 auto}
 #amg_folder_container .appbtn img,
 #shortcut_shadow2 img{width:26px;height:26px;margin-left:20px;}
 #amg_folder_container .appbtn span,
-#shortcut_shadow2 span{color:#fff;margin-top:-30px;margin-left:50px;float:left;text-align:left;background:none}
+#shortcut_shadow2 span{color:#fff;max-width:none;height:30px;line-height:30px;margin-top:-30px;margin-left:50px;float:left;text-align:left;background:none}
 
 /*评分*/
 .grade-box{width:200px}

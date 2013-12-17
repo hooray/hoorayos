@@ -428,10 +428,18 @@
 					if($todesk_arr[0] == ''){
 						$todesk_arr[0] = $id;
 					}else{
-						if($to != -1){
-							array_splice($todesk_arr, $to, 0, $id);
+						if($to == 0){
+							if($boa == 'b'){
+								array_splice($todesk_arr, 0, 0, $id);
+							}else{
+								array_splice($todesk_arr, 1, 0, $id);
+							}
 						}else{
-							$todesk_arr[] = $id;
+							if($boa == 'b'){
+								array_splice($todesk_arr, $to, 0, $id);
+							}else{
+								array_splice($todesk_arr, $to + 1, 0, $id);
+							}
 						}
 					}
 					$db->update(0, 0, 'tb_member', 'desk'.$fromdesk.' = "'.implode(',', $fromdesk_arr).'", desk'.$todesk.' = "'.implode(',', $todesk_arr).'"', 'and tbid = '.session('member_id'));

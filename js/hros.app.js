@@ -127,8 +127,8 @@ HROS.app = (function(){
 					var dock_append = '';
 					$(HROS.VAR.dock).each(function(i){
 						dock_append += appbtnTemp({
-							'top' : dockGrid[i]['startY'],
-							'left' : dockGrid[i]['startX'],
+							'top' : dockGrid[i]['startY'] + 2,
+							'left' : dockGrid[i]['startX'] + 2,
 							'title' : this.name,
 							'type' : this.type,
 							'id' : 'd_' + this.appid,
@@ -978,15 +978,23 @@ HROS.app = (function(){
 			}
 			return rtn;
 		},
-		dataDeskToOtherdesk : function(id, from, to, todesk, fromdesk){
+		dataDeskToOtherdesk : function(id, from, to, boa, todesk, fromdesk){
 			var rtn = false;
 			fromdesk = eval('HROS.VAR.desk' + fromdesk);
 			todesk = eval('HROS.VAR.desk' + todesk);
 			if(fromdesk[from] != null){
-				if(to != -1){
-					todesk.splice(to, 0, fromdesk[from]);
+				if(to == 0){
+					if(boa == 'b'){
+						todesk.splice(0, 0, fromdesk[from]);
+					}else{
+						todesk.splice(1, 0, fromdesk[from]);
+					}
 				}else{
-					todesk.push(fromdesk[from]);
+					if(boa == 'b'){
+						todesk.splice(to, 0, fromdesk[from]);
+					}else{
+						todesk.splice(to + 1, 0, fromdesk[from]);
+					}
 				}
 				fromdesk.splice(from, 1);
 				rtn = true;

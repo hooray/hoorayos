@@ -65,7 +65,7 @@ HROS.grid = (function(){
 						endY : grid[i].startY + height,
 						startX : grid[i].startX + halfW,
 						endX : grid[i].endX
-					})
+					});
 				}else{
 					grid2.push({
 						startY : grid[i].startY,
@@ -80,13 +80,6 @@ HROS.grid = (function(){
 					});
 				}
 			}
-//			for(var i = 0; i < grid2.length / 100; i++){
-//				if(HROS.CONFIG.appXY == 'x'){
-//					$('.desktop-container').append('<div style="position:absolute;z-index:-2;width:'+(halfW-2)+'px;height:'+height+'px;line-height:100px;text-align:center;border:1px dotted #900;left:'+grid2[i].startX+'px;top:'+grid2[i].startY+'px"></div>');
-//				}else{
-//					$('.desktop-container').append('<div style="position:absolute;z-index:-2;width:'+width+'px;height:'+(halfH-2)+'px;line-height:100px;text-align:center;border:1px dotted #900;left:'+grid2[i].startX+'px;top:'+grid2[i].startY+'px"></div>');
-//				}
-//			}
 			var flag = null;
 			for(var i = 0; i < grid2.length; i++){
 				if(x >= grid2[i].startX && x <= grid2[i].endX && y >= grid2[i].startY && y <= grid2[i].endY){
@@ -113,9 +106,6 @@ HROS.grid = (function(){
 					left += 62;
 				}
 			}
-//			for(var i = 0; i < dockAppGrid.length; i++){
-//				$('.dock-applist').append('<div style="position:absolute;z-index:-2;width:58px;height:58px;line-height:100px;text-align:center;border:1px dotted #900;left:'+dockAppGrid[i].startX+'px;top:'+dockAppGrid[i].startY+'px"></div>');
-//			}
 			return dockAppGrid;
 		},
 		searchDockAppGrid : function(x, y){
@@ -147,7 +137,7 @@ HROS.grid = (function(){
 						endY : grid[i].startY + height,
 						startX : grid[i].startX + halfW,
 						endX : grid[i].endX
-					})
+					});
 				}else{
 					grid2.push({
 						startY : grid[i].startY,
@@ -162,13 +152,6 @@ HROS.grid = (function(){
 					});
 				}
 			}
-//			for(var i = 0; i < grid2.length; i++){
-//				if(HROS.CONFIG.dockpos == 'top'){
-//					$('.dock-applist').append('<div style="position:absolute;z-index:-2;width:'+(halfW-2)+'px;height:'+height+'px;line-height:100px;text-align:center;border:1px dotted #900;left:'+grid2[i].startX+'px;top:'+grid2[i].startY+'px"></div>');
-//				}else{
-//					$('.dock-applist').append('<div style="position:absolute;z-index:-2;width:'+width+'px;height:'+(halfH-2)+'px;line-height:100px;text-align:center;border:1px dotted #900;left:'+grid2[i].startX+'px;top:'+grid2[i].startY+'px"></div>');
-//				}
-//			}
 			var flag = null;
 			for(var i = 0; i < grid2.length; i++){
 				if(x >= grid2[i].startX && x <= grid2[i].endX && y >= grid2[i].startY && y <= grid2[i].endY){
@@ -210,76 +193,88 @@ HROS.grid = (function(){
 			for(var i = 0; i < 10000; i++){
 				manageDockAppGrid.push({
 					startX : left,
-					endX : left + 72
+					endX : left + 70
 				});
-				left += 72;
-			}
-			return manageDockAppGrid;
-		},
-		getManageDockAppGridOnMove : function(){
-			var manageDockAppGrid = [], _left = 20;
-			for(var i = 0; i < 10000; i++){
-				manageDockAppGrid.push({
-					startX : _left,
-					endX : _left + (i == 0 ? 29 : 72)
-				});
-				_left += (i == 0 ? 29 : 72);
+				left += 70;
 			}
 			return manageDockAppGrid;
 		},
 		searchManageDockAppGrid : function(x){
-			var grid = HROS.grid.getManageDockAppGridOnMove(), flags = 0;
-			var returnInfo = 0;
+			var grid = HROS.grid.getManageDockAppGrid();
+			var flag = null;
 			for(var i = 0; i < grid.length; i++){
 				if(x >= grid[i].startX && x <= grid[i].endX){
-					flags += 1;
-				}
-				if(flags === 1){
-					returnInfo = i;
-					break;
-				}else{
-					flags = 0;
+					flag = i;
 				}
 			}
-			return returnInfo;
+			return flag;
+		},
+		searchManageDockAppGrid2 : function(x){
+			var grid = HROS.grid.getManageDockAppGrid();
+			var grid2 = [];
+			for(var i = 0; i < grid.length; i++){
+				var width = grid[i].endX - grid[i].startX;
+				var halfW = width / 2;
+				grid2.push({
+					startX : grid[i].startX,
+					endX : grid[i].startX + halfW
+				},{
+					startX : grid[i].startX + halfW,
+					endX : grid[i].endX
+				});
+			}
+			var flag = null;
+			for(var i = 0; i < grid2.length; i++){
+				if(x >= grid2[i].startX && x <= grid2[i].endX){
+					flag = i;
+				}
+			}
+			return flag;
 		},
 		getManageAppGrid : function(){
-			var manageAppGrid = [], _top = 0;
+			var manageAppGrid = [];
+			var top = 0;
 			for(var i = 0; i < 10000; i++){
 				manageAppGrid.push({
-					startY : _top,
-					endY : _top + 40
+					startY : top,
+					endY : top + 40
 				});
-				_top += 40;
-			}
-			return manageAppGrid;
-		},
-		getManageAppGridOnMove : function(){
-			var manageAppGrid = [], _top = 0;
-			for(var i = 0; i < 10000; i++){
-				manageAppGrid.push({
-					startY : _top,
-					endY : _top + (i == 0 ? 20 : 40)
-				});
-				_top += (i == 0 ? 20 : 40);
+				top += 40;
 			}
 			return manageAppGrid;
 		},
 		searchManageAppGrid : function(y){
-			var grid = HROS.grid.getManageAppGridOnMove(), flags = 0;
-			var returnInfo = 0;
+			var grid = HROS.grid.getManageAppGrid();
+			var flag = null;
 			for(var i = 0; i < grid.length; i++){
 				if(y >= grid[i].startY && y <= grid[i].endY){
-					flags += 1;
-				}
-				if(flags === 1){
-					returnInfo = i;
-					break;
-				}else{
-					flags = 0;
+					flag = i;
 				}
 			}
-			return returnInfo;
+			return flag;
+		},
+		searchManageAppGrid2 : function(y){
+			var grid = HROS.grid.getManageAppGrid();
+			var grid2 = [];
+			for(var i = 0; i < grid.length; i++){
+				var height = grid[i].endY - grid[i].startY;
+				var width = grid[i].endX - grid[i].startX;
+				var halfH = height / 2;
+				grid2.push({
+					startY : grid[i].startY,
+					endY : grid[i].startY + halfH
+				},{
+					startY : grid[i].startY + halfH,
+					endY : grid[i].endY
+				});
+			}
+			var flag = null;
+			for(var i = 0; i < grid2.length; i++){
+				if(y >= grid2[i].startY && y <= grid2[i].endY){
+					flag = i;
+				}
+			}
+			return flag;
 		}
 	}
 })();

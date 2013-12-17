@@ -88,6 +88,10 @@ HROS.base = (function(){
 					});
 				}
 			});
+			//测试
+			setTimeout(function(){
+				HROS.appmanage.set();
+			}, 500);
 		},
 		login : function(){
 			$('#lrbox').animate({
