@@ -29,7 +29,7 @@ HROS.base = (function(){
 			});
 			//版权信息初始化并显示
 			HROS.copyright.init();
-			//HROS.copyright.show();
+			HROS.copyright.show();
 			//用于判断网页是否缩放
 			HROS.zoom.init();
 			//桌面(容器)初始化
@@ -88,10 +88,6 @@ HROS.base = (function(){
 					});
 				}
 			});
-			//测试
-			setTimeout(function(){
-				HROS.appmanage.set();
-			}, 500);
 		},
 		login : function(){
 			$('#lrbox').animate({
