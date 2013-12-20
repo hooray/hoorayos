@@ -126,7 +126,7 @@ HROS.grid = (function(){
 				var width = grid[i].endX - grid[i].startX;
 				var halfH = height / 2;
 				var halfW = width / 2;
-				if(HROS.CONFIG.dockpos == 'top'){
+				if(HROS.CONFIG.dockPos == 'top'){
 					grid2.push({
 						startY : grid[i].startY,
 						endY : grid[i].startY + height,

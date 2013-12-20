@@ -7,6 +7,7 @@ HROS.popupMenu = (function(){
 			$('.popup-menu').on('contextmenu', function(){
 				return false;
 			});
+			//动态控制多级菜单的显示位置
 			$('body').on('mouseenter', '.popup-menu li', function(){
 				if($(this).children('.popup-menu').length == 1){
 					$(this).children('a').addClass('focus');
@@ -442,15 +443,15 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuDock){
 				TEMP.popupMenuDock = $(
 					'<div class="popup-menu dock-menu"><ul>'+
-						'<li><a menu="dockpos" pos="top" href="javascript:;"><b class="hook"></b>向上停靠</a></li>'+
-						'<li><a menu="dockpos" pos="left" href="javascript:;"><b class="hook"></b>向左停靠</a></li>'+
-						'<li><a menu="dockpos" pos="right" href="javascript:;"><b class="hook"></b>向右停靠</a></li>'+
-						'<li><a menu="dockpos" pos="none" href="javascript:;">隐藏</a></li>'+
+						'<li><a menu="dockPos" pos="top" href="javascript:;"><b class="hook"></b>向上停靠</a></li>'+
+						'<li><a menu="dockPos" pos="left" href="javascript:;"><b class="hook"></b>向左停靠</a></li>'+
+						'<li><a menu="dockPos" pos="right" href="javascript:;"><b class="hook"></b>向右停靠</a></li>'+
+						'<li><a menu="dockPos" pos="none" href="javascript:;">隐藏</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuDock);
 				//绑定事件
-				$('.dock-menu a[menu="dockpos"]').on('click', function(){
+				$('.dock-menu a[menu="dockPos"]').on('click', function(){
 					if($(this).attr('pos') == 'none'){
 						$.dialog({
 							title : '隐藏应用码头',
@@ -467,7 +468,7 @@ HROS.popupMenu = (function(){
 					$('.popup-menu').hide();
 				});
 			}
-			$('.dock-menu a[menu="dockpos"]').each(function(){
+			$('.dock-menu a[menu="dockPos"]').each(function(){
 				$(this).children('.hook').hide();
 				if($(this).attr('pos') == HROS.CONFIG.dockPos){
 					$(this).children('.hook').show();

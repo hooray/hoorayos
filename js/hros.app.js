@@ -123,12 +123,12 @@ HROS.app = (function(){
 				//绘制应用表格
 				var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
 				//加载应用码头应用
+				var dock_append = '';
 				if(HROS.VAR.dock != ''){
-					var dock_append = '';
 					$(HROS.VAR.dock).each(function(i){
 						dock_append += appbtnTemp({
-							'top' : dockGrid[i]['startY'] + 2,
-							'left' : dockGrid[i]['startX'] + 2,
+							'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 2,
+							'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 2 : dockGrid[i]['startX'],
 							'title' : this.name,
 							'type' : this.type,
 							'id' : 'd_' + this.appid,
@@ -137,10 +137,9 @@ HROS.app = (function(){
 							'imgsrc' : this.icon
 						});
 					});
-					$('#dock-bar .dock-applist').html('').append(dock_append);
-				}else{
-					$('#dock-bar .dock-applist').html('');
 				}
+				$('#dock-bar .dock-applist li').remove();
+				$('#dock-bar .dock-applist').append(dock_append);
 				//加载桌面应用
 				for(var j = 1; j <= 5; j++){
 					var desk_append = '', desk = eval('HROS.VAR.desk' + j);
@@ -165,7 +164,6 @@ HROS.app = (function(){
 					$('#desk-' + j + ' li').remove();
 					$('#desk-' + j + ' .desktop-apps-container').append(desk_append);
 				}
-				HROS.deskTop.appresize();
 				//如果文件夹预览面板为显示状态，则进行更新
 				HROS.folderView.resize();
 				//如果文件夹窗口为显示状态，则进行更新
@@ -322,8 +320,8 @@ HROS.app = (function(){
 									}
 								}
 							}else{
-								var dock_w = HROS.CONFIG.dockPos == 'left' ? 73 : 0;
-								var dock_h = HROS.CONFIG.dockPos == 'top' ? 73 : 0;
+								var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
+								var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
 								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
 								var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
 								var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
@@ -452,8 +450,8 @@ HROS.app = (function(){
 									HROS.app.dataDeskToDock(id, from, to, boa, desk);
 								}
 							}else{
-								var dock_w = HROS.CONFIG.dockPos == 'left' ? 73 : 0;
-								var dock_h = HROS.CONFIG.dockPos == 'top' ? 73 : 0;
+								var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
+								var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
 								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
 								var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
 								var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
@@ -580,8 +578,8 @@ HROS.app = (function(){
 									HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk);
 								}
 							}else{
-								var dock_w = HROS.CONFIG.dockPos == 'left' ? 73 : 0;
-								var dock_h = HROS.CONFIG.dockPos == 'top' ? 73 : 0;
+								var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
+								var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
 								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
 								var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
 								var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);

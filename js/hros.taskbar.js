@@ -69,13 +69,13 @@ HROS.taskbar = (function(){
 			$('#task-content-inner').removeClass('fl');
 			if(HROS.CONFIG.dockPos == 'left'){
 				$('#task-bar').css({
-					'left' : 73,
+					'left' : $('#dock-bar').width(),
 					'right' : 0
 				});
 			}else if(HROS.CONFIG.dockPos == 'right'){
 				$('#task-bar').css({
 					'left' : 0,
-					'right' : 73
+					'right' : $('#dock-bar').width()
 				});
 				$('#task-content-inner').addClass('fl');
 			}else{

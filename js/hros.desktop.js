@@ -58,8 +58,8 @@ HROS.deskTop = (function(){
 			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
 			$('#dock-bar .dock-applist li').each(function(i){
 				$(this).css({
-					'left' : dockGrid[i]['startX'],
-					'top' : dockGrid[i]['startY']
+					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 2 : dockGrid[i]['startX'],
+					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 2
 				});
 				$(this).attr('left', $(this).offset().left).attr('top', $(this).offset().top);
 			});
@@ -72,10 +72,10 @@ HROS.deskTop = (function(){
 					}, 500);
 					switch(HROS.CONFIG.dockPos){
 						case 'top':
-							$(this).attr('left', left).attr('top', top + 73);
+							$(this).attr('left', left).attr('top', top + $('#dock-bar').height());
 							break;
 						case 'left':
-							$(this).attr('left', left + 73).attr('top', top);
+							$(this).attr('left', left + $('#dock-bar').width()).attr('top', top);
 							break;
 						case 'right':
 							$(this).attr('left', left).attr('top', top);
