@@ -302,12 +302,12 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #dock-container .appbtn div img{width:40px;height:40px}
 #dock-container .appbtn span{display:none}
 .dock-applist{position:relative}
-.dock-top .dock-applist{width:434px;height:58px;margin:3px 9px 4px 10px;float:left}
+.dock-top .dock-applist{width:434px;height:58px;margin:4px 9px 3px 10px;float:left}
 .dock-left .dock-applist{width:58px;height:434px;margin:10px 4px 9px 3px;float:left}
-.dock-right .dock-applist{width:58px;height:434px;margin:10px 3px 9px 4px;float:left}
+.dock-right .dock-applist{width:58px;height:434px;margin:10px 3px 9px 4px;float:right}
 .dock-top .dock-toollist{width:20px;height:50px;padding:8px 6px;float:left;overflow:hidden}
 .dock-left .dock-toollist{width:50px;height:20px;padding:6px 8px;float:left;overflow:hidden}
-.dock-right .dock-toollist{width:50px;height:20px;padding:6px 8px;float:left;overflow:hidden}
+.dock-right .dock-toollist{width:50px;height:20px;padding:6px 8px;float:right;overflow:hidden}
 .dock-toollist a{float:left;display:block;width:20px;height:20px;cursor:pointer;background:url(desk_sprite.png) no-repeat}
 .dock-toollist .dock-tool-setting{background-position:-220px -100px}
 .dock-toollist .dock-tool-setting:hover{background-position:-220px -120px}
@@ -321,7 +321,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .dock-right .dock-tool-style{margin-left:5px}
 .dock-top .dock-toollist2{height:40px;width:40px;padding:13px 7px;float:left}
 .dock-left .dock-toollist2{height:40px;width:40px;padding:7px 13px;float:left}
-.dock-right .dock-toollist2{height:40px;width:40px;padding:7px 13px;float:left}
+.dock-right .dock-toollist2{height:40px;width:40px;padding:7px 13px;float:right}
 .dock-tool-start{display:block;width:40px;height:40px;cursor:pointer;margin:0 auto;background:url(logo.png) no-repeat -40px 0}
 .dock-tool-start:hover{background-position:0 0}
 
