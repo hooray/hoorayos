@@ -1,17 +1,18 @@
 <?php
+	//引入公用文件
 	require('global.php');
 	
 	cookie('fromsite', NULL);
 	$setting = $db->select(0, 1, 'tb_setting');
 	//检查是否登录
 	if(!checkLogin()){
-		//未登录用户的ID默认为0
+		//未登录用户的ID默认为0，session、cookie均要设置
 		session('member_id', 0);
 		cookie('memberID', 0, 3600 * 24 * 7);
-		//检查cookie里用户是否存在
+		//检查cookie里用户信息是否存在
 		if(cookie('userinfo') != NULL){
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
-			//检查列表里的第一个用户是否开启自动登录
+			//用户信息存在并且开启下次自动登入，则进行登录操作
 			if($userinfo['rememberMe'] == 1){
 				$sqlwhere = array(
 					'username = "'.$userinfo['username'].'"',
@@ -40,7 +41,10 @@
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
-<script type="text/javascript">var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';</script>
+<script type="text/javascript">
+	//cookie前缀，避免重名
+	var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
+</script>
 </head>
 
 <body>

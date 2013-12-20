@@ -1,6 +1,9 @@
 <?php
 	chdir(dirname(__FILE__));
+	//数据库操作类
 	require('inc/db.class.php');
+	//函数库
 	require('inc/functions.php');
+	//配置文件
 	require('inc/config.php');
 ?>
