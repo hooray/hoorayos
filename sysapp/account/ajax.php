@@ -29,6 +29,17 @@
 			}
 			echo json_encode($cb);
 			break;
+		case 'editLockPassword':
+			$rs = $db->update(0, 1, 'tb_member', 'lockpassword = "'.sha1($lockpassword).'"', 'and tbid = '.session('member_id'));
+			if($rs){
+				$cb['info'] = '';
+				$cb['status'] = 'y';
+			}else{
+				$cb['info'] = '';
+				$cb['status'] = 'n';
+			}
+			echo json_encode($cb);
+			break;
 		case 'unbind':
 			$set = array(
 				'openid_'.$fromsite.' = ""',

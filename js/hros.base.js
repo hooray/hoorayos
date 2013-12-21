@@ -88,8 +88,6 @@ HROS.base = (function(){
 					});
 				}
 			});
-			//测试代码
-			HROS.copyright.hide();
 		},
 		login : function(){
 			$('#lrbox').animate({

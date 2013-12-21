@@ -164,8 +164,9 @@ CREATE TABLE `tb_file` (
 DROP TABLE IF EXISTS `tb_member`;
 CREATE TABLE `tb_member` (
   `tbid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户名',
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '密码',
+  `lockpassword` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '锁屏密码',
   `type` tinyint(1) DEFAULT '0' COMMENT '用户类型，0（普通用户）1（管理员）',
   `permission_id` bigint(20) DEFAULT NULL COMMENT '权限id',
   `dock` longtext COLLATE utf8_unicode_ci COMMENT '[应用码头]应用id，用","相连',

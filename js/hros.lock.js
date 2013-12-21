@@ -1,6 +1,10 @@
 HROS.lock = (function(){
 	return {
 		init : function(){
+			Mousetrap.bind(['space'], function(){
+				$('#lock').click();
+				return false;
+			});
 			$('body').on('click', '#lock', function(){
 				if($('#lock-info').is(':visible')){
 					$('#lock .title').animate({
@@ -10,6 +14,11 @@ HROS.lock = (function(){
 						top : '80%'
 					}, 500);
 					$('#lock-info').fadeOut();
+					Mousetrap.bind(['space'], function(){
+						$('#lock').click();
+						return false;
+					});
+					Mousetrap.unbind('esc');
 				}else{
 					$('#lock .title').animate({
 						top : '-200px'
@@ -19,6 +28,11 @@ HROS.lock = (function(){
 					}, 500);
 					$('#lock-info').fadeIn();
 					$('#lockpassword').val('').focus();
+					Mousetrap.bind(['esc'], function(){
+						$('#lock').click();
+						return false;
+					});
+					Mousetrap.unbind('space');
 				}
 			});
 			$('body').on('click', '#lock-info', function(){
@@ -60,51 +74,84 @@ HROS.lock = (function(){
 						}
 					});
 				}else{
-					window.onbeforeunload = HROS.util.confirmLockExit;
-					$.ajax({
-						type : 'POST',
-						url : 'login.ajax.php',
-						data : 'ac=logout'
-					});
-					$('#desktop').hide();
-					$('body').append(lockTemp);
-					//时间，日期，星期信息的显示
-					var getTimeDateWeek = function(){
-						var time = new Date();
-						$('#lock .time').text((time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':' + (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()));
-						var date = time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate() + '，星期';
-						switch(time.getDay()){
-							case '1' : date += '一'; break;
-							case '1' : date += '二'; break;
-							case '1' : date += '三'; break;
-							case '1' : date += '四'; break;
-							case '1' : date += '五'; break;
-							case '1' : date += '六'; break;
-							default : date += '日';
-						}
-						$('#lock .week').text(date);
-					};
-					getTimeDateWeek();
-					lockFunc = setInterval(function(){
-						//检查是否有恶意修改源程序绕过锁屏界面
-						var iswarning = false;
-						if($('#desktop').is(':visible')){
-							iswarning = true;
-						}
-						if($('#lock').length == 0){
-							iswarning = true;
-						}
-						if($('#lock').is(':hidden')){
-							iswarning = true;
-						}
-						//如果有则重新载入锁屏
-						if(iswarning){
-							clearInterval(lockFunc);
-							$('#lock').remove();
-							HROS.lock.show();
-						}
+					var lock = function(){
+						window.onbeforeunload = HROS.util.confirmLockExit;
+						$.ajax({
+							type : 'POST',
+							url : 'login.ajax.php',
+							data : 'ac=logout'
+						});
+						$('#desktop').hide();
+						$('body').append(lockTemp);
+						//时间，日期，星期信息的显示
+						var getTimeDateWeek = function(){
+							var time = new Date();
+							$('#lock .time').text((time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':' + (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()));
+							var date = time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate() + '，星期';
+							switch(time.getDay()){
+								case '1' : date += '一'; break;
+								case '1' : date += '二'; break;
+								case '1' : date += '三'; break;
+								case '1' : date += '四'; break;
+								case '1' : date += '五'; break;
+								case '1' : date += '六'; break;
+								default : date += '日';
+							}
+							$('#lock .week').text(date);
+						};
 						getTimeDateWeek();
-					}, 1000);
+						lockFunc = setInterval(function(){
+							//检查是否有恶意修改源程序绕过锁屏界面
+							var iswarning = false;
+							if($('#desktop').is(':visible')){
+								iswarning = true;
+							}
+							if($('#lock').length == 0){
+								iswarning = true;
+							}
+							if($('#lock').is(':hidden')){
+								iswarning = true;
+							}
+							//如果有则重新载入锁屏
+							if(iswarning){
+								clearInterval(lockFunc);
+								$('#lock').remove();
+								HROS.lock.show();
+							}
+							getTimeDateWeek();
+						}, 1000);
+					};
+					if($.cookie(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID) == null){
+						$.cookie(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID, 1);
+						$.dialog({
+							title : '温馨提示',
+							icon : 'warning',
+							content : '解锁密码默认为登录密码，是否要先进行修改？',
+							button : [
+								{
+									name : '继续锁定',
+									callback : function(){
+										lock();
+									},
+									focus : true
+								},
+								{
+									name : '修改解锁密码',
+									callback : function(){
+										HROS.window.createTemp({
+											appid : 'zhsz',
+											title : '账号设置',
+											url : 'sysapp/account/security.php',
+											width : 550,
+											height : 580
+										});
+									}
+								}
+							]
+						});
+					}else{
+						lock();
+					}
 				}
 			}
 		},

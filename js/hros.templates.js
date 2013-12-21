@@ -224,7 +224,7 @@ var lockTemp = template(
 		'</div>'+
 		'<div id="lock-info">'+
 			'<div class="img"><img src="img/ui/avatar_120.jpg"></img></div>'+
-			'<div class="text"><input type="password" id="lockpassword" placeholder="请输入解锁密码"></div>'+
+			'<div class="text"><input type="password" class="mousetrap" id="lockpassword" placeholder="请输入解锁密码"></div>'+
 			'<div class="text-tip"></div>'+
 			'<div class="text"><input type="button" id="lockbtn" value="解 锁"></div>'+
 		'</div>'+

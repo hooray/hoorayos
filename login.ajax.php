@@ -85,6 +85,7 @@
 				$set = array(
 					'username = "'.$reg_username.'"',
 					'password = "'.sha1($reg_password).'"',
+					'lockpassword = "'.sha1($reg_password).'"',
 					'thislogindt = now()',
 					'thisloginip = "'.getIp().'"',
 					'regdt = now()'
@@ -124,7 +125,7 @@
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
 			$sqlwhere = array(
 				'username = "'.$userinfo['username'].'"',
-				'password = "'.sha1($password).'"'
+				'lockpassword = "'.sha1($password).'"'
 			);
 			$row = $db->select(0, 1, 'tb_member', '*', $sqlwhere);
 			if(!empty($row)){
