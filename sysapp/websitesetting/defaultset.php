@@ -53,15 +53,15 @@
 <body>
 <?php include('global_title.php'); ?>
 <p class="detile-title">
-	<strong>用户未登录情况下的默认设置</strong>
+	<strong>游客访问默认设置</strong>
 </p>
 <form action="defaultset.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
 <div class="input-label">
-	<div class="label-text">是否开启强制登录：</div>
+	<div class="label-text">是否开启游客访问：</div>
 	<div class="label-box form-inline control-group">
-		<label class="radio" style="margin-right:10px"><input type="radio" name="val_isforcedlogin" value="1" <?php if($set['isforcedlogin'] == 1){echo 'checked';} ?>>是</label>
-		<label class="radio"><input type="radio" name="val_isforcedlogin" value="0" <?php if($set['isforcedlogin'] == 0){echo 'checked';} ?>>否</label>
+		<label class="radio" style="margin-right:10px"><input type="radio" name="val_isforcedlogin" value="0" <?php if($set['isforcedlogin'] == 0){echo 'checked';} ?>>是</label>
+		<label class="radio"><input type="radio" name="val_isforcedlogin" value="1" <?php if($set['isforcedlogin'] == 1){echo 'checked';} ?>>否</label>
 	</div>
 </div>
 <div class="input-label">
