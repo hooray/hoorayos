@@ -546,10 +546,14 @@ HROS.popupMenu = (function(){
 								'</li>'+
 							'</ul></div>'+
 						'</li>'+
+						'<li><a menu="lock" href="javascript:;">锁定</a></li>'+
 						'<li><a menu="logout" href="javascript:;">注销</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuDesk);
+				if(!HROS.base.checkLogin()){
+					$('body .desk-menu li a[menu="logout"]').parent().remove();
+				}
 				//绑定事件
 				$('.desk-menu a[menu="orderby"]').on('click', function(){
 					HROS.app.updateXY($(this).attr('orderby'));
@@ -654,6 +658,10 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
+					$('.popup-menu').hide();
+				});
+				$('.desk-menu a[menu="lock"]').on('click', function(){
+					HROS.lock.show();
 					$('.popup-menu').hide();
 				});
 				$('.desk-menu a[menu="logout"]').on('click', function(){

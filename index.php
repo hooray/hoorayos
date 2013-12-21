@@ -347,6 +347,7 @@
 <script src="js/hros.folderView.js"></script>
 <script src="js/hros.grid.js"></script>
 <script src="js/hros.hotkey.js"></script>
+<script src="js/hros.lock.js"></script>
 <script src="js/hros.maskBox.js"></script>
 <script src="js/hros.navbar.js"></script>
 <script src="js/hros.popupMenu.js"></script>

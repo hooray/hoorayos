@@ -121,6 +121,25 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #maskbox-dockdrap,
 #maskbox-copyright{background:none rgba(0, 0, 0, 0.7)}
 
+/*锁定*/
+#lock{z-index:9000000;cursor:default;background:none;width:100%;height:100%;position:absolute;top:0;left:0;background:none rgba(0, 0, 0, 0.5)}
+#lock .title{position:absolute;top:10%;width:100%;height:200px;color:#fff;text-align:center}
+#lock .title .time{width:100%;height:150px;line-height:150px;font-size:120px;font-family:Tahoma}
+#lock .title .week{width:100%;height:50px;line-height:50px;font-size:24px}
+@-webkit-keyframes lock-breathing{
+	0%{color:#fff;opacity:1}
+	50%{color:#aaa;opacity:0}
+	100%{color:#fff;opacity:1}
+}
+#lock .tip{position:absolute;top:80%;width:100%;height:50px;line-height:50px;color:#fff;text-align:center;font-size:24px;-webkit-animation:lock-breathing 2s linear 0 infinite}
+#lock-info{position:absolute;top:50%;left:50%;margin-top:-100px;margin-left:-100px;width:198px;height:198px;border:1px solid #999;background:#CCC;display:none;border-radius:10px}
+#lock-info .img{width:100%;height:100px;margin-top:-50px;text-align:center}
+#lock-info .img img{width:100px;height:100px;background:#fff;border:1px solid #999;border-radius:50px}
+#lock-info .text{width:100%;text-align:center;margin-top:25px}
+#lock-info input[type='password']{width:100px;height:20px;line-height:20px;padding:5px 10px;font-size:14px;outline:none}
+#lock-info input[type='button']{width:70px;height:30px;line-height:30px}
+#lock-info .text-tip{width:100%;height:15px;line-height:15px;margin-top:5px;color:#F00;text-align:center}
+
 /*关于我们*/
 #copyright{z-index:9999999;display:none;position:absolute;width:330px;height:200px;background:url(desk_sprite.png) no-repeat -200px -600px;top:50%;left:50%;margin-top:-100px;margin-left:-165px; box-shadow:0 0 300px #fff}
 #copyright .close{display:block;position:absolute;top:6px;right:4px;width:24px;height:24px;background:url(desk_sprite.png) no-repeat -510px -390px}

@@ -64,6 +64,13 @@
 					session('openname', NULL);
 					session('openavatar', NULL);
 					session('openurl', NULL);
+					//处理登录用户信息到cookie
+					$userinfo = array();
+					$userinfo['username'] = $row['username'];
+					$userinfo['password'] = '';
+					$userinfo['rememberMe'] = 0;
+					$userinfo['avatar'] = getAvatar($row['tbid'], 'l');
+					cookie('userinfo', json_encode($userinfo), 3600 * 24 * 7);
 				}else{
 					echo 'ERROR_NOT_BIND';
 				}
@@ -111,6 +118,21 @@
 			$userinfo['rememberMe'] = 0;
 			$userinfo['password'] = '';
 			cookie('userinfo', json_encode($userinfo));
+			break;
+		//解锁登录
+		case 'unlock':
+			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
+			$sqlwhere = array(
+				'username = "'.$userinfo['username'].'"',
+				'password = "'.sha1($password).'"'
+			);
+			$row = $db->select(0, 1, 'tb_member', '*', $sqlwhere);
+			if(!empty($row)){
+				session('member_id', $row['tbid']);
+				cookie('memberID', $row['tbid'], 3600 * 24 * 7);
+			}else{
+				echo 'ERROR_LOCKPASSWORD';
+			}
 			break;
 	}
 ?>

@@ -16,9 +16,7 @@ HROS.base = (function(){
 				config['opacity'] = 0.5;
 			})($.dialog.defaults);
 			//增加离开页面确认窗口
-			if(!$.browser.msie){
-				window.onbeforeunload = HROS.util.confirmExit;
-			}
+			window.onbeforeunload = HROS.util.confirmExit;
 			//更新当前用户ID
 			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
 			//文件上传
@@ -70,6 +68,8 @@ HROS.base = (function(){
 			HROS.appmanage.init();
 			//初始化右键菜单
 			HROS.popupMenu.init();
+			//初始化锁屏
+			HROS.lock.init();
 			//初始化快捷键
 			HROS.hotkey.init();
 			//页面加载后运行
@@ -88,6 +88,8 @@ HROS.base = (function(){
 					});
 				}
 			});
+			//测试代码
+			HROS.copyright.hide();
 		},
 		login : function(){
 			$('#lrbox').animate({
@@ -100,11 +102,10 @@ HROS.base = (function(){
 			$.ajax({
 				type : 'POST',
 				url : 'login.ajax.php',
-				data : 'ac=logout',
-				success : function(){
-					window.onbeforeunload = null;
-					location.reload();
-				}
+				data : 'ac=logout'
+			}).done(function(){
+				window.onbeforeunload = null;
+				location.reload();
 			});
 		},
 		checkLogin : function(){

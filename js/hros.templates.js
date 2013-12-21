@@ -215,6 +215,22 @@ var shareDialogTemp = template(
 		'<a class="douban" href="http://shuo.douban.com/!service/share?image=&href=<%=url%>&name=<%=title%>" target="_blank">豆瓣</a>'+
 	'</div>'
 );
+//锁定
+var lockTemp = template(
+	'<div id="lock">'+
+		'<div class="title">'+
+			'<div class="time"></div>'+
+			'<div class="week"></div>'+
+		'</div>'+
+		'<div id="lock-info">'+
+			'<div class="img"><img src="img/ui/avatar_120.jpg"></img></div>'+
+			'<div class="text"><input type="password" id="lockpassword" placeholder="请输入解锁密码"></div>'+
+			'<div class="text-tip"></div>'+
+			'<div class="text"><input type="button" id="lockbtn" value="解 锁"></div>'+
+		'</div>'+
+		'<div class="tip">点击屏幕，开启解锁</div>'+
+	'</div>'
+);
 //上传文件窗口
 var uploadFileDialogTemp = template(
 	'<div id="uploadfilebtnbox">'+

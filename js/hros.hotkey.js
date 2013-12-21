@@ -52,6 +52,11 @@ HROS.hotkey = (function(){
 				}
 				return false;
 			});
+			//锁定
+			Mousetrap.bind(['ctrl+l', 'command+l'], function(){
+				HROS.lock.show();
+				return false;
+			});
 		}
 	}
 })();
