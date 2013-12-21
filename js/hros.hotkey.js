@@ -37,18 +37,18 @@ HROS.hotkey = (function(){
 				return false;
 			});
 			Mousetrap.bind(['ctrl+left', 'command+left'], function(){
-				if(HROS.CONFIG.desk - 1 < 1){
+				if(parseInt(HROS.CONFIG.desk) - 1 < 1){
 					HROS.navbar.switchDesk(5);
 				}else{
-					HROS.navbar.switchDesk(HROS.CONFIG.desk - 1);
+					HROS.navbar.switchDesk(parseInt(HROS.CONFIG.desk) - 1);
 				}
 				return false;
 			});
 			Mousetrap.bind(['ctrl+right', 'command+right'], function(){
-				if(HROS.CONFIG.desk + 1 > 5){
+				if(parseInt(HROS.CONFIG.desk) + 1 > 5){
 					HROS.navbar.switchDesk(1);
 				}else{
-					HROS.navbar.switchDesk(HROS.CONFIG.desk + 1);
+					HROS.navbar.switchDesk(parseInt(HROS.CONFIG.desk) + 1);
 				}
 				return false;
 			});
