@@ -28,6 +28,7 @@ HROS.lock = (function(){
 					}, 500);
 					$('#lock-info').fadeIn();
 					$('#lockpassword').val('').focus();
+					$('#lock-info .text-tip').text('');
 					Mousetrap.bind(['esc'], function(){
 						$('#lock').click();
 						return false;
@@ -82,7 +83,11 @@ HROS.lock = (function(){
 							data : 'ac=logout'
 						});
 						$('#desktop').hide();
-						$('body').append(lockTemp);
+						var userinfo = $.parseJSON($.cookie(cookie_prefix + 'userinfo'));
+						$('body').append(lockTemp({
+							'avatar' : userinfo.avatar,
+							'username' : userinfo.username
+						}));
 						//时间，日期，星期信息的显示
 						var getTimeDateWeek = function(){
 							var time = new Date();

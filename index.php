@@ -42,8 +42,8 @@
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 <script type="text/javascript">
-	//cookie前缀，避免重名
-	var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
+//cookie前缀，避免重名
+var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 </script>
 </head>
 

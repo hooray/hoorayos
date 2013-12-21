@@ -16,7 +16,7 @@ var addbtnTemp = template(
 var taskTemp = template(
 	'<a id="<%=id%>" class="task-item task-item-current" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
 		'<div class="task-item-icon">'+
-			'<img src="<%=imgsrc%>">'+
+			'<img src="<%=imgsrc%>" alt="<%=title%>">'+
 		'</div>'+
 		'<div class="task-item-txt"><%=title%></div>'+
 	'</a>'
@@ -41,7 +41,7 @@ var windowTemp = template(
 	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;left:0;top:0;<% }else{ %>width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
-				'<img class="icon" src="<%=imgsrc%>"><span class="title"><%=title%></span>'+
+				'<img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>'+
 				'<div class="title-handle">'+
 					'<a class="ha-hide" btn="hide" href="javascript:;" title="最小化"><b class="hide-b"></b></a>'+
 					'<% if(istitlebar){ %>'+
@@ -89,7 +89,7 @@ var folderWindowTemp = template(
 	'<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;z-index:<%=zIndex%>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
-				'<img class="icon" src="<%=imgsrc%>"><span class="title"><%=title%></span>'+
+				'<img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>'+
 				'<div class="title-handle">'+
 					'<a class="ha-hide" btn="hide" href="javascript:;" title="最小化"><b class="hide-b"></b></a>'+
 					'<% if(istitlebar){ %>'+
@@ -223,7 +223,7 @@ var lockTemp = template(
 			'<div class="week"></div>'+
 		'</div>'+
 		'<div id="lock-info">'+
-			'<div class="img"><img src="img/ui/avatar_120.jpg"></img></div>'+
+			'<div class="img"><img src="<%=avatar%>" title="<%=username%>" alt="<%=username%>"></img></div>'+
 			'<div class="text"><input type="password" class="mousetrap" id="lockpassword" placeholder="请输入解锁密码"></div>'+
 			'<div class="text-tip"></div>'+
 			'<div class="text"><input type="button" id="lockbtn" value="解 锁"></div>'+
