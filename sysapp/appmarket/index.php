@@ -87,7 +87,7 @@
 					<p>未发布的应用：<font style="font-weight:bold"><?php echo $myappunverifycount; ?></font> 个</p>
 					<div class="text-center"><a href="javascript:openDetailIframe2('myapp.manage.php');" class="btn btn-primary">管理我的应用</a> <a href="javascript:openDetailIframe2('myapp.manage.php?add=1');" class="btn btn-danger">开发新应用</a></div>
 				<?php }else{ ?>
-					<div class="text-center" style="margin-top:40px"><a href="javascript:window.top.HROS.base.login();;" class="btn btn-primary btn-large">您还没登录，点我登录</a></div>
+					<div class="text-center" style="margin-top:40px"><a href="javascript:window.parent.HROS.base.login();;" class="btn btn-primary btn-large">您还没登录，点我登录</a></div>
 				<?php } ?>
 			</div>
 		</div>
@@ -167,63 +167,63 @@ $(function(){
 	});
 	//添加，删除，打开应用
 	$('.app-list').on('click', '.btn-add-s', function(){
-		if(window.top.HROS.base.checkLogin()){
+		if(window.parent.HROS.base.checkLogin()){
 			$(this).removeClass().addClass('btn-loading-s');
-			window.top.HROS.app.add($(this).attr('real_app_id'), function(){
+			window.parent.HROS.app.add($(this).attr('real_app_id'), function(){
 				$('#pagination').trigger('currentPage');
-				window.top.HROS.app.get();
+				window.parent.HROS.app.get();
 			});
 		}else{
-			window.top.$.dialog({
+			window.parent.$.dialog({
 				title: '温馨提示',
 				icon: 'warning',
 				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
 				ok: function(){
-					window.top.HROS.base.login();
+					window.parent.HROS.base.login();
 				}
 			});
 		}
 	}).on('click', '.btn-remove-s', function(){
-		if(window.top.HROS.base.checkLogin()){
+		if(window.parent.HROS.base.checkLogin()){
 			$(this).removeClass().addClass('btn-loading-s');
 			var realappid = $(this).attr('real_app_id'), type = $(this).attr('app_type');
-			window.top.HROS.app.remove($(this).attr('app_id'), function(){
+			window.parent.HROS.app.remove($(this).attr('app_id'), function(){
 				$('#pagination').trigger('currentPage');
-				window.top.HROS.widget.removeCookie(realappid, type);
-				window.top.HROS.app.get();
+				window.parent.HROS.widget.removeCookie(realappid, type);
+				window.parent.HROS.app.get();
 			});
 		}else{
-			window.top.HROS.base.login();
+			window.parent.HROS.base.login();
 		}
 	}).on('click', '.btn-run-s', function(){
 		if($(this).attr('app_type') == 'app'){
-			window.top.HROS.window.create($(this).attr('real_app_id'), $(this).attr('app_type'));
+			window.parent.HROS.window.create($(this).attr('real_app_id'), $(this).attr('app_type'));
 		}else{
-			window.top.HROS.widget.create($(this).attr('real_app_id'), $(this).attr('app_type'));
+			window.parent.HROS.widget.create($(this).attr('real_app_id'), $(this).attr('app_type'));
 		}
 	});
 	$('.commend-day').on('click', '.btn-add', function(){
-		if(window.top.HROS.base.checkLogin()){
+		if(window.parent.HROS.base.checkLogin()){
 			var appid = $(this).attr('real_app_id');
-			window.top.HROS.app.add(appid, function(){
-				window.top.HROS.app.get();
+			window.parent.HROS.app.add(appid, function(){
+				window.parent.HROS.app.get();
 				location.reload();
 			});
 		}else{
-			window.top.$.dialog({
+			window.parent.$.dialog({
 				title: '温馨提示',
 				icon: 'warning',
 				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
 				ok: function(){
-					window.top.HROS.base.login();
+					window.parent.HROS.base.login();
 				}
 			});
 		}
 	}).on('click', '.btn-run', function(){
 		if($(this).attr('app_type') == 'app'){
-			window.top.HROS.window.create($(this).attr('real_app_id'));
+			window.parent.HROS.window.create($(this).attr('real_app_id'));
 		}else{
-			window.top.HROS.widget.create($(this).attr('real_app_id'));
+			window.parent.HROS.widget.create($(this).attr('real_app_id'));
 		}
 	});
 });

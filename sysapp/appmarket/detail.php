@@ -75,19 +75,19 @@
 $(function(){
 	//添加应用
 	$('.btn-add').click(function(){
-		if(window.top.HROS.base.checkLogin()){
+		if(window.parent.HROS.base.checkLogin()){
 			var appid = $(this).attr('app_id');
-			window.top.HROS.app.add(appid, function(){
-				window.top.HROS.app.get();
+			window.parent.HROS.app.add(appid, function(){
+				window.parent.HROS.app.get();
 				location.reload();
 			});
 		}else{
-			window.top.$.dialog({
+			window.parent.$.dialog({
 				title: '温馨提示',
 				icon: 'warning',
 				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
 				ok: function(){
-					window.top.HROS.base.login();
+					window.parent.HROS.base.login();
 				}
 			});
 		}
@@ -95,16 +95,16 @@ $(function(){
 	//打开应用
 	$('.btn-run').click(function(){
 		if($(this).attr('app_type') == 'app'){
-			window.top.HROS.window.create($(this).attr('app_id'));
+			window.parent.HROS.window.create($(this).attr('app_id'));
 		}else{
-			window.top.HROS.widget.create($(this).attr('app_id'));
+			window.parent.HROS.widget.create($(this).attr('app_id'));
 		}
 	});
 	//评分
 	$('.grade-box ul li').click(function(){
 		var num = $(this).attr('num');
 		if(!isNaN(num) && /^[1-5]$/.test(num)){
-			if(window.top.HROS.base.checkLogin()){
+			if(window.parent.HROS.base.checkLogin()){
 				$.ajax({
 					type : 'POST',
 					url : 'detail.ajax.php',
@@ -119,7 +119,7 @@ $(function(){
 					}
 				});
 			}else{
-				window.top.HROS.base.login();
+				window.parent.HROS.base.login();
 			}
 		}
 	});

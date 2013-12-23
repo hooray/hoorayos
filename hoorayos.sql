@@ -305,7 +305,7 @@ CREATE TABLE `tb_setting` (
   `wallpapertype` varchar(255) DEFAULT 'juzhong' COMMENT '壁纸显示方式，tianchong（填充）shiying（适应）pingpu（平铺）lashen（拉伸）juzhong（居中）',
   `isforcedlogin` tinyint(1) DEFAULT '1' COMMENT '是否开启强制登录，1开启0不开启',
   PRIMARY KEY (`tbid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_setting
