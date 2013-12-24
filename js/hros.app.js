@@ -142,12 +142,19 @@ HROS.app = (function(){
 				$('#dock-bar .dock-applist').append(dock_append);
 				//加载桌面应用
 				for(var j = 1; j <= 5; j++){
-					var desk_append = '', desk = eval('HROS.VAR.desk' + j);
+					var desk_append = '';
+					var desk = eval('HROS.VAR.desk' + j);
+					var offsetTop = 6;
+					var offsetLeft = 17;
+					if(HROS.CONFIG.appSize == 's'){
+						offsetTop = 11;
+						offsetLeft = 21;
+					}
 					if(desk != ''){
 						$(desk).each(function(i){
 							desk_append += appbtnTemp({
-								'top' : grid[i]['startY'] + 7,
-								'left' : grid[i]['startX'] + 16,
+								'top' : grid[i]['startY'] + offsetTop,
+								'left' : grid[i]['startX'] + offsetLeft,
 								'title' : this.name,
 								'type' : this.type,
 								'id' : 'd_' + this.appid,
@@ -158,8 +165,8 @@ HROS.app = (function(){
 						});
 					}
 					desk_append += addbtnTemp({
-						'top' : grid[desk.length]['startY'] + 7,
-						'left' : grid[desk.length]['startX'] + 16
+						'top' : grid[desk.length]['startY'] + offsetTop,
+						'left' : grid[desk.length]['startX'] + offsetLeft
 					});
 					$('#desk-' + j + ' li').remove();
 					$('#desk-' + j + ' .desktop-apps-container').append(desk_append);

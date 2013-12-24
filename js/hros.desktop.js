@@ -61,7 +61,6 @@ HROS.deskTop = (function(){
 					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 2 : dockGrid[i]['startX'],
 					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 2
 				});
-				$(this).attr('left', $(this).offset().left).attr('top', $(this).offset().top);
 			});
 			for(var j = 1; j <= 5; j++){
 				$('#desk-' + j + ' li').each(function(i){
@@ -70,17 +69,6 @@ HROS.deskTop = (function(){
 						'left' : left,
 						'top' : top
 					}, 500);
-					switch(HROS.CONFIG.dockPos){
-						case 'top':
-							$(this).attr('left', left).attr('top', top + $('#dock-bar').height());
-							break;
-						case 'left':
-							$(this).attr('left', left + $('#dock-bar').width()).attr('top', top);
-							break;
-						case 'right':
-							$(this).attr('left', left).attr('top', top);
-							break;
-					}
 				});
 			}
 			//更新滚动条

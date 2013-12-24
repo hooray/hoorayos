@@ -73,11 +73,11 @@ HROS.folderView = (function(){
 				//判断是桌面上的文件夹，还是应用码头上的文件夹
 				var left, top;
 				if(obj.parent('div').hasClass('dock-applist')){
-					left = parseInt(obj.attr('left')) + 60;
-					top = parseInt(obj.attr('top'));
+					left = obj.offset().left + obj.width();
+					top = obj.offset().top;
 				}else{
-					left = parseInt(obj.attr('left')) + 80;
-					top = parseInt(obj.attr('top')) - 20;
+					left = obj.offset().left + obj.width();
+					top = obj.offset().top - 20;
 				}
 				//判断预览面板是否有超出屏幕
 				var isScrollbar = false;
@@ -92,7 +92,7 @@ HROS.folderView = (function(){
 					}
 				}
 				if(left + 340 > $(window).width()){
-					left -= (340 + 80);
+					left -= (340 + obj.width());
 					//预览居左
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
@@ -100,9 +100,9 @@ HROS.folderView = (function(){
 						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 26) / 2)}, 200);
 						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2)}, 200).hide();
 						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2), 'height' : Math.ceil((height + 26) / 2) + 20}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : parseInt(obj.attr('top')) - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 26 - (parseInt(obj.attr('top')) - top) - 20 + 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : obj.offset().top - top}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : obj.offset().top - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : obj.offset().top - top + 20, 'height' : height + 26 - (obj.offset().top - top) - 20 + 20}, 200);
 						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height' : height}, 200);
 					}else{
 						$('body').append(folderViewTemp({
@@ -126,9 +126,9 @@ HROS.folderView = (function(){
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
 						$(folderViewId).stop(true, false).animate({'left' : left, 'top' : top}, 500);
-						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : parseInt(obj.attr('top')) - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 26 - (parseInt(obj.attr('top')) - top) - 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : obj.offset().top - top}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : obj.offset().top - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : obj.offset().top - top + 20, 'height' : height + 26 - (obj.offset().top - top) - 20}, 200);
 						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 26) / 2)}, 200);
 						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2)}, 200).hide();
 						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2), 'height' : Math.ceil((height + 26) / 2)}, 200);

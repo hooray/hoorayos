@@ -22,13 +22,13 @@ HROS.grid = (function(){
 				});
 				if(HROS.CONFIG.appXY == 'x'){
 					left += offsetLeft;
-					if(left + 100 > width){
+					if(left + offsetLeft > width){
 						top += offsetTop;
 						left = HROS.CONFIG.appButtonLeft;
 					}
 				}else{
 					top += offsetTop;
-					if(top + 70 > height){
+					if(top + offsetTop > height){
 						top = HROS.CONFIG.appButtonTop;
 						left += offsetLeft;
 					}
@@ -91,19 +91,21 @@ HROS.grid = (function(){
 		getDockAppGrid : function(){
 			var height = $('#dock-bar .dock-applist').height();
 			var dockAppGrid = [];
-			var left = 0;
 			var top = 0;
+			var left = 0;
+			var offsetTop = 62;
+			var offsetLeft = 62;
 			for(var i = 0; i < 7; i++){
 				dockAppGrid.push({
 					startY : top,
-					endY : top + 62,
+					endY : top + offsetTop,
 					startX : left,
-					endX : left + 62
+					endX : left + offsetLeft
 				});
-				top += 62;
-				if(top + 62 > height){
+				top += offsetTop;
+				if(top + offsetTop > height){
 					top = 0;
-					left += 62;
+					left += offsetLeft;
 				}
 			}
 			return dockAppGrid;
@@ -190,7 +192,7 @@ HROS.grid = (function(){
 		getManageDockAppGrid : function(){
 			var manageDockAppGrid = [];
 			var left = 20;
-			for(var i = 0; i < 10000; i++){
+			for(var i = 0; i < 100; i++){
 				manageDockAppGrid.push({
 					startX : left,
 					endX : left + 70
