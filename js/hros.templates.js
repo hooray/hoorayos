@@ -1,19 +1,19 @@
 //桌面应用
-var appbtnTemp = template(
+var appbtnTemp = template.compile(
 	'<li id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="top:<%=top%>px;left:<%=left%>px">'+
 		'<div><img src="<%=imgsrc%>" alt="<%=title%>"></div>'+
 		'<span><%=title%></span>'+
 	'</li>'
 );
 //桌面"添加应用"应用
-var addbtnTemp = template(
+var addbtnTemp = template.compile(
 	'<li class="appbtn add" style="top:<%=top%>px;left:<%=left%>px">'+
 		'<i class="addicon"></i>'+
 		'<span>添加应用</span>'+
 	'</li>'
 );
 //任务栏
-var taskTemp = template(
+var taskTemp = template.compile(
 	'<a id="<%=id%>" class="task-item task-item-current" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
 		'<div class="task-item-icon">'+
 			'<img src="<%=imgsrc%>" alt="<%=title%>">'+
@@ -22,7 +22,7 @@ var taskTemp = template(
 	'</a>'
 );
 //小挂件
-var widgetWindowTemp = template(
+var widgetWindowTemp = template.compile(
 	'<div id="<%=id%>" class="widget" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="z-index:<%=zIndex%>;width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;right:<%=right%>px">'+
 		'<div class="move">'+
 			'<a class="ha-close" href="javascript:;" title="关闭"></a>'+
@@ -37,7 +37,7 @@ var widgetWindowTemp = template(
 	'</div>'
 );
 //应用窗口
-var windowTemp = template(
+var windowTemp = template.compile(
 	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;left:0;top:0;<% }else{ %>width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
@@ -85,7 +85,7 @@ var windowTemp = template(
 	'</div>'
 );
 //文件夹窗口
-var folderWindowTemp = template(
+var folderWindowTemp = template.compile(
 	'<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;z-index:<%=zIndex%>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
@@ -119,7 +119,7 @@ var folderWindowTemp = template(
 	'</div>'
 );
 //文件夹预览
-var folderViewTemp = template(
+var folderViewTemp = template.compile(
 	'<div id="<%=id%>" class="quick_view_container" appid="<%=appid%>" realappid="<%=realappid%>" style="top:<%=top%>px;left:<%=left%>px">'+
 		'<div class="perfect_nine_box">'+
 			'<div class="perfect_nine_t">'+
@@ -160,13 +160,13 @@ var folderViewTemp = template(
 	'</div>'
 );
 //搜索结果列表
-var suggestTemp = template(
+var suggestTemp = template.compile(
 	'<li class="resultList" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
 		'<a href="javascript:;"><div><%=name%></div></a>'+
 	'</li>'
 );
 //新建&修改文件夹窗口
-var editFolderDialogTemp = template(
+var editFolderDialogTemp = template.compile(
 	'<div id="addfolder">'+
 		'<a class="folderSelector"><img src="<%=src%>"></a>'+
 		'<div class="folderNameTxt">请输入文件夹名称：</div>'+
@@ -184,7 +184,7 @@ var editFolderDialogTemp = template(
 	'</div>'
 );
 //应用评分
-var starDialogTemp = template(
+var starDialogTemp = template.compile(
 	'<div id="star">'+
 		'<div class="grade-box">'+
 			'<div class="star-num"><%=point%></div>'+
@@ -203,7 +203,7 @@ var starDialogTemp = template(
 	'</div>'
 );
 //分享
-var shareDialogTemp = template(
+var shareDialogTemp = template.compile(
 	'<div id="share">'+
 		'<a class="tsina" href="http://service.weibo.com/share/share.php?title=<%=title%>&url=<%=url%>&searchPic=true&appkey=<%=sinaweiboAppkey%>" target="_blank">新浪微博</a>'+
 		'<a class="tqq" href="http://v.t.qq.com/share/share.php?title=<%=title%>&url=<%=url%>&appkey=<%=tweiboAppkey%>" target="_blank">腾讯微博</a>'+
@@ -216,7 +216,7 @@ var shareDialogTemp = template(
 	'</div>'
 );
 //锁定
-var lockTemp = template(
+var lockTemp = template.compile(
 	'<div id="lock">'+
 		'<div class="title">'+
 			'<div class="time"></div>'+
@@ -232,13 +232,13 @@ var lockTemp = template(
 	'</div>'
 );
 //上传文件窗口
-var uploadFileDialogTemp = template(
+var uploadFileDialogTemp = template.compile(
 	'<div id="uploadfilebtnbox">'+
 		'请选择文件<input type="file" name="xfile[]" id="uploadfilebtn" />'+
 	'</div>'+
 	'<div id="uploadfile"><%=list%></div>'
 );
-var uploadFileDialogListTemp = template(
+var uploadFileDialogListTemp = template.compile(
 	'<% for(var i = 0; i < list.length; i++){ %>'+
 		'<div class="filelist">'+
 			'<div class="name" title="<%=list[i].name%>"><div style="width:10000px"><%=list[i].name%></div></div>'+
@@ -249,7 +249,7 @@ var uploadFileDialogListTemp = template(
 	'<% } %>'
 );
 //新手帮助提示
-var helpTemp = template(
+var helpTemp = template.compile(
 	'<div id="help">'+
 		'<a href="javascript:;" class="close" title="关闭新手帮助">×</a>'+
 		'<div id="step1" class="step" step="1" style="position:relative;left:50%;top:50%;margin-left:-160px;margin-top:-60px;width:280px;height:100px">'+

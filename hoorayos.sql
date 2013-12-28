@@ -215,7 +215,7 @@ CREATE TABLE `tb_member` (
 -- ----------------------------
 -- Records of tb_member
 -- ----------------------------
-INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', 'm', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', 'm', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tb_member_app`

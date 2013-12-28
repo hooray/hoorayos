@@ -359,7 +359,7 @@ $(function(){
 	$('#btn-preview').on('click', function(){
 		if(form.check()){
 			if($('input[name="val_type"]:checked').val() == 'app'){
-				window.parent.HROS.window.createTemp({
+				window.top.HROS.window.createTemp({
 					title : $('input[name="val_name"]').val(),
 					url : $('input[name="val_url"]').val(),
 					width : $('input[name="val_width"]').val(),
@@ -369,7 +369,7 @@ $(function(){
 					isflash : $('input[name="val_isflash"]:checked').val() == 1 ? true : false
 				});
 			}else{
-				window.parent.HROS.widget.createTemp({
+				window.top.HROS.widget.createTemp({
 					url : $('input[name="val_url"]').val(),
 					width : $('input[name="val_width"]').val(),
 					height : $('input[name="val_height"]').val(),

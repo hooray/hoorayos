@@ -43,33 +43,13 @@ HROS.searchbar = (function(){
 						oldSearchVal = searchVal;
 						HROS.searchbar.getSuggest(searchVal);
 					}
+					$('#search-bar').removeClass('above').addClass('above');
 				}else{
 					$('#search-suggest').hide();
+					$('#search-bar').removeClass('above');
 				}
 			}, 1000);
 			HROS.searchbar.set();
-		},
-		set : function(){
-			$('#search-bar').css({
-				'left' : $('#nav-bar').offset().left + 27,
-				'top' : $('#nav-bar').offset().top + 35
-			}).removeClass('above').show();
-			$('#search-suggest').css({
-				'left' : $('#nav-bar').offset().left + 27,
-				'top' : $('#nav-bar').offset().top + 68
-			});
-			$('#search-suggest .openAppMarket').css('top', $('#search-suggest .resultBox').height()).removeClass('above');
-			$('#search-suggest .resultList a').removeClass('selected');
-			$('#pageletSearchInput').focus();
-			//如果导航条距离桌面底部小于50px，则向上显示
-			if($('#nav-bar').offset().top + 35 + $('#search-suggest .resultBox').height() + 44 + 50 > $(window).height()){
-				$('#search-bar').addClass('above').css('top', $('#nav-bar').offset().top - 35);
-				if($('#search-suggest').is(':visible')){
-					$('#search-suggest .openAppMarket').addClass('above');
-					$('#search-suggest').css('top', $('#search-bar').offset().top - $('#search-suggest .resultBox').height());
-					$('#search-suggest .openAppMarket').css('top', -44);
-				}
-			}
 			Mousetrap.bind(['up'], function(){
 				if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
 					$('#search-suggest > .resultList:last a').addClass('selected');
@@ -127,6 +107,11 @@ HROS.searchbar = (function(){
 				}
 			});
 		},
+		set : function(){
+			$('#search-bar').show();
+			$('#search-suggest .resultList a').removeClass('selected');
+			$('#pageletSearchInput').focus();
+		},
 		getSuggest : function(val){
 			var apps = [];
 			$(HROS.VAR.dock).each(function(){
@@ -161,6 +146,11 @@ HROS.searchbar = (function(){
 				}
 			});
 			$('#search-suggest .resultBox').html(suggest);
+			if(suggest == ''){
+				$('#search-suggest .resultBox').hide();
+			}else{
+				$('#search-suggest .resultBox').show();
+			}
 			HROS.searchbar.set();
 		},
 		openAppMarket : function(searchkey){
@@ -181,11 +171,11 @@ HROS.searchbar = (function(){
 			if(typeof(searchFunc) != 'undefined'){
 				clearInterval(searchFunc);
 			}
+			$('#search-bar').removeClass('above');
 			$('#search-bar, #search-suggest').hide();
 			$('#pageletSearchInput').val('');
 			$('#search-suggest .resultBox').html('');
-			Mousetrap.unbind(['up']);
-			Mousetrap.unbind(['down']);
+			Mousetrap.unbind(['up', 'down']);
 		}
 	}
 })();

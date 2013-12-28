@@ -199,12 +199,40 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 			<div id="dock-container">
 				<div class="dock-middle">
 					<div class="dock-applist"></div>
-					<div class="dock-toollist">
-						<a href="javascript:;" class="dock-tool-setting" title="桌面设置"></a>
-						<a href="javascript:;" class="dock-tool-style" title="主题设置"></a>
+					<div class="dock-tools-container">
+						<div class="dock-tools">
+							<a href="javascript:;" class="dock-tool-setting" title="桌面设置"></a>
+							<a href="javascript:;" class="dock-tool-style" title="主题设置"></a>
+						</div>
+						<div class="dock-tools">
+							<a href="javascript:;" class="dock-tool-appmanage" title="全局视图，快捷键：Ctrl + F"></a>
+							<a href="javascript:;" class="dock-tool-search" title="搜索，Ctrl + F"></a>
+						</div>
+						<div class="dock-startbtn">
+							<a href="javascript:;" class="dock-tool-start" title="点击这里开始"></a>
+						</div>
 					</div>
-					<div class="dock-toollist2">
-						<a href="javascript:;" class="dock-tool-start" title="点击这里开始"></a>
+					<div class="dock-pagination">
+						<a class="pagination pagination-1" href="javascript:;" index="1" title="切换至桌面1，快捷键：Ctrl + 1">
+							<span class="pagination-icon-bg"></span>
+							<span class="pagination-icon pagination-icon-1">1</span>
+						</a>
+						<a class="pagination pagination-2" href="javascript:;" index="2" title="切换至桌面2，快捷键：Ctrl + 2">
+							<span class="pagination-icon-bg"></span>
+							<span class="pagination-icon pagination-icon-2">2</span>
+						</a>
+						<a class="pagination pagination-3" href="javascript:;" index="3" title="切换至桌面3，快捷键：Ctrl + 3">
+							<span class="pagination-icon-bg"></span>
+							<span class="pagination-icon pagination-icon-3">3</span>
+						</a>
+						<a class="pagination pagination-4" href="javascript:;" index="4" title="切换至桌面4，快捷键：Ctrl + 4">
+							<span class="pagination-icon-bg"></span>
+							<span class="pagination-icon pagination-icon-4">4</span>
+						</a>
+						<a class="pagination pagination-5" href="javascript:;" index="5" title="切换至桌面5，快捷键：Ctrl + 5">
+							<span class="pagination-icon-bg"></span>
+							<span class="pagination-icon pagination-icon-5">5</span>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -212,6 +240,9 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 	</div>
 	<div id="startmenu-container">
 		<div class="startmenu-selfinfo">
+			<a href="javascript:;" class="startmenu-feedback" title="反馈"></a>
+			<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L"></a>
+			<div class="startmenu-avatar"><img src="img/ui/loading_24.gif"></div>
 			<div class="startmenu-nick">
 				<?php
 					if(session('member_id') != 0){
@@ -222,7 +253,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<a href="javascript:;">请登录</a>
 				<?php } ?>
 			</div>
-			<a href="javascript:;" class="startmenu-feedback" title="反馈"></a>
 		</div>
 		<ul class="startmenu">
 			<li><a href="javascript:;" class="help">新手指导</a></li>
@@ -238,35 +268,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 			<div id="task-content-inner"></div>
 		</div>
 		<div id="task-pre"><a href="javascript:;" id="task-pre-btn" hidefocus="true"></a></div>
-	</div>
-	<div id="nav-bar">
-		<div class="nav-wrapper">
-			<div class="nav-container" id="navContainer">
-				<div class="indicator indicator-header" id="navbarHeaderImg"><img src="img/ui/loading_24.gif" class="indicator-header-img"></div>
-				<a class="indicator indicator-1" href="javascript:;" index="1" title="桌面1，Ctrl + 1">
-					<span class="indicator-icon-bg"></span>
-					<span class="indicator-icon indicator-icon-1">1</span>
-				</a>
-				<a class="indicator indicator-2" href="javascript:;" index="2" title="桌面2，Ctrl + 2">
-					<span class="indicator-icon-bg"></span>
-					<span class="indicator-icon indicator-icon-2">2</span>
-				</a>
-				<a class="indicator indicator-3" href="javascript:;" index="3" title="桌面3，Ctrl + 3">
-					<span class="indicator-icon-bg"></span>
-					<span class="indicator-icon indicator-icon-3">3</span>
-				</a>
-				<a class="indicator indicator-4" href="javascript:;" index="4" title="桌面4，Ctrl + 4">
-					<span class="indicator-icon-bg"></span>
-					<span class="indicator-icon indicator-icon-4">4</span>
-				</a>
-				<a class="indicator indicator-5" href="javascript:;" index="5" title="桌面5，Ctrl + 5">
-					<span class="indicator-icon-bg"></span>
-					<span class="indicator-icon indicator-icon-5">5</span>
-				</a>
-				<a class="indicator indicator-search" href="javascript:;" title="搜索，Ctrl + F"></a>
-				<a class="indicator indicator-manage" href="javascript:;" title="全局视图，Ctrl + ↑"></a>
-			</div>
-		</div>
 	</div>
 	<div id="search-bar">
 		<input id="pageletSearchInput" class="mousetrap" placeholder="搜索应用...">
@@ -349,7 +350,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/hros.hotkey.js"></script>
 <script src="js/hros.lock.js"></script>
 <script src="js/hros.maskBox.js"></script>
-<script src="js/hros.navbar.js"></script>
 <script src="js/hros.popupMenu.js"></script>
 <script src="js/hros.searchbar.js"></script>
 <script src="js/hros.startmenu.js"></script>

@@ -304,50 +304,91 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 
 /*应用码头*/
 #dock-bar{position:absolute;display:none}
-.top-bar{width:100%;height:66px;left:0;top:0}
-.left-bar{width:66px;height:100%;left:0;top:0}
-.right-bar{width:66px;height:100%;right:0;top:0}
-#dock-container{position:absolute}
+.top-bar{width:100%;height:80px;left:0;top:0}
+.left-bar{width:80px;height:100%;left:0;top:0}
+.right-bar{width:80px;height:100%;right:0;top:0}
+#dock-container{position:absolute;z-index:0}
+#dock-container.showtop{z-index:100000}
 .dock-middle{background:url(desk_sprite.png) no-repeat 0 0}
-.dock-top{width:540px;height:66px;top:0;left:50%;margin:0 0 0 -270px}
-.dock-left{width:66px;height:540px;top:50%;left:0;margin:-270px 0 0 0}
-.dock-right{width:66px;height:540px;top:50%;left:0;margin:-270px 0 0 0}
-.dock-top .dock-middle{width:540px;height:66px;background-position:0 0}
-.dock-left .dock-middle{width:66px;height:540px;background-position:0 -100px}
-.dock-right .dock-middle{width:66px;height:540px;background-position:-100px -100px}
+.dock-top{width:620px;height:80px;top:0;left:50%;margin:0 0 0 -310px}
+.dock-left{width:80px;height:620px;top:50%;left:0;margin:-310px 0 0 0}
+.dock-right{width:80px;height:620px;top:50%;left:0;margin:-310px 0 0 0}
+.dock-top .dock-middle{width:620px;height:80px;background-position:0 0}
+.dock-left .dock-middle{width:80px;height:620px;background-position:0 -100px}
+.dock-right .dock-middle{width:80px;height:620px;background-position:-90px -100px}
 #dock-container .appbtn{width:58px;height:58px}
 #dock-container .appbtn:hover{background:url(desk_sprite.png) no-repeat -350px -100px}
-#dock-container .appbtn div{margin-top:9px}
-#dock-container .appbtn div img{width:40px;height:40px}
+#dock-container .appbtn div{margin-top:5px}
 #dock-container .appbtn span{display:none}
 .dock-applist{position:relative}
-.dock-top .dock-applist{width:434px;height:58px;margin:4px 9px 3px 10px;float:left}
-.dock-left .dock-applist{width:58px;height:434px;margin:10px 4px 9px 3px;float:left}
-.dock-right .dock-applist{width:58px;height:434px;margin:10px 3px 9px 4px;float:right}
-.dock-top .dock-toollist{width:20px;height:50px;padding:8px 6px;float:left;overflow:hidden}
-.dock-left .dock-toollist{width:50px;height:20px;padding:6px 8px;float:left;overflow:hidden}
-.dock-right .dock-toollist{width:50px;height:20px;padding:6px 8px;float:right;overflow:hidden}
-.dock-toollist a{float:left;display:block;width:20px;height:20px;cursor:pointer;background:url(desk_sprite.png) no-repeat}
-.dock-toollist .dock-tool-setting{background-position:-220px -100px}
-.dock-toollist .dock-tool-setting:hover{background-position:-220px -120px}
-.dock-toollist .dock-tool-style{background-position:-200px -100px}
-.dock-toollist .dock-tool-style:hover{background-position:-200px -120px}
-.dock-top .dock-tool-setting{margin-bottom:5px}
-.dock-top .dock-tool-style{margin-top:5px}
+.dock-top .dock-applist{width:476px;height:58px;margin:11px 14px;float:left}
+.dock-left .dock-applist{width:58px;height:476px;margin:14px 11px;float:left}
+.dock-right .dock-applist{width:58px;height:476px;margin:14px 11px;float:right}
+.dock-top .dock-tools-container{height:56px;float:left}
+.dock-left .dock-tools-container{width:56px;float:left}
+.dock-right .dock-tools-container{width:56px;float:right}
+.dock-top .dock-tools{width:20px;height:46px;padding:5px;float:left;overflow:hidden}
+.dock-left .dock-tools{width:46px;height:20px;padding:5px;float:left;overflow:hidden}
+.dock-right .dock-tools{width:46px;height:20px;padding:5px;float:right;overflow:hidden}
+.dock-tools a{float:left;display:block;width:20px;height:20px;cursor:pointer;background:url(desk_sprite.png) no-repeat}
+.dock-tools .dock-tool-setting{background-position:-200px -100px}
+.dock-tools .dock-tool-setting:hover{background-position:-220px -100px}
+.dock-tools .dock-tool-style{background-position:-200px -120px}
+.dock-tools .dock-tool-style:hover{background-position:-220px -120px}
+.dock-tools .dock-tool-appmanage{background-position:-200px -140px}
+.dock-tools .dock-tool-appmanage:hover{background-position:-220px -140px}
+.dock-tools .dock-tool-search{background-position:-200px -160px}
+.dock-tools .dock-tool-search:hover{background-position:-220px -160px}
+.dock-top .dock-tool-setting,
+.dock-top .dock-tool-appmanage{margin-bottom:3px}
+.dock-top .dock-tool-style,
+.dock-top .dock-tool-search{margin-top:3px}
 .dock-left .dock-tool-setting,
-.dock-right .dock-tool-setting{margin-right:5px}
+.dock-left .dock-tool-appmanage,
+.dock-right .dock-tool-setting,
+.dock-right .dock-tool-appmanage{margin-right:3px}
 .dock-left .dock-tool-style,
-.dock-right .dock-tool-style{margin-left:5px}
-.dock-top .dock-toollist2{height:40px;width:40px;padding:13px 7px;float:left}
-.dock-left .dock-toollist2{height:40px;width:40px;padding:7px 13px;float:left}
-.dock-right .dock-toollist2{height:40px;width:40px;padding:7px 13px;float:right}
+.dock-left .dock-tool-search,
+.dock-right .dock-tool-style,
+.dock-right .dock-tool-search{margin-left:3px}
+.dock-top .dock-startbtn{height:40px;width:40px;padding:8px;float:left}
+.dock-left .dock-startbtn{height:40px;width:40px;padding:8px;float:left}
+.dock-right .dock-startbtn{height:40px;width:40px;padding:8px;float:right}
 .dock-tool-start{display:block;width:40px;height:40px;cursor:pointer;margin:0 auto;background:url(logo.png) no-repeat -40px 0}
 .dock-tool-start:hover{background-position:0 0}
+.dock-top .dock-pagination{width:110px;height:22px;padding:1px 3px;float:left}
+.dock-left .dock-pagination{width:22px;height:110px;padding:3px 1px;float:left}
+.dock-right .dock-pagination{width:22px;height:110px;padding:3px 1px;float:right}
+.dock-pagination .pagination-icon,
+.dock-pagination .pagination-icon-bg{background-image:url(desk_sprite.png)}
+.dock-pagination .pagination-icon-bg{display:none;width:22px;height:22px;position:absolute;right:2px;bottom:1px;z-index:1}
+.dock-pagination .pagination{width:20px;height:20px;line-height:1.5;color:#0DBBF1;cursor:pointer;display:inline-block;float:left;font-size:18px;font-weight:bold;margin:1px;outline:0 none;position:relative;text-indent:-999em}
+.dock-pagination .pagination-icon{float:left;height:100%;overflow:hidden;position:relative;width:100%;z-index:1}
+.dock-pagination .pagination-icon-1{background-position:-30px -750px}
+.dock-pagination .pagination-icon-2{background-position:-50px -750px}
+.dock-pagination .pagination-icon-3{background-position:-70px -750px}
+.dock-pagination .pagination-icon-4{background-position:-90px -750px}
+.dock-pagination .pagination-icon-5{background-position:-110px -750px}
+.dock-pagination .pagination-icon-1:hover{background-position:-30px -770px}
+.dock-pagination .pagination-icon-2:hover{background-position:-50px -770px}
+.dock-pagination .pagination-icon-3:hover{background-position:-70px -770px}
+.dock-pagination .pagination-icon-4:hover{background-position:-90px -770px}
+.dock-pagination .pagination-icon-5:hover{background-position:-110px -770px}
+.current-pagination-1 .pagination-1 .pagination-icon-bg,
+.current-pagination-2 .pagination-2 .pagination-icon-bg,
+.current-pagination-3 .pagination-3 .pagination-icon-bg,
+.current-pagination-4 .pagination-4 .pagination-icon-bg,
+.current-pagination-5 .pagination-5 .pagination-icon-bg{background-position:0 -750px;display:block}
+.current-pagination-1 .pagination-icon-1{background-position:-30px -770px}
+.current-pagination-2 .pagination-icon-2{background-position:-50px -770px}
+.current-pagination-3 .pagination-icon-3{background-position:-70px -770px}
+.current-pagination-4 .pagination-icon-4{background-position:-90px -770px}
+.current-pagination-5 .pagination-icon-5{background-position:-110px -770px}
 
 .dock_drap_effect{border:3px solid #3C9DFF;z-index:4000000}
-.dock_drap_effect_top{width:540px;height:66px;margin:0 0 0 -273px;position:absolute;top:-3px;left:50%}
-.dock_drap_effect_left{height:540px;width:66px;margin:-273px 0 0;position:absolute;left:-3px;top:50%}
-.dock_drap_effect_right{height:540px;width:66px;margin:-273px 0 0;position:absolute;right:-3px;top:50%}
+.dock_drap_effect_top{width:620px;height:80px;margin:0 0 0 -313px;position:absolute;top:-3px;left:50%}
+.dock_drap_effect_left{height:620px;width:80px;margin:-313px 0 0;position:absolute;left:-3px;top:50%}
+.dock_drap_effect_right{height:620px;width:80px;margin:-313px 0 0;position:absolute;right:-3px;top:50%}
 .dock_drap_effect_top.hover,
 .dock_drap_effect_left.hover,
 .dock_drap_effect_right.hover{border-color:#E1F0FD}
@@ -361,7 +402,9 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 
 #startmenu-container{position:absolute;z-index:21;color:#fff;width:182px;display:none}
 #startmenu-container .startmenu-selfinfo{float:left;width:177px;height:30px;padding:5px 0 5px 5px;background:url(desk_sprite.png) no-repeat -410px -200px}
-#startmenu-container .startmenu-selfinfo .startmenu-nick{float:left;margin:5px 0 0 10px;overflow:hidden;width:95px;height:18px;display:inline;color:#4CE4FF}
+#startmenu-container .startmenu-selfinfo .startmenu-avatar{width:24px;height:24px;background:#fff;float:left;margin:3px 0 0 8px;border-radius:12px}
+#startmenu-container .startmenu-selfinfo .startmenu-avatar img{float:left;width:20px;height:20px;margin:2px 0 0 2px;background-color:#FFF;cursor:pointer;border-radius:10px}
+#startmenu-container .startmenu-selfinfo .startmenu-nick{float:left;margin-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:80px;height:30px;line-height:30px;display:inline;color:#4CE4FF}
 #startmenu-container .startmenu-selfinfo .startmenu-nick a{color:#4CE4FF}
 #startmenu-container .startmenu{float:left;width:182px}
 #startmenu-container .startmenu li{list-style:none;background:url(desk_sprite.png) no-repeat -410px -300px}
@@ -370,64 +413,27 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #startmenu-container .startmenu-exit{float:left;width:182px;height:44px;background:url(desk_sprite.png) no-repeat -410px -250px;margin-top:-1px}
 #startmenu-container .startmenu-exit a{display:block;width:36px;height:30px;margin:7px auto 0;background:url(desk_sprite.png) no-repeat -500px -350px}
 #startmenu-container .startmenu-exit a:hover{background-position:-450px -350px}
-#startmenu-container .startmenu-feedback{display:block;float:left;margin-left:40px;margin-top:5px;height:24px;width:24px;background:url(desk_sprite.png) no-repeat -450px -390px}
+#startmenu-container .startmenu-feedback{display:block;float:right;margin-right:5px;margin-top:5px;height:24px;width:24px;background:url(desk_sprite.png) no-repeat -450px -390px}
 #startmenu-container .startmenu-feedback:hover{background-position:-480px -390px}
-
-/*分页切换栏*/
-#nav-bar{position:relative;z-index:11;text-align:center;top:10px;width:239px;height:40px;cursor:pointer;display:none}
-#nav-bar.min-zIndex{z-index:-1}
-#nav-bar .nav-wrapper{height:100%;background:url(nav_bar.png) no-repeat}
-#nav-bar .nav-container{height:100%}
-.indicator,
-.indicator-icon-bg,
-.indicator-icon{background-image:url(nav_bar.png)}
-.indicator{background-position:-190px -70px;color:#0DBBF1;cursor:pointer;display:inline-block;float:left;font-size:18px;font-weight:bold;height:20px;line-height:1.5;margin:4px 2px 0;outline:0 none;position:relative;text-indent:-999em;width:20px}
-.indicator-icon{float:left;height:100%;overflow:hidden;position:relative;width:100%;z-index:1}
-.indicator-header{background-position:-122px -64px;display:inline;width:32px;height:32px;margin:-10px 0 0 6px;margin-right:6px}
-.indicator-header-img{display:inline;float:left;height:24px;margin:4px 0 0 4px;width:24px;background-color:#FFF}
-.indicator-icon-bg{display:none;height:26px;left:-6px;position:absolute;top:-6px;width:26px;z-index:1}
-#nav-bar .indicator-icon-1{background-position:-100px -44px}
-#nav-bar .indicator-icon-2{background-position:-120px -44px}
-#nav-bar .indicator-icon-3{background-position:-140px -44px}
-#nav-bar .indicator-icon-4{background-position:-160px -44px}
-#nav-bar .indicator-icon-5{background-position:-180px -44px}
-#nav-bar .indicator-icon-1:hover{background-position:0 -44px}
-#nav-bar .indicator-icon-2:hover{background-position:-20px -44px}
-#nav-bar .indicator-icon-3:hover{background-position:-40px -44px}
-#nav-bar .indicator-icon-4:hover{background-position:-60px -44px}
-#nav-bar .indicator-icon-5:hover{background-position:-80px -44px}
-#nav-bar .nav-current-1 .indicator-1 .indicator-icon-bg,
-#nav-bar .nav-current-2 .indicator-2 .indicator-icon-bg,
-#nav-bar .nav-current-3 .indicator-3 .indicator-icon-bg,
-#nav-bar .nav-current-4 .indicator-4 .indicator-icon-bg,
-#nav-bar .nav-current-5 .indicator-5 .indicator-icon-bg{background-position:0 -64px;display:block}
-#nav-bar .nav-current-1 .indicator-icon-1{background-position:0 -44px}
-#nav-bar .nav-current-2 .indicator-icon-2{background-position:-20px -44px}
-#nav-bar .nav-current-3 .indicator-icon-3{background-position:-40px -44px}
-#nav-bar .nav-current-4 .indicator-icon-4{background-position:-60px -44px}
-#nav-bar .nav-current-5 .indicator-icon-5{background-position:-80px -44px}
-.indicator-manage{float:right;height:24px;width:24px;background-position:-50px -63px;margin:2px 5px}
-.indicator-manage:hover{background-position:-26px -63px}
-.indicator-search{float:right;height:24px;width:24px;background-position:-98px -63px;margin:2px 8px 2px 0}
-.indicator-search:hover{background-position:-74px -63px}
+#startmenu-container .startmenu-lock{display:block;float:right;margin-top:5px;height:24px;width:24px;background:url(desk_sprite.png) no-repeat -450px -420px}
+#startmenu-container .startmenu-lock:hover{background-position:-480px -420px}
 
 /*搜索*/
-#search-bar{height:33px;width:212px;position:absolute;z-index:20;background:url(nav_bar.png) no-repeat 0 -100px;display:none}
-#search-bar.above{background-position:0 -136px}
+#search-bar{height:33px;width:212px;position:absolute;top:0;right:20px;z-index:20;background:url(desk_sprite.png) no-repeat -550px -635px;display:none}
+#search-bar.above{background-position:-550px -600px}
 #pageletSearchInput{outline:none;border:0;width:170px!important;height:20px;line-height:20px;margin:6px 0 0 7px;padding:0;float:left;color:#fff;background:transparent;-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #pageletSearchInput::-webkit-input-placeholder,
 #pageletSearchInput::-moz-placeholder{color:#ccc}
 #pageletSearchButton{border:0;float:right;width:24px!important;height:24px;cursor:pointer;margin:5px 5px 0 0;padding:0;background:url(nav_bar.png) no-repeat -98px -63px}
 #pageletSearchButton:hover{background-position:-74px -63px}
-#search-suggest{width:212px;position:absolute;z-index:20;display:none}
-#search-suggest .resultBox{width:212px;background:url(suggess_list_bg.png) repeat-y;margin:0;padding:0;line-height:0;color:#FFF}
+#search-suggest{width:212px;position:absolute;top:33px;right:20px;z-index:20;display:none}
+#search-suggest .resultBox{width:212px;background:url(suggess_list_bg.png) repeat-y;margin:0;padding-top:5px;line-height:0;color:#FFF}
 #search-suggest .resultList{overflow:hidden;vertical-align:middle}
 #search-suggest .resultList a{display:block;width:210px;height:28px;outline:0;color:#FFF;margin-left:1px}
 #search-suggest .resultList a:hover,
-#search-suggest .resultList a.selected{background:url(nav_bar.png) no-repeat 0 -170px}
+#search-suggest .resultList a.selected{background:url(desk_sprite.png) no-repeat -550px -670px}
 #search-suggest .resultList a div{height:28px;line-height:28px;vertical-align:middle;padding-left:12px;width:190px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;cursor:pointer}
-#search-suggest .openAppMarket{width:212px;height:34px;padding-top:10px;background:url(nav_bar.png) no-repeat 0 -200px;position:absolute}
-#search-suggest .openAppMarket.above{padding:5px 0;background-position:0 -250px}
+#search-suggest .openAppMarket{width:212px;height:33px;padding-top:10px;background:url(desk_sprite.png) no-repeat -550px -700px}
 
 /*任务栏*/
 #task-bar-bg1{width:100%;height:130px;position:absolute;z-index:-1;bottom:0;background:url(task_bg1.png) repeat-x}

@@ -127,8 +127,8 @@ HROS.app = (function(){
 				if(HROS.VAR.dock != ''){
 					$(HROS.VAR.dock).each(function(i){
 						dock_append += appbtnTemp({
-							'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 2,
-							'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 2 : dockGrid[i]['startX'],
+							'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 5,
+							'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 5 : dockGrid[i]['startX'],
 							'title' : this.name,
 							'type' : this.type,
 							'id' : 'd_' + this.appid,

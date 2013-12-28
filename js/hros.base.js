@@ -27,15 +27,13 @@ HROS.base = (function(){
 			});
 			//版权信息初始化并显示
 			HROS.copyright.init();
-			HROS.copyright.show();
+			//HROS.copyright.show();
 			//用于判断网页是否缩放
 			HROS.zoom.init();
 			//桌面(容器)初始化
 			HROS.deskTop.init();
 			//初始化壁纸
 			HROS.wallpaper.init();
-			//初始化分页栏
-			HROS.navbar.init();
 			//初始化搜索栏
 			HROS.searchbar.init();
 			//初始化开始菜单

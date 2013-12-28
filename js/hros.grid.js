@@ -93,8 +93,8 @@ HROS.grid = (function(){
 			var dockAppGrid = [];
 			var top = 0;
 			var left = 0;
-			var offsetTop = 62;
-			var offsetLeft = 62;
+			var offsetTop = 68;
+			var offsetLeft = 68;
 			for(var i = 0; i < 7; i++){
 				dockAppGrid.push({
 					startY : top,

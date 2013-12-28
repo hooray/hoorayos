@@ -454,12 +454,12 @@ HROS.popupMenu = (function(){
 				$('.dock-menu a[menu="dockPos"]').on('click', function(){
 					if($(this).attr('pos') == 'none'){
 						$.dialog({
-							title : '隐藏应用码头',
-							content : '<p>如果应用码头存在应用，隐藏后会将应用转移到当前桌面。</p><p>如果需要再次开启，可在桌面空白处右键，进入“桌面设置”里开启。</p>',
+							title : '温馨提示',
+							icon : 'warning',
+							content : '<p>如果应用码头存在应用，隐藏后会将应用转移到当前桌面。</p><p>若需要再次开启，可在桌面空白处点击右键，进入「 桌面设置 」里开启。</p>',
 							ok : function(){
 								HROS.dock.updatePos('none');
 							},
-							okVal : '确认隐藏',
 							cancel : true
 						});
 					}else{

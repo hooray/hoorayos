@@ -17,38 +17,38 @@ HROS.hotkey = (function(){
 				return false;
 			});
 			Mousetrap.bind(['ctrl+1', 'command+1'], function(){
-				HROS.navbar.switchDesk(1);
+				HROS.dock.switchDesk(1);
 				return false;
 			});
 			Mousetrap.bind(['ctrl+2', 'command+2'], function(){
-				HROS.navbar.switchDesk(2);
+				HROS.dock.switchDesk(2);
 				return false;
 			});
 			Mousetrap.bind(['ctrl+3', 'command+3'], function(){
-				HROS.navbar.switchDesk(3);
+				HROS.dock.switchDesk(3);
 				return false;
 			});
 			Mousetrap.bind(['ctrl+4', 'command+4'], function(){
-				HROS.navbar.switchDesk(4);
+				HROS.dock.switchDesk(4);
 				return false;
 			});
 			Mousetrap.bind(['ctrl+5', 'command+5'], function(){
-				HROS.navbar.switchDesk(5);
+				HROS.dock.switchDesk(5);
 				return false;
 			});
 			Mousetrap.bind(['ctrl+left', 'command+left'], function(){
 				if(parseInt(HROS.CONFIG.desk) - 1 < 1){
-					HROS.navbar.switchDesk(5);
+					HROS.dock.switchDesk(5);
 				}else{
-					HROS.navbar.switchDesk(parseInt(HROS.CONFIG.desk) - 1);
+					HROS.dock.switchDesk(parseInt(HROS.CONFIG.desk) - 1);
 				}
 				return false;
 			});
 			Mousetrap.bind(['ctrl+right', 'command+right'], function(){
 				if(parseInt(HROS.CONFIG.desk) + 1 > 5){
-					HROS.navbar.switchDesk(1);
+					HROS.dock.switchDesk(1);
 				}else{
-					HROS.navbar.switchDesk(parseInt(HROS.CONFIG.desk) + 1);
+					HROS.dock.switchDesk(parseInt(HROS.CONFIG.desk) + 1);
 				}
 				return false;
 			});

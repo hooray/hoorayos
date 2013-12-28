@@ -58,16 +58,21 @@ HROS.deskTop = (function(){
 			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
 			$('#dock-bar .dock-applist li').each(function(i){
 				$(this).css({
-					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 2 : dockGrid[i]['startX'],
-					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 2
+					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 5,
+					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 5 : dockGrid[i]['startX']
 				});
 			});
 			for(var j = 1; j <= 5; j++){
 				$('#desk-' + j + ' li').each(function(i){
-					var left = grid[i]['startX'] + 16, top = grid[i]['startY'] + 7;
+					var offsetTop = 7;
+					var offsetLeft = 16;
+					if(HROS.CONFIG.appSize == 's'){
+						offsetTop = 11;
+						offsetLeft = 21;
+					}
 					$(this).stop(true, false).animate({
-						'left' : left,
-						'top' : top
+						'top' : grid[i]['startY'] + offsetTop,
+						'left' : grid[i]['startX'] + offsetLeft
 					}, 500);
 				});
 			}

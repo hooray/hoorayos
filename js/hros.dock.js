@@ -10,6 +10,15 @@ HROS.dock = (function(){
 			HROS.dock.setPos();
 			//绑定应用码头拖动事件
 			HROS.dock.move();
+			var dockShowtopFunc;
+			$('#dock-container').on('mouseenter', function(){
+				dockShowtopFunc = setTimeout(function(){
+					$('#dock-container').addClass('showtop');
+				}, 300);
+			}).on('mouseleave', function(){
+				clearInterval(dockShowtopFunc);
+				$(this).removeClass('showtop');
+			});
 			$('body').on('contextmenu', '#dock-container', function(e){
 				HROS.popupMenu.hide();
 				HROS.folderView.hide();
@@ -24,8 +33,8 @@ HROS.dock = (function(){
 				}).show();
 				return false;
 			});
-			//绑定应用码头3个按钮的点击事件
-			$('.dock-tool-setting').on('mousedown', function(){
+			//绑定应用码头上各个按钮的点击事件
+			$('#dock-bar .dock-tool-setting').on('mousedown', function(){
 				return false;
 			}).on('click',function(){
 				if(HROS.base.checkLogin()){
@@ -41,7 +50,7 @@ HROS.dock = (function(){
 					HROS.base.login();
 				}
 			});
-			$('.dock-tool-style').on('mousedown', function(){
+			$('#dock-bar .dock-tool-style').on('mousedown', function(){
 				return false;
 			}).on('click', function(){
 				if(HROS.base.checkLogin()){
@@ -57,7 +66,23 @@ HROS.dock = (function(){
 					HROS.base.login();
 				}
 			});
-			$('.dock-tool-start').on('mousedown', function(){
+			$('#dock-bar .dock-tool-appmanage').on('mousedown', function(){
+				return false;
+			}).on('click',function(){
+				HROS.appmanage.set();
+			});
+			$('#dock-bar .dock-tool-search').on('mousedown', function(e){
+				return false;
+			}).on('click',function(e){
+				e.stopPropagation();
+				HROS.searchbar.get();
+			});
+			$('#dock-bar .pagination').on('mousedown', function(){
+				return false;
+			}).on('click',function(){
+				HROS.dock.switchDesk($(this).attr('index'));
+			});
+			$('#dock-bar .dock-tool-start').on('mousedown', function(){
 				return false;
 			}).on('click', function(){
 				HROS.startmenu.show();
@@ -65,7 +90,7 @@ HROS.dock = (function(){
 			});
 		},
 		setPos : function(){
-			HROS.navbar.switchDesk(HROS.CONFIG.desk);
+			HROS.dock.switchDesk(HROS.CONFIG.desk);
 			var desktop = $('#desk-' + HROS.CONFIG.desk), desktops = $('#desk .desktop-container');
 			var desk_w = desktop.css('width', '100%').width(), desk_h = desktop.css('height', '100%').height();
 			//清除dock位置样式
@@ -162,6 +187,34 @@ HROS.dock = (function(){
 					});
 				}
 			});
+		},
+		/*
+		**  切换桌面
+		*/
+		switchDesk : function(deskNumber){
+			//验证传入的桌面号是否为1-5的正整数
+			var r = /^\+?[1-5]*$/;
+			deskNumber = r.test(deskNumber) ? deskNumber : 1;
+			var pagination = $('#dock-bar .dock-pagination'), currindex = HROS.CONFIG.desk, switchindex = deskNumber,
+			currleft = $('#desk-' + currindex).offset().left, switchleft = $('#desk-' + switchindex).offset().left;
+			if(currindex != switchindex){
+				if(!$('#desk-' + switchindex).hasClass('animated') && !$('#desk-' + currindex).hasClass('animated')){
+					$('#desk-' + currindex).addClass('animated').animate({
+						left : switchleft
+					}, 500, 'easeInOutCirc', function(){
+						$(this).removeClass('animated');
+					});
+					$('#desk-'+switchindex).addClass('animated').animate({
+						left : currleft
+					}, 500, 'easeInOutCirc', function(){
+						$(this).removeClass('animated');
+						pagination.removeClass('current-pagination-' + currindex).addClass('current-pagination-' + switchindex);
+						HROS.CONFIG.desk = switchindex;
+					});
+				}
+			}else{
+				pagination.removeClass('current-pagination-' + currindex).addClass('current-pagination-' + switchindex);
+			}
 		}
 	}
 })();

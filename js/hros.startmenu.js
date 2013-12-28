@@ -7,11 +7,18 @@ HROS.startmenu = (function(){
 		**	初始化
 		*/
 		init : function(){
-			$('#startmenu-container .startmenu-nick a').on('click', function(){
-				HROS.navbar.openAccount();
+			HROS.startmenu.getAvatar();
+			$('#startmenu-container').on('mousedown', function(e){
+				e.preventDefault();
+			});
+			$('#startmenu-container .startmenu-nick a, #startmenu-container .startmenu-avatar img').on('click', function(){
+				HROS.startmenu.openAccount();
 			});
 			$('#startmenu-container .startmenu-exit a').on('click', function(){
 				HROS.base.logout();
+			});
+			$('#startmenu-container .startmenu-lock').on('click', function(){
+				HROS.lock.show();
 			});
 			$('#startmenu-container .startmenu-feedback').on('click', function(){
 				HROS.window.createTemp({
@@ -34,37 +41,61 @@ HROS.startmenu = (function(){
 				}
 			});
 		},
+		/*
+		**  获取头像
+		*/
+		getAvatar : function(){
+			$.ajax({
+				type : 'POST',
+				url : ajaxUrl,
+				data : 'ac=getAvatar'
+			}).done(function(msg){
+				$('#startmenu-container .startmenu-avatar img').attr('src', msg);
+			});
+		},
+		/*
+		**  账号设置窗口
+		*/
+		openAccount : function(){
+			if(HROS.CONFIG.memberID != 0){
+				HROS.window.createTemp({
+					appid : 'zhsz',
+					title : '账号设置',
+					url : 'sysapp/account/index.php',
+					width : 550,
+					height : 580
+				});
+			}else{
+				HROS.base.login();
+			}
+		},
 		show : function(){
 			HROS.popupMenu.hide();
 			HROS.folderView.hide();
 			HROS.searchbar.hide();
-			$('#startmenu-container').show();
+			$('#startmenu-container').css({
+				top : 'auto',
+				left : 'auto',
+				right : 'auto',
+				bottom : 'auto'
+			}).show();
 			switch(HROS.CONFIG.dockPos){
 				case 'top':
 					$('#startmenu-container').css({
-						top : 75,
-						left : $('#dock-container').offset().left + 350
+						top : $('#dock-container').height() - 1,
+						right : $('#dock-container').offset().left
 					});
 					break;
 				case 'left':
-					var top = $('#dock-container').offset().top + $('#dock-container').height() - $('#startmenu-container').height() - 20;
-					if($('#dock-container').offset().top + $('#dock-container').height() > $(window).height()){
-						top = $(window).height() - $('#startmenu-container').height() - 20;
-					}
 					$('#startmenu-container').css({
-						top : top,
-						left : 75
+						bottom : $('#dock-container').offset().top,
+						left : $('#dock-container').width() - 1
 					});
 					break;
 				case 'right':
-					var top = $('#dock-container').offset().top + $('#dock-container').height() - $('#startmenu-container').height() - 20;
-					if($('#dock-container').offset().top + $('#dock-container').height() > $(window).height()){
-						top = $(window).height() - $('#startmenu-container').height() - 20;
-					}
-					var left = $(window).width() - $('#dock-container').width() - $('#startmenu-container').width();
 					$('#startmenu-container').css({
-						top : top,
-						left : left
+						bottom : $('#dock-container').offset().top,
+						right : $('#dock-container').width() - 1
 					});
 					break;
 			}
