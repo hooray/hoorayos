@@ -49,7 +49,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 /*登录*/
 #lrbox{background:url(loginbg.jpg) no-repeat center;position:absolute;z-index:9997;top:-200%;left:0;width:100%;height:100%}
 #lrbox .title{position:absolute;top:50%;margin-top:-250px;width:100%;height:100px;line-height:100px;text-align:center;font-size:68px;color:#fff;text-shadow:2px 2px 2px #000}
-#lrbox .back{position:absolute;right:10px;bottom:5px;display:block;color:#fff;text-shadow:1px 1px 1px #000}
+#lrbox .back{position:absolute;left:50%;top:50%;margin-left:-50px;margin-top:140px;display:block;width:100px;height:20px;line-height:20px;text-align:center;color:#fff;text-shadow:1px 1px 1px #000}
 .lrbox{display:none;width:420px;overflow:hidden;position:absolute;top:50%;left:50%;margin-left:-211px;border:1px solid #0FF;border-radius:10px}
 .lrbox .bg{position:absolute;z-index:-1;width:100%;height:100%;background:url(loginbg.jpg) no-repeat center;background-color:rgba(255, 255, 255, .5);-webkit-filter:blur(5px);filter:blur(5px)}
 .lrbox .loginbox,

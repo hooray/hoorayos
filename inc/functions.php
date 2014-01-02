@@ -662,7 +662,6 @@
 						'realid = '.$opt['id'],
 						'name = "'.$app['name'].'"',
 						'icon = "'.$app['icon'].'"',
-						'url = "'.$app['url'].'"',
 						'type = "'.$app['type'].'"',
 						'width = '.(int)$app['width'],
 						'height = '.(int)$app['height'],
