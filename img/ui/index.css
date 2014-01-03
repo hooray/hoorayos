@@ -399,6 +399,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .dock_drop_region_top .text,
 .dock_drop_region_left .text,
 .dock_drop_region_right .text{position:relative;top:40%;text-align:center;color:#fff;font-size:32px}
+.dock_drop_region_top .text{top:10px}
 
 #startmenu-container{position:absolute;z-index:21;color:#fff;width:182px;display:none}
 #startmenu-container .startmenu-selfinfo{float:left;width:177px;height:30px;padding:5px 0 5px 5px;background:url(desk_sprite.png) no-repeat -410px -200px}

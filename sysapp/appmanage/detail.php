@@ -79,14 +79,15 @@
 		<div class="input-label">
 			<label class="label-text">应用分类：</label>
 			<div class="label-box form-inline control-group">
-				<select name="val_kindid" datatype="*" nullmsg="请选择应用分类">
+				<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
 					<option value="">请选择应用分类</option>
 					<?php
-						foreach($apptype as $at){
-							if($at['id'] == $app['kindid']){
-								echo '<option value="'.$at['id'].'" selected>'.$at['name'].'</option>';
+						$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+						foreach($appcategory as $ac){
+							if($ac['tbid'] == $app['app_category_id']){
+								echo '<option value="'.$ac['id'].'" selected>'.$ac['name'].'</option>';
 							}else{
-								echo '<option value="'.$at['id'].'">'.$at['name'].'</option>';
+								echo '<option value="'.$ac['id'].'">'.$ac['name'].'</option>';
 							}
 						}
 					?>
@@ -145,7 +146,7 @@
 		<div class="input-label">
 			<label class="label-text">应用介绍：</label>
 			<div class="label-box form-inline control-group">
-				<textarea class="textarea" name="val_remark" id="val_remark" style="width:300px;height:100px;margin-bottom:10px"><?php echo $app['remark']; ?></textarea>
+				<textarea class="textarea" name="val_remark" id="val_remark" style="width:300px;height:100px"><?php echo $app['remark']; ?></textarea>
 			</div>
 		</div>
 	</div>

@@ -7,7 +7,7 @@
 			$set = array(
 				'icon = "'.$val_icon.'"',
 				'name = "'.$val_name.'"',
-				'kindid = '.(int)$val_kindid,
+				'app_category_id = '.(int)$val_app_category_id,
 				'url = "'.$val_url.'"',
 				'width = '.(int)$val_width,
 				'height = '.(int)$val_height,

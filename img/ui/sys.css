@@ -82,13 +82,14 @@ body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
 
 /* 应用市场 */
 .sub-nav{position:absolute;z-index:2;top:0;bottom:0;left:0;width:60px;height:100%}
-.sub-nav ul{position:absolute;width:54px;height:100%;margin:0 0 0 5px}
-.sub-nav ul .all{margin-top:5px}
-.sub-nav ul .myapps{position:absolute;bottom:10px}
-.sub-nav ul li a{padding-right:0;min-width:28px!important}
-.sub-nav ul li a:hover,
-.sub-nav ul .active a,
-.sub-nav ul .active a:hover{background:#EEE}
+.sub-nav .nav-tabs{position:absolute;width:54px;height:100%;margin:0 0 0 5px}
+.sub-nav .nav-tabs .all{margin-top:5px}
+.sub-nav .nav-tabs .myapps{position:absolute;bottom:5px}
+.sub-nav .nav-tabs li{width:100%}
+.sub-nav .nav-tabs li a{padding-right:0;min-width:28px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub-nav .nav-tabs li a:hover,
+.sub-nav .nav-tabs .active a,
+.sub-nav .nav-tabs .active a:hover{background:#EEE}
 
 .wrap{position:absolute;top:0;right:0;bottom:0;left:60px;_position:relative;_left:0;_height:100%;_margin-left:60px;overflow:auto;background:#EEE}
 .mbox{border:1px solid #DDD;background:#FFF}

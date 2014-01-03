@@ -42,10 +42,12 @@ body{margin:10px 10px 0}
 			<select name="search_2" id="search_2" style="width:140px">
 				<option value="">全部</option>
 				<?php
-					foreach($apptype as $at){
-						echo '<option value="'.$at['id'].'">'.$at['name'].'</option>';
+					$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+					foreach($appcategory as $ac){
+						echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 					}
 				?>
+				<option value="0">未分类</option>
 			</select>
 			<label style="margin-left:10px">类型：</label>
 			<select name="search_3" id="search_3" style="width:140px">

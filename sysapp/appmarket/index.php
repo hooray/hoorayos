@@ -13,22 +13,21 @@
 <body>
 <div class="sub-nav tabbable tabs-left">
 	<ul class="nav nav-tabs">
-		<li class="all active" value="0"><a href="javascript:;">全部</a></li>
+		<li class="all active" value="0"><a href="javascript:;" title="全部">全部</a></li>
 		<?php
-			if(checkLogin()){
+			$isLogin = checkLogin();
+			if($isLogin){
 				$mytype = $db->select(0, 1, 'tb_member', 'type', 'and tbid = '.session('member_id'));
-				foreach($apptype as $at){
-					if(($at['id'] == 1 && $mytype['type'] == 1) || $at['id'] != 1){
-						echo '<li value="'.$at['id'].'"><a href="javascript:;">'.$at['name'].'</a></li>';
-					}
+			}
+			$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+			foreach($appcategory as $ac){
+				if(($ac['issystem'] == 1 && $mytype['type'] == 1) || $ac['issystem'] == 0){
+					echo '<li value="'.$ac['tbid'].'"><a href="javascript:;" title="'.$ac['name'].'">'.$ac['name'].'</a></li>';
 				}
-				echo '<li class="myapps" value="-1"><a href="javascript:;">我的　应用</a></li>';
-			}else{
-				foreach($apptype as $at){
-					if($at['id'] != 1){
-						echo '<li value="'.$at['id'].'"><a href="javascript:;">'.$at['name'].'</a></li>';
-					}
-				}
+			}
+			echo '<li value="-1"><a href="javascript:;" title="挂件">挂件</a></li>';
+			if($isLogin){
+				echo '<li class="myapps" value="-2"><a href="javascript:;" title="我的应用">我的<br>应用</a></li>';
 			}
 		?>
 	</ul>
@@ -38,7 +37,9 @@
 	<div class="col-sub">
 		<div class="search-box">
 			<div class="input-append">
-				<input type="text" name="keyword" id="keyword" style="width:158px" value="<?php echo $searchkey; ?>"><button id="search_3" class="btn"><i class="icon-search"></i></button>
+				<input type="text" name="search_3" id="search_3" placeholder="请输入搜索关键字" style="width:138px" value="<?php echo $searchkey; ?>">
+				<button id="search_3_remove" class="btn" style="padding:4px"><i class="icon-remove"></i></button>
+				<button id="search_3_do" class="btn"><i class="icon-search"></i></button>
 			</div>
 		</div>
 		<div class="mbox commend-day">
@@ -87,7 +88,7 @@
 					<p>未发布的应用：<font style="font-weight:bold"><?php echo $myappunverifycount; ?></font> 个</p>
 					<div class="text-center"><a href="javascript:openDetailIframe2('myapp.manage.php');" class="btn btn-primary">管理我的应用</a> <a href="javascript:openDetailIframe2('myapp.manage.php?add=1');" class="btn btn-danger">开发新应用</a></div>
 				<?php }else{ ?>
-					<div class="text-center" style="margin-top:40px"><a href="javascript:window.parent.HROS.base.login();;" class="btn btn-primary btn-large">您还没登录，点我登录</a></div>
+					<div class="text-center" style="margin-top:45px"><a href="javascript:window.parent.HROS.base.login();;" class="btn btn-primary">您还没登录，点我登录</a></div>
 				<?php } ?>
 			</div>
 		</div>
@@ -157,12 +158,21 @@ $(function(){
 		$('#search_2').val($(this).attr('value'));
 		getPageList(0);
 	});
-	//搜索按钮
-	$('#search_3').click(function(){
+	//搜索
+	$('#search_3').on('keydown', function(e){
+		if(e.keyCode == '13'){
+			$('#search_3_do').click();
+		}
+	});
+	$('#search_3_do').click(function(){
 		$('.app-list-box .title li').removeClass('focus').eq(0).addClass('focus');
 		$('.sub-nav ul li').removeClass('active').eq(0).addClass('active');
 		$('#search_1').val(0);
 		$('#search_2').val(1);
+		getPageList(0);
+	});
+	$('#search_3_remove').click(function(){
+		$('#search_3').val('');
 		getPageList(0);
 	});
 	//添加，删除，打开应用
@@ -244,7 +254,7 @@ function getPageList(current_page){
 	$.ajax({
 		type : 'POST',
 		url : 'index.ajax.php',
-		data : 'ac=getList&from=' + from + '&to=' + to + '&search_1=' + $('#search_1').val() + '&search_2=' + $('#search_2').val() + '&search_3=' + $('#keyword').val(),
+		data : 'ac=getList&from=' + from + '&to=' + to + '&search_1=' + $('#search_1').val() + '&search_2=' + $('#search_2').val() + '&search_3=' + $('#search_3').val(),
 		success : function(msg){
 			var arr = msg.split('<{|*|}>');
 			$('#pagination_setting').attr('count', arr[0]);
