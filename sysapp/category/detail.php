@@ -10,23 +10,19 @@
 		redirect('../error.php?code='.$errorcode['noAdmin']);
 	}
 	//验证是否有权限
-	else if(!checkPermissions(1)){
+	else if(!checkPermissions(5)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	if(isset($permissionid)){
-		$permission = $db->select(0, 1, 'tb_permission', '*', 'and tbid = '.$permissionid);
-		if($permission['apps_id'] != ''){
-			$appsrs = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and tbid in ('.$permission['apps_id'].')');
-			$permission['appsinfo'] = $appsrs;
-		}
+	if(isset($categoryid)){
+		$category = $db->select(0, 1, 'tb_app_category', 'tbid, name', 'and tbid = '.$categoryid);
 	}
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>权限管理</title>
+<title>用户管理</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
 </head>
@@ -34,36 +30,16 @@
 <body>
 <form action="detail.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $permissionid; ?>">
+<input type="hidden" name="id" value="<?php echo $categoryid; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">
-			<strong>编辑权限</strong>
+			<strong>编辑类目</strong>
 		</p>
 		<div class="input-label">
-			<label class="label-text">权限名称：</label>
+			<label class="label-text">类目名称：</label>
 			<div class="label-box form-inline control-group">
-				<input type="text" name="val_name" value="<?php echo $permission['name']; ?>" datatype="*" nullmsg="请输入权限名称">
-				<span class="help-inline"></span>
-			</div>
-		</div>
-		<div class="input-label">
-			<label class="label-text">专属应用：</label>
-			<div class="label-box form-inline control-group">
-				<div class="permissions_apps">
-					<?php
-						if($permission['appsinfo'] != NULL){
-							foreach($permission['appsinfo'] as $v){
-								echo '<div class="app" appid="'.$v['tbid'].'">';
-									echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';
-									echo '<span class="del">删</span>';
-								echo '</div>';
-							}
-						}
-					?>
-				</div>
-				<a class="btn btn-mini" href="javascript:;" menu="addapps">添加应用</a>
-				<input type="hidden" name="val_apps_id" id="val_apps_id" value="<?php echo $permission['apps_id']; ?>" datatype="*" nullmsg="请选择专属应用">
+				<input type="text" name="val_name" value="<?php echo $category['name']; ?>" datatype="*" nullmsg="请输入类目名称">
 				<span class="help-inline"></span>
 			</div>
 		</div>
@@ -72,7 +48,7 @@
 <div class="bottom-bar">
 	<div class="con">
 		<a class="btn btn-primary fr" id="btn-submit" href="javascript:;"><i class="icon-white icon-ok"></i> 确定</a>
-		<a class="btn fr" href="javascript:window.parent.closeDetailIframe();" style="margin-right:10px"><i class="icon-chevron-up"></i> 返回权限列表</a>
+		<a class="btn fr" href="javascript:window.parent.closeDetailIframe();" style="margin-right:10px"><i class="icon-chevron-up"></i> 返回类目列表</a>
 	</div>
 </div>
 </form>
@@ -136,43 +112,6 @@ $(function(){
 				}
 			}
 		}
-	});
-	//添加应用
-	$('a[menu=addapps]').click(function(){
-		$.dialog.data('appsid', $('#val_apps_id').val());
-		$.dialog.open('sysapp/permission/alert_addapps.php', {
-			id : 'alert_addapps',
-			title : '添加应用',
-			resize: false,
-			width : 360,
-			height : 300,
-			ok : function(){
-				$('#val_apps_id').val($.dialog.data('appsid')).focusout();
-				$.ajax({
-					type : 'POST',
-					url : 'detail.ajax.php',
-					data : 'ac=updateApps&appsid=' + $.dialog.data('appsid'),
-					success : function(msg){
-						$('.permissions_apps').html(msg);
-					}
-				});
-			},
-			cancel : true
-		});
-	});
-	//删除应用
-	$('.permissions_apps').on('click','.app .del',function(){
-		var appid = $(this).parent().attr('appid');
-		var appsid = $('#val_apps_id').val().split(',');
-		var newappsid = [];
-		for(var i=0, j=0; i<appsid.length; i++){
-			if(appsid[i] != appid){
-				newappsid[j] = appsid[i];
-				j++;
-			}
-		}
-		$('#val_apps_id').val(newappsid.join(',')).focusout();
-		$(this).parent().remove();
 	});
 });
 </script>

@@ -10,7 +10,7 @@
 		redirect('../error.php?code='.$errorcode['noAdmin']);
 	}
 	//验证是否有权限
-	else if(!checkPermissions(1)){
+	else if(!checkPermissions(5)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 ?>
@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>权限管理</title>
+<title>类目管理</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
 <style>
@@ -29,17 +29,16 @@ body{margin:10px 10px 0}
 <body>
 <div class="well well-small" style="margin-bottom:10px">
 	<div class="form-inline">
-		<label>权限名称：</label>
+		<label>类目名称：</label>
 		<input type="text" name="search_1" id="search_1" class="span2">
 		<a class="btn" menu="search" href="javascript:;" style="margin-left:10px"><i class="icon-search"></i> 搜索</a>
-		<a class="btn btn-primary fr" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 创建新权限</a>
+		<a class="btn btn-primary fr" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 创建新类目</a>
 	</div>
 </div>
 <table class="list-table">
 	<thead>
 		<tr class="col-name">
-			<th style="width:50px">权限ID</th>
-			<th>权限名称</th>
+			<th>类目名称</th>
 			<th style="width:150px">操作</th>
 		</tr>
 		<tr class="sep-row"><td colspan="100"></td></tr>
@@ -53,8 +52,8 @@ body{margin:10px 10px 0}
 	<tbody class="list-con"></tbody>
 	<tfoot><tr><td colspan="100">
 		<div class="pagination pagination-centered" id="pagination"></div>
-		<?php $permissionscount = $db->select(0, 2, 'tb_permission', 'tbid'); ?>
-		<input id="pagination_setting" type="hidden" count="<?php echo $permissionscount; ?>" per="15">
+		<?php $categorycount = $db->select(0, 2, 'tb_app_category', 'tbid'); ?>
+		<input id="pagination_setting" type="hidden" count="<?php echo $categorycount; ?>" per="15">
 	</td></tr></tfoot>
 </table>
 <?php include('sysapp/global_module_detailIframe.php'); ?>
@@ -65,16 +64,16 @@ $(function(){
 	getPageList(0);
 	//删除
 	$('.list-con').on('click', '.do-del', function(){
-		var permissionid = $(this).attr('permissionid');
+		var categoryid = $(this).attr('categoryid');
 		var name = $(this).parent().prev().text();
 		$.dialog({
 			id : 'ajaxedit',
-			content : '确定要删除 “' + name + '” 该权限么？',
+			content : '删除 “' + name + '” 类目时，会将该类目下的所有应用归类到「未分类」类目下，是否继续？',
 			ok : function(){
 				$.ajax({
 					type : 'POST',
 					url : 'index.ajax.php',
-					data : 'ac=del&permissionid=' + permissionid,
+					data : 'ac=del&categoryid=' + categoryid,
 					success : function(msg){
 						getPageList(0);
 					}

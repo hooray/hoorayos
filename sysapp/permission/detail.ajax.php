@@ -20,7 +20,7 @@
 		case 'updateApps':
 			$appsrs = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and tbid in ('.$appsid.')');
 			foreach($appsrs as $a){
-				echo '<div class="app" appid="'.$a['tbid'].'"><img src="../../'.$a['icon'].'" alt="'.$a['name'].'" title="'.$a['icon'].'"><span class="del">删</span></div>';
+				echo '<div class="app" appid="'.$a['tbid'].'"><img src="../../'.$a['icon'].'" alt="'.$a['name'].'" title="'.$a['name'].'"><span class="del">删</span></div>';
 			}
 			break;
 	}

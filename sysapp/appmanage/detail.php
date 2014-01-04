@@ -85,9 +85,9 @@
 						$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
 						foreach($appcategory as $ac){
 							if($ac['tbid'] == $app['app_category_id']){
-								echo '<option value="'.$ac['id'].'" selected>'.$ac['name'].'</option>';
+								echo '<option value="'.$ac['tbid'].'" selected>'.$ac['name'].'</option>';
 							}else{
-								echo '<option value="'.$ac['id'].'">'.$ac['name'].'</option>';
+								echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 							}
 						}
 					?>
