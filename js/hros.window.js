@@ -25,11 +25,11 @@ HROS.window = (function(){
 				$('.popup-menu').hide();
 				$('.quick_view_container').remove();
 				switch($(this).attr('type')){
-					case 'app':
+					case 'window':
 					case 'widget':
 						var popupmenu = HROS.popupMenu.app($(this));
 						break;
-					case 'papp':
+					case 'pwindow':
 					case 'pwidget':
 						var popupmenu = HROS.popupMenu.papp($(this));
 						break;
@@ -50,7 +50,7 @@ HROS.window = (function(){
 		**      示例：HROS.window.createTemp({title:"百度",url:"http://www.baidu.com",width:800,height:400,isresize:false,isopenmax:false,isflash:false});
 		*/
 		createTemp : function(obj){
-			var type = 'app', appid = obj.appid == null ? Date.parse(new Date()) : obj.appid;
+			var type = 'window', appid = obj.appid == null ? Date.parse(new Date()) : obj.appid;
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner a.task-item').each(function(){
@@ -134,7 +134,7 @@ HROS.window = (function(){
 		**      示例：HROS.window.create(12);
 		*/
 		create : function(realappid, type){
-			var type = type == null ? 'app' : type, appid;
+			var type = type == null ? 'window' : type, appid;
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner a.task-item').each(function(){
@@ -153,8 +153,8 @@ HROS.window = (function(){
 					var top = ($(window).height() - options.height) / 2 <= 0 ? 0 : ($(window).height() - options.height) / 2;
 					var left = ($(window).width() - options.width) / 2 <= 0 ? 0 : ($(window).width() - options.width) / 2;
 					switch(options.type){
-						case 'app':
-						case 'papp':
+						case 'window':
+						case 'pwindow':
 							//新增任务栏
 							$('#task-content-inner').prepend(taskTemp({
 								'type' : options.type,

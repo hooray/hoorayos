@@ -25,7 +25,7 @@
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
 						echo '<td style="text-align:left;padding-left:15px"><img src="../../'.$v['icon'].'" alt="'.$v['name'].'" class="appicon"><span class="appname">'.$v['name'].'</span></td>';
-						echo '<td>'.($v['type'] == 'app' ? '窗口' : '挂件').'</td>';
+						echo '<td>'.($v['type'] == 'window' ? '窗口' : '挂件').'</td>';
 						echo '<td>'.($v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']]).'</td>';
 						echo '<td>'.$v['usecount'].'</td>';
 						echo '<td>';

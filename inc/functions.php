@@ -633,7 +633,7 @@
 				);
 				$appid = $db->insert(0, 2, 'tb_member_app', $set);
 				break;
-			case 'papp':
+			case 'pwindow':
 			case 'pwidget':
 				$set = array(
 					'icon = "'.$opt['icon'].'"',
@@ -700,12 +700,12 @@
 				}
 				delAppStr((int)$id);
 				break;
-			case 'app':
+			case 'window':
 			case 'widget':
 				delAppStr((int)$id);
 				$db->update(0, 0, 'tb_app', 'usecount = usecount - 1', 'and tbid = '.$member_app['realid']);
 				break;
-			case 'papp':
+			case 'pwindow':
 			case 'pwidget':
 				delAppStr((int)$id);
 				break;

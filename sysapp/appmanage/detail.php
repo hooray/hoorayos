@@ -19,7 +19,7 @@
 	}else{
 		//给个初始值
 		$app = array(
-			'type' => 'app',
+			'type' => 'window',
 			'isresize' => 1,
 			'isopenmax' => 0,
 			'isflash' => 0,
@@ -117,7 +117,7 @@
 		<div class="input-label">
 			<label class="label-text">应用类型：</label>
 			<div class="label-box form-inline control-group">
-				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="app" <?php if($app['type'] == 'app'){echo 'checked';} ?>>窗口</label>
+				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="window" <?php if($app['type'] == 'window'){echo 'checked';} ?>>窗口</label>
 				<label class="radio"><input type="radio" name="val_type" value="widget" <?php if($app['type'] == 'widget'){echo 'checked';} ?>>挂件</label>
 			</div>
 		</div>
@@ -233,7 +233,7 @@ $(function(){
 		}
 	});
 	$('input[name="val_type"]').change(function(){
-		if($(this).val() == 'app'){
+		if($(this).val() == 'window'){
 			$('.input-label-isresize, .input-label-isopenmax, .input-label-isflash').slideDown();
 		}else{
 			$('input[name="val_isresize"]').each(function(){
@@ -359,7 +359,7 @@ $(function(){
 	});
 	$('#btn-preview').on('click', function(){
 		if(form.check()){
-			if($('input[name="val_type"]:checked').val() == 'app'){
+			if($('input[name="val_type"]:checked').val() == 'window'){
 				window.top.HROS.window.createTemp({
 					title : $('input[name="val_name"]').val(),
 					url : $('input[name="val_url"]').val(),

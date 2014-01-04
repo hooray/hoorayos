@@ -52,7 +52,7 @@ body{margin:10px 10px 0}
 			<label style="margin-left:10px">类型：</label>
 			<select name="search_3" id="search_3" style="width:140px">
 				<option value="">全部</option>
-				<option value="app">窗口</option>
+				<option value="window">窗口</option>
 				<option value="widget">挂件</option>
 			</select>
 			<label style="margin-left:10px">状态：</label>

@@ -27,11 +27,11 @@ HROS.app = (function(){
 				HROS.popupMenu.hide();
 				var popupmenu;
 				switch($(this).attr('type')){
-					case 'app':
+					case 'window':
 					case 'widget':
 						popupmenu = HROS.popupMenu.app($(this));
 						break;
-					case 'papp':
+					case 'pwindow':
 					case 'pwidget':
 						popupmenu = HROS.popupMenu.papp($(this));
 						break;
@@ -263,8 +263,8 @@ HROS.app = (function(){
 						//判断是否移动应用，如果没有则判断为click事件
 						if(dx == cx && dy == cy){
 							switch(oldobj.attr('type')){
-								case 'app':
-								case 'papp':
+								case 'window':
+								case 'pwindow':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':
@@ -393,8 +393,8 @@ HROS.app = (function(){
 						//判断是否移动应用，如果没有则判断为click事件
 						if(dx == cx && dy == cy){
 							switch(oldobj.attr('type')){
-								case 'app':
-								case 'papp':
+								case 'window':
+								case 'pwindow':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':
@@ -523,8 +523,8 @@ HROS.app = (function(){
 						//判断是否移动应用，如果没有则判断为click事件
 						if(dx == cx && dy == cy){
 							switch(oldobj.attr('type')){
-								case 'app':
-								case 'papp':
+								case 'window':
+								case 'pwindow':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':

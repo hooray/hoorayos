@@ -190,7 +190,7 @@
 			$app = array();
 			if(checkLogin()){
 				switch($type){
-					case 'app':
+					case 'window':
 					case 'widget':
 						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and realid = '.(int)$id.' and member_id = '.session('member_id'));
 						if($rs != NULL){
@@ -209,7 +209,7 @@
 							$app['isopenmax'] = $rs['isopenmax'];
 							$app['issetbar'] = $rs['issetbar'];
 							$app['isflash'] = $rs['isflash'];
-							if($rs['type'] == 'app' || $rs['type'] == 'widget'){
+							if($rs['type'] == 'window' || $rs['type'] == 'widget'){
 								$realurl = $db->select(0, 1, 'tb_app', 'url', 'and tbid = '.$rs['realid']);
 								$app['url'] = $realurl['url'];
 							}else{
@@ -219,7 +219,7 @@
 							$app['error'] = 'ERROR_NOT_INSTALLED';
 						}
 						break;
-					case 'papp':
+					case 'pwindow':
 					case 'pwidget':
 					case 'folder':
 						$rs = $db->select(0, 1, 'tb_member_app', '*', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));

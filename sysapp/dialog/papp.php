@@ -12,7 +12,7 @@
 		//给个初始值
 		$app = array(
 			'icon' => 'img/ui/papp.png',
-			'type' => 'papp',
+			'type' => 'pwindow',
 			'isresize' => 1,
 			'isopenmax' => 0,
 			'isflash' => 0
@@ -95,7 +95,7 @@
 		<div class="input-label">
 			<label class="label-text">应用类型：</label>
 			<div class="label-box form-inline control-group">
-				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="papp" <?php if($app['type'] == 'papp'){echo 'checked';} ?>>APP</label>
+				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="pwindow" <?php if($app['type'] == 'pwindow'){echo 'checked';} ?>>APP</label>
 				<label class="radio"><input type="radio" name="val_type" value="pwidget" <?php if($app['type'] == 'pwidget'){echo 'checked';} ?>>挂件</label>
 			</div>
 		</div>
@@ -162,7 +162,7 @@ $(function(){
 		}
 	});
 	$('input[name="val_type"]').change(function(){
-		if($(this).val() == 'papp'){
+		if($(this).val() == 'pwindow'){
 			$('.input-label-isresize, .input-label-isopenmax, .input-label-isflash').slideDown();
 		}else{
 			$('input[name="val_isresize"]').each(function(){
