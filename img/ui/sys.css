@@ -229,7 +229,7 @@ body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
 .permissions_apps .app .del{display:none;position:absolute;right:-6px;top:-6px;text-align:center;font-size:12px;width:20px;height:20px;line-height:20px;cursor:pointer;background:#E6110E;color:#fff;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px}
 .permissions_apps .app:hover .del{display:block}
 
-.alert_addapps{width:340px;margin:auto}
+.alert_addapps{width:340px;margin:auto;overflow:hidden}
 .alert_addapps .app{width:48px;height:48px;margin:10px 10px 20px 10px;float:left;position:relative;cursor:pointer}
 .alert_addapps .app img{width:48px;height:48px}
 .alert_addapps .app .name{width:100%;height:24px;line-height:24px;overflow:hidden}

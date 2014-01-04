@@ -11,15 +11,31 @@
 </head>
 
 <body>
-<div class="alert_addapps">
+<ul class="nav nav-tabs" style="margin:5px 12px">
 	<?php
-		$apps = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and kindid != 1');
-		foreach($apps as $v){
-			echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
-				echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'">';
-				echo '<div class="name">'.$v['name'].'</div>';
-				echo '<span class="selected"></span>';
-			echo '</div>';
+		$category = $db->select(0, 0, 'tb_app_category', '*', 'and issystem = 0', 'tbid asc');
+		if($category != NULL){
+			foreach($category as $c){
+				echo '<li class="dropdown"><a href="#category_'.$c['tbid'].'" data-toggle="tab">'.$c['name'].'</a></li>';
+			}
+		}
+	?>
+</ul>
+<div class="tab-content">
+	<?php
+		if($category != NULL){
+			foreach($category as $c){
+				echo '<div class="alert_addapps tab-pane" id="category_'.$c['tbid'].'">';
+				$apps = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and app_category_id = '.$c['tbid']);
+				foreach($apps as $v){
+					echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
+						echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';
+						echo '<div class="name">'.$v['name'].'</div>';
+						echo '<span class="selected"></span>';
+					echo '</div>';
+				}
+				echo '</div>';
+			}
 		}
 	?>
 </div>
@@ -27,6 +43,7 @@
 <?php include('sysapp/global_js.php'); ?>
 <script>
 $(function(){
+	$('.nav-tabs a:first').tab('show');
 	if($.dialog.data('appsid') != ''){
 		$('#value_1').val($.dialog.data('appsid'));
 		var appsid = $.dialog.data('appsid').split(',');
