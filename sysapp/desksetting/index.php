@@ -52,21 +52,21 @@
 	<table>
 		<tr>
 			<td colspan="3">
-				<div class="set_top"><label class="radio"><input type="radio" name="dockpos" value="top" <?php if($pos == 'top'){echo 'checked';} ?>>顶部</label></div>
+				<div class="set_top form-inline"><label class="radio"><input type="radio" name="dockpos" value="top" <?php if($pos == 'top'){echo 'checked';} ?>>顶部</label></div>
 			</td>
 		</tr>
 		<tr>
 			<td width="75">
-				<div class="set_left"><label class="radio"><input type="radio" name="dockpos" value="left" <?php if($pos == 'left'){echo 'checked';} ?>>左侧</label></div>
+				<div class="set_left form-inline"><label class="radio"><input type="radio" name="dockpos" value="left" <?php if($pos == 'left'){echo 'checked';} ?>>左侧</label></div>
 			</td>
 			<td class="set_view set_view_<?php echo $pos; ?>"></td>
 			<td width="75">
-				<div class="set_right"><label class="radio"><input type="radio" name="dockpos" value="right" <?php if($pos == 'right'){echo 'checked';} ?>>右侧</label></div>
+				<div class="set_right form-inline"><label class="radio"><input type="radio" name="dockpos" value="right" <?php if($pos == 'right'){echo 'checked';} ?>>右侧</label></div>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="3">
-				<div class="set_none"><label class="radio"><input type="radio" name="dockpos" value="none" <?php if($pos == 'none'){echo 'checked';} ?>>停用并隐藏（如果应用码头存在应用，则会将应用转移到当前桌面）</label></div>
+				<div class="set_none form-inline"><label class="radio"><input type="radio" name="dockpos" value="none" <?php if($pos == 'none'){echo 'checked';} ?>>停用并隐藏（如果应用码头存在应用，则会将应用转移到当前桌面）</label></div>
 			</td>
 		</tr>
 	</table>
