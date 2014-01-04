@@ -11,7 +11,7 @@
 	}else{
 		//给个初始值
 		$app = array(
-			'type' => 'app',
+			'type' => 'window',
 			'isresize' => 1,
 			'isopenmax' => 0,
 			'isflash' => 0,
@@ -91,23 +91,23 @@
 			<div class="label-box form-inline control-group">
 				<?php if($app['verifytype'] == 1 || $app['verifytype'] == 2){ ?>
 					<?php
-						foreach($apptype as $at){
-							if($at['id'] == $app['kindid']){
-								echo $at['name'];
+						$appcategory = $db->select(0, 0, 'tb_app_category', '*');
+						foreach($appcategory as $ac){
+							if($ac['tbid'] == $app['app_category_id']){
+								echo $ac['name'];
 							}
 						}
 					?>
 				<?php }else{ ?>
-					<select name="val_kindid" datatype="*" nullmsg="请选择应用分类">
+					<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
 						<option value="">请选择应用分类</option>
 						<?php
-							foreach($apptype as $at){
-								if($at['id'] != 1){
-									if($at['id'] == $app['kindid']){
-										echo '<option value="'.$at['id'].'" selected>'.$at['name'].'</option>';
-									}else{
-										echo '<option value="'.$at['id'].'">'.$at['name'].'</option>';
-									}
+							$appcategory = $db->select(0, 0, 'tb_app_category', '*', 'and issystem = 0', 'tbid asc');
+							foreach($appcategory as $ac){
+								if($ac['tbid'] == $app['app_category_id']){
+									echo '<option value="'.$ac['tbid'].'" selected>'.$ac['name'].'</option>';
+								}else{
+									echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 								}
 							}
 						?>
@@ -147,9 +147,9 @@
 			<label class="label-text">应用类型：</label>
 			<div class="label-box form-inline control-group">
 				<?php if($app['verifytype'] == 1 || $app['verifytype'] == 2){ ?>
-					<?php echo $app['type'] == 'app' ? '窗口' : '挂件'; ?>
+					<?php echo $app['type'] == 'window' ? '窗口' : '挂件'; ?>
 				<?php }else{ ?>
-					<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="app" <?php if($app['type'] == 'app'){echo 'checked';} ?>>窗口</label>
+					<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="window" <?php if($app['type'] == 'window'){echo 'checked';} ?>>窗口</label>
 					<label class="radio"><input type="radio" name="val_type" value="widget" <?php if($app['type'] == 'widget'){echo 'checked';} ?>>挂件</label>
 				<?php } ?>
 			</div>
@@ -293,7 +293,7 @@ $(function(){
 		}
 	});
 	$('input[name="val_type"]').change(function(){
-		if($(this).val() == 'app'){
+		if($(this).val() == 'window'){
 			$('.input-label-isresize, .input-label-isopenmax, .input-label-isflash').slideDown();
 		}else{
 			$('input[name="val_isresize"]').each(function(){

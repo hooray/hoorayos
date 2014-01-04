@@ -35,20 +35,19 @@ body{margin:10px 10px 0}
 			<select name="search_2" id="search_2" style="width:140px">
 				<option value="">全部</option>
 				<?php
-					foreach($apptype as $at){
-						echo '<option value="'.$at['id'].'">'.$at['name'].'</option>';
+					$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+					foreach($appcategory as $ac){
+						echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 					}
 				?>
 			</select>
 			<label style="margin-left:10px">类型：</label>
 			<select name="search_3" id="search_3" style="width:140px">
 				<option value="">全部</option>
-				<option value="app">窗口</option>
+				<option value="window">窗口</option>
 				<option value="widget">挂件</option>
 			</select>
-		</div>
-		<div class="control-group">
-			<label>状态：</label>
+			<label style="margin-left:10px">状态：</label>
 			<select name="search_4" id="search_4" style="width:140px">
 				<option value="1">我的上线应用</option>
 				<option value="0">等待上线应用</option>

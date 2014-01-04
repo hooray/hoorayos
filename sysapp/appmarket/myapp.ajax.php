@@ -3,13 +3,17 @@
 		
 	switch($ac){
 		case 'getList':
+			$appcategory = $db->select(0, 0, 'tb_app_category', '*');
+			foreach($appcategory as $ac){
+				$category[$ac['tbid']] = $ac['name'];
+			}
 			$orderby = 'dt desc limit '.(int)$from.','.(int)$to;
 			$sqlwhere[] = 'member_id = '.session('member_id');
 			if($search_1 != ''){
 				$sqlwhere[] = 'name like "%'.$search_1.'%"';
 			}
 			if((int)$search_2 != ''){
-				$sqlwhere[] = 'kindid = '.(int)$search_2;
+				$sqlwhere[] = 'app_category_id = '.(int)$search_2;
 			}
 			if($search_3 != ''){
 				$sqlwhere[] = 'type = "'.$search_3.'"';
@@ -22,8 +26,8 @@
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
 						echo '<td style="text-align:left;padding-left:15px"><img src="../../'.$v['icon'].'" alt="'.$v['name'].'" class="appicon"><span class="appname">'.$v['name'].'</span></td>';
-						echo '<td>'.($v['type'] == 'app' ? '窗口' : '挂件').'</td>';
-						echo '<td>'.$apptype[$v['kindid']-1]['name'].'</td>';
+						echo '<td>'.($v['type'] == 'window' ? '窗口' : '挂件').'</td>';
+						echo '<td>'.($v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']]).'</td>';
 						echo '<td>'.$v['usecount'].'</td>';
 						echo '<td>';
 							echo '<a href="javascript:openDetailIframe(\'myapp.edit.php?appid='.$v['tbid'].'\');" class="btn btn-mini btn-link">详情</a>';
@@ -36,7 +40,7 @@
 			$set = array(
 				'icon = "'.$val_icon.'"',
 				'name = "'.$val_name.'"',
-				'kindid = '.(int)$val_kindid,
+				'app_category_id = '.(int)$val_app_category_id,
 				'url = "'.$val_url.'"',
 				'width = '.(int)$val_width,
 				'height = '.(int)$val_height,

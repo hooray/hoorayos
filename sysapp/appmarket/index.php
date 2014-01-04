@@ -206,7 +206,7 @@ $(function(){
 			window.parent.HROS.base.login();
 		}
 	}).on('click', '.btn-run-s', function(){
-		if($(this).attr('app_type') == 'app'){
+		if($(this).attr('app_type') == 'window'){
 			window.parent.HROS.window.create($(this).attr('real_app_id'), $(this).attr('app_type'));
 		}else{
 			window.parent.HROS.widget.create($(this).attr('real_app_id'), $(this).attr('app_type'));
