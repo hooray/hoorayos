@@ -20,6 +20,7 @@
 			}
 			break;
 		case 'del':
+			$db->update(0, 0, 'tb_app', 'app_category_id = 0', 'and app_category_id = '.(int)$categoryid);
 			$db->delete(0, 0, 'tb_app_category', 'and tbid = '.(int)$categoryid);
 			break;
 	}
