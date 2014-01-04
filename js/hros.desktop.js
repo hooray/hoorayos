@@ -92,7 +92,7 @@ HROS.deskTop = (function(){
 				var _t = windowdata['top'] / windowdata['emptyH'] * currentH >= currentH ? currentH : windowdata['top'] / windowdata['emptyH'] * currentH;
 				_t = _t <= 0 ? 0 : _t;
 				if($(this).attr('state') != 'hide'){
-					$(this).animate({
+					$(this).stop(true, false).animate({
 						'left' : _l,
 						'top' : _t
 					}, 500, function(){

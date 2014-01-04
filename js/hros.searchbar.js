@@ -12,7 +12,7 @@ HROS.searchbar = (function(){
 			});
 			$('#search-suggest .resultBox').on('click', 'li', function(){
 				switch($(this).attr('type')){
-					case 'app':
+					case 'window':
 						HROS.window.create($(this).attr('realappid'), $(this).attr('type'));
 						break;
 					case 'widget':
@@ -115,21 +115,21 @@ HROS.searchbar = (function(){
 		getSuggest : function(val){
 			var apps = [];
 			$(HROS.VAR.dock).each(function(){
-				if(jQuery.inArray(this.type, ['app', 'widget']) >= 0){
+				if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
 					apps.push(this);
 				}
 			});
 			for(var i = 1; i <= 5; i++){
 				var desk = eval('HROS.VAR.desk' + i);
 				$(desk).each(function(){
-					if(jQuery.inArray(this.type, ['app', 'widget']) >= 0){
+					if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
 						apps.push(this);
 					}
 				});
 			}
 			$(HROS.VAR.folder).each(function(){
 				$(this.apps).each(function(){
-					if(jQuery.inArray(this.type, ['app', 'widget']) >= 0){
+					if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
 						apps.push(this);
 					}
 				});
