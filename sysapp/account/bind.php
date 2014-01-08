@@ -144,7 +144,9 @@ $(function(){
 	});
 });
 function checkUserLogin(){
-	$.removeCookie(cookie_prefix + 'fromsite', {path:'/'});
+	$.removeCookie(cookie_prefix + 'fromsite', {
+		path : '/'
+	});
 	int = setInterval(function(){
 		getLoginCookie(int);
 	}, 500);
@@ -154,7 +156,7 @@ function getLoginCookie(){
 		childWindow.close();
 		window.clearInterval(int);
 		var title;
-		switch($.cookie('fromsite')){
+		switch($.cookie(cookie_prefix + 'fromsite')){
 			case 'sinaweibo': title = '新浪微博'; break;
 			case 'tweibo': title = '腾讯微博'; break;
 			case 't163weibo': title = '网易微博'; break;

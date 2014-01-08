@@ -511,7 +511,9 @@ function changeTabindex(mode){
 	}
 }
 function checkUserLogin(){
-	$.removeCookie(cookie_prefix + 'fromsite');
+	$.removeCookie(cookie_prefix + 'fromsite', {
+		path : '/'
+	});
 	interval = setInterval(function(){
 		getLoginCookie(interval);
 	}, 500);
