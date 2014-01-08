@@ -15,6 +15,10 @@
 <title>社区绑定</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
+<script type="text/javascript">
+//cookie前缀，避免重名
+var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
+</script>
 </head>
 
 <body>
@@ -140,13 +144,13 @@ $(function(){
 	});
 });
 function checkUserLogin(){
-	$.removeCookie('fromsite', {path:'/'});
+	$.removeCookie(cookie_prefix + 'fromsite', {path:'/'});
 	int = setInterval(function(){
 		getLoginCookie(int);
 	}, 500);
 }
 function getLoginCookie(){
-	if($.cookie('fromsite')){
+	if($.cookie(cookie_prefix + 'fromsite')){
 		childWindow.close();
 		window.clearInterval(int);
 		var title;
