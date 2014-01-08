@@ -104,6 +104,23 @@
 	</div>
 </div>
 <?php } ?>
+<?php if(DOUBAN_AKEY && DOUBAN_SKEY){ ?>
+<div class="input-label">
+	<label class="label-text">豆瓣：</label>
+	<div class="label-box form-inline">
+		<?php if($member['openid_douban'] != ''){ ?>
+			<a href="<?php echo $member['openurl_douban']; ?>" target="_blank">
+				<img src="<?php echo $member['openavatar_douban']; ?>" class="img-circle img-polaroid" width="20" height="20">
+				<?php echo $member['openname_douban']; ?>
+				<i class="icon-share"></i>
+			</a>
+			<a href="javascript:;" class="btn btn-link pull-right unbind" data-type="baidu">解除绑定</a>
+		<?php }else{ ?>
+			<a href="javascript:;" class="btn btn-link pull-right bind" data-type="baidu">绑定</a>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
 <?php include('sysapp/global_js.php'); ?>
 <script>
 var childWindow, int;
@@ -139,6 +156,7 @@ function getLoginCookie(){
 			case 't163weibo': title = '网易微博'; break;
 			case 'renren': title = '人人网'; break;
 			case 'baidu': title = '百度'; break;
+			case 'douban': title = '豆瓣'; break;
 			default: return false;
 		}
 		//验证该三方登录账号是否已绑定过本地账号，没有则绑定到自己账号

@@ -1,6 +1,9 @@
 HROS.hotkey = (function(){
 	return {
 		init : function(){
+			Mousetrap.bind(['backspace'], function(){
+				return false;
+			});
 			//显示桌面（最小化所有窗口）
 			Mousetrap.bind(['alt+d'], function(){
 				HROS.window.hideAll();

@@ -231,13 +231,17 @@ CREATE TABLE `tb_member` (
   `openname_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `openavatar_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `openurl_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openid_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openname_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openavatar_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openurl_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`tbid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_member
 -- ----------------------------
-INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', 'm', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', 'm', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tb_member_app`

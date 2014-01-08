@@ -144,7 +144,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				</form>
 			</div>
 		</div>
-		<?php if((SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY)){ ?>
+		<?php if((SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
 		<div class="disanfangdenglu">
 			<label>合作网站帐号登录</label>
 			<div class="box">
@@ -162,6 +162,9 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<?php } ?>
 				<?php if(BAIDU_AKEY && BAIDU_SKEY){ ?>
 					<a href="javascript:;" class="baidu" data-type="baidu" title="百度登录"></a>
+				<?php } ?>
+				<?php if(DOUBAN_AKEY && DOUBAN_SKEY){ ?>
+					<a href="javascript:;" class="douban" data-type="douban" title="豆瓣登录"></a>
 				<?php } ?>
 			</div>
 		</div>
@@ -532,6 +535,7 @@ function getLoginCookie(){
 						case 't163weibo': title = '网易微博'; break;
 						case 'renren': title = '人人网'; break;
 						case 'baidu': title = '百度'; break;
+						case 'douban': title = '豆瓣'; break;
 						default: return false;
 					}
 					$('.disanfangdenglu').hide();

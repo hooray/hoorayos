@@ -105,4 +105,8 @@ define('BAIDU_AKEY',               '');
 define('BAIDU_SKEY',               '');
 define('BAIDU_CALLBACK_URL',       'http://[替换网站域名]/connect/baidu/callback.php');
 define('BAIDU_DOMAIN',             '.[替换网站域名]');
+//豆瓣
+define('DOUBAN_AKEY',              '');
+define('DOUBAN_SKEY',              '');
+define('DOUBAN_CALLBACK_URL',      'http://[替换网站域名]/connect/douban/callback.php');
 ?>
