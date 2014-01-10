@@ -96,7 +96,7 @@ body{margin:10px 10px 0}
 $(function(){
 	//加载列表
 	getPageList(0);
-	//删除，推荐
+	//删除
 	$('.list-con').on('click', '.do-del', function(){
 		var appid = $(this).attr('appid');
 		var appname = $(this).parents('tr').children('td:first-child').text();
@@ -106,22 +106,13 @@ $(function(){
 			ok : function(){
 				$.ajax({
 					type : 'POST',
-					url : 'index.ajax.php',
+					url : 'myapp.ajax.php',
 					data : 'ac=del&appid=' + appid
 				}).done(function(){
 					$('#pagination').trigger('currentPage');
 				});
 			},
 			cancel: true
-		});
-	}).on('click', '.do-recommend', function(){
-		var appid = $(this).attr('appid');
-		$.ajax({
-			type : 'POST',
-			url : 'index.ajax.php',
-			data : 'ac=recommend&appid=' + appid
-		}).done(function(){
-			$('#pagination').trigger('currentPage');
 		});
 	});
 	//搜索

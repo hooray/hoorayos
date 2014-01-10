@@ -65,6 +65,9 @@
 				'status' => 'y'
 			));
 			break;
+		case 'del':
+			$db->delete(0, 0, 'tb_app', 'and tbid = '.(int)$appid.' and member_id = '.session('member_id'));
+			break;
 		case 'uploadImg':
 			include('libs/Uploader.class.php');
 			$config = array(
