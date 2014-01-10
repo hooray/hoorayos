@@ -20,7 +20,6 @@ class HRDB{
 	public function connect(){
 		$this->pdo = new PDO($this->Config['dsn'], $this->Config['name'], $this->Config['password']);
 		$this->pdo->query('set names utf8;');
-		//自己写代码捕获Exception
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	

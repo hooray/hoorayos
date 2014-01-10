@@ -1,10 +1,6 @@
 HROS.folderView = (function(){
 	return {
 		init : function(){
-			//当浏览器窗口改变大小时，文件夹预览窗口也需进行调整
-			$(window).on('resize', function(){
-				HROS.folderView.resize();
-			});
 			$('body').on('click', '.quick_view_container', function(){
 				HROS.popupMenu.hide();
 			}).on('click', '.quick_view_container_open', function(){
@@ -43,22 +39,15 @@ HROS.folderView = (function(){
 				var folderViewHtml = '', height = 0;
 				if(sc != ''){
 					$(sc).each(function(){
-						switch(this.type){
-							case 'app':
-							case 'widget':
-							case 'papp':
-							case 'pwidget':
-								folderViewHtml += appbtnTemp({
-									'top' : 0,
-									'left' : 0,
-									'title' : this.name,
-									'type' : this.type,
-									'id' : 'd_' + this.appid,
-									'appid' : this.appid,
-									'realappid' : this.realappid,
-									'imgsrc' : this.icon
-								});
-								break;
+						if(this.type == 'window' || this.type == 'widget' || this.type == 'pwindow' || this.type == 'pwidget'){
+							folderViewHtml += appbtnTemp({
+								'title' : this.name,
+								'type' : this.type,
+								'id' : 'd_' + this.appid,
+								'appid' : this.appid,
+								'realappid' : this.realappid,
+								'imgsrc' : this.icon
+							});
 						}
 					});
 					if(sc.length % 4 == 0){
@@ -73,16 +62,16 @@ HROS.folderView = (function(){
 				//判断是桌面上的文件夹，还是应用码头上的文件夹
 				var left, top;
 				if(obj.parent('div').hasClass('dock-applist')){
-					left = obj.offset().left + obj.width();
-					top = obj.offset().top;
+					left = parseInt(obj.attr('left')) + obj.width();
+					top = parseInt(obj.attr('top'));
 				}else{
-					left = obj.offset().left + obj.width();
-					top = obj.offset().top - 20;
+					left = parseInt(obj.attr('left')) + obj.width();
+					top = parseInt(obj.attr('top')) - 20;
 				}
 				//判断预览面板是否有超出屏幕
 				var isScrollbar = false;
-				if(height + top + 46 > $(window).height()){
-					var outH = height + top + 46 - $(window).height();
+				if(height + top + 44 > $(window).height()){
+					var outH = height + top + 44 - $(window).height();
 					if(outH <= top){
 						top -= outH;
 					}else{
@@ -91,18 +80,18 @@ HROS.folderView = (function(){
 						isScrollbar = true;
 					}
 				}
-				if(left + 340 > $(window).width()){
-					left -= (340 + obj.width());
+				if(left + 330 > $(window).width()){
+					left -= (330 + obj.width());
 					//预览居左
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
 						$(folderViewId).stop(true, false).animate({'left' : left, 'top' : top}, 500);
-						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 26) / 2)}, 200);
-						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2)}, 200).hide();
-						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2), 'height' : Math.ceil((height + 26) / 2) + 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 24) / 2)}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2)}, 200).hide();
+						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2), 'height' : Math.ceil((height + 24) / 2) + 20}, 200);
 						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : obj.offset().top - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : obj.offset().top - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : obj.offset().top - top + 20, 'height' : height + 26 - (obj.offset().top - top) - 20 + 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 24 - (parseInt(obj.attr('top')) - top) - 20 + 20}, 200);
 						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height' : height}, 200);
 					}else{
 						$('body').append(folderViewTemp({
@@ -113,12 +102,12 @@ HROS.folderView = (function(){
 							'top' : top,
 							'left' : left,
 							'height' : height,
-							'mlt' : Math.ceil((height + 26) / 2),
+							'mlt' : Math.ceil((height + 24) / 2),
 							'mlm' : false,
-							'mlb' : Math.ceil((height + 26) / 2),
+							'mlb' : Math.ceil((height + 24) / 2),
 							'mrt' : obj.offset().top - top,
 							'mrm' : true,
-							'mrb' : height + 26 - (obj.offset().top - top) - 20
+							'mrb' : height + 24 - (obj.offset().top - top) - 20
 						}));
 					}
 				}else{
@@ -126,12 +115,12 @@ HROS.folderView = (function(){
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
 						$(folderViewId).stop(true, false).animate({'left' : left, 'top' : top}, 500);
-						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : obj.offset().top - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : obj.offset().top - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : obj.offset().top - top + 20, 'height' : height + 26 - (obj.offset().top - top) - 20}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 26) / 2)}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2)}, 200).hide();
-						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : Math.ceil((height + 26) / 2), 'height' : Math.ceil((height + 26) / 2)}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : parseInt(obj.attr('top')) - top}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 24 - (parseInt(obj.attr('top')) - top) - 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 24) / 2)}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2)}, 200).hide();
+						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2), 'height' : Math.ceil((height + 24) / 2)}, 200);
 						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height' : height}, 200);
 					}else{
 						$('body').append(folderViewTemp({
@@ -144,10 +133,10 @@ HROS.folderView = (function(){
 							'height' : height,
 							'mlt' : obj.offset().top - top,
 							'mlm' : true,
-							'mlb' : height + 26 - (obj.offset().top - top) - 20,
-							'mrt' : Math.ceil((height + 26) / 2),
+							'mlb' : height + 24 - (obj.offset().top - top) - 20,
+							'mrt' : Math.ceil((height + 24) / 2),
 							'mrm' : false,
-							'mrb' : Math.ceil((height + 26) / 2)
+							'mrb' : Math.ceil((height + 24) / 2)
 						}));
 					}
 				}
@@ -161,7 +150,7 @@ HROS.folderView = (function(){
 				}
 			}, 0);
 		},
-		resize : function(){
+		setPos : function(){
 			$('body .quick_view_container').each(function(){
 				HROS.folderView.get($('#d_' + $(this).attr('appid')));
 			});

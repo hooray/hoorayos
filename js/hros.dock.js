@@ -144,7 +144,7 @@ HROS.dock = (function(){
 				});
 			}
 			HROS.taskbar.resize();
-			HROS.folderView.resize();
+			HROS.folderView.setPos();
 		},
 		updatePos : function(pos){
 			if(pos != HROS.CONFIG.dockPos && typeof(pos) != 'undefined'){

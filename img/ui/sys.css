@@ -98,7 +98,7 @@ body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
 .col-sub{float:right;width:215px;padding:10px 10px 0 0;overflow:hidden}
 .app-list-box{height:400px;overflow:hidden}
 
-.app-list-box .app-list{margin:0;height:324px;overflow:hidden;background:url(app_list.png)}
+.app-list-box .app-list{margin:0;height:330px;overflow:hidden;background:url(app_list.png)}
 .app-list-box .app-list li{position:relative;height:54px;padding:6px 0 6px 68px;vertical-align:middle;overflow:hidden}
 .app-list-box .app-list li:hover{background:#FBEFCE}
 .app-list-box .app-list li a{color:#555;text-decoration:none}

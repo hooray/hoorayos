@@ -1,13 +1,13 @@
 //桌面应用
 var appbtnTemp = template.compile(
-	'<li id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="top:<%=top%>px;left:<%=left%>px">'+
+	'<li id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
 		'<div><img src="<%=imgsrc%>" alt="<%=title%>"></div>'+
 		'<span><%=title%></span>'+
 	'</li>'
 );
 //桌面"添加应用"应用
 var addbtnTemp = template.compile(
-	'<li class="appbtn add" style="top:<%=top%>px;left:<%=left%>px">'+
+	'<li class="appbtn add">'+
 		'<i class="addicon"></i>'+
 		'<span>添加应用</span>'+
 	'</li>'
@@ -38,7 +38,7 @@ var widgetWindowTemp = template.compile(
 );
 //应用窗口
 var windowTemp = template.compile(
-	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;left:0;top:0;<% }else{ %>width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
+	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;<% }else{ %>width:<%=width%>px;height:<%=height%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
 				'<img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>'+
@@ -86,7 +86,7 @@ var windowTemp = template.compile(
 );
 //文件夹窗口
 var folderWindowTemp = template.compile(
-	'<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;left:<%=left%>px;z-index:<%=zIndex%>">'+
+	'<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;z-index:<%=zIndex%>">'+
 		'<div style="height:100%">'+
 			'<div class="title-bar">'+
 				'<img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>'+

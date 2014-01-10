@@ -99,8 +99,8 @@ HROS.appmanage = (function(){
 								case 'pwidget':
 									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
-								case 'app':
-								case 'papp':
+								case 'window':
+								case 'pwindow':
 								case 'folder':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
@@ -199,8 +199,8 @@ HROS.appmanage = (function(){
 								case 'pwidget':
 									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
-								case 'app':
-								case 'papp':
+								case 'window':
+								case 'pwindow':
 								case 'folder':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;

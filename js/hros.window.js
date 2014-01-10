@@ -76,12 +76,12 @@ HROS.window = (function(){
 					HROS.taskbar.resize();
 					//新增窗口
 					TEMP.windowTemp = {
-						'width' : options.width,
-						'height' : options.height,
 						'top' : ($(window).height() - options.height) / 2 <= 0 ? 0 : ($(window).height() - options.height) / 2,
 						'left' : ($(window).width() - options.width) / 2 <= 0 ? 0 : ($(window).width() - options.width) / 2,
 						'emptyW' : $(window).width() - options.width,
 						'emptyH' : $(window).height() - options.height,
+						'width' : options.width,
+						'height' : options.height,
 						'zIndex' : HROS.CONFIG.windowIndexid,
 						'type' : options.type,
 						'id' : 'w_' + options.appid,
@@ -100,6 +100,7 @@ HROS.window = (function(){
 					$('#desk').append(windowTemp(TEMP.windowTemp));
 					$(windowId).data('info', TEMP.windowTemp);
 					HROS.CONFIG.windowIndexid += 1;
+					HROS.window.setPos(false);
 					//iframe加载完毕后，隐藏loading遮罩层
 					$(windowId + ' iframe').load(function(){
 						$(windowId + ' .window-frame').children('div').eq(1).fadeOut();
@@ -167,12 +168,12 @@ HROS.window = (function(){
 							HROS.taskbar.resize();
 							//新增窗口
 							TEMP.windowTemp = {
-								'width' : options.width,
-								'height' : options.height,
 								'top' : top,
 								'left' : left,
 								'emptyW' : $(window).width() - options.width,
 								'emptyH' : $(window).height() - options.height,
+								'width' : options.width,
+								'height' : options.height,
 								'zIndex' : HROS.CONFIG.windowIndexid,
 								'type' : options.type,
 								'id' : 'w_' + options.appid,
@@ -191,6 +192,7 @@ HROS.window = (function(){
 							$('#desk').append(windowTemp(TEMP.windowTemp));
 							$(windowId).data('info', TEMP.windowTemp);
 							HROS.CONFIG.windowIndexid += 1;
+							HROS.window.setPos(false);
 							//iframe加载完毕后，隐藏loading遮罩层
 							$(windowId + ' iframe').load(function(){
 								$(windowId + ' .window-frame').children('div').fadeOut();
@@ -210,12 +212,12 @@ HROS.window = (function(){
 							HROS.taskbar.resize();
 							//新增窗口
 							TEMP.folderWindowTemp = {
-								'width' : options.width,
-								'height' : options.height,
 								'top' : top,
 								'left' : left,
 								'emptyW' : $(window).width() - options.width,
 								'emptyH' : $(window).height() - options.height,
+								'width' : options.width,
+								'height' : options.height,
 								'zIndex' : HROS.CONFIG.windowIndexid,
 								'type' : options.type,
 								'id' : 'w_' + options.appid,
@@ -227,6 +229,7 @@ HROS.window = (function(){
 							$('#desk').append(folderWindowTemp(TEMP.folderWindowTemp));
 							$(windowId).data('info', TEMP.folderWindowTemp);
 							HROS.CONFIG.windowIndexid += 1;
+							HROS.window.setPos(false);
 							//载入文件夹内容
 							var sc = '';
 							$(HROS.VAR.folder).each(function(){
@@ -239,8 +242,6 @@ HROS.window = (function(){
 								var folder_append = '';
 								$(sc).each(function(){
 									folder_append += appbtnTemp({
-										'top' : 0,
-										'left' : 0,
 										'title' : this.name,
 										'type' : this.type,
 										'id' : 'd_' + this.appid,
@@ -298,6 +299,34 @@ HROS.window = (function(){
 					$('#d_' + appid).attr('opening', 0);
 				});
 			}
+		},
+		setPos : function(isAnimate){
+			isAnimate = isAnimate == null ? true : isAnimate;
+			$('#desk .window-container').each(function(){
+				var windowdata = $(this).data('info');
+				var currentW = $(window).width() - $(this).width();
+				var currentH = $(window).height() - $(this).height();
+				var left = windowdata['left'] / windowdata['emptyW'] * currentW >= currentW ? currentW : windowdata['left'] / windowdata['emptyW'] * currentW;
+				left = left <= 0 ? 0 : left;
+				var top = windowdata['top'] / windowdata['emptyH'] * currentH >= currentH ? currentH : windowdata['top'] / windowdata['emptyH'] * currentH;
+				top = top <= 0 ? 0 : top;
+				if($(this).attr('state') != 'hide'){
+					$(this).stop(true, false).animate({
+						'left' : left,
+						'top' : top
+					}, isAnimate ? 500 : 0, function(){
+						windowdata['left'] = left;
+						windowdata['top'] = top;
+						windowdata['emptyW'] = $(window).width() - $(this).width();
+						windowdata['emptyH'] = $(window).height() - $(this).height();
+					});
+				}else{
+					windowdata['left'] = left;
+					windowdata['top'] = top;
+					windowdata['emptyW'] = $(window).width() - $(this).width();
+					windowdata['emptyH'] = $(window).height() - $(this).height();
+				}
+			});
 		},
 		close : function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
@@ -358,8 +387,8 @@ HROS.window = (function(){
 				HROS.window.updateFolder(appid);
 			}
 		},
-		show2top : function(appid, isanimate){
-			isanimate = isanimate == null ? false : isanimate;
+		show2top : function(appid, isAnimate){
+			isAnimate = isAnimate == null ? false : isAnimate;
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			var windowdata = $(windowId).data('info');
 			var arr = [];
@@ -389,7 +418,7 @@ HROS.window = (function(){
 				$(windowId + ' iframe').show();
 				HROS.CONFIG.windowIndexid += 1;
 			}
-			if(isanimate){
+			if(isAnimate){
 				var baseStartX = $(windowId).offset().left, baseEndX = baseStartX + $(windowId).width();
 				var baseStartY = $(windowId).offset().top, baseEndY = baseStartY + $(windowId).height();
 				var baseCenterX = baseStartX + ($(windowId).width() / 2), baseCenterY = baseStartY + ($(windowId).height() / 2);

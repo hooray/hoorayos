@@ -111,24 +111,29 @@ HROS.app = (function(){
 		**  渲染桌面，输出应用
 		*/
 		set : function(){
-			if($('#desktop').css('display') !== 'none'){
-				switch(HROS.CONFIG.appSize){
-					case 's':
-						$('#desk').removeClass('smallIcon').addClass('smallIcon');
-						break;
-					case 'm':
-						$('#desk').removeClass('smallIcon');
-						break;
-				}
-				//绘制应用表格
-				var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
-				//加载应用码头应用
-				var dock_append = '';
-				if(HROS.VAR.dock != ''){
-					$(HROS.VAR.dock).each(function(i){
-						dock_append += appbtnTemp({
-							'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 5,
-							'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 5 : dockGrid[i]['startX'],
+			//加载应用码头应用
+			var dock_append = '';
+			if(HROS.VAR.dock != ''){
+				$(HROS.VAR.dock).each(function(){
+					dock_append += appbtnTemp({
+						'title' : this.name,
+						'type' : this.type,
+						'id' : 'd_' + this.appid,
+						'appid' : this.appid,
+						'realappid' : this.realappid == 0 ? this.appid : this.realappid,
+						'imgsrc' : this.icon
+					});
+				});
+			}
+			$('#dock-bar .dock-applist li').remove();
+			$('#dock-bar .dock-applist').append(dock_append);
+			//加载桌面应用
+			for(var j = 1; j <= 5; j++){
+				var desk_append = '';
+				var desk = eval('HROS.VAR.desk' + j);
+				if(desk != ''){
+					$(desk).each(function(){
+						desk_append += appbtnTemp({
 							'title' : this.name,
 							'type' : this.type,
 							'id' : 'd_' + this.appid,
@@ -138,50 +143,65 @@ HROS.app = (function(){
 						});
 					});
 				}
-				$('#dock-bar .dock-applist li').remove();
-				$('#dock-bar .dock-applist').append(dock_append);
-				//加载桌面应用
-				for(var j = 1; j <= 5; j++){
-					var desk_append = '';
-					var desk = eval('HROS.VAR.desk' + j);
-					var offsetTop = 6;
-					var offsetLeft = 17;
+				desk_append += addbtnTemp();
+				$('#desk-' + j + ' li').remove();
+				$('#desk-' + j + ' .desktop-apps-container').append(desk_append);
+			}
+			HROS.app.setPos(false);
+			//如果文件夹预览面板为显示状态，则进行更新
+			$('body .quick_view_container').each(function(){
+				HROS.folderView.get($('#d_' + $(this).attr('appid')));
+			});
+			//如果文件夹窗口为显示状态，则进行更新
+			$('#desk .folder-window').each(function(){
+				HROS.window.updateFolder($(this).attr('appid'));
+			});
+			//加载滚动条
+			HROS.app.getScrollbar();
+		},
+		setPos : function(isAnimate){
+			isAnimate = isAnimate == null ? true : isAnimate;
+			if($('#desk').hasClass('smallIcon')){
+				$('#desk').removeClass('smallIcon');
+			}
+			if(HROS.CONFIG.appSize == 's'){
+				$('#desk').addClass('smallIcon');
+			}
+			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
+			$('#dock-bar .dock-applist li').each(function(i){
+				$(this).css({
+					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 5,
+					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 5 : dockGrid[i]['startX']
+				}).attr('top', $(this).offset().top).attr('left', $(this).offset().left);
+			});
+			for(var j = 1; j <= 5; j++){
+				$('#desk-' + j + ' li').each(function(i){
+					var offsetTop = 7;
+					var offsetLeft = 16;
 					if(HROS.CONFIG.appSize == 's'){
 						offsetTop = 11;
 						offsetLeft = 21;
 					}
-					if(desk != ''){
-						$(desk).each(function(i){
-							desk_append += appbtnTemp({
-								'top' : grid[i]['startY'] + offsetTop,
-								'left' : grid[i]['startX'] + offsetLeft,
-								'title' : this.name,
-								'type' : this.type,
-								'id' : 'd_' + this.appid,
-								'appid' : this.appid,
-								'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-								'imgsrc' : this.icon
-							});
-						});
+					var top = grid[i]['startY'] + offsetTop;
+					var left = grid[i]['startX'] + offsetLeft;
+					$(this).stop(true, false).animate({
+						'top' : top,
+						'left' : left
+					}, isAnimate ? 500 : 0);
+					switch(HROS.CONFIG.dockPos){
+						case 'top':
+							$(this).attr('left', left).attr('top', top + $('#dock-bar').height());
+							break;
+						case 'left':
+							$(this).attr('left', left + $('#dock-bar').width()).attr('top', top);
+							break;
+						default:
+							$(this).attr('left', left).attr('top', top);
 					}
-					desk_append += addbtnTemp({
-						'top' : grid[desk.length]['startY'] + offsetTop,
-						'left' : grid[desk.length]['startX'] + offsetLeft
-					});
-					$('#desk-' + j + ' li').remove();
-					$('#desk-' + j + ' .desktop-apps-container').append(desk_append);
-				}
-				//如果文件夹预览面板为显示状态，则进行更新
-				HROS.folderView.resize();
-				//如果文件夹窗口为显示状态，则进行更新
-				$('#desk .folder-window').each(function(){
-					HROS.window.updateFolder($(this).attr('appid'));
 				});
-				//加载滚动条
-				HROS.app.getScrollbar();
-			}else{
-				HROS.appmanage.getScrollbar();
 			}
+			//更新滚动条
+			HROS.app.getScrollbar();
 		},
 		/*
 		**  添加应用
