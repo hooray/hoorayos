@@ -23,10 +23,6 @@ $_POST = daddslashes($_POST, 1, TRUE);
 $_REQUEST = daddslashes($_REQUEST, 1, TRUE);
 $_COOKIE = daddslashes($_COOKIE, 1, TRUE);
 
-trim(@extract($_POST));
-trim(@extract($_GET));
-trim(@extract($_REQUEST));
-
 $_CONFIG = array(
 	'authkey' => 'hoorayos', //站点加密密钥，可随意更改
 	'COOKIE_PREFIX' => '',
@@ -72,15 +68,15 @@ $errorcode = array(
 	'noPermissions'=>'1002'
 );
 
-//数据库连接配置信息
-$db_hoorayos_config = array(
-	'dsn'=>'mysql:host=localhost;dbname=hoorayos',
-	'name'=>'root',
-	'password'=>''
-);
-
 //创建数据库连接
-$db = new HRDB($db_hoorayos_config);
+$db = new medoo(array(
+	'database_name' => 'hoorayos',
+	'username' => 'root',
+	'password' => '',
+	'option' => array(
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	)
+));
 
 //社区登录公用变量配置信息
 //新浪微博

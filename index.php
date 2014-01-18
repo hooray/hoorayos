@@ -3,7 +3,7 @@
 	require('global.php');
 	
 	cookie('fromsite', NULL);
-	$setting = $db->select(0, 1, 'tb_setting');
+	$setting = $db->get('tb_setting', '*');
 	//检查是否登录
 	if(!checkLogin()){
 		//未登录用户的ID默认为0，session、cookie均要设置
@@ -14,17 +14,22 @@
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
 			//用户信息存在并且开启下次自动登入，则进行登录操作
 			if($userinfo['rememberMe'] == 1){
-				$sqlwhere = array(
-					'username = "'.$userinfo['username'].'"',
-					'password = "'.sha1(authcode($userinfo['password'], 'DECODE')).'"'
-				);
-				$row = $db->select(0, 1, 'tb_member', '*', $sqlwhere);
+				$row = $db->get('tb_member', '*', array(
+					'AND' => array(
+						'username' => $userinfo['username'],
+						'password' => sha1(authcode($userinfo['password'], 'DECODE'))
+					)
+				));
 				//检查登录是否成功
-				if(!empty($row)){
+				if($row){
 					session('member_id', $row['tbid']);
 					cookie('memberID', $row['tbid'], time() + 3600 * 24 * 7);
-					$db->update(0, 0, 'tb_member', 'lastlogindt = now(), lastloginip = "'.getIp().'"', 'and tbid = '.$row['tbid']);
-					$skin = $db->select(0, 1, 'tb_member', 'skin', 'and tbid = '.session('member_id'));
+					$db->update('tb_member', array(
+						'lastlogindt' => date('Y-m-d H:i:s'),
+						'lastloginip' => getIp()
+					), array(
+						'tbid' => $row['tbid']
+					));
 				}
 			}
 		}
@@ -247,11 +252,8 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 			<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L"></a>
 			<div class="startmenu-avatar"><img src="img/ui/loading_24.gif"></div>
 			<div class="startmenu-nick">
-				<?php
-					if(session('member_id') != 0){
-						$member = $db->select(0, 1, 'tb_member', 'username', 'and tbid = '.session('member_id'));
-				?>
-				<a href="javascript:;" title="编辑个人资料"><?php echo $member['username'];?></a>
+				<?php if(checkLogin()){ ?>
+				<a href="javascript:;" title="编辑个人资料"><?php echo $db->get('tb_member', 'username', array('tbid' => session('member_id'))); ?></a>
 				<?php }else{ ?>
 				<a href="javascript:;">请登录</a>
 				<?php } ?>

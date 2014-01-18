@@ -1,26 +1,27 @@
 <?php
 	require('../../global.php');
 		
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getList':
-			$appcategory = $db->select(0, 0, 'tb_app_category', '*');
+			$appcategory = $db->select('tb_app_category', '*');
 			foreach($appcategory as $ac){
 				$category[$ac['tbid']] = $ac['name'];
 			}
-			$orderby = 'dt desc limit '.(int)$from.','.(int)$to;
-			if($search_1 != ''){
-				$sqlwhere[] = 'name like "%'.$search_1.'%"';
+			$where = array();
+			if($_POST['search_1'] != ''){
+				$where['LIKE']['name'] = $_POST['search_1'];
 			}
-			if($search_2 != ''){
-				$sqlwhere[] = 'app_category_id = '.(int)$search_2;
+			if($_POST['search_2'] != ''){
+				$where['AND']['app_category_id'] = $_POST['search_2'];
 			}
-			if($search_3 != ''){
-				$sqlwhere[] = 'type = "'.$search_3.'"';
+			if($_POST['search_3'] != ''){
+				$where['AND']['type'] = $_POST['search_3'];
 			}
-			$sqlwhere[] = $search_4 == 1 ? 'verifytype = 1' : 'verifytype = 2';
-			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
-			echo $c.'<{|*|}>';
-			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);
+			$where['AND']['verifytype'] = $_POST['search_4'] == 1 ? 1 : 2;
+			echo $db->count('tb_app', $where).'<{|*|}>';
+			$where['ORDER'] = 'dt DESC';
+			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
+			$rs = $db->select('tb_app', '*', $where);
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
@@ -46,11 +47,21 @@
 			}
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_app', 'and tbid = '.(int)$appid);
+			$db->delete('tb_app', array(
+				'tbid' => $_POST['appid']
+			));
 			break;
 		case 'recommend':
-			$db->update(0, 0, 'tb_app', 'isrecommend = 0', 'and isrecommend = 1');
-			$db->update(0, 0, 'tb_app', 'isrecommend = 1', 'and tbid = '.(int)$appid);
+			$db->update('tb_app', array(
+				'isrecommend' => 0
+			), array(
+				'isrecommend' => 1
+			));
+			$db->update('tb_app', array(
+				'isrecommend' => 1
+			), array(
+				'tbid' => $_POST['appid']
+			));
 			break;
 	}
 ?>

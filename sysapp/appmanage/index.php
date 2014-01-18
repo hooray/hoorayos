@@ -42,7 +42,9 @@ body{margin:10px 10px 0}
 			<select name="search_2" id="search_2" style="width:140px">
 				<option value="">全部</option>
 				<?php
-					$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+					$appcategory = $db->select('tb_app_category', '*', array(
+						'ORDER' => 'tbid ASC'
+					));
 					foreach($appcategory as $ac){
 						echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 					}

@@ -5,7 +5,9 @@
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
-	$member = $db->select(0, 1, 'tb_member', '*', 'and tbid = '.session('member_id'));
+	$member = $db->get('tb_member', '*', array(
+		'tbid' => session('member_id')
+	));
 	$global_title = 'bind';
 ?>
 <!doctype html>

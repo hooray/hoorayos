@@ -563,12 +563,21 @@
 	function getWallpaper(){
 		global $db;
 		if(checkLogin()){
-			$rs = $db->select(0, 1, 'tb_member', 'wallpaper_id, wallpapertype, wallpaperwebsite, wallpaperstate', 'and tbid = '.session('member_id'));
+			$rs = $db->get('tb_member', array(
+				'wallpaper_id',
+				'wallpapertype',
+				'wallpaperwebsite',
+				'wallpaperstate'
+			), array(
+				'tbid' => session('member_id')
+			));
 			switch($rs['wallpaperstate']){
 				case '1':
 				case '2':
 					$table = $rs['wallpaperstate'] == 1 ? 'tb_wallpaper' : 'tb_pwallpaper';
-					$wallpaper = $db->select(0, 1, $table, 'url, width, height', 'and tbid = '.$rs['wallpaper_id']);
+					$wallpaper = $db->get($table, array('url', 'width', 'height'), array(
+						'tbid' => $rs['wallpaper_id']
+					));
 					$wallpaper_array = array(
 						$rs['wallpaperstate'],
 						$wallpaper['url'],
@@ -585,8 +594,10 @@
 					break;
 			}
 		}else{
-			$set = $db->select(0, 1, 'tb_setting', 'wallpaper_id, wallpapertype');
-			$wallpaper = $db->select(0, 1, 'tb_wallpaper', 'url, width, height', 'and tbid = '.$set['wallpaper_id']);
+			$set = $db->get('tb_setting', array('wallpaper_id', 'wallpapertype'));
+			$wallpaper = $db->get('tb_wallpaper', array('url', 'width', 'height'), array(
+				'tbid' => $set['wallpaper_id']
+			));
 			$wallpaper_array = array(
 				1,
 				$wallpaper['url'],
@@ -601,11 +612,11 @@
 	function getSkin(){
 		global $db;
 		if(checkLogin()){
-			$member = $db->select(0, 1, 'tb_member', 'skin', 'and tbid = '.session('member_id'));
-			$skin = $member['skin'];
+			$skin = $db->get('tb_member', 'skin', array(
+				'tbid' => session('member_id')
+			));
 		}else{
-			$setting = $db->select(0, 1, 'tb_setting', 'skin');
-			$skin = $setting['skin'];
+			$skin = $db->get('tb_setting', 'skin');
 		}
 		return $skin;
 	}
@@ -613,11 +624,11 @@
 	function getDockPos(){
 		global $db;
 		if(checkLogin()){
-			$member = $db->select(0, 1, 'tb_member', 'dockpos', 'and tbid = '.session('member_id'));
-			$dockpos = $member['dockpos'];
+			$dockpos = $db->get('tb_member', 'dockpos', array(
+				'tbid' => session('member_id')
+			));
 		}else{
-			$setting = $db->select(0, 1, 'tb_setting', 'dockpos');
-			$dockpos = $setting['dockpos'];
+			$dockpos = $db->get('tb_setting', 'dockpos');
 		}
 		return $dockpos;
 	}
@@ -625,11 +636,11 @@
 	function getAppXY(){
 		global $db;
 		if(checkLogin()){
-			$member = $db->select(0, 1, 'tb_member', 'appxy', 'and tbid = '.session('member_id'));
-			$appxy = $member['appxy'];
+			$appxy = $db->get('tb_member', 'appxy', array(
+				'tbid' => session('member_id')
+			));
 		}else{
-			$setting = $db->select(0, 1, 'tb_setting', 'appxy');
-			$appxy = $setting['appxy'];
+			$appxy = $db->get('tb_setting', 'appxy');
 		}
 		return $appxy;
 	}
@@ -637,11 +648,11 @@
 	function getAppSize(){
 		global $db;
 		if(checkLogin()){
-			$member = $db->select(0, 1, 'tb_member', 'appsize', 'and tbid = '.session('member_id'));
-			$appsize = $member['appsize'];
+			$appsize = $db->get('tb_member', 'appsize', array(
+				'tbid' => session('member_id')
+			));
 		}else{
-			$setting = $db->select(0, 1, 'tb_setting', 'appsize');
-			$appsize = $setting['appsize'];
+			$appsize = $db->get('tb_setting', 'appsize');
 		}
 		return $appsize;
 	}
@@ -649,11 +660,11 @@
 	function getDesk(){
 		global $db;
 		if(checkLogin()){
-			$member = $db->select(0, 1, 'tb_member', 'desk', 'and tbid = '.session('member_id'));
-			$desk = $member['desk'];
+			$desk = $db->get('tb_member', 'desk', array(
+				'tbid' => session('member_id')
+			));
 		}else{
-			$setting = $db->select(0, 1, 'tb_setting', 'desk');
-			$desk = $setting['desk'];
+			$desk = $db->get('tb_setting', 'desk');
 		}
 		return $desk;
 	}
@@ -666,87 +677,106 @@
 		global $db;
 		switch($opt['type']){
 			case 'folder':
-				$set = array(
-					'icon = "'.$opt['icon'].'"',
-					'name = "'.$opt['name'].'"',
-					'width = 600',
-					'height = 400',
-					'type = "'.$opt['type'].'"',
-					'dt = now()',
-					'lastdt = now()',
-					'member_id = '.session('member_id')
-				);
-				$appid = $db->insert(0, 2, 'tb_member_app', $set);
+				$appid = $db->insert('tb_member_app', array(
+					'icon' => $opt['icon'],
+					'name' => $opt['name'],
+					'width' => 600,
+					'height' => 400,
+					'type' => $opt['type'],
+					'dt' => date('Y-m-d H:i:s'),
+					'lastdt' => date('Y-m-d H:i:s'),
+					'member_id' => session('member_id')
+				));
 				break;
 			case 'pwindow':
 			case 'pwidget':
-				$set = array(
-					'icon = "'.$opt['icon'].'"',
-					'name = "'.$opt['name'].'"',
-					'url = "'.$opt['url'].'"',
-					'type = "'.$opt['type'].'"',
-					'width = '.(int)$opt['width'],
-					'height = '.(int)$opt['height'],
-					'isresize = '.(int)$opt['isresize'],
-					'isopenmax = '.(int)$opt['isopenmax'],
-					'isflash = '.(int)$opt['isflash'],
-					'dt = now()',
-					'lastdt = now()',
-					'member_id = '.session('member_id')
-				);
-				$appid = $db->insert(0, 2, 'tb_member_app', $set);
+				$appid = $db->insert('tb_member_app', array(
+					'icon' => $opt['icon'],
+					'name' => $opt['name'],
+					'url' => $opt['url'],
+					'type' => $opt['type'],
+					'width' => $opt['width'],
+					'height' => $opt['height'],
+					'isresize' => $opt['isresize'],
+					'isopenmax' => $opt['isopenmax'],
+					'isflash' => $opt['isflash'],
+					'dt' => date('Y-m-d H:i:s'),
+					'lastdt' => date('Y-m-d H:i:s'),
+					'member_id' => session('member_id')
+				));
 				break;
 			default:
 				//检查应用是否已安装
-				$count = $db->select(0, 2, 'tb_member_app', '*', 'and realid = '.(int)$opt['id'].' and member_id = '.session('member_id'));
-				if($count == 0){
+				if($db->has('tb_member_app', array(
+					'AND' => array(
+						'realid' => $opt['id'],
+						'member_id' => session('member_id')
+					)
+				))){
 					//查找应用信息
-					$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.(int)$opt['id']);
+					$app = $db->get('tb_app', '*', array(
+						'tbid' => $opt['id']
+					));
 					//在安装应用表里更新一条记录
-					$set = array(
-						'realid = '.$opt['id'],
-						'name = "'.$app['name'].'"',
-						'icon = "'.$app['icon'].'"',
-						'type = "'.$app['type'].'"',
-						'width = '.(int)$app['width'],
-						'height = '.(int)$app['height'],
-						'isresize = '.(int)$app['isresize'],
-						'isopenmax = '.(int)$app['isopenmax'],
-						'issetbar = '.(int)$app['issetbar'],
-						'isflash = '.(int)$app['isflash'],
-						'dt = now()',
-						'lastdt = now()',
-						'member_id = '.session('member_id')
-					);
-					$appid = $db->insert(0, 2, 'tb_member_app', $set);
+					$appid = $db->insert('tb_member_app', array(
+						'realid' => $opt['id'],
+						'name' => $app['name'],
+						'icon' => $app['icon'],
+						'type' => $app['type'],
+						'width' => $app['width'],
+						'height' => $app['height'],
+						'isresize' => $app['isresize'],
+						'isopenmax' => $app['isopenmax'],
+						'issetbar' => $app['issetbar'],
+						'isflash' => $app['isflash'],
+						'dt' => date('Y-m-d H:i:s'),
+						'lastdt' => date('Y-m-d H:i:s'),
+						'member_id' => session('member_id')
+					));
 					//更新使用人数
-					$db->update(0, 0, 'tb_app', 'usecount = usecount + 1', 'and tbid = '.(int)$opt['id']);
+					$db->update('tb_app', array(
+						'usecount[+]' => 1
+					), array(
+						'tbid' => $opt['id']
+					));
 				}
 		}
 		if(!empty($appid) && (int)$opt['desk'] >= 1 && (int)$opt['desk'] <= 5){
 			//将安装应用表返回的id记录到用户表
-			$rs = $db->select(0, 1, 'tb_member', 'desk'.(int)$opt['desk'], 'and tbid='.session('member_id'));
-			$deskapp = $rs['desk'.(int)$opt['desk']] == '' ? $appid : $rs['desk'.(int)$opt['desk']].','.$appid;
-			$db->update(0, 0, 'tb_member', 'desk'.(int)$opt['desk'].'="'.$deskapp.'"', 'and tbid='.session('member_id'));
+			$rs = $db->get('tb_member', 'desk'.(int)$opt['desk'], array(
+				'tbid' => session('member_id')
+			));
+			$db->update('tb_member', array(
+				'desk'.(int)$opt['desk'] => $rs == '' ? $appid : $rs.','.$appid
+			), array(
+				'tbid' => session('member_id')
+			));
 		}
 	}
 	//删除应用
 	function delApp($id){
 		global $db;
-		$member_app = $db->select(0, 1, 'tb_member_app', 'realid, type, folder_id', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+		$member_app = $db->get('tb_member_app', array('realid', 'type', 'folder_id'), array(
+			'AND' => array(
+				'tbid' => $id,
+				'member_id' => session('member_id')
+			)
+		));
 		//如果是文件夹，则先删除文件夹内的应用
 		if($member_app['type'] == 'folder'){
-			$rs = $db->select(0, 0, 'tb_member_app', 'tbid', 'and folder_id = '.(int)$id);
-			if($rs != NULL){
-				foreach($rs as $v){
-					delApp($v['tbid']);
-				}
+			$rs = $db->select('tb_member_app', 'tbid', array(
+				'folder_id' => $id
+			));
+			foreach($rs as $v){
+				delApp($v);
 			}
 		}else if($member_app['type'] == 'window' || $member_app['type'] == 'widget'){
 			$db->update(0, 0, 'tb_app', 'usecount = usecount - 1', 'and tbid = '.$member_app['realid']);
 		}
-		$member = $db->select(0, 1, 'tb_member', 'dock, desk1, desk2, desk3, desk4, desk5', 'and tbid = '.session('member_id'));
-		$set = array();
+		$member = $db->get('tb_member', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'), array(
+			'tbid' => session('member_id')
+		));
+		$data = array();
 		if($member['dock'] != ''){
 			$dockapp = explode(',', $member['dock']);
 			foreach($dockapp as $k => $v){
@@ -755,7 +785,7 @@
 					break;
 				}
 			}
-			$set[] = 'dock = "'.implode(',', $dockapp).'"';
+			$data['dock'] = implode(',', $dockapp);
 		}
 		for($i = 1; $i <= 5; $i++){
 			if($member['desk'.$i] != ''){
@@ -766,13 +796,20 @@
 						break;
 					}
 				}
-				$set[] = 'desk'.$i.' = "'.implode(',', $deskapp).'"';
+				$data['desk'.$i] = implode(',', $deskapp);
 			}
 		}
 		if($set != NULL){
-			$db->update(0, 0, 'tb_member', $set, 'and tbid = '.session('member_id'));
+			$db->update('tb_member', $data, array(
+				'tbid' => session('member_id')
+			));
 		}
-		$db->delete(0, 0, 'tb_member_app', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+		$db->delete('tb_member_app', array(
+			'AND' => array(
+				'tbid' => $id,
+				'member_id' => session('member_id')
+			)
+		));
 	}
 	//强制格式化appid，如：'10,13,,17,4,6,'，格式化后：'10,13,17,4,6'
 	function formatAppidArray($arr){
@@ -790,18 +827,23 @@
 	//验证是否为管理员
 	function checkAdmin(){
 		global $db;
-		$user = $db->select(0, 1, 'tb_member', 'type', 'and tbid = '.session('member_id'));
-		return $user['type'] == 1 ? true : false;
+		return $db->get('tb_member', 'type', array(
+			'tbid' => session('member_id')
+		)) == 1 ? true : false;
 	}
 	//验证是否有权限
 	function checkPermissions($app_id){
 		global $db;
 		$isHavePermissions = false;
-		$user = $db->select(0, 1, 'tb_member', 'permission_id', 'and tbid = '.session('member_id'));
-		if($user['permission_id'] != ''){
-			$permission = $db->select(0, 1, 'tb_permission', 'apps_id', 'and tbid = '.$user['permission_id']);
-			if($permission['apps_id'] != ''){
-				$apps = explode(',', $permission['apps_id']);
+		$permission_id = $db->get('tb_member', 'permission_id', array(
+			'tbid' => session('member_id')
+		));
+		if($permission_id != ''){
+			$apps_id = $db->get('tb_permission', 'apps_id', array(
+				'tbid' => $permission_id
+			));
+			if($apps_id != ''){
+				$apps = explode(',', $apps_id);
 				if(in_array($app_id, $apps)){
 					$isHavePermissions = true;
 				}

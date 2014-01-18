@@ -1,29 +1,31 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
-			$val_issetbar = $val_kindid == 1 ? 0 : 1;
-			$set = array(
-				'icon = "'.$val_icon.'"',
-				'name = "'.$val_name.'"',
-				'app_category_id = '.(int)$val_app_category_id,
-				'url = "'.$val_url.'"',
-				'width = '.(int)$val_width,
-				'height = '.(int)$val_height,
-				'isresize = '.(int)$val_isresize,
-				'isopenmax = '.(int)$val_isopenmax,
-				'issetbar = '.(int)$val_issetbar,
-				'isflash = '.(int)$val_isflash,
-				'remark = "'.$val_remark.'"'
+			$_POST['val_issetbar'] = $_POST['val_kindid'] == 1 ? 0 : 1;
+			$data = array(
+				'icon' => $_POST['val_icon'],
+				'name' => $_POST['val_name'],
+				'app_category_id' => $_POST['val_app_category_id'],
+				'url' => $_POST['val_url'],
+				'width' => $_POST['val_width'],
+				'height' => $_POST['val_height'],
+				'isresize' => $_POST['val_isresize'],
+				'isopenmax' => $_POST['val_isopenmax'],
+				'issetbar' => $_POST['val_issetbar'],
+				'isflash' => $_POST['val_isflash'],
+				'remark' => $_POST['val_remark']
 			);
-			if($id == ''){
-				$set[] = 'type = "'.$val_type.'"';
-				$set[] = 'dt = now()';
-				$set[] = 'verifytype = 1';
-				$db->insert(0, 0, 'tb_app', $set);
+			if($_POST['id'] == ''){
+				$data['type'] = $_POST['val_type'];
+				$data['dt'] = date('Y-m-d H:i:s');
+				$data['verifytype'] = 1;
+				$db->insert('tb_app', $data);
 			}else{
-				$db->update(0, 0, 'tb_app', $set, 'and tbid = '.(int)$id);
+				$db->update('tb_app', $data, array(
+					'tbid' => $_POST['id']
+				));
 			}
 			echo json_encode(array(
 				'info' => '',
@@ -42,10 +44,19 @@
 			echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
 			break;
 		case 'pass':
-			$db->update(0, 0, 'tb_app', 'verifytype = 1', 'and tbid = '.(int)$appid);
+			$db->update('tb_app', array(
+				'verifytype' => 1
+			), array(
+				'tbid' => $_POST['appid']
+			));
 			break;
 		case 'unpass':
-			$db->update(0, 0, 'tb_app', 'verifytype = 3, verifyinfo = "'.$info.'"', 'and tbid = '.(int)$appid);
+			$db->update('tb_app', array(
+				'verifytype' => 3,
+				'verifyinfo' => $_POST['info']
+			), array(
+				'tbid' => $_POST['appid']
+			));
 			break;
 	}
 ?>

@@ -27,7 +27,7 @@ function avatar_success(){
 <body>
 <?php include('global_title.php'); ?>
 <div style="width:530px;margin:0 auto">
-	<embed src="../../libs/avatar_face/face.swf" quality="high" wmode="opaque" FlashVars="defaultImg=<?php echo $avatar; ?>?id=<?php echo getRandStr(10); ?>" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="530" height="480"></embed>
+	<embed src="../../libs/avatar_face/face.swf" quality="high" wmode="opaque" FlashVars="defaultImg=<?php echo $avatar; ?>?id=<?php echo rand_string(10, 0); ?>" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="530" height="480"></embed>
 </div>
 <?php include('sysapp/global_js.php'); ?>
 </body>

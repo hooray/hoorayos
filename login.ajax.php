@@ -1,17 +1,29 @@
 <?php
 	require('global.php');
 		
-	switch($ac){
+	switch($_POST['ac']){
 		//登录
 		case 'login':
-			$rememberMe = isset($rememberMe) ? 1 : 0;
-			$sqlwhere = array(
-				'username = "'.$username.'"',
-				'password = "'.sha1($password).'"'
-			);
-			$row = $db->select(0, 1, 'tb_member', '*', $sqlwhere);
-			if(!empty($row)){
-				$db->update(0, 0, 'tb_member', 'lastlogindt = thislogindt, lastloginip = thisloginip, thislogindt = now(), thisloginip = "'.getIp().'"', 'and tbid = '.$row['tbid']);
+			$rememberMe = isset($_POST['rememberMe']) ? 1 : 0;
+			$row = $db->get('tb_member', '*', array(
+				'AND' => array(
+					'username' => $_POST['username'],
+					'password' => sha1($_POST['password'])
+				)
+			));
+			if($row){
+				$db->update('tb_member', array(
+					'lastlogindt' => $db->get('tb_member', 'thislogindt', array(
+						'tbid' => $row['tbid']
+					)),
+					'lastloginip' => $db->get('tb_member', 'thisloginip', array(
+						'tbid' => $row['tbid']
+					)),
+					'thislogindt' => date('Y-m-d H:i:s'),
+					'thisloginip' => getIp()
+				), array(
+					'tbid' => $row['tbid']
+				));
 				session('member_id', $row['tbid']);
 				cookie('memberID', $row['tbid'], 3600 * 24 * 7);
 				$cb['info'] = '';
@@ -22,13 +34,14 @@
 						$cb['info'] = 'ERROR_OPENID_IS_USED';
 						$cb['status'] = 'n';
 					}else{
-						$set = array(
-							'openid_'.cookie('fromsite').' = "'.session('openid').'"',
-							'openname_'.cookie('fromsite').' = "'.session('openname').'"',
-							'openavatar_'.cookie('fromsite').' = "'.session('openavatar').'"',
-							'openurl_'.cookie('fromsite').' = "'.session('openurl').'"'
-						);
-						$db->update(0, 0, 'tb_member', $set, 'and tbid = '.$row['tbid']);
+						$db->update(0, 0, 'tb_member', array(
+							'openid_'.cookie('fromsite') => session('openid'),
+							'openname_'.cookie('fromsite') => session('openname'),
+							'openavatar_'.cookie('fromsite') => session('openavatar'),
+							'openurl_'.cookie('fromsite') => session('openurl')
+						), array(
+							'tbid' => $row['tbid']
+						));
 						cookie('fromsite', NULL);
 						session('openid', NULL);
 						session('openname', NULL);
@@ -38,9 +51,9 @@
 				}
 				//处理登录用户信息到cookie
 				$userinfo = array();
-				$userinfo['username'] = $username;
-				$userinfo['password'] = $rememberMe ? authcode($password, 'ENCODE') : '';
-				$userinfo['rememberMe'] = $rememberMe;
+				$userinfo['username'] = $_POST['username'];
+				$userinfo['password'] = $_POST['rememberMe'] ? authcode($_POST['password'], 'ENCODE') : '';
+				$userinfo['rememberMe'] = $_POST['rememberMe'];
 				$userinfo['avatar'] = getAvatar($row['tbid'], 'l');
 				cookie('userinfo', json_encode($userinfo), 3600 * 24 * 7);
 			}else{
@@ -53,9 +66,22 @@
 		case '3login':
 			//检测所需数据是否存在
 			if(cookie('fromsite') && session('?openid') && session('?openname')){
-				$row = $db->select(0, 1, 'tb_member', '*', 'and openid_'.cookie('fromsite').' = "'.session('openid').'"');
-				if(!empty($row)){
-					$db->update(0, 0, 'tb_member', 'lastlogindt = thislogindt, lastloginip = thisloginip, thislogindt = now(), thisloginip = "'.getIp().'"', 'and tbid = '.$row['tbid']);
+				$row = $db->get('tb_member', '*', array(
+					'openid_'.cookie('fromsite') => session('openid')
+				));
+				if($row){
+					$db->update('tb_member', array(
+						'lastlogindt' => $db->get('tb_member', 'thislogindt', array(
+							'tbid' => $row['tbid']
+						)),
+						'lastloginip' => $db->get('tb_member', 'thisloginip', array(
+							'tbid' => $row['tbid']
+						)),
+						'thislogindt' => date('Y-m-d H:i:s'),
+						'thisloginip' => getIp()
+					), array(
+						'tbid' => $row['tbid']
+					));
 					session('member_id', $row['tbid']);
 					cookie('memberID', $row['tbid'], 3600 * 24 * 7);
 					//清空数据
@@ -64,13 +90,6 @@
 					session('openname', NULL);
 					session('openavatar', NULL);
 					session('openurl', NULL);
-					//处理登录用户信息到cookie
-					$userinfo = array();
-					$userinfo['username'] = $row['username'];
-					$userinfo['password'] = '';
-					$userinfo['rememberMe'] = 0;
-					$userinfo['avatar'] = getAvatar($row['tbid'], 'l');
-					cookie('userinfo', json_encode($userinfo), 3600 * 24 * 7);
 				}else{
 					echo 'ERROR_NOT_BIND';
 				}
@@ -80,18 +99,18 @@
 			break;
 		//注册
 		case 'register':
-			$isreg = $db->select(0, 1, 'tb_member', 'tbid', 'and username = "'.$reg_username.'"');
-			if(empty($isreg)){
-				$set = array(
-					'username = "'.$reg_username.'"',
-					'password = "'.sha1($reg_password).'"',
-					'lockpassword = "'.sha1($reg_password).'"',
-					'thislogindt = now()',
-					'thisloginip = "'.getIp().'"',
-					'regdt = now()'
-				);
-				$db->insert(0, 0, 'tb_member', $set);
-				$cb['info'] = $reg_username;
+			if(!$db->has('tb_member', array(
+				'username' => $_POST['reg_username']
+			))){
+				$db->insert('tb_member', array(
+					'username' => $_POST['reg_username'],
+					'password' => sha1($_POST['reg_password']),
+					'lockpassword' => sha1($_POST['reg_password']),
+					'thislogindt' => date('Y-m-d H:i:s'),
+					'thisloginip' => getIp(),
+					'regdt' => date('Y-m-d H:i:s')
+				));
+				$cb['info'] = $_POST['reg_username'];
 				$cb['status'] = 'y';
 			}else{
 				$cb['info'] = '';
@@ -100,8 +119,9 @@
 			echo json_encode($cb);
 			break;
 		case 'checkUsername':
-			$isreg = $db->select(0, 1, 'tb_member', 'tbid', 'and username = "'.$param.'"');
-			if(empty($isreg)){
+			if(!$db->has('tb_member', array(
+				'username' => $_POST['param']
+			))){
 				$cb['info'] = '';
 				$cb['status'] = 'y';
 			}else{
@@ -123,12 +143,11 @@
 		//解锁登录
 		case 'unlock':
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
-			$sqlwhere = array(
-				'username = "'.$userinfo['username'].'"',
-				'lockpassword = "'.sha1($password).'"'
-			);
-			$row = $db->select(0, 1, 'tb_member', '*', $sqlwhere);
-			if(!empty($row)){
+			$row = $db->get('tb_member', '*', array(
+				'username' => $userinfo['username'],
+				'lockpassword' => sha1($_POST['password'])
+			));
+			if($row){
 				session('member_id', $row['tbid']);
 				cookie('memberID', $row['tbid'], 3600 * 24 * 7);
 			}else{

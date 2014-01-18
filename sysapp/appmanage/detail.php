@@ -14,8 +14,10 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	if(isset($appid)){
-		$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.(int)$appid);
+	if(isset($_GET['appid'])){
+		$app = $db->get('tb_app', '*', array(
+			'tbid' => $_GET['appid']
+		));
 	}else{
 		//给个初始值
 		$app = array(
@@ -39,7 +41,7 @@
 <body>
 <form action="detail.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $appid; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['appid']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">编辑应用</p>
@@ -47,7 +49,7 @@
 			<label class="label-text">应用图片：</label>
 			<div class="label-box form-inline control-group">
 				<div class="shortcutbox">
-					<?php if($app['icon'] != NULL){ ?>
+					<?php if($app['icon'] != ''){ ?>
 						<div class="shortcut-addicon bgnone"><input type="file" id="uploadfilebtn" style="position:absolute;right:0;bottom:0;opacity:0;filter:alpha(opacity=0);display:block;width:200px;height:100px"><img src="../../<?php echo $app['icon']; ?>"></div>
 					<?php }else{ ?>
 						<div class="shortcut-addicon"><input type="file" id="uploadfilebtn" style="position:absolute;right:0;bottom:0;opacity:0;filter:alpha(opacity=0);display:block;width:200px;height:100px"><img src=""></div>
@@ -82,7 +84,9 @@
 				<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
 					<option value="">请选择应用分类</option>
 					<?php
-						$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+						$appcategory = $db->select('tb_app_category', '*', array(
+							'ORDER' => 'tbid ASC'
+						));
 						foreach($appcategory as $ac){
 							if($ac['tbid'] == $app['app_category_id']){
 								echo '<option value="'.$ac['tbid'].'" selected>'.$ac['name'].'</option>';

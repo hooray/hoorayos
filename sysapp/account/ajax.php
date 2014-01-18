@@ -1,25 +1,28 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'checkPassword':
-			$row = $db->select(0, 1, 'tb_member', 'password', 'and tbid = '.session('member_id'));
-			if(empty($row)){
+			if($db->has('tb_member', array(
+				'AND' => array(
+					'tbid' => session('member_id'),
+					'password' => sha1($_POST['param'])
+				)
+			))){
+				$cb['info'] = '';
+				$cb['status'] = 'y';
+			}else{
 				$cb['info'] = '原密码错误';
 				$cb['status'] = 'n';
-			}else{
-				if($row['password'] != sha1($param)){
-					$cb['info'] = '原密码错误';
-					$cb['status'] = 'n';
-				}else{
-					$cb['info'] = '';
-					$cb['status'] = 'y';
-				}
 			}
 			echo json_encode($cb);
 			break;
 		case 'editPassword':
-			$rs = $db->update(0, 1, 'tb_member', 'password = "'.sha1($password).'"', 'and tbid = '.session('member_id'));
+			$rs = $db->update('tb_member', array(
+				'password' => sha1($_POST['password'])
+			), array(
+				'tbid' => session('member_id')
+			));
 			if($rs){
 				$cb['info'] = '';
 				$cb['status'] = 'y';
@@ -30,7 +33,11 @@
 			echo json_encode($cb);
 			break;
 		case 'editLockPassword':
-			$rs = $db->update(0, 1, 'tb_member', 'lockpassword = "'.sha1($lockpassword).'"', 'and tbid = '.session('member_id'));
+			$rs = $db->update('tb_member', array(
+				'lockpassword' => sha1($_POST['lockpassword'])
+			), array(
+				'tbid' => session('member_id')
+			));
 			if($rs){
 				$cb['info'] = '';
 				$cb['status'] = 'y';
@@ -41,27 +48,33 @@
 			echo json_encode($cb);
 			break;
 		case 'unbind':
-			$set = array(
-				'openid_'.$fromsite.' = ""',
-				'openname_'.$fromsite.' = ""',
-				'openavatar_'.$fromsite.' = ""',
-				'openurl_'.$fromsite.' = ""'
-			);
-			$db->update(0, 0, 'tb_member', $set, 'and tbid = '.session('member_id'));
+			$db->update('tb_member', array(
+				'openid_'.$_POST['fromsite'] => '',
+				'openname_'.$_POST['fromsite'] => '',
+				'openavatar_'.$_POST['fromsite'] => '',
+				'openurl_'.$_POST['fromsite'] => ''
+			), array(
+				'tbid' => session('member_id')
+			));
 			break;
 		//第三方登录
 		case '3loginBind':
 			//检测所需数据是否存在
 			if(cookie('fromsite') && session('?openid') && session('?openname')){
-				$row = $db->select(0, 1, 'tb_member', '*', 'and openid_'.cookie('fromsite').' = "'.session('openid').'" and tbid != '.session('member_id'));
-				if(empty($row)){
-					$set = array(
-						'openid_'.cookie('fromsite').' = "'.session('openid').'"',
-						'openname_'.cookie('fromsite').' = "'.session('openname').'"',
-						'openavatar_'.cookie('fromsite').' = "'.session('openavatar').'"',
-						'openurl_'.cookie('fromsite').' = "'.session('openurl').'"'
-					);
-					$db->update(0, 0, 'tb_member', $set, 'and tbid = '.session('member_id'));
+				if(!$db->has('tb_member', '*', array(
+					'AND' => array(
+						'openid_'.cookie('fromsite') => session('openid'),
+						'tbid[!]' => session('member_id')
+					)
+				))){
+					$db->update(0, 0, 'tb_member', array(
+						'openid_'.cookie('fromsite') => session('openid'),
+						'openname_'.cookie('fromsite') => session('openname'),
+						'openavatar_'.cookie('fromsite') => session('openavatar'),
+						'openurl_'.cookie('fromsite') => session('openurl')
+					), array(
+						'tbid' => session('member_id')
+					));
 				}else{
 					echo 'ERROR_OPENID_IS_USED';
 				}
