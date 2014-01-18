@@ -76,7 +76,6 @@ HROS.lock = (function(){
 					});
 				}else{
 					var lock = function(){
-						window.onbeforeunload = HROS.util.confirmLockExit;
 						$.ajax({
 							type : 'POST',
 							url : 'login.ajax.php',
@@ -162,7 +161,6 @@ HROS.lock = (function(){
 		},
 		hide : function(){
 			clearInterval(lockFunc);
-			window.onbeforeunload = HROS.util.confirmExit;
 			$('#lock').remove();
 			$('#desktop').show();
 		}

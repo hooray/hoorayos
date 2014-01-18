@@ -15,8 +15,6 @@ HROS.base = (function(){
 				config['background'] = '#000';
 				config['opacity'] = 0.5;
 			})($.dialog.defaults);
-			//增加离开页面确认窗口
-			window.onbeforeunload = HROS.util.confirmExit;
 			//更新当前用户ID
 			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
 			//文件上传
@@ -100,7 +98,6 @@ HROS.base = (function(){
 				url : 'login.ajax.php',
 				data : 'ac=logout'
 			}).done(function(){
-				window.onbeforeunload = null;
 				location.reload();
 			});
 		},
