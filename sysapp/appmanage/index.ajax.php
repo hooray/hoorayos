@@ -19,7 +19,7 @@
 			}
 			$where['AND']['verifytype'] = $_POST['search_4'] == 1 ? 1 : 2;
 			echo $db->count('tb_app', $where).'<{|*|}>';
-			$where['ORDER'] = 'dt DESC';
+			$where['ORDER'] = 'dt';
 			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
 			$rs = $db->select('tb_app', '*', $where);
 			if($rs != NULL){

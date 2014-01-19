@@ -6,10 +6,11 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 	
-	if(isset($appid)){
-		$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.$appid);
+	if(isset($_GET['appid'])){
+		$app = $db->get('tb_app', '*', array(
+			'tbid' => $_GET['appid']
+		));
 	}else{
-		//给个初始值
 		$app = array(
 			'type' => 'window',
 			'isresize' => 1,
@@ -31,7 +32,7 @@
 <body>
 <form action="myapp.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $appid; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['appid']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">
@@ -89,20 +90,20 @@
 		<div class="input-label">
 			<label class="label-text">应用分类：</label>
 			<div class="label-box form-inline control-group">
-				<?php if($app['verifytype'] == 1 || $app['verifytype'] == 2){ ?>
-					<?php
-						$appcategory = $db->select(0, 0, 'tb_app_category', '*');
-						foreach($appcategory as $ac){
-							if($ac['tbid'] == $app['app_category_id']){
-								echo $ac['name'];
-							}
-						}
-					?>
-				<?php }else{ ?>
+				<?php
+					if($app['verifytype'] == 1 || $app['verifytype'] == 2){
+						echo $db->get('tb_app_category', 'name', array(
+							'tbid' => $app['app_category_id']
+						));
+					}else{
+				?>
 					<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
 						<option value="">请选择应用分类</option>
 						<?php
-							$appcategory = $db->select(0, 0, 'tb_app_category', '*', 'and issystem = 0', 'tbid asc');
+							$appcategory = $db->select('tb_app_category', '*', array(
+								'issystem' => 0,
+								'ORDER' => 'tbid ASC'
+							));
 							foreach($appcategory as $ac){
 								if($ac['tbid'] == $app['app_category_id']){
 									echo '<option value="'.$ac['tbid'].'" selected>'.$ac['name'].'</option>';

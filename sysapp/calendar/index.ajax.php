@@ -1,15 +1,15 @@
 <?php
 	require('../../global.php');
 		
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getCalendar':
-			$start = date('Y-m-d H:i:s', $start);
-			$end = date('Y-m-d H:i:s', $end + 86400);
-			$sqlwhere = array(
-				'(startdt <= "'.$end.'" && enddt >= "'.$start.'")',
-				'member_id = '.session('member_id')
-			);
-			$rs = $db->select(0, 0, 'tb_calendar', '*', $sqlwhere);
+			$rs = $db->select('tb_calendar', '*', array(
+				'AND' => array(
+					'startdt[<=]' => date('Y-m-d H:i:s', $_POST['end'] + 86400),
+					'enddt[>=]' => date('Y-m-d H:i:s', $_POST['start']),
+					'member_id' => session('member_id')
+				)
+			));
 			$arr = array();
 			foreach($rs as $v){
 				$tmp['id'] = $v['tbid'];
@@ -25,62 +25,97 @@
 			echo json_encode($arr);
 			break;
 		case 'getDate':
-			$rs = $db->select(0, 1, 'tb_calendar', '*', 'and tbid = '.$id.' and member_id = '.session('member_id'));
-			if($rs != NULL){
+			$rs = $db->get('tb_calendar', '*', array(
+				'AND' => array(
+					'tbid' => $_POST['id'],
+					'member_id' => session('member_id')
+				)
+			));
+			if($rs){
 				$rs['startdt'] = explode(' ', $rs['startdt']);
+				$rs['enddt'] = explode(' ', $rs['enddt']);
 				$rs['startd'] = $rs['startdt'][0];
 				$rs['startt'] = $rs['startdt'][1];
-				$rs['enddt'] = explode(' ', $rs['enddt']);
 				$rs['endd'] = $rs['enddt'][0];
 				$rs['endt'] = $rs['enddt'][1];
 				echo json_encode($rs);
 			}
 			break;
 		case 'quick':
-			switch($do){
+			switch($_POST['do']){
 				case 'add':
-					$db->insert(0, 0, 'tb_calendar', array(
-						'title = "'.$title.'"',
-						'startdt = "'.$start.'"',
-						'enddt = "'.$end.'"',
-						'isallday = '.(int)$isallday,
-						'member_id = '.session('member_id')
+					$db->insert('tb_calendar', array(
+						'title' => $_POST['title'],
+						'startdt' => $_POST['start'],
+						'enddt' => $_POST['end'],
+						'isallday' => $_POST['isallday'],
+						'member_id' => session('member_id')
 					));
 					break;
 				case 'drop':
-					$rs = $db->select(0, 1, 'tb_calendar', 'startdt, enddt', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+					$rs = $db->get('tb_calendar', array('startdt', 'enddt'), array(
+						'AND' => array(
+							'tbid' => $_POST['id'],
+							'member_id' => session('member_id')
+						)
+					));
 					if($rs != NULL){
-						$startdt = date('Y-m-d H:i:s', strtotime($rs['startdt']) + ($dayDelta*24*60*60 + $minuteDelta*60));
-						$enddt = date('Y-m-d H:i:s', strtotime($rs['enddt']) + ($dayDelta*24*60*60 + $minuteDelta*60));
-						$db->update(0, 0, 'tb_calendar', 'startdt = "'.$startdt.'", enddt = "'.$enddt.'"', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+						$db->update('tb_calendar', array(
+							'startdt' => date('Y-m-d H:i:s', strtotime($rs['startdt']) + ($_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60)),
+							'enddt' => date('Y-m-d H:i:s', strtotime($rs['enddt']) + ($_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60))
+						), array(
+							'AND' => array(
+								'tbid' => $_POST['id'],
+								'member_id' => session('member_id')
+							)
+						));
 					}
 					break;
 				case 'resize':
-					$rs = $db->select(0, 1, 'tb_calendar', 'enddt', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
-					if($rs != NULL){
-						$enddt = date('Y-m-d H:i:s', strtotime($rs['enddt']) + ($dayDelta*24*60*60 + $minuteDelta*60));
-						$db->update(0, 0, 'tb_calendar', 'enddt = "'.$enddt.'"', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+					$enddt = $db->get('tb_calendar', 'enddt', array(
+						'AND' => array(
+							'tbid' => $_POST['id'],
+							'member_id' => session('member_id')
+						)
+					));
+					if($enddt){
+						$enddt = date('Y-m-d H:i:s', strtotime($enddt) + $_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60);
+						$db->update('tb_calendar', array(
+							'enddt' => $enddt
+						), array(
+							'AND' => array(
+								'tbid' => $_POST['id'],
+								'member_id' => session('member_id')
+							)
+						));
 					}
 					break;
 				case 'del':
-					$db->delete(0, 0, 'tb_calendar', 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+					$db->delete('tb_calendar', array(
+						'AND' => array(
+							'tbid' => $_POST['id'],
+							'member_id' => session('member_id')
+						)
+					));
 					break;
 			}
 			break;
 		case 'edit':
-			$set = array(
-				'title = "'.$val_title.'"',
-				'startdt = "'.$val_startd.' '.$val_startt.'"',
-				'enddt = "'.$val_endd.' '.$val_endt.'"',
-				'url = "'.$val_url.'"',
-				'content = "'.$val_content.'"',
-				'isallday = '.(int)$val_isallday,
-				'member_id = '.session('member_id')
+			$data = array(
+				'title' => $_POST['val_title'],
+				'startdt' => $_POST['val_startd'].' '.$_POST['val_startt'],
+				'enddt' => $_POST['val_endd'].' '.$_POST['val_endt'],
+				'url' => $_POST['val_url'],
+				'content' => $_POST['val_content'],
+				'isallday' => $_POST['val_isallday'],
+				'member_id' => session('member_id')
 			);
-			if($id == ''){
-				$db->insert(0, 0, 'tb_calendar', $set);
+			if($_POST['id'] == ''){
+				$db->insert('tb_calendar', $data);
 			}else{
-				$db->update(0, 0, 'tb_calendar', $set, 'and tbid = '.(int)$id);
+				$db->update('tb_calendar', $data, array(
+					'tbid' => $_POST['id']
+				));
 			}
 			echo json_encode(array(
 				'info' => '',

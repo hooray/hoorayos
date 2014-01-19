@@ -1,27 +1,25 @@
 <?php
 	require('../../global.php');
 		
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getList':
-			$appcategory = $db->select(0, 0, 'tb_app_category', '*');
-			foreach($appcategory as $ac){
+			foreach($db->select('tb_app_category', '*') as $ac){
 				$category[$ac['tbid']] = $ac['name'];
 			}
-			$orderby = 'dt desc limit '.(int)$from.','.(int)$to;
-			$sqlwhere[] = 'member_id = '.session('member_id');
-			if($search_1 != ''){
-				$sqlwhere[] = 'name like "%'.$search_1.'%"';
+			$where['AND']['member_id'] = session('member_id');
+			if($_POST['search_1'] != ''){
+				$where['LIKE']['name'] = $_POST['search_1'];
 			}
-			if((int)$search_2 != ''){
-				$sqlwhere[] = 'app_category_id = '.(int)$search_2;
+			if($_POST['search_2'] != ''){
+				$where['AND']['app_category_id'] = $_POST['search_2'];
 			}
-			if($search_3 != ''){
-				$sqlwhere[] = 'type = "'.$search_3.'"';
+			if($_POST['search_3'] != ''){
+				$where['AND']['type'] = $_POST['search_3'];
 			}
-			$sqlwhere[] = 'verifytype = '.(int)$search_4;
-			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
-			echo $c.'<{|*|}>';
-			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);
+			$where['AND']['verifytype'] = $_POST['search_4'];
+			echo $db->count('tb_app', $where).'<{|*|}>';
+			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
+			$rs = $db->select('tb_app', '*', $where);
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
@@ -37,28 +35,33 @@
 			}
 			break;
 		case 'edit':
-			$set = array(
-				'icon = "'.$val_icon.'"',
-				'name = "'.$val_name.'"',
-				'app_category_id = '.(int)$val_app_category_id,
-				'url = "'.$val_url.'"',
-				'width = '.(int)$val_width,
-				'height = '.(int)$val_height,
-				'isresize = '.(int)$val_isresize,
-				'isopenmax = '.(int)$val_isopenmax,
-				'issetbar = 1',
-				'isflash = '.(int)$val_isflash,
-				'remark = "'.$val_remark.'"'
+			$data = array(
+				'icon' => $_POST['val_icon'],
+				'name' => $_POST['val_name'],
+				'app_category_id' => $_POST['val_app_category_id'],
+				'url' => $_POST['val_url'],
+				'width' => $_POST['val_width'],
+				'height' => $_POST['val_height'],
+				'isresize' => $_POST['val_isresize'],
+				'isopenmax' => $_POST['val_isopenmax'],
+				'issetbar' => 1,
+				'isflash' => $_POST['val_isflash'],
+				'remark' => $_POST['val_remark']
 			);
 			if($id == ''){
-				$set[] = 'type = "'.$val_type.'"';
-				$set[] = 'dt = now()';
-				$set[] = 'verifytype = 0';
-				$set[] = 'member_id = '.session('member_id');
-				$db->insert(0, 0, 'tb_app', $set);
+				$data['type'] = $_POST['val_type'];
+				$data['dt'] = date('Y-m-d H:i:s');
+				$data['verifytype'] = 0;
+				$data['member_id'] = session('member_id');
+				$db->insert(0, 0, 'tb_app', $data);
 			}else{
-				$set[] = 'verifytype = 2';
-				$db->update(0, 0, 'tb_app', $set, 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+				$data['verifytype'] = 2;
+				$db->update(0, 0, 'tb_app', $data, array(
+					'AND' => array(
+						'tbid' => $id,
+						'member_id' => session('member_id')
+					)
+				));
 			}
 			echo json_encode(array(
 				'info' => '',
@@ -66,7 +69,12 @@
 			));
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_app', 'and tbid = '.(int)$appid.' and member_id = '.session('member_id'));
+			$db->delete('tb_app', array(
+				'AND' => array(
+					'tbid' => $_POST['appid'],
+					'member_id' =>session('member_id')
+				)
+			));
 			break;
 		case 'uploadImg':
 			include('libs/Uploader.class.php');

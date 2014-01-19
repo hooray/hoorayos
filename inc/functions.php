@@ -707,7 +707,7 @@
 				break;
 			default:
 				//检查应用是否已安装
-				if($db->has('tb_member_app', array(
+				if(!$db->has('tb_member_app', array(
 					'AND' => array(
 						'realid' => $opt['id'],
 						'member_id' => session('member_id')

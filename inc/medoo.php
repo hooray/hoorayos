@@ -441,7 +441,7 @@ class medoo{
 		$query = $this->query('SELECT EXISTS(SELECT 1 FROM `' . $table . '`' . $this->where_clause($where) . ')');
 		return is_string($query) ? $query : $query->fetchColumn() === '1';
 	}
-	public function _has(){
+	public function _has($table, $where){
 		$this->debug = true;
 		echo $this->has($table, $where);
 	}

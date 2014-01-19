@@ -1,13 +1,12 @@
 <?php
 	require('../../global.php');
 	
-	$app = $db->select(0, 1, 'tb_app', '*', 'and tbid = '.$id);
-	$myapplist = array();
-	foreach($db->select(0, 0, 'tb_member_app', 'realid', 'and member_id = '.session('member_id')) as $value){
-		if($value['realid'] != ''){
-			$myapplist[] = $value['realid'];
-		}
-	}
+	$app = $db->get('tb_app', '*', array(
+		'tbid' => $_GET['id']
+	));
+	$myapplist = $db->select('tb_member_app', 'realid', array(
+		'member_id' => session('member_id')
+	));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -51,12 +50,15 @@
 			<h5>
 				<?php
 					if($app['member_id'] == 0){
-						$developer = '<b style="color:red">系统提供</b>';
+						$developer = '<b style="color:red">平台提供</b>';
 					}else{
-						$member = $db->select(0, 1, 'tb_member', 'username', 'and tbid = '.$app['member_id']);
-						$developer = $member['username'];
+						$developer = $db->get('tb_member', 'username', array(
+							'tbid' => $app['member_id']
+						));
 					}
-					$category = $db->select(0, 1, 'tb_app_category', '*', 'and tbid = '.$app['app_category_id']);
+					$category = $db->get('tb_app_category', '*', array(
+						'tbid' => $app['app_category_id']
+					));
 				?>
 				<em>开发者：</em><?php echo $developer; ?>
 				<em style="margin-left:10px">所属分类：</em><?php echo $category['name']; ?>
@@ -104,7 +106,7 @@ $(function(){
 				$.ajax({
 					type : 'POST',
 					url : 'detail.ajax.php',
-					data : 'ac=updateAppStar&id=<?php echo $id; ?>&starnum=' + num,
+					data : 'ac=updateAppStar&id=<?php echo $_GET['id']; ?>&starnum=' + num,
 					success : function(msg){
 						if(msg){
 							ZENG.msgbox.show("打分成功！", 4, 2000);

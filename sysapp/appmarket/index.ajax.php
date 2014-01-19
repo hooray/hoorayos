@@ -1,51 +1,60 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getList':
-			$myapplist = array(0);
+			$myapplist = $db->select('tb_member_app', 'realid', array(
+				'member_id' => session('member_id')
+			));
 			$myapplist2 = array();
-			foreach($db->select(0, 0, 'tb_member_app', 'tbid, realid', 'and member_id = '.session('member_id')) as $value){
-				if($value['realid'] != ''){
-					$myapplist[] = $value['realid'];
-					$myapplist2[$value['realid']] = $value['tbid'];
-				}
+			foreach($db->select('tb_member_app', array('tbid', 'realid'), array(
+				'AND' => array(
+					'member_id' => session('member_id'),
+					'realid[!]' => null
+				)
+			)) as $value){
+				$myapplist2[$value['realid']] = $value['tbid'];
 			}
-			$mytype = $db->select(0, 1, 'tb_member', 'type', 'and tbid = '.session('member_id'));
-			if($mytype['type'] != 1){
-				$category = $db->select(0, 1, 'tb_app_category', 'group_concat(tbid) as tbids', 'and issystem = 0');
-				$sqlwhere[] = 'app_category_id in('.$category['tbids'].')';
+			$where = array();
+			if($db->has('tb_member', array(
+				'AND' => array(
+					'type[!]' => 1,
+					'tbid' => session('member_id')
+				)
+			))){
+				$where['AND']['app_category_id'] = $db->select('tb_app_category', 'tbid', array(
+					'issystem' => 0
+				));
 			}
-			if((int)$search_1 != 0){
-				if((int)$search_1 == -1){
-					$sqlwhere[] = 'type = "widget"';
-				}else if((int)$search_1 == -2){
+			if($_POST['search_1'] != 0){
+				if($_POST['search_1'] == -1){
+					$where['AND']['type'] = 'widget';
+				}else if($_POST['search_1'] == -2){
 					if($myapplist != NULL){
-						$sqlwhere[] = 'tbid in('.implode(',', $myapplist).')';
+						$where['AND']['tbid'] = $myapplist;
 					}
 				}else{
-					$sqlwhere[] = 'app_category_id = '.(int)$search_1;
+					$where['AND']['app_category_id'] = $_POST['search_1'];
 				}
 			}
-			if(trim($search_3) != ''){
-				$sqlwhere[] = 'name like "%'.trim($search_3).'%"';
+			if($_POST['search_3'] != ''){
+				$where['LIKE']['name'] = $_POST['search_3'];
 			}
-			$sqlwhere[] = 'verifytype = 1';
-			switch($search_2){
+			$where['AND']['verifytype'] = 1;
+			echo $db->count('tb_app', $where).'<{|*|}>';
+			switch($_POST['search_2']){
 				case '1':
-					$orderby = 'dt desc';
+					$where['ORDER'] = 'dt';
 					break;
 				case '2':
-					$orderby = 'usecount desc';
+					$where['ORDER'] = 'usecount';
 					break;
 				case '3':
-					$orderby = 'starnum desc';
+					$where['ORDER'] = 'starnum';
 					break;
 			}
-			$orderby .= ' limit '.(int)$from.','.(int)$to;
-			$c = $db->select(0, 2, 'tb_app', 'tbid', $sqlwhere);
-			echo $c.'<{|*|}>';
-			$rs = $db->select(0, 0, 'tb_app', '*', $sqlwhere, $orderby);
+			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
+			$rs = $db->select('tb_app', '*', $where);
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<li><a href="javascript:openDetailIframe2(\'detail.php?id='.$v['tbid'].'\');"><img src="../../'.$v['icon'].'"></a><a href="javascript:openDetailIframe2(\'detail.php?id='.$v['tbid'].'\');" class="app-name">'.$v['name'].'</a><span class="app-desc">'.$v['remark'].'</span><span class="star-box"><i style="width:'.($v['starnum'] * 20).'%;"></i></span><span class="star-num">'.(is_int($v['starnum']) || $v['starnum'] == 0 ? (int)$v['starnum'] : sprintf('%.1f', $v['starnum'])).'</span><span class="app-stat">'.$v['usecount'].' 人正在使用</span>';

@@ -15,18 +15,21 @@
 	<ul class="nav nav-tabs">
 		<li class="all active" value="0"><a href="javascript:;" title="全部">全部</a></li>
 		<?php
-			$isLogin = checkLogin();
-			if($isLogin){
-				$mytype = $db->select(0, 1, 'tb_member', 'type', 'and tbid = '.session('member_id'));
+			if(checkLogin()){
+				$type = $db->get('tb_member', 'type', array(
+					'tbid' => session('member_id')
+				));
 			}
-			$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
+			$appcategory = $db->select('tb_app_category', '*', array(
+				'ORDER' => 'tbid ASC'
+			));
 			foreach($appcategory as $ac){
-				if(($ac['issystem'] == 1 && $mytype['type'] == 1) || $ac['issystem'] == 0){
+				if(($ac['issystem'] == 1 && $type == 1) || $ac['issystem'] == 0){
 					echo '<li value="'.$ac['tbid'].'"><a href="javascript:;" title="'.$ac['name'].'">'.$ac['name'].'</a></li>';
 				}
 			}
 			echo '<li value="-1"><a href="javascript:;" title="挂件">挂件</a></li>';
-			if($isLogin){
+			if(checkLogin()){
 				echo '<li class="myapps" value="-2"><a href="javascript:;" title="我的应用">我的<br>应用</a></li>';
 			}
 		?>
@@ -44,7 +47,9 @@
 		</div>
 		<div class="mbox commend-day">
 			<?php
-				$recommendApp = $db->select(0, 1, 'tb_app', '*', 'and isrecommend = 1');
+				$recommendApp = $db->get('tb_app', '*', array(
+					'isrecommend' => 1
+				));
 			?>
 			<h3>今日推荐</h3>
 			<div class="commend-container">
@@ -59,12 +64,9 @@
 				</h4>
 				<div class="con" title="<?php echo $recommendApp['remark']; ?>"><?php echo $recommendApp['remark']; ?></div>
 				<?php
-					$myapplist = array();
-					foreach($db->select(0, 0, 'tb_member_app', 'tbid, realid', 'and member_id = '.session('member_id')) as $value){
-						if($value['realid'] != ''){
-							$myapplist[] = $value['realid'];
-						}
-					}
+					$myapplist = $db->select('tb_member_app', 'realid', array(
+						'member_id' => session('member_id')
+					));
 					if(in_array($recommendApp['tbid'], $myapplist)){
 						echo '<a href="javascript:;" real_app_id="'.$recommendApp['tbid'].'" app_type="'.$recommendApp['type'].'" class="btn-run">打开应用</a>';
 					}else{
@@ -72,18 +74,30 @@
 					}
 				?>
 			</div>
-			<span class="star-box"><i style="width:<?php echo $recommendApp['starnum']*20; ?>%"></i></span>
+			<span class="star-box"><i style="width:<?php echo $recommendApp['starnum'] * 20; ?>%"></i></span>
 		</div>
 		<div class="mbox develop">
 			<h3>我是开发者</h3>
 			<div class="developer">
 				<?php if(checkLogin()){ ?>
 					<?php
-						$userinfo = $db->select(0, 1, 'tb_member', '*', 'and tbid = '.session('member_id'));
-						$myappcount = $db->select(0, 2, 'tb_app', '*', 'and member_id = '.session('member_id').' and verifytype = 1');
-						$myappunverifycount = $db->select(0, 2, 'tb_app', '*', 'and member_id = '.session('member_id').' and verifytype != 1');
+						$username = $db->get('tb_member', 'username', array(
+							'tbid' => session('member_id')
+						));
+						$myappcount = $db->count('tb_app', array(
+							'AND' => array(
+								'member_id' => session('member_id'),
+								'verifytype' => 1
+							)
+						));
+						$myappunverifycount = $db->count('tb_app', array(
+							'AND' => array(
+								'member_id' => session('member_id'),
+								'verifytype[!]' => 1
+							)
+						));
 					?>
-					<p>开发者：<?php echo $userinfo['username']; ?></p>
+					<p>开发者：<?php echo $username; ?></p>
 					<p>我开发的应用：<font style="font-weight:bold"><?php echo $myappcount; ?></font> 个</p>
 					<p>未发布的应用：<font style="font-weight:bold"><?php echo $myappunverifycount; ?></font> 个</p>
 					<div class="text-center"><a href="javascript:openDetailIframe2('myapp.manage.php');" class="btn btn-primary">管理我的应用</a> <a href="javascript:openDetailIframe2('myapp.manage.php?add=1');" class="btn btn-danger">开发新应用</a></div>
@@ -109,9 +123,9 @@
 		</div>
 	</div>
 </div>
-<?php if(isset($id)){ ?>
+<?php if(isset($_GET['id'])){ ?>
 	<div id="detailIframe" style="background:#fff;position:fixed;z-index:1;top:0;left:60px;right:0;height:100%">
-		<iframe frameborder="0" src="detail.php?id=<?php echo $id; ?>" style="width:100%;height:100%"></iframe>
+		<iframe frameborder="0" src="detail.php?id=<?php echo $_GET['id']; ?>" style="width:100%;height:100%"></iframe>
 	</div>
 <?php }else{ ?>
 	<div id="detailIframe" style="background:#fff;position:fixed;z-index:1;top:0;left:140px;right:0;height:100%;display:none">

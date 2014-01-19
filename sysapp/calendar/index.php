@@ -13,7 +13,8 @@
 <title>我的日历</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
-<link rel="stylesheet" href="../../js/fullcalendar-1.6.1/fullcalendar/fullcalendar.css">
+<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
+<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
 </head>
 
 <body>
@@ -74,8 +75,8 @@
 </div>
 <div id="calendar" style="margin:30px"></div>
 <?php include('sysapp/global_js.php'); ?>
-<script src="../../js/fullcalendar-1.6.1/jquery/jquery-ui-1.10.2.custom.min.js"></script>
-<script src="../../js/fullcalendar-1.6.1/fullcalendar/fullcalendar.min.js"></script>
+<script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
+<script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
 <script src="../../js/sugar/sugar-1.3.9.min.js"></script>
 <script src="../../js/My97DatePicker/WdatePicker.js"></script>
 <script>
@@ -146,8 +147,6 @@ $(function(){
 		allDayText: '全天',
 		axisFormat: 'h(:mm)tt',
 		buttonText: {
-			prev: '&nbsp;&#9668;&nbsp;',
-			next: '&nbsp;&#9658;&nbsp;',
 			prevYear: '&nbsp;&lt;&lt;&nbsp;',
 			nextYear: '&nbsp;&gt;&gt;&nbsp;',
 			today: '&nbsp;今天&nbsp;',
@@ -242,7 +241,21 @@ $(function(){
 			calendar.fullCalendar('unselect');
 		},
 		editable: true,
-		events: 'index.ajax.php?ac=getCalendar',
+		events: function(start, end, callback){
+			$.ajax({
+				type: 'POST',
+				url: 'index.ajax.php',
+				data: {
+					ac: 'getCalendar',
+					start: Math.round(start.getTime() / 1000),
+					end: Math.round(end.getTime() / 1000)
+				},
+				dataType: 'json',
+				success: function(msg){
+					callback(msg);
+				}
+			});
+		},
 		eventClick: function(event){
 			var start = new Date(event._start), end = new Date(event._end), content = '';
 			var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());

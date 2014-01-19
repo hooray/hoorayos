@@ -35,8 +35,9 @@ body{margin:10px 10px 0}
 			<select name="search_2" id="search_2" style="width:140px">
 				<option value="">全部</option>
 				<?php
-					$appcategory = $db->select(0, 0, 'tb_app_category', '*', '', 'tbid asc');
-					foreach($appcategory as $ac){
+					foreach($db->select('tb_app_category', '*', array(
+						'ORDER' => 'tbid ASC'
+					)) as $ac){
 						echo '<option value="'.$ac['tbid'].'">'.$ac['name'].'</option>';
 					}
 				?>
@@ -82,7 +83,7 @@ body{margin:10px 10px 0}
 		<input id="pagination_setting" type="hidden" per="10">
 	</td></tr></tfoot>
 </table>
-<?php if(isset($add)){ ?>
+<?php if(isset($_GET['add'])){ ?>
 	<div id="detailIframe" style="background:#fff;position:fixed;z-index:1;top:0;left:0;width:100%;height:100%">
 		<iframe frameborder="0" src="myapp.edit.php" style="width:100%;height:100%"></iframe>
 	</div>
