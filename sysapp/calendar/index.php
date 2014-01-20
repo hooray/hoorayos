@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="../../img/ui/sys.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
+<link rel="stylesheet" href="../../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body>
@@ -35,11 +36,11 @@
 			<div class="input-label">
 				<label class="label-text">日期：</label>
 				<div class="label-box form-inline control-group">
-					<input type="text" class="text" name="val_startd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-					<input type="text" class="text" name="val_startt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
+					<input type="text" class="text start_datetime_d" name="val_startd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
+					<input type="text" class="text start_datetime_t" name="val_startt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
 					<span class="help-inline" style="padding-right:5px">到</span>
-					<input type="text" class="text" name="val_endd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-					<input type="text" class="text" name="val_endt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
+					<input type="text" class="text end_datetime_d" name="val_endd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
+					<input type="text" class="text end_datetime_t" name="val_endt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
 					<span class="help-inline errormsg"></span>
 				</div>
 			</div>
@@ -78,7 +79,8 @@
 <script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
 <script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
 <script src="../../js/sugar/sugar-1.3.9.min.js"></script>
-<script src="../../js/My97DatePicker/WdatePicker.js"></script>
+<script src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
 $(function(){
 	var form = $('#form').Validform({
@@ -108,17 +110,41 @@ $(function(){
 			$('#calendar').fullCalendar('refetchEvents');
 		}
 	});
-	$('input[name="val_startd"], input[name="val_endd"]').click(function(){
-		WdatePicker({
-			dateFmt:'yyyy-M-d',
-			skin:'ext'
-		});
+	$('.start_datetime_d').datetimepicker({
+		language : 'zh-CN',
+		format : 'yyyy-mm-dd',
+		weekStart : 1,
+		startView : 2,
+		minView : 2,
+		todayBtn : true,
+		todayHighlight : true
+	}).on('hide', function(ev){
+		$('.start_datetime_t').datetimepicker('setStartDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 0:0:0'));
+		$('.start_datetime_t').datetimepicker('setEndDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 23:59:59'));
 	});
-	$('input[name="val_startt"], input[name="val_endt"]').click(function(){
-		WdatePicker({
-			dateFmt:'H:m:s',
-			skin:'ext'
-		});
+	$('.end_datetime_d').datetimepicker({
+		language : 'zh-CN',
+		format : 'yyyy-mm-dd',
+		weekStart : 1,
+		startView : 2,
+		minView : 2,
+		todayBtn : true,
+		todayHighlight : true
+	}).on('hide', function(ev){
+		$('.end_datetime_t').datetimepicker('setStartDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 0:0:0'));
+		$('.end_datetime_t').datetimepicker('setEndDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 23:59:59'));
+	});
+	$('.start_datetime_t').datetimepicker({
+		language : 'zh-CN',
+		format : 'hh:ii',
+		startView : 1,
+		maxView : 1
+	});
+	$('.end_datetime_t').datetimepicker({
+		language : 'zh-CN',
+		format : 'hh:ii',
+		startView : 1,
+		maxView : 1
 	});
 	$('input[name="val_isallday"]').change(function(){
 		if($(this).val() == 1){
@@ -205,7 +231,7 @@ $(function(){
 								$.ajax({
 									type: 'POST',
 									url: 'index.ajax.php',
-									data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + Date.create(start).format('{yyyy}-{MM}-{dd} {H}:{m}:{s}') + '&end=' + Date.create(end).format('{yyyy}-{MM}-{dd} {H}:{m}:{s}') + '&isallday=' + isallday,
+									data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + Date.create(start).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&end=' + Date.create(end).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&isallday=' + isallday,
 									success: function(){
 										//添加成功后刷新日历
 										calendar.fullCalendar('refetchEvents');
@@ -229,11 +255,15 @@ $(function(){
 							$('#editbox input[name="val_title"]').val(document.getElementById('title').value);
 							$('#editbox input[name="val_startd"]').val(Date.create(start).format('{yyyy}-{MM}-{dd}'));
 							$('#editbox input[name="val_endd"]').val(Date.create(end).format('{yyyy}-{MM}-{dd}'));
-							$('#editbox input[name="val_startt"]').val(Date.create(start).format('{H}:{m}:{s}'));
-							$('#editbox input[name="val_endt"]').val(Date.create(end).format('{H}:{m}:{s}'));
+							$('#editbox input[name="val_startt"]').val(Date.create(start).format('{H}:{m}'));
+							$('#editbox input[name="val_endt"]').val(Date.create(end).format('{H}:{m}'));
 							if(isallday == 0){
 								$('#editbox input[name="val_isallday"]:eq(1)').click();
 							}
+							$('.start_datetime_t').datetimepicker('setStartDate', Date.create(start).format('{yyyy}-{MM}-{dd} 00:00:00'));
+							$('.start_datetime_t').datetimepicker('setEndDate', Date.create(start).format('{yyyy}-{MM}-{dd} 23:59:59'));
+							$('.end_datetime_t').datetimepicker('setStartDate', Date.create(end).format('{yyyy}-{MM}-{dd} 00:00:00'));
+							$('.end_datetime_t').datetimepicker('setEndDate', Date.create(end).format('{yyyy}-{MM}-{dd} 23:59:59'));
 						}
 					}
 				]
@@ -331,6 +361,10 @@ $(function(){
 										$('#editbox input[name="val_isallday"]:eq(1)').prop('checked', true);
 										$('#editbox input[name="val_startt"], #editbox input[name="val_endt"]').show();
 									}
+									$('.start_datetime_t').datetimepicker('setStartDate', Date.create(msg['startd']).format('{yyyy}-{MM}-{dd} 00:00:00'));
+									$('.start_datetime_t').datetimepicker('setEndDate', Date.create(msg['startd']).format('{yyyy}-{MM}-{dd} 23:59:59'));
+									$('.end_datetime_t').datetimepicker('setStartDate', Date.create(msg['endd']).format('{yyyy}-{MM}-{dd} 00:00:00'));
+									$('.end_datetime_t').datetimepicker('setEndDate', Date.create(msg['endd']).format('{yyyy}-{MM}-{dd} 23:59:59'));
 								}
 							});
 						},
