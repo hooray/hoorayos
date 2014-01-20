@@ -13,9 +13,11 @@
 <body>
 <div class="alert_addapps">
 	<?php
-		$category = $db->select(0, 1, 'tb_app_category', 'group_concat(tbid) as tbids', 'and issystem = 1');
-		$apps = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and app_category_id in('.$category['tbids'].')');
-		foreach($apps as $v){
+		foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'app_category_id' => $db->get('tb_app_category', 'tbid', array(
+				'issystem' => 1
+			))
+		)) as $v){
 			echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
 				echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';
 				echo '<div class="name">'.$v['name'].'</div>';

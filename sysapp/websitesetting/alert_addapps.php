@@ -13,7 +13,10 @@
 <body>
 <ul class="nav nav-tabs" style="margin:5px 12px">
 	<?php
-		$category = $db->select(0, 0, 'tb_app_category', '*', 'and issystem = 0', 'tbid asc');
+		$category = $db->select('tb_app_category', '*', array(
+			'issystem' => 0,
+			'ORDER' => 'tbid ASC'
+		));
 		if($category != NULL){
 			foreach($category as $c){
 				echo '<li class="dropdown"><a href="#category_'.$c['tbid'].'" data-toggle="tab">'.$c['name'].'</a></li>';
@@ -26,8 +29,9 @@
 		if($category != NULL){
 			foreach($category as $c){
 				echo '<div class="alert_addapps tab-pane" id="category_'.$c['tbid'].'">';
-				$apps = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and app_category_id = '.$c['tbid']);
-				foreach($apps as $v){
+				foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
+					'app_category_id' => $c['tbid']
+				)) as $v){
 					echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
 						echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';
 						echo '<div class="name">'.$v['name'].'</div>';

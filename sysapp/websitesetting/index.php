@@ -14,7 +14,7 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	$set = $db->select(0, 1, 'tb_setting');
+	$set = $db->get('tb_setting', '*');
 	$global_title = 'index';
 ?>
 <!DOCTYPE HTML>

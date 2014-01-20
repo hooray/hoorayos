@@ -14,10 +14,11 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	if(isset($memberid)){
-		$member = $db->select(0, 1, 'tb_member', '*', 'and tbid = '.$memberid);
+	if(isset($_GET['memberid'])){
+		$member = $db->get('tb_member', '*', array(
+			'tbid' => $_GET['memberid']
+		));
 	}
-	$permission = $db->select(0, 0, 'tb_permission', 'tbid,name');
 ?>
 <!doctype html>
 <html>
@@ -31,7 +32,7 @@
 <body>
 <form action="detail.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $memberid; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['memberid']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">
@@ -41,7 +42,7 @@
 			<label class="label-text">用户名：</label>
 			<div class="label-box form-inline control-group">
 				<?php
-					if(isset($memberid)){
+					if(isset($_GET['memberid'])){
 						echo $member['username'];
 					}else{
 				?>
@@ -53,14 +54,14 @@
 		<div class="input-label">
 			<label class="label-text">用户密码：</label>
 			<div class="label-box form-inline control-group">
-				<input type="password" name="val_password" <?php if(!isset($memberid)){ ?>datatype="*" nullmsg="请输入用户密码"<?php } ?>>
-				<span class="help-inline"><?php if(isset($memberid)){ echo '（如果无需修改则不填）'; } ?></span>
+				<input type="password" name="val_password" <?php if(!isset($_GET['memberid'])){ ?>datatype="*" nullmsg="请输入用户密码"<?php } ?>>
+				<span class="help-inline"><?php if(isset($_GET['memberid'])){ echo '（如果无需修改则不填）'; } ?></span>
 			</div>
 		</div>
 		<div class="input-label">
 			<label class="label-text">用户类型：</label>
 			<div class="label-box form-inline">
-				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="0" <?php if($member['type'] == 0 || !isset($memberid)){echo 'checked';} ?>>普通会员</label>
+				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="0" <?php if($member['type'] == 0 || !isset($_GET['memberid'])){echo 'checked';} ?>>普通会员</label>
 				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="1" <?php if($member['type'] == 1){echo 'checked';} ?>>管理员</label>
 			</div>
 		</div>
@@ -68,7 +69,7 @@
 			<label class="label-text">用户权限：</label>
 			<div class="label-box form-inline">
 				<?php
-					foreach($permission as $v){
+					foreach($db->select('tb_permission', array('tbid', 'name')) as $v){
 						echo '<label class="checkbox" style="margin-right:10px"><input type="checkbox" name="val_permission_id" value="'.$v['tbid'].'" ';
 						if($member['permission_id'] == $v['tbid']){
 							echo 'checked';

@@ -28,7 +28,7 @@
 				'wallpaperstate' => $_POST['wpstate'],
 				'wallpapertype' => $_POST['wptype']
 			);
-			switch($wpstate){
+			switch($_POST['wpstate']){
 				case '0':
 					$data = array(
 						'wallpapertype' => $_POST['wptype']
@@ -46,13 +46,13 @@
 					}
 					break;
 			}
-			$db->update(0, 0, 'tb_member', $data, array(
+			$db->update('tb_member', $data, array(
 				'tbid' => session('member_id')
 			));
 			break;
 		//更新应用码头位置
 		case 'setDockPos':
-			$db->update(0, 0, 'tb_member', array(
+			$db->update('tb_member', array(
 				'dockpos' => $_POST['dock']
 			), array(
 				'tbid' => session('member_id')

@@ -3,32 +3,32 @@
 	
 	switch($ac){
 		case 'edit':
-			$set = array(
-				'isforcedlogin = '.(int)$val_isforcedlogin,
-				'dock = "'.$val_dock.'"',
-				'desk1 = "'.$val_desk1.'"',
-				'desk2 = "'.$val_desk2.'"',
-				'desk3 = "'.$val_desk3.'"',
-				'desk4 = "'.$val_desk4.'"',
-				'desk5 = "'.$val_desk5.'"',
-				'desk = '.$val_desk,
-				'appxy = "'.$val_appxy.'"',
-				'appsize = "'.$val_appsize.'"',
-				'dockpos = "'.$val_dockpos.'"',
-				'skin = "'.$val_skin.'"',
-				'wallpaper_id = '.$val_wallpaper_id,
-				'wallpapertype = "'.$val_wallpapertype.'"'
-			);
-			$db->update(0, 0, 'tb_setting', $set);
+			$db->update('tb_setting', array(
+				'isforcedlogin' => $_POST['val_isforcedlogin'],
+				'dock' => $_POST['val_dock'],
+				'desk1' => $_POST['val_desk1'],
+				'desk2' => $_POST['val_desk2'],
+				'desk3' => $_POST['val_desk3'],
+				'desk4' => $_POST['val_desk4'],
+				'desk5' => $_POST['val_desk5'],
+				'desk' => $_POST['val_desk'],
+				'appxy' => $_POST['val_appxy'],
+				'appsize' => $_POST['val_appsize'],
+				'dockpos' => $_POST['val_dockpos'],
+				'skin' => $_POST['val_skin'],
+				'wallpaper_id' => $_POST['val_wallpaper_id'],
+				'wallpapertype' => $_POST['val_wallpapertype']
+			));
 			echo json_encode(array(
 				'info' => '',
 				'status' => 'y'
 			));
 			break;
 		case 'updateApps':
-			$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$appsid.')');
-			foreach($appsrs as $a){
-				echo '<div class="app" appid="'.$a['tbid'].'"><img src="../../'.$a['icon'].'" alt="'.$a['name'].'" title="'.$a['name'].'"><span class="del">删</span></div>';
+			foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
+				'tbid' => explode(',', $_POST['appsid'])
+			)) as $v){
+				echo '<div class="app" appid="'.$v['tbid'].'"><img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'"><span class="del">删</span></div>';
 			}
 			break;
 	}

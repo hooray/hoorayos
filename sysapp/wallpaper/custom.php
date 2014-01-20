@@ -6,11 +6,9 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 	
-	$wallpaper = $db->select(0, 1, 'tb_member', 'wallpapertype,wallpaperwebsite', 'and tbid = '.session('member_id'));
-	$wallpaperList = $db->select(0, 0, 'tb_pwallpaper', '*', 'and member_id = '.session('member_id'));
-	foreach($wallpaperList as &$value){
-		$value['surl'] = getSimgSrc($value['url']);
-	}
+	$wallpaper = $db->get('tb_member', array('wallpapertype', 'wallpaperwebsite'), array(
+		'tbid' => session('member_id')
+	));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -51,8 +49,10 @@
 	<div class="view">
 		<ul>
 			<?php
-				foreach($wallpaperList as $v){
-					echo '<li id="'.$v['tbid'].'" style="background:url(../../'.$v['surl'].')"><a href="javascript:;">删 除</a></li>';
+				foreach($db->select('tb_pwallpaper', '*', array(
+					'member_id' => session('member_id')
+				)) as $v){
+					echo '<li id="'.$v['tbid'].'" style="background:url(../../'.getSimgSrc($value['url']).')"><a href="javascript:;">删 除</a></li>';
 				}
 			?>
 		</ul>
@@ -134,7 +134,7 @@ $(function(){
 					}
 				}
 			}, false);
-			xhr.open('post', 'custom.ajax.php?ac=uploadImg', true);
+			xhr.open('post', 'upload_img.php', true);
 			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			xhr.send(fd);
 		}

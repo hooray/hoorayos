@@ -1,14 +1,13 @@
 <?php
 	require('../../global.php');
 		
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
-			$set = array(
-				'title = "'.$val_title.'"',
-				'keywords = "'.$val_keywords.'"',
-				'description = "'.$val_description.'"'
-			);
-			$db->update(0, 0, 'tb_setting', $set);
+			$db->update('tb_setting', array(
+				'title' => $_POST['val_title'],
+				'keywords' => $_POST['val_keywords'],
+				'description' => $_POST['val_description']
+			));
 			echo json_encode(array(
 				'info' => '',
 				'status' => 'y'

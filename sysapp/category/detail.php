@@ -14,8 +14,10 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	if(isset($categoryid)){
-		$category = $db->select(0, 1, 'tb_app_category', 'tbid, name', 'and tbid = '.$categoryid);
+	if(isset($_GET['categoryid'])){
+		$name = $db->get('tb_app_category', 'name', array(
+			'tbid' => $_GET['categoryid']
+		));
 	}
 ?>
 <!doctype html>
@@ -39,7 +41,7 @@
 		<div class="input-label">
 			<label class="label-text">类目名称：</label>
 			<div class="label-box form-inline control-group">
-				<input type="text" name="val_name" value="<?php echo $category['name']; ?>" datatype="*" nullmsg="请输入类目名称">
+				<input type="text" name="val_name" value="<?php echo $name; ?>" datatype="*" nullmsg="请输入类目名称">
 				<span class="help-inline"></span>
 			</div>
 		</div>

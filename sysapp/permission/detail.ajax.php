@@ -1,16 +1,18 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
-			$set = array(
-				'name = "'.$val_name.'"',
-				'apps_id = "'.$val_apps_id.'"'
+			$data = array(
+				'name' => $_POST['val_name'],
+				'apps_id' => $_POST['val_apps_id']
 			);
-			if($id == ''){
-				$db->insert(0, 0, 'tb_permission', $set);
+			if($_POST['id'] == ''){
+				$db->insert('tb_permission', $data);
 			}else{
-				$db->update(0, 0, 'tb_permission', $set, 'and tbid = '.(int)$id);
+				$db->update('tb_permission', $data, array(
+					'tbid' => $_POST['id']
+				));
 			}
 			echo json_encode(array(
 				'info' => '',
@@ -18,8 +20,9 @@
 			));
 			break;
 		case 'updateApps':
-			$appsrs = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and tbid in ('.$appsid.')');
-			foreach($appsrs as $a){
+			foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
+				'tbid' => explode(',', $_POST['appsid'])
+			)) as $a){
 				echo '<div class="app" appid="'.$a['tbid'].'"><img src="../../'.$a['icon'].'" alt="'.$a['name'].'" title="'.$a['name'].'"><span class="del">删</span></div>';
 			}
 			break;

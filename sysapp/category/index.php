@@ -52,8 +52,7 @@ body{margin:10px 10px 0}
 	<tbody class="list-con"></tbody>
 	<tfoot><tr><td colspan="100">
 		<div class="pagination pagination-centered" id="pagination"></div>
-		<?php $categorycount = $db->select(0, 2, 'tb_app_category', 'tbid'); ?>
-		<input id="pagination_setting" type="hidden" count="<?php echo $categorycount; ?>" per="15">
+		<input id="pagination_setting" type="hidden" per="15">
 	</td></tr></tfoot>
 </table>
 <?php include('sysapp/global_module_detailIframe.php'); ?>

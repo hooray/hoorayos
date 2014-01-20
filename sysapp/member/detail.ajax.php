@@ -1,30 +1,34 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
 			$val_password = $val_password == '' ? $val_password : sha1($val_password);			
-			if($id == ''){
-				$set = array(
-					'username = "'.$val_username.'"',
-					'password = "'.$val_password.'"',
-					'type = '.(int)$val_type
+			if($_POST['id'] == ''){
+				$data = array(
+					'username' => $_POST['val_username'],
+					'password' => $_POST['val_password'] == '' ? $_POST['val_password'] : sha1($_POST['val_password']),
+					'type' => $_POST['val_type']
 				);
-				if((int)$val_type == 1){
-					$set[] = 'permission_id = '.(int)$val_permission_id;
+				if($_POST['val_type'] == 1){
+					$data['permission_id'] = $_POST['val_permission_id'];
 				}
-				$db->insert(0, 0, 'tb_member', $set);
+				$db->insert('tb_member', $data);
 			}else{
-				$set = array('type = '.(int)$val_type);
-				if($val_password != ''){
-					$set[] = 'password = "'.$val_password.'"';
+				$data = array(
+					'type' => $_POST['val_type']
+				);
+				if($_POST['val_password'] != ''){
+					$data['password'] = sha1($_POST['val_password']);
 				}
-				if((int)$val_type == 1){
-					$set[] = 'permission_id = '.(int)$val_permission_id;
+				if($_POST['val_type'] == 1){
+					$data['permission_id'] = $_POST['val_permission_id'];
 				}else{
-					$set[] = 'permission_id = ""';
+					$data['permission_id'] = '';
 				}
-				$db->update(0, 0, 'tb_member', $set, 'and tbid = '.(int)$id);
+				$db->update('tb_member', $data, array(
+					'tbid' => $_POST['id']
+				));
 			}
 			echo json_encode(array(
 				'info' => '',

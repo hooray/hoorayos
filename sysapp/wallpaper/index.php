@@ -6,11 +6,9 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 	
-	$wallpaperList = $db->select(0, 0, 'tb_wallpaper', '*', '', 'tbid asc');
-	foreach($wallpaperList as &$v){
-		$v['s_url'] = getFileInfo($v['url'], 'simg');
-	}
-	$wallpapertype = $db->select(0, 1, 'tb_member', 'wallpapertype', 'and tbid='.session('member_id'));
+	$wallpapertype = $db->get('tb_member', 'wallpapertype', array(
+		'tbid' => session('member_id')
+	));
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -35,24 +33,26 @@
 	<div class="fr">
 		<label>显示方式：</label>
 		<select name="wallpapertype" id="wallpapertype" style="width:100px">
-			<option value="tianchong" <?php if($wallpapertype['wallpapertype'] == 'tianchong'){echo 'selected';} ?>>填充</option>
-			<option value="shiying" <?php if($wallpapertype['wallpapertype'] == 'shiying'){echo 'selected';} ?>>适应</option>
-			<option value="pingpu" <?php if($wallpapertype['wallpapertype'] == 'pingpu'){echo 'selected';} ?>>平铺</option>
-			<option value="lashen" <?php if($wallpapertype['wallpapertype'] == 'lashen'){echo 'selected';} ?>>拉伸</option>
-			<option value="juzhong" <?php if($wallpapertype['wallpapertype'] == 'juzhong'){echo 'selected';} ?>>居中</option>
+			<option value="tianchong" <?php if($wallpapertype == 'tianchong'){echo 'selected';} ?>>填充</option>
+			<option value="shiying" <?php if($wallpapertype == 'shiying'){echo 'selected';} ?>>适应</option>
+			<option value="pingpu" <?php if($wallpapertype == 'pingpu'){echo 'selected';} ?>>平铺</option>
+			<option value="lashen" <?php if($wallpapertype == 'lashen'){echo 'selected';} ?>>拉伸</option>
+			<option value="juzhong" <?php if($wallpapertype == 'juzhong'){echo 'selected';} ?>>居中</option>
 		</select>
 	</div>
 </div>
 <ul class="wallpaper">
 	<?php
-		foreach($wallpaperList as $key => $value){
-			if($key % 3 == 2){
-				echo '<li class="three" wpid="'.$value['tbid'].'">';
+		foreach($db->select('tb_wallpaper', '*', array(
+			'ORDER' => 'tbid ASC'
+		)) as $k => $v){
+			if($k % 3 == 2){
+				echo '<li class="three" wpid="'.$v['tbid'].'">';
 			}else{
-				echo '<li wpid="'.$value['tbid'].'">';
+				echo '<li wpid="'.$v['tbid'].'">';
 			}
-				echo '<img src="../../'.$value['s_url'].'">';
-				echo '<div>'.$value['title'].'</div>';
+				echo '<img src="../../'.getFileInfo($v['url'], 'simg').'">';
+				echo '<div>'.$v['title'].'</div>';
 			echo '</li>';
 		}
 	?>

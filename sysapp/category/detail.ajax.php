@@ -1,15 +1,17 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
-			$set = array(
-				'name = "'.$val_name.'"'
+			$data = array(
+				'name' => $_POST['val_name']
 			);
-			if($id == ''){
-				$db->insert(0, 0, 'tb_app_category', $set);
+			if($_POST['id'] == ''){
+				$db->insert('tb_app_category', $data);
 			}else{
-				$db->update(0, 0, 'tb_app_category', $set, 'and tbid = '.(int)$id);
+				$db->update('tb_app_category', $data, array(
+					'tbid' => $_POST['id']
+				));
 			}
 			echo json_encode(array(
 				'info' => '',

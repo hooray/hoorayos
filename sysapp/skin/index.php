@@ -5,22 +5,6 @@
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
-	
-	//读取皮肤目录
-	$fp = opendir('img/skins/');
-	while($file = readdir($fp)){
-		if(($file != '.') && ($file != '..')){
-			$fileExt = strtolower(strrchr($file, '.'));
-			if($fileExt == '.css'){
-				$temp['name'] = basename($file, '.css');
-				$temp['img'] = 'img/skins/'.$temp['name'].'/preview.png';
-				$arr_file[] = $temp;
-			}
-		}
-	}
-	closedir($fp);
-	
-	$skin = getSkin();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -40,7 +24,21 @@
 </div>
 <ul class="skin">
 	<?php
+		//读取皮肤目录
+		$fp = opendir('img/skins/');
+		while($file = readdir($fp)){
+			if(($file != '.') && ($file != '..')){
+				$fileExt = strtolower(strrchr($file, '.'));
+				if($fileExt == '.css'){
+					$temp['name'] = basename($file, '.css');
+					$temp['img'] = 'img/skins/'.$temp['name'].'/preview.png';
+					$arr_file[] = $temp;
+				}
+			}
+		}
+		closedir($fp);
 		if($arr_file != NULL){
+			$skin = getSkin();
 			foreach($arr_file as $file){
 				if($file['name'] == $skin){
 					echo '<li class="selected" skin="'.$file['name'].'"><img src="../../'.$file['img'].'" style="width:256px;height:156px"><div></div></li>';

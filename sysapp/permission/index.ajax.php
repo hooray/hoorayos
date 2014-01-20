@@ -1,15 +1,15 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getList':
-			$orderby = 'tbid desc limit '.(int)$from.','.(int)$to;
-			if($search_1 != ''){
-				$sqlwhere[] = 'name like "%'.$search_1.'%"';
+			$where = array();
+			if($_POST['search_1'] != ''){
+				$where['LIKE']['name'] = $_POST['search_1'];
 			}
-			$c = $db->select(0, 2, 'tb_permission', 'tbid', $sqlwhere);
-			echo $c.'<{|*|}>';
-			$rs = $db->select(0, 0, 'tb_permission', '*', $sqlwhere, $orderby);
+			echo $db->count('tb_permission', $where).'<{|*|}>';
+			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
+			$rs = $db->select('tb_permission', '*', $where);
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
@@ -21,7 +21,9 @@
 			}
 			break;
 		case 'del':
-			$db->delete(0, 0, 'tb_permission', 'and tbid = '.(int)$permissionid);
+			$db->delete('tb_permission', array(
+				'tbid' => $_POST['permissionid']
+			));
 			break;
 	}
 ?>

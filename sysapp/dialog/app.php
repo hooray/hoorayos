@@ -6,8 +6,10 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 	
-	if(isset($id)){
-		$app = $db->select(0, 1, 'tb_member_app', '*', 'and tbid = '.$id);
+	if(isset($_GET['id'])){
+		$app = $db->get('tb_member_app', '*', array(
+			'tbid' => $_GET['id']
+		));
 	}
 ?>
 <!doctype html>
@@ -27,7 +29,7 @@
 <body>
 <form action="app.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<div class="input-label">
@@ -197,7 +199,7 @@ $(function(){
 					}
 				}
 			}, false);
-			xhr.open('post', 'detail.ajax.php?ac=uploadImg', true);
+			xhr.open('post', 'upload_img.php', true);
 			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			xhr.send(fd);
 		}

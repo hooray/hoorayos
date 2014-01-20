@@ -1,9 +1,13 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'update':
-			$db->update(0, 0, 'tb_member', 'skin = "'.$skin.'"', 'and tbid = '.session('member_id'));
+			$db->update('tb_member', array(
+				'skin' => $_POST['skin']
+			), array(
+				'tbid' => session('member_id')
+			));
 			break;
 	}
 ?>

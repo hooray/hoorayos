@@ -14,11 +14,14 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	if(isset($permissionid)){
-		$permission = $db->select(0, 1, 'tb_permission', '*', 'and tbid = '.$permissionid);
+	if(isset($_GET['permissionid'])){
+		$permission = $db->get('tb_permission', '*', array(
+			'tbid' => $_GET['permissionid']
+		));
 		if($permission['apps_id'] != ''){
-			$appsrs = $db->select(0, 0, 'tb_app', 'tbid, name, icon', 'and tbid in ('.$permission['apps_id'].')');
-			$permission['appsinfo'] = $appsrs;
+			$permission['appsinfo'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+				'tbid' => explode(',', $permission['apps_id'])
+			));
 		}
 	}
 ?>
@@ -34,7 +37,7 @@
 <body>
 <form action="detail.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $permissionid; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['permissionid']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">

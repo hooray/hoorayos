@@ -1,50 +1,34 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'edit':
+			$data = array(
+				'type' => $_POST['val_type'],
+				'icon' => $_POST['val_icon'],
+				'name' => $_POST['val_name'],
+				'url' => $_POST['val_url'],
+				'width' => $_POST['val_width'],
+				'height' => $_POST['val_height'],
+				'isresize' => $_POST['val_isresize'],
+				'isopenmax' => $_POST['val_isopenmax'],
+				'isflash' => $_POST['val_isflash']
+			);
 			if($id == ''){
-				addApp(array(
-					'type' => $val_type,
-					'icon' => $val_icon,
-					'name' => $val_name,
-					'url' => $val_url,
-					'width' => $val_width,
-					'height' => $val_height,
-					'isresize' => $val_isresize,
-					'isopenmax' => $val_isopenmax,
-					'isflash' => $val_isflash,
-					'desk' => $desk
-				));
+				$data['desk'] = $_POST['desk'];
+				addApp($data);
 			}else{
-				$set = array(
-					'type = "'.$val_type.'"',
-					'icon = "'.$val_icon.'"',
-					'name = "'.$val_name.'"',
-					'url = "'.$val_url.'"',
-					'width = '.$val_width,
-					'height = '.$val_height,
-					'isresize = '.$val_isresize,
-					'isopenmax = '.$val_isopenmax,
-					'isflash = '.$val_isflash
-				);
-				$db->update(0, 0, 'tb_member_app', $set, 'and tbid = '.(int)$id.' and member_id = '.session('member_id'));
+				$db->update('tb_member_app', $data, array(
+					'AND' => array(
+						'tbid' => $_POST['id'],
+						'member_id' => session('member_id')
+					)
+				));
 			}
 			echo json_encode(array(
 				'info' => '',
 				'status' => 'y'
 			));
-			break;
-		case 'uploadImg':
-			include('libs/Uploader.class.php');
-			$config = array(
-				'savePath' => 'uploads/'.session('member_id').'/shortcut/', //保存路径
-				'allowFiles' => array('.jpg', '.jpeg', '.png', '.gif', '.bmp'), //文件允许格式
-				'maxSize' => 1000 //文件大小限制，单位KB
-			);
-			$up = new Uploader('xfile', $config);
-			$info = $up->getFileInfo();
-			echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
 			break;
 	}
 ?>

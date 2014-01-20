@@ -318,7 +318,7 @@ $(function(){
 					}
 				}
 			}, false);
-			xhr.open('post', 'detail.ajax.php?ac=uploadImg', true);
+			xhr.open('post', 'upload_img.php', true);
 			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 			xhr.send(fd);
 		}

@@ -14,30 +14,36 @@
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 	
-	$set = $db->select(0, 1, 'tb_setting');
+	$set = $db->get('tb_setting', '*');
 	if($set['dock'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['dock'].')');
-		$set['dockinfo'] = $appsrs;
+		$set['dockinfo'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['dock'])
+		));
 	}
 	if($set['desk1'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['desk1'].')');
-		$set['desk1info'] = $appsrs;
+		$set['desk1info'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['desk1'])
+		));
 	}
 	if($set['desk2'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['desk2'].')');
-		$set['desk2info'] = $appsrs;
+		$set['desk2info'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['desk2'])
+		));
 	}
 	if($set['desk3'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['desk3'].')');
-		$set['desk3info'] = $appsrs;
+		$set['desk3info'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['desk3'])
+		));
 	}
 	if($set['desk4'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['desk4'].')');
-		$set['desk4info'] = $appsrs;
+		$set['desk4info'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['desk4'])
+		));
 	}
 	if($set['desk5'] != ''){
-		$appsrs = $db->select(0, 0, 'tb_app', 'tbid,name,icon', 'and tbid in ('.$set['desk5'].')');
-		$set['desk5info'] = $appsrs;
+		$set['desk5info'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			'tbid' => explode(',', $set['desk5'])
+		));
 	}
 	$global_title = 'defaultset';
 ?>
@@ -232,12 +238,13 @@
 	<div class="label-box form-inline control-group">
 		<select name="val_wallpaper_id">
 		<?php
-			$wallpaperList = $db->select(0, 0, 'tb_wallpaper', '*', '', 'tbid asc');
-			foreach($wallpaperList as $w){
-				if($w['tbid'] == $set['wallpaper_id']){
-					echo '<option value="'.$w['tbid'].'" selected>'.$w['title'].'</option>';
+			foreach($db->select('tb_wallpaper', '*', array(
+				'ORDER' => 'tbid ASC'
+			)) as $v){
+				if($v['tbid'] == $set['wallpaper_id']){
+					echo '<option value="'.$v['tbid'].'" selected>'.$v['title'].'</option>';
 				}else{
-					echo '<option value="'.$w['tbid'].'">'.$w['title'].'</option>';
+					echo '<option value="'.$v['tbid'].'">'.$v['title'].'</option>';
 				}
 			}
 		?>

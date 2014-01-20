@@ -1,15 +1,15 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_POST['ac']){
 		case 'getList':
-			$orderby = 'tbid desc limit '.(int)$from.','.(int)$to;
-			if($search_1 != ''){
-				$sqlwhere[] = 'name like "%'.$search_1.'%"';
+			$where['issystem'] = 0;
+			if($_POST['search_1'] != ''){
+				$where['LIKE']['name'] = $_POST['search_1'];
 			}
-			$c = $db->select(0, 2, 'tb_app_category', 'tbid', $sqlwhere);
-			echo $c.'<{|*|}>';
-			$rs = $db->select(0, 0, 'tb_app_category', '*', $sqlwhere, $orderby);
+			echo $db->count('tb_app_category', $where).'<{|*|}>';
+			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
+			$rs = $db->select('tb_app_category', '*', $where);
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
@@ -20,8 +20,14 @@
 			}
 			break;
 		case 'del':
-			$db->update(0, 0, 'tb_app', 'app_category_id = 0', 'and app_category_id = '.(int)$categoryid);
-			$db->delete(0, 0, 'tb_app_category', 'and tbid = '.(int)$categoryid);
+			$db->update('tb_app', array(
+				'app_category_id' => 0
+			), array(
+				'app_category_id' => $_POST['categoryid']
+			));
+			$db->delete('tb_app_category', array(
+				'tbid' => $_POST['categoryid']
+			));
 			break;
 	}
 ?>
