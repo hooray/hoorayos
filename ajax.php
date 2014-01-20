@@ -531,7 +531,7 @@
 							}
 						}
 					}
-					$db->update(0, 0, 'tb_member', array(
+					$db->update('tb_member', array(
 						'desk'.$_POST['fromdesk'] => implode(',', $fromdesk_arr),
 						'desk'.$_POST['todesk'] => implode(',', $todesk_arr)
 					), array(

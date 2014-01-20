@@ -67,7 +67,7 @@
 						'tbid[!]' => session('member_id')
 					)
 				))){
-					$db->update(0, 0, 'tb_member', array(
+					$db->update('tb_member', array(
 						'openid_'.cookie('fromsite') => session('openid'),
 						'openname_'.cookie('fromsite') => session('openname'),
 						'openavatar_'.cookie('fromsite') => session('openavatar'),

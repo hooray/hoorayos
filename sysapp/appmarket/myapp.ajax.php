@@ -53,10 +53,10 @@
 				$data['dt'] = date('Y-m-d H:i:s');
 				$data['verifytype'] = 0;
 				$data['member_id'] = session('member_id');
-				$db->insert(0, 0, 'tb_app', $data);
+				$db->insert('tb_app', $data);
 			}else{
 				$data['verifytype'] = 2;
-				$db->update(0, 0, 'tb_app', $data, array(
+				$db->update('tb_app', $data, array(
 					'AND' => array(
 						'tbid' => $id,
 						'member_id' => session('member_id')
