@@ -55,7 +55,7 @@ HROS.app = (function(){
 		updateXY : function(i){
 			if(HROS.CONFIG.appXY != i){
 				HROS.CONFIG.appXY = i;
-				HROS.deskTop.appresize();
+				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
 						type : 'POST',
@@ -71,7 +71,7 @@ HROS.app = (function(){
 		updateSize : function(i){
 			if(HROS.CONFIG.appSize != i){
 				HROS.CONFIG.appSize = i;
-				HROS.deskTop.appresize();
+				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
 						type : 'POST',
