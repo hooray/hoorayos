@@ -96,7 +96,7 @@
 		<div class="input-label">
 			<label class="label-text">应用类型：</label>
 			<div class="label-box form-inline control-group">
-				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="pwindow" <?php if($app['type'] == 'pwindow'){echo 'checked';} ?>>APP</label>
+				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="pwindow" <?php if($app['type'] == 'pwindow'){echo 'checked';} ?>>窗口</label>
 				<label class="radio"><input type="radio" name="val_type" value="pwidget" <?php if($app['type'] == 'pwidget'){echo 'checked';} ?>>挂件</label>
 			</div>
 		</div>
