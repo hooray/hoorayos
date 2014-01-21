@@ -24,11 +24,8 @@ HROS.appmanage = (function(){
 			//加载应用码头应用
 			var dock_append = '';
 			if(HROS.VAR.dock != ''){
-				var manageDockGrid = HROS.grid.getManageDockAppGrid();
 				$(HROS.VAR.dock).each(function(i){
 					dock_append += appbtnTemp({
-						'top' : 10,
-						'left' : manageDockGrid[i]['startX'] + 6,
 						'title' : this.name,
 						'type' : this.type,
 						'id' : 'd_' + this.appid,
@@ -42,12 +39,9 @@ HROS.appmanage = (function(){
 			//加载桌面应用
 			for(var j = 0; j < 5; j++){
 				var desk_append = '', desk = eval('HROS.VAR.desk' + (j + 1));
-				var manageAppGrid = HROS.grid.getManageAppGrid();
 				if(desk != ''){
 					$(desk).each(function(i){
 						desk_append += appbtnTemp({
-							'top' : manageAppGrid[i]['startY'] + 5,
-							'left' : 0,
 							'title' : this.name,
 							'type' : this.type,
 							'id' : 'd_' + this.appid,
@@ -59,7 +53,25 @@ HROS.appmanage = (function(){
 				}
 				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner').html(desk_append);
 			}
+			HROS.appmanage.setPos();
 			HROS.appmanage.getScrollbar();
+		},
+		setPos : function(){
+			var manageDockGrid = HROS.grid.getManageDockAppGrid(), manageAppGrid = HROS.grid.getManageAppGrid();
+			$('#amg_dock_container li').each(function(i){
+				$(this).css({
+					'top' : 10,
+					'left' : manageDockGrid[i]['startX'] + 6
+				});
+			});
+			for(var j = 0; j < 5; j++){
+				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner li').each(function(i){
+					$(this).css({
+						'top' : manageAppGrid[i]['startY'] + 5,
+						'left' : 0
+					});
+				});
+			}
 		},
 		move : function(){
 			$('#amg_dock_container').on('mousedown', 'li', function(e){

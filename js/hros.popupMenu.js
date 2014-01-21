@@ -71,7 +71,7 @@ HROS.popupMenu = (function(){
 			$('.app-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
 				from = obj.index(),
-				to = -1,
+				to = 99999,
 				todesk = $(this).attr('desk'),
 				fromdesk = HROS.CONFIG.desk,
 				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
@@ -89,7 +89,7 @@ HROS.popupMenu = (function(){
 								});
 							}
 						}else if(obj.parent().hasClass('desktop-apps-container')){
-							if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
+							if(HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk)){
 								$.ajax({
 									type : 'POST',
 									url : ajaxUrl,

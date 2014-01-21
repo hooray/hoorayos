@@ -96,7 +96,7 @@
 			break;
 		//更新默认桌面
 		case 'setDesk':
-			if($desk != '' && $_POST['desk'] >= 1 && $_POST['desk'] <= 5){
+			if($_POST['desk'] != '' && $_POST['desk'] >= 1 && $_POST['desk'] <= 5){
 				$db->update('tb_member', array(
 					'desk' => $_POST['desk']
 				), array(
