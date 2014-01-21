@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'getList':
 			$myapplist = $db->select('tb_member_app', 'realid', array(
 				'member_id' => session('member_id')
@@ -59,7 +59,7 @@
 				foreach($rs as $v){
 					echo '<li><a href="javascript:openDetailIframe2(\'detail.php?id='.$v['tbid'].'\');"><img src="../../'.$v['icon'].'"></a><a href="javascript:openDetailIframe2(\'detail.php?id='.$v['tbid'].'\');" class="app-name">'.$v['name'].'</a><span class="app-desc">'.$v['remark'].'</span><span class="star-box"><i style="width:'.($v['starnum'] * 20).'%;"></i></span><span class="star-num">'.(is_int($v['starnum']) || $v['starnum'] == 0 ? (int)$v['starnum'] : sprintf('%.1f', $v['starnum'])).'</span><span class="app-stat">'.$v['usecount'].' 人正在使用</span>';
 					if(in_array($v['tbid'], $myapplist)){
-						if($search_1 == -2){
+						if($_POST['search_1'] == -2){
 							echo '<a href="javascript:;" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" class="btn-run-s" style="right:35px" title="打开应用">打开应用</a>';
 							echo '<a href="javascript:;" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" class="btn-remove-s" style="right:10px" title="删除应用">删除应用</a>';
 						}else{

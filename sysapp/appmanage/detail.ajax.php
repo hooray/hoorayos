@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'edit':
 			$_POST['val_issetbar'] = $_POST['val_kindid'] == 1 ? 0 : 1;
 			$data = array(
@@ -46,6 +46,17 @@
 			), array(
 				'tbid' => $_POST['appid']
 			));
+			break;
+		case 'uploadImg':
+			include('libs/Uploader.class.php');
+			$config = array(
+				'savePath' => 'uploads/shortcut/', //保存路径
+				'allowFiles' => array('.jpg', '.jpeg', '.png', '.gif', '.bmp'), //文件允许格式
+				'maxSize' => 1000 //文件大小限制，单位KB
+			);
+			$up = new Uploader('xfile', $config);
+			$info = $up->getFileInfo();
+			echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
 			break;
 	}
 ?>

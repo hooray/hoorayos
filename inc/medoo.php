@@ -155,6 +155,7 @@ class medoo{
 								$wheres[] = $column . ' NOT IN (' . $this->array_quote($value) . ')';
 								break;
 							case 'integer':
+							case 'double':
 								$wheres[] = $column . ' != ' . $value;
 								break;
 							case 'string':
@@ -194,6 +195,7 @@ class medoo{
 								$wheres[] = $column . ' IN (' . $this->array_quote($value) . ')';
 								break;
 							case 'integer':
+							case 'double':
 								$wheres[] = $column . ' = ' . $value;
 								break;
 							case 'string':
@@ -337,6 +339,7 @@ class medoo{
 						$values[] = $this->quote(serialize($value));
 						break;
 					case 'integer':
+					case 'double':
 					case 'string':
 						$values[] = $this->quote($value);
 						break;
@@ -373,6 +376,7 @@ class medoo{
 							$fields[] = $key . ' = ' . $this->quote(serialize($value));
 							break;
 						case 'integer':
+						case 'double':
 						case 'string':
 							$fields[] = $key . ' = ' . $this->quote($value);
 							break;

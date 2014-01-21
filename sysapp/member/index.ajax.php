@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'getList':
 			$where = array();
 			if($_POST['search_1'] != ''){

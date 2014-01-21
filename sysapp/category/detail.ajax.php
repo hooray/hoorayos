@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'edit':
 			$data = array(
 				'name' => $_POST['val_name']

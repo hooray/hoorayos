@@ -1,12 +1,14 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		//更新应用评分
 		case 'updateAppStar':
 			if(!$db->has('tb_app_star', array(
-				'app_id' => $_POST['id'],
-				'member_id' => session('member_id')
+				'AND' => array(
+					'app_id' => $_POST['id'],
+					'member_id' => session('member_id')
+				)
 			))){
 				$db->insert('tb_app_star', array(
 					'app_id' => $_POST['id'],

@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'edit':
 			$db->update('tb_setting', array(
 				'title' => $_POST['val_title'],

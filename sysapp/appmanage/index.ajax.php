@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'getList':
 			$appcategory = $db->select('tb_app_category', '*');
 			foreach($appcategory as $ac){

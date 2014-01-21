@@ -1,7 +1,7 @@
 <?php
 	require('global.php');
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		//登录
 		case 'login':
 			$rememberMe = isset($_POST['rememberMe']) ? 1 : 0;

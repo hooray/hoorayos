@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'checkPassword':
 			if($db->has('tb_member', array(
 				'AND' => array(

@@ -244,7 +244,7 @@ $(function(){
 			});
 		}
 	}).on('click', '.btn-run', function(){
-		if($(this).attr('app_type') == 'app'){
+		if($(this).attr('app_type') == 'window'){
 			window.parent.HROS.window.create($(this).attr('real_app_id'));
 		}else{
 			window.parent.HROS.widget.create($(this).attr('real_app_id'));

@@ -34,8 +34,8 @@
 					<a href="javascript:;" app_id="<?php echo $app['tbid']; ?>" app_type="<?php echo $app['type']; ?>" class="btn-add">添加应用</a>
 				<?php } ?>
 				<div class="grade-box">
-					<div class="star-num"><?php echo floor($app['starnum']); ?></div>
-					<div class="star-box"><i style="width:<?php echo $app['starnum']*20; ?>%"></i>
+					<div class="star-num"><?php echo is_int($app['starnum']) || $app['starnum'] == 0 ? (int)$app['starnum'] : sprintf('%.1f', $app['starnum']); ?></div>
+					<div class="star-box"><i style="width:<?php echo $app['starnum'] * 20; ?>%"></i>
 						<ul>
 							<li class="grade-1" num="1"><a href="javascript:;"><em>很不好用</em></a></li>
 							<li class="grade-2" num="2"><a href="javascript:;"><em>体验一般般</em></a></li>

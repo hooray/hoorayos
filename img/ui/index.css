@@ -496,13 +496,13 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #shortcut_shadow2 span{color:#fff;max-width:none;height:30px;line-height:30px;margin-top:-30px;margin-left:50px;float:left;text-align:left;background:none}
 
 /*评分*/
-.grade-box{width:200px}
+.grade-box{width:200px;height:20px}
 .star-box,
 .star-box i,
 .star-box a{background-image:url(app_spr_img.png);_background-image:url(app_spr_img.gif);background-repeat:no-repeat}
 .grade-box .star-box{float:right}
-.grade-box .star-num{float:right;margin:-3px 30px 0 4px}
-.star-box{position:relative;display:inline-block;width:85px;height:15px;background-position:0 -62px}
+.grade-box .star-num{float:right;margin:0 30px 0 5px}
+.star-box{position:relative;display:inline-block;width:85px;height:15px;margin-top:5px;background-position:0 -62px}
 .star-box div{width:40px;height:18px;line-height:18px;float:left;position:relative;left:-40px}
 .star-box i{position:absolute;top:0;left:0;height:15px;overflow:hidden;background-position:0 -78px;font-style:normal}
 .star-box ul,
@@ -516,7 +516,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .grade-3{width:51px;z-index:8}
 .grade-4{width:68px;z-index:7}
 .grade-5{width:85px;z-index:6}
-.star-num{display:inline-block;height:21px;line-height:21px;font-family:Georgia;font-weight:bold;font-size:16px;color:#F60}
+.star-num{display:inline-block;height:20px;line-height:20px;font-family:Georgia;font-weight:bold;font-size:16px;color:#F60}
 
 /*分享*/
 #share a{display:block;float:left;padding-left:20px;margin:5px 0;width:60px;height:16px;line-height:16px;background:url(share_icon.png) no-repeat;cursor:pointer;color:#333}

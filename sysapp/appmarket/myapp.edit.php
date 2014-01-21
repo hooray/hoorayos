@@ -382,8 +382,8 @@ $(function(){
 	});
 	$('#btn-preview').on('click', function(){
 		if(form.check()){
-			if($('input[name="val_type"]:checked').val() == 'app'){
-				window.parent.parent.HROS.window.createTemp({
+			if($('input[name="val_type"]:checked').val() == 'window'){
+				window.parent.parent.parent.HROS.window.createTemp({
 					title : $('input[name="val_name"]').val(),
 					url : $('input[name="val_url"]').val(),
 					width : $('input[name="val_width"]').val(),
@@ -393,7 +393,7 @@ $(function(){
 					isflash : $('input[name="val_isflash"]:checked').val() == 1 ? true : false
 				});
 			}else{
-				window.parent.parent.HROS.widget.createTemp({
+				window.parent.parent.parent.HROS.widget.createTemp({
 					url : $('input[name="val_url"]').val(),
 					width : $('input[name="val_width"]').val(),
 					height : $('input[name="val_height"]').val(),

@@ -4,13 +4,13 @@
 	//所有操作分两种类型：读和写
 	//如 getWallpaper 是读操作，setWallpaper 是写操作
 	//当遇到写操作时，则需要通过下面登录验证，未登录用户则中断之后的写操作，并输出错误信息
-	if(in_array($_POST['ac'], array('setWallpaper', 'setDockPos', 'setAppXY', 'addMyApp', 'delMyApp', 'moveMyApp', 'updateMyApp', 'addFolder', 'updateFolder', 'updateAppStar'))){
+	if(in_array($_REQUEST['ac'], array('setWallpaper', 'setDockPos', 'setAppXY', 'addMyApp', 'delMyApp', 'moveMyApp', 'updateMyApp', 'addFolder', 'updateFolder', 'updateAppStar'))){
 		if(!checkLogin()){
 			exit('ERROR_NOT_LOGGED_IN');
 		}
 	}
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'checkLogin':
 			echo checkLogin() ? 1 : 0;
 			break;
@@ -675,9 +675,10 @@
 			break;
 		//获取应用评分
 		case 'getAppStar':
-			echo $db->get('tb_app', 'starnum', array(
+			$startnum = $db->get('tb_app', 'starnum', array(
 				'tbid' => $_POST['id']
 			));
+			echo is_int($startnum) || $startnum == 0 ? (int)$startnum : sprintf('%.1f', $startnum);
 			break;
 		//更新应用评分
 		case 'updateAppStar':

@@ -771,7 +771,11 @@
 				delApp($v);
 			}
 		}else if($member_app['type'] == 'window' || $member_app['type'] == 'widget'){
-			$db->update('tb_app', 'usecount = usecount - 1', 'and tbid = '.$member_app['realid']);
+			$db->update('tb_app', array(
+				'usecount[-]' => 1
+			), array(
+				'tbid' => $member_app['realid']
+			));
 		}
 		$member = $db->get('tb_member', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'), array(
 			'tbid' => session('member_id')

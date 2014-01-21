@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'edit':
 			$val_password = $val_password == '' ? $val_password : sha1($val_password);			
 			if($_POST['id'] == ''){

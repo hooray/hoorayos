@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 		
-	switch($_POST['ac']){
+	switch($_REQUEST['ac']){
 		case 'getCalendar':
 			$rs = $db->select('tb_calendar', '*', array(
 				'AND' => array(

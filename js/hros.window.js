@@ -657,7 +657,7 @@ HROS.window = (function(){
 						width : 250,
 						id : 'star',
 						content : starDialogTemp({
-							'point' : Math.floor(point),
+							'point' : point,
 							'realpoint' : point * 20
 						})
 					});
