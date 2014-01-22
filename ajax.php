@@ -116,7 +116,7 @@
 					'tbid' => session('member_id')
 				));
 				if($appid['dock'] != ''){
-					$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN ('.$appid['dock'].') ORDER BY FIELD (`tbid`, '.$appid['dock'].')')->fetchAll();
+					$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN('.$appid['dock'].') ORDER BY FIELD(`tbid`, '.$appid['dock'].')')->fetchAll();
 					$data = array();
 					foreach($rs as $v){
 						$tmp = array();
@@ -134,7 +134,7 @@
 				}
 				for($i = 1; $i <= 5; $i++){
 					if($appid['desk'.$i] != ''){
-						$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN ('.$appid['desk'.$i].') ORDER BY FIELD (`tbid`, '.$appid['desk'.$i].')')->fetchAll();
+						$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN('.$appid['desk'.$i].') ORDER BY FIELD(`tbid`, '.$appid['desk'.$i].')')->fetchAll();
 						$data = array();
 						foreach($rs as $v){
 							$tmp = array();
@@ -179,7 +179,7 @@
 			}else{
 				$appid = $db->get('tb_setting', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'));
 				if($appid['dock'] != ''){
-					$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN ('.$appid['dock'].') ORDER BY FIELD (`tbid`, '.$appid['dock'].')')->fetchAll();
+					$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN('.$appid['dock'].') ORDER BY FIELD(`tbid`, '.$appid['dock'].')')->fetchAll();
 					$data = array();
 					foreach($rs as $v){
 						$tmp = array();
@@ -194,7 +194,7 @@
 				}
 				for($i = 1; $i <= 5; $i++){
 					if($appid['desk'.$i] != ''){
-						$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN ('.$appid['desk'.$i].') ORDER BY FIELD (`tbid`, '.$appid['desk'.$i].')')->fetchAll();
+						$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN('.$appid['desk'.$i].') ORDER BY FIELD(`tbid`, '.$appid['desk'.$i].')')->fetchAll();
 						$data = array();
 						foreach($rs as $v){
 							$tmp = array();
