@@ -30,7 +30,10 @@
 			foreach($category as $c){
 				echo '<div class="alert_addapps tab-pane" id="category_'.$c['tbid'].'">';
 				foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
-					'app_category_id' => $c['tbid']
+					'AND' => array(
+						'app_category_id' => $c['tbid'],
+						'verifytype' => 1
+					)
 				)) as $v){
 					echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
 						echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';

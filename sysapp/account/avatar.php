@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="../../img/ui/sys.css">
 <script> 
 function avatar_success(){
-	window.parent.HROS.navbar.getAvatar();
+	window.parent.HROS.startmenu.getAvatar();
 	alert('头像保存成功');
 	location.reload();
 }

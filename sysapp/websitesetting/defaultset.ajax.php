@@ -1,7 +1,7 @@
 <?php
 	require('../../global.php');
 	
-	switch($ac){
+	switch($_REQUEST['ac']){
 		case 'edit':
 			$db->update('tb_setting', array(
 				'isforcedlogin' => $_POST['val_isforcedlogin'],
