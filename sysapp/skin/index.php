@@ -57,6 +57,7 @@ $(function(){
 		$(this).addClass('selected');
 		var skin = $(this).attr('skin');
 		$.ajax({
+			type : 'POST',
 			url : 'index.ajax.php',
 			data : 'ac=update&skin=' + skin,
 			success : function(){

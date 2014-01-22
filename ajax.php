@@ -106,6 +106,11 @@
 			break;
 		//获取桌面图标
 		case 'getMyApp':
+			$desktop['dock'] = array();
+			for($i = 1; $i <= 5; $i++){
+				$desktop['desk' + i] = array();
+			}
+			$desktop['folder'] = array();
 			if(checkLogin()){
 				$appid = $db->get('tb_member', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'), array(
 					'tbid' => session('member_id')
