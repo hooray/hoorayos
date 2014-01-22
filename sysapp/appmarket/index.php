@@ -40,7 +40,7 @@
 	<div class="col-sub">
 		<div class="search-box">
 			<div class="input-append">
-				<input type="text" name="search_3" id="search_3" placeholder="请输入搜索关键字" style="width:138px" value="<?php echo $searchkey; ?>">
+				<input type="text" name="search_3" id="search_3" placeholder="请输入搜索关键字" style="width:138px" value="<?php echo $_GET['searchkey']; ?>">
 				<button id="search_3_remove" class="btn" style="padding:4px"><i class="icon-remove"></i></button>
 				<button id="search_3_do" class="btn"><i class="icon-search"></i></button>
 			</div>

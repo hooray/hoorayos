@@ -556,7 +556,7 @@ HROS.app = (function(){
 						}
 						var movegrid = HROS.grid.searchFolderGrid(cx, cy);
 						if(movegrid != null){
-							if(oldobj.parents('.folder-window').attr('appid') != folderId){
+							if(oldobj.parents('.folder-window').attr('appid') != movegrid){
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;

@@ -425,8 +425,8 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #pageletSearchInput{outline:none;border:0;width:170px!important;height:20px;line-height:20px;margin:6px 0 0 7px;padding:0;float:left;color:#fff;background:transparent;-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #pageletSearchInput::-webkit-input-placeholder,
 #pageletSearchInput::-moz-placeholder{color:#ccc}
-#pageletSearchButton{border:0;float:right;width:24px!important;height:24px;cursor:pointer;margin:5px 5px 0 0;padding:0;background:url(nav_bar.png) no-repeat -98px -63px}
-#pageletSearchButton:hover{background-position:-74px -63px}
+#pageletSearchButton{border:0;float:right;width:20px;height:20px;cursor:pointer;margin:6px 8px 0 0;padding:0;background:url(desk_sprite.png) no-repeat -200px -160px}
+#pageletSearchButton:hover{background-position:-220px -160px}
 #search-suggest{width:212px;position:absolute;top:33px;right:20px;z-index:20;display:none}
 #search-suggest .resultBox{width:212px;background:url(suggess_list_bg.png) repeat-y;margin:0;padding-top:5px;line-height:0;color:#FFF}
 #search-suggest .resultList{overflow:hidden;vertical-align:middle}

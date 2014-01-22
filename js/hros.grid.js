@@ -1,7 +1,7 @@
 /*
 **  应用布局格子
 **  这篇文章里有简单说明格子的作用
-**  http://www.cnblogs.com/hooray/archive/2012/03/23/2414410.html
+**  http://hooray.cnblogs.com/p/3480087.html
 */
 HROS.grid = (function(){
 	return {
@@ -42,6 +42,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid.length; i++){
 				if(x >= grid[i].startX && x <= grid[i].endX && y >= grid[i].startY && y <= grid[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -84,6 +85,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid2.length; i++){
 				if(x >= grid2[i].startX && x <= grid2[i].endX && y >= grid2[i].startY && y <= grid2[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -116,6 +118,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid.length; i++){
 				if(x >= grid[i].startX && x <= grid[i].endX && y >= grid[i].startY && y <= grid[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -158,6 +161,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid2.length; i++){
 				if(x >= grid2[i].startX && x <= grid2[i].endX && y >= grid2[i].startY && y <= grid2[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -185,6 +189,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < folderGrid.length; i++){
 				if(x >= folderGrid[i].startX && x <= folderGrid[i].endX && y >= folderGrid[i].startY && y <= folderGrid[i].endY){
 					flag = folderGrid[i]['id'];
+					break;
 				}
 			}
 			return flag;
@@ -207,6 +212,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid.length; i++){
 				if(x >= grid[i].startX && x <= grid[i].endX){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -229,6 +235,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid2.length; i++){
 				if(x >= grid2[i].startX && x <= grid2[i].endX){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -251,6 +258,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid.length; i++){
 				if(y >= grid[i].startY && y <= grid[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
@@ -274,6 +282,7 @@ HROS.grid = (function(){
 			for(var i = 0; i < grid2.length; i++){
 				if(y >= grid2[i].startY && y <= grid2[i].endY){
 					flag = i;
+					break;
 				}
 			}
 			return flag;
