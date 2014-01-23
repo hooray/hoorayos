@@ -16,7 +16,7 @@
 <script src="../js/HoorayLibs/hooraylibs.js"></script>
 <script type="text/javascript">
 $(function(){
-	<?php if($code == $errorcode['noLogin']){ ?>
+	<?php if($_GET['code'] == $errorcode['noLogin']){ ?>
 		window.parent.HROS.CONFIG.memberID = 0;
 		window.parent.$.dialog({
 			title: '温馨提示',
@@ -26,9 +26,9 @@ $(function(){
 				window.parent.HROS.base.login();
 			}
 		});
-	<?php }elseif($code == $errorcode['noAdmin']){ ?>
+	<?php }elseif($_GET['code'] == $errorcode['noAdmin']){ ?>
 		window.parent.ZENG.msgbox.show("对不起，您不是管理员！", 1, 2000);
-	<?php }elseif($code == $errorcode['noPermissions']){ ?>
+	<?php }elseif($_GET['code'] == $errorcode['noPermissions']){ ?>
 		window.parent.ZENG.msgbox.show("对不起，您没有权限操作！", 1, 2000);
 	<?php } ?>
 });
