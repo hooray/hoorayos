@@ -108,7 +108,7 @@
 		case 'getMyApp':
 			$desktop['dock'] = array();
 			for($i = 1; $i <= 5; $i++){
-				$desktop['desk' + i] = array();
+				$desktop['desk'.$i] = array();
 			}
 			$desktop['folder'] = array();
 			if(checkLogin()){
@@ -712,49 +712,49 @@
 				echo false;
 			}
 			break;
-//		case 'html5upload':
-//			$r = new stdClass();
-//			//文件名转码，防止中文出现乱码，最后输出时再转回来
-//			$file_array = explode('.', iconv('UTF-8', 'gb2312', $_FILES['xfile']['name']));
-//			//取出扩展名
-//			$extension = $file_array[count($file_array) - 1];
-//			unset($file_array[count($file_array) - 1]);
-//			//取出文件名
-//			$name = implode('.', $file_array);
-//			//拼装新文件名（含扩展名）
-//			$file = $name.'_'.sha1(@microtime().$_FILES['xfile']['name']).'.'.$extension;
-//			//验证文件是否合格
-//			if(in_array($extension, $uploadFileUnType)){
-//				$r->error = "上传文件类型系统不支持";
-//			}else if($_FILES['xfile']['size'] > ($uploadFileMaxSize * 1048576)){
-//				$r->error = "上传文件单个大小不能超过 $uploadFileMaxSize MB";
-//			}else{
-//				$icon = '';
-//				foreach($uploadFileType as $uft){
-//					if($uft['ext'] == $extension){
-//						$icon = $uft['icon'];
-//						break;
-//					}
-//				}
-//				if($icon == ''){
-//					$icon = 'img/ui/file_unknow.png';
-//				}
-//				//生成文件存放路径
-//				$dir = 'uploads/member/'.session('member_id').'/file/';
-//				if(!is_dir($dir)){
-//					//循环创建目录
-//					recursive_mkdir($dir);
-//				}
-//				//上传
-//				move_uploaded_file($_FILES['xfile']["tmp_name"], $dir.$file);
-//				
-//				$r->dir = $dir;
-//				$r->file = iconv('gb2312', 'UTF-8', $file);
-//				$r->name = iconv('gb2312', 'UTF-8', $name);
-//				$r->extension = iconv('gb2312', 'UTF-8', $extension);
-//				$r->icon = $icon;
-//			}
-//			echo json_encode($r);
-//			break;
+		case 'html5upload':
+			$r = new stdClass();
+			//文件名转码，防止中文出现乱码，最后输出时再转回来
+			$file_array = explode('.', iconv('UTF-8', 'gb2312', $_FILES['xfile']['name']));
+			//取出扩展名
+			$extension = $file_array[count($file_array) - 1];
+			unset($file_array[count($file_array) - 1]);
+			//取出文件名
+			$name = implode('.', $file_array);
+			//拼装新文件名（含扩展名）
+			$file = $name.'_'.sha1(@microtime().$_FILES['xfile']['name']).'.'.$extension;
+			//验证文件是否合格
+			if(in_array($extension, $uploadFileUnType)){
+				$r->error = "上传文件类型系统不支持";
+			}else if($_FILES['xfile']['size'] > ($uploadFileMaxSize * 1048576)){
+				$r->error = "上传文件单个大小不能超过 $uploadFileMaxSize MB";
+			}else{
+				$icon = '';
+				foreach($uploadFileType as $uft){
+					if($uft['ext'] == $extension){
+						$icon = $uft['icon'];
+						break;
+					}
+				}
+				if($icon == ''){
+					$icon = 'img/ui/file_unknow.png';
+				}
+				//生成文件存放路径
+				$dir = 'uploads/member/'.session('member_id').'/file/';
+				if(!is_dir($dir)){
+					//循环创建目录
+					recursive_mkdir($dir);
+				}
+				//上传
+				move_uploaded_file($_FILES['xfile']["tmp_name"], $dir.$file);
+				
+				$r->dir = $dir;
+				$r->file = iconv('gb2312', 'UTF-8', $file);
+				$r->name = iconv('gb2312', 'UTF-8', $name);
+				$r->extension = iconv('gb2312', 'UTF-8', $extension);
+				$r->icon = $icon;
+			}
+			echo json_encode($r);
+			break;
 	}
 ?>

@@ -43,9 +43,7 @@
 </div>
 <ul class="wallpaper">
 	<?php
-		foreach($db->select('tb_wallpaper', '*', array(
-			'ORDER' => 'tbid ASC'
-		)) as $k => $v){
+		foreach($db->select('tb_wallpaper', '*') as $k => $v){
 			if($k % 3 == 2){
 				echo '<li class="three" wpid="'.$v['tbid'].'">';
 			}else{

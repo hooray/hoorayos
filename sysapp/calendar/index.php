@@ -78,7 +78,7 @@
 <?php include('sysapp/global_js.php'); ?>
 <script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
 <script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
-<script src="../../js/sugar/sugar-1.3.9.min.js"></script>
+<script src="../../js/sugar/sugar-1.4.1.min.js"></script>
 <script src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="../../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>

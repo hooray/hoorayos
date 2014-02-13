@@ -18,14 +18,13 @@ HROS.base = (function(){
 			//更新当前用户ID
 			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
 			//文件上传
-			//HROS.uploadFile.init();
+			HROS.uploadFile.init();
 			//阻止弹出浏览器默认右键菜单
 			$('body').on('contextmenu', function(){
 				return false;
 			});
 			//版权信息初始化并显示
 			HROS.copyright.init();
-			HROS.copyright.show();
 			//用于判断网页是否缩放
 			HROS.zoom.init();
 			//桌面(容器)初始化

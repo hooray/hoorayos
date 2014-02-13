@@ -524,7 +524,7 @@ HROS.popupMenu = (function(){
 								'<li><a menu="addpapp" href="javascript:;"><b class="customapp"></b>新建私人应用</a></li>'+
 							'</ul></div>'+
 						'</li>'+
-						'<!--li style="border-bottom:1px solid #F0F0F0"><b class="upload"></b><a menu="uploadfile" href="javascript:;">上传文件</a></li-->'+
+						'<li style="border-bottom:1px solid #F0F0F0"><b class="upload"></b><a menu="uploadfile" href="javascript:;">上传文件</a></li>'+
 						'<li><a menu="themes" href="javascript:;"><b class="themes"></b>主题设置</a></li>'+
 						'<li><a menu="setting" href="javascript:;"><b class="setting"></b>桌面设置</a></li>'+
 						'<li style="border-bottom:1px solid #F0F0F0">'+

@@ -101,8 +101,7 @@
 						<option value="">请选择应用分类</option>
 						<?php
 							$appcategory = $db->select('tb_app_category', '*', array(
-								'issystem' => 0,
-								'ORDER' => 'tbid ASC'
+								'issystem' => 0
 							));
 							foreach($appcategory as $ac){
 								if($ac['tbid'] == $app['app_category_id']){

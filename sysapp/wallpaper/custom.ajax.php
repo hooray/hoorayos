@@ -3,12 +3,22 @@
 	
 	switch($_REQUEST['ac']){
 		case 'del':
-			$db->delete('tb_pwallpaper', array(
+			//检查当前准备删除的壁纸是否在使用
+			if(!$db->has('tb_member', array(
 				'AND' => array(
-					'tbid' => $_POST['id'],
-					'member_id' => session('member_id')
+					'wallpaper_id' => $_POST['id'],
+					'wallpaperstate' => 2
 				)
-			));
+			))){
+				$db->delete('tb_pwallpaper', array(
+					'AND' => array(
+						'tbid' => $_POST['id'],
+						'member_id' => session('member_id')
+					)
+				));
+			}else{
+				echo 'ERROR';
+			}
 			break;
 		case 'uploadImg':
 			//先验证图片是否超过6张，否则不允许上传

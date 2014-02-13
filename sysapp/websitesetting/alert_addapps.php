@@ -14,8 +14,7 @@
 <ul class="nav nav-tabs" style="margin:5px 12px">
 	<?php
 		$category = $db->select('tb_app_category', '*', array(
-			'issystem' => 0,
-			'ORDER' => 'tbid ASC'
+			'issystem' => 0
 		));
 		if($category != NULL){
 			foreach($category as $c){

@@ -149,10 +149,13 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				</form>
 			</div>
 		</div>
-		<?php if((SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
+		<?php if((QQ_AKEY && QQ_SKEY) || (SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
 		<div class="disanfangdenglu">
 			<label>合作网站帐号登录</label>
 			<div class="box">
+				<?php if(QQ_AKEY && QQ_SKEY){ ?>
+					<a href="javascript:;" class="qq" data-type="qq" title="QQ登录"></a>
+				<?php } ?>
 				<?php if(SINAWEIBO_AKEY && SINAWEIBO_SKEY){ ?>
 					<a href="javascript:;" class="sinaweibo" data-type="sinaweibo" title="新浪微博登录"></a>
 				<?php } ?>
@@ -342,7 +345,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/HoorayLibs/hooraylibs.js"></script>
 <script src="js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
-<script src="js/sugar/sugar-1.3.9.min.js"></script>
+<script src="js/sugar/sugar-1.4.1.min.js"></script>
 <script src="js/hros.core.js"></script>
 <script src="js/hros.app.js"></script>
 <script src="js/hros.appmanage.js"></script>
@@ -533,6 +536,7 @@ function getLoginCookie(){
 				}else if(msg == 'ERROR_NOT_BIND'){
 					var title;
 					switch($.cookie(cookie_prefix + 'fromsite')){
+						case 'qq': title = 'qq'; break;
 						case 'sinaweibo': title = '新浪微博'; break;
 						case 'tweibo': title = '腾讯微博'; break;
 						case 't163weibo': title = '网易微博'; break;

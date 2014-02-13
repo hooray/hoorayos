@@ -16,12 +16,7 @@
 				$myapplist2[$value['realid']] = $value['tbid'];
 			}
 			$where = array();
-			if($db->has('tb_member', array(
-				'AND' => array(
-					'type[!]' => 1,
-					'tbid' => session('member_id')
-				)
-			))){
+			if(!checkLogin() || !checkAdmin()){
 				$where['AND']['app_category_id'] = $db->select('tb_app_category', 'tbid', array(
 					'issystem' => 0
 				));
@@ -44,13 +39,13 @@
 			echo $db->count('tb_app', $where).'<{|*|}>';
 			switch($_POST['search_2']){
 				case '1':
-					$where['ORDER'] = 'dt';
+					$where['ORDER'] = 'dt DESC';
 					break;
 				case '2':
-					$where['ORDER'] = 'usecount';
+					$where['ORDER'] = 'usecount DESC';
 					break;
 				case '3':
-					$where['ORDER'] = 'starnum';
+					$where['ORDER'] = 'starnum DESC';
 					break;
 			}
 			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);

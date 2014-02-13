@@ -79,6 +79,10 @@ $db = new medoo(array(
 ));
 
 //社区登录公用变量配置信息
+//QQ
+define('QQ_AKEY',                  '');
+define('QQ_SKEY',                  '');
+define('QQ_CALLBACK_URL',          'http://[替换网站域名]/connect/qq/callback.php');
 //新浪微博
 define('SINAWEIBO_AKEY',           '');
 define('SINAWEIBO_SKEY',           '');

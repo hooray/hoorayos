@@ -84,9 +84,7 @@
 				<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
 					<option value="">请选择应用分类</option>
 					<?php
-						$appcategory = $db->select('tb_app_category', '*', array(
-							'ORDER' => 'tbid ASC'
-						));
+						$appcategory = $db->select('tb_app_category', '*');
 						foreach($appcategory as $ac){
 							if($ac['tbid'] == $app['app_category_id']){
 								echo '<option value="'.$ac['tbid'].'" selected>'.$ac['name'].'</option>';

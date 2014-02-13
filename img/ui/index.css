@@ -145,7 +145,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #copyright .close{display:block;position:absolute;top:6px;right:4px;width:24px;height:24px;background:url(desk_sprite.png) no-repeat -510px -390px}
 #copyright .close:hover{background-position:-540px -390px}
 #copyright .title{padding-left:20px;height:56px;line-height:56px;color:#fff;font-size:28px}
-#copyright .body{padding:10px 30px;color:#fff}
+#copyright .body{padding:10px 20px;color:#fff}
 #copyright .body p{margin-bottom:5px}
 #copyright .body a{color:#fff}
 #copyright .body a:hover{color:#ccc;text-decoration:underline}

@@ -25,6 +25,20 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 
 <body>
 <?php include('global_title.php'); ?>
+<?php if(QQ_AKEY && QQ_SKEY){ ?>
+<div class="input-label">
+	<label class="label-text">QQ：</label>
+	<div class="label-box form-inline">
+		<?php if($member['openid_qq'] != ''){ ?>
+			<img src="<?php echo $member['openavatar_qq']; ?>" class="img-circle img-polaroid" width="20" height="20">
+			<?php echo $member['openname_qq']; ?>
+			<a href="javascript:;" class="btn btn-link pull-right unbind" data-type="qq">解除绑定</a>
+		<?php }else{ ?>
+			<a href="javascript:;" class="btn btn-link pull-right bind" data-type="qq">绑定</a>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
 <?php if(SINAWEIBO_AKEY && SINAWEIBO_SKEY){ ?>
 <div class="input-label">
 	<label class="label-text">新浪微博：</label>
@@ -159,6 +173,7 @@ function getLoginCookie(){
 		window.clearInterval(int);
 		var title;
 		switch($.cookie(cookie_prefix + 'fromsite')){
+			case 'qq': title = 'QQ'; break;
 			case 'sinaweibo': title = '新浪微博'; break;
 			case 'tweibo': title = '腾讯微博'; break;
 			case 't163weibo': title = '网易微博'; break;

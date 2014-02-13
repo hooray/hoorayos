@@ -20,10 +20,7 @@
 					'tbid' => session('member_id')
 				));
 			}
-			$appcategory = $db->select('tb_app_category', '*', array(
-				'ORDER' => 'tbid ASC'
-			));
-			foreach($appcategory as $ac){
+			foreach($db->select('tb_app_category', '*') as $ac){
 				if(($ac['issystem'] == 1 && $type == 1) || $ac['issystem'] == 0){
 					echo '<li value="'.$ac['tbid'].'"><a href="javascript:;" title="'.$ac['name'].'">'.$ac['name'].'</a></li>';
 				}
@@ -40,9 +37,9 @@
 	<div class="col-sub">
 		<div class="search-box">
 			<div class="input-append">
-				<input type="text" name="search_3" id="search_3" placeholder="请输入搜索关键字" style="width:138px" value="<?php echo $_GET['searchkey']; ?>">
-				<button id="search_3_remove" class="btn" style="padding:4px"><i class="icon-remove"></i></button>
-				<button id="search_3_do" class="btn"><i class="icon-search"></i></button>
+				<input type="text" name="search_3" id="search_3" placeholder="请输入搜索关键字" style="width:150px" value="<?php echo $_GET['searchkey']; ?>">
+				<button id="search_3_remove" class="btn" style="padding:4px 5px"><i class="icon-remove"></i></button>
+				<button id="search_3_do" class="btn" style="padding:4px 5px"><i class="icon-search"></i></button>
 			</div>
 		</div>
 		<div class="mbox commend-day">

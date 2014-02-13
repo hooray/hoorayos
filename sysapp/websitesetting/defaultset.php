@@ -238,9 +238,7 @@
 	<div class="label-box form-inline control-group">
 		<select name="val_wallpaper_id">
 		<?php
-			foreach($db->select('tb_wallpaper', '*', array(
-				'ORDER' => 'tbid ASC'
-			)) as $v){
+			foreach($db->select('tb_wallpaper', '*') as $v){
 				if($v['tbid'] == $set['wallpaper_id']){
 					echo '<option value="'.$v['tbid'].'" selected>'.$v['title'].'</option>';
 				}else{

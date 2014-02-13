@@ -6,7 +6,7 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 	
-	$wallpaper = $db->get('tb_member', array('wallpapertype', 'wallpaperwebsite'), array(
+	$wallpaper = $db->get('tb_member', array('wallpaperstate', 'wallpapertype'), array(
 		'tbid' => session('member_id')
 	));
 ?>
@@ -52,7 +52,7 @@
 				foreach($db->select('tb_pwallpaper', '*', array(
 					'member_id' => session('member_id')
 				)) as $v){
-					echo '<li id="'.$v['tbid'].'" style="background:url(../../'.getSimgSrc($value['url']).')"><a href="javascript:;">删 除</a></li>';
+					echo '<li id="'.$v['tbid'].'" style="background:url(../../'.getSimgSrc($v['url']).')"><a href="javascript:;">删 除</a></li>';
 				}
 			?>
 		</ul>
@@ -78,9 +78,12 @@ $(function(){
 		$.ajax({
 			type : 'POST',
 			url : 'custom.ajax.php',
-			data : 'ac=del&id=' + id,
-			success : function(){
+			data : 'ac=del&id=' + id
+		}).done(function(msg){
+			if(msg != 'ERROR'){
 				$('#' + id).remove();
+			}else{
+				ZENG.msgbox.show('当前壁纸正在使用，删除失败！', 5, 2000);
 			}
 		});
 		return false;

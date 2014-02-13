@@ -61,7 +61,7 @@
 		case '3loginBind':
 			//检测所需数据是否存在
 			if(cookie('fromsite') && session('?openid') && session('?openname')){
-				if(!$db->has('tb_member', '*', array(
+				if(!$db->has('tb_member', array(
 					'AND' => array(
 						'openid_'.cookie('fromsite') => session('openid'),
 						'tbid[!]' => session('member_id')
