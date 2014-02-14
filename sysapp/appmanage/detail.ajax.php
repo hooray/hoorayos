@@ -3,7 +3,7 @@
 	
 	switch($_REQUEST['ac']){
 		case 'edit':
-			$_POST['val_issetbar'] = $_POST['val_kindid'] == 1 ? 0 : 1;
+			$_POST['val_issetbar'] = $_POST['val_app_category_id'] == 1 ? 0 : 1;
 			$data = array(
 				'icon' => $_POST['val_icon'],
 				'name' => $_POST['val_name'],

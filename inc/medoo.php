@@ -378,7 +378,7 @@ class medoo{
 						break;
 				}
 			}
-			$exec = $this->exec('INSERT INTO `' . $table . '` (`' . $keys . '`) VALUES (' . implode($values, ', ') . ')');
+			$exec = $this->exec('INSERT INTO "' . $table . '" ("' . $keys . '") VALUES (' . implode($values, ', ') . ')');
 			is_string($exec) ? $query[] = $exec : $lastId[] = $this->pdo->lastInsertId();
 		}
 		return $query ? implode('; ', $query) : (count($lastId) > 1 ? $lastId : $lastId[0]);

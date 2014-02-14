@@ -24,6 +24,7 @@
 			if($rs != NULL){
 				foreach($rs as $v){
 					echo '<tr class="list-bd">';
+						echo '<td>'.$v['tbid'].'</td>';
 						echo '<td style="text-align:left;padding-left:15px"><img src="../../'.$v['icon'].'" alt="'.$v['name'].'" class="appicon"><span class="appname">'.$v['name'].'</span></td>';
 						echo '<td>'.($v['type'] == 'window' ? '窗口' : '挂件').'</td>';
 						echo '<td>'.($v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']]).'</td>';
@@ -31,15 +32,15 @@
 						echo '<td>';
 							if($v['verifytype'] == 1){
 								if($v['isrecommend'] == 1){
-									echo '<a href="javascript:;" class="btn btn-mini btn-link">今日推荐</a>';
+									echo '<a href="javascript:;" class="btn btn-link">今日推荐</a>';
 								}else{
-									echo '<a href="javascript:;" class="btn btn-mini btn-link do-recommend" appid="'.$v['tbid'].'">设为今日推荐</a>';
+									echo '<a href="javascript:;" class="btn btn-link do-recommend" appid="'.$v['tbid'].'">设为今日推荐</a>';
 								}
-								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-mini btn-link">编辑</a>';
+								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-link">编辑</a>';
 							}else{
-								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-mini btn-link">查看详情</a>';
+								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-link">查看详情</a>';
 							}
-							echo '<a href="javascript:;" class="btn btn-mini btn-link do-del" appid="'.$v['tbid'].'">删除</a>';
+							echo '<a href="javascript:;" class="btn btn-link do-del" appid="'.$v['tbid'].'">删除</a>';
 						echo '</td>';
 					echo '</tr>';
 				}

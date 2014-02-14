@@ -38,7 +38,6 @@ body{margin:10px 10px 0}
 <table class="list-table">
 	<thead>
 		<tr class="col-name">
-			<th style="width:50px">权限ID</th>
 			<th>权限名称</th>
 			<th style="width:150px">操作</th>
 		</tr>

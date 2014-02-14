@@ -47,6 +47,30 @@ HROS.app = (function(){
 				}).show();
 				return false;
 			});
+			//应用窗口上的评分、分享按钮事件
+			$('body').on('click', '#star ul li', function(){
+				var num = $(this).attr('num');
+				if(!isNaN(num) && /^[1-5]$/.test(num)){
+					if(HROS.base.checkLogin()){
+						$.ajax({
+							type : 'POST',
+							url : ajaxUrl,
+							data : 'ac=updateAppStar&id=' + $('#star').attr('realappid') + '&starnum=' + num
+						}).done(function(responseText){
+							$.dialog.list['star'].close();
+							if(responseText){
+								ZENG.msgbox.show("打分成功！", 4, 2000);
+							}else{
+								ZENG.msgbox.show("你已经打过分了！", 1, 2000);
+							}
+						});
+					}else{
+						HROS.base.login();
+					}
+				}
+			}).on('click', '#share a', function(){
+				$.dialog.list['share'].close();
+			});
 			HROS.app.get();
 		},
 		/*

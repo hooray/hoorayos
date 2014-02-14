@@ -66,11 +66,12 @@ body{margin:10px 10px 0}
 <table class="list-table">
 	<thead>
 		<tr class="col-name">
+			<th style="width:50px">应用ID</th>
 			<th>应用名称</th>
 			<th style="width:100px">类型</th>
 			<th style="width:100px">分类</th>
 			<th style="width:100px">使用人数</th>
-			<th style="width:200px">操作</th>
+			<th style="width:220px">操作</th>
 		</tr>
 		<tr class="sep-row"><td colspan="100"></td></tr>
 		<tr class="toolbar">

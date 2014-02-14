@@ -185,7 +185,7 @@ var editFolderDialogTemp = template.compile(
 );
 //应用评分
 var starDialogTemp = template.compile(
-	'<div id="star">'+
+	'<div id="star" realappid="<%=realappid%>">'+
 		'<div class="grade-box">'+
 			'<div class="star-num"><%=point%></div>'+
 			'<div class="star-box">'+

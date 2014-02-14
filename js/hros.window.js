@@ -657,32 +657,11 @@ HROS.window = (function(){
 						width : 250,
 						id : 'star',
 						content : starDialogTemp({
+							'realappid' : obj.data('info').realappid,
 							'point' : point,
 							'realpoint' : point * 20
 						})
 					});
-				});
-				$('body').off('click').on('click', '#star ul li', function(){
-					var num = $(this).attr('num');
-					var realappid = $(this).parent('ul').data('realappid');
-					if(!isNaN(num) && /^[1-5]$/.test(num)){
-						if(HROS.base.checkLogin()){
-							$.ajax({
-								type : 'POST',
-								url : ajaxUrl,
-								data : 'ac=updateAppStar&id=' + obj.data('info').realappid + '&starnum=' + num
-							}).done(function(responseText){
-								$.dialog.list['star'].close();
-								if(responseText){
-									ZENG.msgbox.show("打分成功！", 4, 2000);
-								}else{
-									ZENG.msgbox.show("你已经打过分了！", 1, 2000);
-								}
-							});
-						}else{
-							HROS.base.login();
-						}
-					}
 				});
 			}).on('click', '.window-container .share', function(){
 				var obj = $(this).parents('.window-container');
@@ -696,9 +675,6 @@ HROS.window = (function(){
 						'title' : '我正在使用 %23HoorayOS%23 中的 %23' + obj.data('info').title + '%23 应用，很不错哦，推荐你也来试试！',
 						'url' : HROS.CONFIG.website + '?run=' + obj.data('info').realappid + '%26type=app'
 					})
-				});
-				$('body').off('click').on('click', '#share a', function(){
-					$.dialog.list['share'].close();
 				});
 			}).on('contextmenu', '.window-container', function(){
 				$('.popup-menu').hide();
