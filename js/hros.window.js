@@ -689,26 +689,21 @@ HROS.window = (function(){
 					return false;
 				}
 				HROS.window.show2top(obj.attr('appid'));
-				var windowdata = obj.data('info'), lay, x, y;
-				x = e.clientX - obj.offset().left;
-				y = e.clientY - obj.offset().top;
+				var windowdata = obj.data('info');
+				var x = e.clientX - obj.offset().left;
+				var y = e.clientY - obj.offset().top;
+				var lay;
 				//绑定鼠标移动事件
 				$(document).on('mousemove', function(e){
 					lay = HROS.maskBox.desk();
 					lay.show();
 					//强制把右上角还原按钮隐藏，最大化按钮显示
 					obj.find('.ha-revert').hide().prev('.ha-max').show();
-					_l = e.clientX - x;
-					_t = e.clientY - y;
-					_w = windowdata['width'];
-					_h = windowdata['height'];
-					//窗口贴屏幕顶部10px内 || 底部60px内
-					_t = _t <= 10 ? 0 : _t >= lay.height()-30 ? lay.height()-30 : _t;
 					obj.css({
-						width : _w,
-						height : _h,
-						left : _l,
-						top : _t
+						width : windowdata['width'],
+						height : windowdata['height'],
+						left : e.clientX - x,
+						top : e.clientY - y <= 10 ? 0 : e.clientY - y >= lay.height()-30 ? lay.height()-30 : e.clientY - y
 					});
 					obj.data('info').left = obj.offset().left;
 					obj.data('info').top = obj.offset().top;
@@ -723,16 +718,18 @@ HROS.window = (function(){
 		resize : function(obj){
 			$('#desk').on('mousedown', '.window-container .window-resize', function(e){
 				var obj = $(this).parents('.window-container');
-				//增加背景遮罩层
-				var resizeobj = $(this), lay, x = e.clientX, y = e.clientY, w = obj.width(), h = obj.height();
+				var resizeobj = $(this);
+				var lay;
+				var x = e.clientX;
+				var y = e.clientY;
+				var w = obj.width();
+				var h = obj.height();
 				$(document).on('mousemove', function(e){
 					lay = HROS.maskBox.desk();
 					lay.show();
-					_x = e.clientX;
-					_y = e.clientY;
 					//当拖动到屏幕边缘时，自动贴屏
-					_x = _x <= 10 ? 0 : _x >= (lay.width()-12) ? (lay.width()-2) : _x;
-					_y = _y <= 10 ? 0 : _y >= (lay.height()-12) ? lay.height() : _y;
+					var _x = e.clientX <= 10 ? 0 : e.clientX >= (lay.width() - 12) ? (lay.width() - 2) : e.clientX;
+					var _y = e.clientY <= 10 ? 0 : e.clientY >= (lay.height() - 12) ? lay.height() : e.clientY;
 					switch(resizeobj.attr('resize')){
 						case 't':
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({

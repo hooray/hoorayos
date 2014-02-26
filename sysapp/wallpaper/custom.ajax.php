@@ -31,7 +31,7 @@
 					"allowFiles" => array('.jpg', '.jpeg', '.png', '.gif', '.bmp'), //文件允许格式
 					"maxSize" => 1000 //文件大小限制，单位KB
 				);
-				$up = new Uploader('xfile', $config);
+				$up = new Uploader('file', $config);
 				$info = $up->getFileInfo();
 				//如果上传成功，则进行缩略图上传
 				if($info["state"] == 'SUCCESS'){

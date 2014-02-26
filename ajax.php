@@ -281,7 +281,7 @@
 				}
 			}else{
 				$rs = $db->query('SELECT GROUP_CONCAT(dock, \',\', desk1, \',\', desk2, \',\', desk3, \',\', desk4, \',\', desk5) as appid from tb_setting')->fetch();
-				$appid = formatAppidArray(explode(',', $rs['appid']));
+				$appid = explode(',', $rs['appid']);
 				if(in_array($_POST['id'], $appid)){
 					$rs = $db->get('tb_app', '*', array(
 						'tbid' => $_POST['id']
@@ -365,7 +365,6 @@
 						}else{
 							unset($dock_arr[$_POST['from']]);
 						}
-						$dock_arr = formatAppidArray($dock_arr);
 						$db->update('tb_member', array(
 							'dock' => implode(',', $dock_arr)
 						), array(
@@ -504,7 +503,6 @@
 						}else{
 							unset($desk_arr[$_POST['from']]);
 						}
-						$desk_arr = formatAppidArray($desk_arr);
 						$db->update('tb_member', array(
 							'desk'.$_POST['desk'] => implode(',', $desk_arr)
 						), array(

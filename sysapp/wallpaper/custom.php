@@ -43,7 +43,7 @@
 </div>
 <div class="wapppapercustom">
 	<div class="tip">
-		<a class="btn btn-mini fr" style="overflow:hidden;position:relative">上传壁纸<input type="file" id="uploadfilebtn" style="position:absolute;right:0;bottom:0;opacity:0;filter:alpha(opacity=0);display:block;width:200px;height:100px"></a>
+		<a href="javascript:;" id="upload" class="btn btn-mini fr" style="position:relative">上传壁纸</a>
 		<strong>自定义壁纸：</strong>最多上传6张，每张上传的壁纸大小不超过1M
 	</div>
 	<div class="view">
@@ -61,12 +61,44 @@
 <div class="wapppaperwebsite form-inline">
 	<label>网络壁纸：</label>
 	<div class="input-append">
-		<input type="text" id="wallpaperurl" style="width:350px" placeholder="请输入一个URL地址（地址以 jpg, jpeg, png, gif, html, htm 结尾）" value="<?php echo $wallpaper['wallpaperwebsite']; ?>"><button type="button" class="btn">应用</button>
+		<input type="text" id="wallpaperurl" style="width:350px" placeholder="请输入一个URL地址（建议以 jpg, jpeg, png, gif, html, htm 结尾）" value="<?php echo $wallpaper['wallpaperwebsite']; ?>"><button type="button" class="btn">应用</button>
 	</div>
 </div>
 <?php include('sysapp/global_js.php'); ?>
+<script src="../../js/webuploader-0.1.0/webuploader.min.js"></script>
 <script>
 $(function(){
+	var uploader = WebUploader.create({
+		// 选完文件后，是否自动上传。
+		auto: true,
+		// swf文件路径
+		swf: '../../js/webuploader-0.1.0/Uploader.swf',
+		// 文件接收服务端。
+		server: 'custom.ajax.php?ac=uploadImg',
+		// 选择文件的按钮。可选。
+		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		pick: {
+			id: '#upload',
+			multiple: false
+		},
+		// 只允许选择图片文件。
+		accept: {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		}
+	});
+	uploader.on('beforeFileQueued', function(file){
+		if(file.size > 1000 * 1024){
+			alert('文件大于1000Kb，请压缩后再上传');
+			return false;
+		}
+	});
+	uploader.on('uploadSuccess', function(file, cb){
+		$('.wapppapercustom .view ul').append('<li id="'+cb.tbid+'" style="background:url(../../'+cb.surl+')"><a href="javascript:;">删 除</a></li>');
+		window.parent.HROS.wallpaper.update(2, $('#wallpapertype').val(), cb.tbid);
+		uploader.removeFile(file);
+	});
 	$('#wallpapertype').on('change', function(){
 		window.parent.HROS.wallpaper.update(0, $('#wallpapertype').val(), '');
 	});
@@ -90,57 +122,6 @@ $(function(){
 	});
 	$('.wapppaperwebsite button').on('click', function(){
 		window.parent.HROS.wallpaper.update(3, $('#wallpapertype').val(), $('#wallpaperurl').val());
-	});
-	$('#uploadfilebtn').on('change', function(e){
-		var files = e.target.files || e.dataTransfer.files;
-		if(files.length == 0){
-			return;
-		}
-		//检测文件是不是图片
-		if(files[0].type.indexOf('image') === -1){
-			alert('请上传图片');
-			return false;
-		}
-		//检测文件大小是否超过1M
-		if(files[0].size > 1024*1024){
-			alert('图片大小超过1M');
-			return;
-		}
-		var fd = new FormData();
-		fd.append('xfile', files[0]);
-		var xhr = new XMLHttpRequest();
-		if(xhr.upload){
-			$.dialog({
-				id: 'uploadImg',
-				title: '正在上传',
-				content: '<div id="imgProgress" class="progress progress-striped active" style="width:200px;margin-bottom:0"><div class="bar"></div></div>',
-				cancel: false
-			});
-			xhr.upload.addEventListener('progress', function(e){
-				if(e.lengthComputable){
-					var loaded = Math.ceil(e.loaded / e.total * 100);
-					$('#imgProgress .bar').css({
-						width: loaded + '%'
-					});
-				}
-			}, false);
-			xhr.addEventListener('load', function(e){
-				$('#uploadfilebtn').val('');
-				$.dialog.list['uploadImg'].close();
-				if(xhr.readyState == 4 && xhr.status == 200){
-					var result = jQuery.parseJSON(e.target.responseText);
-					if(result.state == 'SUCCESS'){
-						$('.wapppapercustom .view ul').append('<li id="'+result.tbid+'" style="background:url(../../'+result.surl+')"><a href="javascript:;">删 除</a></li>');
-						window.parent.HROS.wallpaper.update(2, $('#wallpapertype').val(), result.tbid);
-					}else{
-						ZENG.msgbox.show(result.state, 5, 2000);
-					}
-				}
-			}, false);
-			xhr.open('post', 'custom.ajax.php?ac=uploadImg', true);
-			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			xhr.send(fd);
-		}
 	});
 });
 </script>

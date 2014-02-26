@@ -19,11 +19,6 @@
 <title>编辑应用</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
-<style type="text/css">
-.creatbox .middle{bottom:47px}
-.bottom-bar{height:48px}
-.bottom-bar .con{height:28px;background:#fff}
-</style>
 </head>
 
 <body>
@@ -35,24 +30,24 @@
 		<div class="input-label">
 			<label class="label-text">应用图片：</label>
 			<div class="label-box form-inline control-group">
-				<div class="shortcutbox">
-					<?php if($app['icon'] != NULL){ ?>
-						<div class="shortcut-addicon bgnone"><input type="file" id="uploadfilebtn" style="position:absolute;right:0;bottom:0;opacity:0;filter:alpha(opacity=0);display:block;width:200px;height:100px"><img src="../../<?php echo $app['icon']; ?>"></div>
-					<?php }else{ ?>
-						<div class="shortcut-addicon"><input type="file" id="uploadfilebtn" style="position:absolute;right:0;bottom:0;opacity:0;filter:alpha(opacity=0);display:block;width:200px;height:100px"><img src=""></div>
+				<div class="shortcutview">
+					<?php if($app['icon'] != ''){ ?>
+						<img src="../../<?php echo $app['icon']; ?>">
 					<?php } ?>
-					<div class="shortcut-selicon">
-						<a href="javascript:;"><img src="../../img/ui/system-gear.png" valsrc="img/ui/system-gear.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-users.png" valsrc="img/ui/system-users.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-wrench.png" valsrc="img/ui/system-wrench.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-star.png" valsrc="img/ui/system-star.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-shapes.png" valsrc="img/ui/system-shapes.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-chart-bar.png" valsrc="img/ui/system-chart-bar.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-document-edit.png" valsrc="img/ui/system-document-edit.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-documents.png" valsrc="img/ui/system-documents.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-mail.png" valsrc="img/ui/system-mail.png"></a>
-						<a href="javascript:;"><img src="../../img/ui/system-puzzle.png" valsrc="img/ui/system-puzzle.png"></a>
-					</div>
+				</div>
+				<a href="javascript:;" id="upload" class="btn fl" style="position:relative">选择图片</a>
+				<div class="shortcut-selicon">
+					<div class="title">系统推荐的图标：</div>
+					<a href="javascript:;"><img src="../../img/ui/system-gear.png" valsrc="img/ui/system-gear.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-users.png" valsrc="img/ui/system-users.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-wrench.png" valsrc="img/ui/system-wrench.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-star.png" valsrc="img/ui/system-star.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-shapes.png" valsrc="img/ui/system-shapes.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-chart-bar.png" valsrc="img/ui/system-chart-bar.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-document-edit.png" valsrc="img/ui/system-document-edit.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-documents.png" valsrc="img/ui/system-documents.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-mail.png" valsrc="img/ui/system-mail.png"></a>
+					<a href="javascript:;"><img src="../../img/ui/system-puzzle.png" valsrc="img/ui/system-puzzle.png"></a>
 				</div>
 				<input type="hidden" name="val_icon" id="val_icon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
 				<span class="help-inline"></span>
@@ -109,8 +104,55 @@
 </div>
 </form>
 <?php include('sysapp/global_js.php'); ?>
+<script src="../../js/webuploader-0.1.0/webuploader.min.js"></script>
 <script>
 $(function(){
+	var uploader = WebUploader.create({
+		// 选完文件后，是否自动上传。
+		auto: true,
+		// swf文件路径
+		swf: '../../js/webuploader-0.1.0/Uploader.swf',
+		// 文件接收服务端。
+		server: 'app.ajax.php?ac=uploadImg',
+		// 选择文件的按钮。可选。
+		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		pick: {
+			id: '#upload',
+			multiple: false
+		},
+		// 只允许选择图片文件。
+		accept: {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		}
+	});
+	uploader.on('beforeFileQueued', function(file){
+		if(file.size > 300 * 1024){
+			alert('文件大于300Kb，请压缩后再上传');
+			return false;
+		}else{
+			$('.shortcutview img').remove();
+			$('#val_icon').val('');
+		}
+	});
+	uploader.on('fileQueued', function(file){
+		var $img = $('<img>');
+		$('.shortcutview').append($img);
+		// 创建缩略图
+		uploader.makeThumb(file, function(error, src){
+			if(error){
+				$img.replaceWith('');
+				return;
+			}
+			$img.attr('src', src);
+		}, 48, 48);
+	});
+	uploader.on('uploadSuccess', function(file, cb){
+		$('.shortcutview img').attr('src', '../../' + cb.url);
+		$('#val_icon').val(cb.url);
+		uploader.removeFile(file);
+	});
 	$('#form').Validform({
 		btnSubmit: '#btn-submit',
 		postonce: false,
@@ -151,58 +193,6 @@ $(function(){
 		$('.shortcut-addicon img').remove();
 		$('.shortcut-addicon').addClass('bgnone').append($(this).html());
 		$('#val_icon').val($(this).children('img').attr('valsrc')).focusout();
-	});
-	$('#uploadfilebtn').on('change', function(e){
-		var files = e.target.files || e.dataTransfer.files;
-		if(files.length == 0){
-			return;
-		}
-		//检测文件是不是图片
-		if(files[0].type.indexOf('image') === -1){
-			alert('请上传图片');
-			return false;
-		}
-		//检测文件大小是否超过1M
-		if(files[0].size > 1024*1024){
-			alert('图片大小超过1M');
-			return;
-		}
-		var fd = new FormData();
-		fd.append('xfile', files[0]);
-		var xhr = new XMLHttpRequest();
-		if(xhr.upload){
-			$.dialog({
-				id: 'uploadImg',
-				title: '正在上传',
-				content: '<div id="imgProgress" class="progress progress-striped active" style="width:200px;margin-bottom:0"><div class="bar"></div></div>',
-				cancel: false
-			});
-			xhr.upload.addEventListener('progress', function(e){
-				if(e.lengthComputable){
-					var loaded = Math.ceil(e.loaded / e.total * 100);
-					$('#imgProgress .bar').css({
-						width: loaded + '%'
-					});
-				}
-			}, false);
-			xhr.addEventListener('load', function(e){
-				$('#uploadfilebtn').val('');
-				$.dialog.list['uploadImg'].close();
-				if(xhr.readyState == 4 && xhr.status == 200){
-					var result = jQuery.parseJSON(e.target.responseText);
-					if(result.state == 'SUCCESS'){
-						$('.shortcut-addicon img').remove();
-						$('.shortcut-addicon').addClass('bgnone').append('<img src="../../' + result.url + '" />');
-						$('#val_icon').val(result.url).focusout();
-					}else{
-						ZENG.msgbox.show(result.state, 5, 2000);
-					}
-				}
-			}, false);
-			xhr.open('post', 'app.ajax.php?ac=uploadImg', true);
-			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			xhr.send(fd);
-		}
 	});
 });
 </script>

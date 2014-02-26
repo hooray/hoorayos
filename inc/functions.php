@@ -764,19 +764,21 @@
 		));
 		//如果是文件夹，则先删除文件夹内的应用
 		if($member_app['type'] == 'folder'){
-			$rs = $db->select('tb_member_app', 'tbid', array(
+			foreach($db->select('tb_member_app', 'tbid', array(
 				'folder_id' => $id
-			));
-			foreach($rs as $v){
+			)) as $v){
 				delApp($v);
 			}
-		}else if($member_app['type'] == 'window' || $member_app['type'] == 'widget'){
+		}
+		//如果是系统应用，则更新应用的安装人数
+		else if($member_app['type'] == 'window' || $member_app['type'] == 'widget'){
 			$db->update('tb_app', array(
 				'usecount[-]' => 1
 			), array(
 				'tbid' => $member_app['realid']
 			));
 		}
+		//查询用户应用码头以及5个桌面的数据
 		$member = $db->get('tb_member', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'), array(
 			'tbid' => session('member_id')
 		));
@@ -803,11 +805,9 @@
 				$data['desk'.$i] = implode(',', $deskapp);
 			}
 		}
-		if($set != NULL){
-			$db->update('tb_member', $data, array(
-				'tbid' => session('member_id')
-			));
-		}
+		$db->update('tb_member', $data, array(
+			'tbid' => session('member_id')
+		));
 		$db->delete('tb_member_app', array(
 			'AND' => array(
 				'tbid' => $id,
@@ -815,13 +815,16 @@
 			)
 		));
 	}
-	//强制格式化appid，如：'10,13,,17,4,6,'，格式化后：'10,13,17,4,6'
+	//格式化appid字符串
 	function formatAppidArray($arr){
+		//去空白，如：'10,13,,17,4,6,'，格式化后：'10,13,17,4,6'
 		foreach($arr as $k => $v){
 			if($v == ''){
 				unset($arr[$k]);
 			}
 		}
+		//去重复
+		$arr = array_unique($arr);
 		return $arr;
 	}
 	//验证是否登入

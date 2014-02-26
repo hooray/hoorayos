@@ -549,23 +549,6 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #addpapp td.tar{text-align:right}
 #addpapp input[type='text']{height:22px}
 
-/*文件上传*/
-#uploadfilebtnbox{width:80px;height:20px;line-height:20px;border:1px solid #bbb;margin:10px 0 10px 10px;position:relative;overflow:hidden;text-align:center;color:#666;cursor:pointer;background:#eff}
-#uploadfilebtnbox:hover{border:1px solid #666}
-#uploadfilebtnbox:active{border:1px solid #999}
-#uploadfilebtnbox input{cursor:pointer;position:absolute;left:0;top:0;font-size:48px;opacity:0}
-#uploadfile{width:390px;height:200px;border-top:1px solid #DADEE5;overflow-y:scroll;overflow-x:hidden}
-#uploadfile .filelist{width:380px;height:24px;line-height:24px;position:relative}
-#uploadfile .filelist:hover{background:#eee}
-#uploadfile .filelist .name{width:240px;float:left;padding-left:10px;overflow:hidden}
-#uploadfile .filelist .size{width:75px;float:left;text-align:right;padding:0 10px}
-#uploadfile .filelist .do{width:35px;float:left}
-#uploadfile .filelist .do a{color:#999}
-#uploadfile .filelist .do a:hover{color:#666}
-
-@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
-#uploadfile .filelist .progress{width:0;height:24px;color:#fff;text-align:center;text-shadow:0 -1px 0 rgba(0,0,0,0.25);background-color:#5bc0de;background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,0.15)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,0.15)),color-stop(0.75,rgba(255,255,255,0.15)),color-stop(0.75,transparent),to(transparent));background-image:-webkit-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-moz-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-ms-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-image:linear-gradient(-45deg,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.15) 50%,rgba(255,255,255,0.15) 75%,transparent 75%,transparent);background-repeat:repeat-x;filter:progid:dximagetransform.microsoft.gradient(startColorstr='#5bc0de',endColorstr='#339bb9',GradientType=0);-webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);-moz-box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);box-shadow:inset 0 -1px 0 rgba(0,0,0,0.15);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;-webkit-transition:width .6s ease;-moz-transition:width .6s ease;-ms-transition:width .6s ease;-o-transition:width .6s ease;transition:width .6s ease;-webkit-background-size:40px 40px;-moz-background-size:40px 40px;-o-background-size:40px 40px;background-size:40px 40px;-webkit-animation:progress-bar-stripes 2s linear infinite;-moz-animation:progress-bar-stripes 2s linear infinite;-ms-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite}
-
 /*右键提示*/
 .popup-menu{position:absolute;z-index:9990;background:url(popup_menu.gif) repeat-y scroll 0 0 #FFFFFF;border:1px solid #AEAEAE;box-shadow:0 0 6px rgba(0, 0, 0, 0.4);width:125px;display:none}
 .popup-menu ul{padding:1px;position:relative}

@@ -363,7 +363,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/hros.startmenu.js"></script>
 <script src="js/hros.taskbar.js"></script>
 <script src="js/hros.templates.js"></script>
-<script src="js/hros.uploadFile.js"></script>
 <script src="js/hros.wallpaper.js"></script>
 <script src="js/hros.widget.js"></script>
 <script src="js/hros.window.js"></script>

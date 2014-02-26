@@ -212,17 +212,17 @@ HROS.widget = (function(){
 			$('#desk').on('mousedown', '.widget .move', function(e){
 				var obj = $(this).parents('.widget');
 				HROS.widget.show2top(obj.attr('appid'));
-				var lay, x, y, t, r;
-				x = e.clientX - obj.offset().left;
-				y = e.clientY - obj.offset().top;
+				var x = e.clientX - obj.offset().left;
+				var y = e.clientY - obj.offset().top;
+				var lay;
+				var t;
+				var r;
 				//绑定鼠标移动事件
 				$(document).on('mousemove', function(e){
 					lay = HROS.maskBox.desk();
 					lay.show();
-					t = e.clientY - y;
-					t = t < 0 ? 0 : t;
-					r = e.clientX - x;
-					r = $(window).width() - obj.width() - r;
+					t = e.clientY - y < 0 ? 0 : e.clientY - y;
+					r = $(window).width() - obj.width() - (e.clientX - x);
 					obj.css({
 						top : t,
 						right : r

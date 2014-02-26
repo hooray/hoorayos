@@ -231,23 +231,6 @@ var lockTemp = template.compile(
 		'<div class="tip">点击屏幕，开启解锁</div>'+
 	'</div>'
 );
-//上传文件窗口
-var uploadFileDialogTemp = template.compile(
-	'<div id="uploadfilebtnbox">'+
-		'请选择文件<input type="file" name="xfile[]" id="uploadfilebtn" />'+
-	'</div>'+
-	'<div id="uploadfile"><%=list%></div>'
-);
-var uploadFileDialogListTemp = template.compile(
-	'<% for(var i = 0; i < list.length; i++){ %>'+
-		'<div class="filelist">'+
-			'<div class="name" title="<%=list[i].name%>"><div style="width:10000px"><%=list[i].name%></div></div>'+
-			'<div class="size"><%=list[i].size%></div>'+
-			'<div class="do">[&nbsp;<a href="javascript:;" class="del">删</a>&nbsp;]</div>'+
-			'<div class="progress"></div>'+
-		'</div>'+
-	'<% } %>'
-);
 //新手帮助提示
 var helpTemp = template.compile(
 	'<div id="help">'+
