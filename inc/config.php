@@ -54,7 +54,7 @@ $uploadFileType = array(
 	'txt'  => 'img/ui/file_txt.png'
 );
 //文件上传大小限制，单位MB
-$uploadFileMaxSize = 2000;
+$uploadFileMaxSize = 20000;
 
 //错误代码
 $errorcode = array(

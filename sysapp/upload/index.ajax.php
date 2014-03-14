@@ -12,5 +12,6 @@
 	);
 	$up = new Uploader('file', $config);
 	$info = $up->getFileInfo();
-	echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
+	echo json_encode($info);
+	//echo '{"originalName":"'.$info['originalName'].'","name":"'.$info['name'].'","url":"'.$info['url'].'","size":"'.$info['size'].'","type":"'.$info['type'].'","state":"'.$info['state'].'"}';
 ?>

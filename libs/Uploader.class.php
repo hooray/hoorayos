@@ -17,20 +17,32 @@ class Uploader
     private $fileSize;             //文件大小
     private $fileType;             //文件类型
     private $stateInfo;            //上传状态信息,
-    private $stateMap = array(     //上传状态映射表，国际化用户需考虑此处数据的国际化
+    private $stateMap = array(    //上传状态映射表，国际化用户需考虑此处数据的国际化
         "SUCCESS" ,                //上传成功标记，在UEditor中内不可改变，否则flash判断会出错
-        "文件大小超出 upload_max_filesize 限制" ,
-        "文件大小超出 MAX_FILE_SIZE 限制" ,
-        "文件未被完整上传" ,
-        "没有文件被上传" ,
-        "上传文件为空" ,
-        "POST" => "文件大小超出 post_max_size 限制" ,
-        "SIZE" => "文件大小超出网站限制" ,
-        "TYPE" => "不允许的文件类型" ,
-        "DIR" => "目录创建失败" ,
-        "IO" => "输入输出错误" ,
-        "UNKNOWN" => "未知错误" ,
-        "MOVE" => "文件保存时出错"
+        // "文件大小超出 upload_max_filesize 限制" ,
+        '\u6587\u4ef6\u5927\u5c0f\u8d85\u51fa\u9650\u5236',
+        // "文件大小超出 MAX_FILE_SIZE 限制" ,
+        '\u6587\u4ef6\u5927\u5c0f\u8d85\u51fa\u9650\u5236',
+        // "文件未被完整上传" ,
+        '\u6587\u4ef6\u672a\u88ab\u5b8c\u6574\u4e0a\u4f20',
+        // "没有文件被上传" ,
+        '\u6ca1\u6709\u6587\u4ef6\u88ab\u4e0a\u4f20',
+        // "上传文件为空" ,
+        '\u4e0a\u4f20\u6587\u4ef6\u4e3a\u7a7a',
+        // "POST" => "文件大小超出 post_max_size 限制" ,
+        'POST' => '\u6587\u4ef6\u5927\u5c0f\u8d85\u51fa\u9650\u5236',
+        // "SIZE" => "文件大小超出网站限制" ,
+        'SIZE' => '\u6587\u4ef6\u5927\u5c0f\u8d85\u51fa\u7f51\u7ad9\u9650\u5236',
+        // "TYPE" => "不允许的文件类型" ,
+        'TYPE' => '\u4e0d\u5141\u8bb8\u7684\u6587\u4ef6\u7c7b\u578b',
+        // "DIR" => "目录创建失败" ,
+        'DIR' => '\u76ee\u5f55\u521b\u5efa\u5931\u8d25',
+        // "IO" => "输入输出错误" ,
+        'IO' => '\u8f93\u5165\u8f93\u51fa\u9519\u8bef',
+        //"UNKNOWN" => "未知错误" ,
+        'UNKNOWN'=>'\u672a\u77e5\u9519\u8bef',
+        // "MOVE" => "文件保存时出错"
+        'MOVE' => '\u6587\u4ef6\u4fdd\u5b58\u65f6\u51fa\u9519'
     );
 
     /**
@@ -147,7 +159,46 @@ class Uploader
      */
     private function getName()
     {
-        return $this->fileName = time() . rand( 1 , 10000 ) . $this->getFileExt();
+        $count = 0;
+        $dir = $this->getFolder();
+        $timeStamp = time();
+        if ($format = $this->config[ "fileNameFormat" ]) {
+
+            $ext = $this->getFileExt();
+            $oriName = substr($this->oriName, 0, strrpos($this->oriName, '.'));
+            $randNum = rand(1, 10000000000);
+
+            //过滤非法字符
+            $format = preg_replace("/[\|\?\"\<\>\/\*\\\\]+/", '', $format);
+
+            $d = split('-', date("Y-y-m-d-H-i-s"));
+            $format = str_replace("{yyyy}", $d[0], $format);
+            $format = str_replace("{yy}", $d[1], $format);
+            $format = str_replace("{mm}", $d[2], $format);
+            $format = str_replace("{dd}", $d[3], $format);
+            $format = str_replace("{hh}", $d[4], $format);
+            $format = str_replace("{ii}", $d[5], $format);
+            $format = str_replace("{ss}", $d[6], $format);
+            $format = str_replace("{time}", $timeStamp, $format);
+            $format = str_replace("{filename}", $oriName, $format);
+
+            if(preg_match("/\{rand\:([\d]*)\}/i", $format, $matches)) {
+                $format = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
+            }
+
+            //过滤非法字符
+            $format = preg_replace("/[\|\?\"\<\>\/\*\\\\]+/", '', $format);
+
+            $fileName = $format.$ext;
+            while (file_exists($dir.'/'.$fileName)){
+                $fileName = $format.'_'.(++$count).$ext;
+            }
+        } else {
+            do{
+                $fileName = time().rand(1, 10000).$this->getFileExt();
+            } while (file_exists($dir.'/'.$fileName));
+        }
+        return $this->fileName = $fileName;
     }
 
     /**
@@ -163,7 +214,7 @@ class Uploader
      * 文件大小检测
      * @return bool
      */
-    private function checkSize()
+    private function  checkSize()
     {
         return $this->fileSize <= ( $this->config[ "maxSize" ] * 1024 );
     }
@@ -196,3 +247,4 @@ class Uploader
         return $pathStr;
     }
 }
+?>

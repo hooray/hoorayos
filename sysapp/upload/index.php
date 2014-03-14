@@ -146,7 +146,11 @@ $(function(){
 		}
 	});
 	uploader.on('error', function(error){
-		alert(error)
+		switch(error){
+			case 'F_EXCEED_SIZE':
+				alert('有文件超出上传文件大小限制，请检查！');
+				break;
+		}
 	});
 	uploader.on('all', function(type){
 		switch(type) {

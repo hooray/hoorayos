@@ -22,13 +22,20 @@
 				));
 			}
 			if($_POST['search_1'] != 0){
+				//查询挂件应用
 				if($_POST['search_1'] == -1){
 					$where['AND']['type'] = 'widget';
-				}else if($_POST['search_1'] == -2){
+				}
+				//查询已安装的应用
+				else if($_POST['search_1'] == -2){
 					if($myapplist != NULL){
 						$where['AND']['tbid'] = $myapplist;
+					}else{
+						$where['AND']['tbid'] = 0;
 					}
-				}else{
+				}
+				//根据所选应用分类查询应用
+				else{
 					$where['AND']['app_category_id'] = $_POST['search_1'];
 				}
 			}

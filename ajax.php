@@ -264,7 +264,7 @@
 						if($rs){
 							$app['type'] = $rs['type'];
 							$app['appid'] = $rs['tbid'];
-							$app['realappid'] = $rs['tbid'];
+							$app['realappid'] = $rs['realid'];
 							$app['name'] = $rs['name'];
 							$app['icon'] = $rs['icon'];
 							$app['width'] = $rs['width'];

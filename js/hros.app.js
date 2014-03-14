@@ -71,6 +71,7 @@ HROS.app = (function(){
 			}).on('click', '#share a', function(){
 				$.dialog.list['share'].close();
 			});
+			//获取桌面应用数据
 			HROS.app.get();
 		},
 		/*
