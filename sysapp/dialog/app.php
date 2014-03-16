@@ -190,8 +190,8 @@ $(function(){
 	});
 	//选择应用图片
 	$('.shortcut-selicon a').click(function(){
-		$('.shortcut-addicon img').remove();
-		$('.shortcut-addicon').addClass('bgnone').append($(this).html());
+		$('.shortcutview img').remove();
+		$('.shortcutview').append($(this).html());
 		$('#val_icon').val($(this).children('img').attr('valsrc')).focusout();
 	});
 });
