@@ -229,24 +229,23 @@
 								'tbid' => $rs['realid'])
 							)){
 								$app['error'] = 'ERROR_NOT_FOUND';
-							}
-							$app['type'] = $rs['type'];
-							$app['appid'] = $rs['tbid'];
-							$app['realappid'] = $rs['realid'];
-							$app['name'] = $rs['name'];
-							$app['icon'] = $rs['icon'];
-							$app['width'] = $rs['width'];
-							$app['height'] = $rs['height'];
-							$app['isresize'] = $rs['isresize'];
-							$app['isopenmax'] = $rs['isopenmax'];
-							$app['issetbar'] = $rs['issetbar'];
-							$app['isflash'] = $rs['isflash'];
-							if($rs['type'] == 'window' || $rs['type'] == 'widget'){
+							}else{
+								$app['type'] = $rs['type'];
+								$app['appid'] = $rs['tbid'];
+								$app['realappid'] = $rs['realid'];
+								$app['name'] = $rs['name'];
+								$app['icon'] = $rs['icon'];
+								$app['width'] = $rs['width'];
+								$app['height'] = $rs['height'];
 								$app['url'] = $db->get('tb_app', 'url', array(
 									'tbid' => $rs['realid']
 								));
-							}else{
-								$app['url'] = $rs['url'];
+								if($rs['type'] == 'window'){
+									$app['isresize'] = $rs['isresize'];
+									$app['isopenmax'] = $rs['isopenmax'];
+									$app['issetbar'] = $rs['issetbar'];
+									$app['isflash'] = $rs['isflash'];
+								}
 							}
 						}else{
 							$app['error'] = 'ERROR_NOT_INSTALLED';
@@ -269,11 +268,13 @@
 							$app['icon'] = $rs['icon'];
 							$app['width'] = $rs['width'];
 							$app['height'] = $rs['height'];
-							$app['isresize'] = $rs['isresize'];
-							$app['isopenmax'] = $rs['isopenmax'];
-							$app['issetbar'] = $rs['issetbar'];
-							$app['isflash'] = $rs['isflash'];
 							$app['url'] = $rs['url'];
+							if($rs['type'] == 'pwindow'){
+								$app['isresize'] = $rs['isresize'];
+								$app['isopenmax'] = $rs['isopenmax'];
+								$app['issetbar'] = $rs['issetbar'];
+								$app['isflash'] = $rs['isflash'];
+							}
 						}else{
 							$app['error'] = 'ERROR_NOT_FOUND';
 						}
@@ -293,11 +294,13 @@
 					$app['icon'] = $rs['icon'];
 					$app['width'] = $rs['width'];
 					$app['height'] = $rs['height'];
-					$app['isresize'] = $rs['isresize'];
-					$app['isopenmax'] = $rs['isopenmax'];
-					$app['issetbar'] = $rs['issetbar'];
-					$app['isflash'] = $rs['isflash'];
 					$app['url'] = $rs['url'];
+					if($rs['type'] == 'window'){
+						$app['isresize'] = $rs['isresize'];
+						$app['isopenmax'] = $rs['isopenmax'];
+						$app['issetbar'] = $rs['issetbar'];
+						$app['isflash'] = $rs['isflash'];
+					}
 				}else{
 					$app['error'] = 'ERROR_NOT_FOUND';
 				}
@@ -661,7 +664,7 @@
 				'type' => 'folder',
 				'icon' => $_POST['icon'],
 				'name' => $_POST['name'],
-				'desk' => (int)$_POST['desk']
+				'desk' => $_POST['desk']
 			));
 			break;
 		//文件夹重命名
@@ -709,50 +712,6 @@
 			}else{
 				echo false;
 			}
-			break;
-		case 'html5upload':
-			$r = new stdClass();
-			//文件名转码，防止中文出现乱码，最后输出时再转回来
-			$file_array = explode('.', iconv('UTF-8', 'gb2312', $_FILES['xfile']['name']));
-			//取出扩展名
-			$extension = $file_array[count($file_array) - 1];
-			unset($file_array[count($file_array) - 1]);
-			//取出文件名
-			$name = implode('.', $file_array);
-			//拼装新文件名（含扩展名）
-			$file = $name.'_'.sha1(@microtime().$_FILES['xfile']['name']).'.'.$extension;
-			//验证文件是否合格
-			if(in_array($extension, $uploadFileUnType)){
-				$r->error = "上传文件类型系统不支持";
-			}else if($_FILES['xfile']['size'] > ($uploadFileMaxSize * 1048576)){
-				$r->error = "上传文件单个大小不能超过 $uploadFileMaxSize MB";
-			}else{
-				$icon = '';
-				foreach($uploadFileType as $uft){
-					if($uft['ext'] == $extension){
-						$icon = $uft['icon'];
-						break;
-					}
-				}
-				if($icon == ''){
-					$icon = 'img/ui/file_unknow.png';
-				}
-				//生成文件存放路径
-				$dir = 'uploads/member/'.session('member_id').'/file/';
-				if(!is_dir($dir)){
-					//循环创建目录
-					recursive_mkdir($dir);
-				}
-				//上传
-				move_uploaded_file($_FILES['xfile']["tmp_name"], $dir.$file);
-				
-				$r->dir = $dir;
-				$r->file = iconv('gb2312', 'UTF-8', $file);
-				$r->name = iconv('gb2312', 'UTF-8', $name);
-				$r->extension = iconv('gb2312', 'UTF-8', $extension);
-				$r->icon = $icon;
-			}
-			echo json_encode($r);
 			break;
 	}
 ?>

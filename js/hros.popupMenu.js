@@ -627,7 +627,14 @@ HROS.popupMenu = (function(){
 					$('.popup-menu').hide();
 				});
 				$('.desk-menu a[menu="uploadfile"]').on('click', function(){
-					HROS.uploadFile.getDialog();
+					HROS.window.createTemp({
+						appid : 'hoorayos-scwj',
+						title : '上传文件',
+						url : 'sysapp/upload/index.php',
+						width : 700,
+						height : 600,
+						isflash : false
+					});
 					$('.popup-menu').hide();
 				});
 				$('.desk-menu a[menu="themes"]').on('click', function(){

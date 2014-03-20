@@ -1,5 +1,6 @@
 <?php
 	require('../../global.php');
+	
 	include('libs/Uploader.class.php');
 	$fileType = array_keys($uploadFileType);
 	foreach($fileType as &$v){
@@ -12,6 +13,18 @@
 	);
 	$up = new Uploader('file', $config);
 	$info = $up->getFileInfo();
+	if($info['state'] == 'SUCCESS'){
+		$name = path_info($info['originalName']);
+		$data = array(
+			'type' => 'file',
+			'icon' => $uploadFileType[$name['extension']],
+			'name' => $name['filename'],
+			'url' => $info['url'],
+			'ext' => $name['extension'],
+			'size' => $info['size'],
+			'desk' => $_POST['desk']
+		);
+		addApp($data);
+	}
 	echo json_encode($info);
-	//echo '{"originalName":"'.$info['originalName'].'","name":"'.$info['name'].'","url":"'.$info['url'].'","size":"'.$info['size'].'","type":"'.$info['type'].'","state":"'.$info['state'].'"}';
 ?>

@@ -20,7 +20,7 @@
 	<div class="middle">
 		<div class="alert alert-info alert-block" style="margin:10px;">
 			<p><b>注意：</b></p>
-			<p>上传文件大小最大支持「 <?php echo $uploadFileMaxSize; ?>MB 」，格式支持「 <?php echo implode('、', array_keys($uploadFileType)); ?> 」，如果上传的文件为其它格式，建议以压缩包形式上传。</p>
+			<p>上传文件单个最大支持「 <?php echo $uploadFileMaxSize; ?>MB 」，格式支持「 <?php echo implode('、', array_keys($uploadFileType)); ?> 」，如果上传的文件为其它格式，建议以压缩包形式上传。</p>
 		</div>
 		<div style="margin:0 10px">
 		<table class="list-table">
@@ -52,9 +52,6 @@
 $(function(){
 	var fileCount = 0;
 	var percentages = {};
-	function addFile(file){
-		
-	}
 	function setState(mode){
 		switch(mode){
 			case 'pedding':
@@ -165,6 +162,9 @@ $(function(){
 				break;
 		}
 	});
+	uploader.on('uploadBeforeSend', function(object, data){
+		data['desk'] = window.parent.HROS.CONFIG.desk;
+	});
 	uploader.on('uploadProgress', function(file, percentage){
 		$('#'+file.id+' .del').hide();
 		$('#'+file.id+' td:eq(2) span:eq(0)').text('上传中');
@@ -174,6 +174,7 @@ $(function(){
 		$('#'+file.id+' td:eq(2) span:eq(0)').text('上传完成');
 		$('#'+file.id+' td:eq(2) span:eq(1)').hide().text('');
 		uploader.removeFile(file);
+		window.parent.HROS.app.get();
 	});
 	$('#btn-upload').click(function(){
 		uploader.upload();

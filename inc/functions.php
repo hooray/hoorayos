@@ -408,6 +408,14 @@
 			case 'simg' : return getFileInfo($str, 'path').'/s_'.getFileInfo($str, 'name').'.jpg'; break;
 		}
 	}
+	function path_info($filepath){   
+		$path_parts = array();   
+		$path_parts ['dirname'] = rtrim(substr($filepath, 0, strrpos($filepath, '/')),"/")."/";   
+		$path_parts ['basename'] = ltrim(substr($filepath, strrpos($filepath, '/')),"/");   
+		$path_parts ['extension'] = substr(strrchr($filepath, '.'), 1);   
+		$path_parts ['filename'] = ltrim(substr($path_parts ['basename'], 0, strrpos($path_parts ['basename'], '.')),"/");   
+		return $path_parts;   
+	}
 	/**
 	 * 字节格式化 把字节数格式为 B K M G T 描述的大小
 	 * @return string
@@ -676,6 +684,21 @@
 	function addApp($opt){
 		global $db;
 		switch($opt['type']){
+			case 'file':
+				$appid = $db->insert('tb_member_app', array(
+					'icon' => $opt['icon'],
+					'name' => $opt['name'],
+					'url' => $opt['url'],
+					'ext' => $opt['ext'],
+					'size' => $opt['size'],
+					'width' => 600,
+					'height' => 400,
+					'type' => $opt['type'],
+					'dt' => date('Y-m-d H:i:s'),
+					'lastdt' => date('Y-m-d H:i:s'),
+					'member_id' => session('member_id')
+				));
+				break;
 			case 'folder':
 				$appid = $db->insert('tb_member_app', array(
 					'icon' => $opt['icon'],
