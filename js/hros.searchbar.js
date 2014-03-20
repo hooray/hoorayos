@@ -74,6 +74,7 @@ HROS.searchbar = (function(){
 						}
 					}
 				}
+				return false;
 			});
 			Mousetrap.bind(['down'], function(){
 				if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
@@ -105,7 +106,9 @@ HROS.searchbar = (function(){
 						}
 					}
 				}
+				return false;
 			});
+			Mousetrap.bind(['backspace'], function(){});
 		},
 		set : function(){
 			$('#search-bar').show();
@@ -115,21 +118,21 @@ HROS.searchbar = (function(){
 		getSuggest : function(val){
 			var apps = [];
 			$(HROS.VAR.dock).each(function(){
-				if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
+				if($.inArray(this.type, ['window', 'widget']) >= 0){
 					apps.push(this);
 				}
 			});
 			for(var i = 1; i <= 5; i++){
 				var desk = eval('HROS.VAR.desk' + i);
 				$(desk).each(function(){
-					if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
+					if($.inArray(this.type, ['window', 'widget']) >= 0){
 						apps.push(this);
 					}
 				});
 			}
 			$(HROS.VAR.folder).each(function(){
 				$(this.apps).each(function(){
-					if(jQuery.inArray(this.type, ['window', 'widget']) >= 0){
+					if($.inArray(this.type, ['window', 'widget']) >= 0){
 						apps.push(this);
 					}
 				});
