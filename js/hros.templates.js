@@ -159,6 +159,10 @@ var folderViewTemp = template.compile(
 		'</div>'+
 	'</div>'
 );
+//文件下载
+var fileDownloadTemp = template.compile(
+	'<iframe src="filedownload.php?appid=<%=appid%>" frameborder="0" style="display:none"></iframe>'
+);
 //搜索结果列表
 var suggestTemp = template.compile(
 	'<li class="resultList" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+

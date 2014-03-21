@@ -254,6 +254,24 @@ HROS.window = (function(){
 							}
 							HROS.window.show2top(options.appid);
 							break;
+						case 'file':
+							TEMP.fileWindowTemp = {
+								'top' : top,
+								'left' : left,
+								'emptyW' : $(window).width() - options.width,
+								'emptyH' : $(window).height() - options.height,
+								'width' : options.width,
+								'height' : options.height,
+								'zIndex' : HROS.CONFIG.windowIndexid,
+								'type' : options.type,
+								'id' : 'w_' + options.appid,
+								'appid' : options.appid,
+								'realappid' : options.realappid,
+								'title' : options.title,
+								'imgsrc' : options.imgsrc
+							};
+							$('body').append(fileDownloadTemp(TEMP.fileWindowTemp));
+							break;
 					}
 				}
 				ZENG.msgbox.show('应用正在加载中，请耐心等待...', 6, 100000);

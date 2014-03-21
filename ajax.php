@@ -127,6 +127,9 @@
 						$tmp['appid'] = $v['tbid'];
 						$tmp['realappid'] = $v['realid'];
 						$tmp['name'] = $v['name'];
+						if($v['type'] == 'file'){
+							$tmp['name'] .= '.'.$v['ext'];
+						}
 						$tmp['icon'] = $v['icon'];
 						$data[] = $tmp;
 					}
@@ -145,6 +148,9 @@
 							$tmp['appid'] = $v['tbid'];
 							$tmp['realappid'] = $v['realid'];
 							$tmp['name'] = $v['name'];
+							if($v['type'] == 'file'){
+								$tmp['name'] .= '.'.$v['ext'];
+							}
 							$tmp['icon'] = $v['icon'];
 							$data[] = $tmp;
 						}
@@ -169,6 +175,9 @@
 							$tmpp['appid'] = $vv['tbid'];
 							$tmpp['realappid'] = $vv['realid'];
 							$tmpp['name'] = $vv['name'];
+							if($vv['type'] == 'file'){
+								$tmpp['name'] .= '.'.$vv['ext'];
+							}
 							$tmpp['icon'] = $vv['icon'];
 							$tmp['apps'][] = $tmpp;
 						}
@@ -254,6 +263,7 @@
 					case 'pwindow':
 					case 'pwidget':
 					case 'folder':
+					case 'file':
 						$rs = $db->get('tb_member_app', '*', array(
 							'AND' => array(
 								'tbid' => $_POST['id'],
@@ -274,6 +284,9 @@
 								$app['isopenmax'] = $rs['isopenmax'];
 								$app['issetbar'] = $rs['issetbar'];
 								$app['isflash'] = $rs['isflash'];
+							}else if($rs['type'] == 'file'){
+								$app['ext'] = $rs['ext'];
+								$app['url'] = '';
 							}
 						}else{
 							$app['error'] = 'ERROR_NOT_FOUND';

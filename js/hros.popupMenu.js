@@ -436,6 +436,82 @@ HROS.popupMenu = (function(){
 			return TEMP.popupMenuFolder;
 		},
 		/*
+		**  文件右键
+		*/
+		file : function(obj){
+			HROS.window.show2under();
+			if(!TEMP.popupMenuFile){
+				TEMP.popupMenuFile = $(
+					'<div class="popup-menu file-menu"><ul>'+
+						'<li style="border-bottom:1px solid #F0F0F0"><a menu="download" href="javascript:;">下载</a></li>'+
+						'<li><a menu="rename" href="javascript:;"><b class="edit"></b>重命名</a></li>'+
+						'<li><a menu="del" href="javascript:;"><b class="del"></b>删除</a></li>'+
+					'</ul></div>'
+				);
+				$('body').append(TEMP.popupMenuFile);
+			}
+			//绑定事件
+			$('.file-menu a[menu="download"]').off('click').on('click', function(){
+				$('body').append(fileDownloadTemp({
+					appid : obj.attr('appid')
+				}));
+				$('.popup-menu').hide();
+			});
+			$('.file-menu a[menu="rename"]').off('click').on('click', function(){
+				if(HROS.base.checkLogin()){
+					$.dialog({
+						id : 'addfolder',
+						title : '重命名“' + obj.find('span').text() + '”文件夹',
+						padding : 0,
+						content : editFolderDialogTemp({
+							'name' : obj.find('span').text(),
+							'src' : obj.find('img').attr('src')
+						}),
+						ok : function(){
+							if($('#folderName').val() != ''){
+								$.ajax({
+									type : 'POST',
+									url : ajaxUrl,
+									data : 'ac=updateFolder&name=' + $('#folderName').val() + '&icon=' + $('.folderSelector img').attr('src') + '&id=' + obj.attr('appid')
+								}).done(function(responseText){
+									HROS.app.get();
+								});
+							}else{
+								$('.folderNameError').show();
+								return false;
+							}
+						},
+						cancel : true
+					});
+					$('.folderSelector').off('click').on('click', function(){
+						$('.fcDropdown').show();
+					});
+					$('.fcDropdown_item').off('click').on('click', function(){
+						$('.folderSelector img').attr('src', $(this).children('img').attr('src')).attr('idx', $(this).children('img').attr('idx'));
+						$('.fcDropdown').hide();
+					});
+				}else{
+					HROS.base.login();
+				}
+				$('.popup-menu').hide();
+			});
+			$('.file-menu a[menu="del"]').off('click').on('click', function(){
+				HROS.app.dataDeleteByAppid(obj.attr('appid'));
+				HROS.app.remove(obj.attr('appid'), function(){
+					obj.find('img, span').show().animate({
+						opacity : 'toggle',
+						width : 0,
+						height : 0
+					}, 500, function(){
+						obj.remove();
+						HROS.deskTop.resize();
+					});
+				});
+				$('.popup-menu').hide();
+			});
+			return TEMP.popupMenuFile;
+		},
+		/*
 		**  应用码头右键
 		*/
 		dock : function(){

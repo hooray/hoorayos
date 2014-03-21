@@ -38,6 +38,9 @@ HROS.app = (function(){
 					case 'folder':
 						popupmenu = HROS.popupMenu.folder($(this));
 						break;
+					case 'file':
+						popupmenu = HROS.popupMenu.file($(this));
+						break;
 				}
 				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
 				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
@@ -310,6 +313,7 @@ HROS.app = (function(){
 							switch(oldobj.attr('type')){
 								case 'window':
 								case 'pwindow':
+								case 'file':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':
@@ -440,6 +444,7 @@ HROS.app = (function(){
 							switch(oldobj.attr('type')){
 								case 'window':
 								case 'pwindow':
+								case 'file':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':
@@ -570,6 +575,7 @@ HROS.app = (function(){
 							switch(oldobj.attr('type')){
 								case 'window':
 								case 'pwindow':
+								case 'file':
 									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
 									break;
 								case 'widget':
