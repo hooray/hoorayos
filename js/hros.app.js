@@ -118,12 +118,12 @@ HROS.app = (function(){
 				type : 'POST',
 				url : ajaxUrl,
 				data : 'ac=getMyApp',
+				dataType : 'json',
 				beforeSend : function(){
 					HROS.VAR.isAppMoving = true;
 				}
 			}).done(function(sc){
 				HROS.VAR.isAppMoving = false;
-				sc = $.parseJSON(sc);
 				HROS.VAR.dock = sc['dock'];
 				HROS.VAR.desk1 = sc['desk1'];
 				HROS.VAR.desk2 = sc['desk2'];

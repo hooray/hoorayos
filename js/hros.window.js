@@ -278,10 +278,10 @@ HROS.window = (function(){
 				$.ajax({
 					type : 'POST',
 					url : ajaxUrl,
-					data : 'ac=getMyAppById&id=' + realappid + '&type=' + type
+					data : 'ac=getMyAppById&id=' + realappid + '&type=' + type,
+					dataType : 'json'
 				}).done(function(app){
 					ZENG.msgbox._hide();
-					app = $.parseJSON(app);
 					if(app != null){
 						if(app['error'] == 'ERROR_NOT_FOUND'){
 							ZENG.msgbox.show('应用不存在，建议删除', 5, 2000);

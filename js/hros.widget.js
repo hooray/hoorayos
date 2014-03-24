@@ -108,10 +108,10 @@ HROS.widget = (function(){
 				$.ajax({
 					type : 'POST',
 					url : ajaxUrl,
-					data : 'ac=getMyAppById&id=' + realappid + '&type=' + type
+					data : 'ac=getMyAppById&id=' + realappid + '&type=' + type,
+					dataType : 'json'
 				}).done(function(widget){
 					ZENG.msgbox._hide();
-					widget = $.parseJSON(widget);
 					if(widget != null){
 						if(widget['error'] == 'ERROR_NOT_FOUND'){
 							ZENG.msgbox.show('小挂件不存在，建议删除', 5, 2000);
