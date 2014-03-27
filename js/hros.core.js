@@ -28,11 +28,11 @@ HROS.CONFIG = {
 HROS.VAR = {
 	zoomLevel       : 1,
 	isAppMoving     : false,    //桌面应用是否正在移动中，也就是ajax操作是否正在执行中
-	dock            : '',
-	desk1           : '',
-	desk2           : '',
-	desk3           : '',
-	desk4           : '',
-	desk5           : '',
-	folder          : ''
+	dock            : [],
+	desk1           : [],
+	desk2           : [],
+	desk3           : [],
+	desk4           : [],
+	desk5           : [],
+	folder          : []
 };
