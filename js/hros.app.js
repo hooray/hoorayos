@@ -124,26 +124,28 @@ HROS.app = (function(){
 				}
 			}).done(function(sc){
 				HROS.VAR.isAppMoving = false;
-				if(typeof sc['dock'] == 'object'){
-					HROS.VAR.dock = sc['dock'];
-				}
-				if(typeof sc['desk1'] == 'object'){
-					HROS.VAR.desk1 = sc['desk1'];
-				}
-				if(typeof sc['desk2'] == 'object'){
-					HROS.VAR.desk2 = sc['desk2'];
-				}
-				if(typeof sc['desk3'] == 'object'){
-					HROS.VAR.desk3 = sc['desk3'];
-				}
-				if(typeof sc['desk4'] == 'object'){
-					HROS.VAR.desk4 = sc['desk4'];
-				}
-				if(typeof sc['desk5'] == 'object'){
-					HROS.VAR.desk5 = sc['desk5'];
-				}
-				if(typeof sc['folder'] == 'object'){
-					HROS.VAR.folder = sc['folder'];
+				if(typeof sc == 'object'){
+					if(typeof sc['dock'] == 'object'){
+						HROS.VAR.dock = sc['dock'];
+					}
+					if(typeof sc['desk1'] == 'object'){
+						HROS.VAR.desk1 = sc['desk1'];
+					}
+					if(typeof sc['desk2'] == 'object'){
+						HROS.VAR.desk2 = sc['desk2'];
+					}
+					if(typeof sc['desk3'] == 'object'){
+						HROS.VAR.desk3 = sc['desk3'];
+					}
+					if(typeof sc['desk4'] == 'object'){
+						HROS.VAR.desk4 = sc['desk4'];
+					}
+					if(typeof sc['desk5'] == 'object'){
+						HROS.VAR.desk5 = sc['desk5'];
+					}
+					if(typeof sc['folder'] == 'object'){
+						HROS.VAR.folder = sc['folder'];
+					}
 				}
 				//输出桌面应用
 				HROS.app.set();

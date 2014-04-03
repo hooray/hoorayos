@@ -213,7 +213,7 @@
 					}
 				}
 			}
-			echo json_encode($desktop);
+			echo json_encode($desktop == NULL ? array() : $desktop);
 			break;
 		//根据id获取图标
 		case 'getMyAppById':
