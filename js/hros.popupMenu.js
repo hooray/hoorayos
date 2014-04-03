@@ -114,7 +114,7 @@ HROS.popupMenu = (function(){
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
 					}else if(obj.parent().hasClass('desktop-apps-container')){
-						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
+						HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 					}
@@ -189,7 +189,7 @@ HROS.popupMenu = (function(){
 			$('.papp-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
 				from = obj.index(),
-				to = -1,
+				to = 99999,
 				todesk = $(this).attr('desk'),
 				fromdesk = HROS.CONFIG.desk,
 				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
@@ -205,8 +205,8 @@ HROS.popupMenu = (function(){
 								HROS.VAR.isAppMoving = false;
 							});
 						}
-					}else if(obj.parent().hasClass('desktop-container')){
-						if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
+					}else if(obj.parent().hasClass('desktop-apps-container')){
+						if(HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk)){
 							$.ajax({
 								type : 'POST',
 								url : ajaxUrl,
@@ -230,7 +230,7 @@ HROS.popupMenu = (function(){
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
 					}else if(obj.parent().hasClass('desktop-apps-container')){
-						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
+						HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 					}
@@ -324,7 +324,7 @@ HROS.popupMenu = (function(){
 			$('.folder-menu a[menu="moveto"]').off('click').on('click', function(){
 				var id = obj.attr('appid'),
 				from = obj.index(),
-				to = -1,
+				to = 99999,
 				todesk = $(this).attr('desk'),
 				fromdesk = HROS.CONFIG.desk,
 				fromfolderid = obj.parents('.folder-window').attr('appid') || obj.parents('.quick_view_container').attr('appid');
@@ -341,7 +341,7 @@ HROS.popupMenu = (function(){
 							});
 						}
 					}else if(obj.parent().hasClass('desktop-apps-container')){
-						if(HROS.app.dataDeskToOtherdesk(id, from, to, todesk, fromdesk)){
+						if(HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk)){
 							$.ajax({
 								type : 'POST',
 								url : ajaxUrl,
@@ -365,7 +365,7 @@ HROS.popupMenu = (function(){
 					if(obj.parent().hasClass('dock-applist')){
 						HROS.app.dataDockToOtherdesk(id, from, todesk);
 					}else if(obj.parent().hasClass('desktop-apps-container')){
-						HROS.app.dataDeskToOtherdesk(id, from, todesk, fromdesk);
+						HROS.app.dataDeskToOtherdesk(id, from, to, 'a', todesk, fromdesk);
 					}else{
 						HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 					}
