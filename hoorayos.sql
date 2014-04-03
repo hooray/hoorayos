@@ -161,26 +161,6 @@ CREATE TABLE `tb_calendar` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tb_file`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_file`;
-CREATE TABLE `tb_file` (
-  `tbid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '图标地址',
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '文件名',
-  `ext` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '扩展名',
-  `size` int(11) DEFAULT NULL COMMENT '文件大小',
-  `url` text COLLATE utf8_unicode_ci COMMENT '文件存放地址',
-  `member_id` bigint(20) DEFAULT NULL COMMENT '用户id',
-  `dt` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`tbid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of tb_file
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `tb_member`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_member`;
