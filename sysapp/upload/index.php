@@ -20,7 +20,7 @@
 	<div class="middle">
 		<div class="alert alert-info alert-block" style="margin:10px;">
 			<p><b>注意：</b></p>
-			<p>上传文件单个最大支持「 <?php echo $uploadFileMaxSize; ?>MB 」，格式支持「 <?php echo implode('、', array_keys($uploadFileType)); ?> 」，如果上传的文件为其它格式，建议以压缩包形式上传。</p>
+			<p>单个文件最大支持「 <?php echo $uploadFileSingleSize; ?>MB 」，总文件大小最大支持「 <?php echo $uploadFileSize; ?>MB 」，格式支持「 <?php echo implode('、', array_keys($uploadFileType)); ?> 」，如果上传的文件为其它格式，建议以压缩包形式上传。</p>
 		</div>
 		<div style="margin:0 10px">
 		<table class="list-table">
@@ -105,7 +105,8 @@ $(function(){
 			title: 'Files',
 			extensions: '<?php echo implode(',', array_keys($uploadFileType)); ?>'
 		},
-		fileSingleSizeLimit: <?php echo $uploadFileMaxSize * 1024 * 1024; ?>
+		fileSingleSizeLimit: <?php echo $uploadFileSingleSize * 1024 * 1024; ?>,
+		fileSizeLimit: <?php echo $uploadFileSize * 1024 * 1024; ?>
 	});
 	uploader.on('fileQueued', function(file){
 		fileCount++;
@@ -143,9 +144,13 @@ $(function(){
 		}
 	});
 	uploader.on('error', function(error){
+		console.log(error);
 		switch(error){
 			case 'F_EXCEED_SIZE':
-				alert('有文件超出上传文件大小限制，请检查！');
+				alert('有文件上传超出大小限制！');
+				break;
+			case 'Q_EXCEED_SIZE_LIMIT':
+				alert('总文件上传大小超出限制！');
 				break;
 		}
 	});

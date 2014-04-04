@@ -53,8 +53,10 @@ $uploadFileType = array(
 	'mp3'  => 'img/ui/file_music.png',
 	'txt'  => 'img/ui/file_txt.png'
 );
-//文件上传大小限制，单位MB
-$uploadFileMaxSize = 20000;
+//单个文件上传大小，单位MB
+$uploadFileSingleSize = 2;
+//总文件上传大小，单位MB
+$uploadFileSize = 10;
 
 //错误代码
 $errorcode = array(

@@ -707,7 +707,7 @@ HROS.popupMenu = (function(){
 						appid : 'hoorayos-scwj',
 						title : '上传文件',
 						url : 'sysapp/upload/index.php',
-						width : 700,
+						width : 750,
 						height : 600,
 						isflash : false
 					});
