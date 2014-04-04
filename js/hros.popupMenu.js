@@ -444,7 +444,6 @@ HROS.popupMenu = (function(){
 				TEMP.popupMenuFile = $(
 					'<div class="popup-menu file-menu"><ul>'+
 						'<li style="border-bottom:1px solid #F0F0F0"><a menu="download" href="javascript:;">下载</a></li>'+
-						'<li><a menu="rename" href="javascript:;"><b class="edit"></b>重命名</a></li>'+
 						'<li><a menu="del" href="javascript:;"><b class="del"></b>删除</a></li>'+
 					'</ul></div>'
 				);
@@ -455,44 +454,6 @@ HROS.popupMenu = (function(){
 				$('body').append(fileDownloadTemp({
 					appid : obj.attr('appid')
 				}));
-				$('.popup-menu').hide();
-			});
-			$('.file-menu a[menu="rename"]').off('click').on('click', function(){
-				if(HROS.base.checkLogin()){
-					$.dialog({
-						id : 'addfolder',
-						title : '重命名“' + obj.find('span').text() + '”文件夹',
-						padding : 0,
-						content : editFolderDialogTemp({
-							'name' : obj.find('span').text(),
-							'src' : obj.find('img').attr('src')
-						}),
-						ok : function(){
-							if($('#folderName').val() != ''){
-								$.ajax({
-									type : 'POST',
-									url : ajaxUrl,
-									data : 'ac=updateFolder&name=' + $('#folderName').val() + '&icon=' + $('.folderSelector img').attr('src') + '&id=' + obj.attr('appid')
-								}).done(function(responseText){
-									HROS.app.get();
-								});
-							}else{
-								$('.folderNameError').show();
-								return false;
-							}
-						},
-						cancel : true
-					});
-					$('.folderSelector').off('click').on('click', function(){
-						$('.fcDropdown').show();
-					});
-					$('.fcDropdown_item').off('click').on('click', function(){
-						$('.folderSelector img').attr('src', $(this).children('img').attr('src')).attr('idx', $(this).children('img').attr('idx'));
-						$('.fcDropdown').hide();
-					});
-				}else{
-					HROS.base.login();
-				}
 				$('.popup-menu').hide();
 			});
 			$('.file-menu a[menu="del"]').off('click').on('click', function(){
