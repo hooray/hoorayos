@@ -4,7 +4,7 @@ header("Content-type: text/html; charset=utf-8");
 ob_start();
 session('[start]');
 
-error_reporting(E_ERROR | E_WARNING);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 //定义魔术变量
 if(version_compare(PHP_VERSION, '5.4.0', '<')){
