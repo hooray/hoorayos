@@ -14,7 +14,7 @@
 				'isopenmax' => $_POST['val_isopenmax'],
 				'isflash' => $_POST['val_isflash']
 			);
-			if($id == ''){
+			if($_POST['id'] == ''){
 				$data['desk'] = $_POST['desk'];
 				addApp($data);
 			}else{

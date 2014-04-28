@@ -54,7 +54,7 @@ HROS.window = (function(){
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner a.task-item').each(function(){
-				if($(this).attr('realappid') == appid){
+				if($(this).attr('appid') == appid){
 					iswindowopen = true;
 					HROS.window.show2top($(this).attr('appid'));
 					return false;
@@ -139,7 +139,7 @@ HROS.window = (function(){
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner a.task-item').each(function(){
-				if($(this).attr('realappid') == realappid){
+				if($(this).attr('appid') == realappid){
 					iswindowopen = true;
 					appid = $(this).attr('appid');
 					HROS.window.show2top(appid);

@@ -26,7 +26,7 @@ HROS.widget = (function(){
 			//判断窗口是否已打开
 			var iswidgetopen = false;
 			$('#desk .widget').each(function(){
-				if($(this).attr('realappid') == appid){
+				if($(this).attr('appid') == appid){
 					iswidgetopen = true;
 					return false;
 				}
@@ -64,7 +64,7 @@ HROS.widget = (function(){
 			//判断窗口是否已打开
 			var iswidgetopen = false;
 			$('#desk .widget').each(function(){
-				if($(this).attr('realappid') == realappid){
+				if($(this).attr('appid') == realappid){
 					iswidgetopen = true;
 					appid = $(this).attr('appid');
 					return false;

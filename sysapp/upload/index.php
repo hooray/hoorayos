@@ -41,7 +41,7 @@
 <div class="bottom-bar">
 	<div class="con">
 		<button class="btn fr" disabled id="btn-upload"><i class="icon-upload"></i> 开始上传</button>
-		<button class="btn btn-primary fr" id="btn-filePicker" style="margin-right:10px">选择文件</button>
+		<a class="btn btn-primary fr" id="btn-filePicker" style="margin-right:10px">选择文件</a>
 		<button class="btn fr" disabled id="btn-paused" style="margin-right:10px">暂停上传</button>
 		<button class="btn fr" disabled id="btn-goonupload" style="margin-right:10px">继续上传</button>
 	</div>
