@@ -59,14 +59,13 @@ HROS.widget = (function(){
 				});
 			}
 		},
-		create : function(realappid, type){
-			var type = type == null ? 'widget' : type, appid;
+		create : function(appid, type){
+			var type = type == null ? 'widget' : type;
 			//判断窗口是否已打开
 			var iswidgetopen = false;
 			$('#desk .widget').each(function(){
-				if($(this).attr('appid') == realappid){
+				if($(this).attr('appid') == appid){
 					iswidgetopen = true;
-					appid = $(this).attr('appid');
 					return false;
 				}
 			});
@@ -108,7 +107,7 @@ HROS.widget = (function(){
 				$.ajax({
 					type : 'POST',
 					url : ajaxUrl,
-					data : 'ac=getMyAppById&id=' + realappid + '&type=' + type,
+					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
 					dataType : 'json'
 				}).done(function(widget){
 					ZENG.msgbox._hide();
@@ -120,7 +119,7 @@ HROS.widget = (function(){
 							HROS.window.createTemp({
 								appid : 'hoorayos-yysc',
 								title : '应用市场',
-								url : 'sysapp/appmarket/index.php?id=' + realappid,
+								url : 'sysapp/appmarket/index.php?id=' + $('#d_' + appid).attr('realappid'),
 								width : 800,
 								height : 484,
 								isflash : false,

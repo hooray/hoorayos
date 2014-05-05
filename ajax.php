@@ -224,7 +224,7 @@
 					case 'widget':
 						$rs = $db->get('tb_member_app', '*', array(
 							'AND' => array(
-								'realid' => $_POST['id'],
+								'tbid' => $_POST['id'],
 								'member_id' => session('member_id')
 							)
 						));

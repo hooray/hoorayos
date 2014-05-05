@@ -330,11 +330,11 @@ HROS.app = (function(){
 								case 'window':
 								case 'pwindow':
 								case 'file':
-									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'widget':
 								case 'pwidget':
-									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'folder':
 									HROS.folderView.get(oldobj);
@@ -461,11 +461,11 @@ HROS.app = (function(){
 								case 'window':
 								case 'pwindow':
 								case 'file':
-									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'widget':
 								case 'pwidget':
-									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'folder':
 									HROS.folderView.get(oldobj);
@@ -592,11 +592,11 @@ HROS.app = (function(){
 								case 'window':
 								case 'pwindow':
 								case 'file':
-									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'widget':
 								case 'pwidget':
-									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 							}
 							return false;
