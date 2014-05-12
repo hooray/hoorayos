@@ -522,24 +522,31 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuTask){
 				TEMP.popupMenuTask = $(
 					'<div class="popup-menu task-menu"><ul>'+
-						'<li><a menu="max" href="javascript:;">最大化</a></li>'+
+						'<li><a menu="show" href="javascript:;">还原</a></li>'+
 						'<li style="border-bottom:1px solid #F0F0F0"><a menu="hide" href="javascript:;">最小化</a></li>'+
 						'<li><a menu="close" href="javascript:;">关闭</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuTask);
 			}
+			if($('#w_' + obj.attr('appid')).attr('state') == 'hide'){
+				$('.task-menu a[menu="show"]').parent().show();
+				$('.task-menu a[menu="hide"]').parent().hide();
+			}else{
+				$('.task-menu a[menu="show"]').parent().hide();
+				$('.task-menu a[menu="hide"]').parent().show();
+			}
 			//绑定事件
-			$('.task-menu a[menu="max"]').off('click').on('click', function(){
-				HROS.window.max(obj.attr('appid'), obj.attr('type'));
+			$('.task-menu a[menu="show"]').off('click').on('click', function(){
+				HROS.window.show2top(obj.attr('appid'));
 				$('.popup-menu').hide();
 			});
 			$('.task-menu a[menu="hide"]').off('click').on('click', function(){
-				HROS.window.hide(obj.attr('appid'), obj.attr('type'));
+				HROS.window.hide(obj.attr('appid'));
 				$('.popup-menu').hide();
 			});
 			$('.task-menu a[menu="close"]').off('click').on('click', function(){
-				HROS.window.close(obj.attr('appid'), obj.attr('type'));
+				HROS.window.close(obj.attr('appid'));
 				$('.popup-menu').hide();
 			});
 			return TEMP.popupMenuTask;
