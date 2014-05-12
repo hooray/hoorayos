@@ -396,6 +396,7 @@ HROS.window = (function(){
 			$('#task-bar, #nav-bar').removeClass('min-zIndex');
 		},
 		refresh : function(appid){
+			HROS.window.show2top(appid);
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			//判断是应用窗口，还是文件夹窗口
 			if($(windowId + '_iframe').length != 0){
