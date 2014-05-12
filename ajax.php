@@ -315,6 +315,14 @@
 			}
 			echo json_encode($app);
 			break;
+		case 'getAppidByRealappid':
+			echo $db->get('tb_member_app', 'tbid', array(
+				'AND' => array(
+					'realid' => $_POST['id'],
+					'member_id' => session('member_id')
+				)
+			));
+			break;
 		//添加桌面图标
 		case 'addMyApp':
 			addApp(array(

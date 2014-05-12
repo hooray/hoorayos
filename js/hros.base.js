@@ -198,13 +198,31 @@ HROS.base = (function(){
 				}
 			}
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
-				if(request['type'] == 'app'){
-					HROS.window.create(request['run']);
+				if(HROS.base.checkLogin()){
+					$.ajax({
+						type : 'POST',
+						url : ajaxUrl,
+						data : 'ac=getAppidByRealappid&id=' + request['run']
+					}).done(function(appid){
+						if(request['type'] == 'app'){
+							HROS.window.create(appid);
+						}else{
+							//判断挂件是否存在cookie中，因为如果存在则自动会启动
+							if(!HROS.widget.checkCookie(appid, request['type'])){
+								HROS.widget.create(appid);
+							}
+						}
+					});
 				}else{
-					//判断挂件是否存在cookie中，因为如果存在则自动会启动
-					if(!HROS.widget.checkCookie(request['run'], request['type'])){
-						HROS.widget.create(request['run']);
-					}
+					HROS.window.createTemp({
+						appid : 'hoorayos-yysc',
+						title : '应用市场',
+						url : 'sysapp/appmarket/index.php?id=' + request['run'],
+						width : 800,
+						height : 484,
+						isflash : false,
+						refresh : true
+					});
 				}
 			}
 		}
