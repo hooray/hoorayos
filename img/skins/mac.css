@@ -7,7 +7,7 @@
 .window-current{background:#6E6E6E}
 /*标题*/
 .title-bar,
-.window-current .title-bar{background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3 );background:-o-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
+.window-current .title-bar{background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3 );background:-o-linear-gradient(top,#ebebeb,#c3c3c3);background:-ms-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
 /*标题文字*/
 .title-bar .title{text-shadow:0 1px 1px #fff}
 /*窗口右上角操作按钮*/
@@ -27,7 +27,7 @@
 .window-frame{border-top:1px solid #666;border-bottom:1px solid #666}
 /*底部*/
 .set-bar,
-.window-current .set-bar{background:#E8E8E8;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3);background:-o-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
+.window-current .set-bar{background:#E8E8E8;background:-webkit-gradient(linear,0% 0%,0% 100%,from(#ebebeb),to(#c3c3c3));background:-moz-linear-gradient(top,#ebebeb,#c3c3c3);background:-o-linear-gradient(top,#ebebeb,#c3c3c3);background:-ms-linear-gradient(top,#ebebeb,#c3c3c3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb',endColorstr='#c3c3c3');*background:#DDD}
 .set-bar .btn,
 .window-current .set-bar .btn{border:none;width:30px;margin-top:4px}
 .set-bar .btn:hover,
