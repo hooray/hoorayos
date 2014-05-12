@@ -376,7 +376,7 @@ $(function(){
 		}else{
 			$.dialog({
 				icon : 'error',
-				content : '应用无法预览，请讲内容填写完整后再尝试预览'
+				content : '应用无法预览，请将内容填写完整后再尝试预览'
 			});
 		}
 	});
