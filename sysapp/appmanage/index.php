@@ -98,7 +98,7 @@ $(function(){
 	//删除，推荐
 	$('.list-con').on('click', '.do-del', function(){
 		var appid = $(this).attr('appid');
-		var appname = $(this).parents('tr').children('td:first-child').text();
+		var appname = $(this).parents('tr').children('td:nth-child(2)').text();
 		$.dialog({
 			id : 'del',
 			content : '确定要删除 “' + appname + '” 该应用么？',
