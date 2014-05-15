@@ -32,7 +32,7 @@
 <body>
 <form action="detail.ajax.php" method="post" name="form" id="form">
 <input type="hidden" name="ac" value="edit">
-<input type="hidden" name="id" value="<?php echo $categoryid; ?>">
+<input type="hidden" name="id" value="<?php echo $_GET['categoryid']; ?>">
 <div class="creatbox">
 	<div class="middle">
 		<p class="detile-title">
