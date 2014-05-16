@@ -13,10 +13,10 @@ HROS.searchbar = (function(){
 			$('#search-suggest .resultBox').on('click', 'li', function(){
 				switch($(this).attr('type')){
 					case 'window':
-						HROS.window.create($(this).attr('realappid'), $(this).attr('type'));
+						HROS.window.create($(this).attr('appid'), $(this).attr('type'));
 						break;
 					case 'widget':
-						HROS.widget.create($(this).attr('realappid'), $(this).attr('type'));
+						HROS.widget.create($(this).attr('appid'), $(this).attr('type'));
 						break;
 				}
 			});
