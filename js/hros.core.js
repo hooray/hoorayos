@@ -1,4 +1,4 @@
-var version   = '3.2.0';        //版本号
+var version   = '3.2.1';        //版本号
 var ajaxUrl   = 'ajax.php';     //所有ajax操作指向页面
 var TEMP      = {};
 var HROS      = {};
