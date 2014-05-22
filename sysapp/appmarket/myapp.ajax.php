@@ -48,7 +48,7 @@
 				'isflash' => $_POST['val_isflash'],
 				'remark' => $_POST['val_remark']
 			);
-			if($id == ''){
+			if($_POST['id'] == ''){
 				$data['type'] = $_POST['val_type'];
 				$data['dt'] = date('Y-m-d H:i:s');
 				$data['verifytype'] = 0;
@@ -58,7 +58,7 @@
 				$data['verifytype'] = 2;
 				$db->update('tb_app', $data, array(
 					'AND' => array(
-						'tbid' => $id,
+						'tbid' => $_POST['id'],
 						'member_id' => session('member_id')
 					)
 				));
