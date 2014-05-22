@@ -156,8 +156,8 @@
 <div class="bottom-bar">
 	<div class="con">
 		<?php if($app['verifytype'] == 2){ ?>
-		<a class="btn btn-success fl" id="btn-pass" href="javascript:;" appid="<?php echo $appid; ?>"><i class="icon-white icon-ok"></i> 审核通过</a>
-		<a class="btn fl" id="btn-unpass" href="javascript:;" appid="<?php echo $appid; ?>" style="margin-left:10px"><i class="icon-remove"></i> 审核不通过</a>
+		<a class="btn btn-success fl" id="btn-pass" href="javascript:;" appid="<?php echo $_GET['appid']; ?>"><i class="icon-white icon-ok"></i> 审核通过</a>
+		<a class="btn fl" id="btn-unpass" href="javascript:;" appid="<?php echo $_GET['appid']; ?>" style="margin-left:10px"><i class="icon-remove"></i> 审核不通过</a>
 		<a class="btn" id="btn-preview" href="javascript:;" style="margin-left:10px"><i class="icon-eye-open"></i> 预览应用</a>
 		<?php }else{ ?>
 		<a class="btn" id="btn-preview" href="javascript:;"><i class="icon-eye-open"></i> 预览应用</a>
