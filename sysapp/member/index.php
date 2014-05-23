@@ -83,7 +83,7 @@ $(function(){
 					url : 'index.ajax.php',
 					data : 'ac=del&memberid=' + memberid,
 					success : function(msg){
-						getPageList(0);
+						$('#pagination').trigger('currentPage');
 					}
 				});
 			},
