@@ -38,11 +38,11 @@ HROS.base = (function(){
 			/*
 			**      当dockPos为top时          当dockPos为left时         当dockPos为right时
 			**  -----------------------   -----------------------   -----------------------
-			**  | o o o         dock  |   | o | o               |   | o               | o |
+			**  | o o o        [dock] |   | o | o               |   | o               | o |
 			**  -----------------------   | o | o               |   | o               | o |
 			**  | o o                 |   | o | o               |   | o               | o |
 			**  | o +                 |   |   | o               |   | o               |   |
-			**  | o             desk  |   |   | o         desk  |   | o         desk  |   |
+			**  | o            [desk] |   |   | o        [desk] |   | o        [desk] |   |
 			**  | o                   |   |   | +               |   | +               |   |
 			**  -----------------------   -----------------------   -----------------------
 			**  因为desk区域的尺寸和定位受dock位置的影响，所以加载应用前必须先定位好dock的位置
@@ -68,8 +68,8 @@ HROS.base = (function(){
 			//页面加载后运行
 			HROS.base.run();
 			//绑定ajax全局验证
-			$(document).ajaxSuccess(function(event, xhr, settings){
-				if($.trim(xhr.responseText) == 'ERROR_NOT_LOGGED_IN'){
+			$(document).ajaxSuccess(function(event, request, settings){
+				if($.trim(request.responseText) == 'ERROR_NOT_LOGGED_IN'){
 					HROS.CONFIG.memberID = 0;
 					$.dialog({
 						title : '温馨提示',
