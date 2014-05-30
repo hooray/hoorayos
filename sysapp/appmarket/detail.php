@@ -7,6 +7,15 @@
 	$myapplist = $db->select('tb_member_app', 'realid', array(
 		'member_id' => session('member_id')
 	));
+	$myapplist2 = array();
+	foreach($db->select('tb_member_app', array('tbid', 'realid'), array(
+		'AND' => array(
+			'member_id' => session('member_id'),
+			'realid[!]' => null
+		)
+	)) as $value){
+		$myapplist2[$value['realid']] = $value['tbid'];
+	}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -29,9 +38,9 @@
 				<span class="app-name"><?php echo $app['name']; ?></span>
 				<span class="app-desc"><i><?php echo $app['usecount']; ?></i> 人在使用</span>
 				<?php if(in_array($app['tbid'], $myapplist)){ ?>
-					<a href="javascript:;" app_id="<?php echo $app['tbid']; ?>" app_type="<?php echo $app['type']; ?>" class="btn-run">打开应用</a>
+					<a href="javascript:;" app_id="<?php echo $myapplist2[$app['tbid']]; ?>" real_app_id="<?php echo $app['tbid']; ?>" app_type="<?php echo $app['type']; ?>" class="btn-run">打开应用</a>
 				<?php }else{ ?>
-					<a href="javascript:;" app_id="<?php echo $app['tbid']; ?>" app_type="<?php echo $app['type']; ?>" class="btn-add">添加应用</a>
+					<a href="javascript:;" real_app_id="<?php echo $app['tbid']; ?>" app_type="<?php echo $app['type']; ?>" class="btn-add">添加应用</a>
 				<?php } ?>
 				<div class="grade-box">
 					<div class="star-num"><?php echo is_int($app['starnum']) || $app['starnum'] == 0 ? (int)$app['starnum'] : sprintf('%.1f', $app['starnum']); ?></div>
@@ -74,7 +83,7 @@ $(function(){
 	//添加应用
 	$('.btn-add').click(function(){
 		if(window.parent.parent.HROS.base.checkLogin()){
-			var appid = $(this).attr('app_id');
+			var appid = $(this).attr('real_app_id');
 			window.parent.parent.HROS.app.add(appid, function(){
 				window.parent.parent.HROS.app.get();
 				location.reload();
@@ -92,7 +101,7 @@ $(function(){
 	});
 	//打开应用
 	$('.btn-run').click(function(){
-		if($(this).attr('app_type') == 'app'){
+		if($(this).attr('app_type') == 'window'){
 			window.parent.parent.HROS.window.create($(this).attr('app_id'));
 		}else{
 			window.parent.parent.HROS.widget.create($(this).attr('app_id'));
