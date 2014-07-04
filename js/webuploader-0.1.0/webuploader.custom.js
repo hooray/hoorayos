@@ -150,27 +150,330 @@
         return _;
     });
     /**
-     * @fileOverview 使用jQuery的Promise
+     * 直接来源于jquery的代码。
+     * @fileOverview Promise/A+
+     * @beta
      */
-    define('promise-third',[
+    define('promise-builtin',[
         'dollar'
     ], function( $ ) {
-        return {
-            Deferred: $.Deferred,
-            when: $.when,
     
+        var api;
+    
+        // 简单版Callbacks, 默认memory，可选once.
+        function Callbacks( once ) {
+            var list = [],
+                stack = !once && [],
+                fire = function( data ) {
+                    memory = data;
+                    fired = true;
+                    firingIndex = firingStart || 0;
+                    firingStart = 0;
+                    firingLength = list.length;
+                    firing = true;
+    
+                    for ( ; list && firingIndex < firingLength; firingIndex++ ) {
+                        list[ firingIndex ].apply( data[ 0 ], data[ 1 ] );
+                    }
+                    firing = false;
+    
+                    if ( list ) {
+                        if ( stack ) {
+                            stack.length && fire( stack.shift() );
+                        }  else {
+                            list = [];
+                        }
+                    }
+                },
+                self = {
+                    add: function() {
+                        if ( list ) {
+                            var start = list.length;
+                            (function add ( args ) {
+                                $.each( args, function( _, arg ) {
+                                    var type = $.type( arg );
+                                    if ( type === 'function' ) {
+                                        list.push( arg );
+                                    } else if ( arg && arg.length &&
+                                            type !== 'string' ) {
+    
+                                        add( arg );
+                                    }
+                                });
+                            })( arguments );
+    
+                            if ( firing ) {
+                                firingLength = list.length;
+                            } else if ( memory ) {
+                                firingStart = start;
+                                fire( memory );
+                            }
+                        }
+                        return this;
+                    },
+    
+                    disable: function() {
+                        list = stack = memory = undefined;
+                        return this;
+                    },
+    
+                    // Lock the list in its current state
+                    lock: function() {
+                        stack = undefined;
+                        if ( !memory ) {
+                            self.disable();
+                        }
+                        return this;
+                    },
+    
+                    fireWith: function( context, args ) {
+                        if ( list && (!fired || stack) ) {
+                            args = args || [];
+                            args = [ context, args.slice ? args.slice() : args ];
+                            if ( firing ) {
+                                stack.push( args );
+                            } else {
+                                fire( args );
+                            }
+                        }
+                        return this;
+                    },
+    
+                    fire: function() {
+                        self.fireWith( this, arguments );
+                        return this;
+                    }
+                },
+    
+                fired, firing, firingStart, firingLength, firingIndex, memory;
+    
+            return self;
+        }
+    
+        function Deferred( func ) {
+            var tuples = [
+                    // action, add listener, listener list, final state
+                    [ 'resolve', 'done', Callbacks( true ), 'resolved' ],
+                    [ 'reject', 'fail', Callbacks( true ), 'rejected' ],
+                    [ 'notify', 'progress', Callbacks() ]
+                ],
+                state = 'pending',
+                promise = {
+                    state: function() {
+                        return state;
+                    },
+                    always: function() {
+                        deferred.done( arguments ).fail( arguments );
+                        return this;
+                    },
+                    then: function( /* fnDone, fnFail, fnProgress */ ) {
+                        var fns = arguments;
+                        return Deferred(function( newDefer ) {
+                            $.each( tuples, function( i, tuple ) {
+                                var action = tuple[ 0 ],
+                                    fn = $.isFunction( fns[ i ] ) && fns[ i ];
+    
+                                // deferred[ done | fail | progress ] for
+                                // forwarding actions to newDefer
+                                deferred[ tuple[ 1 ] ](function() {
+                                    var returned;
+    
+                                    returned = fn && fn.apply( this, arguments );
+    
+                                    if ( returned &&
+                                            $.isFunction( returned.promise ) ) {
+    
+                                        returned.promise()
+                                                .done( newDefer.resolve )
+                                                .fail( newDefer.reject )
+                                                .progress( newDefer.notify );
+                                    } else {
+                                        newDefer[ action + 'With' ](
+                                                this === promise ?
+                                                newDefer.promise() :
+                                                this,
+                                                fn ? [ returned ] : arguments );
+                                    }
+                                });
+                            });
+                            fns = null;
+                        }).promise();
+                    },
+    
+                    // Get a promise for this deferred
+                    // If obj is provided, the promise aspect is added to the object
+                    promise: function( obj ) {
+    
+                        return obj != null ? $.extend( obj, promise ) : promise;
+                    }
+                },
+                deferred = {};
+    
+            // Keep pipe for back-compat
+            promise.pipe = promise.then;
+    
+            // Add list-specific methods
+            $.each( tuples, function( i, tuple ) {
+                var list = tuple[ 2 ],
+                    stateString = tuple[ 3 ];
+    
+                // promise[ done | fail | progress ] = list.add
+                promise[ tuple[ 1 ] ] = list.add;
+    
+                // Handle state
+                if ( stateString ) {
+                    list.add(function() {
+                        // state = [ resolved | rejected ]
+                        state = stateString;
+    
+                    // [ reject_list | resolve_list ].disable; progress_list.lock
+                    }, tuples[ i ^ 1 ][ 2 ].disable, tuples[ 2 ][ 2 ].lock );
+                }
+    
+                // deferred[ resolve | reject | notify ]
+                deferred[ tuple[ 0 ] ] = function() {
+                    deferred[ tuple[ 0 ] + 'With' ]( this === deferred ? promise :
+                            this, arguments );
+                    return this;
+                };
+                deferred[ tuple[ 0 ] + 'With' ] = list.fireWith;
+            });
+    
+            // Make the deferred a promise
+            promise.promise( deferred );
+    
+            // Call given func if any
+            if ( func ) {
+                func.call( deferred, deferred );
+            }
+    
+            // All done!
+            return deferred;
+        }
+    
+        api = {
+            /**
+             * 创建一个[Deferred](http://api.jquery.com/category/deferred-object/)对象。
+             * 详细的Deferred用法说明，请参照jQuery的API文档。
+             *
+             * Deferred对象在钩子回掉函数中经常要用到，用来处理需要等待的异步操作。
+             *
+             * @for  Base
+             * @method Deferred
+             * @grammar Base.Deferred() => Deferred
+             * @example
+             * // 在文件开始发送前做些异步操作。
+             * // WebUploader会等待此异步操作完成后，开始发送文件。
+             * Uploader.register({
+             *     'before-send-file': 'doSomthingAsync'
+             * }, {
+             *
+             *     doSomthingAsync: function() {
+             *         var deferred = Base.Deferred();
+             *
+             *         // 模拟一次异步操作。
+             *         setTimeout(deferred.resolve, 2000);
+             *
+             *         return deferred.promise();
+             *     }
+             * });
+             */
+            Deferred: Deferred,
+    
+            /**
+             * 判断传入的参数是否为一个promise对象。
+             * @method isPromise
+             * @grammar Base.isPromise( anything ) => Boolean
+             * @param  {*}  anything 检测对象。
+             * @return {Boolean}
+             * @for  Base
+             * @example
+             * console.log( Base.isPromise() );    // => false
+             * console.log( Base.isPromise({ key: '123' }) );    // => false
+             * console.log( Base.isPromise( Base.Deferred().promise() ) );    // => true
+             *
+             * // Deferred也是一个Promise
+             * console.log( Base.isPromise( Base.Deferred() ) );    // => true
+             */
             isPromise: function( anything ) {
                 return anything && typeof anything.then === 'function';
+            },
+    
+            /**
+             * 返回一个promise，此promise在所有传入的promise都完成了后完成。
+             * 详细请查看[这里](http://api.jquery.com/jQuery.when/)。
+             *
+             * @method when
+             * @for  Base
+             * @grammar Base.when( promise1[, promise2[, promise3...]] ) => Promise
+             */
+            when: function( subordinate /* , ..., subordinateN */ ) {
+                var i = 0,
+                    slice = [].slice,
+                    resolveValues = slice.call( arguments ),
+                    length = resolveValues.length,
+    
+                    // the count of uncompleted subordinates
+                    remaining = length !== 1 || (subordinate &&
+                        $.isFunction( subordinate.promise )) ? length : 0,
+    
+                    // the master Deferred. If resolveValues consist of
+                    // only a single Deferred, just use that.
+                    deferred = remaining === 1 ? subordinate : Deferred(),
+    
+                    // Update function for both resolve and progress values
+                    updateFunc = function( i, contexts, values ) {
+                        return function( value ) {
+                            contexts[ i ] = this;
+                            values[ i ] = arguments.length > 1 ?
+                                    slice.call( arguments ) : value;
+    
+                            if ( values === progressValues ) {
+                                deferred.notifyWith( contexts, values );
+                            } else if ( !(--remaining) ) {
+                                deferred.resolveWith( contexts, values );
+                            }
+                        };
+                    },
+    
+                    progressValues, progressContexts, resolveContexts;
+    
+                // add listeners to Deferred subordinates; treat others as resolved
+                if ( length > 1 ) {
+                    progressValues = new Array( length );
+                    progressContexts = new Array( length );
+                    resolveContexts = new Array( length );
+                    for ( ; i < length; i++ ) {
+                        if ( resolveValues[ i ] &&
+                                $.isFunction( resolveValues[ i ].promise ) ) {
+    
+                            resolveValues[ i ].promise()
+                                    .done( updateFunc( i, resolveContexts,
+                                            resolveValues ) )
+                                    .fail( deferred.reject )
+                                    .progress( updateFunc( i, progressContexts,
+                                            progressValues ) );
+                        } else {
+                            --remaining;
+                        }
+                    }
+                }
+    
+                // if we're not waiting on anything, resolve the master
+                if ( !remaining ) {
+                    deferred.resolveWith( resolveContexts, resolveValues );
+                }
+    
+                return deferred.promise();
             }
         };
+    
+        return api;
     });
-    /**
-     * @fileOverview Promise/A+
-     */
     define('promise',[
-        'promise-third'
-    ], function( _ ) {
-        return _;
+        'promise-builtin'
+    ], function( $ ) {
+        return $;
     });
     /**
      * @fileOverview 基础类方法。
@@ -1143,377 +1446,6 @@
         return RuntimeClient;
     });
     /**
-     * @fileOverview 错误信息
-     */
-    define('lib/dnd',[
-        'base',
-        'mediator',
-        'runtime/client'
-    ], function( Base, Mediator, RuntimeClent ) {
-    
-        var $ = Base.$;
-    
-        function DragAndDrop( opts ) {
-            opts = this.options = $.extend({}, DragAndDrop.options, opts );
-    
-            opts.container = $( opts.container );
-    
-            if ( !opts.container.length ) {
-                return;
-            }
-    
-            RuntimeClent.call( this, 'DragAndDrop' );
-        }
-    
-        DragAndDrop.options = {
-            accept: null,
-            disableGlobalDnd: false
-        };
-    
-        Base.inherits( RuntimeClent, {
-            constructor: DragAndDrop,
-    
-            init: function() {
-                var me = this;
-    
-                me.connectRuntime( me.options, function() {
-                    me.exec('init');
-                    me.trigger('ready');
-                });
-            },
-    
-            destroy: function() {
-                this.disconnectRuntime();
-            }
-        });
-    
-        Mediator.installTo( DragAndDrop.prototype );
-    
-        return DragAndDrop;
-    });
-    /**
-     * @fileOverview 组件基类。
-     */
-    define('widgets/widget',[
-        'base',
-        'uploader'
-    ], function( Base, Uploader ) {
-    
-        var $ = Base.$,
-            _init = Uploader.prototype._init,
-            IGNORE = {},
-            widgetClass = [];
-    
-        function isArrayLike( obj ) {
-            if ( !obj ) {
-                return false;
-            }
-    
-            var length = obj.length,
-                type = $.type( obj );
-    
-            if ( obj.nodeType === 1 && length ) {
-                return true;
-            }
-    
-            return type === 'array' || type !== 'function' && type !== 'string' &&
-                    (length === 0 || typeof length === 'number' && length > 0 &&
-                    (length - 1) in obj);
-        }
-    
-        function Widget( uploader ) {
-            this.owner = uploader;
-            this.options = uploader.options;
-        }
-    
-        $.extend( Widget.prototype, {
-    
-            init: Base.noop,
-    
-            // 类Backbone的事件监听声明，监听uploader实例上的事件
-            // widget直接无法监听事件，事件只能通过uploader来传递
-            invoke: function( apiName, args ) {
-    
-                /*
-                    {
-                        'make-thumb': 'makeThumb'
-                    }
-                 */
-                var map = this.responseMap;
-    
-                // 如果无API响应声明则忽略
-                if ( !map || !(apiName in map) || !(map[ apiName ] in this) ||
-                        !$.isFunction( this[ map[ apiName ] ] ) ) {
-    
-                    return IGNORE;
-                }
-    
-                return this[ map[ apiName ] ].apply( this, args );
-    
-            },
-    
-            /**
-             * 发送命令。当传入`callback`或者`handler`中返回`promise`时。返回一个当所有`handler`中的promise都完成后完成的新`promise`。
-             * @method request
-             * @grammar request( command, args ) => * | Promise
-             * @grammar request( command, args, callback ) => Promise
-             * @for  Uploader
-             */
-            request: function() {
-                return this.owner.request.apply( this.owner, arguments );
-            }
-        });
-    
-        // 扩展Uploader.
-        $.extend( Uploader.prototype, {
-    
-            // 覆写_init用来初始化widgets
-            _init: function() {
-                var me = this,
-                    widgets = me._widgets = [];
-    
-                $.each( widgetClass, function( _, klass ) {
-                    widgets.push( new klass( me ) );
-                });
-    
-                return _init.apply( me, arguments );
-            },
-    
-            request: function( apiName, args, callback ) {
-                var i = 0,
-                    widgets = this._widgets,
-                    len = widgets.length,
-                    rlts = [],
-                    dfds = [],
-                    widget, rlt, promise, key;
-    
-                args = isArrayLike( args ) ? args : [ args ];
-    
-                for ( ; i < len; i++ ) {
-                    widget = widgets[ i ];
-                    rlt = widget.invoke( apiName, args );
-    
-                    if ( rlt !== IGNORE ) {
-    
-                        // Deferred对象
-                        if ( Base.isPromise( rlt ) ) {
-                            dfds.push( rlt );
-                        } else {
-                            rlts.push( rlt );
-                        }
-                    }
-                }
-    
-                // 如果有callback，则用异步方式。
-                if ( callback || dfds.length ) {
-                    promise = Base.when.apply( Base, dfds );
-                    key = promise.pipe ? 'pipe' : 'then';
-    
-                    // 很重要不能删除。删除了会死循环。
-                    // 保证执行顺序。让callback总是在下一个 tick 中执行。
-                    return promise[ key ](function() {
-                                var deferred = Base.Deferred(),
-                                    args = arguments;
-    
-                                if ( args.length === 1 ) {
-                                    args = args[ 0 ];
-                                }
-    
-                                setTimeout(function() {
-                                    deferred.resolve( args );
-                                }, 1 );
-    
-                                return deferred.promise();
-                            })[ callback ? key : 'done' ]( callback || Base.noop );
-                } else {
-                    return rlts[ 0 ];
-                }
-            }
-        });
-    
-        /**
-         * 添加组件
-         * @param  {object} widgetProto 组件原型，构造函数通过constructor属性定义
-         * @param  {object} responseMap API名称与函数实现的映射
-         * @example
-         *     Uploader.register( {
-         *         init: function( options ) {},
-         *         makeThumb: function() {}
-         *     }, {
-         *         'make-thumb': 'makeThumb'
-         *     } );
-         */
-        Uploader.register = Widget.register = function( responseMap, widgetProto ) {
-            var map = { init: 'init' },
-                klass;
-    
-            if ( arguments.length === 1 ) {
-                widgetProto = responseMap;
-                widgetProto.responseMap = map;
-            } else {
-                widgetProto.responseMap = $.extend( map, responseMap );
-            }
-    
-            klass = Base.inherits( Widget, widgetProto );
-            widgetClass.push( klass );
-    
-            return klass;
-        };
-    
-        return Widget;
-    });
-    /**
-     * @fileOverview DragAndDrop Widget。
-     */
-    define('widgets/filednd',[
-        'base',
-        'uploader',
-        'lib/dnd',
-        'widgets/widget'
-    ], function( Base, Uploader, Dnd ) {
-        var $ = Base.$;
-    
-        Uploader.options.dnd = '';
-    
-        /**
-         * @property {Selector} [dnd=undefined]  指定Drag And Drop拖拽的容器，如果不指定，则不启动。
-         * @namespace options
-         * @for Uploader
-         */
-        
-        /**
-         * @property {Selector} [disableGlobalDnd=false]  是否禁掉整个页面的拖拽功能，如果不禁用，图片拖进来的时候会默认被浏览器打开。
-         * @namespace options
-         * @for Uploader
-         */
-    
-        /**
-         * @event dndAccept
-         * @param {DataTransferItemList} items DataTransferItem
-         * @description 阻止此事件可以拒绝某些类型的文件拖入进来。目前只有 chrome 提供这样的 API，且只能通过 mime-type 验证。
-         * @for  Uploader
-         */
-        return Uploader.register({
-            init: function( opts ) {
-    
-                if ( !opts.dnd ||
-                        this.request('predict-runtime-type') !== 'html5' ) {
-                    return;
-                }
-    
-                var me = this,
-                    deferred = Base.Deferred(),
-                    options = $.extend({}, {
-                        disableGlobalDnd: opts.disableGlobalDnd,
-                        container: opts.dnd,
-                        accept: opts.accept
-                    }),
-                    dnd;
-    
-                dnd = new Dnd( options );
-    
-                dnd.once( 'ready', deferred.resolve );
-                dnd.on( 'drop', function( files ) {
-                    me.request( 'add-file', [ files ]);
-                });
-    
-                // 检测文件是否全部允许添加。
-                dnd.on( 'accept', function( items ) {
-                    return me.owner.trigger( 'dndAccept', items );
-                });
-    
-                dnd.init();
-    
-                return deferred.promise();
-            }
-        });
-    });
-    
-    /**
-     * @fileOverview 错误信息
-     */
-    define('lib/filepaste',[
-        'base',
-        'mediator',
-        'runtime/client'
-    ], function( Base, Mediator, RuntimeClent ) {
-    
-        var $ = Base.$;
-    
-        function FilePaste( opts ) {
-            opts = this.options = $.extend({}, opts );
-            opts.container = $( opts.container || document.body );
-            RuntimeClent.call( this, 'FilePaste' );
-        }
-    
-        Base.inherits( RuntimeClent, {
-            constructor: FilePaste,
-    
-            init: function() {
-                var me = this;
-    
-                me.connectRuntime( me.options, function() {
-                    me.exec('init');
-                    me.trigger('ready');
-                });
-            },
-    
-            destroy: function() {
-                this.exec('destroy');
-                this.disconnectRuntime();
-                this.off();
-            }
-        });
-    
-        Mediator.installTo( FilePaste.prototype );
-    
-        return FilePaste;
-    });
-    /**
-     * @fileOverview 组件基类。
-     */
-    define('widgets/filepaste',[
-        'base',
-        'uploader',
-        'lib/filepaste',
-        'widgets/widget'
-    ], function( Base, Uploader, FilePaste ) {
-        var $ = Base.$;
-    
-        /**
-         * @property {Selector} [paste=undefined]  指定监听paste事件的容器，如果不指定，不启用此功能。此功能为通过粘贴来添加截屏的图片。建议设置为`document.body`.
-         * @namespace options
-         * @for Uploader
-         */
-        return Uploader.register({
-            init: function( opts ) {
-    
-                if ( !opts.paste ||
-                        this.request('predict-runtime-type') !== 'html5' ) {
-                    return;
-                }
-    
-                var me = this,
-                    deferred = Base.Deferred(),
-                    options = $.extend({}, {
-                        container: opts.paste,
-                        accept: opts.accept
-                    }),
-                    paste;
-    
-                paste = new FilePaste( options );
-    
-                paste.once( 'ready', deferred.resolve );
-                paste.on( 'paste', function( files ) {
-                    me.owner.request( 'add-file', [ files ]);
-                });
-                paste.init();
-    
-                return deferred.promise();
-            }
-        });
-    });
-    /**
      * @fileOverview Blob
      */
     define('lib/blob',[
@@ -1727,6 +1659,177 @@
         return FilePicker;
     });
     
+    /**
+     * @fileOverview 组件基类。
+     */
+    define('widgets/widget',[
+        'base',
+        'uploader'
+    ], function( Base, Uploader ) {
+    
+        var $ = Base.$,
+            _init = Uploader.prototype._init,
+            IGNORE = {},
+            widgetClass = [];
+    
+        function isArrayLike( obj ) {
+            if ( !obj ) {
+                return false;
+            }
+    
+            var length = obj.length,
+                type = $.type( obj );
+    
+            if ( obj.nodeType === 1 && length ) {
+                return true;
+            }
+    
+            return type === 'array' || type !== 'function' && type !== 'string' &&
+                    (length === 0 || typeof length === 'number' && length > 0 &&
+                    (length - 1) in obj);
+        }
+    
+        function Widget( uploader ) {
+            this.owner = uploader;
+            this.options = uploader.options;
+        }
+    
+        $.extend( Widget.prototype, {
+    
+            init: Base.noop,
+    
+            // 类Backbone的事件监听声明，监听uploader实例上的事件
+            // widget直接无法监听事件，事件只能通过uploader来传递
+            invoke: function( apiName, args ) {
+    
+                /*
+                    {
+                        'make-thumb': 'makeThumb'
+                    }
+                 */
+                var map = this.responseMap;
+    
+                // 如果无API响应声明则忽略
+                if ( !map || !(apiName in map) || !(map[ apiName ] in this) ||
+                        !$.isFunction( this[ map[ apiName ] ] ) ) {
+    
+                    return IGNORE;
+                }
+    
+                return this[ map[ apiName ] ].apply( this, args );
+    
+            },
+    
+            /**
+             * 发送命令。当传入`callback`或者`handler`中返回`promise`时。返回一个当所有`handler`中的promise都完成后完成的新`promise`。
+             * @method request
+             * @grammar request( command, args ) => * | Promise
+             * @grammar request( command, args, callback ) => Promise
+             * @for  Uploader
+             */
+            request: function() {
+                return this.owner.request.apply( this.owner, arguments );
+            }
+        });
+    
+        // 扩展Uploader.
+        $.extend( Uploader.prototype, {
+    
+            // 覆写_init用来初始化widgets
+            _init: function() {
+                var me = this,
+                    widgets = me._widgets = [];
+    
+                $.each( widgetClass, function( _, klass ) {
+                    widgets.push( new klass( me ) );
+                });
+    
+                return _init.apply( me, arguments );
+            },
+    
+            request: function( apiName, args, callback ) {
+                var i = 0,
+                    widgets = this._widgets,
+                    len = widgets.length,
+                    rlts = [],
+                    dfds = [],
+                    widget, rlt, promise, key;
+    
+                args = isArrayLike( args ) ? args : [ args ];
+    
+                for ( ; i < len; i++ ) {
+                    widget = widgets[ i ];
+                    rlt = widget.invoke( apiName, args );
+    
+                    if ( rlt !== IGNORE ) {
+    
+                        // Deferred对象
+                        if ( Base.isPromise( rlt ) ) {
+                            dfds.push( rlt );
+                        } else {
+                            rlts.push( rlt );
+                        }
+                    }
+                }
+    
+                // 如果有callback，则用异步方式。
+                if ( callback || dfds.length ) {
+                    promise = Base.when.apply( Base, dfds );
+                    key = promise.pipe ? 'pipe' : 'then';
+    
+                    // 很重要不能删除。删除了会死循环。
+                    // 保证执行顺序。让callback总是在下一个 tick 中执行。
+                    return promise[ key ](function() {
+                                var deferred = Base.Deferred(),
+                                    args = arguments;
+    
+                                if ( args.length === 1 ) {
+                                    args = args[ 0 ];
+                                }
+    
+                                setTimeout(function() {
+                                    deferred.resolve( args );
+                                }, 1 );
+    
+                                return deferred.promise();
+                            })[ callback ? key : 'done' ]( callback || Base.noop );
+                } else {
+                    return rlts[ 0 ];
+                }
+            }
+        });
+    
+        /**
+         * 添加组件
+         * @param  {object} widgetProto 组件原型，构造函数通过constructor属性定义
+         * @param  {object} responseMap API名称与函数实现的映射
+         * @example
+         *     Uploader.register( {
+         *         init: function( options ) {},
+         *         makeThumb: function() {}
+         *     }, {
+         *         'make-thumb': 'makeThumb'
+         *     } );
+         */
+        Uploader.register = Widget.register = function( responseMap, widgetProto ) {
+            var map = { init: 'init' },
+                klass;
+    
+            if ( arguments.length === 1 ) {
+                widgetProto = responseMap;
+                widgetProto.responseMap = map;
+            } else {
+                widgetProto.responseMap = $.extend( map, responseMap );
+            }
+    
+            klass = Base.inherits( Widget, widgetProto );
+            widgetClass.push( klass );
+    
+            return klass;
+        };
+    
+        return Widget;
+    });
     /**
      * @fileOverview 文件选择相关
      */
@@ -3812,232 +3915,6 @@
         });
     });
     /**
-     * @fileOverview 各种验证，包括文件总大小是否超出、单文件是否超出和文件是否重复。
-     */
-    
-    define('widgets/validator',[
-        'base',
-        'uploader',
-        'file',
-        'widgets/widget'
-    ], function( Base, Uploader, WUFile ) {
-    
-        var $ = Base.$,
-            validators = {},
-            api;
-    
-        /**
-         * @event error
-         * @param {String} type 错误类型。
-         * @description 当validate不通过时，会以派送错误事件的形式通知调用者。通过`upload.on('error', handler)`可以捕获到此类错误，目前有以下错误会在特定的情况下派送错来。
-         *
-         * * `Q_EXCEED_NUM_LIMIT` 在设置了`fileNumLimit`且尝试给`uploader`添加的文件数量超出这个值时派送。
-         * * `Q_EXCEED_SIZE_LIMIT` 在设置了`Q_EXCEED_SIZE_LIMIT`且尝试给`uploader`添加的文件总大小超出这个值时派送。
-         * @for  Uploader
-         */
-    
-        // 暴露给外面的api
-        api = {
-    
-            // 添加验证器
-            addValidator: function( type, cb ) {
-                validators[ type ] = cb;
-            },
-    
-            // 移除验证器
-            removeValidator: function( type ) {
-                delete validators[ type ];
-            }
-        };
-    
-        // 在Uploader初始化的时候启动Validators的初始化
-        Uploader.register({
-            init: function() {
-                var me = this;
-                Base.nextTick(function() {
-                    $.each( validators, function() {
-                        this.call( me.owner );
-                    });
-                });
-            }
-        });
-    
-        /**
-         * @property {int} [fileNumLimit=undefined]
-         * @namespace options
-         * @for Uploader
-         * @description 验证文件总数量, 超出则不允许加入队列。
-         */
-        api.addValidator( 'fileNumLimit', function() {
-            var uploader = this,
-                opts = uploader.options,
-                count = 0,
-                max = parseInt( opts.fileNumLimit, 10 ),
-                flag = true;
-    
-            if ( !max ) {
-                return;
-            }
-    
-            uploader.on( 'beforeFileQueued', function( file ) {
-    
-                if ( count >= max && flag ) {
-                    flag = false;
-                    this.trigger( 'error', 'Q_EXCEED_NUM_LIMIT', max, file );
-                    setTimeout(function() {
-                        flag = true;
-                    }, 1 );
-                }
-    
-                return count >= max ? false : true;
-            });
-    
-            uploader.on( 'fileQueued', function() {
-                count++;
-            });
-    
-            uploader.on( 'fileDequeued', function() {
-                count--;
-            });
-    
-            uploader.on( 'uploadFinished reset', function() {
-                count = 0;
-            });
-        });
-    
-    
-        /**
-         * @property {int} [fileSizeLimit=undefined]
-         * @namespace options
-         * @for Uploader
-         * @description 验证文件总大小是否超出限制, 超出则不允许加入队列。
-         */
-        api.addValidator( 'fileSizeLimit', function() {
-            var uploader = this,
-                opts = uploader.options,
-                count = 0,
-                max = opts.fileSizeLimit >> 0,
-                flag = true;
-    
-            if ( !max ) {
-                return;
-            }
-    
-            uploader.on( 'beforeFileQueued', function( file ) {
-                var invalid = count + file.size > max;
-    
-                if ( invalid && flag ) {
-                    flag = false;
-                    this.trigger( 'error', 'Q_EXCEED_SIZE_LIMIT', max, file );
-                    setTimeout(function() {
-                        flag = true;
-                    }, 1 );
-                }
-    
-                return invalid ? false : true;
-            });
-    
-            uploader.on( 'fileQueued', function( file ) {
-                count += file.size;
-            });
-    
-            uploader.on( 'fileDequeued', function( file ) {
-                count -= file.size;
-            });
-    
-            uploader.on( 'uploadFinished reset', function() {
-                count = 0;
-            });
-        });
-    
-        /**
-         * @property {int} [fileSingleSizeLimit=undefined]
-         * @namespace options
-         * @for Uploader
-         * @description 验证单个文件大小是否超出限制, 超出则不允许加入队列。
-         */
-        api.addValidator( 'fileSingleSizeLimit', function() {
-            var uploader = this,
-                opts = uploader.options,
-                max = opts.fileSingleSizeLimit;
-    
-            if ( !max ) {
-                return;
-            }
-    
-            uploader.on( 'beforeFileQueued', function( file ) {
-    
-                if ( file.size > max ) {
-                    file.setStatus( WUFile.Status.INVALID, 'exceed_size' );
-                    this.trigger( 'error', 'F_EXCEED_SIZE', file );
-                    return false;
-                }
-    
-            });
-    
-        });
-    
-        /**
-         * @property {int} [duplicate=undefined]
-         * @namespace options
-         * @for Uploader
-         * @description 去重， 根据文件名字、文件大小和最后修改时间来生成hash Key.
-         */
-        api.addValidator( 'duplicate', function() {
-            var uploader = this,
-                opts = uploader.options,
-                mapping = {};
-    
-            if ( opts.duplicate ) {
-                return;
-            }
-    
-            function hashString( str ) {
-                var hash = 0,
-                    i = 0,
-                    len = str.length,
-                    _char;
-    
-                for ( ; i < len; i++ ) {
-                    _char = str.charCodeAt( i );
-                    hash = _char + (hash << 6) + (hash << 16) - hash;
-                }
-    
-                return hash;
-            }
-    
-            uploader.on( 'beforeFileQueued', function( file ) {
-                var hash = file.__hash || (file.__hash = hashString( file.name +
-                        file.size + file.lastModifiedDate ));
-    
-                // 已经重复了
-                if ( mapping[ hash ] ) {
-                    this.trigger( 'error', 'F_DUPLICATE', file );
-                    return false;
-                }
-            });
-    
-            uploader.on( 'fileQueued', function( file ) {
-                var hash = file.__hash;
-    
-                hash && (mapping[ hash ] = true);
-            });
-    
-            uploader.on( 'fileDequeued', function( file ) {
-                var hash = file.__hash;
-    
-                hash && (delete mapping[ hash ]);
-            });
-    
-            uploader.on( 'reset', function() {
-                mapping = {};
-            });
-        });
-    
-        return api;
-    });
-    
-    /**
      * @fileOverview Runtime管理器，负责Runtime的选择, 连接
      */
     define('runtime/compbase',[],function() {
@@ -4152,277 +4029,6 @@
             }
         });
     });
-    /**
-     * @fileOverview FilePaste
-     */
-    define('runtime/html5/dnd',[
-        'base',
-        'runtime/html5/runtime',
-        'lib/file'
-    ], function( Base, Html5Runtime, File ) {
-    
-        var $ = Base.$,
-            prefix = 'webuploader-dnd-';
-    
-        return Html5Runtime.register( 'DragAndDrop', {
-            init: function() {
-                var elem = this.elem = this.options.container;
-    
-                this.dragEnterHandler = Base.bindFn( this._dragEnterHandler, this );
-                this.dragOverHandler = Base.bindFn( this._dragOverHandler, this );
-                this.dragLeaveHandler = Base.bindFn( this._dragLeaveHandler, this );
-                this.dropHandler = Base.bindFn( this._dropHandler, this );
-                this.dndOver = false;
-    
-                elem.on( 'dragenter', this.dragEnterHandler );
-                elem.on( 'dragover', this.dragOverHandler );
-                elem.on( 'dragleave', this.dragLeaveHandler );
-                elem.on( 'drop', this.dropHandler );
-    
-                if ( this.options.disableGlobalDnd ) {
-                    $( document ).on( 'dragover', this.dragOverHandler );
-                    $( document ).on( 'drop', this.dropHandler );
-                }
-            },
-    
-            _dragEnterHandler: function( e ) {
-                var me = this,
-                    denied = me._denied || false,
-                    items;
-    
-                e = e.originalEvent || e;
-    
-                if ( !me.dndOver ) {
-                    me.dndOver = true;
-    
-                    // 注意只有 chrome 支持。
-                    items = e.dataTransfer.items;
-    
-                    if ( items && items.length ) {
-                        me._denied = denied = !me.trigger( 'accept', items );
-                    }
-    
-                    me.elem.addClass( prefix + 'over' );
-                    me.elem[ denied ? 'addClass' :
-                            'removeClass' ]( prefix + 'denied' );
-                }
-    
-                e.dataTransfer.dropEffect = denied ? 'none' : 'copy';
-    
-                return false;
-            },
-    
-            _dragOverHandler: function( e ) {
-                // 只处理框内的。
-                var parentElem = this.elem.parent().get( 0 );
-                if ( parentElem && !$.contains( parentElem, e.currentTarget ) ) {
-                    return false;
-                }
-    
-                clearTimeout( this._leaveTimer );
-                this._dragEnterHandler.call( this, e );
-    
-                return false;
-            },
-    
-            _dragLeaveHandler: function() {
-                var me = this,
-                    handler;
-    
-                handler = function() {
-                    me.dndOver = false;
-                    me.elem.removeClass( prefix + 'over ' + prefix + 'denied' );
-                };
-    
-                clearTimeout( me._leaveTimer );
-                me._leaveTimer = setTimeout( handler, 100 );
-                return false;
-            },
-    
-            _dropHandler: function( e ) {
-                var me = this,
-                    ruid = me.getRuid(),
-                    parentElem = me.elem.parent().get( 0 ),
-                    dataTransfer, data;
-    
-                // 只处理框内的。
-                if ( parentElem && !$.contains( parentElem, e.currentTarget ) ) {
-                    return false;
-                }
-    
-                e = e.originalEvent || e;
-                dataTransfer = e.dataTransfer;
-    
-                // 如果是页面内拖拽，还不能处理，不阻止事件。
-                // 此处 ie11 下会报参数错误，
-                try {
-                    data = dataTransfer.getData('text/html');
-                } catch( err ) {
-                }
-    
-                if ( data ) {
-                    return;
-                }
-    
-                me._getTansferFiles( dataTransfer, function( results ) {
-                    me.trigger( 'drop', $.map( results, function( file ) {
-                        return new File( ruid, file );
-                    }) );
-                });
-    
-                me.dndOver = false;
-                me.elem.removeClass( prefix + 'over' );
-                return false;
-            },
-    
-            // 如果传入 callback 则去查看文件夹，否则只管当前文件夹。
-            _getTansferFiles: function( dataTransfer, callback ) {
-                var results  = [],
-                    promises = [],
-                    items, files, file, item, i, len, canAccessFolder;
-    
-                items = dataTransfer.items;
-                files = dataTransfer.files;
-    
-                canAccessFolder = !!(items && items[ 0 ].webkitGetAsEntry);
-    
-                for ( i = 0, len = files.length; i < len; i++ ) {
-                    file = files[ i ];
-                    item = items && items[ i ];
-    
-                    if ( canAccessFolder && item.webkitGetAsEntry().isDirectory ) {
-    
-                        promises.push( this._traverseDirectoryTree(
-                                item.webkitGetAsEntry(), results ) );
-                    } else {
-                        results.push( file );
-                    }
-                }
-    
-                Base.when.apply( Base, promises ).done(function() {
-    
-                    if ( !results.length ) {
-                        return;
-                    }
-    
-                    callback( results );
-                });
-            },
-    
-            _traverseDirectoryTree: function( entry, results ) {
-                var deferred = Base.Deferred(),
-                    me = this;
-    
-                if ( entry.isFile ) {
-                    entry.file(function( file ) {
-                        results.push( file );
-                        deferred.resolve();
-                    });
-                } else if ( entry.isDirectory ) {
-                    entry.createReader().readEntries(function( entries ) {
-                        var len = entries.length,
-                            promises = [],
-                            arr = [],    // 为了保证顺序。
-                            i;
-    
-                        for ( i = 0; i < len; i++ ) {
-                            promises.push( me._traverseDirectoryTree(
-                                    entries[ i ], arr ) );
-                        }
-    
-                        Base.when.apply( Base, promises ).then(function() {
-                            results.push.apply( results, arr );
-                            deferred.resolve();
-                        }, deferred.reject );
-                    });
-                }
-    
-                return deferred.promise();
-            },
-    
-            destroy: function() {
-                var elem = this.elem;
-    
-                elem.off( 'dragenter', this.dragEnterHandler );
-                elem.off( 'dragover', this.dragEnterHandler );
-                elem.off( 'dragleave', this.dragLeaveHandler );
-                elem.off( 'drop', this.dropHandler );
-    
-                if ( this.options.disableGlobalDnd ) {
-                    $( document ).off( 'dragover', this.dragOverHandler );
-                    $( document ).off( 'drop', this.dropHandler );
-                }
-            }
-        });
-    });
-    
-    /**
-     * @fileOverview FilePaste
-     */
-    define('runtime/html5/filepaste',[
-        'base',
-        'runtime/html5/runtime',
-        'lib/file'
-    ], function( Base, Html5Runtime, File ) {
-    
-        return Html5Runtime.register( 'FilePaste', {
-            init: function() {
-                var opts = this.options,
-                    elem = this.elem = opts.container,
-                    accept = '.*',
-                    arr, i, len, item;
-    
-                // accetp的mimeTypes中生成匹配正则。
-                if ( opts.accept ) {
-                    arr = [];
-    
-                    for ( i = 0, len = opts.accept.length; i < len; i++ ) {
-                        item = opts.accept[ i ].mimeTypes;
-                        item && arr.push( item );
-                    }
-    
-                    if ( arr.length ) {
-                        accept = arr.join(',');
-                        accept = accept.replace( /,/g, '|' ).replace( /\*/g, '.*' );
-                    }
-                }
-                this.accept = accept = new RegExp( accept, 'i' );
-                this.hander = Base.bindFn( this._pasteHander, this );
-                elem.on( 'paste', this.hander );
-            },
-    
-            _pasteHander: function( e ) {
-                var allowed = [],
-                    ruid = this.getRuid(),
-                    items, item, blob, i, len;
-    
-                e = e.originalEvent || e;
-                items = e.clipboardData.items;
-    
-                for ( i = 0, len = items.length; i < len; i++ ) {
-                    item = items[ i ];
-    
-                    if ( item.kind !== 'file' || !(blob = item.getAsFile()) ) {
-                        continue;
-                    }
-    
-                    allowed.push( new File( ruid, blob ) );
-                }
-    
-                if ( allowed.length ) {
-                    // 不阻止非文件粘贴（文字粘贴）的事件冒泡
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.trigger( 'paste', allowed );
-                }
-            },
-    
-            destroy: function() {
-                this.elem.off( 'paste', this.hander );
-            }
-        });
-    });
-    
     /**
      * @fileOverview FilePicker
      */
@@ -5495,6 +5101,808 @@
         });
     });
     /**
+     * 这个方式性能不行，但是可以解决android里面的toDataUrl的bug
+     * android里面toDataUrl('image/jpege')得到的结果却是png.
+     *
+     * 所以这里没辙，只能借助这个工具
+     * @fileOverview jpeg encoder
+     */
+    define('runtime/html5/jpegencoder',[], function( require, exports, module ) {
+    
+        /*
+          Copyright (c) 2008, Adobe Systems Incorporated
+          All rights reserved.
+    
+          Redistribution and use in source and binary forms, with or without
+          modification, are permitted provided that the following conditions are
+          met:
+    
+          * Redistributions of source code must retain the above copyright notice,
+            this list of conditions and the following disclaimer.
+    
+          * Redistributions in binary form must reproduce the above copyright
+            notice, this list of conditions and the following disclaimer in the
+            documentation and/or other materials provided with the distribution.
+    
+          * Neither the name of Adobe Systems Incorporated nor the names of its
+            contributors may be used to endorse or promote products derived from
+            this software without specific prior written permission.
+    
+          THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+          IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+          THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+          PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+          CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+          EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+          PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+          PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+          LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+          NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+          SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        */
+        /*
+        JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom.eu, 11/2009
+    
+        Basic GUI blocking jpeg encoder
+        */
+    
+        function JPEGEncoder(quality) {
+          var self = this;
+            var fround = Math.round;
+            var ffloor = Math.floor;
+            var YTable = new Array(64);
+            var UVTable = new Array(64);
+            var fdtbl_Y = new Array(64);
+            var fdtbl_UV = new Array(64);
+            var YDC_HT;
+            var UVDC_HT;
+            var YAC_HT;
+            var UVAC_HT;
+    
+            var bitcode = new Array(65535);
+            var category = new Array(65535);
+            var outputfDCTQuant = new Array(64);
+            var DU = new Array(64);
+            var byteout = [];
+            var bytenew = 0;
+            var bytepos = 7;
+    
+            var YDU = new Array(64);
+            var UDU = new Array(64);
+            var VDU = new Array(64);
+            var clt = new Array(256);
+            var RGB_YUV_TABLE = new Array(2048);
+            var currentQuality;
+    
+            var ZigZag = [
+                     0, 1, 5, 6,14,15,27,28,
+                     2, 4, 7,13,16,26,29,42,
+                     3, 8,12,17,25,30,41,43,
+                     9,11,18,24,31,40,44,53,
+                    10,19,23,32,39,45,52,54,
+                    20,22,33,38,46,51,55,60,
+                    21,34,37,47,50,56,59,61,
+                    35,36,48,49,57,58,62,63
+                ];
+    
+            var std_dc_luminance_nrcodes = [0,0,1,5,1,1,1,1,1,1,0,0,0,0,0,0,0];
+            var std_dc_luminance_values = [0,1,2,3,4,5,6,7,8,9,10,11];
+            var std_ac_luminance_nrcodes = [0,0,2,1,3,3,2,4,3,5,5,4,4,0,0,1,0x7d];
+            var std_ac_luminance_values = [
+                    0x01,0x02,0x03,0x00,0x04,0x11,0x05,0x12,
+                    0x21,0x31,0x41,0x06,0x13,0x51,0x61,0x07,
+                    0x22,0x71,0x14,0x32,0x81,0x91,0xa1,0x08,
+                    0x23,0x42,0xb1,0xc1,0x15,0x52,0xd1,0xf0,
+                    0x24,0x33,0x62,0x72,0x82,0x09,0x0a,0x16,
+                    0x17,0x18,0x19,0x1a,0x25,0x26,0x27,0x28,
+                    0x29,0x2a,0x34,0x35,0x36,0x37,0x38,0x39,
+                    0x3a,0x43,0x44,0x45,0x46,0x47,0x48,0x49,
+                    0x4a,0x53,0x54,0x55,0x56,0x57,0x58,0x59,
+                    0x5a,0x63,0x64,0x65,0x66,0x67,0x68,0x69,
+                    0x6a,0x73,0x74,0x75,0x76,0x77,0x78,0x79,
+                    0x7a,0x83,0x84,0x85,0x86,0x87,0x88,0x89,
+                    0x8a,0x92,0x93,0x94,0x95,0x96,0x97,0x98,
+                    0x99,0x9a,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,
+                    0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,0xb5,0xb6,
+                    0xb7,0xb8,0xb9,0xba,0xc2,0xc3,0xc4,0xc5,
+                    0xc6,0xc7,0xc8,0xc9,0xca,0xd2,0xd3,0xd4,
+                    0xd5,0xd6,0xd7,0xd8,0xd9,0xda,0xe1,0xe2,
+                    0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,0xea,
+                    0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
+                    0xf9,0xfa
+                ];
+    
+            var std_dc_chrominance_nrcodes = [0,0,3,1,1,1,1,1,1,1,1,1,0,0,0,0,0];
+            var std_dc_chrominance_values = [0,1,2,3,4,5,6,7,8,9,10,11];
+            var std_ac_chrominance_nrcodes = [0,0,2,1,2,4,4,3,4,7,5,4,4,0,1,2,0x77];
+            var std_ac_chrominance_values = [
+                    0x00,0x01,0x02,0x03,0x11,0x04,0x05,0x21,
+                    0x31,0x06,0x12,0x41,0x51,0x07,0x61,0x71,
+                    0x13,0x22,0x32,0x81,0x08,0x14,0x42,0x91,
+                    0xa1,0xb1,0xc1,0x09,0x23,0x33,0x52,0xf0,
+                    0x15,0x62,0x72,0xd1,0x0a,0x16,0x24,0x34,
+                    0xe1,0x25,0xf1,0x17,0x18,0x19,0x1a,0x26,
+                    0x27,0x28,0x29,0x2a,0x35,0x36,0x37,0x38,
+                    0x39,0x3a,0x43,0x44,0x45,0x46,0x47,0x48,
+                    0x49,0x4a,0x53,0x54,0x55,0x56,0x57,0x58,
+                    0x59,0x5a,0x63,0x64,0x65,0x66,0x67,0x68,
+                    0x69,0x6a,0x73,0x74,0x75,0x76,0x77,0x78,
+                    0x79,0x7a,0x82,0x83,0x84,0x85,0x86,0x87,
+                    0x88,0x89,0x8a,0x92,0x93,0x94,0x95,0x96,
+                    0x97,0x98,0x99,0x9a,0xa2,0xa3,0xa4,0xa5,
+                    0xa6,0xa7,0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,
+                    0xb5,0xb6,0xb7,0xb8,0xb9,0xba,0xc2,0xc3,
+                    0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xd2,
+                    0xd3,0xd4,0xd5,0xd6,0xd7,0xd8,0xd9,0xda,
+                    0xe2,0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,
+                    0xea,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
+                    0xf9,0xfa
+                ];
+    
+            function initQuantTables(sf){
+                    var YQT = [
+                        16, 11, 10, 16, 24, 40, 51, 61,
+                        12, 12, 14, 19, 26, 58, 60, 55,
+                        14, 13, 16, 24, 40, 57, 69, 56,
+                        14, 17, 22, 29, 51, 87, 80, 62,
+                        18, 22, 37, 56, 68,109,103, 77,
+                        24, 35, 55, 64, 81,104,113, 92,
+                        49, 64, 78, 87,103,121,120,101,
+                        72, 92, 95, 98,112,100,103, 99
+                    ];
+    
+                    for (var i = 0; i < 64; i++) {
+                        var t = ffloor((YQT[i]*sf+50)/100);
+                        if (t < 1) {
+                            t = 1;
+                        } else if (t > 255) {
+                            t = 255;
+                        }
+                        YTable[ZigZag[i]] = t;
+                    }
+                    var UVQT = [
+                        17, 18, 24, 47, 99, 99, 99, 99,
+                        18, 21, 26, 66, 99, 99, 99, 99,
+                        24, 26, 56, 99, 99, 99, 99, 99,
+                        47, 66, 99, 99, 99, 99, 99, 99,
+                        99, 99, 99, 99, 99, 99, 99, 99,
+                        99, 99, 99, 99, 99, 99, 99, 99,
+                        99, 99, 99, 99, 99, 99, 99, 99,
+                        99, 99, 99, 99, 99, 99, 99, 99
+                    ];
+                    for (var j = 0; j < 64; j++) {
+                        var u = ffloor((UVQT[j]*sf+50)/100);
+                        if (u < 1) {
+                            u = 1;
+                        } else if (u > 255) {
+                            u = 255;
+                        }
+                        UVTable[ZigZag[j]] = u;
+                    }
+                    var aasf = [
+                        1.0, 1.387039845, 1.306562965, 1.175875602,
+                        1.0, 0.785694958, 0.541196100, 0.275899379
+                    ];
+                    var k = 0;
+                    for (var row = 0; row < 8; row++)
+                    {
+                        for (var col = 0; col < 8; col++)
+                        {
+                            fdtbl_Y[k]  = (1.0 / (YTable [ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
+                            fdtbl_UV[k] = (1.0 / (UVTable[ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
+                            k++;
+                        }
+                    }
+                }
+    
+                function computeHuffmanTbl(nrcodes, std_table){
+                    var codevalue = 0;
+                    var pos_in_table = 0;
+                    var HT = new Array();
+                    for (var k = 1; k <= 16; k++) {
+                        for (var j = 1; j <= nrcodes[k]; j++) {
+                            HT[std_table[pos_in_table]] = [];
+                            HT[std_table[pos_in_table]][0] = codevalue;
+                            HT[std_table[pos_in_table]][1] = k;
+                            pos_in_table++;
+                            codevalue++;
+                        }
+                        codevalue*=2;
+                    }
+                    return HT;
+                }
+    
+                function initHuffmanTbl()
+                {
+                    YDC_HT = computeHuffmanTbl(std_dc_luminance_nrcodes,std_dc_luminance_values);
+                    UVDC_HT = computeHuffmanTbl(std_dc_chrominance_nrcodes,std_dc_chrominance_values);
+                    YAC_HT = computeHuffmanTbl(std_ac_luminance_nrcodes,std_ac_luminance_values);
+                    UVAC_HT = computeHuffmanTbl(std_ac_chrominance_nrcodes,std_ac_chrominance_values);
+                }
+    
+                function initCategoryNumber()
+                {
+                    var nrlower = 1;
+                    var nrupper = 2;
+                    for (var cat = 1; cat <= 15; cat++) {
+                        //Positive numbers
+                        for (var nr = nrlower; nr<nrupper; nr++) {
+                            category[32767+nr] = cat;
+                            bitcode[32767+nr] = [];
+                            bitcode[32767+nr][1] = cat;
+                            bitcode[32767+nr][0] = nr;
+                        }
+                        //Negative numbers
+                        for (var nrneg =-(nrupper-1); nrneg<=-nrlower; nrneg++) {
+                            category[32767+nrneg] = cat;
+                            bitcode[32767+nrneg] = [];
+                            bitcode[32767+nrneg][1] = cat;
+                            bitcode[32767+nrneg][0] = nrupper-1+nrneg;
+                        }
+                        nrlower <<= 1;
+                        nrupper <<= 1;
+                    }
+                }
+    
+                function initRGBYUVTable() {
+                    for(var i = 0; i < 256;i++) {
+                        RGB_YUV_TABLE[i]            =  19595 * i;
+                        RGB_YUV_TABLE[(i+ 256)>>0]  =  38470 * i;
+                        RGB_YUV_TABLE[(i+ 512)>>0]  =   7471 * i + 0x8000;
+                        RGB_YUV_TABLE[(i+ 768)>>0]  = -11059 * i;
+                        RGB_YUV_TABLE[(i+1024)>>0]  = -21709 * i;
+                        RGB_YUV_TABLE[(i+1280)>>0]  =  32768 * i + 0x807FFF;
+                        RGB_YUV_TABLE[(i+1536)>>0]  = -27439 * i;
+                        RGB_YUV_TABLE[(i+1792)>>0]  = - 5329 * i;
+                    }
+                }
+    
+                // IO functions
+                function writeBits(bs)
+                {
+                    var value = bs[0];
+                    var posval = bs[1]-1;
+                    while ( posval >= 0 ) {
+                        if (value & (1 << posval) ) {
+                            bytenew |= (1 << bytepos);
+                        }
+                        posval--;
+                        bytepos--;
+                        if (bytepos < 0) {
+                            if (bytenew == 0xFF) {
+                                writeByte(0xFF);
+                                writeByte(0);
+                            }
+                            else {
+                                writeByte(bytenew);
+                            }
+                            bytepos=7;
+                            bytenew=0;
+                        }
+                    }
+                }
+    
+                function writeByte(value)
+                {
+                    byteout.push(clt[value]); // write char directly instead of converting later
+                }
+    
+                function writeWord(value)
+                {
+                    writeByte((value>>8)&0xFF);
+                    writeByte((value   )&0xFF);
+                }
+    
+                // DCT & quantization core
+                function fDCTQuant(data, fdtbl)
+                {
+                    var d0, d1, d2, d3, d4, d5, d6, d7;
+                    /* Pass 1: process rows. */
+                    var dataOff=0;
+                    var i;
+                    var I8 = 8;
+                    var I64 = 64;
+                    for (i=0; i<I8; ++i)
+                    {
+                        d0 = data[dataOff];
+                        d1 = data[dataOff+1];
+                        d2 = data[dataOff+2];
+                        d3 = data[dataOff+3];
+                        d4 = data[dataOff+4];
+                        d5 = data[dataOff+5];
+                        d6 = data[dataOff+6];
+                        d7 = data[dataOff+7];
+    
+                        var tmp0 = d0 + d7;
+                        var tmp7 = d0 - d7;
+                        var tmp1 = d1 + d6;
+                        var tmp6 = d1 - d6;
+                        var tmp2 = d2 + d5;
+                        var tmp5 = d2 - d5;
+                        var tmp3 = d3 + d4;
+                        var tmp4 = d3 - d4;
+    
+                        /* Even part */
+                        var tmp10 = tmp0 + tmp3;    /* phase 2 */
+                        var tmp13 = tmp0 - tmp3;
+                        var tmp11 = tmp1 + tmp2;
+                        var tmp12 = tmp1 - tmp2;
+    
+                        data[dataOff] = tmp10 + tmp11; /* phase 3 */
+                        data[dataOff+4] = tmp10 - tmp11;
+    
+                        var z1 = (tmp12 + tmp13) * 0.707106781; /* c4 */
+                        data[dataOff+2] = tmp13 + z1; /* phase 5 */
+                        data[dataOff+6] = tmp13 - z1;
+    
+                        /* Odd part */
+                        tmp10 = tmp4 + tmp5; /* phase 2 */
+                        tmp11 = tmp5 + tmp6;
+                        tmp12 = tmp6 + tmp7;
+    
+                        /* The rotator is modified from fig 4-8 to avoid extra negations. */
+                        var z5 = (tmp10 - tmp12) * 0.382683433; /* c6 */
+                        var z2 = 0.541196100 * tmp10 + z5; /* c2-c6 */
+                        var z4 = 1.306562965 * tmp12 + z5; /* c2+c6 */
+                        var z3 = tmp11 * 0.707106781; /* c4 */
+    
+                        var z11 = tmp7 + z3;    /* phase 5 */
+                        var z13 = tmp7 - z3;
+    
+                        data[dataOff+5] = z13 + z2; /* phase 6 */
+                        data[dataOff+3] = z13 - z2;
+                        data[dataOff+1] = z11 + z4;
+                        data[dataOff+7] = z11 - z4;
+    
+                        dataOff += 8; /* advance pointer to next row */
+                    }
+    
+                    /* Pass 2: process columns. */
+                    dataOff = 0;
+                    for (i=0; i<I8; ++i)
+                    {
+                        d0 = data[dataOff];
+                        d1 = data[dataOff + 8];
+                        d2 = data[dataOff + 16];
+                        d3 = data[dataOff + 24];
+                        d4 = data[dataOff + 32];
+                        d5 = data[dataOff + 40];
+                        d6 = data[dataOff + 48];
+                        d7 = data[dataOff + 56];
+    
+                        var tmp0p2 = d0 + d7;
+                        var tmp7p2 = d0 - d7;
+                        var tmp1p2 = d1 + d6;
+                        var tmp6p2 = d1 - d6;
+                        var tmp2p2 = d2 + d5;
+                        var tmp5p2 = d2 - d5;
+                        var tmp3p2 = d3 + d4;
+                        var tmp4p2 = d3 - d4;
+    
+                        /* Even part */
+                        var tmp10p2 = tmp0p2 + tmp3p2;  /* phase 2 */
+                        var tmp13p2 = tmp0p2 - tmp3p2;
+                        var tmp11p2 = tmp1p2 + tmp2p2;
+                        var tmp12p2 = tmp1p2 - tmp2p2;
+    
+                        data[dataOff] = tmp10p2 + tmp11p2; /* phase 3 */
+                        data[dataOff+32] = tmp10p2 - tmp11p2;
+    
+                        var z1p2 = (tmp12p2 + tmp13p2) * 0.707106781; /* c4 */
+                        data[dataOff+16] = tmp13p2 + z1p2; /* phase 5 */
+                        data[dataOff+48] = tmp13p2 - z1p2;
+    
+                        /* Odd part */
+                        tmp10p2 = tmp4p2 + tmp5p2; /* phase 2 */
+                        tmp11p2 = tmp5p2 + tmp6p2;
+                        tmp12p2 = tmp6p2 + tmp7p2;
+    
+                        /* The rotator is modified from fig 4-8 to avoid extra negations. */
+                        var z5p2 = (tmp10p2 - tmp12p2) * 0.382683433; /* c6 */
+                        var z2p2 = 0.541196100 * tmp10p2 + z5p2; /* c2-c6 */
+                        var z4p2 = 1.306562965 * tmp12p2 + z5p2; /* c2+c6 */
+                        var z3p2 = tmp11p2 * 0.707106781; /* c4 */
+    
+                        var z11p2 = tmp7p2 + z3p2;  /* phase 5 */
+                        var z13p2 = tmp7p2 - z3p2;
+    
+                        data[dataOff+40] = z13p2 + z2p2; /* phase 6 */
+                        data[dataOff+24] = z13p2 - z2p2;
+                        data[dataOff+ 8] = z11p2 + z4p2;
+                        data[dataOff+56] = z11p2 - z4p2;
+    
+                        dataOff++; /* advance pointer to next column */
+                    }
+    
+                    // Quantize/descale the coefficients
+                    var fDCTQuant;
+                    for (i=0; i<I64; ++i)
+                    {
+                        // Apply the quantization and scaling factor & Round to nearest integer
+                        fDCTQuant = data[i]*fdtbl[i];
+                        outputfDCTQuant[i] = (fDCTQuant > 0.0) ? ((fDCTQuant + 0.5)|0) : ((fDCTQuant - 0.5)|0);
+                        //outputfDCTQuant[i] = fround(fDCTQuant);
+    
+                    }
+                    return outputfDCTQuant;
+                }
+    
+                function writeAPP0()
+                {
+                    writeWord(0xFFE0); // marker
+                    writeWord(16); // length
+                    writeByte(0x4A); // J
+                    writeByte(0x46); // F
+                    writeByte(0x49); // I
+                    writeByte(0x46); // F
+                    writeByte(0); // = "JFIF",'\0'
+                    writeByte(1); // versionhi
+                    writeByte(1); // versionlo
+                    writeByte(0); // xyunits
+                    writeWord(1); // xdensity
+                    writeWord(1); // ydensity
+                    writeByte(0); // thumbnwidth
+                    writeByte(0); // thumbnheight
+                }
+    
+                function writeSOF0(width, height)
+                {
+                    writeWord(0xFFC0); // marker
+                    writeWord(17);   // length, truecolor YUV JPG
+                    writeByte(8);    // precision
+                    writeWord(height);
+                    writeWord(width);
+                    writeByte(3);    // nrofcomponents
+                    writeByte(1);    // IdY
+                    writeByte(0x11); // HVY
+                    writeByte(0);    // QTY
+                    writeByte(2);    // IdU
+                    writeByte(0x11); // HVU
+                    writeByte(1);    // QTU
+                    writeByte(3);    // IdV
+                    writeByte(0x11); // HVV
+                    writeByte(1);    // QTV
+                }
+    
+                function writeDQT()
+                {
+                    writeWord(0xFFDB); // marker
+                    writeWord(132);    // length
+                    writeByte(0);
+                    for (var i=0; i<64; i++) {
+                        writeByte(YTable[i]);
+                    }
+                    writeByte(1);
+                    for (var j=0; j<64; j++) {
+                        writeByte(UVTable[j]);
+                    }
+                }
+    
+                function writeDHT()
+                {
+                    writeWord(0xFFC4); // marker
+                    writeWord(0x01A2); // length
+    
+                    writeByte(0); // HTYDCinfo
+                    for (var i=0; i<16; i++) {
+                        writeByte(std_dc_luminance_nrcodes[i+1]);
+                    }
+                    for (var j=0; j<=11; j++) {
+                        writeByte(std_dc_luminance_values[j]);
+                    }
+    
+                    writeByte(0x10); // HTYACinfo
+                    for (var k=0; k<16; k++) {
+                        writeByte(std_ac_luminance_nrcodes[k+1]);
+                    }
+                    for (var l=0; l<=161; l++) {
+                        writeByte(std_ac_luminance_values[l]);
+                    }
+    
+                    writeByte(1); // HTUDCinfo
+                    for (var m=0; m<16; m++) {
+                        writeByte(std_dc_chrominance_nrcodes[m+1]);
+                    }
+                    for (var n=0; n<=11; n++) {
+                        writeByte(std_dc_chrominance_values[n]);
+                    }
+    
+                    writeByte(0x11); // HTUACinfo
+                    for (var o=0; o<16; o++) {
+                        writeByte(std_ac_chrominance_nrcodes[o+1]);
+                    }
+                    for (var p=0; p<=161; p++) {
+                        writeByte(std_ac_chrominance_values[p]);
+                    }
+                }
+    
+                function writeSOS()
+                {
+                    writeWord(0xFFDA); // marker
+                    writeWord(12); // length
+                    writeByte(3); // nrofcomponents
+                    writeByte(1); // IdY
+                    writeByte(0); // HTY
+                    writeByte(2); // IdU
+                    writeByte(0x11); // HTU
+                    writeByte(3); // IdV
+                    writeByte(0x11); // HTV
+                    writeByte(0); // Ss
+                    writeByte(0x3f); // Se
+                    writeByte(0); // Bf
+                }
+    
+                function processDU(CDU, fdtbl, DC, HTDC, HTAC){
+                    var EOB = HTAC[0x00];
+                    var M16zeroes = HTAC[0xF0];
+                    var pos;
+                    var I16 = 16;
+                    var I63 = 63;
+                    var I64 = 64;
+                    var DU_DCT = fDCTQuant(CDU, fdtbl);
+                    //ZigZag reorder
+                    for (var j=0;j<I64;++j) {
+                        DU[ZigZag[j]]=DU_DCT[j];
+                    }
+                    var Diff = DU[0] - DC; DC = DU[0];
+                    //Encode DC
+                    if (Diff==0) {
+                        writeBits(HTDC[0]); // Diff might be 0
+                    } else {
+                        pos = 32767+Diff;
+                        writeBits(HTDC[category[pos]]);
+                        writeBits(bitcode[pos]);
+                    }
+                    //Encode ACs
+                    var end0pos = 63; // was const... which is crazy
+                    for (; (end0pos>0)&&(DU[end0pos]==0); end0pos--) {};
+                    //end0pos = first element in reverse order !=0
+                    if ( end0pos == 0) {
+                        writeBits(EOB);
+                        return DC;
+                    }
+                    var i = 1;
+                    var lng;
+                    while ( i <= end0pos ) {
+                        var startpos = i;
+                        for (; (DU[i]==0) && (i<=end0pos); ++i) {}
+                        var nrzeroes = i-startpos;
+                        if ( nrzeroes >= I16 ) {
+                            lng = nrzeroes>>4;
+                            for (var nrmarker=1; nrmarker <= lng; ++nrmarker)
+                                writeBits(M16zeroes);
+                            nrzeroes = nrzeroes&0xF;
+                        }
+                        pos = 32767+DU[i];
+                        writeBits(HTAC[(nrzeroes<<4)+category[pos]]);
+                        writeBits(bitcode[pos]);
+                        i++;
+                    }
+                    if ( end0pos != I63 ) {
+                        writeBits(EOB);
+                    }
+                    return DC;
+                }
+    
+                function initCharLookupTable(){
+                    var sfcc = String.fromCharCode;
+                    for(var i=0; i < 256; i++){ ///// ACHTUNG // 255
+                        clt[i] = sfcc(i);
+                    }
+                }
+    
+                this.encode = function(image,quality) // image data object
+                {
+                    // var time_start = new Date().getTime();
+    
+                    if(quality) setQuality(quality);
+    
+                    // Initialize bit writer
+                    byteout = new Array();
+                    bytenew=0;
+                    bytepos=7;
+    
+                    // Add JPEG headers
+                    writeWord(0xFFD8); // SOI
+                    writeAPP0();
+                    writeDQT();
+                    writeSOF0(image.width,image.height);
+                    writeDHT();
+                    writeSOS();
+    
+    
+                    // Encode 8x8 macroblocks
+                    var DCY=0;
+                    var DCU=0;
+                    var DCV=0;
+    
+                    bytenew=0;
+                    bytepos=7;
+    
+    
+                    this.encode.displayName = "_encode_";
+    
+                    var imageData = image.data;
+                    var width = image.width;
+                    var height = image.height;
+    
+                    var quadWidth = width*4;
+                    var tripleWidth = width*3;
+    
+                    var x, y = 0;
+                    var r, g, b;
+                    var start,p, col,row,pos;
+                    while(y < height){
+                        x = 0;
+                        while(x < quadWidth){
+                        start = quadWidth * y + x;
+                        p = start;
+                        col = -1;
+                        row = 0;
+    
+                        for(pos=0; pos < 64; pos++){
+                            row = pos >> 3;// /8
+                            col = ( pos & 7 ) * 4; // %8
+                            p = start + ( row * quadWidth ) + col;
+    
+                            if(y+row >= height){ // padding bottom
+                                p-= (quadWidth*(y+1+row-height));
+                            }
+    
+                            if(x+col >= quadWidth){ // padding right
+                                p-= ((x+col) - quadWidth +4)
+                            }
+    
+                            r = imageData[ p++ ];
+                            g = imageData[ p++ ];
+                            b = imageData[ p++ ];
+    
+    
+                            /* // calculate YUV values dynamically
+                            YDU[pos]=((( 0.29900)*r+( 0.58700)*g+( 0.11400)*b))-128; //-0x80
+                            UDU[pos]=(((-0.16874)*r+(-0.33126)*g+( 0.50000)*b));
+                            VDU[pos]=((( 0.50000)*r+(-0.41869)*g+(-0.08131)*b));
+                            */
+    
+                            // use lookup table (slightly faster)
+                            YDU[pos] = ((RGB_YUV_TABLE[r]             + RGB_YUV_TABLE[(g +  256)>>0] + RGB_YUV_TABLE[(b +  512)>>0]) >> 16)-128;
+                            UDU[pos] = ((RGB_YUV_TABLE[(r +  768)>>0] + RGB_YUV_TABLE[(g + 1024)>>0] + RGB_YUV_TABLE[(b + 1280)>>0]) >> 16)-128;
+                            VDU[pos] = ((RGB_YUV_TABLE[(r + 1280)>>0] + RGB_YUV_TABLE[(g + 1536)>>0] + RGB_YUV_TABLE[(b + 1792)>>0]) >> 16)-128;
+    
+                        }
+    
+                        DCY = processDU(YDU, fdtbl_Y, DCY, YDC_HT, YAC_HT);
+                        DCU = processDU(UDU, fdtbl_UV, DCU, UVDC_HT, UVAC_HT);
+                        DCV = processDU(VDU, fdtbl_UV, DCV, UVDC_HT, UVAC_HT);
+                        x+=32;
+                        }
+                        y+=8;
+                    }
+    
+    
+                    ////////////////////////////////////////////////////////////////
+    
+                    // Do the bit alignment of the EOI marker
+                    if ( bytepos >= 0 ) {
+                        var fillbits = [];
+                        fillbits[1] = bytepos+1;
+                        fillbits[0] = (1<<(bytepos+1))-1;
+                        writeBits(fillbits);
+                    }
+    
+                    writeWord(0xFFD9); //EOI
+    
+                    var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
+    
+                    byteout = [];
+    
+                    // benchmarking
+                    // var duration = new Date().getTime() - time_start;
+                    // console.log('Encoding time: '+ currentQuality + 'ms');
+                    //
+    
+                    return jpegDataUri
+            }
+    
+            function setQuality(quality){
+                if (quality <= 0) {
+                    quality = 1;
+                }
+                if (quality > 100) {
+                    quality = 100;
+                }
+    
+                if(currentQuality == quality) return // don't recalc if unchanged
+    
+                var sf = 0;
+                if (quality < 50) {
+                    sf = Math.floor(5000 / quality);
+                } else {
+                    sf = Math.floor(200 - quality*2);
+                }
+    
+                initQuantTables(sf);
+                currentQuality = quality;
+                // console.log('Quality set to: '+quality +'%');
+            }
+    
+            function init(){
+                // var time_start = new Date().getTime();
+                if(!quality) quality = 50;
+                // Create tables
+                initCharLookupTable()
+                initHuffmanTbl();
+                initCategoryNumber();
+                initRGBYUVTable();
+    
+                setQuality(quality);
+                // var duration = new Date().getTime() - time_start;
+                // console.log('Initialization '+ duration + 'ms');
+            }
+    
+            init();
+    
+        };
+    
+        JPEGEncoder.encode = function( data, quality ) {
+            var encoder = new JPEGEncoder( quality );
+    
+            return encoder.encode( data );
+        }
+    
+        return JPEGEncoder;
+    });
+    /**
+     * @fileOverview Fix android canvas.toDataUrl bug.
+     */
+    define('runtime/html5/androidpatch',[
+        'runtime/html5/util',
+        'runtime/html5/jpegencoder',
+        'base'
+    ], function( Util, encoder, Base ) {
+        var origin = Util.canvasToDataUrl,
+            supportJpeg;
+    
+        Util.canvasToDataUrl = function( canvas, type, quality ) {
+            var ctx, w, h, fragement, parts;
+    
+            // 非android手机直接跳过。
+            if ( !Base.os.android ) {
+                return origin.apply( null, arguments );
+            }
+    
+            // 检测是否canvas支持jpeg导出，根据数据格式来判断。
+            // JPEG 前两位分别是：255, 216
+            if ( type === 'image/jpeg' && typeof supportJpeg === 'undefined' ) {
+                fragement = origin.apply( null, arguments );
+    
+                parts = fragement.split(',');
+    
+                if ( ~parts[ 0 ].indexOf('base64') ) {
+                    fragement = atob( parts[ 1 ] );
+                } else {
+                    fragement = decodeURIComponent( parts[ 1 ] );
+                }
+    
+                fragement = fragement.substring( 0, 2 );
+    
+                supportJpeg = fragement.charCodeAt( 0 ) === 255 &&
+                        fragement.charCodeAt( 1 ) === 216;
+            }
+    
+            // 只有在android环境下才修复
+            if ( type === 'image/jpeg' && !supportJpeg ) {
+                w = canvas.width;
+                h = canvas.height;
+                ctx = canvas.getContext('2d');
+    
+                return encoder.encode( ctx.getImageData( 0, 0, w, h ), quality );
+            }
+    
+            return origin.apply( null, arguments );
+        };
+    });
+    /**
      * @fileOverview Transport
      * @todo 支持chunked传输，优势：
      * 可以将大文件分成小块，挨个传输，可以提高大文件成功率，当失败的时候，也只需要重传那小部分，
@@ -5664,38 +6072,21 @@
             }
         });
     });
-    /**
-     * @fileOverview 只有html5实现的文件版本。
-     */
-    define('preset/html5only',[
+    define('webuploader',[
         'base',
-    
-        // widgets
-        'widgets/filednd',
-        'widgets/filepaste',
         'widgets/filepicker',
         'widgets/image',
         'widgets/queue',
         'widgets/runtime',
         'widgets/upload',
-        'widgets/validator',
-    
-        // runtimes
-        // html5
         'runtime/html5/blob',
-        'runtime/html5/dnd',
-        'runtime/html5/filepaste',
         'runtime/html5/filepicker',
         'runtime/html5/imagemeta/exif',
         'runtime/html5/image',
+        'runtime/html5/androidpatch',
         'runtime/html5/transport'
     ], function( Base ) {
         return Base;
-    });
-    define('webuploader',[
-        'preset/html5only'
-    ], function( preset ) {
-        return preset;
     });
     return require('webuploader');
 });
