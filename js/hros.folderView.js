@@ -39,16 +39,14 @@ HROS.folderView = (function(){
 				var folderViewHtml = '', height = 0;
 				if(sc != ''){
 					$(sc).each(function(){
-						if(this.type == 'window' || this.type == 'widget' || this.type == 'pwindow' || this.type == 'pwidget'){
-							folderViewHtml += appbtnTemp({
-								'title' : this.name,
-								'type' : this.type,
-								'id' : 'd_' + this.appid,
-								'appid' : this.appid,
-								'realappid' : this.realappid,
-								'imgsrc' : this.icon
-							});
-						}
+						folderViewHtml += appbtnTemp({
+							'title' : this.name,
+							'type' : this.type,
+							'id' : 'd_' + this.appid,
+							'appid' : this.appid,
+							'realappid' : this.realappid,
+							'imgsrc' : this.icon
+						});
 					});
 					if(sc.length % 4 == 0){
 						height += Math.floor(sc.length / 4) * 60;
