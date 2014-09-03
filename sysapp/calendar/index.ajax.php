@@ -61,8 +61,8 @@
 					));
 					if($rs != NULL){
 						$db->update('tb_calendar', array(
-							'startdt' => date('Y-m-d H:i:s', strtotime($rs['startdt']) + ($_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60)),
-							'enddt' => date('Y-m-d H:i:s', strtotime($rs['enddt']) + ($_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60))
+							'startdt' => date('Y-m-d H:i:s', strtotime($rs['startdt']) + $_POST['delta'] / 1000),
+							'enddt' => date('Y-m-d H:i:s', strtotime($rs['enddt']) + $_POST['delta'] / 1000)
 						), array(
 							'AND' => array(
 								'tbid' => $_POST['id'],
@@ -79,7 +79,7 @@
 						)
 					));
 					if($enddt){
-						$enddt = date('Y-m-d H:i:s', strtotime($enddt) + $_POST['dayDelta'] * 24 * 60 * 60 + $_POST['minuteDelta'] * 60);
+						$enddt = date('Y-m-d H:i:s', strtotime($enddt) + $_POST['delta'] / 1000);
 						$db->update('tb_calendar', array(
 							'enddt' => $enddt
 						), array(

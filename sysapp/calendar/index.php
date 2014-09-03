@@ -13,8 +13,8 @@
 <title>我的日历</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
-<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
-<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
+<link rel="stylesheet" href="../../js/fullcalendar-2.1.1/fullcalendar.min.css">
+<link rel="stylesheet" href="../../js/fullcalendar-2.1.1/fullcalendar.print.css" media="print">
 <link rel="stylesheet" href="../../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 </head>
 
@@ -76,8 +76,10 @@
 </div>
 <div id="calendar" style="margin:30px"></div>
 <?php include('sysapp/global_js.php'); ?>
-<script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
-<script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
+<script src="../../js/fullcalendar-2.1.1/lib/moment.min.js"></script>
+<script src="../../js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+<script src="../../js/fullcalendar-2.1.1/fullcalendar.min.js"></script>
+<script src="../../js/fullcalendar-2.1.1/lang/zh-cn.js"></script>
 <script src="../../js/sugar/sugar-1.4.1.min.js"></script>
 <script src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="../../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -166,30 +168,7 @@ $(function(){
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
 		},
-		monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-		dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-		allDayText: '全天',
-		axisFormat: 'h(:mm)tt',
-		buttonText: {
-			prevYear: '&nbsp;&lt;&lt;&nbsp;',
-			nextYear: '&nbsp;&gt;&gt;&nbsp;',
-			today: '&nbsp;今天&nbsp;',
-			month: '&nbsp;月&nbsp;',
-			week: '&nbsp;周&nbsp;',
-			day: '&nbsp;日&nbsp;'
-		},
-		titleFormat: {
-			month: 'yyyy年MMMM',
-			week: "yyyy年 MMMd日[ yyyy]{'-'[ MMM]d'日'}",
-			day: 'yyyy年MMMd日 dddd'
-		},
-		columnFormat: {
-			month: 'ddd',
-			week: 'M月d日 ddd',
-			day: 'M月d日 dddd'
-		},
+		axisFormat: 'h(:mm)a',
 		timeFormat: {
 			'': 'H:mm - '
 		},
@@ -201,10 +180,10 @@ $(function(){
 				$.dialog.list['selectDialog'].close();
 			}
 			var content = '', isallday = 1;
-			var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());
-			var enddText = Date.create(end).format('{M}月{dd}日 ') + getMyDay(end.getDay());
-			var starttText = Date.create(start).format(' {H}:{m}');
-			var endtText = Date.create(end).format(' {H}:{m}');
+			var startdText = Date.create(start.format()).format('{M}月{dd}日 ') + getMyDay(Date.create(start.format()).getWeekday());
+			var enddText = Date.create(end.format()).format('{M}月{dd}日 ') + getMyDay(Date.create(end.format()).getWeekday());
+			var starttText = Date.create(start.format()).format(' {H}:{m}');
+			var endtText = Date.create(end.format()).format(' {H}:{m}');
 			if(starttText != ' 0:0' || endtText != ' 0:0'){
 				isallday = 0;
 			}
@@ -214,7 +193,7 @@ $(function(){
 				if(startdText == enddText){
 					content += startdText;
 				}else{
-					content += startdText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText;
+					content += startdText + starttText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText + endtText;
 				}
 			}
 			//创建对话框
@@ -231,7 +210,7 @@ $(function(){
 								$.ajax({
 									type: 'POST',
 									url: 'index.ajax.php',
-									data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + Date.create(start).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&end=' + Date.create(end).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&isallday=' + isallday,
+									data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + Date.create(start.format()).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&end=' + Date.create(end.format()).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&isallday=' + isallday,
 									success: function(){
 										//添加成功后刷新日历
 										calendar.fullCalendar('refetchEvents');
@@ -253,17 +232,17 @@ $(function(){
 							clearEditForm();
 							//初始化表单
 							$('#editbox input[name="val_title"]').val(document.getElementById('title').value);
-							$('#editbox input[name="val_startd"]').val(Date.create(start).format('{yyyy}-{MM}-{dd}'));
-							$('#editbox input[name="val_endd"]').val(Date.create(end).format('{yyyy}-{MM}-{dd}'));
-							$('#editbox input[name="val_startt"]').val(Date.create(start).format('{H}:{m}'));
-							$('#editbox input[name="val_endt"]').val(Date.create(end).format('{H}:{m}'));
+							$('#editbox input[name="val_startd"]').val(Date.create(start.format()).format('{yyyy}-{MM}-{dd}'));
+							$('#editbox input[name="val_endd"]').val(Date.create(end.format()).format('{yyyy}-{MM}-{dd}'));
+							$('#editbox input[name="val_startt"]').val(Date.create(start.format()).format('{H}:{m}'));
+							$('#editbox input[name="val_endt"]').val(Date.create(end.format()).format('{H}:{m}'));
 							if(isallday == 0){
 								$('#editbox input[name="val_isallday"]:eq(1)').click();
 							}
-							$('.start_datetime_t').datetimepicker('setStartDate', Date.create(start).format('{yyyy}-{MM}-{dd} 00:00:00'));
-							$('.start_datetime_t').datetimepicker('setEndDate', Date.create(start).format('{yyyy}-{MM}-{dd} 23:59:59'));
-							$('.end_datetime_t').datetimepicker('setStartDate', Date.create(end).format('{yyyy}-{MM}-{dd} 00:00:00'));
-							$('.end_datetime_t').datetimepicker('setEndDate', Date.create(end).format('{yyyy}-{MM}-{dd} 23:59:59'));
+							$('.start_datetime_t').datetimepicker('setStartDate', Date.create(start.format()).format('{yyyy}-{MM}-{dd} 00:00:00'));
+							$('.start_datetime_t').datetimepicker('setEndDate', Date.create(start.format()).format('{yyyy}-{MM}-{dd} 23:59:59'));
+							$('.end_datetime_t').datetimepicker('setStartDate', Date.create(end.format()).format('{yyyy}-{MM}-{dd} 00:00:00'));
+							$('.end_datetime_t').datetimepicker('setEndDate', Date.create(end.format()).format('{yyyy}-{MM}-{dd} 23:59:59'));
 						}
 					}
 				]
@@ -271,14 +250,14 @@ $(function(){
 			calendar.fullCalendar('unselect');
 		},
 		editable: true,
-		events: function(start, end, callback){
+		events: function(start, end, timezone, callback){
 			$.ajax({
 				type: 'POST',
 				url: 'index.ajax.php',
 				data: {
 					ac: 'getCalendar',
-					start: Math.round(start.getTime() / 1000),
-					end: Math.round(end.getTime() / 1000)
+					start: start.unix(),
+					end: end.unix()
 				},
 				dataType: 'json',
 				success: function(msg){
@@ -288,17 +267,17 @@ $(function(){
 		},
 		eventClick: function(event){
 			var start = new Date(event._start), end = new Date(event._end), content = '';
-			var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());
-			var enddText = Date.create(end).format('{M}月{dd}日 ') + getMyDay(end.getDay());
-			var starttText = Date.create(start).format(' {H}:{m}');
-			var endtText = Date.create(end).format(' {H}:{m}');
+			var startdText = Date.create(start.format()).format('{M}月{dd}日 ') + getMyDay(Date.create(start.format()).getWeekday());
+			var enddText = Date.create(end.format()).format('{M}月{dd}日 ') + getMyDay(Date.create(end.format()).getWeekday());
+			var starttText = Date.create(start.format()).format(' {H}:{m}');
+			var endtText = Date.create(end.format()).format(' {H}:{m}');
 			if(!event.allDay){
 				content += startdText + starttText + '&nbsp;&nbsp;–&nbsp;' + endtText;
 			}else{
 				if(startdText == enddText){
 					content += startdText;
 				}else{
-					content += startdText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText;
+					content += startdText + starttText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText + endtText;
 				}
 			}
 			$.dialog({
@@ -374,23 +353,23 @@ $(function(){
 			});
 			return false;
 		},
-		eventDrop: function(event, dayDelta, minuteDelta){
+		eventDrop: function(event, delta){
 			ZENG.msgbox.show('正在更新中，请稍后...', 6, 100000);
 			$.ajax({
 				type: 'POST',
 				url: 'index.ajax.php',
-				data: 'ac=quick&do=drop&id=' + event._id + '&dayDelta=' + dayDelta + '&minuteDelta=' + minuteDelta,
+				data: 'ac=quick&do=drop&id=' + event._id + '&delta=' + delta,
 				success: function(){
 					ZENG.msgbox._hide();
 				}
 			});
 		},
-		eventResize: function(event, dayDelta, minuteDelta){
+		eventResize: function(event, delta){
 			ZENG.msgbox.show('正在更新中，请稍后...', 6, 100000);
 			$.ajax({
 				type: 'POST',
 				url: 'index.ajax.php',
-				data: 'ac=quick&do=resize&id=' + event._id + '&dayDelta=' + dayDelta + '&minuteDelta=' + minuteDelta,
+				data: 'ac=quick&do=resize&id=' + event._id + '&delta=' + delta,
 				success: function(){
 					ZENG.msgbox._hide();
 				}
