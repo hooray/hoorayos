@@ -346,6 +346,8 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/HoorayLibs/hooraylibs.js"></script>
 <script src="js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script src="js/sugar/sugar-1.4.1.min.js"></script>
+<script src="js/artDialog4.1.7/jquery.artDialog.js?skin=default"></script>
+<script src="js/artDialog4.1.7/plugins/iframeTools.js"></script>
 <script src="js/hros.core.js"></script>
 <script src="js/hros.app.js"></script>
 <script src="js/hros.appmanage.js"></script>
@@ -370,8 +372,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 <!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
 <!--script src="js/hros.min.js"></script-->
-<script src="js/artDialog4.1.7/jquery.artDialog.js?skin=default"></script>
-<script src="js/artDialog4.1.7/plugins/iframeTools.js"></script>
 <script>
 var childWindow, interval;
 $(function(){
