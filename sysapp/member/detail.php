@@ -46,7 +46,7 @@
 						echo $member['username'];
 					}else{
 				?>
-				<input type="text" name="val_username" datatype="*" nullmsg="请输入用户名">
+				<input type="text" name="val_username" datatype="s6-18" ajaxurl="detail.ajax.php?ac=checkUsername" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
 				<?php } ?>
 				<span class="help-inline"></span>
 			</div>

@@ -35,5 +35,17 @@
 				'status' => 'y'
 			));
 			break;
+		case 'checkUsername':
+			if(!$db->has('tb_member', array(
+				'username' => $_POST['param']
+			))){
+				$cb['info'] = '';
+				$cb['status'] = 'y';
+			}else{
+				$cb['info'] = '用户名已存在，请更换';
+				$cb['status'] = 'n';
+			}
+			echo json_encode($cb);
+			break;
 	}
 ?>
