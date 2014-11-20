@@ -37,6 +37,28 @@
 				//根据所选应用分类查询应用
 				else{
 					$where['AND']['app_category_id'] = $_POST['search_1'];
+					//如果是系统分类，则只显示可添加的系统应用
+					if($db->get('tb_app_category', 'issystem', array(
+						'tbid' => $_POST['search_1']
+					))){
+						if(checkAdmin()){
+							$permission_id = $db->get('tb_member', 'permission_id', array(
+								'tbid' => session('member_id')
+							));
+							if($permission_id != ''){
+								$apps_id = $db->get('tb_permission', 'apps_id', array(
+									'tbid' => $permission_id
+								));
+								if($apps_id != ''){
+									$where['AND']['tbid'] = explode(',', $apps_id);
+								}
+							}else{
+								$where['AND']['tbid'] = NULL;
+							}
+						}else{
+							$where['AND']['tbid'] = NULL;
+						}
+					}
 				}
 			}
 			if($_POST['search_3'] != ''){
