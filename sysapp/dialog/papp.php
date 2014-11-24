@@ -132,14 +132,14 @@
 </div>
 </form>
 <?php include('sysapp/global_js.php'); ?>
-<script src="../../js/webuploader-0.1.0/webuploader.min.js"></script>
+<script src="../../js/webuploader-0.1.5/webuploader.min.js"></script>
 <script>
 $(function(){
 	var uploader = WebUploader.create({
 		// 选完文件后，是否自动上传。
 		auto: true,
 		// swf文件路径
-		swf: '../../js/webuploader-0.1.0/Uploader.swf',
+		swf: '../../js/webuploader-0.1.5/Uploader.swf',
 		// 文件接收服务端。
 		server: 'papp.ajax.php?ac=uploadImg',
 		// 选择文件的按钮。可选。

@@ -1276,13 +1276,22 @@
         // 扩展Uploader.
         $.extend( Uploader.prototype, {
     
+            /**
+             * @property {String | Array} [disableWidgets=undefined]
+             * @namespace options
+             * @for Uploader
+             * @description 默认所有 Uploader.register 了的 widget 都会被加载，如果禁用某一部分，请通过此 option 指定黑名单。
+             */
+    
             // 覆写_init用来初始化widgets
             _init: function() {
                 var me = this,
-                    widgets = me._widgets = [];
+                    widgets = me._widgets = [],
+                    deactives = me.options.disableWidgets || '';
     
                 $.each( widgetClass, function( _, klass ) {
-                    widgets.push( new klass( me ) );
+                    (!deactives || !~deactives.indexOf( klass._name )) &&
+                        widgets.push( new klass( me ) );
                 });
     
                 return _init.apply( me, arguments );
@@ -1461,6 +1470,8 @@
          * @for  Uploader
          */
         return Uploader.register({
+            name: 'dnd',
+            
             init: function( opts ) {
     
                 if ( !opts.dnd ||
@@ -1551,6 +1562,8 @@
          * @for Uploader
          */
         return Uploader.register({
+            name: 'paste',
+            
             init: function( opts ) {
     
                 if ( !opts.paste ||
@@ -1815,7 +1828,7 @@
              * @for Uploader
              * @description 指定选择文件的按钮容器，不指定则不创建按钮。
              *
-             * * `id` {Seletor} 指定选择文件的按钮容器，不指定则不创建按钮。
+             * * `id` {Seletor|dom} 指定选择文件的按钮容器，不指定则不创建按钮。**注意** 这里虽然写的是 id, 但是不是只支持 id, 还支持 class, 或者 dom 节点。
              * * `label` {String} 请采用 `innerHTML` 代替
              * * `innerHTML` {String} 指定按钮文字。不指定时优先从指定的容器中看是否自带文字。
              * * `multiple` {Boolean} 是否开起同时选择多个文件能力。
@@ -1850,6 +1863,7 @@
         });
     
         return Uploader.register({
+            name: 'picker',
     
             init: function( opts ) {
                 this.pickers = [];
@@ -1883,7 +1897,7 @@
                 if ( !pick ) {
                     return;
                 }
-                
+    
                 $.isPlainObject( pick ) || (pick = {
                     id: pick
                 });
@@ -2161,6 +2175,8 @@
         });
     
         return Uploader.register({
+    
+            name: 'image',
     
     
             /**
@@ -2565,7 +2581,7 @@
                 numOfUploadFailed: 0,
                 numOfInvalid: 0,
                 numofDeleted: 0,
-                numofInterrupt: 0,
+                numofInterrupt: 0
             };
     
             // 上传队列，仅包括等待上传的文件
@@ -2788,6 +2804,7 @@
             Status = WUFile.Status;
     
         return Uploader.register({
+            name: 'queue',
     
             init: function( opts ) {
                 var me = this,
@@ -2910,6 +2927,14 @@
              * @param {File} files 数组，内容为原始File(lib/File）对象。
              * @description 当一批文件添加进队列以后触发。
              * @for  Uploader
+             */
+            
+            /**
+             * @property {Boolean} [auto=false]
+             * @namespace options
+             * @for Uploader
+             * @description 设置为 true 后，不需要手动调用上传，有文件选择即开始上传。
+             * 
              */
     
             /**
@@ -3080,7 +3105,17 @@
             return Runtime.hasRuntime.apply( Runtime, arguments );
         };
     
+        /**
+         * @property {Object} [runtimeOrder=html5,flash]
+         * @namespace options
+         * @for Uploader
+         * @description 指定运行时启动顺序。默认会想尝试 html5 是否支持，如果支持则使用 html5, 否则则使用 flash.
+         *
+         * 可以将此值设置成 `flash`，来强制使用 flash 运行时。
+         */
+    
         return Uploader.register({
+            name: 'runtime',
     
             init: function() {
                 if ( !this.predictRuntimeType() ) {
@@ -3385,6 +3420,7 @@
         }
     
         Uploader.register({
+            name: 'upload',
     
             init: function() {
                 var owner = this.owner,
@@ -3415,7 +3451,7 @@
                 this.__tick = Base.bindFn( this._tick, this );
     
                 owner.on( 'uploadComplete', function( file ) {
-                    
+    
                     // 把其他块取消了。
                     file.blocks && $.each( file.blocks, function( _, v ) {
                         v.transport && (v.transport.abort(), v.transport.destroy());
@@ -3467,7 +3503,7 @@
     
                     if (file.getStatus() === Status.INTERRUPT) {
                         $.each( me.pool, function( _, v ) {
-                        
+    
                             // 之前暂停过。
                             if (v.file !== file) {
                                 return;
@@ -3475,7 +3511,7 @@
     
                             v.transport && v.transport.send();
                         });
-                        
+    
                         file.setStatus( Status.QUEUED );
                     } else if (file.getStatus() === Status.PROGRESS) {
                         return;
@@ -3494,16 +3530,23 @@
     
                 me.runing = true;
     
+                var files = [];
+    
                 // 如果有暂停的，则续传
                 $.each( me.pool, function( _, v ) {
                     var file = v.file;
     
                     if ( file.getStatus() === Status.INTERRUPT ) {
-                        file.setStatus( Status.PROGRESS );
+                        files.push(file);
                         me._trigged = false;
                         v.transport && v.transport.send();
                     }
                 });
+    
+                var file;
+                while ( (file = files.shift()) ) {
+                    file.setStatus( Status.PROGRESS );
+                }
     
                 file || $.each( me.request( 'get-files',
                         Status.INTERRUPT ), function() {
@@ -3554,7 +3597,7 @@
     
                     file.setStatus( Status.INTERRUPT );
                     $.each( me.pool, function( _, v ) {
-                        
+    
                         // 只 abort 指定的文件。
                         if (v.file !== file) {
                             return;
@@ -3753,7 +3796,7 @@
                         if ( !file ) {
                             return null;
                         }
-                            
+    
                         act = CuteFile( file, opts.chunked ? opts.chunkSize : 0 );
                         me.stack.push(act);
                         return act.shift();
@@ -3788,7 +3831,7 @@
                     promise = me.request( 'before-send-file', file, function() {
     
                         // 有可能文件被skip掉了。文件被skip掉后，状态坑定不是Queued.
-                        if ( file.getStatus() === Status.PROGRESS || 
+                        if ( file.getStatus() === Status.PROGRESS ||
                             file.getStatus() === Status.INTERRUPT ) {
                             return file;
                         }
@@ -3838,7 +3881,7 @@
                 // 如：暂停，取消
                 // 我们不能中断 promise, 但是可以在 promise 完后，不做上传操作。
                 if ( file.getStatus() !== Status.PROGRESS ) {
-                    
+    
                     // 如果是中断，则还需要放回去。
                     if (file.getStatus() === Status.INTERRUPT) {
                         me._putback(block);
@@ -3878,6 +3921,7 @@
                         });
                     } else {
                         block.percentage = 1;
+                        me.updateFileProgress( file );
                         me._popBlock( block );
                         Base.nextTick( me.__tick );
                     }
@@ -3955,25 +3999,8 @@
     
                 // 广播上传进度。以文件为单位。
                 tr.on( 'progress', function( percentage ) {
-                    var totalPercent = 0,
-                        uploaded = 0;
-    
-                    // 可能没有abort掉，progress还是执行进来了。
-                    // if ( !file.blocks ) {
-                    //     return;
-                    // }
-    
-                    totalPercent = block.percentage = percentage;
-    
-                    if ( block.chunks > 1 ) {    // 计算文件的整体速度。
-                        $.each( file.blocks, function( _, v ) {
-                            uploaded += (v.percentage || 0) * (v.end - v.start);
-                        });
-    
-                        totalPercent = uploaded / file.size;
-                    }
-    
-                    owner.trigger( 'uploadProgress', file, totalPercent || 0 );
+                    block.percentage = percentage;
+                    me.updateFileProgress( file );
                 });
     
                 // 用来询问，是否返回的结果是有错误的。
@@ -4082,6 +4109,22 @@
                         .always(function() {
                             owner.trigger( 'uploadComplete', file );
                         });
+            },
+    
+            updateFileProgress: function(file) {
+                var totalPercent = 0,
+                    uploaded = 0;
+    
+                if (!file.blocks) {
+                    return;
+                }
+    
+                $.each( file.blocks, function( _, v ) {
+                    uploaded += (v.percentage || 0) * (v.end - v.start);
+                });
+    
+                totalPercent = uploaded / file.size;
+                this.owner.trigger( 'uploadProgress', file, totalPercent || 0 );
             }
     
         });
@@ -4128,6 +4171,8 @@
     
         // 在Uploader初始化的时候启动Validators的初始化
         Uploader.register({
+            name: 'validator',
+    
             init: function() {
                 var me = this;
                 Base.nextTick(function() {
@@ -4360,6 +4405,7 @@
     ], function( Base, Uploader, Md5, Blob ) {
     
         return Uploader.register({
+            name: 'md5',
     
     
             /**
@@ -7858,7 +7904,7 @@
                                 return {};
                             }
                         };
-                        me._responseJson  = p(me._response);
+                        me._responseJson  = me._response ? p(me._response) : {};
                             
                         // }
                     }
@@ -7883,6 +7929,22 @@
                 $.each( headers, function( key, val ) {
                     xhr.exec( 'setRequestHeader', key, val );
                 });
+            }
+        });
+    });
+    /**
+     * @fileOverview Blob Html实现
+     */
+    define('runtime/flash/blob',[
+        'runtime/flash/runtime',
+        'lib/blob'
+    ], function( FlashRuntime, Blob ) {
+    
+        return FlashRuntime.register( 'Blob', {
+            slice: function( start, end ) {
+                var blob = this.flashExec( 'Blob', 'slice', start, end );
+    
+                return new Blob( blob.uid, blob );
             }
         });
     });
@@ -7936,6 +7998,7 @@
         'runtime/flash/filepicker',
         'runtime/flash/image',
         'runtime/flash/transport',
+        'runtime/flash/blob',
         'runtime/flash/md5'
     ], function( Base ) {
         return Base;
