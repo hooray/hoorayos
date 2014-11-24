@@ -7,14 +7,14 @@
 		$v = '.'.$v;
 	}
 	$config = array(
-		'savePath' => 'uploads/member/'.session('member_id').'/file/', //保存路径
+		'pathFormat' => 'uploads/member/'.session('member_id').'/file/{yyyy}{mm}{dd}/{time}{rand:6}', //保存路径
 		'allowFiles' => $fileType, //文件允许格式
-		'maxSize' => $uploadFileSize * 1024 //文件大小限制，单位KB
+		'maxSize' => $uploadFileSize * 1024000 //文件大小限制，单位B
 	);
 	$up = new Uploader('file', $config);
 	$info = $up->getFileInfo();
 	if($info['state'] == 'SUCCESS'){
-		$name = path_info($info['originalName']);
+		$name = path_info($info['original']);
 		$data = array(
 			'type' => 'file',
 			'icon' => $uploadFileType[$name['extension']],

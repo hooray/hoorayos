@@ -27,9 +27,9 @@
 			)) < 6){
 				include('libs/Uploader.class.php');
 				$config = array(
-					"savePath" => 'uploads/member/'.session('member_id').'/wallpaper/', //保存路径
+					"pathFormat" => 'uploads/member/'.session('member_id').'/wallpaper/{yyyy}{mm}{dd}/{time}{rand:6}', //保存路径
 					"allowFiles" => array('.jpg', '.jpeg', '.png', '.gif', '.bmp'), //文件允许格式
-					"maxSize" => 1000 //文件大小限制，单位KB
+					"maxSize" => 10240000 //文件大小限制，单位B
 				);
 				$up = new Uploader('file', $config);
 				$info = $up->getFileInfo();

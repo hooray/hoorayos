@@ -79,9 +79,9 @@
 		case 'uploadImg':
 			include('libs/Uploader.class.php');
 			$config = array(
-				'savePath' => 'uploads/shortcut/', //保存路径
+				'pathFormat' => 'uploads/shortcut/{yyyy}{mm}{dd}/{time}{rand:6}', //保存路径
 				'allowFiles' => array('.jpg', '.jpeg', '.png', '.gif', '.bmp'), //文件允许格式
-				'maxSize' => 300 //文件大小限制，单位KB
+				'maxSize' => 2048000 //文件大小限制，单位B
 			);
 			$up = new Uploader('file', $config);
 			$info = $up->getFileInfo();
