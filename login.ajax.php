@@ -144,8 +144,10 @@
 		case 'unlock':
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
 			$row = $db->get('tb_member', '*', array(
-				'username' => $userinfo['username'],
-				'lockpassword' => sha1($_POST['password'])
+				'AND' => array(
+					'username' => $userinfo['username'],
+					'lockpassword' => sha1($_POST['password'])
+				)
 			));
 			if($row){
 				session('member_id', $row['tbid']);
