@@ -205,11 +205,11 @@ HROS.app = (function(){
 		},
 		setPos : function(isAnimate){
 			isAnimate = isAnimate == null ? true : isAnimate;
-			if($('#desk').hasClass('smallIcon')){
-				$('#desk').removeClass('smallIcon');
-			}
+			$('#desk').removeClass('smallIcon bigIcon');
 			if(HROS.CONFIG.appSize == 's'){
 				$('#desk').addClass('smallIcon');
+			}else if(HROS.CONFIG.appSize == 'b'){
+				$('#desk').addClass('bigIcon');
 			}
 			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
 			$('#dock-bar .dock-applist li').each(function(i){
@@ -220,11 +220,19 @@ HROS.app = (function(){
 			});
 			for(var j = 1; j <= 5; j++){
 				$('#desk-' + j + ' li').each(function(i){
-					var offsetTop = 7;
-					var offsetLeft = 16;
-					if(HROS.CONFIG.appSize == 's'){
-						offsetTop = 11;
-						offsetLeft = 21;
+					var offsetTop, offsetLeft;
+					switch(HROS.CONFIG.appSize){
+						case 's':
+							offsetTop = 11;
+							offsetLeft = 21;
+							break;
+						case 'b':
+							offsetTop = 21;
+							offsetLeft = 17;
+							break;
+						default:
+							offsetTop = 7;
+							offsetLeft = 16;
 					}
 					var top = grid[i]['startY'] + offsetTop;
 					var left = grid[i]['startX'] + offsetLeft;
@@ -310,7 +318,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('body').append(obj);
+						$('#desk').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
@@ -441,7 +449,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('body').append(obj);
+						$('#desk').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
@@ -572,7 +580,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('body').append(obj);
+						$('#desk').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;

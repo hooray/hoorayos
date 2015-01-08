@@ -11,8 +11,27 @@ HROS.grid = (function(){
 			var top = HROS.CONFIG.appButtonTop;
 			var left = HROS.CONFIG.appButtonLeft;
 			var appGrid = [];
-			var offsetTop = HROS.CONFIG.appSize == 's' ? 80 : 100;
-			var offsetLeft = HROS.CONFIG.appSize == 's' ? 100 : 120;
+			var offsetTop, offsetLeft;
+			switch(HROS.CONFIG.appSize){
+				case 's':
+					offsetTop = 80;
+					break;
+				case 'b':
+					offsetTop = 140;
+					break;
+				default: // case 'm'
+					offsetTop = 100;
+			}
+			switch(HROS.CONFIG.appSize){
+				case 's':
+					offsetLeft = 100;
+					break;
+				case 'b':
+					offsetLeft = 160;
+					break;
+				default: // case 'm'
+					offsetLeft = 120;
+			}
 			for(var i = 0; i < 10000; i++){
 				appGrid.push({
 					startY : top,

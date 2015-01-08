@@ -585,7 +585,8 @@ HROS.popupMenu = (function(){
 									'<a href="javascript:;">尺寸<b class="arrow">»</b></a>'+
 									'<div class="popup-menu"><ul>'+
 										'<li><a menu="size" size="s" href="javascript:;"><b class="hook"></b>小图标</a></li>'+
-										'<li><a menu="size" size="m" href="javascript:;"><b class="hook"></b>大图标</a></li>'+
+										'<li><a menu="size" size="m" href="javascript:;"><b class="hook"></b>常规图标</a></li>'+
+										'<li><a menu="size" size="b" href="javascript:;"><b class="hook"></b>大图标</a></li>'+
 									'</ul></div>'+
 								'</li>'+
 							'</ul></div>'+
