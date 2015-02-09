@@ -180,7 +180,9 @@ CREATE TABLE `tb_member` (
   `appxy` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'x' COMMENT '图标排列方式，x（横向排列）y（纵向排列）',
   `desk` tinyint(1) DEFAULT '1' COMMENT '默认桌面',
   `dockpos` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'top' COMMENT '应用码头位置，top（顶部）left（左侧）right（右侧）none（隐藏）',
-  `appsize` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'm' COMMENT '图标展示尺寸，s（小图标）（大图标）',
+  `appsize` int(11) DEFAULT '48' COMMENT '图标尺寸',
+  `appverticalspacing` int(11) DEFAULT '50' COMMENT '图标垂直间距',
+  `apphorizontalspacing` int(11) DEFAULT '50' COMMENT '图标水平间距',
   `wallpaper_id` int(11) DEFAULT '1' COMMENT '壁纸id',
   `wallpaperwebsite` text COLLATE utf8_unicode_ci COMMENT '壁纸网址',
   `wallpaperstate` tinyint(4) DEFAULT '1' COMMENT '1（系统壁纸）2（自定义壁纸）3（网络地址）',
@@ -225,7 +227,7 @@ CREATE TABLE `tb_member` (
 -- ----------------------------
 -- Records of tb_member
 -- ----------------------------
-INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', 'm', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', '48', '50', '50', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tb_member_app`
@@ -311,7 +313,9 @@ CREATE TABLE `tb_setting` (
   `desk5` longtext COMMENT '[桌面5]应用id，用","相连',
   `desk` tinyint(1) DEFAULT '1' COMMENT '默认显示第几桌面',
   `appxy` varchar(255) DEFAULT 'x' COMMENT '图标排列方式，x（横向排列）y（纵向排列）',
-  `appsize` varchar(255) DEFAULT 'm' COMMENT '图标展示尺寸，s（小图标）m（大图标）',
+  `appsize` int(11) DEFAULT '48' COMMENT '图标尺寸',
+  `appverticalspacing` int(11) DEFAULT '50' COMMENT '图标垂直间距',
+  `apphorizontalspacing` int(11) DEFAULT '50' COMMENT '图标水平间距',
   `dockpos` varchar(255) DEFAULT 'top' COMMENT '应用码头位置，top（顶部）left（左侧）right（右侧）none（隐藏）',
   `skin` varchar(255) DEFAULT 'default' COMMENT '窗口皮肤',
   `wallpaper_id` int(11) DEFAULT '1',
@@ -323,7 +327,7 @@ CREATE TABLE `tb_setting` (
 -- ----------------------------
 -- Records of tb_setting
 -- ----------------------------
-INSERT INTO `tb_setting` VALUES ('1', 'HoorayOS桌面应用框架', 'HoorayOS是一套web桌面应用框架，你可以用它开发出类似于Q+web这类的桌面应用网站，也可以在它的基础上二次开发出适合项目的桌面式管理系统。', 'HoorayOS,web桌面,免费开源,桌面管理系统', '14', '55,54,53,52,51', '50,49,48,47,46', '45,44,43,41,42', '30,29,28,27,26', '20,19,18,17,16', '1', 'x', 'm', 'top', 'default', '1', 'juzhong', '0');
+INSERT INTO `tb_setting` VALUES ('1', 'HoorayOS桌面应用框架', 'HoorayOS是一套web桌面应用框架，你可以用它开发出类似于Q+web这类的桌面应用网站，也可以在它的基础上二次开发出适合项目的桌面式管理系统。', 'HoorayOS,web桌面,免费开源,桌面管理系统', '14', '55,54,53,52,51', '50,49,48,47,46', '45,44,43,41,42', '30,29,28,27,26', '20,19,18,17,16', '1', 'x', '32', '50', '50', 'top', 'default', '1', 'juzhong', '0');
 
 -- ----------------------------
 -- Table structure for `tb_wallpaper`
