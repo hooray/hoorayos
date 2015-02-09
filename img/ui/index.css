@@ -155,9 +155,10 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #shortcut_shadow{padding:10px;text-align:center;position:absolute;z-index:0;cursor:pointer}
 .appbtn:hover{border-radius:5px;background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#3F000000,endcolorstr=#3F000000);}
 #shortcut_shadow,
-#shortcut_shadow2{z-index:9999999;display:none}
+#shortcut_shadow2{position:absolute;z-index:9999999;display:none}
 .appbtn img,
-#shortcut_shadow img{border-radius:3px;display:block;margin:0 auto;}
+#shortcut_shadow img,
+#shortcut_shadow2 img{border-radius:3px;display:block;margin:0 auto;}
 #shortcut_shadow img,
 #shortcut_shadow span,
 #shortcut_shadow2 img,
@@ -454,9 +455,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #appmanage .amg_close:hover{background-position:-350px -387px}
 #appmanage .amg_close:active{background-position:-350px -424px}
 #amg_dock_container{background:url(amg_top.png) repeat-x;height:60px;overflow:hidden;padding:10px}
-#amg_dock_container .appbtn{width:58px;height:58px}
-#amg_dock_container .appbtn:hover{background:url(desk_sprite.png) no-repeat -350px -100px}
-#amg_dock_container .appbtn div{margin-top:5px}
+#amg_dock_container .appbtn{padding:6px;}
 #amg_dock_container .appbtn span{display:none}
 #appmanage .amg_line_x{border-bottom:1px solid #666666;font-size:0;height:0;width:100%}
 #appmanage .amg_line_y{background:url(amg_line_y.png) repeat-y;height:100%;left:-1px;position:absolute;top:0;width:3px}
@@ -473,14 +472,12 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #amg_folder_container .folderInner{margin:5px 0;min-width:180px;position:relative;z-index:1;height:100%;overflow:hidden}
 #amg_folder_container .scrollBar{position:absolute;right:2px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10}
 #amg_folder_container .appbtn,
-#shortcut_shadow2{height:30px;width:100%;position:absolute}
-#amg_folder_container .appbtn:hover{background:url(amg_shortcut_hover.png) repeat-x}
-#amg_folder_container .appbtn div,
-#shortcut_shadow2 div{cursor:pointer;height:26px;padding:2px 0;width:100%;overflow:hidden;position:relative;margin:0 auto}
+#shortcut_shadow2{height:26px;width:100%;padding:2px 0;overflow:hidden;}
+#amg_folder_container .appbtn:hover{border-radius:0;background:rgba(255,255,255,0.3);filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#3F000000,endcolorstr=#3F000000);}
 #amg_folder_container .appbtn img,
-#shortcut_shadow2 img{width:26px;height:26px;margin-left:20px;}
+#shortcut_shadow2 img{margin-left:20px;}
 #amg_folder_container .appbtn span,
-#shortcut_shadow2 span{color:#fff;max-width:none;height:30px;line-height:30px;margin-top:-30px;margin-left:50px;float:left;text-align:left;background:none}
+#shortcut_shadow2 span{color:#fff;width:100%!important;height:26px;line-height:26px;margin-top:-26px;margin-left:50px;float:left;text-align:left;background:none}
 
 /*评分*/
 .grade-box{width:200px;height:20px}

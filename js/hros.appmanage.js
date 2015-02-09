@@ -31,7 +31,8 @@ HROS.appmanage = (function(){
 						'id' : 'd_' + this.appid,
 						'appid' : this.appid,
 						'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-						'imgsrc' : this.icon
+						'imgsrc' : this.icon,
+						'appsize' : 48
 					});
 				});
 			}
@@ -47,7 +48,8 @@ HROS.appmanage = (function(){
 							'id' : 'd_' + this.appid,
 							'appid' : this.appid,
 							'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-							'imgsrc' : this.icon
+							'imgsrc' : this.icon,
+							'appsize' : 26
 						});
 					});
 				}
