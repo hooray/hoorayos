@@ -10,6 +10,8 @@
 	$xy = getAppXY();	
 	$size = getAppSize();
 	$pos = getDockPos();
+	$vertical = getAppVerticalSpacing();
+	$horizontal = getAppHorizontalSpacing();
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -43,8 +45,31 @@
 <div class="input-label">
 	<label class="label-text">显示尺寸：</label>
 	<div class="label-box form-inline control-group">
-		<label class="radio" style="margin-right:10px"><input type="radio" name="appsize" value="s" <?php if($size == 's'){echo 'checked';} ?>>小图标</label>
-		<label class="radio"><input type="radio" name="appsize" value="m" <?php if($size == 'm'){echo 'checked';} ?>>大图标</label>
+		<div class="input-prepend input-append">
+			<button class="btn appsize-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="appsize" class="text-center span1" value="<?php echo $size; ?>">
+			<button class="btn appsize-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">垂直间距：</label>
+	<div class="label-box form-inline control-group">
+		<div class="input-prepend input-append">
+			<button class="btn appverticalspacing-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="appverticalspacing" class="text-center span1" value="<?php echo $vertical; ?>">
+			<button class="btn appverticalspacing-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">水平间距：</label>
+	<div class="label-box form-inline control-group">
+		<div class="input-prepend input-append">
+			<button class="btn apphorizontalspacing-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="apphorizontalspacing" class="text-center span1" value="<?php echo $horizontal; ?>">
+			<button class="btn apphorizontalspacing-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
 	</div>
 </div>
 <div class="title">应用码头设置</div>
@@ -82,9 +107,71 @@ $(function(){
 		var xy = $('input[name="appxy"]:checked').val();
 		window.parent.HROS.app.updateXY(xy);
 	});
-	$('input[name="appsize"]').change(function(){
-		var size = $('input[name="appsize"]:checked').val();
+	var updateSize = function(size){
+		if(size < 32){
+			size = 32;
+		}else if(size > 64){
+			size = 64
+		}
+		$('input[name="appsize"]').val(size);
 		window.parent.HROS.app.updateSize(size);
+	};
+	$('.appsize-minus, .appsize-plus').click(function(){
+		var size = parseInt($('input[name="appsize"]').val());
+		if($(this).hasClass('appsize-minus')){
+			size = size - 1;
+		}else{
+			size = size + 1;
+		}
+		updateSize(size);
+	});
+	$('input[name="appsize"]').keyup(function(){
+		var size = parseInt($('input[name="appsize"]').val());
+		updateSize(size);
+	});
+	var updateVertical = function(vertical){
+		if(vertical < 0){
+			vertical = 0;
+		}else if(vertical > 100){
+			vertical = 100
+		}
+		$('input[name="appverticalspacing"]').val(vertical);
+		window.parent.HROS.app.updateVertical(vertical);
+	};
+	$('.appverticalspacing-minus, .appverticalspacing-plus').click(function(){
+		var vertical = parseInt($('input[name="appverticalspacing"]').val());
+		if($(this).hasClass('appverticalspacing-minus')){
+			vertical = vertical - 1;
+		}else{
+			vertical = vertical + 1;
+		}
+		updateVertical(vertical);
+	});
+	$('input[name="appverticalspacing"]').keyup(function(){
+		var vertical = parseInt($('input[name="appverticalspacing"]').val());
+		updateVertical(vertical);
+	});
+	var updateHorizontal = function(horizontal){
+		if(horizontal < 0){
+			horizontal = 0;
+		}else if(horizontal > 100){
+			horizontal = 100
+		}
+		$('input[name="apphorizontalspacing"]').val(horizontal);
+		window.parent.HROS.app.updateHorizontal(horizontal);
+	};
+	$('.apphorizontalspacing-minus, .apphorizontalspacing-plus').click(function(){
+		var horizontal = parseInt($('input[name="apphorizontalspacing"]').val());
+		if($(this).hasClass('apphorizontalspacing-minus')){
+			horizontal = horizontal - 1;
+		}else{
+			horizontal = horizontal + 1;
+		}
+		updateHorizontal(horizontal);
+	});
+	$('input[name="apphorizontalspacing"]').keyup(function(){
+		var horizontal = parseInt($('input[name="apphorizontalspacing"]').val());
+		updateHorizontal(horizontal);
 	});
 	$('input[name="dockpos"]').change(function(){
 		var pos = $('input[name="dockpos"]:checked').val();

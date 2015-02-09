@@ -600,7 +600,9 @@ $(function(){
 			?>
 			HROS.CONFIG.dockPos = '<?php echo getDockPos(); ?>';
 			HROS.CONFIG.appXY = '<?php echo getAppXY(); ?>';
-			HROS.CONFIG.appSize = '<?php echo getAppSize(); ?>';
+			HROS.CONFIG.appSize = <?php echo getAppSize(); ?>;
+			HROS.CONFIG.appVerticalSpacing = <?php echo getAppVerticalSpacing(); ?>;
+			HROS.CONFIG.appHorizontalSpacing = <?php echo getAppHorizontalSpacing(); ?>;
 			HROS.CONFIG.desk = <?php echo getDesk(); ?>;
 			//加载桌面
 			HROS.base.init();

@@ -6,32 +6,13 @@
 HROS.grid = (function(){
 	return {
 		getAppGrid : function(){
-			var width = $('#desk-' + HROS.CONFIG.desk).width() - HROS.CONFIG.appButtonLeft;
-			var height = $('#desk-' + HROS.CONFIG.desk).height() - HROS.CONFIG.appButtonTop;
-			var top = HROS.CONFIG.appButtonTop;
-			var left = HROS.CONFIG.appButtonLeft;
+			var width = $('#desk-' + HROS.CONFIG.desk).width() - HROS.CONFIG.appMarginLeft;
+			var height = $('#desk-' + HROS.CONFIG.desk).height() - HROS.CONFIG.appMarginTop;
+			var top = HROS.CONFIG.appMarginTop;
+			var left = HROS.CONFIG.appMarginLeft;
 			var appGrid = [];
-			var offsetTop, offsetLeft;
-			switch(HROS.CONFIG.appSize){
-				case 's':
-					offsetTop = 80;
-					break;
-				case 'b':
-					offsetTop = 140;
-					break;
-				default: // case 'm'
-					offsetTop = 100;
-			}
-			switch(HROS.CONFIG.appSize){
-				case 's':
-					offsetLeft = 100;
-					break;
-				case 'b':
-					offsetLeft = 160;
-					break;
-				default: // case 'm'
-					offsetLeft = 120;
-			}
+			var offsetTop = $('#desk-1 li.add').outerHeight() + HROS.CONFIG.appVerticalSpacing;
+			var offsetLeft = $('#desk-1 li.add').outerWidth() + HROS.CONFIG.appHorizontalSpacing;
 			for(var i = 0; i < 10000; i++){
 				appGrid.push({
 					startY : top,
@@ -43,12 +24,12 @@ HROS.grid = (function(){
 					left += offsetLeft;
 					if(left + offsetLeft > width){
 						top += offsetTop;
-						left = HROS.CONFIG.appButtonLeft;
+						left = HROS.CONFIG.appMarginLeft;
 					}
 				}else{
 					top += offsetTop;
 					if(top + offsetTop > height){
-						top = HROS.CONFIG.appButtonTop;
+						top = HROS.CONFIG.appMarginTop;
 						left += offsetLeft;
 					}
 				}

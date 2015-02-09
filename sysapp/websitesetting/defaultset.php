@@ -210,8 +210,31 @@
 <div class="input-label">
 	<label class="label-text">图标显示尺寸：</label>
 	<div class="label-box form-inline control-group">
-		<label class="radio" style="margin-right:10px"><input type="radio" name="val_appsize" value="s" <?php if($set['appsize'] == 's'){echo 'checked';} ?>>小图标</label>
-		<label class="radio"><input type="radio" name="val_appsize" value="m" <?php if($set['appsize'] == 'm'){echo 'checked';} ?>>大图标</label>
+		<div class="input-prepend input-append">
+			<button class="btn appsize-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="val_appsize" class="text-center span1" value="<?php echo $set['appsize']; ?>">
+			<button class="btn appsize-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">垂直间距：</label>
+	<div class="label-box form-inline control-group">
+		<div class="input-prepend input-append">
+			<button class="btn appverticalspacing-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="val_appverticalspacing" class="text-center span1" value="<?php echo $set['appverticalspacing']; ?>">
+			<button class="btn appverticalspacing-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
+	</div>
+</div>
+<div class="input-label">
+	<label class="label-text">水平间距：</label>
+	<div class="label-box form-inline control-group">
+		<div class="input-prepend input-append">
+			<button class="btn apphorizontalspacing-minus" type="button"><i class="icon-minus"></i></button>
+			<input type="text" name="val_apphorizontalspacing" class="text-center span1" value="<?php echo $set['apphorizontalspacing']; ?>">
+			<button class="btn apphorizontalspacing-plus" type="button"><i class="icon-plus"></i></button>
+		</div>
 	</div>
 </div>
 <div class="input-label">
@@ -331,6 +354,69 @@ $(function(){
 		}
 		$(this).parents('.permissions_apps').siblings('input[type="hidden"]').val(newappsid.join(',')).focusout();
 		$(this).parent().remove();
+	});
+	var updateSize = function(size){
+		if(size < 32){
+			size = 32;
+		}else if(size > 64){
+			size = 64
+		}
+		$('input[name="val_appsize"]').val(size);
+	};
+	$('.appsize-minus, .appsize-plus').click(function(){
+		var size = parseInt($('input[name="val_appsize"]').val());
+		if($(this).hasClass('appsize-minus')){
+			size = size - 1;
+		}else{
+			size = size + 1;
+		}
+		updateSize(size);
+	});
+	$('input[name="val_appsize"]').keyup(function(){
+		var size = parseInt($('input[name="val_appsize"]').val());
+		updateSize(size);
+	});
+	var updateVertical = function(vertical){
+		if(vertical < 0){
+			vertical = 0;
+		}else if(vertical > 100){
+			vertical = 100
+		}
+		$('input[name="val_appverticalspacing"]').val(vertical);
+	};
+	$('.appverticalspacing-minus, .appverticalspacing-plus').click(function(){
+		var vertical = parseInt($('input[name="val_appverticalspacing"]').val());
+		if($(this).hasClass('appverticalspacing-minus')){
+			vertical = vertical - 1;
+		}else{
+			vertical = vertical + 1;
+		}
+		updateVertical(vertical);
+	});
+	$('input[name="val_appverticalspacing"]').keyup(function(){
+		var vertical = parseInt($('input[name="val_appverticalspacing"]').val());
+		updateVertical(vertical);
+	});
+	var updateHorizontal = function(horizontal){
+		if(horizontal < 0){
+			horizontal = 0;
+		}else if(horizontal > 100){
+			horizontal = 100
+		}
+		$('input[name="val_apphorizontalspacing"]').val(horizontal);
+	};
+	$('.apphorizontalspacing-minus, .apphorizontalspacing-plus').click(function(){
+		var horizontal = parseInt($('input[name="val_apphorizontalspacing"]').val());
+		if($(this).hasClass('apphorizontalspacing-minus')){
+			horizontal = horizontal - 1;
+		}else{
+			horizontal = horizontal + 1;
+		}
+		updateHorizontal(horizontal);
+	});
+	$('input[name="val_apphorizontalspacing"]').keyup(function(){
+		var horizontal = parseInt($('input[name="val_apphorizontalspacing"]').val());
+		updateHorizontal(horizontal);
 	});
 });
 </script>

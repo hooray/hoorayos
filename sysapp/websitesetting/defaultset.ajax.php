@@ -14,6 +14,8 @@
 				'desk' => $_POST['val_desk'],
 				'appxy' => $_POST['val_appxy'],
 				'appsize' => $_POST['val_appsize'],
+				'appverticalspacing' => $_POST['val_appverticalspacing'],
+				'apphorizontalspacing' => $_POST['val_apphorizontalspacing'],
 				'dockpos' => $_POST['val_dockpos'],
 				'skin' => $_POST['val_skin'],
 				'wallpaper_id' => $_POST['val_wallpaper_id'],

@@ -1,15 +1,15 @@
 //桌面应用
 var appbtnTemp = template.compile(
 	'<li id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">'+
-		'<div><img src="<%=imgsrc%>" alt="<%=title%>"></div>'+
-		'<span><%=title%></span>'+
+		'<img src="<%=imgsrc%>" alt="<%=title%>" style="width:<%=appsize%>px;height:<%=appsize%>px;">'+
+		'<span style="width:<%=appsize+10%>px;"><%=title%></span>'+
 	'</li>'
 );
 //桌面"添加应用"应用
 var addbtnTemp = template.compile(
 	'<li class="appbtn add">'+
-		'<i class="addicon"></i>'+
-		'<span>添加应用</span>'+
+		'<img src="img/ui/addicon.png" style="width:<%=appsize%>px;height:<%=appsize%>px;">'+
+		'<span style="width:<%=appsize+10%>px;">添加应用</span>'+
 	'</li>'
 );
 //任务栏

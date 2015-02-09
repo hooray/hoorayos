@@ -110,6 +110,38 @@ HROS.app = (function(){
 			}
 		},
 		/*
+		**  更新应用垂直间距
+		*/
+		updateVertical : function(i){
+			if(HROS.CONFIG.appVerticalSpacing != i){
+				HROS.CONFIG.appVerticalSpacing = i;
+				HROS.deskTop.resize();
+				if(HROS.base.checkLogin()){
+					$.ajax({
+						type : 'POST',
+						url : ajaxUrl,
+						data : 'ac=setAppVerticalSpacing&appverticalspacing=' + i
+					});
+				}
+			}
+		},
+		/*
+		**  更新应用水平间距
+		*/
+		updateHorizontal : function(i){
+			if(HROS.CONFIG.appHorizontalSpacing != i){
+				HROS.CONFIG.appHorizontalSpacing = i;
+				HROS.deskTop.resize();
+				if(HROS.base.checkLogin()){
+					$.ajax({
+						type : 'POST',
+						url : ajaxUrl,
+						data : 'ac=setAppHorizontalSpacing&apphorizontalspacing=' + i
+					});
+				}
+			}
+		},
+		/*
 		**  获取桌面应用数据
 		*/
 		get : function(){
@@ -165,7 +197,8 @@ HROS.app = (function(){
 						'id' : 'd_' + this.appid,
 						'appid' : this.appid,
 						'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-						'imgsrc' : this.icon
+						'imgsrc' : this.icon,
+						'appsize' : 48
 					});
 				});
 			}
@@ -183,11 +216,14 @@ HROS.app = (function(){
 							'id' : 'd_' + this.appid,
 							'appid' : this.appid,
 							'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-							'imgsrc' : this.icon
+							'imgsrc' : this.icon,
+							'appsize' : HROS.CONFIG.appSize
 						});
 					});
 				}
-				desk_append += addbtnTemp();
+				desk_append += addbtnTemp({
+					'appsize' : HROS.CONFIG.appSize
+				});
 				$('#desk-' + j + ' li').remove();
 				$('#desk-' + j + ' .desktop-apps-container').append(desk_append);
 			}
@@ -204,13 +240,9 @@ HROS.app = (function(){
 			HROS.app.getScrollbar();
 		},
 		setPos : function(isAnimate){
+			$('#desk .desktop-container .appbtn img').width(HROS.CONFIG.appSize).height(HROS.CONFIG.appSize);
+			$('#desk .desktop-container .appbtn span').width(Number(HROS.CONFIG.appSize) + 10);
 			isAnimate = isAnimate == null ? true : isAnimate;
-			$('#desk').removeClass('smallIcon bigIcon');
-			if(HROS.CONFIG.appSize == 's'){
-				$('#desk').addClass('smallIcon');
-			}else if(HROS.CONFIG.appSize == 'b'){
-				$('#desk').addClass('bigIcon');
-			}
 			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
 			$('#dock-bar .dock-applist li').each(function(i){
 				$(this).css({
@@ -220,20 +252,8 @@ HROS.app = (function(){
 			});
 			for(var j = 1; j <= 5; j++){
 				$('#desk-' + j + ' li').each(function(i){
-					var offsetTop, offsetLeft;
-					switch(HROS.CONFIG.appSize){
-						case 's':
-							offsetTop = 11;
-							offsetLeft = 21;
-							break;
-						case 'b':
-							offsetTop = 21;
-							offsetLeft = 17;
-							break;
-						default:
-							offsetTop = 7;
-							offsetLeft = 16;
-					}
+					var offsetTop = HROS.CONFIG.appVerticalSpacing / 2;
+					var offsetLeft = HROS.CONFIG.appHorizontalSpacing /2;
 					var top = grid[i]['startY'] + offsetTop;
 					var left = grid[i]['startX'] + offsetLeft;
 					$(this).stop(true, false).animate({

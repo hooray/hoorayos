@@ -701,6 +701,30 @@
 		}
 		return $appsize;
 	}
+	//获取图标垂直间距
+	function getAppVerticalSpacing(){
+		global $db;
+		if(checkLogin()){
+			$appverticalspacing = $db->get('tb_member', 'appverticalspacing', array(
+				'tbid' => session('member_id')
+			));
+		}else{
+			$appverticalspacing = $db->get('tb_setting', 'appverticalspacing');
+		}
+		return $appverticalspacing;
+	}
+	//获取图标水平间距
+	function getAppHorizontalSpacing(){
+		global $db;
+		if(checkLogin()){
+			$apphorizontalspacing = $db->get('tb_member', 'apphorizontalspacing', array(
+				'tbid' => session('member_id')
+			));
+		}else{
+			$apphorizontalspacing = $db->get('tb_setting', 'apphorizontalspacing');
+		}
+		return $apphorizontalspacing;
+	}
 	//获取默认桌面
 	function getDesk(){
 		global $db;

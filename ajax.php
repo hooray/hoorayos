@@ -94,6 +94,22 @@
 				'tbid' => session('member_id')
 			));
 			break;
+		//更新图标垂直间距
+		case 'setAppVerticalSpacing':
+			$db->update('tb_member', array(
+				'appverticalspacing' => $_POST['appverticalspacing']
+			), array(
+				'tbid' => session('member_id')
+			));
+			break;
+		//更新图标水平间距
+		case 'setAppHorizontalSpacing':
+			$db->update('tb_member', array(
+				'apphorizontalspacing' => $_POST['apphorizontalspacing']
+			), array(
+				'tbid' => session('member_id')
+			));
+			break;
 		//更新默认桌面
 		case 'setDesk':
 			if($_POST['desk'] != '' && $_POST['desk'] >= 1 && $_POST['desk'] <= 5){
