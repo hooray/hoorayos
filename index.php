@@ -216,7 +216,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 							<a href="javascript:;" class="dock-tool-style" title="主题设置"></a>
 						</div>
 						<div class="dock-tools">
-							<a href="javascript:;" class="dock-tool-appmanage" title="全局视图，快捷键：Ctrl + F"></a>
+							<a href="javascript:;" class="dock-tool-appmanage" title="全局视图，快捷键：Ctrl + ↑"></a>
 							<a href="javascript:;" class="dock-tool-search" title="搜索，Ctrl + F"></a>
 						</div>
 						<div class="dock-startbtn">

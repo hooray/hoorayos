@@ -451,7 +451,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 
 /*全局视图*/
 #appmanage{display:none;height:100%;left:0;overflow:hidden;position:absolute;top:0;width:100%;z-index:1000}
-#appmanage .amg_close{background:url(desk_sprite.png) no-repeat -350px -350px;cursor:pointer;width:90px;height:37px;position:absolute;top:25px;right:10px}
+#appmanage .amg_close{background:url(desk_sprite.png) no-repeat -350px -350px;cursor:pointer;width:90px;height:37px;position:absolute;top:20px;right:20px}
 #appmanage .amg_close:hover{background-position:-350px -387px}
 #appmanage .amg_close:active{background-position:-350px -424px}
 #amg_dock_container{background:url(amg_top.png) repeat-x;height:60px;overflow:hidden;padding:10px}
