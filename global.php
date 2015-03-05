@@ -1,5 +1,6 @@
 <?php
-	chdir(dirname(__FILE__));
+	define('ROOT', dirname(__FILE__));
+	chdir(ROOT);
 	//数据库操作类
 	require('inc/medoo.php');
 	//函数库

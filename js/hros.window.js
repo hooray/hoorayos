@@ -350,7 +350,7 @@ HROS.window = (function(){
 			$(windowId).removeData('info').html('').remove();
 			$('#task-content-inner ' + taskId).html('').remove();
 			$('#task-content-inner').css('width', $('#task-content-inner .task-item').length * 114);
-			$('#task-bar, #nav-bar').removeClass('min-zIndex');
+			$('#task-bar').removeClass('min-zIndex');
 			HROS.taskbar.resize();
 		},
 		closeAll : function(){
@@ -363,7 +363,7 @@ HROS.window = (function(){
 			$(windowId).css('left', -10000).attr('state', 'hide');
 			$('#task-content-inner ' + taskId).removeClass('task-item-current');
 			if($(windowId).attr('ismax') == 1){
-				$('#task-bar, #nav-bar').removeClass('min-zIndex');
+				$('#task-bar').removeClass('min-zIndex');
 			}
 		},
 		hideAll : function(){
@@ -380,7 +380,7 @@ HROS.window = (function(){
 				top : 0,
 				left : 0
 			}, 200);
-			$('#task-bar, #nav-bar').addClass('min-zIndex');
+			$('#task-bar').addClass('min-zIndex');
 		},
 		revert : function(appid){
 			HROS.window.show2top(appid);
@@ -393,7 +393,7 @@ HROS.window = (function(){
 				left : windowdata['left'],
 				top : windowdata['top']
 			}, 500);
-			$('#task-bar, #nav-bar').removeClass('min-zIndex');
+			$('#task-bar').removeClass('min-zIndex');
 		},
 		refresh : function(appid){
 			HROS.window.show2top(appid);
@@ -415,7 +415,7 @@ HROS.window = (function(){
 				//改变当前任务栏样式
 				$('#task-content-inner ' + taskId).addClass('task-item-current');
 				if($(windowId).attr('ismax') == 1){
-					$('#task-bar, #nav-bar').addClass('min-zIndex');
+					$('#task-bar').addClass('min-zIndex');
 				}
 				//改变当前窗口样式
 				$(windowId).addClass('window-current').css({
