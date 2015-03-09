@@ -134,7 +134,7 @@ HROS.window = (function(){
 		**  系统窗口：HROS.window.create(appid, [type]);
 		**      示例：HROS.window.create(12);
 		*/
-		create : function(appid, type){
+		create : function(appid, type, realappid){
 			var type = type == null ? 'window' : type;
 			//判断窗口是否已打开
 			var iswindowopen = false;
@@ -288,7 +288,7 @@ HROS.window = (function(){
 							HROS.window.createTemp({
 								appid : 'hoorayos-yysc',
 								title : '应用市场',
-								url : 'sysapp/appmarket/index.php?id=' + $('#d_' + appid).attr('realappid'),
+								url : 'sysapp/appmarket/index.php?id=' + (realappid == null ? $('#d_' + appid).attr('realappid') : realappid),
 								width : 800,
 								height : 484,
 								isflash : false,

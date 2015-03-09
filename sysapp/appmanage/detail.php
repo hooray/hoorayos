@@ -119,8 +119,8 @@
 		<div class="input-label">
 			<label class="label-text">应用类型：</label>
 			<div class="label-box form-inline control-group">
-				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="window" <?php if($app['type'] == 'window'){echo 'checked';} ?>>窗口</label>
-				<label class="radio"><input type="radio" name="val_type" value="widget" <?php if($app['type'] == 'widget'){echo 'checked';} ?>>挂件</label>
+				<label class="radio" style="margin-right:10px"><input type="radio" name="val_type" value="window" <?php if($app['type'] == 'window'){echo 'checked';} ?> <?php if(isset($_GET['appid'])){echo 'disabled';} ?>>窗口</label>
+				<label class="radio"><input type="radio" name="val_type" value="widget" <?php if($app['type'] == 'widget'){echo 'checked';} ?> <?php if(isset($_GET['appid'])){echo 'disabled';} ?>>挂件</label>
 			</div>
 		</div>
 		<div class="input-label input-label-isresize" <?php if($app['type'] == 'widget'){echo 'style="display:none"';} ?>>

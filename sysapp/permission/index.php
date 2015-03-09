@@ -10,7 +10,7 @@
 		redirect('../error.php?code='.$errorcode['noAdmin']);
 	}
 	//验证是否有权限
-	else if(!checkPermissions(1)){
+	else if(!checkPermissions(4)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
 ?>

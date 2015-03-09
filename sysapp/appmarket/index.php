@@ -218,9 +218,9 @@ $(function(){
 		}
 	}).on('click', '.btn-run-s', function(){
 		if($(this).attr('app_type') == 'window'){
-			window.parent.HROS.window.create($(this).attr('app_id'));
+			window.parent.HROS.window.create($(this).attr('app_id'), 'window', $(this).attr('real_app_id'));
 		}else{
-			window.parent.HROS.widget.create($(this).attr('app_id'));
+			window.parent.HROS.widget.create($(this).attr('app_id'), 'widget', $(this).attr('real_app_id'));
 		}
 	});
 	$('.commend-day').on('click', '.btn-add', function(){
@@ -242,9 +242,9 @@ $(function(){
 		}
 	}).on('click', '.btn-run', function(){
 		if($(this).attr('app_type') == 'window'){
-			window.parent.HROS.window.create($(this).attr('app_id'));
+			window.parent.HROS.window.create($(this).attr('app_id'), 'window', $(this).attr('real_app_id'));
 		}else{
-			window.parent.HROS.widget.create($(this).attr('app_id'));
+			window.parent.HROS.widget.create($(this).attr('app_id'), 'widget', $(this).attr('real_app_id'));
 		}
 	});
 });

@@ -411,8 +411,10 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #search-bar{height:33px;width:212px;position:absolute;top:0;right:20px;z-index:20;background:url(desk_sprite.png) no-repeat -550px -635px;display:none}
 #search-bar.above{background-position:-550px -600px}
 #pageletSearchInput{outline:none;border:0;width:170px!important;height:20px;line-height:20px;margin:6px 0 0 7px;padding:0;float:left;color:#fff;background:transparent;-moz-user-select:text;-webkit-user-select:text;user-select:text}
-#pageletSearchInput::-webkit-input-placeholder,
-#pageletSearchInput::-moz-placeholder{color:#ccc}
+#pageletSearchInput::-webkit-input-placeholder{color:#ccc}/* WebKit browsers */
+#pageletSearchInput:-moz-placeholder{color:#ccc}/* Mozilla Firefox 4 to 18 */
+#pageletSearchInput::-moz-placeholder{color:#ccc}/* Mozilla Firefox 19+ */
+#pageletSearchInput:-ms-input-placeholder{color:#ccc}/* Internet Explorer 10+ */
 #pageletSearchButton{border:0;float:right;width:20px;height:20px;cursor:pointer;margin:6px 8px 0 0;padding:0;background:url(desk_sprite.png) no-repeat -200px -160px}
 #pageletSearchButton:hover{background-position:-220px -160px}
 #search-suggest{width:212px;position:absolute;top:33px;right:20px;z-index:20;display:none}

@@ -550,17 +550,17 @@
 		return substr($path,strrpos($path,'/')+1);
 	} 
 	function file_download($file, $filename){
-		if (file_exists($file)) {
+		if(file_exists($file)){
 			header("Cache-Control: public");  
 			header("Content-Type: application/octet-stream");  
 			header("Content-Disposition: attachment;filename=".$filename);  
 			header("Accept-Ranges: bytes");
 			$size = filesize($file);  
 			//如果有$_SERVER['HTTP_RANGE']参数 断点续传 
-			if (isset ($_SERVER['HTTP_RANGE'])) {  
+			if(isset($_SERVER['HTTP_RANGE'])){  
 				list ($a, $range) = explode("=", $_SERVER['HTTP_RANGE']);  
 				str_replace($range, "-", $range);  
-				$size2 = $size -1; //文件总字节数  
+				$size2 = $size - 1; //文件总字节数  
 				$new_length = $size2 - $range; //获取下次下载的长度  
 				header("HTTP/1.1 206 Partial Content");  
 				header("Content-Length: $new_length"); //输入总长  
@@ -572,14 +572,14 @@
 			}  
 			$fp = fopen($file, "rb");  
 			fseek($fp, $range);  
-			while (!feof($fp)) {  
+			while(!feof($fp)){  
 				set_time_limit(0);  
-				print (fread($fp, 1024 * 8)); //输出文件  
+				print(fread($fp, 1024 * 8)); //输出文件  
 				flush(); 
 				ob_flush();  
 			}  
 			fclose($fp);  
-			exit ();
+			exit();
 		} 
 	}
 	

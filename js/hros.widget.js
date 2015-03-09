@@ -59,7 +59,7 @@ HROS.widget = (function(){
 				});
 			}
 		},
-		create : function(appid, type){
+		create : function(appid, type, realappid){
 			var type = type == null ? 'widget' : type;
 			//判断窗口是否已打开
 			var iswidgetopen = false;
@@ -119,7 +119,7 @@ HROS.widget = (function(){
 							HROS.window.createTemp({
 								appid : 'hoorayos-yysc',
 								title : '应用市场',
-								url : 'sysapp/appmarket/index.php?id=' + $('#d_' + appid).attr('realappid'),
+								url : 'sysapp/appmarket/index.php?id=' + (realappid == null ? $('#d_' + appid).attr('realappid') : realappid),
 								width : 800,
 								height : 484,
 								isflash : false,
