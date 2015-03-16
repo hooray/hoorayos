@@ -111,12 +111,12 @@ HROS.appmanage = (function(){
 							switch(oldobj.attr('type')){
 								case 'widget':
 								case 'pwidget':
-									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'window':
 								case 'pwindow':
 								case 'folder':
-									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 							}
 							return false;
@@ -211,12 +211,12 @@ HROS.appmanage = (function(){
 							switch(oldobj.attr('type')){
 								case 'widget':
 								case 'pwidget':
-									HROS.widget.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 								case 'window':
 								case 'pwindow':
 								case 'folder':
-									HROS.window.create(oldobj.attr('realappid'), oldobj.attr('type'));
+									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
 									break;
 							}
 							return false;
