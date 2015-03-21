@@ -64,8 +64,17 @@
 					$myapplist = $db->select('tb_member_app', 'realid', array(
 						'member_id' => session('member_id')
 					));
+					$myapplist2 = array();
+					foreach($db->select('tb_member_app', array('tbid', 'realid'), array(
+						'AND' => array(
+							'member_id' => session('member_id'),
+							'realid[!]' => null
+						)
+					)) as $value){
+						$myapplist2[$value['realid']] = $value['tbid'];
+					}
 					if(in_array($recommendApp['tbid'], $myapplist)){
-						echo '<a href="javascript:;" real_app_id="'.$recommendApp['tbid'].'" app_type="'.$recommendApp['type'].'" class="btn-run">打开应用</a>';
+						echo '<a href="javascript:;" app_id="'.$myapplist2[$recommendApp['tbid']].'" real_app_id="'.$recommendApp['tbid'].'" app_type="'.$recommendApp['type'].'" class="btn-run">打开应用</a>';
 					}else{
 						echo '<a href="javascript:;" real_app_id="'.$recommendApp['tbid'].'" class="btn-add">添加应用</a>';
 					}
