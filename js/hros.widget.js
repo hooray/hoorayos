@@ -105,8 +105,6 @@ HROS.widget = (function(){
 				}
 				ZENG.msgbox.show('小挂件正在加载中，请耐心等待...', 6, 100000);
 				$.ajax({
-					type : 'POST',
-					url : ajaxUrl,
 					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
 					dataType : 'json'
 				}).done(function(widget){
@@ -258,18 +256,17 @@ HROS.widget = (function(){
 			}).on('click', '.widget .ha-star', function(){
 				var obj = $(this).parents('.widget');
 				$.ajax({
-					type : 'POST',
-					url : ajaxUrl,
 					data : 'ac=getAppStar&id=' + obj.data('info').realappid
-				}).done(function(point){
+				}).done(function(starnum){
+					starnum = starnum['starnum']
 					$.dialog({
 						title : '给“' + obj.data('info').title + '”打分',
-						width : 250,
+						width : 300,
 						id : 'star',
 						content : starDialogTemp({
 							'realappid' : obj.data('info').realappid,
-							'point' : Math.floor(point),
-							'realpoint' : point * 20
+							'point' : Math.floor(starnum),
+							'realpoint' : starnum * 20
 						})
 					});
 				});

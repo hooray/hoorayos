@@ -15,6 +15,25 @@ HROS.base = (function(){
 				config['background'] = '#000';
 				config['opacity'] = 0.5;
 			})($.dialog.defaults);
+			//ajax默认设置
+			$.ajaxSetup({
+				url : ajaxUrl,
+				type : 'POST',
+				dataType : 'json'
+			});
+			//绑定ajax全局验证
+			$(document).ajaxSuccess(function(event, request, settings){
+				if($.trim(request.responseText) == 'ERROR_NOT_LOGGED_IN' && HROS.CONFIG.memberID != 0){
+					$.dialog({
+						title : '温馨提示',
+						icon : 'warning',
+						content : '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？',
+						ok : function(){
+							HROS.base.login();
+						}
+					});
+				}
+			});
 			//更新当前用户ID
 			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
 			//阻止弹出浏览器默认右键菜单
@@ -67,20 +86,6 @@ HROS.base = (function(){
 			HROS.hotkey.init();
 			//页面加载后运行
 			HROS.base.run();
-			//绑定ajax全局验证
-			$(document).ajaxSuccess(function(event, request, settings){
-				if($.trim(request.responseText) == 'ERROR_NOT_LOGGED_IN'){
-					HROS.CONFIG.memberID = 0;
-					$.dialog({
-						title : '温馨提示',
-						icon : 'warning',
-						content : '系统检测到您尚未登录，为了更好的操作，是否登录？',
-						ok : function(){
-							HROS.base.login();
-						}
-					});
-				}
-			});
 		},
 		login : function(){
 			$('#lrbox').animate({
@@ -91,7 +96,6 @@ HROS.base = (function(){
 		},
 		logout : function(){
 			$.ajax({
-				type : 'POST',
 				url : 'login.ajax.php',
 				data : 'ac=logout'
 			}).done(function(){
@@ -200,8 +204,6 @@ HROS.base = (function(){
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						type : 'POST',
-						url : ajaxUrl,
 						data : 'ac=getAppidByRealappid&id=' + request['run']
 					}).done(function(appid){
 						if(request['type'] == 'app'){

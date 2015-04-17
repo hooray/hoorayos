@@ -13,7 +13,7 @@ HROS.grid = (function(){
 			var appGrid = [];
 			var offsetTop = $('#desk-1 li.add').outerHeight() + HROS.CONFIG.appVerticalSpacing;
 			var offsetLeft = $('#desk-1 li.add').outerWidth() + HROS.CONFIG.appHorizontalSpacing;
-			for(var i = 0; i < 10000; i++){
+			for(var i = 0; i < 500; i++){
 				appGrid.push({
 					startY : top,
 					endY : top + offsetTop,
@@ -197,7 +197,7 @@ HROS.grid = (function(){
 		getManageDockAppGrid : function(){
 			var manageDockAppGrid = [];
 			var left = 20;
-			for(var i = 0; i < 100; i++){
+			for(var i = 0; i < 50; i++){
 				manageDockAppGrid.push({
 					startX : left,
 					endX : left + 70
@@ -243,7 +243,7 @@ HROS.grid = (function(){
 		getManageAppGrid : function(){
 			var manageAppGrid = [];
 			var top = 0;
-			for(var i = 0; i < 10000; i++){
+			for(var i = 0; i < 500; i++){
 				manageAppGrid.push({
 					startY : top,
 					endY : top + 40

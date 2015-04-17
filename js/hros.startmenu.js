@@ -46,11 +46,9 @@ HROS.startmenu = (function(){
 		*/
 		getAvatar : function(){
 			$.ajax({
-				type : 'POST',
-				url : ajaxUrl,
 				data : 'ac=getAvatar'
-			}).done(function(msg){
-				$('#startmenu-container .startmenu-avatar img').attr('src', msg);
+			}).done(function(avatar){
+				$('#startmenu-container .startmenu-avatar img').attr('src', avatar['avatar']);
 			});
 		},
 		/*

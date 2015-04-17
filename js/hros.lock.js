@@ -42,7 +42,6 @@ HROS.lock = (function(){
 			$('body').on('click', '#lockbtn', function(){
 				if($('#lockpassword').val() != ''){
 					$.ajax({
-						type : 'POST',
 						url : 'login.ajax.php',
 						data : 'ac=unlock&password=' + $('#lockpassword').val(),
 					}).done(function(responseText){
@@ -77,7 +76,6 @@ HROS.lock = (function(){
 				}else{
 					var lock = function(){
 						$.ajax({
-							type : 'POST',
 							url : 'login.ajax.php',
 							data : 'ac=logout'
 						});

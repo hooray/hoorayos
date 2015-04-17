@@ -15,26 +15,23 @@ HROS.wallpaper = (function(){
 		*/
 		get : function(callback){
 			$.ajax({
-				type : 'POST',
-				url : ajaxUrl,
-				data : 'ac=getWallpaper',
-				success : function(msg){
-					var w = msg.split('<{|}>');
-					HROS.CONFIG.wallpaperState = parseInt(w[0]);
-					switch(HROS.CONFIG.wallpaperState){
-						case 1:
-						case 2:
-							HROS.CONFIG.wallpaper = w[1];
-							HROS.CONFIG.wallpaperType = w[2];
-							HROS.CONFIG.wallpaperWidth = parseInt(w[3]);
-							HROS.CONFIG.wallpaperHeight = parseInt(w[4]);
-							break;
-						case 3:
-							HROS.CONFIG.wallpaper = w[1];
-							break;
-					}
-					callback && callback();
+				data : 'ac=getWallpaper'
+			}).done(function(wallpaper){
+				var w = wallpaper['wallpaper'].split('<{|}>');
+				HROS.CONFIG.wallpaperState = parseInt(w[0]);
+				switch(HROS.CONFIG.wallpaperState){
+					case 1:
+					case 2:
+						HROS.CONFIG.wallpaper = w[1];
+						HROS.CONFIG.wallpaperType = w[2];
+						HROS.CONFIG.wallpaperWidth = parseInt(w[3]);
+						HROS.CONFIG.wallpaperHeight = parseInt(w[4]);
+						break;
+					case 3:
+						HROS.CONFIG.wallpaper = w[1];
+						break;
 				}
+				callback && callback();
 			});
 		},
 		/*
@@ -156,8 +153,6 @@ HROS.wallpaper = (function(){
 			}
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					type : 'POST',
-					url : ajaxUrl,
 					data : 'ac=setWallpaper&wpstate=' + wallpaperstate + '&wptype=' + wallpapertype + '&wp=' + wallpaper
 				}).done(function(responseText){
 					done();

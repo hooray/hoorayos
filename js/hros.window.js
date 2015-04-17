@@ -275,8 +275,6 @@ HROS.window = (function(){
 				}
 				ZENG.msgbox.show('应用正在加载中，请耐心等待...', 6, 100000);
 				$.ajax({
-					type : 'POST',
-					url : ajaxUrl,
 					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
 					dataType : 'json'
 				}).done(function(app){
@@ -666,18 +664,17 @@ HROS.window = (function(){
 			}).on('click', '.window-container .star', function(){
 				var obj = $(this).parents('.window-container');
 				$.ajax({
-					type : 'POST',
-					url : ajaxUrl,
 					data : 'ac=getAppStar&id=' + obj.data('info').realappid
-				}).done(function(point){
+				}).done(function(starnum){
+					starnum = starnum['starnum'];
 					$.dialog({
 						title : '给“' + obj.data('info').title + '”打分',
-						width : 250,
+						width : 300,
 						id : 'star',
 						content : starDialogTemp({
 							'realappid' : obj.data('info').realappid,
-							'point' : point,
-							'realpoint' : point * 20
+							'point' : starnum,
+							'realpoint' : starnum * 20
 						})
 					});
 				});

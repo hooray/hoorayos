@@ -11,16 +11,15 @@
 	}
 		
 	switch($_REQUEST['ac']){
-		case 'checkLogin':
-			echo checkLogin() ? 1 : 0;
-			break;
 		//获取头像
 		case 'getAvatar':
-			echo getAvatar(checkLogin() ? session('member_id') : 0);
+			$cb['avatar'] = getAvatar(checkLogin() ? session('member_id') : 0);
+			echo json_encode($cb);
 			break;
 		//获取主题
 		case 'getWallpaper':
-			echo getWallpaper();
+			$cb['wallpaper'] = getWallpaper();
+			echo json_encode($cb);
 			break;
 		//更新主题
 		case 'setWallpaper':
@@ -713,10 +712,11 @@
 			break;
 		//获取应用评分
 		case 'getAppStar':
-			$startnum = $db->get('tb_app', 'starnum', array(
+			$starnum = $db->get('tb_app', 'starnum', array(
 				'tbid' => $_POST['id']
 			));
-			echo is_int($startnum) || $startnum == 0 ? (int)$startnum : sprintf('%.1f', $startnum);
+			$cb['starnum'] = is_int($starnum) || $starnum == 0 ? (int)$starnum : sprintf('%.1f', $starnum);
+			echo json_encode($cb);
 			break;
 		//更新应用评分
 		case 'updateAppStar':
@@ -740,10 +740,11 @@
 				), array(
 					'tbid' => $_POST['id']
 				));
-				echo true;
+				$cb['response'] = true;
 			}else{
-				echo false;
+				$cb['response'] = false;
 			}
+			echo json_encode($cb);
 			break;
 	}
 ?>

@@ -158,8 +158,6 @@ HROS.dock = (function(){
 				HROS.app.set();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						type : 'POST',
-						url : ajaxUrl,
 						data : 'ac=setDockPos&dock=' + pos + '&desk=' + HROS.CONFIG.desk
 					});
 				}
