@@ -221,7 +221,6 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .window-mask{position:absolute;z-index:9998;height:100%;width:100%;display:none;overflow:hidden;background:url(window_mask_bg.png) repeat-x}
 .window-mask div{width:100%;text-align:center;margin-top:20px}
 .window-mask .maskbg{margin-top:70px;height:75px;background:url(window_mask_icon.png) no-repeat center}
-.window-loading{position:absolute;z-index:9999;width:100%;height:100%;background:#fff url(loading_48.gif) center center no-repeat}
 .window-mask-noflash{background:none;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
 .window-resize{position:absolute;overflow:hidden;background:url(transparent.gif) repeat;display:block}
 .window-resize-t{left:0;top:-8px;width:100%;height:10px;z-index:1;cursor:n-resize}

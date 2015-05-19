@@ -60,7 +60,6 @@ var windowTemp = template.compile(
 				'<% }else{ %>'+
 					'<div class="window-mask window-mask-noflash"></div>'+
 				'<% } %>'+
-				'<div class="window-loading"></div>'+
 				'<iframe id="<%=id%>_iframe" frameborder="0" src="<%=url%>"></iframe>'+
 			'</div>'+
 			'<div class="set-bar"><div class="fr">'+

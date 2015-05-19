@@ -101,10 +101,6 @@ HROS.window = (function(){
 					$(windowId).data('info', TEMP.windowTemp);
 					HROS.CONFIG.windowIndexid += 1;
 					HROS.window.setPos(false);
-					//iframe加载完毕后，隐藏loading遮罩层
-					$(windowId + ' iframe').load(function(){
-						$(windowId + ' .window-frame').children('div').eq(1).fadeOut();
-					});
 					HROS.window.show2top(options.appid);
 				}
 				nextDo({
@@ -192,10 +188,6 @@ HROS.window = (function(){
 							$(windowId).data('info', TEMP.windowTemp);
 							HROS.CONFIG.windowIndexid += 1;
 							HROS.window.setPos(false);
-							//iframe加载完毕后，隐藏loading遮罩层
-							$(windowId + ' iframe').load(function(){
-								$(windowId + ' .window-frame').children('div').fadeOut();
-							});
 							HROS.window.show2top(options.appid);
 							break;
 						case 'folder':
