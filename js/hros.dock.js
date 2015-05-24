@@ -99,48 +99,48 @@ HROS.dock = (function(){
 			if(HROS.CONFIG.dockPos == 'top'){
 				$('#dock-bar').addClass('top-bar').children('#dock-container').addClass('dock-top');
 				desktops.css({
-					'width' : desk_w,
-					'height' : desk_h - $('#task-bar').height() - $('#dock-bar').height(),
-					'left' : desk_w,
-					'top' : $('#dock-bar').height()
+					width : desk_w,
+					height : desk_h - $('#task-bar').height() - $('#dock-bar').height(),
+					left : desk_w,
+					top : $('#dock-bar').height()
 				});
 				desktop.css({
-					'left' : 0
+					left : 0
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'left'){
 				$('#dock-bar').addClass('left-bar').children('#dock-container').addClass('dock-left');
 				desktops.css({
-					'width' : desk_w - $('#dock-bar').width(),
-					'height' : desk_h - $('#task-bar').height(),
-					'left' : desk_w + $('#dock-bar').width(),
-					'top' : 0
+					width : desk_w - $('#dock-bar').width(),
+					height : desk_h - $('#task-bar').height(),
+					left : desk_w + $('#dock-bar').width(),
+					top : 0
 				});
 				desktop.css({
-					'left' : $('#dock-bar').width()
+					left : $('#dock-bar').width()
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'right'){
 				$('#dock-bar').addClass('right-bar').children('#dock-container').addClass('dock-right');
 				desktops.css({
-					'width' : desk_w - $('#dock-bar').width(),
-					'height' : desk_h - $('#task-bar').height(),
-					'left' : desk_w,
-					'top' : 0
+					width : desk_w - $('#dock-bar').width(),
+					height : desk_h - $('#task-bar').height(),
+					left : desk_w,
+					top : 0
 				});
 				desktop.css({
-					'left' : 0
+					left : 0
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'none'){
 				desktops.css({
-					'width' : desk_w,
-					'height' : desk_h - $('#task-bar').height(),
-					'left' : desk_w,
-					'top' : 0
+					width : desk_w,
+					height : desk_h - $('#task-bar').height(),
+					left : desk_w,
+					top : 0
 				});
 				desktop.css({
-					'left' : 0
+					left : 0
 				});
 			}
 			HROS.taskbar.resize();
@@ -165,7 +165,7 @@ HROS.dock = (function(){
 		},
 		move : function(){
 			$('#dock-container').on('mousedown',function(e){
-				if(e.button == 0 || e.button == 1){
+				if(e.button == 0){
 					var lay = HROS.maskBox.dock(), location;
 					$(document).on('mousemove', function(e){
 						lay.show();

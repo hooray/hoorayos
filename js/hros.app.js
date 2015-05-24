@@ -310,7 +310,7 @@ HROS.app = (function(){
 			$('#dock-bar .dock-applist').on('mousedown', 'li', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0 || e.button == 1){
+				if(e.button == 0){
 					var oldobj = $(this);
 					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
 					var dx = e.clientX;
@@ -435,7 +435,7 @@ HROS.app = (function(){
 			$('#desktop .desktop-apps-container').on('mousedown', 'li:not(.add)', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0 || e.button == 1){
+				if(e.button == 0){
 					var oldobj = $(this);
 					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
 					var dx = e.clientX;
@@ -560,7 +560,7 @@ HROS.app = (function(){
 			$('body').on('mousedown', '.folder_body li, .quick_view_container li', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0 || e.button == 1){
+				if(e.button == 0){
 					var oldobj = $(this);
 					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
 					var dx = e.clientX;

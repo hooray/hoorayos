@@ -11,19 +11,12 @@ HROS.taskbar = (function(){
 			$(window).on('resize', function(){
 				HROS.taskbar.resize();
 			});
-			//绑定任务栏点击事件
-			HROS.taskbar.click();
+			//绑定任务栏拖动事件
+			HROS.taskbar.move();
 			//绑定任务栏前进后退按钮事件
 			HROS.taskbar.pageClick();
-		},
-		click : function(){
-			$('#task-content-inner').on('click', 'a.task-item', function(){
-				if($(this).hasClass('task-item-current')){
-					HROS.window.hide($(this).attr('appid'));
-				}else{
-					HROS.window.show2top($(this).attr('appid'));
-				}
-			}).on('contextmenu', 'a.task-item', function(e){
+			//绑定任务栏右键事件
+			$('#task-content-inner').on('contextmenu', '.task-item', function(e){
 				$('.popup-menu').hide();
 				$('.quick_view_container').remove();
 				var popupmenu = HROS.popupMenu.task($(this));
@@ -39,10 +32,11 @@ HROS.taskbar = (function(){
 		pageClick : function(){
 			$('#task-next-btn').on('click', function(){
 				if($(this).hasClass('disable') == false){
-					var w = $('#task-bar').width(), realW = $('#task-content-inner .task-item').length * 114, showW = w - 112, overW = realW - showW;
-					var marginL = parseInt($('#task-content-inner').css('margin-left')) - 114;
-					if(marginL <= overW * -1){
-						marginL = overW * -1;
+					var taskW = $('#task-content-inner .task-item').width();
+					var marginL = parseInt($('#task-content-inner').css('margin-left')) - taskW;
+					var overW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-pre').outerWidth(true) - $('#task-content-inner .task-item').length * taskW;
+					if(marginL <= overW){
+						marginL = overW;
 						$('#task-next a').addClass('disable');
 					}
 					$('#task-pre a').removeClass('disable');
@@ -53,7 +47,8 @@ HROS.taskbar = (function(){
 			});
 			$('#task-pre-btn').on('click', function(){
 				if($(this).hasClass('disable') == false){
-					var marginL = parseInt($('#task-content-inner').css('margin-left')) + 114;
+					var taskW = $('#task-content-inner .task-item').width();
+					var marginL = parseInt($('#task-content-inner').css('margin-left')) + taskW;
 					if(marginL >= 0){
 						marginL = 0;
 						$('#task-pre a').addClass('disable');
@@ -66,30 +61,28 @@ HROS.taskbar = (function(){
 			});
 		},
 		resize : function(){
-			$('#task-content-inner').removeClass('fl');
 			if(HROS.CONFIG.dockPos == 'left'){
 				$('#task-bar').css({
-					'left' : $('#dock-bar').width(),
-					'right' : 0
+					left : $('#dock-bar').width(),
+					right : 0
 				});
 			}else if(HROS.CONFIG.dockPos == 'right'){
 				$('#task-bar').css({
-					'left' : 0,
-					'right' : $('#dock-bar').width()
+					left : 0,
+					right : $('#dock-bar').width()
 				});
-				$('#task-content-inner').addClass('fl');
 			}else{
 				$('#task-bar').css({
-					'left' : 0,
-					'right' : 0
+					left : 0,
+					right : 0
 				});
 			}
-			var w = $('#task-bar').width(), realW = $('#task-content-inner .task-item').length * 114, showW = w - 112;
-			$('#task-content-inner').css('width', realW);
+			var realW = $('#task-content-inner .task-item').length * $('#task-content-inner .task-item').width();
+			var showW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-pre').outerWidth(true);
 			if(realW >= showW){
 				$('#task-next, #task-pre').show();
 				$('#task-content').css('width', showW);
-				$('#task-content-inner').addClass('fl').stop(true, false).animate({
+				$('#task-content-inner').stop(true, false).animate({
 					marginLeft : 0
 				}, 200);
 				$('#task-next a').removeClass('disable');
@@ -98,10 +91,88 @@ HROS.taskbar = (function(){
 				$('#task-next, #task-pre').hide();
 				$('#task-content').css('width','100%');
 				$('#task-content-inner').css({
-					'margin-left' : 0,
-					'margin-right' : 0
+					marginLeft : 0
 				});
 			}
+		},
+		move : function(){
+			$('#task-content-inner').on('mousedown', '.task-item', function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				if(e.button == 0){
+					var self = $(this);
+					var task_left = self.offset().left;
+					var task_width = self.width();
+					var drag = self.clone().addClass('task-dragging').css({
+						left : task_left
+					});
+					var current_animate_id;
+					var dx = e.clientX;
+					var cx = e.clientX;
+					var lay = HROS.maskBox.desk();
+					$(document).on('mousemove', function(e){
+						$('body').append(drag);
+						self.css('opacity', 0);
+						lay.show();
+						cx = e.clientX;
+						var left = cx - dx + task_left;
+						drag.css('left', left);
+						$('#task-content-inner').find('.task-item').each(function(i){
+							var this_left = $(this).offset().left;
+							if(left > this_left && left < this_left + task_width / 2){
+								if(self.attr('id') != $(this).attr('id')){
+									swapTab($(this).attr('id'), 'b');
+								}
+							}else if(left < this_left && left > this_left - task_width / 2){
+								if(self.attr('id') != $(this).attr('id')){
+									swapTab($(this).attr('id'), 'a');
+								}
+							}
+						});
+					}).on('mouseup', function(e){
+						$(document).off('mousemove').off('mouseup');
+						lay.hide();
+						drag.animate({
+							left : self.offset().left
+						}, 200, function(){
+							$(this).remove();
+							self.css('opacity', 1);
+						});
+						if(dx == cx){
+							if(self.hasClass('task-item-current')){
+								HROS.window.hide(self.attr('appid'));
+							}else{
+								HROS.window.show2top(self.attr('appid'));
+							}
+						}
+					});
+					var swapTab = function(id, boa){
+						if(!(self.is(':animated') && current_animate_id == id)){
+							current_animate_id = id;
+							self.stop(true, true);
+							$('#task-content-inner').find('.task-temp').remove();
+							var temp = self.clone().insertAfter(self).addClass('task-temp');
+							if(boa == 'b'){
+								$('#' + id).before(self.css({
+									width : 0
+								}));
+							}else{
+								$('#' + id).after(self.css({
+									width : 0
+								}));
+							}
+							self.animate({
+								width : task_width
+							}, 100);
+							temp.animate({
+								width : 0
+							}, 100, function(){
+								$(this).remove();
+							});
+						}
+					};
+				}
+			});
 		}
 	}
 })();

@@ -53,7 +53,7 @@ HROS.window = (function(){
 			var type = 'window', appid = obj.appid == null ? Date.parse(new Date()) : obj.appid;
 			//判断窗口是否已打开
 			var iswindowopen = false;
-			$('#task-content-inner a.task-item').each(function(){
+			$('#task-content-inner .task-item').each(function(){
 				if($(this).attr('appid') == appid){
 					iswindowopen = true;
 					HROS.window.show2top($(this).attr('appid'));
@@ -65,7 +65,7 @@ HROS.window = (function(){
 				function nextDo(options){
 					var windowId = '#w_' + options.appid;
 					//新增任务栏
-					$('#task-content-inner').prepend(taskTemp({
+					$('#task-content-inner').append(taskTemp({
 						'type' : options.type,
 						'id' : 't_' + options.appid,
 						'appid' : options.appid,
@@ -134,7 +134,7 @@ HROS.window = (function(){
 			var type = type == null ? 'window' : type;
 			//判断窗口是否已打开
 			var iswindowopen = false;
-			$('#task-content-inner a.task-item').each(function(){
+			$('#task-content-inner .task-item').each(function(){
 				if($(this).attr('appid') == appid){
 					iswindowopen = true;
 					HROS.window.show2top(appid);
@@ -152,7 +152,7 @@ HROS.window = (function(){
 						case 'window':
 						case 'pwindow':
 							//新增任务栏
-							$('#task-content-inner').prepend(taskTemp({
+							$('#task-content-inner').append(taskTemp({
 								'type' : options.type,
 								'id' : 't_' + options.appid,
 								'appid' : options.appid,
@@ -192,7 +192,7 @@ HROS.window = (function(){
 							break;
 						case 'folder':
 							//新增任务栏
-							$('#task-content-inner').prepend(taskTemp({
+							$('#task-content-inner').append(taskTemp({
 								'type' : options.type,
 								'id' : 't_' + options.appid,
 								'appid' : options.appid,
@@ -339,7 +339,6 @@ HROS.window = (function(){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			$(windowId).removeData('info').html('').remove();
 			$('#task-content-inner ' + taskId).html('').remove();
-			$('#task-content-inner').css('width', $('#task-content-inner .task-item').length * 114);
 			$('#task-bar').removeClass('min-zIndex');
 			HROS.taskbar.resize();
 		},
@@ -357,7 +356,7 @@ HROS.window = (function(){
 			}
 		},
 		hideAll : function(){
-			$('#task-content-inner a.task-item').removeClass('task-item-current');
+			$('#task-content-inner .task-item').removeClass('task-item-current');
 			$('#desk-' + HROS.CONFIG.desk).nextAll('div.window-container').css('left', -10000).attr('state', 'hide');
 		},
 		max : function(appid){
@@ -409,15 +408,15 @@ HROS.window = (function(){
 				}
 				//改变当前窗口样式
 				$(windowId).addClass('window-current').css({
-					'z-index' : HROS.CONFIG.windowIndexid,
-					'left' : windowdata['left'],
-					'top' : windowdata['top']
+					zIndex : HROS.CONFIG.windowIndexid,
+					left : windowdata['left'],
+					top : windowdata['top']
 				}).attr('state', 'show');
 				//如果窗口最小化前是最大化状态的，则坐标位置设为0
 				if($(windowId).attr('ismax') == 1){
 					$(windowId).css({
-						'left' : 0,
-						'top' : 0
+						left : 0,
+						top : 0
 					});
 				}
 				//改变当前窗口遮罩层样式
@@ -562,7 +561,7 @@ HROS.window = (function(){
 		},
 		show2under : function(){
 			//改变任务栏样式
-			$('#task-content-inner a.task-item').removeClass('task-item-current');
+			$('#task-content-inner .task-item').removeClass('task-item-current');
 			//改变窗口样式
 			$('#desk .window-container').removeClass('window-current');
 			//改变窗口遮罩层样式

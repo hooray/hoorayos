@@ -271,11 +271,11 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 	<div id="task-bar-bg1"></div>
 	<div id="task-bar-bg2"></div>
 	<div id="task-bar">
-		<div id="task-next"><a href="javascript:;" id="task-next-btn" hidefocus="true"></a></div>
+		<div id="task-pre"><a href="javascript:;" id="task-pre-btn" hidefocus="true"></a></div>
 		<div id="task-content">
 			<div id="task-content-inner"></div>
 		</div>
-		<div id="task-pre"><a href="javascript:;" id="task-pre-btn" hidefocus="true"></a></div>
+		<div id="task-next"><a href="javascript:;" id="task-next-btn" hidefocus="true"></a></div>
 	</div>
 	<div id="search-bar">
 		<input id="pageletSearchInput" class="mousetrap" placeholder="搜索应用...">
