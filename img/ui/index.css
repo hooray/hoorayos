@@ -141,7 +141,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #lock-info .text-tip{width:100%;height:15px;line-height:15px;margin-top:5px;color:#F00;text-align:center}
 
 /*关于我们*/
-#copyright{z-index:9999999;display:none;position:absolute;width:330px;height:200px;background:url(desk_sprite.png) no-repeat -200px -600px;top:50%;left:50%;margin-top:-100px;margin-left:-165px; box-shadow:0 0 300px #fff}
+#copyright{z-index:9999999;display:none;position:absolute;width:330px;height:200px;background:url(desk_sprite.png) no-repeat -200px -600px;top:50%;left:50%;margin-top:-100px;margin-left:-165px;box-shadow:0 0 100px #fff}
 #copyright .close{display:block;position:absolute;top:6px;right:4px;width:24px;height:24px;background:url(desk_sprite.png) no-repeat -510px -390px}
 #copyright .close:hover{background-position:-540px -390px}
 #copyright .title{padding-left:20px;height:56px;line-height:56px;color:#fff;font-size:28px}
