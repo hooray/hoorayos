@@ -764,7 +764,7 @@
 				$appid = $db->insert('tb_member_app', array(
 					'icon' => $opt['icon'],
 					'name' => $opt['name'],
-					'width' => 600,
+					'width' => 610,
 					'height' => 400,
 					'type' => $opt['type'],
 					'dt' => date('Y-m-d H:i:s'),

@@ -322,7 +322,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('#desk').append(obj);
+						$('body').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
@@ -447,7 +447,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('#desk').append(obj);
+						$('body').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
@@ -572,7 +572,7 @@ HROS.app = (function(){
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
 					$(document).on('mousemove', function(e){
-						$('#desk').append(obj);
+						$('body').append(obj);
 						lay.show();
 						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
 						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
@@ -603,7 +603,7 @@ HROS.app = (function(){
 						}
 						var movegrid = HROS.grid.searchFolderGrid(cx, cy);
 						if(movegrid != null){
-							if(oldobj.parents('.folder-window').attr('appid') != movegrid){
+							if((oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid')) != movegrid){
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;

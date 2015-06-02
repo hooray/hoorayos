@@ -238,7 +238,8 @@ HROS.window = (function(){
 										'id' : 'd_' + this.appid,
 										'appid' : this.appid,
 										'realappid' : this.realappid,
-										'imgsrc' : this.icon
+										'imgsrc' : this.icon,
+										'appsize' : 48
 									});
 								});
 								$(windowId).find('.folder_body').append(folder_append);
@@ -589,7 +590,8 @@ HROS.window = (function(){
 						'id' : 'd_' + sc[i]['appid'],
 						'appid' : sc[i]['appid'],
 						'realappid' : sc[i]['realappid'],
-						'imgsrc' : sc[i]['icon']
+						'imgsrc' : sc[i]['icon'],
+						'appsize' : 48
 					});
 				}
 				$(windowId).find('.folder_body').html('').append(folder_append).on('contextmenu', '.appbtn', function(e){
