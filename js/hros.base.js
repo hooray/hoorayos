@@ -173,7 +173,7 @@ HROS.base = (function(){
 			});
 		},
 		help : function(){
-			if(!$.browser.msie || ($.browser.msie && $.browser.version < 9)){
+			if(!$.browser.msie || ($.browser.msie && $.browser.version >= 9)){
 				$('body').append(helpTemp);
 				//IE6,7,8基本就告别新手帮助了
 				$('#step1').show();
@@ -194,11 +194,11 @@ HROS.base = (function(){
 		run : function(){
 			var url = location.search;
 			var request = new Object();
-			if(url.indexOf("?") != -1){
+			if(url.indexOf('?') != -1){
 				var str = url.substr(1);
-				strs = str.split("&");
+				strs = str.split('&');
 				for(var i = 0; i < strs.length; i++){
-					request[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+					request[strs[i].split('=')[0]]=unescape(strs[i].split('=')[1]);
 				}
 			}
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){

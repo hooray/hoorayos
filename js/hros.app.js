@@ -8,7 +8,7 @@ HROS.app = (function(){
 		*/
 		init : function(){
 			//绑定'应用市场'点击事件
-			$('#desk').on('click', 'li.add', function(){
+			$('#desk').on('click', '.add', function(){
 				HROS.window.createTemp({
 					appid : 'hoorayos-yysc',
 					title : '应用市场',
@@ -190,7 +190,7 @@ HROS.app = (function(){
 					});
 				});
 			}
-			$('#dock-bar .dock-applist li').remove();
+			$('#dock-bar .dock-applist .appbtn').remove();
 			$('#dock-bar .dock-applist').append(dock_append);
 			//加载桌面应用
 			for(var j = 1; j <= 5; j++){
@@ -212,7 +212,7 @@ HROS.app = (function(){
 				desk_append += addbtnTemp({
 					'appsize' : HROS.CONFIG.appSize
 				});
-				$('#desk-' + j + ' li').remove();
+				$('#desk-' + j + ' .desktop-apps-container .appbtn').remove();
 				$('#desk-' + j + ' .desktop-apps-container').append(desk_append);
 			}
 			HROS.app.setPos(false);
@@ -232,14 +232,14 @@ HROS.app = (function(){
 			$('#desk .desktop-container .appbtn span').width(Number(HROS.CONFIG.appSize) + 10);
 			isAnimate = isAnimate == null ? true : isAnimate;
 			var grid = HROS.grid.getAppGrid(), dockGrid = HROS.grid.getDockAppGrid();
-			$('#dock-bar .dock-applist li').each(function(i){
+			$('#dock-bar .dock-applist .appbtn').each(function(i){
 				$(this).css({
 					'top' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startY'] : dockGrid[i]['startY'] + 5,
 					'left' : HROS.CONFIG.dockPos == 'top' ? dockGrid[i]['startX'] + 5 : dockGrid[i]['startX']
 				}).attr('top', $(this).offset().top).attr('left', $(this).offset().left);
 			});
 			for(var j = 1; j <= 5; j++){
-				$('#desk-' + j + ' li').each(function(i){
+				$('#desk-' + j + ' .appbtn').each(function(i){
 					var offsetTop = HROS.CONFIG.appVerticalSpacing / 2;
 					var offsetLeft = HROS.CONFIG.appHorizontalSpacing /2;
 					var top = grid[i]['startY'] + offsetTop;
@@ -307,12 +307,12 @@ HROS.app = (function(){
 		*/
 		move : function(){
 			//应用码头应用拖动
-			$('#dock-bar .dock-applist').on('mousedown', 'li', function(e){
+			$('#dock-bar .dock-applist').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				if(e.button == 0){
 					var oldobj = $(this);
-					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
+					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
 					var dy = e.clientY;
 					var cx = e.clientX;
@@ -432,12 +432,12 @@ HROS.app = (function(){
 				}
 			});
 			//桌面应用拖动
-			$('#desktop .desktop-apps-container').on('mousedown', 'li:not(.add)', function(e){
+			$('#desktop .desktop-apps-container').on('mousedown', '.appbtn:not(.add)', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				if(e.button == 0){
 					var oldobj = $(this);
-					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
+					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
 					var dy = e.clientY;
 					var cx = e.clientX;
@@ -557,12 +557,12 @@ HROS.app = (function(){
 				}
 			});
 			//文件夹内应用拖动
-			$('body').on('mousedown', '.folder_body li, .quick_view_container li', function(e){
+			$('body').on('mousedown', '.folder_body .appbtn, .quick_view_container .appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				if(e.button == 0){
 					var oldobj = $(this);
-					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
+					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
 					var dy = e.clientY;
 					var cx = e.clientX;

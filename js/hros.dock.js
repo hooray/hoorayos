@@ -191,8 +191,7 @@ HROS.dock = (function(){
 		*/
 		switchDesk : function(deskNumber){
 			//验证传入的桌面号是否为1-5的正整数
-			var r = /^\+?[1-5]*$/;
-			deskNumber = r.test(deskNumber) ? deskNumber : 1;
+			deskNumber = /^\+?[1-5]*$/.test(deskNumber) ? deskNumber : 1;
 			var pagination = $('#dock-bar .dock-pagination'), currindex = HROS.CONFIG.desk, switchindex = deskNumber,
 			currleft = $('#desk-' + currindex).offset().left, switchleft = $('#desk-' + switchindex).offset().left;
 			if(currindex != switchindex){

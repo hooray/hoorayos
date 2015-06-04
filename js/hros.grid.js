@@ -11,8 +11,8 @@ HROS.grid = (function(){
 			var top = HROS.CONFIG.appMarginTop;
 			var left = HROS.CONFIG.appMarginLeft;
 			var appGrid = [];
-			var offsetTop = $('#desk-1 li.add').outerHeight() + HROS.CONFIG.appVerticalSpacing;
-			var offsetLeft = $('#desk-1 li.add').outerWidth() + HROS.CONFIG.appHorizontalSpacing;
+			var offsetTop = $('#desk-1 .add').outerHeight() + HROS.CONFIG.appVerticalSpacing;
+			var offsetLeft = $('#desk-1 .add').outerWidth() + HROS.CONFIG.appHorizontalSpacing;
 			for(var i = 0; i < 500; i++){
 				appGrid.push({
 					startY : top,

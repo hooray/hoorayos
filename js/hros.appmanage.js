@@ -36,7 +36,8 @@ HROS.appmanage = (function(){
 					});
 				});
 			}
-			$('#amg_dock_container').html(dock_append);
+			$('#amg_dock_container .appbtn').remove();
+			$('#amg_dock_container').append(dock_append);
 			//加载桌面应用
 			for(var j = 0; j < 5; j++){
 				var desk_append = '', desk = eval('HROS.VAR.desk' + (j + 1));
@@ -53,21 +54,22 @@ HROS.appmanage = (function(){
 						});
 					});
 				}
-				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner').html(desk_append);
+				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner .appbtn').remove();
+				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner').append(desk_append);
 			}
 			HROS.appmanage.setPos();
 			HROS.appmanage.getScrollbar();
 		},
 		setPos : function(){
 			var manageDockGrid = HROS.grid.getManageDockAppGrid(), manageAppGrid = HROS.grid.getManageAppGrid();
-			$('#amg_dock_container li').each(function(i){
+			$('#amg_dock_container .appbtn').each(function(i){
 				$(this).css({
 					top : 10,
 					left : manageDockGrid[i]['startX'] + 6
 				});
 			});
 			for(var j = 0; j < 5; j++){
-				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner li').each(function(i){
+				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner .appbtn').each(function(i){
 					$(this).css({
 						top : manageAppGrid[i]['startY'] + 5,
 						left : 0
@@ -76,12 +78,12 @@ HROS.appmanage = (function(){
 			}
 		},
 		move : function(){
-			$('#amg_dock_container').on('mousedown', 'li', function(e){
+			$('#amg_dock_container').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				if(e.button == 0){
 					var oldobj = $(this);
-					var obj = $('<li id="shortcut_shadow">' + oldobj.html() + '</li>');
+					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
 					var dy = e.clientY;
 					var cx = e.clientX;
@@ -172,12 +174,12 @@ HROS.appmanage = (function(){
 				}
 				return false;
 			});
-			$('#amg_folder_container').on('mousedown', 'li.appbtn:not(.add)', function(e){
+			$('#amg_folder_container').on('mousedown', '.appbtn:not(.add)', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 				if(e.button == 0){
 					var oldobj = $(this);
-					var obj = $('<li id="shortcut_shadow2">' + oldobj.html() + '</li>');
+					var obj = $('<div id="shortcut_shadow2">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
 					var dy = e.clientY;
 					var cx = e.clientX;
