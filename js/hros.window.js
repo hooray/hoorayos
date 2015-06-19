@@ -621,6 +621,9 @@ HROS.window = (function(){
 				}else{
 					obj.find('.ha-max').click();
 				}
+			}).on('click', '.window-container .set-bar', function(){
+				var obj = $(this).parents('.window-container');
+				HROS.window.show2top(obj.attr('appid'));
 			}).on('click', '.window-container .ha-hide', function(){
 				var obj = $(this).parents('.window-container');
 				HROS.window.hide(obj.attr('appid'));
@@ -691,7 +694,7 @@ HROS.window = (function(){
 			});
 		},
 		move : function(){
-			$('#desk').on('mousedown', '.window-container .title-bar', function(e){
+			$('#desk').on('mousedown', '.window-container .title-bar, .window-container .set-bar', function(e){
 				var obj = $(this).parents('.window-container');
 				if(obj.attr('ismax') == 1){
 					return false;
