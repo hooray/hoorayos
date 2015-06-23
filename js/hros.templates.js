@@ -21,7 +21,7 @@ var taskTemp = template.compile(
 		'<div class="task-item-txt"><%=title%></div>'+
 	'</a>'
 );
-//小挂件
+//挂件应用
 var widgetWindowTemp = template.compile(
 	'<div id="<%=id%>" class="widget" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="z-index:<%=zIndex%>;width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;right:<%=right%>px">'+
 		'<div class="move">'+
@@ -36,7 +36,7 @@ var widgetWindowTemp = template.compile(
 		'</div>'+
 	'</div>'
 );
-//应用窗口
+//窗口应用
 var windowTemp = template.compile(
 	'<div id="<%=id%>" class="window-container window-current<% if(isflash){ %> window-container-flash<% } %>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="<% if(isopenmax){ %>width:100%;height:100%;<% }else{ %>width:<%=width%>px;height:<%=height%>px;<% } %>z-index:<%=zIndex%>" ismax="<% if(isopenmax){ %>1<% }else{ %>0<% } %>">'+
 		'<div style="height:100%">'+
