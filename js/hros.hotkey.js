@@ -16,7 +16,7 @@ HROS.hotkey = (function(){
 			});
 			//调出查询栏
 			Mousetrap.bind(['ctrl+f', 'command+f'], function(){
-				HROS.searchbar.get();
+				HROS.searchBar.get();
 				return false;
 			});
 			Mousetrap.bind(['ctrl+1', 'command+1'], function(){

@@ -9,8 +9,8 @@ HROS.folderView = (function(){
 			}).on('click', '.appbtn', function(){
 				HROS.popupMenu.hide();
 				HROS.folderView.hide();
-				HROS.searchbar.hide();
-				HROS.startmenu.hide();
+				HROS.searchBar.hide();
+				HROS.startMenu.hide();
 			});
 			HROS.folderView.moveScrollbar();
 		},

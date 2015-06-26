@@ -1,7 +1,7 @@
 /*
 **  任务栏
 */
-HROS.taskbar = (function(){
+HROS.taskBar = (function(){
 	return {
 		/*
 		**  初始化
@@ -9,12 +9,12 @@ HROS.taskbar = (function(){
 		init : function(){
 			//当浏览器窗口改变大小时，任务栏的显示也需进行刷新
 			$(window).on('resize', function(){
-				HROS.taskbar.resize();
+				HROS.taskBar.resize();
 			});
 			//绑定任务栏拖动事件
-			HROS.taskbar.move();
+			HROS.taskBar.move();
 			//绑定任务栏前进后退按钮事件
-			HROS.taskbar.pageClick();
+			HROS.taskBar.pageClick();
 			//绑定任务栏右键事件
 			$('#task-content-inner').on('contextmenu', '.task-item', function(e){
 				$('.popup-menu').hide();

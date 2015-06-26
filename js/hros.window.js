@@ -73,7 +73,7 @@ HROS.window = (function(){
 						'title' : options.title,
 						'imgsrc' : options.imgsrc
 					}));
-					HROS.taskbar.resize();
+					HROS.taskBar.resize();
 					//新增窗口
 					TEMP.windowTemp = {
 						'top' : ($(window).height() - options.height) / 2 <= 0 ? 0 : ($(window).height() - options.height) / 2,
@@ -160,7 +160,7 @@ HROS.window = (function(){
 								'title' : options.title,
 								'imgsrc' : options.imgsrc
 							}));
-							HROS.taskbar.resize();
+							HROS.taskBar.resize();
 							//新增窗口
 							TEMP.windowTemp = {
 								'top' : top,
@@ -200,7 +200,7 @@ HROS.window = (function(){
 								'title' : options.title,
 								'imgsrc' : options.imgsrc
 							}));
-							HROS.taskbar.resize();
+							HROS.taskBar.resize();
 							//新增窗口
 							TEMP.folderWindowTemp = {
 								'top' : top,
@@ -341,7 +341,7 @@ HROS.window = (function(){
 			$(windowId).removeData('info').html('').remove();
 			$('#task-content-inner ' + taskId).html('').remove();
 			$('#task-bar').removeClass('min-zIndex');
-			HROS.taskbar.resize();
+			HROS.taskBar.resize();
 		},
 		closeAll : function(){
 			$('#desk .window-container').each(function(){

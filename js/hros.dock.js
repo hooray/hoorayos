@@ -22,8 +22,8 @@ HROS.dock = (function(){
 			$('body').on('contextmenu', '#dock-container', function(e){
 				HROS.popupMenu.hide();
 				HROS.folderView.hide();
-				HROS.searchbar.hide();
-				HROS.startmenu.hide();
+				HROS.searchBar.hide();
+				HROS.startMenu.hide();
 				var popupmenu = HROS.popupMenu.dock();
 				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
 				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
@@ -75,7 +75,7 @@ HROS.dock = (function(){
 				return false;
 			}).on('click',function(e){
 				e.stopPropagation();
-				HROS.searchbar.get();
+				HROS.searchBar.get();
 			});
 			$('#dock-bar .pagination').on('mousedown', function(){
 				return false;
@@ -85,7 +85,7 @@ HROS.dock = (function(){
 			$('#dock-bar .dock-tool-start').on('mousedown', function(){
 				return false;
 			}).on('click', function(){
-				HROS.startmenu.show();
+				HROS.startMenu.show();
 				return false;
 			});
 		},
@@ -143,7 +143,7 @@ HROS.dock = (function(){
 					left : 0
 				});
 			}
-			HROS.taskbar.resize();
+			HROS.taskBar.resize();
 			HROS.folderView.setPos();
 		},
 		updatePos : function(pos){

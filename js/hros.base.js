@@ -49,11 +49,11 @@ HROS.base = (function(){
 			//初始化壁纸
 			HROS.wallpaper.init();
 			//初始化搜索栏
-			HROS.searchbar.init();
+			HROS.searchBar.init();
 			//初始化开始菜单
-			HROS.startmenu.init();
+			HROS.startMenu.init();
 			//初始化任务栏
-			HROS.taskbar.init();
+			HROS.taskBar.init();
 			/*
 			**      当dockPos为top时          当dockPos为left时         当dockPos为right时
 			**  -----------------------   -----------------------   -----------------------

@@ -1,7 +1,7 @@
 /*
 **  搜索栏
 */
-HROS.searchbar = (function(){
+HROS.searchBar = (function(){
 	return {
 		/*
 		**  初始化
@@ -21,12 +21,12 @@ HROS.searchbar = (function(){
 				}
 			});
 			$('#search-suggest .openAppMarket a, #pageletSearchButton').on('click', function(){
-				HROS.searchbar.openAppMarket($('#pageletSearchInput').val());
+				HROS.searchBar.openAppMarket($('#pageletSearchInput').val());
 			});
 			$('#pageletSearchInput').on('keydown', function(e){
 				if(e.keyCode == '13'){
 					if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
-						HROS.searchbar.openAppMarket($(this).val());
+						HROS.searchBar.openAppMarket($(this).val());
 					}else{
 						$('#search-suggest .resultList a.selected').click();
 					}
@@ -41,7 +41,7 @@ HROS.searchbar = (function(){
 					$('#search-suggest').show();
 					if(searchVal != oldSearchVal){
 						oldSearchVal = searchVal;
-						HROS.searchbar.getSuggest(searchVal);
+						HROS.searchBar.getSuggest(searchVal);
 					}
 					$('#search-bar').removeClass('above').addClass('above');
 				}else{
@@ -49,7 +49,7 @@ HROS.searchbar = (function(){
 					$('#search-bar').removeClass('above');
 				}
 			}, 1000);
-			HROS.searchbar.set();
+			HROS.searchBar.set();
 			Mousetrap.bind(['up'], function(){
 				if($('#search-suggest .resultBox .resultList a.selected').length == 0 && $('#search-suggest > .resultList a.selected').length == 0){
 					$('#search-suggest > .resultList:last a').addClass('selected');
@@ -154,7 +154,7 @@ HROS.searchbar = (function(){
 			}else{
 				$('#search-suggest .resultBox').show();
 			}
-			HROS.searchbar.set();
+			HROS.searchBar.set();
 		},
 		openAppMarket : function(searchkey){
 			if(searchkey != ''){
@@ -168,7 +168,7 @@ HROS.searchbar = (function(){
 					refresh : true
 				});
 			}
-			HROS.searchbar.hide();
+			HROS.searchBar.hide();
 		},
 		hide : function(){
 			if(typeof(searchFunc) != 'undefined'){

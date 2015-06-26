@@ -1,18 +1,18 @@
 /*
 **  开始菜单
 */
-HROS.startmenu = (function(){
+HROS.startMenu = (function(){
 	return {
 		/*
 		**	初始化
 		*/
 		init : function(){
-			HROS.startmenu.getAvatar();
+			HROS.startMenu.getAvatar();
 			$('#startmenu-container').on('mousedown', function(e){
 				e.preventDefault();
 			});
 			$('#startmenu-container .startmenu-nick a, #startmenu-container .startmenu-avatar img').on('click', function(){
-				HROS.startmenu.openAccount();
+				HROS.startMenu.openAccount();
 			});
 			$('#startmenu-container .startmenu-exit a').on('click', function(){
 				HROS.base.logout();
@@ -70,7 +70,7 @@ HROS.startmenu = (function(){
 		show : function(){
 			HROS.popupMenu.hide();
 			HROS.folderView.hide();
-			HROS.searchbar.hide();
+			HROS.searchBar.hide();
 			$('#startmenu-container').css({
 				top : 'auto',
 				left : 'auto',

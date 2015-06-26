@@ -11,13 +11,13 @@ HROS.deskTop = (function(){
 			$('body').on('click', '#desktop', function(){
 				HROS.popupMenu.hide();
 				HROS.folderView.hide();
-				HROS.searchbar.hide();
-				HROS.startmenu.hide();
+				HROS.searchBar.hide();
+				HROS.startMenu.hide();
 			}).on('contextmenu', '#desktop', function(e){
 				HROS.popupMenu.hide();
 				HROS.folderView.hide();
-				HROS.searchbar.hide();
-				HROS.startmenu.hide();
+				HROS.searchBar.hide();
+				HROS.startMenu.hide();
 				var popupmenu = HROS.popupMenu.desk();
 				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
 				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
