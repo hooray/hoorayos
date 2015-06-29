@@ -126,9 +126,11 @@
 					'tbid' => session('member_id')
 				));
 				if($appid['dock'] != ''){
-					$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN('.$appid['dock'].') ORDER BY FIELD(`tbid`, '.$appid['dock'].')')->fetchAll();
 					$data = array();
-					foreach($rs as $v){
+					foreach($db->select('tb_member_app', '*', array(
+						'tbid' => explode(',', $appid['dock']),
+						'ORDER' => array('tbid', explode(',', $appid['dock']))
+					)) as $v){
 						$tmp = array();
 						if($v['type'] == 'folder'){
 							$folderid[] = $v['tbid'];
@@ -147,9 +149,11 @@
 				}
 				for($i = 1; $i <= 5; $i++){
 					if($appid['desk'.$i] != ''){
-						$rs = $db->query('SELECT * FROM `tb_member_app` WHERE `tbid` IN('.$appid['desk'.$i].') ORDER BY FIELD(`tbid`, '.$appid['desk'.$i].')')->fetchAll();
 						$data = array();
-						foreach($rs as $v){
+						foreach($db->select('tb_member_app', '*', array(
+							'tbid' => explode(',', $appid['desk'.$i]),
+							'ORDER' => array('tbid', explode(',', $appid['desk'.$i]))
+						)) as $v){
 							$tmp = array();
 							if($v['type'] == 'folder'){
 								$folderid[] = $v['tbid'];
@@ -198,9 +202,11 @@
 			}else{
 				$appid = $db->get('tb_setting', array('dock', 'desk1', 'desk2', 'desk3', 'desk4', 'desk5'));
 				if($appid['dock'] != ''){
-					$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN('.$appid['dock'].') ORDER BY FIELD(`tbid`, '.$appid['dock'].')')->fetchAll();
 					$data = array();
-					foreach($rs as $v){
+					foreach($db->select('tb_app', '*', array(
+						'tbid' => explode(',', $appid['dock']),
+						'ORDER' => array('tbid', explode(',', $appid['dock']))
+					)) as $v){
 						$tmp = array();
 						$tmp['type'] = $v['type'];
 						$tmp['appid'] = $v['tbid'];
@@ -213,9 +219,11 @@
 				}
 				for($i = 1; $i <= 5; $i++){
 					if($appid['desk'.$i] != ''){
-						$rs = $db->query('SELECT * FROM `tb_app` WHERE `tbid` IN('.$appid['desk'.$i].') ORDER BY FIELD(`tbid`, '.$appid['desk'.$i].')')->fetchAll();
 						$data = array();
-						foreach($rs as $v){
+						foreach($db->select('tb_app', '*', array(
+							'tbid' => explode(',', $appid['desk'.$i]),
+							'ORDER' => array('tbid', explode(',', $appid['desk'.$i]))
+						)) as $v){
 							$tmp = array();
 							$tmp['type'] = $v['type'];
 							$tmp['appid'] = $v['tbid'];
