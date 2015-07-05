@@ -67,9 +67,11 @@ $errorcode = array(
 
 //创建数据库连接
 $db = new medoo(array(
+	'database_type' => 'mysql',
 	'database_name' => 'hoorayos',
 	'username' => 'root',
 	'password' => '',
+	'charset' => 'utf8',
 	'option' => array(
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	)
