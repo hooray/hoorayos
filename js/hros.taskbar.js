@@ -99,77 +99,79 @@ HROS.taskBar = (function(){
 			$('#task-content-inner').on('mousedown', '.task-item', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				var self = $(this);
-				var task_left = self.offset().left;
-				var task_width = self.width();
-				var drag = self.clone().addClass('task-dragging').css({
-					left : task_left
-				});
-				var current_animate_id;
-				var dx = e.clientX;
-				var cx = e.clientX;
-				var lay = HROS.maskBox.desk();
-				$(document).on('mousemove', function(e){
-					$('body').append(drag);
-					self.css('opacity', 0);
-					lay.show();
-					cx = e.clientX;
-					var left = cx - dx + task_left;
-					drag.css('left', left);
-					$('#task-content-inner').find('.task-item').each(function(i){
-						var this_left = $(this).offset().left;
-						if(left > this_left && left < this_left + task_width / 2){
-							if(self.attr('id') != $(this).attr('id')){
-								swapTab($(this).attr('id'), 'b');
-							}
-						}else if(left < this_left && left > this_left - task_width / 2){
-							if(self.attr('id') != $(this).attr('id')){
-								swapTab($(this).attr('id'), 'a');
-							}
-						}
+				if(e.which == 1){
+					var self = $(this);
+					var task_left = self.offset().left;
+					var task_width = self.width();
+					var drag = self.clone().addClass('task-dragging').css({
+						left : task_left
 					});
-				}).on('mouseup', function(e){
-					$(document).off('mousemove').off('mouseup');
-					lay.hide();
-					drag.animate({
-						left : self.offset().left
-					}, 200, function(){
-						$(this).remove();
-						self.css('opacity', 1);
-					});
-					if(dx == cx){
-						if(self.hasClass('task-item-current')){
-							HROS.window.hide(self.attr('appid'));
-						}else{
-							HROS.window.show2top(self.attr('appid'));
-						}
-					}
-				});
-				var swapTab = function(id, boa){
-					if(!(self.is(':animated') && current_animate_id == id)){
-						current_animate_id = id;
-						self.stop(true, true);
-						$('#task-content-inner').find('.task-temp').remove();
-						var temp = self.clone().insertAfter(self).addClass('task-temp');
-						if(boa == 'b'){
-							$('#' + id).before(self.css({
-								width : 0
-							}));
-						}else{
-							$('#' + id).after(self.css({
-								width : 0
-							}));
-						}
-						self.animate({
-							width : task_width
-						}, 100);
-						temp.animate({
-							width : 0
-						}, 100, function(){
-							$(this).remove();
+					var current_animate_id;
+					var dx = e.clientX;
+					var cx = e.clientX;
+					var lay = HROS.maskBox.desk();
+					$(document).on('mousemove', function(e){
+						$('body').append(drag);
+						self.css('opacity', 0);
+						lay.show();
+						cx = e.clientX;
+						var left = cx - dx + task_left;
+						drag.css('left', left);
+						$('#task-content-inner').find('.task-item').each(function(i){
+							var this_left = $(this).offset().left;
+							if(left > this_left && left < this_left + task_width / 2){
+								if(self.attr('id') != $(this).attr('id')){
+									swapTab($(this).attr('id'), 'b');
+								}
+							}else if(left < this_left && left > this_left - task_width / 2){
+								if(self.attr('id') != $(this).attr('id')){
+									swapTab($(this).attr('id'), 'a');
+								}
+							}
 						});
-					}
-				};
+					}).on('mouseup', function(e){
+						$(document).off('mousemove').off('mouseup');
+						lay.hide();
+						drag.animate({
+							left : self.offset().left
+						}, 200, function(){
+							$(this).remove();
+							self.css('opacity', 1);
+						});
+						if(dx == cx){
+							if(self.hasClass('task-item-current')){
+								HROS.window.hide(self.attr('appid'));
+							}else{
+								HROS.window.show2top(self.attr('appid'));
+							}
+						}
+					});
+					var swapTab = function(id, boa){
+						if(!(self.is(':animated') && current_animate_id == id)){
+							current_animate_id = id;
+							self.stop(true, true);
+							$('#task-content-inner').find('.task-temp').remove();
+							var temp = self.clone().insertAfter(self).addClass('task-temp');
+							if(boa == 'b'){
+								$('#' + id).before(self.css({
+									width : 0
+								}));
+							}else{
+								$('#' + id).after(self.css({
+									width : 0
+								}));
+							}
+							self.animate({
+								width : task_width
+							}, 100);
+							temp.animate({
+								width : 0
+							}, 100, function(){
+								$(this).remove();
+							});
+						}
+					};
+				}
 			});
 		}
 	}
