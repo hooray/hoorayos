@@ -310,132 +310,130 @@ HROS.app = (function(){
 			$('#dock-bar .dock-applist').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0){
-					var oldobj = $(this);
-					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
-					var dx = e.clientX;
-					var dy = e.clientY;
-					var cx = e.clientX;
-					var cy = e.clientY;
-					var x = dx - oldobj.offset().left;
-					var y = dy - oldobj.offset().top;
-					var lay = HROS.maskBox.desk();
-					//绑定鼠标移动事件
-					$(document).on('mousemove', function(e){
-						$('body').append(obj);
-						lay.show();
-						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
-						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
-						if(dx != cx || dy != cy){
-							obj.css({
-								left : cx - x,
-								top : cy - y
-							}).show();
+				var oldobj = $(this);
+				var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
+				var dx = e.clientX;
+				var dy = e.clientY;
+				var cx = e.clientX;
+				var cy = e.clientY;
+				var x = dx - oldobj.offset().left;
+				var y = dy - oldobj.offset().top;
+				var lay = HROS.maskBox.desk();
+				//绑定鼠标移动事件
+				$(document).on('mousemove', function(e){
+					$('body').append(obj);
+					lay.show();
+					cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
+					cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
+					if(dx != cx || dy != cy){
+						obj.css({
+							left : cx - x,
+							top : cy - y
+						}).show();
+					}
+				}).on('mouseup', function(){
+					$(document).off('mousemove').off('mouseup');
+					obj.remove();
+					lay.hide();
+					//判断是否移动应用，如果没有则判断为click事件
+					if(dx == cx && dy == cy){
+						switch(oldobj.attr('type')){
+							case 'window':
+							case 'pwindow':
+							case 'file':
+								HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
+								break;
+							case 'widget':
+							case 'pwidget':
+								HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
+								break;
+							case 'folder':
+								HROS.folderView.get(oldobj);
+								break;
 						}
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
-						obj.remove();
-						lay.hide();
-						//判断是否移动应用，如果没有则判断为click事件
-						if(dx == cx && dy == cy){
-							switch(oldobj.attr('type')){
-								case 'window':
-								case 'pwindow':
-								case 'file':
-									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
-									break;
-								case 'widget':
-								case 'pwidget':
-									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
-									break;
-								case 'folder':
-									HROS.folderView.get(oldobj);
-									break;
+						return false;
+					}
+					var movegrid = HROS.grid.searchFolderGrid(cx, cy);
+					if(movegrid != null){
+						if(oldobj.hasClass('folder') == false){
+							var id = oldobj.attr('appid');
+							var from = oldobj.index();
+							var to = movegrid;
+							if(HROS.base.checkLogin()){
+								if(!HROS.app.checkIsMoving()){
+									if(HROS.app.dataDockToFolder(id, from, to)){
+										$.ajax({
+											data : 'ac=moveMyApp&movetype=dock-folder&id=' + id + '&from=' + from + '&to=' + to
+										}).done(function(responseText){
+											HROS.VAR.isAppMoving = false;
+										});
+									}
+								}
+							}else{
+								HROS.app.dataDockToFolder(id, from, to);
 							}
-							return false;
 						}
-						var movegrid = HROS.grid.searchFolderGrid(cx, cy);
+					}else{
+						var dock_w = HROS.CONFIG.dockPos == 'left' ? 0 : HROS.CONFIG.dockPos == 'top' ? ($(window).width() - $('#dock-container').width() + 20) / 2 : $(window).width() - $('#dock-container').width();
+						var dock_h = HROS.CONFIG.dockPos == 'top' ? 0 : ($(window).height() - $('#dock-container').height() + 20) / 2;
+						var movegrid = HROS.grid.searchDockAppGrid(cx - dock_w, cy - dock_h);
 						if(movegrid != null){
-							if(oldobj.hasClass('folder') == false){
+							if(movegrid != oldobj.index()){
+								var movegrid2 = HROS.grid.searchDockAppGrid2(cx - dock_w, cy - dock_h);
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;
+								var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
-										if(HROS.app.dataDockToFolder(id, from, to)){
+										if(HROS.app.dataDockToDock(id, from, to, boa)){
 											$.ajax({
-												data : 'ac=moveMyApp&movetype=dock-folder&id=' + id + '&from=' + from + '&to=' + to
+												data : 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
 										}
 									}
 								}else{
-									HROS.app.dataDockToFolder(id, from, to);
+									HROS.app.dataDockToDock(id, from, to, boa);
 								}
 							}
 						}else{
-							var dock_w = HROS.CONFIG.dockPos == 'left' ? 0 : HROS.CONFIG.dockPos == 'top' ? ($(window).width() - $('#dock-container').width() + 20) / 2 : $(window).width() - $('#dock-container').width();
-							var dock_h = HROS.CONFIG.dockPos == 'top' ? 0 : ($(window).height() - $('#dock-container').height() + 20) / 2;
-							var movegrid = HROS.grid.searchDockAppGrid(cx - dock_w, cy - dock_h);
+							var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
+							var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
+							var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
+							var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
+							var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
 							if(movegrid != null){
-								if(movegrid != oldobj.index()){
-									var movegrid2 = HROS.grid.searchDockAppGrid2(cx - dock_w, cy - dock_h);
-									var id = oldobj.attr('appid');
-									var from = oldobj.index();
-									var to = movegrid;
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
-									if(HROS.base.checkLogin()){
-										if(!HROS.app.checkIsMoving()){
-											if(HROS.app.dataDockToDock(id, from, to, boa)){
-												$.ajax({
-													data : 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
-												}).done(function(responseText){
-													HROS.VAR.isAppMoving = false;
-												});
-											}
+								var movegrid2 = HROS.grid.searchAppGrid2(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
+								var id = oldobj.attr('appid');
+								var from = oldobj.index();
+								var to = movegrid;
+								var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+								var desk = HROS.CONFIG.desk;
+								if(HROS.base.checkLogin()){
+									if(!HROS.app.checkIsMoving()){
+										if(HROS.app.dataDockToDesk(id, from, to, boa, desk)){
+											$.ajax({
+												data : 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+											}).done(function(responseText){
+												HROS.VAR.isAppMoving = false;
+											});
 										}
-									}else{
-										HROS.app.dataDockToDock(id, from, to, boa);
 									}
-								}
-							}else{
-								var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
-								var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
-								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
-								var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
-								var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
-								if(movegrid != null){
-									var movegrid2 = HROS.grid.searchAppGrid2(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
-									var id = oldobj.attr('appid');
-									var from = oldobj.index();
-									var to = movegrid;
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
-									var desk = HROS.CONFIG.desk;
-									if(HROS.base.checkLogin()){
-										if(!HROS.app.checkIsMoving()){
-											if(HROS.app.dataDockToDesk(id, from, to, boa, desk)){
-												$.ajax({
-													data : 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
-												}).done(function(responseText){
-													HROS.VAR.isAppMoving = false;
-												});
-											}
-										}
-									}else{
-										HROS.app.dataDockToDesk(id, from, to, boa, desk);
-									}
+								}else{
+									HROS.app.dataDockToDesk(id, from, to, boa, desk);
 								}
 							}
 						}
-					});
-				}
+					}
+				});
 			});
 			//桌面应用拖动
 			$('#desktop .desktop-apps-container').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0 && !$(this).hasClass('add')){
+				if(!$(this).hasClass('add')){
 					var oldobj = $(this);
 					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
@@ -560,74 +558,100 @@ HROS.app = (function(){
 			$('body').on('mousedown', '.folder_body .appbtn, .quick_view_container .appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.button == 0){
-					var oldobj = $(this);
-					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
-					var dx = e.clientX;
-					var dy = e.clientY;
-					var cx = e.clientX;
-					var cy = e.clientY;
-					var x = dx - oldobj.offset().left;
-					var y = dy - oldobj.offset().top;
-					var lay = HROS.maskBox.desk();
-					//绑定鼠标移动事件
-					$(document).on('mousemove', function(e){
-						$('body').append(obj);
-						lay.show();
-						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
-						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
-						if(dx != cx || dy != cy){
-							obj.css({
-								left : cx - x,
-								top : cy - y
-							}).show();
+				var oldobj = $(this);
+				var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
+				var dx = e.clientX;
+				var dy = e.clientY;
+				var cx = e.clientX;
+				var cy = e.clientY;
+				var x = dx - oldobj.offset().left;
+				var y = dy - oldobj.offset().top;
+				var lay = HROS.maskBox.desk();
+				//绑定鼠标移动事件
+				$(document).on('mousemove', function(e){
+					$('body').append(obj);
+					lay.show();
+					cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
+					cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
+					if(dx != cx || dy != cy){
+						obj.css({
+							left : cx - x,
+							top : cy - y
+						}).show();
+					}
+				}).on('mouseup', function(){
+					$(document).off('mousemove').off('mouseup');
+					obj.remove();
+					lay.hide();
+					//判断是否移动应用，如果没有则判断为click事件
+					if(dx == cx && dy == cy){
+						switch(oldobj.attr('type')){
+							case 'window':
+							case 'pwindow':
+							case 'file':
+								HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
+								break;
+							case 'widget':
+							case 'pwidget':
+								HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
+								break;
 						}
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
-						obj.remove();
-						lay.hide();
-						//判断是否移动应用，如果没有则判断为click事件
-						if(dx == cx && dy == cy){
-							switch(oldobj.attr('type')){
-								case 'window':
-								case 'pwindow':
-								case 'file':
-									HROS.window.create(oldobj.attr('appid'), oldobj.attr('type'));
-									break;
-								case 'widget':
-								case 'pwidget':
-									HROS.widget.create(oldobj.attr('appid'), oldobj.attr('type'));
-									break;
-							}
-							return false;
-						}
-						var movegrid = HROS.grid.searchFolderGrid(cx, cy);
-						if(movegrid != null){
-							if((oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid')) != movegrid){
-								var id = oldobj.attr('appid');
-								var from = oldobj.index();
-								var to = movegrid;
-								var fromFolderId = oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid');
-								if(HROS.base.checkLogin()){
-									if(!HROS.app.checkIsMoving()){
-										if(HROS.app.dataFolderToFolder(id, from, to, fromFolderId)){
-											$.ajax({
-												data : 'ac=moveMyApp&movetype=folder-folder&id=' + id + '&from=' + from + '&to=' + to
-											}).done(function(responseText){
-												HROS.VAR.isAppMoving = false;
-											});
-										}
+						return false;
+					}
+					var movegrid = HROS.grid.searchFolderGrid(cx, cy);
+					if(movegrid != null){
+						if((oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid')) != movegrid){
+							var id = oldobj.attr('appid');
+							var from = oldobj.index();
+							var to = movegrid;
+							var fromFolderId = oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid');
+							if(HROS.base.checkLogin()){
+								if(!HROS.app.checkIsMoving()){
+									if(HROS.app.dataFolderToFolder(id, from, to, fromFolderId)){
+										$.ajax({
+											data : 'ac=moveMyApp&movetype=folder-folder&id=' + id + '&from=' + from + '&to=' + to
+										}).done(function(responseText){
+											HROS.VAR.isAppMoving = false;
+										});
 									}
-								}else{
-									HROS.app.dataFolderToFolder(id, from, to, fromFolderId);
 								}
+							}else{
+								HROS.app.dataFolderToFolder(id, from, to, fromFolderId);
+							}
+						}
+					}else{
+						var dock_w = HROS.CONFIG.dockPos == 'left' ? 0 : HROS.CONFIG.dockPos == 'top' ? ($(window).width() - $('#dock-container').width() + 20) / 2 : $(window).width() - $('#dock-container').width();
+						var dock_h = HROS.CONFIG.dockPos == 'top' ? 0 : ($(window).height() - $('#dock-container').height() + 20) / 2;
+						var movegrid = HROS.grid.searchDockAppGrid(cx - dock_w, cy - dock_h);
+						if(movegrid != null){
+							var movegrid2 = HROS.grid.searchDockAppGrid2(cx - dock_w, cy - dock_h);
+							var id = oldobj.attr('appid');
+							var from = oldobj.index();
+							var to = movegrid;
+							var fromFolderId = oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid');
+							var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+							var desk = HROS.CONFIG.desk;
+							if(HROS.base.checkLogin()){
+								if(!HROS.app.checkIsMoving()){
+									if(HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk)){
+										$.ajax({
+											data : 'ac=moveMyApp&movetype=folder-dock&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+										}).done(function(responseText){
+											HROS.VAR.isAppMoving = false;
+										});
+									}
+								}
+							}else{
+								HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk);
 							}
 						}else{
-							var dock_w = HROS.CONFIG.dockPos == 'left' ? 0 : HROS.CONFIG.dockPos == 'top' ? ($(window).width() - $('#dock-container').width() + 20) / 2 : $(window).width() - $('#dock-container').width();
-							var dock_h = HROS.CONFIG.dockPos == 'top' ? 0 : ($(window).height() - $('#dock-container').height() + 20) / 2;
-							var movegrid = HROS.grid.searchDockAppGrid(cx - dock_w, cy - dock_h);
+							var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
+							var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
+							var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
+							var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
+							var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
 							if(movegrid != null){
-								var movegrid2 = HROS.grid.searchDockAppGrid2(cx - dock_w, cy - dock_h);
+								var movegrid2 = HROS.grid.searchAppGrid2(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;
@@ -636,49 +660,21 @@ HROS.app = (function(){
 								var desk = HROS.CONFIG.desk;
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
-										if(HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk)){
+										if(HROS.app.dataFolderToDesk(id, from, to, fromFolderId, boa, desk)){
 											$.ajax({
-												data : 'ac=moveMyApp&movetype=folder-dock&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+												data : 'ac=moveMyApp&movetype=folder-desk&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
 										}
 									}
 								}else{
-									HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk);
-								}
-							}else{
-								var dock_w = HROS.CONFIG.dockPos == 'left' ? $('#dock-bar').width() : 0;
-								var dock_h = HROS.CONFIG.dockPos == 'top' ? $('#dock-bar').height() : 0;
-								var deskScrollLeft = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollLeft();
-								var deskScrollTop = $('#desk-' + HROS.CONFIG.desk + ' .desktop-apps-container').scrollTop();
-								var movegrid = HROS.grid.searchAppGrid(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
-								if(movegrid != null){
-									var movegrid2 = HROS.grid.searchAppGrid2(cx - dock_w + deskScrollLeft, cy - dock_h + deskScrollTop);
-									var id = oldobj.attr('appid');
-									var from = oldobj.index();
-									var to = movegrid;
-									var fromFolderId = oldobj.parents('.folder-window').attr('appid') || oldobj.parents('.quick_view_container').attr('appid');
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
-									var desk = HROS.CONFIG.desk;
-									if(HROS.base.checkLogin()){
-										if(!HROS.app.checkIsMoving()){
-											if(HROS.app.dataFolderToDesk(id, from, to, fromFolderId, boa, desk)){
-												$.ajax({
-													data : 'ac=moveMyApp&movetype=folder-desk&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
-												}).done(function(responseText){
-													HROS.VAR.isAppMoving = false;
-												});
-											}
-										}
-									}else{
-										HROS.app.dataFolderToDesk(id, from, to, fromFolderId, boa, desk);
-									}
+									HROS.app.dataFolderToDesk(id, from, to, fromFolderId, boa, desk);
 								}
 							}
 						}
-					});
-				}
+					}
+				});
 			});
 		},
 		/*

@@ -165,25 +165,23 @@ HROS.dock = (function(){
 		},
 		move : function(){
 			$('#dock-container').on('mousedown',function(e){
-				if(e.button == 0){
-					var lay = HROS.maskBox.dock(), location;
-					$(document).on('mousemove', function(e){
-						lay.show();
-						if(e.clientY < lay.height() * 0.2){
-							location = 'top';		
-						}else if(e.clientX < lay.width() * 0.5){
-							location = 'left';
-						}else{				
-							location = 'right';
-						}
-						$('.dock_drap_effect').removeClass('hover');
-						$('.dock_drap_effect_' + location).addClass('hover');
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
-						lay.hide();
-						HROS.dock.updatePos(location);
-					});
-				}
+				var lay = HROS.maskBox.dock(), location;
+				$(document).on('mousemove', function(e){
+					lay.show();
+					if(e.clientY < lay.height() * 0.2){
+						location = 'top';		
+					}else if(e.clientX < lay.width() * 0.5){
+						location = 'left';
+					}else{				
+						location = 'right';
+					}
+					$('.dock_drap_effect').removeClass('hover');
+					$('.dock_drap_effect_' + location).addClass('hover');
+				}).on('mouseup', function(){
+					$(document).off('mousemove').off('mouseup');
+					lay.hide();
+					HROS.dock.updatePos(location);
+				});
 			});
 		},
 		/*
