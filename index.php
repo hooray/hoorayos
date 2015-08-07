@@ -263,7 +263,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 			</div>
 		</div>
 		<ul class="startmenu">
-			<li><a href="javascript:;" class="help">新手指导</a></li>
 			<li><a href="javascript:;" class="about">关于 HoorayOS</a></li>
 		</ul>
 		<div class="startmenu-exit"><a href="javascript:;" title="注销当前用户"></a></div>

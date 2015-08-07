@@ -172,22 +172,6 @@ HROS.base = (function(){
 				callback && callback();
 			});
 		},
-		help : function(){
-			//IE6,7,8基本就告别新手帮助了
-			if(!$.browser.msie || ($.browser.msie && $.browser.version >= 9)){
-				$('body').append(helpTemp);
-				$('#step1').show();
-				$('#help .close').on('click', function(){
-					$('#help').remove();
-				});
-				$('#help .next').on('click', function(){
-					var obj = $(this).parents('.step');
-					var step = obj.attr('step');
-					obj.hide();
-					$('#step' + (parseInt(step) + 1)).show();
-				});
-			}
-		},
 		run : function(){
 			var url = location.search;
 			var request = new Object();

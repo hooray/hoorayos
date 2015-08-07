@@ -32,9 +32,6 @@ HROS.startMenu = (function(){
 			});
 			$('#startmenu-container .startmenu a').on('click', function(){
 				switch($(this).attr('class')){
-					case 'help':
-						HROS.base.help();
-						break;
 					case 'about':
 						HROS.copyright.show();
 						break;
