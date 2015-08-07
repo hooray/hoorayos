@@ -959,18 +959,24 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .btn:hover .icon200{background-position:-342px -162px}
 
 /*新手帮助*/
-#help{position:absolute;z-index:5555;width:100%;height:100%;background:none rgba(0, 0, 0, 0.7)}
-#help .close{float:right;font-size:40px;color:#fff;width:40px;height:40px;line-height:36px;text-align:center;background:none}
-#help .close:hover{background:none rgba(0, 0, 0, 0.7)}
-#help .step{position:absolute;color:#eee;padding:0 20px 15px;background:none rgba(0, 0, 0, 0.7);border-radius:5px;display:none}
+#help{position:absolute;z-index:5555;width:100%;height:100%;}
+#help .overlay-hole{position:absolute;height:0;width:0;padding:20px;top:0;left:0;z-index:98;box-shadow:rgba(0, 0, 0, 0.6) 0px 0px 1px 10000px;}
+#help .overlay-hole div{position:absolute;top:0;bottom:0;left:0;right:0;box-shadow:inset 0 0 10px 10px rgba(0, 0, 0, 0.6);}
+#help .step{position:absolute;z-index:99;color:#eee;padding:0 20px 15px;background:none rgba(0, 0, 0, 0.7);border-radius:5px;display:none}
 #help .step .jt{font-size:0;height:0;border:20px solid rgba(0, 0, 0, 0);position:absolute}
-#help .step .jt_left{border-right:20px solid rgba(0, 0, 0, 0.7)}
-#help .step .jt_right{border-left:20px solid rgba(0, 0, 0, 0.7)}
-#help .step .jt_top{border-bottom:20px solid rgba(0, 0, 0, 0.7)}
-#help .step .jt_bottom{border-top:20px solid rgba(0, 0, 0, 0.7)}
+#help .step .jt_left{border-right:20px solid rgba(0, 0, 0, 0.7);left:-40px;top:20px}
+#help .step .jt_right{border-left:20px solid rgba(0, 0, 0, 0.7);right:-40px;top:20px}
+#help .step .jt_top{border-bottom:20px solid rgba(0, 0, 0, 0.7);top:-40px;left:30px}
+#help .step .jt_bottom{border-top:20px solid rgba(0, 0, 0, 0.7);bottom:-40px;left:30px}
 #help .step .h1{font-size:40px;font-weight:bold}
-#help .step .h2{font-size:28px;font-weight:bold;padding-left:10px}
+#help .step .h2{font-size:28px;font-weight:bold}
+#help .step .inner{margin:10px 0;}
+#help .step .prev,
 #help .step .next,
-#help .step .over{border:1px solid #fff;color:#fff;padding:0 5px;float:right;margin-top:10px}
+#help .step .close{border:1px solid #fff;color:#fff;padding:0 5px;margin-top:10px}
+#help .step .prev{float:left;}
+#help .step .next{float:right;}
+#help .step .close{float:left;margin-left:53px;}
+#help .step .prev:hover,
 #help .step .next:hover,
-#help .step .over:hover{background:none rgba(50, 50, 50, 0.7)}
+#help .step .close:hover{background:none rgba(50, 50, 50, 0.7)}

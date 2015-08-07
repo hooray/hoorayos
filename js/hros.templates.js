@@ -237,44 +237,51 @@ var lockTemp = template.compile(
 //新手帮助提示
 var helpTemp = template.compile(
 	'<div id="help">'+
-		'<a href="javascript:;" class="close" title="关闭新手帮助">×</a>'+
-		'<div id="step1" class="step" step="1" style="position:relative;left:50%;top:50%;margin-left:-160px;margin-top:-60px;width:280px;height:100px">'+
+		'<div class="overlay-hole" style="width:104px;height:112px;top:23px;left:105px"><div></div></div>'+
+		'<div id="step1" class="step" step="1" style="left:50%;top:50%;margin-left:-160px;margin-top:-60px;width:280px">'+
 			'<p style="text-align:center">'+
 				'<span class="h2">欢迎使用HoorayOS</span>'+
-				'<br>下面我会简单介绍下如何使用，以便你快速上手<br>'+
-				'<a href="javascript:;" class="next">下一步</a>'+
+				'<div class="inner" style="text-align:center">下面我会简单介绍下如何使用，以便你快速上手</div>'+
+				'<a href="javascript:;" class="next">开　始</a>'+
 			'</p>'+
 		'</div>'+
 		'<div id="step2" class="step" step="2" style="top:90px;left:140px;width:250px">'+
-			'<b class="jt jt_left" style="left:-40px;top:20px"></b>'+
+			'<b class="jt jt_left"></b>'+
 			'<p>'+
 				'<span class="h1">①</span><span class="h2">桌面</span>'+
-				'<br>可以在应用中心添加自己需要的应用到桌面<br>'+
+				'<div class="inner">可以在应用中心添加自己需要的应用到桌面</div>'+
+				'<a href="javascript:;" class="prev">上一步</a>'+
+				'<a href="javascript:;" class="close">关　闭</a>'+
 				'<a href="javascript:;" class="next">下一步</a>'+
 			'</p>'+
 		'</div>'+
 		'<div id="step3" class="step" step="3" style="top:90px;left:50%;margin-left:-125px;width:250px">'+
-			'<b class="jt jt_top" style="top:-40px;left:30px"></b>'+
+			'<b class="jt jt_top"></b>'+
 			'<p>'+
 				'<span class="h1">②</span><span class="h2">应用码头</span>'+
-				'<br>可以将桌面应用拖放到这<br>'+
+				'<div class="inner">可以将桌面应用拖放到这</div>'+
+				'<a href="javascript:;" class="prev">上一步</a>'+
+				'<a href="javascript:;" class="close">关　闭</a>'+
 				'<a href="javascript:;" class="next">下一步</a>'+
 			'</p>'+
 		'</div>'+
 		'<div id="step4" class="step" step="4" style="top:130px;left:50%;margin-left:-125px;width:250px">'+
-			'<b class="jt jt_top" style="top:-40px;left:30px"></b>'+
+			'<b class="jt jt_top"></b>'+
 			'<p>'+
 				'<span class="h1">③</span><span class="h2">翻页导航</span>'+
-				'<br>可以快速切换当前桌面<br>'+
+				'<div class="inner">可以快速切换当前桌面</div>'+
+				'<a href="javascript:;" class="prev">上一步</a>'+
+				'<a href="javascript:;" class="close">关　闭</a>'+
 				'<a href="javascript:;" class="next">下一步</a>'+
 			'</p>'+
 		'</div>'+
 		'<div id="step5" class="step" step="5" style="bottom:50px;left:50%;margin-left:-125px;width:250px">'+
-			'<b class="jt jt_bottom" style="bottom:-40px;left:30px"></b>'+
+			'<b class="jt jt_bottom"></b>'+
 			'<p>'+
 				'<span class="h1">④</span><span class="h2">任务栏</span>'+
-				'<br>这个就不用我介绍了吧 =)<br>'+
-				'<a href="javascript:;" class="over">&nbsp;完&nbsp;成&nbsp;</a>'+
+				'<div class="inner">这个就不用我介绍了吧 =)</div>'+
+				'<a href="javascript:;" class="prev">上一步</a>'+
+				'<a href="javascript:;" class="close">关　闭</a>'+
 			'</p>'+
 		'</div>'+
 	'</div>'

@@ -173,21 +173,18 @@ HROS.base = (function(){
 			});
 		},
 		help : function(){
+			//IE6,7,8基本就告别新手帮助了
 			if(!$.browser.msie || ($.browser.msie && $.browser.version >= 9)){
 				$('body').append(helpTemp);
-				//IE6,7,8基本就告别新手帮助了
 				$('#step1').show();
-				$('.close').on('click', function(){
+				$('#help .close').on('click', function(){
 					$('#help').remove();
 				});
-				$('.next').on('click', function(){
+				$('#help .next').on('click', function(){
 					var obj = $(this).parents('.step');
 					var step = obj.attr('step');
 					obj.hide();
 					$('#step' + (parseInt(step) + 1)).show();
-				});
-				$('.over').on('click', function(){
-					$('#help').remove();
 				});
 			}
 		},
@@ -198,7 +195,7 @@ HROS.base = (function(){
 				var str = url.substr(1);
 				strs = str.split('&');
 				for(var i = 0; i < strs.length; i++){
-					request[strs[i].split('=')[0]]=unescape(strs[i].split('=')[1]);
+					request[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
 				}
 			}
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
