@@ -22,12 +22,12 @@
 			}
 			foreach($db->select('tb_app_category', '*') as $ac){
 				if(($ac['issystem'] == 1 && $type == 1) || $ac['issystem'] == 0){
-					echo '<li value="'.$ac['tbid'].'"><a href="javascript:;" title="'.$ac['name'].'">'.$ac['name'].'</a></li>';
+					echo '<li val="'.$ac['tbid'].'"><a href="javascript:;" title="'.$ac['name'].'">'.$ac['name'].'</a></li>';
 				}
 			}
-			echo '<li value="-1"><a href="javascript:;" title="挂件">挂件</a></li>';
+			echo '<li val="-1"><a href="javascript:;" title="挂件">挂件</a></li>';
 			if(checkLogin()){
-				echo '<li class="myapps" value="-2"><a href="javascript:;" title="我的应用">我的<br>应用</a></li>';
+				echo '<li class="myapps" val="-2"><a href="javascript:;" title="我的应用">我的<br>应用</a></li>';
 			}
 		?>
 	</ul>
@@ -117,9 +117,9 @@
 		<div class="mbox app-list-box">
 			<div class="title">
 				<ul>
-					<li class="focus" value="1"><a href="javascript:;">最新应用</a></li>
-					<li value="2"><a href="javascript:;">最热门</a></li>
-					<li value="3"><a href="javascript:;">最高评价</a></li>
+					<li class="focus" val="1"><a href="javascript:;">最新应用</a></li>
+					<li val="2"><a href="javascript:;">最热门</a></li>
+					<li val="3"><a href="javascript:;">最高评价</a></li>
 					<input type="hidden" name="search_2" id="search_2" value="1">
 				</ul>
 			</div>
@@ -167,7 +167,7 @@ $(function(){
 		closeDetailIframe2();
 		$('.sub-nav ul li').removeClass('active');
 		$(this).addClass('active');
-		$('#search_1').val($(this).attr('value'));
+		$('#search_1').val($(this).attr('val'));
 		$('.app-list-box .title li').removeClass('active').eq(0).addClass('active');
 		$('#search_2').val(1);
 		getPageList(0);
@@ -175,7 +175,7 @@ $(function(){
 	$('.app-list-box .title li').click(function(){
 		$('.app-list-box .title li').removeClass('focus');
 		$(this).addClass('focus');
-		$('#search_2').val($(this).attr('value'));
+		$('#search_2').val($(this).attr('val'));
 		getPageList(0);
 	});
 	//搜索
