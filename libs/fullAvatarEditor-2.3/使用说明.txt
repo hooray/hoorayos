@@ -1,0 +1,46 @@
+目录结构
+│
+├─asp───┐ //asp上传接口文件夹
+│   	     ├─Upload.asp 	//asp上传接口文件
+│           │         
+│           └─Upload.asp.cls //Upload.asp使用的无组件上传类
+│
+├─asp.net─┐ //asp.net接口文件夹
+│           ├─c#─┐
+│           │      ├─bin─┐
+│           │	     │       └─Newtonsoft.Json.dll
+│           │      ├─Upload.ashx
+│           │      ├─Upload.aspx
+│           │      └─Upload.aspx.cs
+│           └─vb─┐
+│                   ├─bin─┐
+│           	     │       └─Newtonsoft.Json.dll
+│                   ├─Upload.aspx
+│                   └─Upload.aspx.vb
+├─jsp───┐ //jsp上传接口文件夹
+│           ├─WEB-INF	//jsp上传接口文件所必须的插件包
+│           └─upload.jsp	//jsp上传接口文件
+├─php───┐ 
+│           └─upload.php	//php上传接口文件
+├─scripts─┐
+│           ├─fullAvatarEditor.js	//富头像上传编辑器插件的js文件
+│           └─swfobject.js		//fullAvatarEditor.js使用的SWFObject插件
+├─crossdomain.xml      //Flash跨域策略配置文件
+├─expressInstall.swf   //用于在SWFObject插件中快速安装/升级的flash的插件
+├─fullAvatarEditor.swf //富头像上传编辑器插件的flash文件
+├─simpleDemo.html      //简单的演示网页文件
+└─upload               //默认演示中头像图片文件上传保存的目录
+
+注意事项:
+    asp.net接口需要将其文件夹中的bin文件夹放置于根目录。并自行更改接口代码中定义的上传目录
+    jsp接口需要将其文件夹中的WEB-INF文件夹放置于根目录。并自行更改接口代码中定义的上传目录
+    如果图片写入不成功，请注意查看并修改图片存储目录的可写权限
+
+调试方法：
+    Chrome（推荐）: Ctrl + Shift + J
+    FireFox: 安装firebug插件，F12->网络->所有
+
+购买去版权水印或源码授权或有任何问题请联系我
+联系方式
+ＱＱ号码：23232697
+电子邮箱/支付宝帐号：looselive@gmail.com

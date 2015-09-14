@@ -45,7 +45,7 @@ HROS.startMenu = (function(){
 			$.ajax({
 				data : 'ac=getAvatar'
 			}).done(function(avatar){
-				$('#startmenu-container .startmenu-avatar img').attr('src', avatar['avatar']);
+				$('#startmenu-container .startmenu-avatar img').attr('src', avatar['avatar'] + '?' + Date.parse(new Date()));
 			});
 		},
 		/*
@@ -57,7 +57,7 @@ HROS.startMenu = (function(){
 					appid : 'zhsz',
 					title : '账号设置',
 					url : 'sysapp/account/index.php',
-					width : 550,
+					width : 680,
 					height : 580
 				});
 			}else{

@@ -432,7 +432,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #task-bar.min-zIndex{z-index:-1}
 #task-next,
 #task-pre{width:54px;height:100%;float:left;margin:0 1px;overflow:hidden;display:none}
-#task-next{position:relative;z-index:9990;background:url(desk_sprite.png) no-repeat -200px -264px}
+#task-next{position:relative;z-index:9990;background:url(desk_sprite.png) no-repeat -350px -259px}
 #task-next a{display:block;width:45px;height:35px;margin-top:20px;margin-left:15px;background:url(desk_sprite.png) no-repeat -265px -450px;cursor:pointer}
 #task-next a:hover{background-position:-265px -402px}
 #task-next a.disable{background-position:-265px -497px;cursor:default}
