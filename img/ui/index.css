@@ -152,8 +152,8 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 
 /*图标*/
 .appbtn,
-#shortcut_shadow{padding:10px;text-align:center;position:absolute;z-index:1;cursor:pointer}
-.appbtn:hover{border-radius:5px;background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#3F000000,endcolorstr=#3F000000);}
+#shortcut_shadow{padding:10px;text-align:center;position:absolute;z-index:1;cursor:pointer;border-radius:5px;-webkit-transition:background 0.2s;-moz-transition:background 0.2s;-o-transition:background 0.2s;-ms-transition:background 0.2s;transition:background 0.2s;}
+.appbtn:hover{background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(startcolorstr=#3F000000,endcolorstr=#3F000000);}
 #shortcut_shadow,
 #shortcut_shadow2{position:absolute;z-index:9999999;display:none}
 .appbtn img,
