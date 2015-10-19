@@ -432,10 +432,10 @@ HROS.app = (function(){
 				}
 			});
 			//桌面应用拖动
-			$('#desktop .desktop-apps-container').on('mousedown', '.appbtn:not(.add)', function(e){
+			$('#desktop .desktop-apps-container').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.which == 1){
+				if(e.which == 1 && !$(this).hasClass('add')){
 					var oldobj = $(this);
 					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
 					var dx = e.clientX;
