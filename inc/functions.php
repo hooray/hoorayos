@@ -73,14 +73,15 @@
 			return $keyc.str_replace('=', '', base64_encode($result));
 		}
 	}
-	function daddslashes($string, $force = 0, $strip = FALSE) {
-		if(!get_magic_quotes_gpc() || $force) {
-			if(is_array($string)) {
+	function daddslashes($string, $force = 0, $strip = FALSE){
+		//字符串或数组，是否强制，是否去除
+		if(!MAGIC_QUOTES_GPC || $force){
+			if(is_array($string)){
 				//如果其为一个数组则循环执行此函数
-				foreach($string as $key => $val) {
+				foreach($string as $key => $val){
 					$string[$key] = daddslashes($val, $force, $strip);
 				}
-			} else {
+			}else{
 				//下面是一个三元操作符，如果$strip为true则执行stripslashes去掉反斜线字符，再执行addslashes
 				//这里为什么要将$string先去掉反斜线再进行转义呢，因为有的时候$string有可能有两个反斜线，stripslashes是将多余的反斜线过滤掉
 				$string = addslashes($strip ? stripslashes($string) : $string);
