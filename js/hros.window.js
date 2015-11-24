@@ -609,7 +609,7 @@ HROS.window = (function(){
 			}
 		},
 		handle : function(){
-			$('#desk').on('mousedown', '.window-container .title-bar .title-handle a', function(e){
+			$('#desk').on('mousedown', '.window-container .title-bar .title-handle a, .window-container .set-bar a', function(e){
 				e.preventDefault();
 				e.stopPropagation();
 			});
