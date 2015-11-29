@@ -98,9 +98,14 @@ HROS.window = (function(){
 						'isflash' : options.isflash
 					};
 					$('#desk').append(windowTemp(TEMP.windowTemp));
-					$(windowId).data('info', TEMP.windowTemp);
+					$(windowId).data('info', TEMP.windowTemp).css({
+						opacity : 0,
+						scale : 1.1
+					}).transition({
+						opacity : 1,
+						scale : 1
+					}, 200);
 					HROS.CONFIG.windowIndexid += 1;
-					HROS.window.setPos(false);
 					HROS.window.show2top(options.appid);
 				}
 				nextDo({
@@ -185,9 +190,14 @@ HROS.window = (function(){
 								'isflash' : options.isflash == 1 ? true : false
 							};
 							$('#desk').append(windowTemp(TEMP.windowTemp));
-							$(windowId).data('info', TEMP.windowTemp);
+							$(windowId).data('info', TEMP.windowTemp).css({
+								opacity : 0,
+								scale : 1.1
+							}).transition({
+								opacity : 1,
+								scale : 1
+							}, 200);
 							HROS.CONFIG.windowIndexid += 1;
-							HROS.window.setPos(false);
 							HROS.window.show2top(options.appid);
 							break;
 						case 'folder':
@@ -218,9 +228,14 @@ HROS.window = (function(){
 								'imgsrc' : options.imgsrc
 							};
 							$('#desk').append(folderWindowTemp(TEMP.folderWindowTemp));
-							$(windowId).data('info', TEMP.folderWindowTemp);
+							$(windowId).data('info', TEMP.folderWindowTemp).css({
+								opacity : 0,
+								scale : 1.1
+							}).transition({
+								opacity : 1,
+								scale : 1
+							}, 200);
 							HROS.CONFIG.windowIndexid += 1;
-							HROS.window.setPos(false);
 							//载入文件夹内容
 							var sc = '';
 							$(HROS.VAR.folder).each(function(){
@@ -308,8 +323,7 @@ HROS.window = (function(){
 				});
 			}
 		},
-		setPos : function(isAnimate){
-			isAnimate = isAnimate == null ? true : isAnimate;
+		setPos : function(){
 			$('#desk .window-container').each(function(){
 				var windowdata = $(this).data('info');
 				var currentW = $(window).width() - $(this).width();
@@ -322,7 +336,7 @@ HROS.window = (function(){
 					$(this).stop(true, false).animate({
 						'left' : left,
 						'top' : top
-					}, isAnimate ? 500 : 0, function(){
+					}, 500, function(){
 						windowdata['left'] = left;
 						windowdata['top'] = top;
 						windowdata['emptyW'] = $(window).width() - $(this).width();
@@ -338,7 +352,15 @@ HROS.window = (function(){
 		},
 		close : function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
-			$(windowId).removeData('info').html('').remove();
+			$(windowId).css({
+				opacity : 1,
+				scale : 1
+			}).transition({
+				opacity : 0,
+				scale : 1.1
+			}, 200, function(){
+				$(this).removeData('info').html('').remove();
+			});
 			$('#task-content-inner ' + taskId).html('').remove();
 			$('#task-bar').removeClass('min-zIndex');
 			HROS.taskBar.resize();
@@ -350,7 +372,17 @@ HROS.window = (function(){
 		},
 		hide : function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
-			$(windowId).css('left', -10000).attr('state', 'hide');
+			$(windowId).css({
+				opacity : 1,
+				scale : 1,
+				y : 0
+			}).transition({
+				opacity : 0,
+				scale : 0.9,
+				y : 50
+			}, 200, function(){
+				$(this).css('left', -10000).attr('state', 'hide');
+			});
 			$('#task-content-inner ' + taskId).removeClass('task-item-current');
 			if($(windowId).attr('ismax') == 1){
 				$('#task-bar').removeClass('min-zIndex');
@@ -374,10 +406,9 @@ HROS.window = (function(){
 		},
 		revert : function(appid){
 			HROS.window.show2top(appid);
-			var windowId = '#w_' + appid, taskId = '#t_' + appid;
+			var windowId = '#w_' + appid, taskId = '#t_' + appid, windowdata = $(windowId).data('info');
 			$(windowId + ' .title-handle .ha-revert').hide().prev('.ha-max').show();
-			var obj = $(windowId), windowdata = obj.data('info');
-			obj.removeClass('window-maximize').attr('ismax',0).animate({
+			$(windowId).removeClass('window-maximize').attr('ismax',0).animate({
 				width : windowdata['width'],
 				height : windowdata['height'],
 				left : windowdata['left'],
@@ -397,8 +428,7 @@ HROS.window = (function(){
 		},
 		show2top : function(appid, isAnimate){
 			isAnimate = isAnimate == null ? false : isAnimate;
-			var windowId = '#w_' + appid, taskId = '#t_' + appid;
-			var windowdata = $(windowId).data('info');
+			var windowId = '#w_' + appid, taskId = '#t_' + appid, windowdata = $(windowId).data('info');
 			var arr = [];
 			function show(){
 				HROS.window.show2under();
@@ -412,7 +442,7 @@ HROS.window = (function(){
 					zIndex : HROS.CONFIG.windowIndexid,
 					left : windowdata['left'],
 					top : windowdata['top']
-				}).attr('state', 'show');
+				});
 				//如果窗口最小化前是最大化状态的，则坐标位置设为0
 				if($(windowId).attr('ismax') == 1){
 					$(windowId).css({
@@ -425,6 +455,19 @@ HROS.window = (function(){
 				//改变当前iframe显示
 				$(windowId + ' iframe').show();
 				HROS.CONFIG.windowIndexid += 1;
+				if($(windowId).attr('state') == 'hide'){
+					$(windowId).css({
+						opacity : 0,
+						scale : 0.9,
+						y : 50
+					}).transition({
+						opacity : 1,
+						scale : 1,
+						y : 0
+					}, 200, function(){
+						$(this).attr('state', 'show');
+					});
+				}
 			}
 			if(isAnimate){
 				var baseStartX = $(windowId).offset().left, baseEndX = baseStartX + $(windowId).width();

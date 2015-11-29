@@ -180,7 +180,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 .folder_body .appbtn{position:relative;float:left;margin:5px}
 
 /*窗口*/
-.window-container{position:absolute;background:#ccc;border:1px solid #000}
+.window-container{position:absolute;background:#ccc;border:1px solid #000;-webkit-box-shadow:0px 5px 60px rgba(0,0,0,0.8);-moz-box-shadow:0px 5px 60px rgba(0,0,0,0.8);box-shadow:0px 5px 60px rgba(0,0,0,0.8)}
 /*当前窗口*/
 .window-current{background:#fff}
 /*最大化窗口*/
