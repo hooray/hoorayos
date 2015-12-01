@@ -10,7 +10,7 @@ HROS.appmanage = (function(){
 			$('#appmanage .amg_close').off('click').on('click', function(){
 				HROS.appmanage.close();
 			});
-			$('#amg_folder_container').on('contextmenu', '.appbtn', function(){
+			$('#amg_dock_container, #amg_folder_container').on('contextmenu', '.appbtn', function(){
 				return false;
 			});
 			HROS.appmanage.move();
