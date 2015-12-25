@@ -362,7 +362,16 @@ HROS.window = (function(){
 				$(this).removeData('info').html('').remove();
 			});
 			$('#task-content-inner ' + taskId).html('').remove();
-			$('#task-bar').removeClass('min-zIndex');
+			//当所有显示在桌面上的窗口都不处于最大化状态时，则去掉任务栏min-zIndex样式
+			var f = true;
+			$('#desk .window-container').each(function(){
+				if($(this).attr('state') == 'show' && $(this).attr('ismax') == 1){
+					f = false;
+				}
+			});
+			if(f){
+				$('#task-bar').removeClass('min-zIndex');
+			}
 			HROS.taskBar.resize();
 		},
 		closeAll : function(){

@@ -34,7 +34,8 @@ HROS.widget = (function(){
 			//如果没有打开，则进行创建
 			if(!iswidgetopen){
 				function nextDo(options){
-					$('#desk').append(widgetWindowTemp({
+					var widgetId = '#w_' + options.appid;
+					TEMP.widgetTemp = {
 						'width' : options.width,
 						'height' : options.height,
 						'type' : 'widgetTemp',
@@ -46,7 +47,15 @@ HROS.widget = (function(){
 						'url' : options.url,
 						'zIndex' : HROS.CONFIG.widgetIndexid,
 						'issetbar' : 0
-					}));
+					};
+					$('#desk').append(widgetWindowTemp(TEMP.widgetTemp));
+					$(widgetId).data('info', TEMP.widgetTemp).css({
+						opacity : 0,
+						scale : 1.1
+					}).transition({
+						opacity : 1,
+						scale : 1
+					}, 200);
 					HROS.CONFIG.widgetIndexid += 1;
 				}
 				nextDo({
@@ -100,7 +109,13 @@ HROS.widget = (function(){
 						'issetbar' : 1
 					};
 					$('#desk').append(widgetWindowTemp(TEMP.widgetTemp));
-					$(widgetId).data('info', TEMP.widgetTemp);
+					$(widgetId).data('info', TEMP.widgetTemp).css({
+						opacity : 0,
+						scale : 1.1
+					}).transition({
+						opacity : 1,
+						scale : 1
+					}, 200);
 					HROS.CONFIG.widgetIndexid += 1;
 				}
 				ZENG.msgbox.show('小挂件正在加载中，请耐心等待...', 6, 100000);
@@ -238,7 +253,15 @@ HROS.widget = (function(){
 		close : function(appid){
 			var widgetId = '#w_' + appid;
 			HROS.widget.removeCookie($(widgetId).attr('appid'), $(widgetId).attr('type'));
-			$(widgetId).html('').remove();
+			$(widgetId).css({
+				opacity : 1,
+				scale : 1
+			}).transition({
+				opacity : 0,
+				scale : 1.1
+			}, 200, function(){
+				$(this).removeData('info').html('').remove();
+			});
 		},
 		show2top : function(appid){
 			var widgetId = '#w_' + appid;
