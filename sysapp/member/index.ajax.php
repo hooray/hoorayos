@@ -5,7 +5,7 @@
 		case 'getList':
 			$where = array();
 			if($_POST['search_1'] != ''){
-				$where['LIKE']['username'] = $_POST['search_1'];
+				$where['AND']['username[~]'] = $_POST['search_1'];
 			}
 			if($_POST['search_2'] != ''){
 				$where['type'] = $_POST['search_2'];

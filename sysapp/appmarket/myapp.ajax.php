@@ -8,7 +8,7 @@
 			}
 			$where['AND']['member_id'] = session('member_id');
 			if($_POST['search_1'] != ''){
-				$where['LIKE']['name'] = $_POST['search_1'];
+				$where['AND']['name[~]'] = $_POST['search_1'];
 			}
 			if($_POST['search_2'] != ''){
 				$where['AND']['app_category_id'] = $_POST['search_2'];

@@ -5,7 +5,7 @@
 		case 'getList':
 			$where['issystem'] = 0;
 			if($_POST['search_1'] != ''){
-				$where['LIKE']['name'] = $_POST['search_1'];
+				$where['AND']['name[~]'] = $_POST['search_1'];
 			}
 			echo $db->count('tb_app_category', $where).'<{|*|}>';
 			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);

@@ -62,7 +62,7 @@
 				}
 			}
 			if($_POST['search_3'] != ''){
-				$where['LIKE']['name'] = $_POST['search_3'];
+				$where['AND']['name[~]'] = $_POST['search_3'];
 			}
 			$where['AND']['verifytype'] = 1;
 			echo $db->count('tb_app', $where).'<{|*|}>';
