@@ -80,7 +80,7 @@ HROS.lock = (function(){
 							data : 'ac=logout'
 						});
 						$('#desktop').hide();
-						var userinfo = $.parseJSON($.cookie(cookie_prefix + 'userinfo'));
+						var userinfo = $.parseJSON(Cookies.get(cookie_prefix + 'userinfo'));
 						$('body').append(lockTemp({
 							'avatar' : userinfo.avatar,
 							'username' : userinfo.username
@@ -123,8 +123,8 @@ HROS.lock = (function(){
 							getTimeDateWeek();
 						}, 1000);
 					};
-					if($.cookie(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID) == null){
-						$.cookie(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID, 1);
+					if(Cookies.get(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID) == null){
+						Cookies.set(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID, 1);
 						$.dialog({
 							title : '温馨提示',
 							icon : 'warning',

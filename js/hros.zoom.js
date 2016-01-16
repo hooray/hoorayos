@@ -12,11 +12,7 @@ HROS.zoom = (function(){
 		*/
 		init : function(){
 			$('body').append('<div id="zoombox"></div>');
-			/*
-			**  使用SWFObject.js插入flash
-			**  http://www.cnblogs.com/wuxinxi007/archive/2009/10/27/1590709.html
-			*/
-			swfobject.embedSWF('js/zoom.swf?onchange=HROS.zoom.check', 'zoombox', '10', '10', '6.0.0', 'expressInstall.swf', '', {allowScriptAccess : 'always', wmode : 'transparent', scale : 'noScale'}, {id : 'accessory_zoom', name : 'zoom_detect'});
+			swfobject.embedSWF('js/zoom.swf?onchange=HROS.zoom.check', document.getElementById('zoombox'), 10, 10, 10, 'expressInstall.swf', '', {allowScriptAccess : 'always', wmode : 'transparent', scale : 'noScale'}, {id : 'accessory_zoom', name : 'zoom_detect'});
 		},
 		/*
 		**  为什么会有个参数o？其实我也不知道

@@ -392,8 +392,8 @@ $(function(){
 		});
 	});
 	//初始化登录用户
-	if($.parseJSON($.cookie(cookie_prefix + 'userinfo')) != '' && $.parseJSON($.cookie(cookie_prefix + 'userinfo')) != null){
-		var userinfo = $.parseJSON($.cookie(cookie_prefix + 'userinfo'));
+	if($.parseJSON(Cookies.get(cookie_prefix + 'userinfo')) != '' && $.parseJSON(Cookies.get(cookie_prefix + 'userinfo')) != null){
+		var userinfo = $.parseJSON(Cookies.get(cookie_prefix + 'userinfo'));
 		$('#avatar').attr('src', userinfo.avatar);
 		$('#username').val(userinfo.username);
 	}
@@ -521,7 +521,7 @@ function checkUserLogin(){
 	}, 500);
 }
 function getLoginCookie(){
-	if($.cookie(cookie_prefix + 'fromsite')){
+	if(Cookies.get(cookie_prefix + 'fromsite')){
 		childWindow.close();
 		window.clearInterval(interval);
 		//验证该三方登录账号是否已绑定过本地账号，有则直接登录，否则执行绑定账号流程
@@ -533,7 +533,7 @@ function getLoginCookie(){
 					ZENG.msgbox.show('未知错误，建议重启浏览器后重新操作', 1, 2000);
 				}else if(msg == 'ERROR_NOT_BIND'){
 					var title;
-					switch($.cookie(cookie_prefix + 'fromsite')){
+					switch(Cookies.get(cookie_prefix + 'fromsite')){
 						case 'qq': title = 'qq'; break;
 						case 'sinaweibo': title = '新浪微博'; break;
 						case 'tweibo': title = '腾讯微博'; break;
@@ -570,7 +570,7 @@ $(function(){
 		}
 		$('#update_browser_box').show();
 	}else{
-		if($('#lrbox').data('isforcedlogin') == 0 || $.cookie(cookie_prefix + 'memberID') != 0){
+		if($('#lrbox').data('isforcedlogin') == 0 || Cookies.get(cookie_prefix + 'memberID') != 0){
 			$('#desktop').show();
 			//初始化一些桌面信息
 			HROS.CONFIG.sinaweiboAppkey = '<?php echo SINAWEIBO_AKEY; ?>';

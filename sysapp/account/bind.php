@@ -168,11 +168,11 @@ function checkUserLogin(){
 	}, 500);
 }
 function getLoginCookie(){
-	if($.cookie(cookie_prefix + 'fromsite')){
+	if(Cookies.get(cookie_prefix + 'fromsite')){
 		childWindow.close();
 		window.clearInterval(int);
 		var title;
-		switch($.cookie(cookie_prefix + 'fromsite')){
+		switch(Cookies.get(cookie_prefix + 'fromsite')){
 			case 'qq': title = 'QQ'; break;
 			case 'sinaweibo': title = '新浪微博'; break;
 			case 'tweibo': title = '腾讯微博'; break;

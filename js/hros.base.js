@@ -35,7 +35,7 @@ HROS.base = (function(){
 				}
 			});
 			//更新当前用户ID
-			HROS.CONFIG.memberID = $.cookie(cookie_prefix + 'memberID');
+			HROS.CONFIG.memberID = Cookies.get(cookie_prefix + 'memberID');
 			//阻止弹出浏览器默认右键菜单
 			$('body').on('contextmenu', function(){
 				return false;
