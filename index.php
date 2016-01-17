@@ -57,16 +57,14 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <!-- 浏览器升级提示 -->
 <div id="update_browser_box">
 	<div class="update_browser">
-		<div class="subtitle">您正在使用的IE浏览器版本过低，<br>我们建议您升级或者更换浏览器，以便体验顺畅、兼容、安全的互联网。</div>
-		<div class="title">选择一款<span>新</span>浏览器吧</div>
-		<div class="browser">
-			<a href="http://windows.microsoft.com/zh-CN/internet-explorer/downloads/ie" class="ie" target="_blank" title="ie浏览器">ie浏览器</a>
-			<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html" class="chrome" target="_blank" title="谷歌浏览器">谷歌浏览器</a>
-			<a href="http://www.firefox.com.cn" class="firefox" target="_blank" title="火狐浏览器">火狐浏览器</a>
-			<a href="http://www.opera.com" class="opera" target="_blank" title="opera浏览器">opera浏览器</a>
-			<a href="http://www.apple.com.cn/safari" class="safari" target="_blank" title="safari浏览器">safari浏览器</a>
-		</div>
-		<div class="bottomtitle">[&nbsp;<a href="http://www.baidu.com/search/theie6countdown.html" target="_blank">对IE6说再见</a>&nbsp;]</div>
+		<h1>请升级您的浏览器</h1>
+		<h2>尊敬的用户，您正在使用的浏览器版本过低，<br>我们建议您升级或者更换浏览器，以便体验更顺畅、兼容、安全的互联网。</h2>
+		<h3>您可以选择：</h3>
+		<ul>
+			<li class="ie"><a href="http://www.microsoft.com/china/windows/IE/upgrade/index.aspx" target="_blank"><h4>Internet Explorer 9+</h4></a></li>
+			<li class="chrome"><a href="http://www.google.cn/intl/zh-CN/chrome/browser/" target="_blank"><h4>Google Chrome</h4></a></li>
+			<li class="firefox"><a href="http://www.mozilla.org/zh-CN/firefox/new/" target="_blank"><h4>Mozilla Firefox</h4></a></li>
+		</ul>
 	</div>
 </div>
 <!-- 登录 -->
@@ -564,10 +562,6 @@ $(function(){
 	$('.loading').hide();
 	//IE6,7升级提示
 	if($.browser.msie && $.browser.version < 8){
-		if($.browser.version < 7){
-			//虽然不支持IE6，但还是得修复PNG图片透明的问题
-			DD_belatedPNG.fix('#update_browser_box .browser');
-		}
 		$('#update_browser_box').show();
 	}else{
 		if($('#lrbox').data('isforcedlogin') == 0 || Cookies.get(cookie_prefix + 'memberID') != 0){

@@ -15,7 +15,8 @@ a img{border:none}
 
 *{-moz-user-select:none;-webkit-user-select:none;user-select:none}
 html{height:100%;overflow:hidden}
-body{font:12px/1.8 'Segoe UI','微软雅黑',sans-serif}
+body{font:12px/1.8 'Segoe UI','Microsoft YaHei',微软雅黑,'STHei',华文黑体,sans-serif}
+
 input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #desktop{position:absolute;z-index:1;width:100%;height:100%;display:none}
 #accessory_zoom{position:absolute}
@@ -29,22 +30,22 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #zoom-tip div span{padding-left:30px}
 #zoom-tip .close{font-size:6px;position:absolute;right:10px;top:6px;text-decoration:none}
 
-/**
- * 浏览器升级提示
- * 5个浏览器图片为MorchaDesign版权所有，本项目使用已得到官方授权
- * 9 Browsers Icons Designed by Morcha Design
- * http://www.morcha.net/post/46.html
- */
-#update_browser_box{display:none;background:url(update_browser_bg.png) repeat;position:absolute;z-index:9998;top:0;left:0;width:100%;height:100%;_height:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight))}
-.update_browser{width:640px;height:350px;position:absolute;left:50%;top:50%;margin-left:-320px;margin-top:-175px}
-.update_browser .subtitle{width:640px;height:36px;line-height:18px;font-size:14px;color:#777}
-.update_browser .title{width:640px;height:106px;line-height:96px;font-size:48px;text-align:center;color:#009AD9}
-.update_browser .title span{font-size:60px;color:#F33}
-.update_browser .browser{background:url(browser.png) no-repeat;width:640px;height:128px;overflow:hidden}
-.update_browser .browser a{display:block;width:128px;height:128px;float:left;text-indent:-999em}
-.update_browser .bottomtitle{width:640px;height:78px;line-height:78px;text-align:center;font-size:14px;color:#777}
-.update_browser .bottomtitle a{color:#777}
-.update_browser .bottomtitle a:hover{color:#999}
+/*浏览器升级提示*/
+#update_browser_box{display:none;background:url(browser_bg.png) repeat;position:absolute;z-index:9998;top:0;left:0;width:100%;height:100%;_height:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight))}
+#update_browser_box .update_browser{width:718px;height:496px;background:url(browser_bg_wrapper.png) no-repeat;position:absolute;left:50%;top:50%;margin-left:-359px;margin-top:-248px}
+#update_browser_box .update_browser h1,
+#update_browser_box .update_browser h2,
+#update_browser_box .update_browser h3,
+#update_browser_box .update_browser h4{text-align:center;color:#999;font-weight:normal;font-size:14px}
+#update_browser_box .update_browser h1{padding:70px 0 0 0;font-size:30px;line-height:30px;color:#333;letter-spacing:3px}
+#update_browser_box .update_browser h2{padding:30px 55px 10px}
+#update_browser_box .update_browser h3{font-size:16px;color:#666;padding:20px 0 30px 0}
+#update_browser_box .update_browser ul{width:600px;margin:0 auto;clear:both}
+#update_browser_box .update_browser li{float:left;display:block;background:url(browser.png) no-repeat;width:128px;height:128px;text-align:center;margin:0 36px;}
+#update_browser_box .update_browser ul a{display:block;width:100%;padding:135px 0 0 0}
+#update_browser_box .update_browser .ie{background-position:0 0}
+#update_browser_box .update_browser .chrome{background-position:-256px 0}
+#update_browser_box .update_browser .firefox{background-position:-128px 0}
 
 /*登录*/
 #lrbox{background:url(loginbg.jpg) no-repeat center;position:absolute;z-index:9997;top:-200%;left:0;width:100%;height:100%}
