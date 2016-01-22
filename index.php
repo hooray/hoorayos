@@ -67,114 +67,109 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 		</ul>
 	</div>
 </div>
-<!-- 登录 -->
+<!-- 登录&注册 -->
 <div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="top:0"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
-	<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
-	<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
 	<div class="lrbox">
-		<div class="bg"></div>
-		<div style="width:1000px">
-			<div class="loginbox">
-				<form action="login.ajax.php" method="post" id="loginForm">
-					<input type="hidden" name="ac" value="login">
-					<div class="middle">
-						<div class="left">
-							<img src="img/ui/avatar_120.jpg" id="avatar">
-						</div>
-						<div class="right">
-							<div class="input_box username">
-								<input type="input" name="username" id="username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" nullmsg="请您输入用户名后再登录" errormsg="用户名长度为6-18个字符">
-								<div class="tip">
-									<div class="text">
-										<span class="arrow">◆</span>
-										<span class="arrow arrow1">◆</span>
-										<p></p>
-									</div>
-								</div>
-							</div>
-							<div class="input_box password">
-								<input type="password" name="password" id="password" placeholder="请输入密码" datatype="*6-18" nullmsg="请您输入密码后再登录" errormsg="密码长度在6~18位之间">
-								<div class="tip">
-									<div class="text">
-										<span class="arrow">◆</span>
-										<span class="arrow arrow1">◆</span>
-										<p></p>
-									</div>
-								</div> 
-							</div>
-							<div class="label-box">
-								<label><input type="checkbox" name="rememberMe" id="rememberMe">记住我，下次自动登录</label>
-							</div>
+		<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
+		<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
+		<div class="loginbox">
+			<div class="mask"></div>
+			<form action="login.ajax.php" method="post" id="loginForm" class="form">
+				<input type="hidden" name="ac" value="login">
+				<div class="avatar">
+					<img src="img/ui/avatar_120.jpg" id="avatar">
+				</div>
+				<div class="input_box">
+					<input type="input" name="username" id="username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
+					<div class="tip">
+						<div class="text">
+							<span class="arrow">◆</span>
+							<p></p>
 						</div>
 					</div>
-					<div class="bottom">
-						<button class="login_btn" id="submit_login_btn" type="submit">登　　录</button>
-						<button class="register_btn" id="go_register_btn" type="button" tabindex="-1">去注册 <font style="font-size:14px">&raquo;</font></button>
-					</div>
-				</form>
+				</div>
+				<div class="input_box">
+					<input type="password" name="password" id="password" placeholder="请输入密码" datatype="*6-18" nullmsg="请输入密码" errormsg="密码长度在6~18位之间">
+					<div class="tip">
+						<div class="text">
+							<span class="arrow">◆</span>
+							<p></p>
+						</div>
+					</div> 
+				</div>
+				<div class="label_box">
+					<label><input type="checkbox" name="rememberMe" id="rememberMe" value="1">记住我，下次自动登录</label>
+				</div>
+				<div class="input_box">
+					<button class="login_btn" id="submit_login_btn" type="submit">登录</button>
+				</div>
+			</form>
+			<?php if((QQ_AKEY && QQ_SKEY) || (SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
+			<div class="disanfangdenglu">
+				<label>合作网站<br>帐号登录</label>
+				<div class="box">
+					<?php if(QQ_AKEY && QQ_SKEY){ ?>
+						<a href="javascript:;" class="qq" data-type="qq" title="QQ登录"></a>
+					<?php } ?>
+					<?php if(SINAWEIBO_AKEY && SINAWEIBO_SKEY){ ?>
+						<a href="javascript:;" class="sinaweibo" data-type="sinaweibo" title="新浪微博登录"></a>
+					<?php } ?>
+					<?php if(TWEIBO_AKEY && TWEIBO_SKEY){ ?>
+						<a href="javascript:;" class="tweibo" data-type="tweibo" title="腾讯微博登录"></a>
+					<?php } ?>
+					<?php if(T163WEIBO_AKEY && T163WEIBO_SKEY){ ?>
+						<a href="javascript:;" class="t163weibo" data-type="t163weibo" title="网易微博登录"></a>
+					<?php } ?>
+					<?php if(RENREN_AID && RENREN_AKEY && RENREN_SKEY){ ?>
+						<a href="javascript:;" class="renren" data-type="renren" title="人人网登录"></a>
+					<?php } ?>
+					<?php if(BAIDU_AKEY && BAIDU_SKEY){ ?>
+						<a href="javascript:;" class="baidu" data-type="baidu" title="百度登录"></a>
+					<?php } ?>
+					<?php if(DOUBAN_AKEY && DOUBAN_SKEY){ ?>
+						<a href="javascript:;" class="douban" data-type="douban" title="豆瓣登录"></a>
+					<?php } ?>
+				</div>
 			</div>
-			<div class="registerbox">
-				<form action="login.ajax.php" method="post" id="registerForm">
-					<input type="hidden" name="ac" value="register">
-					<div class="middle"> 
-						<div class="right all">
-							<div class="input_box username">
-								<input type="input" name="reg_username" id="reg_username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" ajaxurl="login.ajax.php?ac=checkUsername" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
-								<div class="tip">
-									<div class="text">
-										<span class="arrow">◆</span>
-										<span class="arrow arrow1">◆</span>
-										<p></p>
-									</div>
-								</div> 
-							</div>
-							<div class="input_box password">
-								<input type="password" name="reg_password" id="reg_password" placeholder="请输入密码" datatype="*6-18" nullmsg="请输入密码" errormsg="密码长度在6~18位之间">
-								<div class="tip">
-									<div class="text">
-										<span class="arrow">◆</span>
-										<span class="arrow arrow1">◆</span>
-										<p></p>
-									</div>
-								</div> 
-							</div>
-						</div>
-					</div>
-					<div class="bottom">
-						<button class="login_btn" id="go_login_btn" type="button" tabindex="-1"><font style="font-size:14px">&laquo;</font> 去登录</button>
-						<button class="register_btn" id="submit_register_btn" type="submit">注　　册</button>
-					</div>
-				</form>
-			</div>
+			<?php } ?>
 		</div>
-		<?php if((QQ_AKEY && QQ_SKEY) || (SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
-		<div class="disanfangdenglu">
-			<label>合作网站帐号登录</label>
-			<div class="box">
-				<?php if(QQ_AKEY && QQ_SKEY){ ?>
-					<a href="javascript:;" class="qq" data-type="qq" title="QQ登录"></a>
-				<?php } ?>
-				<?php if(SINAWEIBO_AKEY && SINAWEIBO_SKEY){ ?>
-					<a href="javascript:;" class="sinaweibo" data-type="sinaweibo" title="新浪微博登录"></a>
-				<?php } ?>
-				<?php if(TWEIBO_AKEY && TWEIBO_SKEY){ ?>
-					<a href="javascript:;" class="tweibo" data-type="tweibo" title="腾讯微博登录"></a>
-				<?php } ?>
-				<?php if(T163WEIBO_AKEY && T163WEIBO_SKEY){ ?>
-					<a href="javascript:;" class="t163weibo" data-type="t163weibo" title="网易微博登录"></a>
-				<?php } ?>
-				<?php if(RENREN_AID && RENREN_AKEY && RENREN_SKEY){ ?>
-					<a href="javascript:;" class="renren" data-type="renren" title="人人网登录"></a>
-				<?php } ?>
-				<?php if(BAIDU_AKEY && BAIDU_SKEY){ ?>
-					<a href="javascript:;" class="baidu" data-type="baidu" title="百度登录"></a>
-				<?php } ?>
-				<?php if(DOUBAN_AKEY && DOUBAN_SKEY){ ?>
-					<a href="javascript:;" class="douban" data-type="douban" title="豆瓣登录"></a>
-				<?php } ?>
-			</div>
+		<div class="registerbox">
+			<div class="mask"></div>
+			<form action="login.ajax.php" method="post" id="registerForm" class="form">
+				<input type="hidden" name="ac" value="register">
+				<div class="maintitle">注册新用户</div>
+				<div class="input_box">
+					<input type="input" name="reg_username" id="reg_username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" ajaxurl="login.ajax.php?ac=checkUsername" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
+					<div class="tip">
+						<div class="text">
+							<span class="arrow">◆</span>
+							<p></p>
+						</div>
+					</div> 
+				</div>
+				<div class="input_box">
+					<input type="password" name="reg_password" id="reg_password" placeholder="请输入密码" datatype="*6-18" nullmsg="请输入密码" errormsg="密码长度在6~18位之间">
+					<div class="tip">
+						<div class="text">
+							<span class="arrow">◆</span>
+							<p></p>
+						</div>
+					</div> 
+				</div>
+				<div class="input_box">
+					<input type="password" name="reg_password2" id="reg_password2" placeholder="请确认密码" datatype="*6-18" recheck="reg_password" nullmsg="请再输入一次密码" errormsg="您两次输入的账号密码不一致">
+					<div class="tip">
+						<div class="text">
+							<span class="arrow">◆</span>
+							<p></p>
+						</div>
+					</div> 
+				</div>
+				<div class="input_box">
+					<button class="register_btn" id="submit_register_btn" type="submit">注册</button>
+				</div>
+			</form>
 		</div>
-		<?php } ?>
 		<div class="disanfangdenglutip">
 			<span></span>帐号登录成功，请绑定你的 HoorayOS 账号。<a href="javascript:;" class="cancel">取消</a>
 		</div>
@@ -287,7 +282,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <div id="appmanage">
 	<a class="amg_close" href="javascript:;"></a>
 	<div id="amg_dock_container"></div>
-	<div class="amg_line_x"></div>
 	<div id="amg_folder_container">
 		<div class="folderItem">
 			<div class="folder_bg folder_bg1"></div>
@@ -302,7 +296,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="folderInner" desk="2"></div>
 				<div class="scrollBar"></div>
 			</div>
-			<div class="amg_line_y"></div>
 		</div>
 		<div class="folderItem">
 			<div class="folder_bg folder_bg3"></div>
@@ -310,7 +303,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="folderInner" desk="3"></div>
 				<div class="scrollBar"></div>
 			</div>
-			<div class="amg_line_y"></div>
 		</div>
 		<div class="folderItem">
 			<div class="folder_bg folder_bg4"></div>
@@ -318,7 +310,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="folderInner" desk="4"></div>
 				<div class="scrollBar"></div>
 			</div>
-			<div class="amg_line_y"></div>
 		</div>
 		<div class="folderItem">
 			<div class="folder_bg folder_bg5"></div>
@@ -326,7 +317,6 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="folderInner" desk="5"></div>
 				<div class="scrollBar"></div>
 			</div>
-			<div class="amg_line_y"></div>
 		</div>
 	</div>
 </div>
@@ -372,22 +362,24 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script>
 var childWindow, interval;
 $(function(){
-	$('#lrbox .lrbox').css('marginTop', ($('.lrbox').height() / 2) * -1).show();
+	var loginboxHeight = $('#lrbox .loginbox').outerHeight();
+	var registerboxHeight = $('#lrbox .registerbox').outerHeight();
+	var lrboxHeight = loginboxHeight > registerboxHeight ? loginboxHeight : registerboxHeight;
+	$('#lrbox .lrbox').css({
+		height : lrboxHeight,
+		marginTop : (loginboxHeight / 2) * -1
+	});
 	$('#lrbox .back').on('click', function(){
 		$('#lrbox').animate({
 			top : '-200%'
 		}, 1000);
 	});
-	changeTabindex('login');
-	$('#go_register_btn').click(function(){
-		$('.loginbox').animate({marginLeft : '-420px'}, 500, function(){
-			changeTabindex('register');
-		});
+	changeTabindex('init');
+	$('#lrbox .loginbox .mask').click(function(){
+		changeTabindex('login');
 	});
-	$('#go_login_btn').click(function(){
-		$('.loginbox').animate({marginLeft : 0}, 500, function(){
-			changeTabindex('login');
-		});
+	$('#lrbox .registerbox .mask').click(function(){
+		changeTabindex('register');
 	});
 	//初始化登录用户
 	if($.parseJSON(Cookies.get(cookie_prefix + 'userinfo')) != '' && $.parseJSON(Cookies.get(cookie_prefix + 'userinfo')) != null){
@@ -400,7 +392,7 @@ $(function(){
 		btnSubmit: '#submit_login_btn',
 		postonce: false,
 		showAllError: true,
-		tipSweep: false,
+		tipSweep: true,
 		//msg：提示信息;
 		//o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
 		//cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
@@ -442,7 +434,7 @@ $(function(){
 		btnSubmit: '#submit_register_btn',
 		postonce: false,
 		showAllError: true,
-		tipSweep: false,
+		tipSweep: true,
 		//msg：提示信息;
 		//o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;
 		//cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
@@ -467,12 +459,12 @@ $(function(){
 			$('#submit_register_btn').removeClass('disabled').prop('disabled', false);
 			registerForm.resetStatus();
 			if(data.status == 'y'){
-				$('#go_login_btn').click();
 				$('#avatar').attr('src', 'img/ui/avatar_120.jpg');
 				$('#username').val(data.info);
 				$('#password').val('');
 				$('#rememberMe').prop('checked', false);
 				$('#reg_username, #reg_password').val('');
+				changeTabindex('login');
 			}else{
 				ZENG.msgbox.show('注册失败', 5, 2000);
 			}
@@ -489,25 +481,129 @@ $(function(){
 	});
 });
 function changeTabindex(mode){
-	$('#username, #password, #submit_login_btn, #reg_username, #reg_password, #submit_register_btn').attr('tabindex', '-1');
-	if(mode == 'login'){
-		$('#username').attr('tabindex', 1);
-		$('#password').attr('tabindex', 2);
-		$('#submit_login_btn').attr('tabindex', 3);
-		if($('#username').val() == ''){
-			$('#username').focus();
-		}else{
-			$('#password').focus();
-		}
-	}else{
-		$('#reg_username').attr('tabindex', 1);
-		$('#reg_password').attr('tabindex', 2);
-		$('#submit_register_btn').attr('tabindex', 3);
-		if($('#reg_username').val() == ''){
-			$('#reg_username').focus();
-		}else{
-			$('#reg_password').focus();
-		}
+	$('#username, #password, #submit_login_btn, #reg_username, #reg_password, #reg_password2, #submit_register_btn').attr('tabindex', '-1');
+	var loginbox = $('#lrbox .loginbox');
+	var registerbox = $('#lrbox .registerbox');
+	
+	var loginboxMarginTopOnShow = 0;
+	var loginboxMarginTopOnMove = 20;
+	var loginboxMarginTopOnHide = 40;
+	
+	var loginboxMarginLeftOnShow = loginbox.outerWidth() * -1 + 50;
+	var loginboxMarginLeftOnMove = loginbox.outerWidth() * -1;
+	var loginboxMarginLeftOnHide = loginbox.outerWidth() * -1 + 220;
+	
+	var registerboxMarginTopOnShow = 0;
+	var registerboxMarginTopOnMove = 20;
+	var registerboxMarginTopOnHide = 40;
+	
+	var registerboxMarginRightOnShow = registerbox.outerWidth() * -1 + 50;
+	var registerboxMarginRightOnMove = registerbox.outerWidth() * -1;
+	var registerboxMarginRightOnHide = registerbox.outerWidth() * -1 + 220;
+	
+	switch(mode){
+		case 'init':
+			$('#username').attr('tabindex', 1);
+			$('#password').attr('tabindex', 2);
+			$('#submit_login_btn').attr('tabindex', 3);
+			loginbox.css({
+				zIndex : 2,
+				marginTop : loginboxMarginTopOnShow,
+				marginLeft : loginboxMarginLeftOnShow
+			});
+			loginbox.children('.mask').css('opacity', 0).hide();
+			registerbox.css({
+				zIndex : 1,
+				marginRight : registerboxMarginRightOnHide,
+				marginTop : registerboxMarginTopOnHide
+			});
+			registerbox.children('.form').css('opacity', 0);
+			break;
+		case 'login':
+			//登录面板动画
+			loginbox.transition({
+				marginLeft : loginboxMarginLeftOnMove,
+				marginTop : loginboxMarginTopOnMove
+			}, 150, 'easeInOutSine', function(){
+				loginbox.css('zIndex', 2);
+			}).transition({
+				marginLeft : loginboxMarginLeftOnShow,
+				marginTop : loginboxMarginTopOnShow
+			}, 200, 'easeInOutSine');
+			loginbox.children('.mask').transition({
+				opacity : 0
+			}, 150, function(){
+				loginbox.children('.mask').hide();
+			});
+			loginbox.children('.form').transition({
+				opacity : 1,
+				delay : 150
+			}, 200, function(){
+				$('#username').attr('tabindex', 1).focus();
+				$('#password').attr('tabindex', 2);
+				$('#submit_login_btn').attr('tabindex', 3);
+			});
+			//注册面板动画
+			registerbox.transition({
+				marginRight : registerboxMarginRightOnMove,
+				marginTop : registerboxMarginTopOnMove
+			}, 150, 'easeInOutSine', function(){
+				registerbox.css('zIndex', 1);
+			}).transition({
+				marginRight : registerboxMarginRightOnHide,
+				marginTop : registerboxMarginTopOnHide
+			}, 200, 'easeInOutSine');
+			registerbox.children('.form').transition({
+				opacity : 0
+			}, 150);
+			registerbox.children('.mask').show().transition({
+				opacity : 1,
+				delay : 150
+			}, 200);
+			break;
+		case 'register':
+			//登录面板动画
+			loginbox.transition({
+				marginLeft : loginboxMarginLeftOnMove,
+				marginTop : loginboxMarginTopOnMove
+			}, 150, 'easeInOutSine', function(){
+				loginbox.css('zIndex', 1);
+			}).transition({
+				marginLeft : loginboxMarginLeftOnHide,
+				marginTop : loginboxMarginTopOnHide
+			}, 200, 'easeInOutSine');
+			loginbox.children('.form').transition({
+				opacity : 0
+			}, 150);
+			loginbox.children('.mask').show().transition({
+				opacity : 1,
+				delay : 150
+			}, 200);
+			//注册面板动画
+			registerbox.transition({
+				marginRight : registerboxMarginRightOnMove,
+				marginTop : registerboxMarginTopOnMove
+			}, 150, 'easeInOutSine', function(){
+				registerbox.css('zIndex', 2);
+			}).transition({
+				marginRight : registerboxMarginRightOnShow,
+				marginTop : registerboxMarginTopOnShow
+			}, 200, 'easeInOutSine');
+			registerbox.children('.mask').transition({
+				opacity : 0
+			}, 150, function(){
+				registerbox.children('.mask').hide();
+			});
+			registerbox.children('.form').transition({
+				opacity : 1,
+				delay : 150
+			}, 200, function(){
+				$('#reg_username').attr('tabindex', 1).focus();
+				$('#reg_password').attr('tabindex', 2);
+				$('#reg_password2').attr('tabindex', 3);
+				$('#submit_register_btn').attr('tabindex', 4);
+			});
+			break;
 	}
 }
 function checkUserLogin(){

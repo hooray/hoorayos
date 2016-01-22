@@ -47,67 +47,52 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #update_browser_box .update_browser .chrome{background-position:-256px 0}
 #update_browser_box .update_browser .firefox{background-position:-128px 0}
 
-/*登录*/
-#lrbox{background:url(loginbg.jpg) no-repeat center;position:absolute;z-index:9997;top:-200%;left:0;width:100%;height:100%}
-#lrbox .title{position:absolute;top:50%;margin-top:-250px;width:100%;height:100px;line-height:100px;text-align:center;font-size:68px;color:#fff;text-shadow:2px 2px 2px #000}
-#lrbox .back{position:absolute;left:50%;top:50%;margin-left:-50px;margin-top:140px;display:block;width:100px;height:20px;line-height:20px;text-align:center;color:#fff;text-shadow:1px 1px 1px #000}
-.lrbox{display:none;width:420px;overflow:hidden;position:absolute;top:50%;left:50%;margin-left:-211px;border:1px solid #0FF;border-radius:10px}
-.lrbox .bg{position:absolute;z-index:-1;width:100%;height:100%;background:url(loginbg.jpg) no-repeat center;background-color:rgba(255, 255, 255, .5);-webkit-filter:blur(5px);filter:blur(5px)}
-.lrbox .loginbox,
-.lrbox .registerbox{float:left;padding:0 10px 10px 10px}
-.lrbox .middle{margin-top:10px;height:130px}
-.lrbox .left{width:100px;height:100px;float:left}
-.lrbox .left img{width:100px;height:100px;border:none}
-.lrbox .right{width:300px;float:left}
-.lrbox .right .input_box{width:100%;height:50px;position:relative}
-.loginbox .right .password{height:49px;border-top:1px solid #0f82f5}
-.registerbox .right .password{height:49px;border-top:1px solid #FF8000}
-.lrbox .right .input_box input{font-family:'Segoe UI','微软雅黑',sans-serif;border:none;outline:none;width:280px;height:50px;line-height:50px;padding:0 10px;font-size:24px;color:#333;float:left}
-.lrbox .right .password input{height:49px}
-.lrbox .right .input_box .tip{display:none;height:36px;position:absolute;right:-1px;top:50px;z-index:1}
-.lrbox .right .password .tip{top:49px}
-.lrbox .right .input_box .tip .text{position:relative;height:16px;line-height:16px;padding:10px;border:1px solid red;background:#fff}
-.lrbox .right .input_box .tip .text .arrow{position:absolute;top:-8px;right:10px;font-size:12px;color:red}
-.lrbox .right .input_box .tip .text .arrow1{top:-7px;color:#fff}
-.lrbox .right .input_box .tip .text p{font-size:12px}
-.lrbox .right .input_box button{position:absolute;right:-70px;width:60px;height:60px;border:none;float:left;color:#999;background:none;font-size:12px;cursor:pointer;text-shadow:0 0 5px #ccc;-webkit-transition:all 300ms}
-.lrbox .right .password button{height:55px}
-.lrbox .right .input_box button:hover{color:#333}
-.lrbox .right .label-box{height:30px;padding-left:10px}
-.lrbox .right .label-box label{float:left;height:30px;line-height:30px;color:#eee;text-shadow:1px 1px 1px #000}
-.lrbox .right .label-box input[type='checkbox']{width:auto;height:30px;margin-right:5px;float:left}
-.lrbox .all{width:400px}
-.lrbox .all .input_box input{width:380px}
-.lrbox .all .username input{width:380px;padding-right:10px}
-.lrbox .bottom{height:50px}
-.lrbox .bottom button{border:none;height:50px;line-height:50px;float:left;text-align:center;font-size:16px;color:#eee;cursor:pointer;-webkit-transition:all 500ms}
-.loginbox .bottom .login_btn{width:300px;background:#0f82f5}
-.loginbox .bottom .login_btn:hover{background:#0072e6;color:#fff}
-.loginbox .bottom .login_btn.disabled{background:#C6C6C6}
-.loginbox .bottom .register_btn{width:100px;background:#FF8000;font-size:12px}
-.loginbox .bottom .register_btn:hover{background:#E74002;color:#fff}
-.registerbox .bottom .register_btn{width:300px;background:#FF8000}
-.registerbox .bottom .register_btn:hover{background:#E74002;color:#fff}
-.registerbox .bottom .register_btn.disabled{background:#C6C6C6}
-.registerbox .bottom .login_btn{width:100px;background:#0f82f5;font-size:12px}
-.registerbox .bottom .login_btn:hover{background:#0072e6;color:#fff}
-.lrbox .disanfangdenglu{float:left;margin:0 50px 10px 50px;width:320px;height:30px}
-.disanfangdenglu label{color:#eee;text-shadow:1px 1px 1px #000;width:50px;line-height:15px;margin-right:15px;float:left}
-.disanfangdenglu div{float:left;margin-top:3px}
-.disanfangdenglu div a{float:left;width:24px;height:24px;margin-right:12px;font-size:0;background:url(login_icon.png) no-repeat;border-radius:5px}
-.disanfangdenglu div a.sinaweibo{background-position:0 0}
-.disanfangdenglu div a.tweibo{background-position:0 -24px}
-.disanfangdenglu div a.t163weibo{background-position:0 -48px}
-.disanfangdenglu div a.sohuweibo{background-position:0 -72px}
-.disanfangdenglu div a.qq{background-position:0 -96px}
-.disanfangdenglu div a.qzone{background-position:0 -120px}
-.disanfangdenglu div a.renren{background-position:0 -144px}
-.disanfangdenglu div a.douban{background-position:0 -168px}
-.disanfangdenglu div a.baidu{background-position:0 -192px}
-.lrbox .disanfangdenglutip{float:left;margin:0 10px 10px 10px;border:1px solid #000;width:398px;height:28px;line-height:30px;background:#FF0;display:none}
-.disanfangdenglutip span{font-weight:bold;padding:0 5px 0 10px}
-.disanfangdenglutip .cancel{float:right;margin-right:10px;color:#999}
-.disanfangdenglutip .cancel:hover{color:#333}
+/*登录&注册*/
+#lrbox{background:#3b4465 url(loginbg.jpg) no-repeat center center;position:absolute;z-index:9997;top:-200%;left:0;width:100%;height:100%}
+#lrbox .lrbox{position:absolute;width:100%;top:50%}
+#lrbox .title{position:absolute;top:-120px;left:50%;margin-left:-900px;width:1800px;height:100px;line-height:100px;text-align:center;font-size:68px;color:#fff;text-shadow:2px 2px 2px #000}
+#lrbox .back{position:absolute;bottom:-50px;left:50%;margin-left:-100px;display:block;width:200px;height:20px;line-height:20px;text-align:center;color:#fff;text-shadow:1px 1px 1px #000}
+#lrbox .loginbox,
+#lrbox .registerbox{background-color:#fafafa;width:300px;padding:40px 50px;border-radius:5px;position:absolute;overflow:hidden;box-shadow:0 0 0 1px hsla(0,0%,100%,.3) inset,0 .5em 1em rgba(0, 0, 0, 0.6)}
+#lrbox .loginbox{left:50%}
+#lrbox .registerbox{right:50%}
+#lrbox .loginbox .avatar{width:100%;height:100px;text-align:center;padding-bottom:30px;}
+#lrbox .loginbox .avatar img{width:90px;height:90px;border:5px solid #eee;border-radius:50%;box-shadow:1px 1px 50px #999}
+#lrbox .registerbox .maintitle{padding-bottom:20px;text-align:center;font-size:24px;font-weight:bold;color:#ff8000;}
+#lrbox .input_box{width:100%;height:50px;padding:10px 0 20px 0;position:relative}
+#lrbox .input_box input{font-family:'Segoe UI','Microsoft YaHei',微软雅黑,'STHei',华文黑体,sans-serif;border:1px solid #ccc;outline:none;width:278px;height:48px;line-height:50px;padding:0 10px;font-size:24px;color:#333;box-shadow:1px 1px 50px #ccc}
+#lrbox .input_box .tip{display:none;height:36px;position:absolute;right:0;top:59px;z-index:1}
+#lrbox .input_box .tip .text{position:relative;height:16px;line-height:16px;padding:5px;border:1px solid red;background:#f00;color:#fff}
+#lrbox .input_box .tip .text .arrow{font-family:sans-serif;position:absolute;top:-8px;right:10px;font-size:12px;color:#f00}
+#lrbox .input_box .tip .text p{font-size:12px}
+#lrbox .label_box{height:30px;padding:10px 0 20px 0;}
+#lrbox .label_box label{height:30px;line-height:30px;color:#666;text-shadow:1px 1px 10px #999}
+#lrbox .label_box input[type='checkbox']{width:auto;height:30px;margin-right:5px;float:left}
+#lrbox .input_box button{font-family:'Segoe UI','Microsoft YaHei',微软雅黑,'STHei',华文黑体,sans-serif;width:100%;height:50px;border:none;color:#eee;font-size:18px;font-weight:bold;letter-spacing:20px;text-indent:20px;cursor:pointer;box-shadow:1px 1px 50px #ccc;transition:all 300ms}
+#lrbox .input_box .login_btn{background:#0f82f5}
+#lrbox .input_box .login_btn:hover{background:#0072e6;color:#fff;box-shadow:1px 1px 50px #0f82f5}
+#lrbox .input_box .login_btn.disabled{background:#c6c6c6}
+#lrbox .input_box .register_btn{background:#ff8000}
+#lrbox .input_box .register_btn:hover{background:#e74002;color:#fff;box-shadow:1px 1px 50px #ff8000}
+#lrbox .input_box .register_btn.disabled{background:#c6c6c6}
+#lrbox .mask{position:absolute;width:100%;height:100%;top:0;left:0;z-index:1;background-color:#c9dfec}
+#lrbox .disanfangdenglu{width:100%;height:30px}
+#lrbox .disanfangdenglu label{float:left;color:#666;text-shadow:1px 1px 10px #999;line-height:15px}
+#lrbox .disanfangdenglu div{float:left;margin-top:3px}
+#lrbox .disanfangdenglu div a{float:left;width:24px;height:24px;margin-left:12px;font-size:0;background:url(login_icon.png) no-repeat;border-radius:5px;box-shadow:1px 1px 10px #999}
+#lrbox .disanfangdenglu div a.sinaweibo{background-position:0 0}
+#lrbox .disanfangdenglu div a.tweibo{background-position:0 -24px}
+#lrbox .disanfangdenglu div a.t163weibo{background-position:0 -48px}
+#lrbox .disanfangdenglu div a.sohuweibo{background-position:0 -72px}
+#lrbox .disanfangdenglu div a.qq{background-position:0 -96px}
+#lrbox .disanfangdenglu div a.qzone{background-position:0 -120px}
+#lrbox .disanfangdenglu div a.renren{background-position:0 -144px}
+#lrbox .disanfangdenglu div a.douban{background-position:0 -168px}
+#lrbox .disanfangdenglu div a.baidu{background-position:0 -192px}
+#lrbox .disanfangdenglutip{float:left;margin:0 10px 10px 10px;border:1px solid #000;width:398px;height:28px;line-height:30px;background:#FF0;display:none}
+#lrbox .disanfangdenglutip span{font-weight:bold;padding:0 5px 0 10px}
+#lrbox .disanfangdenglutip .cancel{float:right;margin-right:10px;color:#999}
+#lrbox .disanfangdenglutip .cancel:hover{color:#333}
 
 @-webkit-keyframes radi{
 	0%{-webkit-mask-size:0%;-webkit-animation-timing-function:ease-in-out}
@@ -456,13 +441,12 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #appmanage .amg_close{background:url(desk_sprite.png) no-repeat -350px -350px;cursor:pointer;width:90px;height:37px;position:absolute;top:20px;right:20px}
 #appmanage .amg_close:hover{background-position:-350px -387px}
 #appmanage .amg_close:active{background-position:-350px -424px}
-#amg_dock_container{background:url(amg_top.png) repeat-x;height:60px;overflow:hidden;padding:10px}
+#amg_dock_container{background:url(amg_top.png) repeat-x;height:60px;overflow:hidden;padding:10px;border-bottom:1px solid #666}
 #amg_dock_container .appbtn{padding:6px;}
 #amg_dock_container .appbtn span{display:none}
-#appmanage .amg_line_x{border-bottom:1px solid #666666;font-size:0;height:0;width:100%}
-#appmanage .amg_line_y{background:url(amg_line_y.png) repeat-y;height:100%;left:-1px;position:absolute;top:0;width:3px}
 #amg_folder_container{background:url(amg_body.png) repeat;overflow:hidden;height:100%}
-#amg_folder_container .folderItem{width:20%;height:100%;overflow:hidden;float:left;position:relative;-webkit-transform:rotateY(70deg);-moz-transform:rotateY(70deg);-o-transform:rotateY(70deg);transform:rotateY(70deg);-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;transform-origin:center center;-webkit-transition:-webkit-transform .8s linear;-moz-transition:-moz-transform .8s linear;-o-transition:-o-transform .8s linear;transition:transform .8s linear}
+#amg_folder_container .folderItem{border-left:1px solid #666;margin-left:-1px;width:20%;height:100%;overflow:hidden;float:left;position:relative;-webkit-transform:rotateY(70deg);-moz-transform:rotateY(70deg);-o-transform:rotateY(70deg);transform:rotateY(70deg);-webkit-transform-origin:center center;-moz-transform-origin:center center;-o-transform-origin:center center;transform-origin:center center;-webkit-transition:-webkit-transform .8s linear;-moz-transition:-moz-transform .8s linear;-o-transition:-o-transform .8s linear;transition:transform .8s linear}
+#amg_folder_container .folderItem:first-child{border-left:0;margin-left:auto;}
 #amg_folder_container .folderItem_turn{-webkit-transform:rotateY(0deg);-moz-transform:rotateY(0deg);-o-transform:rotateY(0deg);transform:rotateY(0deg)}
 #amg_folder_container .folder_bg{height:100px;position:absolute;right:0;top:0;width:70px}
 #amg_folder_container .folder_bg1{background:url(amg_1.png) no-repeat right top}
@@ -474,10 +458,10 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text}
 #amg_folder_container .folderInner{margin:5px 0;min-width:180px;position:relative;z-index:1;height:100%;overflow:hidden}
 #amg_folder_container .scrollBar{position:absolute;right:2px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10}
 #amg_folder_container .appbtn,
-#shortcut_shadow2{height:26px;width:100%;padding:2px 0;overflow:hidden;}
-#amg_folder_container .appbtn:hover{border-radius:0;background:rgba(255,255,255,0.3);}
+#shortcut_shadow2{height:26px;width:100%;padding:2px 0;overflow:hidden}
+#amg_folder_container .appbtn:hover{border-radius:0;background:rgba(255,255,255,0.3)}
 #amg_folder_container .appbtn img,
-#shortcut_shadow2 img{margin-left:20px;}
+#shortcut_shadow2 img{margin-left:20px}
 #amg_folder_container .appbtn span,
 #shortcut_shadow2 span{color:#fff;width:100%!important;height:26px;line-height:26px;margin-top:-26px;margin-left:50px;float:left;text-align:left;background:none}
 
