@@ -17,6 +17,7 @@
 		$uid_get = $c->get_uid();
 		$user = $c->show_user_by_id($uid_get['uid']);
 		cookie('fromsite', 'sinaweibo', 3600);
+		cookie('fromsitename', $user['screen_name'], 3600);
 		session('openid', $token['uid']);
 		session('openname', $user['screen_name']);
 		session('openavatar', $user['profile_image_url']);

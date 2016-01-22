@@ -15,6 +15,7 @@
 	$access_info = $oauthApi->rr_post_curl($token_url, $post_params);//使用code换取token
 	if($access_info["access_token"]){
 		cookie('fromsite', 'renren', 3600);
+		cookie('fromsitename', $access_info['user']['name'], 3600);
 		session('openid', $access_info["access_token"]);
 		session('openname', $access_info['user']['name']);
 		session('openavatar', $access_info['user']['avatar'][1]['url']);

@@ -14,6 +14,7 @@
 	}
 	if($user){
 		cookie('fromsite', 'baidu', 3600);
+		cookie('fromsitename', $profile['username'], 3600);
 		session('openid', $profile['userid']);
 		session('openname', $profile['username']);
 		session('openavatar', 'http://tb.himg.baidu.com/sys/portraitn/item/'.$profile['portrait']);

@@ -21,6 +21,7 @@
 		$me = $douban->api('User.me.GET')->makeRequest();
 		$me = json_decode($me);
 		cookie('fromsite', 'douban', 3600);
+		cookie('fromsitename', $me->name, 3600);
 		session('openid', $me->uid);
 		session('openname', $me->name);
 		session('openavatar', $me->avatar);

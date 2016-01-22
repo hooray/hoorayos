@@ -6,6 +6,7 @@
 		$tblog = new TBlog(T163WEIBO_AKEY, T163WEIBO_SKEY, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 		$me = $tblog->verify_credentials();
 		cookie('fromsite', 't163weibo', 3600);
+		cookie('fromsitename', $me['name'], 3600);
 		session('openid', $me['id']);
 		session('openname', $me['name']);
 		session('openavatar', $me['profile_image_url']);

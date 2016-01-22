@@ -6,6 +6,7 @@
 		$r = Tencent::api('user/info');
 		$r = json_decode($r);
 		cookie('fromsite', 'tweibo', 3600);
+		cookie('fromsitename', $r->data->nick, 3600);
 		session('openid', $r->data->openid);
 		session('openname', $r->data->nick);
 		session('openavatar', $r->data->head.'/20');
