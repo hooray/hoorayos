@@ -91,7 +91,7 @@ HROS.base = (function(){
 			$('#lrbox').animate({
 				top : 0
 			}, 500, function(){
-				changeTabindex('login');
+				changeTabindex();
 			});
 		},
 		logout : function(){

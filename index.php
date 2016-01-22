@@ -379,7 +379,7 @@ $(function(){
 			top : '-200%'
 		}, 1000);
 	});
-	changeTabindex('init');
+	changeTabindex();
 	$('#lrbox .loginbox .mask').click(function(){
 		changeTabindex('login');
 	});
@@ -478,7 +478,7 @@ $(function(){
 		childWindow = window.open('connect/' + $(this).data('type') + '/redirect.php', 'LoginWindow', 'width=850,height=520,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
 	});
 	$('.disanfangdenglutip .cancel').click(function(){
-		Cookie.remove(cookie_prefix + 'fromsite');
+		Cookies.remove(cookie_prefix + 'fromsite');
 		$('.disanfangdenglutip').hide();
 		$('.disanfangdenglu').show();
 	});
@@ -494,21 +494,6 @@ function changeTabindex(mode){
 	var registerboxMarginRightOnMove = registerbox.outerWidth() * -1;
 	var registerboxMarginRightOnHide = (registerbox.outerWidth() / 2) * -1 - 50;
 	switch(mode){
-		case 'init':
-			$('#username').attr('tabindex', 1);
-			$('#password').attr('tabindex', 2);
-			$('#submit_login_btn').attr('tabindex', 3);
-			loginbox.css({
-				zIndex : 2,
-				marginLeft : loginboxMarginLeftOnShow
-			});
-			loginbox.children('.mask').css('opacity', 0).hide();
-			registerbox.css({
-				zIndex : 1,
-				marginRight : registerboxMarginRightOnHide
-			});
-			registerbox.children('.form').css('opacity', 0);
-			break;
 		case 'login':
 			//登录面板动画
 			loginbox.transition({
@@ -586,6 +571,20 @@ function changeTabindex(mode){
 				$('#submit_register_btn').attr('tabindex', 4);
 			});
 			break;
+		default:
+			$('#username').attr('tabindex', 1);
+			$('#password').attr('tabindex', 2);
+			$('#submit_login_btn').attr('tabindex', 3);
+			loginbox.css({
+				zIndex : 2,
+				marginLeft : loginboxMarginLeftOnShow
+			});
+			loginbox.children('.mask').css('opacity', 0).hide();
+			registerbox.css({
+				zIndex : 1,
+				marginRight : registerboxMarginRightOnHide
+			});
+			registerbox.children('.form').css('opacity', 0);
 	}
 }
 function checkUserLogin(){
