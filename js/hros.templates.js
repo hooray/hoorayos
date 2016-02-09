@@ -208,8 +208,8 @@ var starDialogTemp = template.compile(
 //分享
 var shareDialogTemp = template.compile(
 	'<div id="share">'+
-		'<a class="tsina" href="http://service.weibo.com/share/share.php?title=<%=title%>&url=<%=url%>&searchPic=true&appkey=<%=sinaweiboAppkey%>" target="_blank">新浪微博</a>'+
-		'<a class="tqq" href="http://v.t.qq.com/share/share.php?title=<%=title%>&url=<%=url%>&appkey=<%=tweiboAppkey%>" target="_blank">腾讯微博</a>'+
+		'<a class="tsina" href="http://service.weibo.com/share/share.php?title=<%=title%>&url=<%=url%>&searchPic=true" target="_blank">新浪微博</a>'+
+		'<a class="tqq" href="http://v.t.qq.com/share/share.php?title=<%=title%>&url=<%=url%>" target="_blank">腾讯微博</a>'+
 		'<a class="tsohu" href="http://t.sohu.com/third/post.jsp?url=<%=url%>&title=<%=title%>&content=utf-8" target="_blank">搜狐微博</a>'+
 		'<a class="twangyi" href="http://t.163.com/article/user/checkLogin.do?info=<%=title%>+<%=url%>" target="_blank">网易微博</a>'+
 		'<a class="qzone" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<%=url%>&title=<%=title%>" target="_blank">QQ空间</a>'+

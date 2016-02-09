@@ -85,29 +85,7 @@ define('QQ_AKEY',                  '');
 define('QQ_SKEY',                  '');
 define('QQ_CALLBACK_URL',          'http://[替换网站域名]/connect/qq/callback.php');
 //新浪微博
-define('SINAWEIBO_AKEY',           '');
-define('SINAWEIBO_SKEY',           '');
-define('SINAWEIBO_CALLBACK_URL',   'http://[替换网站域名]/connect/sinaweibo/callback.php');
-//腾讯微博
-define('TWEIBO_AKEY',              '');
-define('TWEIBO_SKEY',              '');
-define('TWEIBO_CALLBACK_URL',      'http://[替换网站域名]/connect/tweibo/callback.php');
-//网易微博
-define('T163WEIBO_AKEY',           '');
-define('T163WEIBO_SKEY',           '');
-define('T163WEIBO_CALLBACK_URL',   'http://[替换网站域名]/connect/t163weibo/callback.php');
-//人人网
-define('RENREN_AID',               '');
-define('RENREN_AKEY',              '');
-define('RENREN_SKEY',              '');
-define('RENREN_CALLBACK_URL',      'http://[替换网站域名]/connect/renren/callback.php');
-//百度
-define('BAIDU_AKEY',               '');
-define('BAIDU_SKEY',               '');
-define('BAIDU_CALLBACK_URL',       'http://[替换网站域名]/connect/baidu/callback.php');
-define('BAIDU_DOMAIN',             '.[替换网站域名]');
-//豆瓣
-define('DOUBAN_AKEY',              '');
-define('DOUBAN_SKEY',              '');
-define('DOUBAN_CALLBACK_URL',      'http://[替换网站域名]/connect/douban/callback.php');
+define('WEIBO_AKEY',               '');
+define('WEIBO_SKEY',               '');
+define('WEIBO_CALLBACK_URL',       'http://[替换网站域名]/connect/weibo/callback.php');
 ?>

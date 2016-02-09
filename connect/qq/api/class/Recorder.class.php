@@ -15,7 +15,7 @@ class Recorder{
         $this->error = new ErrorCase();
 
         //-------读取配置文件
-		$incFileContents = '{"appid":"'.QQ_AKEY.'","appkey":"'.QQ_SKEY.'","callback":"'.QQ_CALLBACK_URL.'","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}';
+        $incFileContents = '{"appid":"'.QQ_AKEY.'","appkey":"'.QQ_SKEY.'","callback":"'.QQ_CALLBACK_URL.'","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}';
         $this->inc = json_decode($incFileContents);
         if(empty($this->inc)){
             $this->error->showError("20001");

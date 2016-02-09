@@ -17,6 +17,10 @@
 <title>基本信息</title>
 <?php include('sysapp/global_css.php'); ?>
 <link rel="stylesheet" href="../../img/ui/sys.css">
+<script type="text/javascript">
+//cookie前缀，避免重名
+var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
+</script>
 </head>
 
 <body>
@@ -40,5 +44,87 @@
 	<label class="label-text">最近一次登录IP：</label>
 	<div class="label-box form-inline"><?php echo $member['lastloginip']; ?></div>
 </div>
+<?php if(QQ_AKEY && QQ_SKEY){ ?>
+<div class="input-label">
+	<label class="label-text">QQ：</label>
+	<div class="label-box form-inline">
+		<?php if($member['openid_qq'] != ''){ ?>
+			<img src="<?php echo $member['openavatar_qq']; ?>" class="img-circle img-polaroid" width="20" height="20">
+			<?php echo $member['openname_qq']; ?>
+			<a href="javascript:;" class="btn btn-link pull-right unbind" data-type="qq">解除绑定</a>
+		<?php }else{ ?>
+			<a href="javascript:;" class="btn btn-link pull-right bind" data-type="qq">绑定</a>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
+<?php if(WEIBO_AKEY && WEIBO_SKEY){ ?>
+<div class="input-label">
+	<label class="label-text">新浪微博：</label>
+	<div class="label-box form-inline">
+		<?php if($member['openid_weibo'] != ''){ ?>
+			<a href="<?php echo $member['openurl_weibo']; ?>" target="_blank">
+				<img src="<?php echo $member['openavatar_weibo']; ?>" class="img-circle img-polaroid" width="20" height="20">
+				<?php echo $member['openname_weibo']; ?>
+				<i class="icon-share"></i>
+			</a>
+			<a href="javascript:;" class="btn btn-link pull-right unbind" data-type="weibo">解除绑定</a>
+		<?php }else{ ?>
+			<a href="javascript:;" class="btn btn-link pull-right bind" data-type="weibo">绑定</a>
+		<?php } ?>
+	</div>
+</div>
+<?php } ?>
+<?php include('sysapp/global_js.php'); ?>
+<script>
+var childWindow, interval;
+$(function(){
+	$('.bind').click(function(){
+		checkUserLogin();
+		childWindow = window.open('../../connect/' + $(this).data('type') + '/redirect.php', 'LoginWindow', 'width=850,height=520,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
+	});
+	$('.unbind').click(function(){
+		$.ajax({
+			type : 'POST',
+			url : 'ajax.php',
+			data : 'ac=unbind&fromsite=' + $(this).data('type')
+		}).done(function(){
+			location.reload();
+		});
+	});
+});
+function checkUserLogin(){
+	Cookies.remove(cookie_prefix + 'fromsite');
+	interval = setInterval(function(){
+		getLoginCookie(interval);
+	}, 500);
+}
+function getLoginCookie(){
+	if(Cookies.get(cookie_prefix + 'fromsite')){
+		childWindow.close();
+		window.clearInterval(interval);
+		var title;
+		switch(Cookies.get(cookie_prefix + 'fromsite')){
+			case 'qq': title = 'QQ'; break;
+			case 'weibo': title = '新浪微博'; break;
+			default: return false;
+		}
+		//验证该三方登录账号是否已绑定过本地账号，没有则绑定到自己账号
+		$.ajax({
+			url:'ajax.php',
+			data:'ac=3loginBind',
+			success: function(msg){
+				if(msg == 'ERROR_LACK_OF_DATA'){
+					window.parent.ZENG.msgbox.show('未知错误，建议重启浏览器后重新操作', 1, 2000);
+				}else if(msg == 'ERROR_OPENID_IS_USED'){
+					window.parent.ZENG.msgbox.show('该' + title + '账号已经绑定过其它本地账号', 1, 2000);
+				}else{
+					location.reload();
+				}
+			}
+		});
+	}
+}
+</script>
 </body>
 </html>

@@ -46,6 +46,7 @@
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
+<link rel="stylesheet" href="js/font-awesome-4.5.0/css/font-awesome.min.css">
 <script type="text/javascript">
 //cookie前缀，避免重名
 var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
@@ -103,38 +104,20 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="input_box">
 					<button class="login_btn" id="submit_login_btn" type="submit">登录</button>
 				</div>
-			</form>
-			<?php if((QQ_AKEY && QQ_SKEY) || (SINAWEIBO_AKEY && SINAWEIBO_SKEY) || (TWEIBO_AKEY && TWEIBO_SKEY) || (T163WEIBO_AKEY && T163WEIBO_SKEY) || (RENREN_AID && RENREN_AKEY && RENREN_SKEY) || (BAIDU_AKEY && BAIDU_SKEY) || (DOUBAN_AKEY && DOUBAN_SKEY)){ ?>
-			<div class="disanfangdenglu">
-				<label>合作网站<br>帐号登录</label>
-				<div class="box">
+				<?php if((QQ_AKEY && QQ_SKEY) || (WEIBO_AKEY && WEIBO_SKEY)){ ?>
+				<div class="disanfangdenglu">
 					<?php if(QQ_AKEY && QQ_SKEY){ ?>
 						<a href="javascript:;" class="qq" data-type="qq" title="QQ登录"></a>
 					<?php } ?>
-					<?php if(SINAWEIBO_AKEY && SINAWEIBO_SKEY){ ?>
-						<a href="javascript:;" class="sinaweibo" data-type="sinaweibo" title="新浪微博登录"></a>
-					<?php } ?>
-					<?php if(TWEIBO_AKEY && TWEIBO_SKEY){ ?>
-						<a href="javascript:;" class="tweibo" data-type="tweibo" title="腾讯微博登录"></a>
-					<?php } ?>
-					<?php if(T163WEIBO_AKEY && T163WEIBO_SKEY){ ?>
-						<a href="javascript:;" class="t163weibo" data-type="t163weibo" title="网易微博登录"></a>
-					<?php } ?>
-					<?php if(RENREN_AID && RENREN_AKEY && RENREN_SKEY){ ?>
-						<a href="javascript:;" class="renren" data-type="renren" title="人人网登录"></a>
-					<?php } ?>
-					<?php if(BAIDU_AKEY && BAIDU_SKEY){ ?>
-						<a href="javascript:;" class="baidu" data-type="baidu" title="百度登录"></a>
-					<?php } ?>
-					<?php if(DOUBAN_AKEY && DOUBAN_SKEY){ ?>
-						<a href="javascript:;" class="douban" data-type="douban" title="豆瓣登录"></a>
+					<?php if(WEIBO_AKEY && WEIBO_SKEY){ ?>
+						<a href="javascript:;" class="weibo" data-type="weibo" title="新浪微博登录"></a>
 					<?php } ?>
 				</div>
-			</div>
-			<?php } ?>
-			<div class="disanfangdenglutip">
-				<span class="fromsite"></span>帐号（<span class="fromsitename"></span>）登录成功，<br>请绑定你的 HoorayOS 账号。<a href="javascript:;" class="cancel">【取消】</a>
-			</div>
+				<?php } ?>
+				<div class="disanfangdenglutip">
+					<span class="fromsite"></span>帐号（<span class="fromsitename"></span>）登录成功，<br>请绑定你的 HoorayOS 账号。<a href="javascript:;" class="cancel">【取消】</a>
+				</div>
+			</form>
 		</div>
 		<div class="registerbox">
 			<div class="mask"></div>
@@ -171,10 +154,10 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 				<div class="input_box">
 					<button class="register_btn" id="submit_register_btn" type="submit">注册</button>
 				</div>
+				<div class="disanfangdenglutip">
+					<span class="fromsite"></span>帐号（<span class="fromsitename"></span>）登录成功，<br>请绑定你的 HoorayOS 账号。<a href="javascript:;" class="cancel">【取消】</a>
+				</div>
 			</form>
-			<div class="disanfangdenglutip">
-				<span class="fromsite"></span>帐号（<span class="fromsitename"></span>）登录成功，<br>请绑定你的 HoorayOS 账号。<a href="javascript:;" class="cancel">【取消】</a>
-			</div>
 		</div>
 	</div>
 </div>
@@ -473,7 +456,7 @@ $(function(){
 			}
 		}
 	});
-	$('.disanfangdenglu .box a').click(function(){
+	$('.disanfangdenglu a').click(function(){
 		checkUserLogin();
 		childWindow = window.open('connect/' + $(this).data('type') + '/redirect.php', 'LoginWindow', 'width=850,height=520,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
 	});
@@ -608,12 +591,7 @@ function getLoginCookie(){
 					var title = '';
 					switch(Cookies.get(cookie_prefix + 'fromsite')){
 						case 'qq': title = 'QQ'; break;
-						case 'sinaweibo': title = '新浪微博'; break;
-						case 'tweibo': title = '腾讯微博'; break;
-						case 't163weibo': title = '网易微博'; break;
-						case 'renren': title = '人人网'; break;
-						case 'baidu': title = '百度'; break;
-						case 'douban': title = '豆瓣'; break;
+						case 'weibo': title = '新浪微博'; break;
 						default: return false;
 					}
 					$('.disanfangdenglu').hide();
@@ -641,8 +619,6 @@ $(function(){
 		if($('#lrbox').data('isforcedlogin') == 0 || Cookies.get(cookie_prefix + 'memberID') != 0){
 			$('#desktop').show();
 			//初始化一些桌面信息
-			HROS.CONFIG.sinaweiboAppkey = '<?php echo SINAWEIBO_AKEY; ?>';
-			HROS.CONFIG.tweiboAppkey = '<?php echo TWEIBO_AKEY; ?>';
 			<?php
 				$w = explode('<{|}>', getWallpaper());
 			?>

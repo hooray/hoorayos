@@ -197,37 +197,17 @@ CREATE TABLE `tb_member` (
   `openname_qq` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `openavatar_qq` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `openurl_qq` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_sinaweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_sinaweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_sinaweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_sinaweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_tweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_tweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_tweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_tweibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_t163weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_t163weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_t163weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_t163weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_renren` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_renren` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_renren` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_renren` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_baidu` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openid_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openname_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openavatar_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `openurl_douban` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openid_weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openname_weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openavatar_weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `openurl_weibo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`tbid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_member
 -- ----------------------------
-INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', '48', '50', '50', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', '48', '50', '50', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tb_member_app`

@@ -300,8 +300,6 @@ HROS.widget = (function(){
 					width : 370,
 					id : 'share',
 					content : shareDialogTemp({
-						'sinaweiboAppkey' : HROS.CONFIG.sinaweiboAppkey == '' ? '1197457869' : HROS.CONFIG.sinaweiboAppkey,
-						'tweiboAppkey' : HROS.CONFIG.tweiboAppkey == '' ? '801356816' : HROS.CONFIG.tweiboAppkey,
 						'title' : '我正在使用 %23HoorayOS%23 中的 %23' + obj.data('info').title + '%23 应用，很不错哦，推荐你也来试试！',
 						'url' : HROS.CONFIG.website + '?run=' + obj.data('info').realappid + '%26type=widget'
 					})

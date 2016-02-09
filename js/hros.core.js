@@ -5,8 +5,6 @@ var HROS      = {};
 
 HROS.CONFIG = {
 	website         : 'http://' + location.hostname + location.pathname, //网站地址，用于分享应用时调用。一般无需修改
-	sinaweiboAppkey       : '',        //新浪微博appkey。首页加载会自动初始化，一般无需修改
-	tweiboAppkey          : '',        //腾讯微博appkey。首页加载会自动初始化，一般无需修改
 	memberID              : 0,         //用户id
 	desk                  : 1,         //当前显示桌面
 	dockPos               : '',        //应用码头位置，参数有：top,left,right
