@@ -64,11 +64,11 @@ var windowTemp = template.compile(
 			'</div>'+
 			'<div class="set-bar"><div class="fr">'+
 				'<% if(issetbar){ %>'+
-					'<a class="btn share"><i class="icon icon104"></i><span class="btn-con">分享</span></a>'+
-					'<a class="btn star"><i class="icon icon177"></i><span class="btn-con">评分</span></a>'+
-					'<a class="btn detail"><i class="icon icon120"></i><span class="btn-con">详情</span></a>'+
+					'<a class="btn share"><i class="fa fa-share-alt"></i><span class="btn-con">分享</span></a>'+
+					'<a class="btn star"><i class="fa fa-star"></i><span class="btn-con">评分</span></a>'+
+					'<a class="btn detail"><i class="fa fa-info-circle"></i><span class="btn-con">详情</span></a>'+
 				'<% } %>'+
-				'<a class="btn refresh"><i class="icon icon158"></i><span class="btn-con">刷新</span></a>'+
+				'<a class="btn refresh"><i class="fa fa-refresh"></i><span class="btn-con">刷新</span></a>'+
 			'</div></div>'+
 		'</div>'+
 		'<% if(isresize){ %>'+
