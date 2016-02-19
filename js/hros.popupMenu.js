@@ -565,7 +565,7 @@ HROS.popupMenu = (function(){
 						'<li><i class="fa fa-cloud-upload"></i><a menu="uploadfile" href="javascript:;">上传文件</a></li>'+
 						'<li class="separator"></li>'+
 						'<li><a menu="themes" href="javascript:;"><i class="fa fa-photo"></i>主题设置</a></li>'+
-						'<li><a menu="setting" href="javascript:;"><i class="fa fa-cog fa-spin"></i>桌面设置</a></li>'+
+						'<li><a menu="setting" href="javascript:;"><i class="fa fa-cog"></i>桌面设置</a></li>'+
 						'<li>'+
 							'<a href="javascript:;">图标设置<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
