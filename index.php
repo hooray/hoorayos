@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 <link rel="stylesheet" href="js/font-awesome-4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 <script type="text/javascript">
 //cookie前缀，避免重名
 var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
@@ -75,7 +76,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 		<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
 		<div class="loginbox">
 			<div class="mask">
-				<div class="mask_title">已有帐号点此登录</div>
+				<div class="mask_title">已有帐号点击登录</div>
 			</div>
 			<form action="login.ajax.php" method="post" id="loginForm" class="form">
 				<input type="hidden" name="ac" value="login">
@@ -123,7 +124,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 		</div>
 		<div class="registerbox">
 			<div class="mask">
-				<div class="mask_title">帐号注册</div>
+				<div class="mask_title">立即注册</div>
 			</div>
 			<form action="login.ajax.php" method="post" id="registerForm" class="form">
 				<input type="hidden" name="ac" value="register">
@@ -156,6 +157,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 					</div> 
 				</div>
 				<div class="input_box">
+					<input type="hidden" id="clicaptcha_info" name="clicaptcha_info">
 					<button class="register_btn" id="submit_register_btn" type="submit">注册</button>
 				</div>
 				<div class="disanfangdenglutip">
@@ -322,6 +324,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/HoorayLibs/hooraylibs.js"></script>
 <script src="js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="libs/clicaptcha/clicaptcha.js"></script>
 <script src="js/sugar/sugar-1.4.1.min.js"></script>
 <script src="js/artDialog4.1.7/jquery.artDialog.js?skin=default"></script>
 <script src="js/artDialog4.1.7/plugins/iframeTools.js"></script>
@@ -381,7 +384,7 @@ $(function(){
 	}
 	//表单登录初始化
 	var loginForm = $('#loginForm').Validform({
-		btnSubmit: '#submit_login_btn',
+		sbtnSubmit: '#submit_login_btn',
 		postonce: false,
 		sshowAllError: true,
 		tipSweep: false,
@@ -442,9 +445,20 @@ $(function(){
 		},
 		ajaxPost: true,
 		beforeSubmit: function(){
-			$('#submit_register_btn').addClass('disabled').prop('disabled', true);
+			if(!$('#clicaptcha_info').clicaptchaCheck()){
+				$('#clicaptcha_info').clicaptcha({
+					src: 'libs/clicaptcha/clicaptcha.php',
+					success_tip: '验证成功，正在注册！',
+					callback: function(){
+						$('#submit_register_btn').addClass('disabled').prop('disabled', true);
+						registerForm.submitForm();
+					}
+				});
+				return false;
+			}
 		},
 		callback: function(data){
+			$('#clicaptcha_info').clicaptchaReset();
 			$('#submit_register_btn').removeClass('disabled').prop('disabled', false);
 			registerForm.resetStatus();
 			if(data.status == 'y'){
@@ -456,7 +470,7 @@ $(function(){
 				changeTabindex('login');
 				ZENG.msgbox.show('注册成功', 4, 2000);
 			}else{
-				ZENG.msgbox.show('注册失败', 5, 2000);
+				ZENG.msgbox.show('注册失败：' + data.info, 5, 2000);
 			}
 		}
 	});

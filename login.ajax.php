@@ -99,21 +99,28 @@
 			break;
 		//注册
 		case 'register':
-			if(!$db->has('tb_member', array(
-				'username' => $_POST['reg_username']
-			))){
-				$db->insert('tb_member', array(
-					'username' => $_POST['reg_username'],
-					'password' => sha1($_POST['reg_password']),
-					'lockpassword' => sha1($_POST['reg_password']),
-					'thislogindt' => date('Y-m-d H:i:s'),
-					'thisloginip' => getIp(),
-					'regdt' => date('Y-m-d H:i:s')
-				));
-				$cb['info'] = $_POST['reg_username'];
-				$cb['status'] = 'y';
+			require('libs/clicaptcha/clicaptcha.class.php');
+			$clicaptcha = new clicaptcha();
+			if($clicaptcha->check($_POST['clicaptcha_info'])){
+				if(!$db->has('tb_member', array(
+					'username' => $_POST['reg_username']
+				))){
+					$db->insert('tb_member', array(
+						'username' => $_POST['reg_username'],
+						'password' => sha1($_POST['reg_password']),
+						'lockpassword' => sha1($_POST['reg_password']),
+						'thislogindt' => date('Y-m-d H:i:s'),
+						'thisloginip' => getIp(),
+						'regdt' => date('Y-m-d H:i:s')
+					));
+					$cb['info'] = $_POST['reg_username'];
+					$cb['status'] = 'y';
+				}else{
+					$cb['info'] = '用户名已存在';
+					$cb['status'] = 'n';
+				}
 			}else{
-				$cb['info'] = '';
+				$cb['info'] = '验证码错误';
 				$cb['status'] = 'n';
 			}
 			echo json_encode($cb);
