@@ -74,7 +74,9 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 		<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
 		<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
 		<div class="loginbox">
-			<div class="mask"></div>
+			<div class="mask">
+				<div class="mask_title">已有帐号点此登录</div>
+			</div>
 			<form action="login.ajax.php" method="post" id="loginForm" class="form">
 				<input type="hidden" name="ac" value="login">
 				<div class="avatar">
@@ -120,7 +122,9 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 			</form>
 		</div>
 		<div class="registerbox">
-			<div class="mask"></div>
+			<div class="mask">
+				<div class="mask_title">帐号注册</div>
+			</div>
 			<form action="login.ajax.php" method="post" id="registerForm" class="form">
 				<input type="hidden" name="ac" value="register">
 				<div class="maintitle">注册新用户</div>
