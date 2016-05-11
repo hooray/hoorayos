@@ -452,7 +452,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 #amg_folder_container .folderInner{margin:5px 0;min-width:180px;position:relative;z-index:1;height:100%;overflow:hidden;}
 #amg_folder_container .scrollBar{position:absolute;right:2px;top:0;width:7px;height:20px;-moz-border-radius:6px;-khtml-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;background:url(scrollbar_bgy.png) repeat-y;display:none;z-index:10;}
 #amg_folder_container .appbtn,
-#shortcut_shadow2{height:26px;width:100%;padding:2px 0;overflow:hidden;}
+#shortcut_shadow2{height:26px;width:100%;padding:2px 0;border-radius:0;overflow:hidden;}
 #amg_folder_container .appbtn:hover{border-radius:0;background:rgba(255,255,255,0.3);}
 #amg_folder_container .appbtn img,
 #shortcut_shadow2 img{margin-left:20px;}

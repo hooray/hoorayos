@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -13,7 +13,7 @@
 	else if(!checkPermissions(1)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
-	
+
 	if(isset($_GET['memberid'])){
 		$member = $db->get('tb_member', '*', array(
 			'tbid' => $_GET['memberid']

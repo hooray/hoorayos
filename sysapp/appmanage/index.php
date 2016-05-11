@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -143,8 +143,8 @@ function getPageList(current_page){
 	ZENG.msgbox.show('正在加载中，请稍后...', 6, 100000);
 	var from = current_page * parseInt($('#pagination_setting').attr('per')), to = parseInt($('#pagination_setting').attr('per'));
 	$.ajax({
-		type : 'POST', 
-		url : 'index.ajax.php', 
+		type : 'POST',
+		url : 'index.ajax.php',
 		data : 'ac=getList&from=' + from + '&to=' + to + '&search_1=' + $('#search_1').val() + '&search_2=' + $('#search_2').val() + '&search_3=' + $('#search_3').val() + '&search_4=' + $('#search_4').val(),
 		success : function(msg){
 			var arr = msg.split('<{|*|}>');
@@ -154,7 +154,7 @@ function getPageList(current_page){
 			initPagination(current_page);
 			ZENG.msgbox._hide();
 		}
-	}); 
+	});
 }
 </script>
 </body>

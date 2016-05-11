@@ -106,67 +106,11 @@ HROS.base = (function(){
 			return HROS.CONFIG.memberID != 0 ? true : false;
 		},
 		setSkin : function(skin, callback){
-			function styleOnload(node, callback) {
-				// for IE6-9 and Opera
-				if(node.attachEvent){
-					node.attachEvent('onload', callback);
-					// NOTICE:
-					// 1. "onload" will be fired in IE6-9 when the file is 404, but in
-					// this situation, Opera does nothing, so fallback to timeout.
-					// 2. "onerror" doesn't fire in any browsers!
-				}
-				// polling for Firefox, Chrome, Safari
-				else{
-					setTimeout(function(){
-						poll(node, callback);
-					}, 0); // for cache
-				}
-			}
-			function poll(node, callback) {
-				if(callback.isCalled){
-					return;
-				}
-				var isLoaded = false;
-				//webkit
-				if(/webkit/i.test(navigator.userAgent)){
-					if (node['sheet']) {
-						isLoaded = true;
-					}
-				}
-				// for Firefox
-				else if(node['sheet']){
-					try{
-						if (node['sheet'].cssRules) {
-							isLoaded = true;
-						}
-					}catch(ex){
-						// NS_ERROR_DOM_SECURITY_ERR
-						if(ex.code === 1000){
-							isLoaded = true;
-						}
-					}
-				}
-				if(isLoaded){
-					// give time to render.
-					setTimeout(function() {
-						callback();
-					}, 1);
-				}else{
-					setTimeout(function() {
-						poll(node, callback);
-					}, 1);
-				}
-			}					
 			//将原样式修改id，并载入新样式
 			$('#window-skin').attr('id', 'window-skin-ready2remove');
-			var css = document.createElement('link');
-			css.rel = 'stylesheet';
-			css.href = 'img/skins/' + skin + '.css?' + version;
-			css.id = 'window-skin';
-			document.getElementsByTagName('head')[0].appendChild(css);
-			//新样式载入完毕后清空原样式
-			//方法为参考seajs源码并改编，文章地址：http://www.blogjava.net/Hafeyang/archive/2011/10/08/360183.html
-			styleOnload(css, function(){
+			var stylesheet = loadCSS('img/skins/' + skin + '.css?' + version);
+			onloadCSS(stylesheet, function(){
+				$('body link').last().attr('id', 'window-skin');
 				$('#window-skin-ready2remove').remove();
 				HROS.CONFIG.skin = skin;
 				callback && callback();
