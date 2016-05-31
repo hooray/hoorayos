@@ -1,7 +1,7 @@
 <?php
 	//引入公用文件
 	require('global.php');
-	
+
 	cookie('fromsite', NULL);
 	$setting = $db->get('tb_setting', '*');
 	//检查是否登录
@@ -99,7 +99,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 							<span class="arrow">◆</span>
 							<p></p>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<div class="label_box">
 					<label><input type="checkbox" name="rememberMe" id="rememberMe" value="1">记住我，下次自动登录</label>
@@ -136,7 +136,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 							<span class="arrow">◆</span>
 							<p></p>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<div class="input_box">
 					<input type="password" name="reg_password" id="reg_password" placeholder="请输入密码" datatype="*6-18" nullmsg="请输入密码" errormsg="密码长度在6~18位之间">
@@ -145,7 +145,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 							<span class="arrow">◆</span>
 							<p></p>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<div class="input_box">
 					<input type="password" name="reg_password2" id="reg_password2" placeholder="请确认密码" datatype="*6-18" recheck="reg_password" nullmsg="请再输入一次密码" errormsg="您两次输入的账号密码不一致">
@@ -154,7 +154,7 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 							<span class="arrow">◆</span>
 							<p></p>
 						</div>
-					</div> 
+					</div>
 				</div>
 				<div class="input_box">
 					<input type="hidden" id="clicaptcha_info" name="clicaptcha_info">
