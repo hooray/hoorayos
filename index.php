@@ -46,7 +46,7 @@
 <link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
-<link rel="stylesheet" href="js/font-awesome-4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="js/font-awesome-4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 <script type="text/javascript">
 //cookie前缀，避免重名

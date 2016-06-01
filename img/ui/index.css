@@ -144,7 +144,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 #shortcut_shadow2 img,
 #shortcut_shadow2 span{opacity:0.5;}
 .appbtn span,
-#shortcut_shadow span{border-radius:10px;color:#fff;display:block;height:20px;line-height:20px;margin-top:8px;overflow:hidden;padding:0 5px;position:relative;text-align:center;text-overflow:ellipsis;white-space:nowrap;z-index:1;background:rgba(0,0,0,0.3);}
+#shortcut_shadow span{border-radius:10px;color:#fff;display:block;height:20px;line-height:20px;margin-top:8px;overflow:hidden;padding:0 5px;position:relative;text-align:center;text-overflow:ellipsis;white-space:nowrap;z-index:1;background:rgba(0,0,0,0.3);text-shadow:1px 1px 1px #000;}
 
 /*桌面*/
 #desk{position:absolute;z-index:1;top:0;bottom:30px;left:0;right:0;width:100%;height:100%;overflow:hidden;}
@@ -522,7 +522,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 .popup-menu a:hover{background-color:#3B7CE6;color:#fff;text-decoration:none;}
 .popup-menu a.disabled,
 .popup-menu a.disabled:hover{background-color:inherit;color:#ccc;cursor:not-allowed;}
-.popup-menu .fa{position:absolute;top:5px;left:15px;font-size:14px;color:#666;}
+.popup-menu .fa{position:absolute;top:5px;left:13px;font-size:14px;color:#888;}
 .popup-menu a:hover .fa{color:#fff;}
 .popup-menu a.disabled .fa{color:#ccc;}
 .popup-menu .arrow{left:auto;right:15px;}

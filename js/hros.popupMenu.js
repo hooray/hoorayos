@@ -42,29 +42,29 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuApp){
 				TEMP.popupMenuApp = $(
 					'<div class="popup-menu app-menu"><ul>'+
-						'<li><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-external-link"></i>打开</a></li>'+
 						'<li class="separator"></li>'+
 						'<li>'+
-							'<a menu="move" href="javascript:;">移动到<i class="fa fa-caret-right arrow"></i></a>'+
+							'<a menu="move" href="javascript:;"><i class="fa fa-fw fa-share"></i>移动到<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
-								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
-								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
-								'<li><a menu="moveto" desk="3" href="javascript:;">桌面3</a></li>'+
-								'<li><a menu="moveto" desk="4" href="javascript:;">桌面4</a></li>'+
-								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
+								'<li><a menu="moveto" desk="1" href="javascript:;"><i class="fa fa-fw fa-check"></i>桌面1</a></li>'+
+								'<li><a menu="moveto" desk="2" href="javascript:;"><i class="fa fa-fw fa-check"></i>桌面2</a></li>'+
+								'<li><a menu="moveto" desk="3" href="javascript:;"><i class="fa fa-fw fa-check"></i>桌面3</a></li>'+
+								'<li><a menu="moveto" desk="4" href="javascript:;"><i class="fa fa-fw fa-check"></i>桌面4</a></li>'+
+								'<li><a menu="moveto" desk="5" href="javascript:;"><i class="fa fa-fw fa-check"></i>桌面5</a></li>'+
 							'</ul></div>'+
 						'</li>'+
-						'<li><a menu="edit" href="javascript:;"><i class="fa fa-edit"></i>编辑</a></li>'+
-						'<li><a menu="del" href="javascript:;"><i class="fa fa-remove"></i>卸载</a></li>'+
+						'<li><a menu="edit" href="javascript:;"><i class="fa fa-fw fa-pencil"></i>编辑</a></li>'+
+						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>卸载</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuApp);
 			}
-			$('.app-menu a[menu="moveto"]').removeClass('disabled');
+			$('.app-menu a[menu="moveto"]').removeClass('disabled').children('i.fa-check').hide();
 			if(obj.parent().hasClass('desktop-apps-container')){
 				$('.app-menu a[menu="moveto"]').each(function(){
 					if($(this).attr('desk') == HROS.CONFIG.desk){
-						$(this).addClass('disabled');
+						$(this).addClass('disabled').children('i.fa-check').show();
 					}
 				});
 			}
@@ -162,10 +162,10 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuPapp){
 				TEMP.popupMenuPapp = $(
 					'<div class="popup-menu papp-menu"><ul>'+
-						'<li><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-external-link"></i>打开</a></li>'+
 						'<li class="separator"></li>'+
 						'<li>'+
-							'<a menu="move" href="javascript:;">移动到<i class="fa fa-caret-right arrow"></i></a>'+
+							'<a menu="move" href="javascript:;"><i class="fa fa-fw fa-share"></i>移动到<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
 								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
 								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
@@ -174,8 +174,8 @@ HROS.popupMenu = (function(){
 								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
 							'</ul></div>'+
 						'</li>'+
-						'<li><a menu="edit" href="javascript:;"><i class="fa fa-edit"></i>编辑</a></li>'+
-						'<li><a menu="del" href="javascript:;"><i class="fa fa-remove"></i>删除</a></li>'+
+						'<li><a menu="edit" href="javascript:;"><i class="fa fa-fw fa-pencil"></i>编辑</a></li>'+
+						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuPapp);
@@ -283,11 +283,11 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuFolder){
 				TEMP.popupMenuFolder = $(
 					'<div class="popup-menu folder-menu"><ul>'+
-						'<li><a menu="view" href="javascript:;"><i class="fa fa-eye"></i>预览</a></li>'+
-						'<li><a menu="open" href="javascript:;">打开</a></li>'+
+						'<li><a menu="view" href="javascript:;"><i class="fa fa-fw fa-eye"></i>预览</a></li>'+
+						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-folder-open-o"></i>打开</a></li>'+
 						'<li class="separator"></li>'+
 						'<li>'+
-							'<a menu="move" href="javascript:;">移动到<i class="fa fa-caret-right arrow"></i></a>'+
+							'<a menu="move" href="javascript:;"><i class="fa fa-fw fa-share"></i>移动到<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
 								'<li><a menu="moveto" desk="1" href="javascript:;">桌面1</a></li>'+
 								'<li><a menu="moveto" desk="2" href="javascript:;">桌面2</a></li>'+
@@ -296,8 +296,8 @@ HROS.popupMenu = (function(){
 								'<li><a menu="moveto" desk="5" href="javascript:;">桌面5</a></li>'+
 							'</ul></div>'+
 						'</li>'+
-						'<li><a menu="rename" href="javascript:;"><i class="fa fa-edit"></i>重命名</a></li>'+
-						'<li><a menu="del" href="javascript:;"><i class="fa fa-remove"></i>删除</a></li>'+
+						'<li><a menu="rename" href="javascript:;"><i class="fa fa-fw fa-pencil"></i>重命名</a></li>'+
+						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuFolder);
@@ -433,9 +433,9 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuFile){
 				TEMP.popupMenuFile = $(
 					'<div class="popup-menu file-menu"><ul>'+
-						'<li><a menu="download" href="javascript:;"><i class="fa fa-cloud-download"></i>下载</a></li>'+
+						'<li><a menu="download" href="javascript:;"><i class="fa fa-fw fa-cloud-download"></i>下载</a></li>'+
 						'<li class="separator"></li>'+
-						'<li><a menu="del" href="javascript:;"><i class="fa fa-remove"></i>删除</a></li>'+
+						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuFile);
@@ -471,11 +471,11 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuDock){
 				TEMP.popupMenuDock = $(
 					'<div class="popup-menu dock-menu"><ul>'+
-						'<li><a menu="dockPos" pos="top" href="javascript:;"><i class="fa fa-check"></i>向上停靠</a></li>'+
-						'<li><a menu="dockPos" pos="left" href="javascript:;"><i class="fa fa-check"></i>向左停靠</a></li>'+
-						'<li><a menu="dockPos" pos="right" href="javascript:;"><i class="fa fa-check"></i>向右停靠</a></li>'+
+						'<li><a menu="dockPos" pos="top" href="javascript:;"><i class="fa fa-fw fa-check"></i>向上停靠</a></li>'+
+						'<li><a menu="dockPos" pos="left" href="javascript:;"><i class="fa fa-fw fa-check"></i>向左停靠</a></li>'+
+						'<li><a menu="dockPos" pos="right" href="javascript:;"><i class="fa fa-fw fa-check"></i>向右停靠</a></li>'+
 						'<li class="separator"></li>'+
-						'<li><a menu="dockPos" pos="none" href="javascript:;">隐藏</a></li>'+
+						'<li><a menu="dockPos" pos="none" href="javascript:;"><i class="fa fa-fw fa-eye-slash"></i>隐藏</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuDock);
@@ -514,10 +514,10 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuTask){
 				TEMP.popupMenuTask = $(
 					'<div class="popup-menu task-menu"><ul>'+
-						'<li><a menu="show" href="javascript:;">还原</a></li>'+
-						'<li><a menu="hide" href="javascript:;">最小化</a></li>'+
+						'<li><a menu="show" href="javascript:;"><i class="fa fa-fw fa-caret-up"></i>还原</a></li>'+
+						'<li><a menu="hide" href="javascript:;"><i class="fa fa-fw fa-caret-down"></i>最小化</a></li>'+
 						'<li class="separator"></li>'+
-						'<li><a menu="close" href="javascript:;"><i class="fa fa-close"></i>关闭</a></li>'+
+						'<li><a menu="close" href="javascript:;"><i class="fa fa-fw fa-close"></i>关闭</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuTask);
@@ -552,43 +552,43 @@ HROS.popupMenu = (function(){
 			if(!TEMP.popupMenuDesk){
 				TEMP.popupMenuDesk = $(
 					'<div class="popup-menu desk-menu"><ul>'+
-						'<li><a menu="hideall" href="javascript:;"><i class="fa fa-desktop"></i>显示桌面</a></li>'+
-						'<li><a menu="closeall" href="javascript:;"><i class="fa fa-close"></i>关闭所有窗口</a></li>'+
+						'<li><a menu="hideall" href="javascript:;"><i class="fa fa-fw fa-desktop"></i>显示桌面</a></li>'+
+						'<li><a menu="closeall" href="javascript:;"><i class="fa fa-fw fa-close"></i>关闭所有窗口</a></li>'+
 						'<li class="separator"></li>'+
 						'<li>'+
-							'<a href="javascript:;">新建<i class="fa fa-caret-right arrow"></i></a>'+
+							'<a href="javascript:;"><i class="fa fa-fw fa-folder-o"></i>新建<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
-								'<li><a menu="addfolder" href="javascript:;"><i class="fa fa-folder-o"></i>新建文件夹</a></li>'+
-								'<li><a menu="addpapp" href="javascript:;"><i class="fa fa-edge"></i>新建私人应用</a></li>'+
+								'<li><a menu="addfolder" href="javascript:;"><i class="fa fa-fw fa-folder-o"></i>新建文件夹</a></li>'+
+								'<li><a menu="addpapp" href="javascript:;"><i class="fa fa-fw fa-edge"></i>新建私人应用</a></li>'+
 							'</ul></div>'+
 						'</li>'+
-						'<li><i class="fa fa-cloud-upload"></i><a menu="uploadfile" href="javascript:;">上传文件</a></li>'+
+						'<li><a menu="uploadfile" href="javascript:;"><i class="fa fa-fw fa-cloud-upload"></i>上传文件</a></li>'+
 						'<li class="separator"></li>'+
-						'<li><a menu="themes" href="javascript:;"><i class="fa fa-photo"></i>主题设置</a></li>'+
-						'<li><a menu="setting" href="javascript:;"><i class="fa fa-cog"></i>桌面设置</a></li>'+
+						'<li><a menu="themes" href="javascript:;"><i class="fa fa-fw fa-photo"></i>主题设置</a></li>'+
+						'<li><a menu="setting" href="javascript:;"><i class="fa fa-fw fa-cog"></i>桌面设置</a></li>'+
 						'<li>'+
-							'<a href="javascript:;">图标设置<i class="fa fa-caret-right arrow"></i></a>'+
+							'<a href="javascript:;"><i class="fa fa-fw fa-th"></i>图标设置<i class="fa fa-caret-right arrow"></i></a>'+
 							'<div class="popup-menu"><ul>'+
 								'<li>'+
-									'<a href="javascript:;"><i class="fa fa-sort"></i>排列<i class="fa fa-caret-right arrow"></i></a>'+
+									'<a href="javascript:;"><i class="fa fa-fw fa-th"></i>排列<i class="fa fa-caret-right arrow"></i></a>'+
 									'<div class="popup-menu"><ul>'+
-										'<li><a menu="orderby" orderby="x" href="javascript:;"><i class="fa fa-check"></i>横向排列</a></li>'+
-										'<li><a menu="orderby" orderby="y" href="javascript:;"><i class="fa fa-check"></i>纵向排列</a></li>'+
+										'<li><a menu="orderby" orderby="x" href="javascript:;"><i class="fa fa-fw fa-check"></i>横向排列</a></li>'+
+										'<li><a menu="orderby" orderby="y" href="javascript:;"><i class="fa fa-fw fa-check"></i>纵向排列</a></li>'+
 									'</ul></div>'+
 								'</li>'+
 								'<li>'+
-									'<a href="javascript:;"><i class="fa fa-square-o"></i>尺寸<i class="fa fa-caret-right arrow"></i></a>'+
+									'<a href="javascript:;"><i class="fa fa-fw fa-square-o"></i>尺寸<i class="fa fa-caret-right arrow"></i></a>'+
 									'<div class="popup-menu"><ul>'+
-										'<li><a menu="size" size="32" href="javascript:;"><i class="fa fa-check"></i>小图标</a></li>'+
-										'<li><a menu="size" size="48" href="javascript:;"><i class="fa fa-check"></i>常规图标</a></li>'+
-										'<li><a menu="size" size="64" href="javascript:;"><i class="fa fa-check"></i>大图标</a></li>'+
+										'<li><a menu="size" size="32" href="javascript:;"><i class="fa fa-fw fa-check"></i>小图标</a></li>'+
+										'<li><a menu="size" size="48" href="javascript:;"><i class="fa fa-fw fa-check"></i>常规图标</a></li>'+
+										'<li><a menu="size" size="64" href="javascript:;"><i class="fa fa-fw fa-check"></i>大图标</a></li>'+
 									'</ul></div>'+
 								'</li>'+
 							'</ul></div>'+
 						'</li>'+
 						'<li class="separator"></li>'+
-						'<li><a menu="lock" href="javascript:;"><i class="fa fa-lock"></i>锁定</a></li>'+
-						'<li><a menu="logout" href="javascript:;"><i class="fa fa-sign-out"></i>注销</a></li>'+
+						'<li><a menu="lock" href="javascript:;"><i class="fa fa-fw fa-lock"></i>锁定</a></li>'+
+						'<li><a menu="logout" href="javascript:;"><i class="fa fa-fw fa-sign-out"></i>注销</a></li>'+
 					'</ul></div>'
 				);
 				$('body').append(TEMP.popupMenuDesk);
