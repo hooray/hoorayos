@@ -665,7 +665,8 @@ HROS.window = (function(){
 				e.preventDefault();
 				e.stopPropagation();
 			});
-			$('#desk').on('dblclick', '.window-container .title-bar', function(e){
+			$('#desk').on('dblclick', '.window-container .title-bar .title', function(e){
+				console.log(1);
 				var obj = $(this).parents('.window-container');
 				//判断当前窗口是否已经是最大化
 				if(obj.find('.ha-max').is(':hidden')){
