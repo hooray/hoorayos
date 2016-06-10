@@ -65,14 +65,7 @@ HROS.lock = (function(){
 		show : function(){
 			if($('#lock').length == 0){
 				if(!HROS.base.checkLogin()){
-					$.dialog({
-						title : '温馨提示',
-						icon : 'warning',
-						content : '锁定功能需要登录后才能使用，为了更好的操作，是否登录？',
-						ok : function(){
-							HROS.base.login();
-						}
-					});
+					HROS.base.loginDialog('锁定功能需要登录后才能使用，为了更好的操作，是否登录？');
 				}else{
 					var lock = function(){
 						$.ajax({
@@ -125,31 +118,25 @@ HROS.lock = (function(){
 					};
 					if(Cookies.get(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID) == null){
 						Cookies.set(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID, 1);
-						$.dialog({
+						swal({
+							type : 'warning',
 							title : '温馨提示',
-							icon : 'warning',
-							content : '解锁密码默认为登录密码，是否要先进行修改？',
-							button : [
-								{
-									name : '继续锁定',
-									callback : function(){
-										lock();
-									},
-									focus : true
-								},
-								{
-									name : '修改解锁密码',
-									callback : function(){
-										HROS.window.createTemp({
-											appid : 'zhsz',
-											title : '账号设置',
-											url : 'sysapp/account/security.php',
-											width : 550,
-											height : 580
-										});
-									}
-								}
-							]
+							text : '解锁密码默认为登录密码，是否要先进行修改？',
+							showCancelButton : true,
+							confirmButtonText : '继续锁定',
+							cancelButtonText : '修改解锁密码'
+						}, function(isConfirm){
+							if(isConfirm){
+								lock();
+							}else{
+								HROS.window.createTemp({
+									appid : 'zhsz',
+									title : '账号设置',
+									url : 'sysapp/account/security.php',
+									width : 550,
+									height : 580
+								});
+							}
 						});
 					}else{
 						lock();

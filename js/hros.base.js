@@ -7,14 +7,6 @@ HROS.base = (function(){
 		**	系统初始化
 		*/
 		init : function(){
-			//配置artDialog全局默认参数
-			(function(config){
-				config['lock'] = true;
-				config['fixed'] = true;
-				config['resize'] = false;
-				config['background'] = '#000';
-				config['opacity'] = 0.5;
-			})($.dialog.defaults);
 			//ajax默认设置
 			$.ajaxSetup({
 				url : ajaxUrl,
@@ -24,14 +16,7 @@ HROS.base = (function(){
 			//绑定ajax全局验证
 			$(document).ajaxSuccess(function(event, request, settings){
 				if($.trim(request.responseText) == 'ERROR_NOT_LOGGED_IN' && HROS.CONFIG.memberID != 0){
-					$.dialog({
-						title : '温馨提示',
-						icon : 'warning',
-						content : '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？',
-						ok : function(){
-							HROS.base.login();
-						}
-					});
+					HROS.base.loginDialog();
 				}
 			});
 			//更新当前用户ID
@@ -86,6 +71,21 @@ HROS.base = (function(){
 			HROS.hotkey.init();
 			//页面加载后运行
 			HROS.base.run();
+		},
+		loginDialog : function(text){
+			text = typeof text === 'undefined' ? '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？' : text;
+			HROS.CONFIG.memberID = 0;
+			swal({
+				type : 'warning',
+				title : '温馨提示',
+				text : text,
+				html : true,
+				showCancelButton : true,
+				confirmButtonText : '走，去登录！',
+				cancelButtonText : '我再逛逛…'
+			}, function(){
+				HROS.base.login();
+			});
 		},
 		login : function(){
 			$('#lrbox').animate({

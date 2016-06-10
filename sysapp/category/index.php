@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -65,20 +65,23 @@ $(function(){
 	$('.list-con').on('click', '.do-del', function(){
 		var categoryid = $(this).attr('categoryid');
 		var name = $(this).parent().prev().text();
-		$.dialog({
-			id : 'ajaxedit',
-			content : '删除 “' + name + '” 类目时，会将该类目下的所有应用归类到「未分类」类目下，是否继续？',
-			ok : function(){
-				$.ajax({
-					type : 'POST',
-					url : 'index.ajax.php',
-					data : 'ac=del&categoryid=' + categoryid,
-					success : function(msg){
-						getPageList(0);
-					}
-				});
-			},
-			cancel: true
+		swal({
+			type : 'warning',
+			title : '删除 “' + name + '” 类目',
+			text : '删除类目的同时会将该类目下的所有应用归类到「未分类」<br />确认要删除么？',
+			html : true,
+			showCancelButton : true,
+			confirmButtonText : '确认删除',
+			cancelButtonText : '我点错了'
+		}, function(){
+			$.ajax({
+				type : 'POST',
+				url : 'index.ajax.php',
+				data : 'ac=del&categoryid=' + categoryid,
+				success : function(msg){
+					getPageList(0);
+				}
+			});
 		});
 	});
 	//搜索
@@ -101,8 +104,8 @@ function getPageList(current_page){
 	ZENG.msgbox.show('正在加载中，请稍后...', 6, 100000);
 	var from = current_page * parseInt($('#pagination_setting').attr('per')), to = parseInt($('#pagination_setting').attr('per'));
 	$.ajax({
-		type : 'POST', 
-		url : 'index.ajax.php', 
+		type : 'POST',
+		url : 'index.ajax.php',
 		data : 'ac=getList&from=' + from + '&to=' + to + '&search_1=' + $('#search_1').val(),
 		success : function(msg){
 			var arr = msg.split('<{|*|}>');
@@ -112,7 +115,7 @@ function getPageList(current_page){
 			initPagination(current_page);
 			ZENG.msgbox._hide();
 		}
-	}); 
+	});
 }
 </script>
 </body>

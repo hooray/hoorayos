@@ -129,12 +129,14 @@ HROS.popupMenu = (function(){
 			});
 			$('.app-menu a[menu="edit"]').off('click').on('click', function(){
 				if(HROS.base.checkLogin()){
-					$.dialog.open('sysapp/dialog/app.php?id=' + obj.attr('appid'), {
+					dialog({
 						id : 'editdialog',
 						title : '编辑应用“' + obj.children('span').text() + '”',
+						url : 'sysapp/dialog/app.php?id=' + obj.attr('appid'),
+						padding : 0,
 						width : 600,
 						height : 350
-					});
+					}).showModal();
 				}else{
 					HROS.base.login();
 				}
@@ -247,12 +249,14 @@ HROS.popupMenu = (function(){
 			});
 			$('.papp-menu a[menu="edit"]').off('click').on('click', function(){
 				if(HROS.base.checkLogin()){
-					$.dialog.open('sysapp/dialog/papp.php?id=' + obj.attr('appid'), {
+					dialog({
 						id : 'editdialog',
 						title : '编辑私人应用“' + obj.children('span').text() + '”',
+						url : 'sysapp/dialog/papp.php?id=' + obj.attr('appid'),
+						padding : 0,
 						width : 600,
 						height : 450
-					});
+					}).showModal();
 				}else{
 					HROS.base.login();
 				}
@@ -366,34 +370,33 @@ HROS.popupMenu = (function(){
 			});
 			$('.folder-menu a[menu="rename"]').off('click').on('click', function(){
 				if(HROS.base.checkLogin()){
-					$.dialog({
-						id : 'addfolder',
+					swal({
+						type : 'input',
 						title : '重命名“' + obj.find('span').text() + '”文件夹',
-						padding : 0,
-						content : editFolderDialogTemp({
-							'name' : obj.find('span').text(),
-							'src' : obj.find('img').attr('src')
-						}),
-						ok : function(){
-							if($('#folderName').val() != ''){
-								$.ajax({
-									data : 'ac=updateFolder&name=' + $('#folderName').val() + '&icon=' + $('.folderSelector img').attr('src') + '&id=' + obj.attr('appid')
-								}).done(function(responseText){
-									HROS.app.get();
-								});
-							}else{
-								$('.folderNameError').show();
-								return false;
-							}
-						},
-						cancel : true
-					});
-					$('.folderSelector').off('click').on('click', function(){
-						$('.fcDropdown').show();
-					});
-					$('.fcDropdown_item').off('click').on('click', function(){
-						$('.folderSelector img').attr('src', $(this).children('img').attr('src')).attr('idx', $(this).children('img').attr('idx'));
-						$('.fcDropdown').hide();
+						showCancelButton : true,
+						closeOnConfirm: false,
+						confirmButtonText : '修改',
+						cancelButtonText : '取消',
+						animation : 'slide-from-top',
+						inputPlaceholder : '请输入文件夹名称',
+						inputValue : obj.find('span').text()
+					}, function(inputValue){
+						if(inputValue === false){
+							return false;
+						}
+						if(inputValue === ''){
+							swal.showInputError('文件夹名称不能为空');
+							return false;
+						}
+						$.ajax({
+							data : 'ac=updateFolder&name=' + inputValue + '&id=' + obj.attr('appid')
+						}).done(function(responseText){
+							HROS.app.get();
+							swal({
+								type : 'success',
+								title : '修改成功'
+							});
+						});
 					});
 				}else{
 					HROS.base.login();
@@ -401,25 +404,25 @@ HROS.popupMenu = (function(){
 				$('.popup-menu').hide();
 			});
 			$('.folder-menu a[menu="del"]').off('click').on('click', function(){
-				$.dialog({
-					id : 'delfolder',
+				swal({
+					type : 'warning',
 					title : '删除“' + obj.find('span').text() + '”文件夹',
-					content : '删除文件夹的同时会删除文件夹内所有应用',
-					icon : 'warning',
-					ok : function(){
-						HROS.app.remove(obj.attr('appid'), function(){
-							HROS.app.dataDeleteByAppid(obj.attr('appid'));
-							obj.find('img, span').show().animate({
-								opacity : 'toggle',
-								width : 0,
-								height : 0
-							}, 500, function(){
-								obj.remove();
-								HROS.deskTop.resize();
-							});
+					text : '删除文件夹的同时会删除文件夹内所有应用，确认要删除么？',
+					showCancelButton : true,
+					confirmButtonText : '确认删除',
+					cancelButtonText : '我点错了'
+				}, function(){
+					HROS.app.remove(obj.attr('appid'), function(){
+						HROS.app.dataDeleteByAppid(obj.attr('appid'));
+						obj.find('img, span').show().animate({
+							opacity : 'toggle',
+							width : 0,
+							height : 0
+						}, 500, function(){
+							obj.remove();
+							HROS.deskTop.resize();
 						});
-					},
-					cancel : true
+					});
 				});
 				$('.popup-menu').hide();
 			});
@@ -482,15 +485,20 @@ HROS.popupMenu = (function(){
 				//绑定事件
 				$('.dock-menu a[menu="dockPos"]').on('click', function(){
 					if($(this).attr('pos') == 'none'){
-						$.dialog({
-							title : '温馨提示',
-							icon : 'warning',
-							content : '<p>如果应用码头存在应用，隐藏后会将应用转移到当前桌面。</p><p>若需要再次开启，可在桌面空白处点击右键，进入「 桌面设置 」里开启。</p>',
-							ok : function(){
+						if(Cookies.get(cookie_prefix + 'isfirsthidedock' + HROS.CONFIG.memberID) == null){
+							Cookies.set(cookie_prefix + 'isfirsthidedock' + HROS.CONFIG.memberID, 1);
+							swal({
+								type : 'warning',
+								title : '温馨提示',
+								text : '如果应用码头存在应用，隐藏后会将应用转移到当前桌面<br>若需要再次开启，可在桌面空白处点击右键<br>进入「 桌面设置 」里开启',
+								html : true,
+								confirmButtonText : '我知道了'
+							}, function(){
 								HROS.dock.updatePos('none');
-							},
-							cancel : true
-						});
+							});
+						}else{
+							HROS.dock.updatePos('none');
+						}
 					}else{
 						HROS.dock.updatePos($(this).attr('pos'));
 					}
@@ -614,38 +622,32 @@ HROS.popupMenu = (function(){
 				});
 				$('.desk-menu a[menu="addfolder"]').on('click', function(){
 					if(HROS.base.checkLogin()){
-						$.dialog({
-							id : 'addfolder',
+						swal({
+							type : 'input',
 							title : '新建文件夹',
-							padding : 0,
-							content : editFolderDialogTemp({
-								'name' : '新建文件夹',
-								'src' : 'img/ui/folder_default.png'
-							}),
-							ok : function(){
-								if($('#folderName').val() != ''){
-									$.ajax({
-										data : 'ac=addFolder&name=' + $('#folderName').val() + '&icon=' + $('.folderSelector img').attr('src') + '&desk=' + HROS.CONFIG.desk
-									}).done(function(responseText){
-										HROS.app.get();
-									});
-								}else{
-									$('.folderNameError').show();
-									return false;
-								}
-							},
-							cancel : true
-						});
-						$('.folderSelector').on('click', function(){
-							$('#addfolder .fcDropdown').show();
-							return false;
-						});
-						$(document).click(function(){
-							$('#addfolder .fcDropdown').hide();
-						});
-						$('.fcDropdown_item').on('click', function(){
-							$('.folderSelector img').attr('src', $(this).children('img').attr('src')).attr('idx', $(this).children('img').attr('idx'));
-							$('#addfolder .fcDropdown').hide();
+							showCancelButton : true,
+							closeOnConfirm: false,
+							confirmButtonText : '创建',
+							cancelButtonText : '取消',
+							animation : 'slide-from-top',
+							inputPlaceholder : '请输入文件夹名称'
+						}, function(inputValue){
+							if(inputValue === false){
+								return false;
+							}
+							if(inputValue === ''){
+								swal.showInputError('文件夹名称不能为空');
+								return false;
+							}
+							$.ajax({
+								data : 'ac=addFolder&name=' + inputValue + '&desk=' + HROS.CONFIG.desk
+							}).done(function(responseText){
+								HROS.app.get();
+								swal({
+									type : 'success',
+									title : '创建成功'
+								});
+							});
 						});
 					}else{
 						HROS.base.login();
@@ -654,12 +656,14 @@ HROS.popupMenu = (function(){
 				});
 				$('.desk-menu a[menu="addpapp"]').on('click', function(){
 					if(HROS.base.checkLogin()){
-						$.dialog.open('sysapp/dialog/papp.php?desk=' + HROS.CONFIG.desk, {
+						dialog({
 							id : 'editdialog',
 							title : '新建私人应用',
+							url : 'sysapp/dialog/papp.php?desk=' + HROS.CONFIG.desk,
+							padding : 0,
 							width : 600,
 							height : 450
-						});
+						}).showModal();
 					}else{
 						HROS.base.login();
 					}

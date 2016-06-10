@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -196,10 +196,6 @@ $(function(){
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay){
-			//如果对话框存在，则先关闭
-			if($.dialog.list['selectDialog'] != null){
-				$.dialog.list['selectDialog'].close();
-			}
 			var content = '', isallday = 1;
 			var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());
 			var enddText = Date.create(end).format('{M}月{dd}日 ') + getMyDay(end.getDay());
@@ -218,14 +214,13 @@ $(function(){
 				}
 			}
 			//创建对话框
-			$.dialog({
+			dialog({
 				id: 'selectDialog',
-				lock: false,
 				title: '创建日程',
 				content: '<table><tr><td style="width:50px;height:30px;vertical-align:middle">时间：</td><td style="vertical-align:middle">' + content + '</td></tr><tr><td style="height:30px;vertical-align:middle">标题：</td><td style="vertical-align:middle"><input type="text" id="title" style="margin-bottom:0"></td></tr><tr><td></td><td style="height:30px;vertical-align:middle">例如：下午 4 点在 星巴克 喝下午茶</td></tr></table>',
 				button: [
 					{
-						name: '创建',
+						value: '创建',
 						callback: function(){
 							if($.trim(document.getElementById('title').value) != ''){
 								$.ajax({
@@ -238,14 +233,19 @@ $(function(){
 									}
 								});
 							}else{
-								$.dialog.tips('请填写活动标题');
+								swal({
+									type : 'error',
+									title : '请填写活动标题',
+									showConfirmButton : false,
+									timer : 1000
+								});
 								return false;
 							}
 						},
-						focus: true
+						autofocus: true
 					},
 					{
-						name: '编辑',
+						value: '编辑',
 						callback: function(){
 							$('#calendar').hide();
 							$('#editbox').show();
@@ -267,7 +267,7 @@ $(function(){
 						}
 					}
 				]
-			});
+			}).showModal();
 			calendar.fullCalendar('unselect');
 		},
 		editable: true,
@@ -301,20 +301,20 @@ $(function(){
 					content += startdText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText;
 				}
 			}
-			$.dialog({
+			dialog({
 				title: event.title,
 				content: content,
 				width: 350,
 				button: [
 					{
-						name: '跳转',
+						value: '跳转',
 						callback: function(){
 							window.open(event.url, '_blank');
 						},
 						disabled: typeof event.url == 'undefined' ? true : false
 					},
 					{
-						name: '删除',
+						value: '删除',
 						callback: function(){
 							ZENG.msgbox.show('正在更新中，请稍后...', 6, 100000);
 							$.ajax({
@@ -329,7 +329,7 @@ $(function(){
 						}
 					},
 					{
-						name: '编辑',
+						value: '编辑',
 						callback: function(){
 							ZENG.msgbox.show('正在读取中，请勿操作', 6, 100000);
 							$.ajax({
@@ -368,10 +368,10 @@ $(function(){
 								}
 							});
 						},
-						focus: true
+						autofocus: true
 					}
 				]
-			});
+			}).showModal();
 			return false;
 		},
 		eventDrop: function(event, dayDelta, minuteDelta){

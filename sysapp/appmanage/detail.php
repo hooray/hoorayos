@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -13,7 +13,7 @@
 	else if(!checkPermissions(1)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
-	
+
 	if(isset($_GET['appid'])){
 		$app = $db->get('tb_app', '*', array(
 			'tbid' => $_GET['appid']
@@ -167,8 +167,7 @@
 	</div>
 </div>
 </form>
-<div id="unpassinfo" class="form-inline" style="display:none;width:300px">
-	<div>拒绝审核通过理由：</div>
+<div id="unpassinfo" class="form-inline" style="display:none">
 	<label class="radio" style="margin-right:10px"><input type="radio" name="unpassinfo" value="信息不完整" checked>信息不完整</label>
 	<label class="radio" style="margin-right:10px"><input type="radio" name="unpassinfo" value="应用已存在">应用已存在</label>
 	<label class="radio" style="margin-right:10px"><input type="radio" name="unpassinfo" value="内容低俗">内容低俗</label>
@@ -247,31 +246,29 @@ $(function(){
 		callback: function(data){
 			if($('input[name="id"]').val() != ''){
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '修改成功，是否继续修改？',
-						okVal: '是',
-						ok : function(){
-							$.dialog.list['ajaxedit'].close();
-						},
-						cancel : function(){
-							window.parent.closeDetailIframe(function(){
-								window.parent.$('#pagination').trigger('currentPage');
-							});
-						}
+					window.parent.closeDetailIframe(function(){
+						window.parent.$('#pagination').trigger('currentPage');
+					});
+					window.parent.swal({
+						type : 'success',
+						title : '编辑成功'
 					});
 				}
 			}else{
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '添加成功，是否继续添加？',
-						okVal: '是',
-						ok : function(){
+					swal({
+						type : 'success',
+						title : '添加成功',
+						text : '是否继续添加？',
+						showCancelButton : true,
+						confirmButtonText : '继续添加',
+						cancelButtonText : '返回',
+						closeOnConfirm : false,
+						closeOnCancel : false
+					}, function(isConfirm){
+						if(isConfirm){
 							location.reload();
-							return false;
-						},
-						cancel : function(){
+						}else{
 							window.parent.closeDetailIframe(function(){
 								window.parent.$('#pagination').trigger('currentPage');
 							});
@@ -318,27 +315,30 @@ $(function(){
 	});
 	$('#btn-pass').on('click', function(){
 		var appid = $(this).attr('appid');
-		$.dialog({
-			id : 'del',
-			content : '确认审核通过该应用？',
-			ok : function(){
-				$.ajax({
-					type : 'POST',
-					url : 'detail.ajax.php',
-					data : 'ac=pass&appid=' + appid
-				}).done(function(){
-					window.parent.closeDetailIframe(function(){
-						window.parent.$('#pagination').trigger('currentPage');
-					});
+		swal({
+			type : 'warning',
+			title : '确认审核通过该应用',
+			showCancelButton : true,
+			confirmButtonText : '确认',
+			cancelButtonText : '取消',
+			closeOnConfirm : false
+		}, function(){
+			$.ajax({
+				type : 'POST',
+				url : 'detail.ajax.php',
+				data : 'ac=pass&appid=' + appid
+			}).done(function(){
+				window.parent.closeDetailIframe(function(){
+					window.parent.$('#pagination').trigger('currentPage');
 				});
-			},
-			cancel: true
+			});
 		});
 	});
 	$('#btn-unpass').on('click', function(){
 		var appid = $(this).attr('appid');
-		$.dialog({
+		dialog({
 			id : 'del',
+			title : '拒绝审核通过理由',
 			content : document.getElementById('unpassinfo'),
 			ok : function(){
 				$.ajax({
@@ -351,8 +351,10 @@ $(function(){
 					});
 				});
 			},
-			cancel: true
-		});
+			okValue : '确认',
+			cancel : true,
+			cancelValue : '取消'
+		}).showModal();
 	});
 	$('#btn-preview').on('click', function(){
 		if(form.check()){
@@ -374,9 +376,10 @@ $(function(){
 				});
 			}
 		}else{
-			$.dialog({
-				icon : 'error',
-				content : '应用无法预览，请将内容填写完整后再尝试预览'
+			swal({
+				type : 'error',
+				title : '应用无法预览',
+				text : '请将内容填写完整后再尝试预览'
 			});
 		}
 	});

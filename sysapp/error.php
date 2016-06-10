@@ -17,15 +17,7 @@
 <script type="text/javascript">
 $(function(){
 	<?php if($_GET['code'] == $errorcode['noLogin']){ ?>
-		window.parent.HROS.CONFIG.memberID = 0;
-		window.parent.$.dialog({
-			title: '温馨提示',
-			icon: 'warning',
-			content: '您尚未登录，为了更好的操作，是否登录？',
-			ok: function(){
-				window.parent.HROS.base.login();
-			}
-		});
+		window.parent.HROS.base.loginDialog();
 	<?php }elseif($_GET['code'] == $errorcode['noAdmin']){ ?>
 		window.parent.ZENG.msgbox.show("对不起，您不是管理员！", 1, 2000);
 	<?php }elseif($_GET['code'] == $errorcode['noPermissions']){ ?>

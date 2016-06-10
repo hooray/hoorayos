@@ -168,24 +168,6 @@ var suggestTemp = template.compile(
 		'<a href="javascript:;"><div><%=name%></div></a>'+
 	'</li>'
 );
-//新建&修改文件夹窗口
-var editFolderDialogTemp = template.compile(
-	'<div id="addfolder">'+
-		'<a class="folderSelector"><img src="<%=src%>"></a>'+
-		'<div class="folderNameTxt">请输入文件夹名称：</div>'+
-		'<div class="folderInput"><input type="text" class="folderName" id="folderName" value="<%=name%>"></div>'+
-		'<div class="folderNameError">文件夹名称不能只包含空字符</div>'+
-		'<div class="fcDropdown">'+
-			'<a class="fcDropdown_item" title="默认"><img class="fcDropdown_img" src="img/ui/folder_default.png"></a>'+
-			'<a class="fcDropdown_item" title="文本"><img class="fcDropdown_img" src="img/ui/folder_doc.png"></a>'+
-			'<a class="fcDropdown_item" title="游戏"><img class="fcDropdown_img" src="img/ui/folder_game.png"></a>'+
-			'<a class="fcDropdown_item" title="生活"><img class="fcDropdown_img" src="img/ui/folder_life.png"></a>'+
-			'<a class="fcDropdown_item" title="音乐"><img class="fcDropdown_img" src="img/ui/folder_music.png"></a>'+
-			'<a class="fcDropdown_item" title="工具"><img class="fcDropdown_img" src="img/ui/folder_tool.png"></a>'+
-			'<a class="fcDropdown_item" title="视频"><img class="fcDropdown_img" src="img/ui/folder_video.png"></a>'+
-		'</div>'+
-	'</div>'
-);
 //应用评分
 var starDialogTemp = template.compile(
 	'<div id="star" realappid="<%=realappid%>">'+

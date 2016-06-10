@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -13,7 +13,7 @@
 	else if(!checkPermissions(5)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
-	
+
 	if(isset($_GET['categoryid'])){
 		$name = $db->get('tb_app_category', 'name', array(
 			'tbid' => $_GET['categoryid']
@@ -81,31 +81,29 @@ $(function(){
 		callback: function(data){
 			if($('input[name="id"]').val() != ''){
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '修改成功，是否继续修改？',
-						okVal: '是',
-						ok : function(){
-							$.dialog.list['ajaxedit'].close();
-						},
-						cancel : function(){
-							window.parent.closeDetailIframe(function(){
-								window.parent.$('#pagination').trigger('currentPage');
-							});
-						}
+					window.parent.closeDetailIframe(function(){
+						window.parent.$('#pagination').trigger('currentPage');
+					});
+					window.parent.swal({
+						type : 'success',
+						title : '编辑成功'
 					});
 				}
 			}else{
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '添加成功，是否继续添加？',
-						okVal: '是',
-						ok : function(){
+					swal({
+						type : 'success',
+						title : '添加成功',
+						text : '是否继续添加？',
+						showCancelButton : true,
+						confirmButtonText : '继续添加',
+						cancelButtonText : '返回',
+						closeOnConfirm : false,
+						closeOnCancel : false
+					}, function(isConfirm){
+						if(isConfirm){
 							location.reload();
-							return false;
-						},
-						cancel : function(){
+						}else{
 							window.parent.closeDetailIframe(function(){
 								window.parent.$('#pagination').trigger('currentPage');
 							});

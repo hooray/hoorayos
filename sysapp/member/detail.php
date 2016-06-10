@@ -116,31 +116,29 @@ $(function(){
 		callback: function(data){
 			if($('input[name="id"]').val() != ''){
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '修改成功，是否继续修改？',
-						okVal: '是',
-						ok : function(){
-							$.dialog.list['ajaxedit'].close();
-						},
-						cancel : function(){
-							window.parent.closeDetailIframe(function(){
-								window.parent.$('#pagination').trigger('currentPage');
-							});
-						}
+					window.parent.closeDetailIframe(function(){
+						window.parent.$('#pagination').trigger('currentPage');
+					});
+					window.parent.swal({
+						type : 'success',
+						title : '编辑成功'
 					});
 				}
 			}else{
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '添加成功，是否继续添加？',
-						okVal: '是',
-						ok : function(){
+					swal({
+						type : 'success',
+						title : '添加成功',
+						text : '是否继续添加？',
+						showCancelButton : true,
+						confirmButtonText : '继续添加',
+						cancelButtonText : '返回',
+						closeOnConfirm : false,
+						closeOnCancel : false
+					}, function(isConfirm){
+						if(isConfirm){
 							location.reload();
-							return false;
-						},
-						cancel : function(){
+						}else{
 							window.parent.closeDetailIframe(function(){
 								window.parent.$('#pagination').trigger('currentPage');
 							});

@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	$app = $db->get('tb_app', '*', array(
 		'tbid' => $_GET['id']
 	));
@@ -89,14 +89,7 @@ $(function(){
 				location.reload();
 			});
 		}else{
-			window.parent.$.dialog({
-				title: '温馨提示',
-				icon: 'warning',
-				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
-				ok: function(){
-					window.parent.parent.HROS.base.login();
-				}
-			});
+			window.parent.parent.HROS.base.loginDialog('您尚未登录，赶快登录去添加您喜爱的应用吧！');
 		}
 	});
 	//打开应用

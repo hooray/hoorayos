@@ -47,6 +47,8 @@
 <link rel="stylesheet" href="img/ui/index.css">
 <link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 <link rel="stylesheet" href="js/font-awesome-4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="js/artDialog-6.0.4/css/ui-dialog.css">
+<link rel="stylesheet" href="js/sweetalert-1.1.1/dist/sweetalert.css">
 <link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 <script type="text/javascript">
 //cookie前缀，避免重名
@@ -326,8 +328,9 @@ var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 <script src="js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script src="libs/clicaptcha/clicaptcha.js"></script>
 <script src="js/sugar/sugar-1.4.1.min.js"></script>
-<script src="js/artDialog4.1.7/jquery.artDialog.js?skin=default"></script>
-<script src="js/artDialog4.1.7/plugins/iframeTools.js"></script>
+<script src="js/artDialog-6.0.4/dist/dialog-min.js"></script>
+<script src="js/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
+<script src="js/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 <!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 <script src="js/hros.core.js"></script>
 <script src="js/hros.app.js"></script>

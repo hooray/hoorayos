@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<ul class="nav nav-tabs" style="margin:5px 12px">
+<ul class="nav nav-tabs" style="margin-top:5px;margin-bottom:0">
 	<?php
 		$category = $db->select('tb_app_category', '*', array(
 			'issystem' => 0
@@ -50,9 +50,10 @@
 <script>
 $(function(){
 	$('.nav-tabs a:first').tab('show');
-	if($.dialog.data('appsid') != ''){
-		$('#value_1').val($.dialog.data('appsid'));
-		var appsid = $.dialog.data('appsid').split(',');
+	var dialog = window.parent.dialog.get(window);
+	if(dialog.data.appsid != ''){
+		$('#value_1').val(dialog.data.appsid);
+		var appsid = dialog.data.appsid.split(',');
 		$('.app').each(function(){
 			for(var i=0; i<appsid.length; i++){
 				if(appsid[i] == $(this).attr('appid')){
@@ -84,7 +85,7 @@ $(function(){
 			}
 			$(this).addClass('act');
 		}
-		$.dialog.data('appsid', $('#value_1').val());
+		dialog.data.appsid = $('#value_1').val();
 	});
 });
 </script>

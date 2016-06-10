@@ -1,19 +1,12 @@
 <script src="../../js/jquery-1.8.3.min.js"></script>
 <script src="../../js/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../js/HoorayLibs/hooraylibs.js"></script>
-<script src="../../js/artDialog4.1.7/jquery.artDialog.js?skin=simple"></script>
-<script src="../../js/artDialog4.1.7/plugins/iframeTools.js"></script>
+<script src="../../js/artDialog-6.0.4/dist/dialog-min.js"></script>
+<script src="../../js/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
+<script src="../../js/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 <script src="../../js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script>
 $(function(){
-	//配置artDialog全局默认参数
-	(function(config){
-		config['lock'] = true;
-		config['fixed'] = true;
-		config['resize'] = false;
-		config['background'] = '#000';
-		config['opacity'] = 0.5;
-	})($.dialog.defaults);
 	//toolTip
 	$('[rel="tooltip"]').tooltip();
 	//表单提示

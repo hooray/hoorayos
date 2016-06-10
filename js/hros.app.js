@@ -58,7 +58,7 @@ HROS.app = (function(){
 						$.ajax({
 							data : 'ac=updateAppStar&id=' + $('#star').attr('realappid') + '&starnum=' + num
 						}).done(function(responseText){
-							$.dialog.list['star'].close();
+							dialog.get('star').close().remove();
 							if(responseText['response']){
 								ZENG.msgbox.show("打分成功！", 4, 2000);
 							}else{
@@ -70,7 +70,7 @@ HROS.app = (function(){
 					}
 				}
 			}).on('click', '#share a', function(){
-				$.dialog.list['share'].close();
+				dialog.get('share').close().remove();
 			});
 			//获取桌面应用数据
 			HROS.app.get();
@@ -799,11 +799,12 @@ HROS.app = (function(){
 		checkIsMoving : function(){
 			var rtn = false;
 			if(HROS.VAR.isAppMoving){
-				$.dialog({
+				swal({
+					type : 'warning',
 					title : '温馨提示',
-					icon : 'warning',
-					content : '数据正在处理中，请稍后。',
-					ok : true
+					text : '数据正在处理中，请稍后…',
+					timer: 2000,
+					showConfirmButton: false
 				});
 				rtn = true;
 			}else{
@@ -812,11 +813,12 @@ HROS.app = (function(){
 			return rtn;
 		},
 		dataWarning : function(){
-			$.dialog({
+			swal({
+				type : 'error',
 				title : '温馨提示',
-				icon : 'warning',
-				content : '数据错误，请刷新后重试。',
-				ok : true
+				text : '数据错误，请刷新后重试',
+				timer: 2000,
+				showConfirmButton: false
 			});
 		},
 		dataDockToFolder : function(id, from, to){

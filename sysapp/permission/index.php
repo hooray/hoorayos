@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -65,20 +65,21 @@ $(function(){
 	$('.list-con').on('click', '.do-del', function(){
 		var permissionid = $(this).attr('permissionid');
 		var name = $(this).parent().prev().text();
-		$.dialog({
-			id : 'ajaxedit',
-			content : '确定要删除 “' + name + '” 该权限么？',
-			ok : function(){
-				$.ajax({
-					type : 'POST',
-					url : 'index.ajax.php',
-					data : 'ac=del&permissionid=' + permissionid,
-					success : function(msg){
-						getPageList(0);
-					}
-				});
-			},
-			cancel: true
+		swal({
+			type : 'warning',
+			title : '',
+			text : '确定要删除 “' + appname + '” 该权限么？',
+			showCancelButton : true,
+			confirmButtonText : '确认',
+			cancelButtonText : '取消'
+		}, function(){
+			$.ajax({
+				type : 'POST',
+				url : 'index.ajax.php',
+				data : 'ac=del&permissionid=' + permissionid
+			}).done(function(){
+				$('#pagination').trigger('currentPage');
+			});
 		});
 	});
 	//搜索
@@ -101,8 +102,8 @@ function getPageList(current_page){
 	ZENG.msgbox.show('正在加载中，请稍后...', 6, 100000);
 	var from = current_page * parseInt($('#pagination_setting').attr('per')), to = parseInt($('#pagination_setting').attr('per'));
 	$.ajax({
-		type : 'POST', 
-		url : 'index.ajax.php', 
+		type : 'POST',
+		url : 'index.ajax.php',
 		data : 'ac=getList&from=' + from + '&to=' + to + '&search_1=' + $('#search_1').val(),
 		success : function(msg){
 			var arr = msg.split('<{|*|}>');
@@ -112,7 +113,7 @@ function getPageList(current_page){
 			initPagination(current_page);
 			ZENG.msgbox._hide();
 		}
-	}); 
+	});
 }
 </script>
 </body>

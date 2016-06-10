@@ -99,19 +99,21 @@ $(function(){
 	$('.list-con').on('click', '.do-del', function(){
 		var appid = $(this).attr('appid');
 		var appname = $(this).parents('tr').children('td:nth-child(2)').text();
-		$.dialog({
-			id : 'del',
-			content : '确定要删除 “' + appname + '” 该应用么？',
-			ok : function(){
-				$.ajax({
-					type : 'POST',
-					url : 'index.ajax.php',
-					data : 'ac=del&appid=' + appid
-				}).done(function(){
-					$('#pagination').trigger('currentPage');
-				});
-			},
-			cancel: true
+		swal({
+			type : 'warning',
+			title : '',
+			text : '确定要删除 “' + appname + '” 该应用么？',
+			showCancelButton : true,
+			confirmButtonText : '确认',
+			cancelButtonText : '取消'
+		}, function(){
+			$.ajax({
+				type : 'POST',
+				url : 'index.ajax.php',
+				data : 'ac=del&appid=' + appid
+			}).done(function(){
+				$('#pagination').trigger('currentPage');
+			});
 		});
 	}).on('click', '.do-recommend', function(){
 		var appid = $(this).attr('appid');

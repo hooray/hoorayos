@@ -1,6 +1,6 @@
 <?php
 	require('global.php');
-	
+
 	//所有操作分两种类型：读和写
 	//如 getWallpaper 是读操作，setWallpaper 是写操作
 	//当遇到写操作时，则需要通过下面登录验证，未登录用户则中断之后的写操作，并输出错误信息
@@ -9,7 +9,7 @@
 			exit('ERROR_NOT_LOGGED_IN');
 		}
 	}
-		
+
 	switch($_REQUEST['ac']){
 		//获取头像
 		case 'getAvatar':
@@ -37,7 +37,7 @@
 				case '2':
 					if($_POST['wp'] != '' && $_POST['wp'] != 0){
 						$data['wallpaper_id'] = $_POST['wp'];
-					}					
+					}
 					break;
 				case '3':
 					if($_POST['wp'] != ''){
@@ -701,7 +701,6 @@
 		case 'addFolder':
 			addApp(array(
 				'type' => 'folder',
-				'icon' => $_POST['icon'],
 				'name' => $_POST['name'],
 				'desk' => $_POST['desk']
 			));
@@ -709,7 +708,6 @@
 		//文件夹重命名
 		case 'updateFolder':
 			$db->update('tb_member_app', array(
-				'icon' => $_POST['icon'],
 				'name' => $_POST['name']
 			), array(
 				'AND' => array(

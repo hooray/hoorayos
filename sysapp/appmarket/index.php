@@ -51,13 +51,13 @@
 			<h3>今日推荐</h3>
 			<div class="commend-container">
 				<a href="javascript:openDetailIframe2('detail.php?id=<?php echo $recommendApp['tbid']; ?>');">
-					<img src="../../<?php echo $recommendApp['icon']; ?>" alt="<?php echo $recommendApp['name']; ?>">			
+					<img src="../../<?php echo $recommendApp['icon']; ?>" alt="<?php echo $recommendApp['name']; ?>">
 				</a>
 			</div>
 			<div class="commend-text">
 				<h4>
 					<strong><?php echo $recommendApp['name']; ?></strong>
-					<span><?php echo $recommendApp['usecount']; ?>人在用</span>				
+					<span><?php echo $recommendApp['usecount']; ?>人在用</span>
 				</h4>
 				<div class="con" title="<?php echo $recommendApp['remark']; ?>"><?php echo $recommendApp['remark']; ?></div>
 				<?php
@@ -204,14 +204,7 @@ $(function(){
 				window.parent.HROS.app.get();
 			});
 		}else{
-			window.parent.$.dialog({
-				title: '温馨提示',
-				icon: 'warning',
-				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
-				ok: function(){
-					window.parent.HROS.base.login();
-				}
-			});
+			window.parent.HROS.base.loginDialog('您尚未登录，赶快登录去添加您喜爱的应用吧！');
 		}
 	}).on('click', '.btn-remove-s', function(){
 		if(window.parent.HROS.base.checkLogin()){
@@ -240,14 +233,7 @@ $(function(){
 				location.reload();
 			});
 		}else{
-			window.parent.$.dialog({
-				title: '温馨提示',
-				icon: 'warning',
-				content: '您尚未登录，赶快登录去添加您喜爱的应用吧！',
-				ok: function(){
-					window.parent.HROS.base.login();
-				}
-			});
+			window.parent.HROS.base.loginDialog('您尚未登录，赶快登录去添加您喜爱的应用吧！');
 		}
 	}).on('click', '.btn-run', function(){
 		if($(this).attr('app_type') == 'window'){
@@ -282,7 +268,7 @@ function getPageList(current_page){
 			initPagination(current_page);
 			ZENG.msgbox._hide();
 		}
-	}); 
+	});
 }
 </script>
 </body>

@@ -245,15 +245,16 @@ HROS.appmanage = (function(){
 								}
 							}
 							if(HROS.CONFIG.dockPos == 'none'){
-								$.dialog({
+								swal({
+									type : 'warning',
 									title : '温馨提示',
-									icon : 'warning',
-									content : '当前应用码头处于停用状态，是否开启？',
-									ok : function(){
-										HROS.dock.updatePos('top');
-										next();
-									},
-									cancel : true
+									text : '当前应用码头处于停用状态，是否开启？',
+									showCancelButton : true,
+									confirmButtonText : '是的',
+									cancelButtonText : '不用'
+								}, function(){
+									HROS.dock.updatePos('top');
+									next();
 								});
 							}else{
 								next();

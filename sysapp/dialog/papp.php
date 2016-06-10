@@ -1,11 +1,11 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
-	
+
 	if(isset($_GET['id'])){
 		$app = $db->get('tb_member_app', '*', array(
 			'tbid' => $_GET['id']
@@ -126,7 +126,7 @@
 </div>
 <div class="bottom-bar">
 	<div class="con">
-		<a class="btn fr" href="javascript:window.parent.$.dialog.list['editdialog'].close();"><i class="icon-remove"></i> 关闭</a>
+		<a class="btn fr" href="javascript:window.parent.dialog.get('editdialog').close().remove();"><i class="icon-remove"></i> 关闭</a>
 		<a class="btn btn-primary fr" id="btn-submit" href="javascript:;" style="margin-right:10px"><i class="icon-white icon-ok"></i> 确定</a>
 	</div>
 </div>
@@ -205,7 +205,7 @@ $(function(){
 		callback: function(data){
 			if(data.status == 'y'){
 				window.parent.HROS.app.get();
-				window.parent.$.dialog.list['editdialog'].close();
+				window.parent.dialog.get('editdialog').close().remove();
 			}
 		}
 	});

@@ -141,14 +141,14 @@
 			}elseif($prefix){ // 获取session
 				if(strpos($name, '.')){
 					list($name1, $name2) = explode('.', $name);
-					return isset($_SESSION[$prefix][$name1][$name2]) ? $_SESSION[$prefix][$name1][$name2] : null;  
+					return isset($_SESSION[$prefix][$name1][$name2]) ? $_SESSION[$prefix][$name1][$name2] : null;
 				}else{
-					return isset($_SESSION[$prefix][$name]) ? $_SESSION[$prefix][$name] : null;                
+					return isset($_SESSION[$prefix][$name]) ? $_SESSION[$prefix][$name] : null;
 				}
 			}else{
 				if(strpos($name, '.')){
 					list($name1, $name2) = explode('.', $name);
-					return isset($_SESSION[$name1][$name2]) ? $_SESSION[$name1][$name2] : null;  
+					return isset($_SESSION[$name1][$name2]) ? $_SESSION[$name1][$name2] : null;
 				}else{
 					return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
 				}
@@ -437,13 +437,13 @@
 			case 'simg' : return getFileInfo($str, 'path').'/s_'.getFileInfo($str, 'name').'.jpg'; break;
 		}
 	}
-	function path_info($filepath){   
-		$path_parts = array();   
-		$path_parts ['dirname'] = rtrim(substr($filepath, 0, strrpos($filepath, '/')),"/")."/";   
-		$path_parts ['basename'] = ltrim(substr($filepath, strrpos($filepath, '/')),"/");   
-		$path_parts ['extension'] = substr(strrchr($filepath, '.'), 1);   
-		$path_parts ['filename'] = ltrim(substr($path_parts ['basename'], 0, strrpos($path_parts ['basename'], '.')),"/");   
-		return $path_parts;   
+	function path_info($filepath){
+		$path_parts = array();
+		$path_parts ['dirname'] = rtrim(substr($filepath, 0, strrpos($filepath, '/')),"/")."/";
+		$path_parts ['basename'] = ltrim(substr($filepath, strrpos($filepath, '/')),"/");
+		$path_parts ['extension'] = substr(strrchr($filepath, '.'), 1);
+		$path_parts ['filename'] = ltrim(substr($path_parts ['basename'], 0, strrpos($path_parts ['basename'], '.')),"/");
+		return $path_parts;
 	}
 	/**
 	 * 字节格式化 把字节数格式为 B K M G T 描述的大小
@@ -533,12 +533,12 @@
 			// Resample
 			error_log('height: ' . $new_height . ' - width: ' . $new_width);
 			$new = imagecreatetruecolor(round($new_width), round($new_height));
-			
+
 			$c = imagecolorallocatealpha($new , 0 , 0 , 0 , 127);//拾取一个完全透明的颜色
 			imagealphablending($new , false);//关闭混合模式，以便透明颜色能覆盖原画布
 			imagefill($new , 0 , 0 , $c);//填充
 			imagesavealpha($new , true);//设置保存PNG时保留透明通道信息
-			
+
 			imagecopyresampled($new, $image, 0, 0, 0, 0, $new_width, $new_height, $w, $h);
 			// Crop
 			if($crop){
@@ -577,43 +577,43 @@
 	function get_path_this($path){
 		$path = str_replace('\\','/', rtrim(trim($path),'/'));
 		return substr($path,strrpos($path,'/')+1);
-	} 
+	}
 	function file_download($file, $filename){
 		if(file_exists($file)){
-			header("Cache-Control: public");  
-			header("Content-Type: application/octet-stream");  
-			header("Content-Disposition: attachment;filename=".$filename);  
+			header("Cache-Control: public");
+			header("Content-Type: application/octet-stream");
+			header("Content-Disposition: attachment;filename=".$filename);
 			header("Accept-Ranges: bytes");
-			$size = filesize($file);  
-			//如果有$_SERVER['HTTP_RANGE']参数 断点续传 
-			if(isset($_SERVER['HTTP_RANGE'])){  
-				list ($a, $range) = explode("=", $_SERVER['HTTP_RANGE']);  
-				str_replace($range, "-", $range);  
-				$size2 = $size - 1; //文件总字节数  
-				$new_length = $size2 - $range; //获取下次下载的长度  
-				header("HTTP/1.1 206 Partial Content");  
-				header("Content-Length: $new_length"); //输入总长  
+			$size = filesize($file);
+			//如果有$_SERVER['HTTP_RANGE']参数 断点续传
+			if(isset($_SERVER['HTTP_RANGE'])){
+				list ($a, $range) = explode("=", $_SERVER['HTTP_RANGE']);
+				str_replace($range, "-", $range);
+				$size2 = $size - 1; //文件总字节数
+				$new_length = $size2 - $range; //获取下次下载的长度
+				header("HTTP/1.1 206 Partial Content");
+				header("Content-Length: $new_length"); //输入总长
 				header("Content-Range: bytes $range$size2/$size");
 			}else{//第一次连接
-				$size2 = $size -1;  
-				header("Content-Range: bytes 0-$size2/$size"); //Content-Range: bytes 0-4988927/4988928  
-				header("Content-Length: " . $size); //输出总长  
-			}  
-			$fp = fopen($file, "rb");  
-			fseek($fp, $range);  
-			while(!feof($fp)){  
-				set_time_limit(0);  
-				print(fread($fp, 1024 * 8)); //输出文件  
-				flush(); 
-				ob_flush();  
-			}  
-			fclose($fp);  
+				$size2 = $size -1;
+				header("Content-Range: bytes 0-$size2/$size"); //Content-Range: bytes 0-4988927/4988928
+				header("Content-Length: " . $size); //输出总长
+			}
+			$fp = fopen($file, "rb");
+			fseek($fp, $range);
+			while(!feof($fp)){
+				set_time_limit(0);
+				print(fread($fp, 1024 * 8)); //输出文件
+				flush();
+				ob_flush();
+			}
+			fclose($fp);
 			exit();
-		} 
+		}
 	}
-	
+
 	/*****以下方法仅限该项目*****/
-	
+
 	//获取用户头像
 	function getAvatar($memberid, $size = 's'){
 		switch($size){
@@ -791,7 +791,7 @@
 				break;
 			case 'folder':
 				$appid = $db->insert('tb_member_app', array(
-					'icon' => $opt['icon'],
+					'icon' => 'img/ui/folder.png',
 					'name' => $opt['name'],
 					'width' => 610,
 					'height' => 400,

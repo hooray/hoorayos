@@ -1,11 +1,11 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
-	
+
 	if(isset($_GET['appid'])){
 		$app = $db->get('tb_app', '*', array(
 			'tbid' => $_GET['appid']
@@ -45,7 +45,7 @@
 					echo '编辑应用';
 				}
 			?>
-		</p>	
+		</p>
 		<div class="input-label">
 			<label class="label-text">应用图片：</label>
 			<div class="label-box form-inline control-group">
@@ -305,31 +305,29 @@ $(function(){
 		callback: function(data){
 			if($('input[name="id"]').val() != ''){
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '修改成功，是否继续修改？',
-						okVal: '是',
-						ok : function(){
-							$.dialog.list['ajaxedit'].close();
-						},
-						cancel : function(){
-							window.parent.closeDetailIframe(function(){
-								window.parent.$('#pagination').trigger('currentPage');
-							});
-						}
+					window.parent.closeDetailIframe(function(){
+						window.parent.$('#pagination').trigger('currentPage');
+					});
+					window.parent.swal({
+						type : 'success',
+						title : '编辑成功'
 					});
 				}
 			}else{
 				if(data.status == 'y'){
-					$.dialog({
-						id : 'ajaxedit',
-						content : '添加成功，是否继续添加？',
-						okVal: '是',
-						ok : function(){
+					swal({
+						type : 'success',
+						title : '添加成功',
+						text : '是否继续添加？',
+						showCancelButton : true,
+						confirmButtonText : '继续添加',
+						cancelButtonText : '返回',
+						closeOnConfirm : false,
+						closeOnCancel : false
+					}, function(isConfirm){
+						if(isConfirm){
 							location.reload();
-							return false;
-						},
-						cancel : function(){
+						}else{
 							window.parent.closeDetailIframe(function(){
 								window.parent.$('#pagination').trigger('currentPage');
 							});
@@ -394,9 +392,10 @@ $(function(){
 				});
 			}
 		}else{
-			$.dialog({
-				icon : 'error',
-				content : '应用无法预览，请将内容填写完整后再尝试预览'
+			swal({
+				type : 'error',
+				title : '应用无法预览',
+				text : '请将内容填写完整后再尝试预览'
 			});
 		}
 	});

@@ -1,4 +1,4 @@
-*{margin:0;padding:0;}
+*{margin:0;padding:0;font:12px/1.8 'Segoe UI','Microsoft YaHei',微软雅黑,'STHei',华文黑体,sans-serif;}
 form,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,p{list-style:none outside none;}
 a{text-decoration:none;color:#ccc;outline:none;}
 a:hover{text-decoration:none;}
@@ -15,7 +15,6 @@ a img{border:none;}
 
 *{-moz-user-select:none;-webkit-user-select:none;user-select:none;}
 html{height:100%;overflow:hidden;}
-body{font:12px/1.8 'Segoe UI','Microsoft YaHei',微软雅黑,'STHei',华文黑体,sans-serif;}
 
 input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 #desktop{position:absolute;z-index:1;width:100%;height:100%;display:none;}
@@ -493,20 +492,6 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 #share a.tsohu{background-position:0 -80px;}
 #share a.douban{background-position:0 -96px;}
 #share a.twangyi{background-position:0 -112px;}
-
-/*新建文件夹*/
-#addfolder{width:380px;height:100px;position:relative;}
-.folderSelector{width:54px;height:50px;position:absolute;top:30px;left:30px;cursor:pointer;background:url(forder_selector.png) no-repeat;}
-.folderSelector:hover{background-position:0 -50px;}
-.folderSelector img{width:38px;height:38px;margin:6px;}
-.folderNameTxt{left:100px;position:absolute;top:28px;color:#333;font-size:14px;}
-.folderInput{left:100px;position:absolute;top:53px;}
-.folderName{height:22px;width:210px;padding:0 5px;border:1px solid #BDBDBD;}
-.folderNameError{color:red;left:100px;position:absolute;top:80px;display:none;}
-.fcDropdown{width:300px;height:120px;position:absolute;left:30px;top:84px;border:1px solid #86A1A3;background:#FFF;display:none;}
-.fcDropdown_item{float:left;margin:5px;cursor:pointer;width:50px;height:50px;}
-.fcDropdown_item:hover{background:url(forder_selector.png) no-repeat 0 -100px;}
-.fcDropdown_img{width:38px;height:38px;margin:6px;}
 
 /*新建私人应用*/
 #addpapp{width:320px;}

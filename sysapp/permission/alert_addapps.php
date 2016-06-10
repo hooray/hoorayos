@@ -30,9 +30,10 @@
 <?php include('sysapp/global_js.php'); ?>
 <script>
 $(function(){
-	if($.dialog.data('appsid') != ''){
-		$('#value_1').val($.dialog.data('appsid'));
-		var appsid = $.dialog.data('appsid').split(',');
+	var dialog = window.parent.dialog.get(window);
+	if(dialog.data.appsid != ''){
+		$('#value_1').val(dialog.data.appsid);
+		var appsid = dialog.data.appsid.split(',');
 		$('.app').each(function(){
 			for(var i = 0; i < appsid.length; i++){
 				if(appsid[i] == $(this).attr('appid')){
@@ -64,7 +65,7 @@ $(function(){
 			}
 			$(this).addClass('act');
 		}
-		$.dialog.data('appsid', $('#value_1').val());
+		dialog.data.appsid = $('#value_1').val();
 	});
 });
 </script>

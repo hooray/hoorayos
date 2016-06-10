@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -13,7 +13,7 @@
 	else if(!checkPermissions(1)){
 		redirect('../error.php?code='.$errorcode['noPermissions']);
 	}
-	
+
 	$set = $db->get('tb_setting', '*');
 	if($set['dock'] != ''){
 		$set['dockinfo'] = $db->select('tb_app', array('tbid', 'name', 'icon'), array(
@@ -320,26 +320,28 @@ $(function(){
 	$('a[menu=addapps]').click(function(){
 		var appsBox = $(this).siblings('.permissions_apps');
 		var appsidInput = $(this).next('input');
-		$.dialog.data('appsid', appsidInput.val());
-		$.dialog.open('sysapp/websitesetting/alert_addapps.php', {
+		dialog({
 			id : 'alert_addapps',
 			title : '选择应用',
-			resize: false,
+			url : 'alert_addapps.php',
+			data : {
+				appsid : appsidInput.val()
+			},
+			padding: 0,
 			width : 360,
-			height : 300,
+			height : 363,
 			ok : function(){
-				appsidInput.val($.dialog.data('appsid')).focusout();
+				appsidInput.val(this.data.appsid).focusout();
 				$.ajax({
 					type : 'POST',
 					url : 'defaultset.ajax.php',
-					data : 'ac=updateApps&appsid=' + $.dialog.data('appsid'),
-					success : function(msg){
-						appsBox.html(msg);
-					}
+					data : 'ac=updateApps&appsid=' + this.data.appsid
+				}).done(function(msg){
+					appsBox.html(msg);
 				});
 			},
 			cancel : true
-		});
+		}).showModal();
 	});
 	//删除应用
 	$('.permissions_apps').on('click','.app .del',function(){
