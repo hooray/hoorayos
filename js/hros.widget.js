@@ -84,7 +84,7 @@ HROS.widget = (function(){
 				function nextDo(options){
 					var widgetId = '#w_' + options.appid;
 					if(HROS.widget.checkCookie(appid, type)){
-						var widgetState = $.parseJSON(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
+						var widgetState = JSON.parse(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
 						$(widgetState).each(function(){
 							if(this.appid == options.appid && this.type == options.type){
 								options.top = this.top;
@@ -161,19 +161,26 @@ HROS.widget = (function(){
 		},
 		//还原上次退出系统时widget的状态
 		reduction : function(){
-			var widgetState = $.parseJSON(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
-			$(widgetState).each(function(){
-				HROS.widget.create(this.appid, this.type);
-			});
+			var widgetState = Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID);
+			if(typeof widgetState !== 'undefined'){
+				widgetState = JSON.parse(widgetState);
+				$(widgetState).each(function(){
+					HROS.widget.create(this.appid, this.type);
+				});
+			}
 		},
 		//根据id验证是否存在cookie中
 		checkCookie : function(appid, type){
-			var flag = false, widgetState = $.parseJSON(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
-			$(widgetState).each(function(){
-				if(this.appid == appid && this.type == type){
-					flag = true;
-				}
-			});
+			var flag = false;
+			var widgetState = Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID);
+			if(typeof widgetState !== 'undefined'){
+				widgetState = JSON.parse(widgetState);
+				$(widgetState).each(function(){
+					if(this.appid == appid && this.type == type){
+						flag = true;
+					}
+				});
+			}
 			return flag;
 		},
 		/*
@@ -183,9 +190,9 @@ HROS.widget = (function(){
 		*/
 		addCookie : function(appid, type, top, right){
 			if(type == 'widget' || type == 'pwidget'){
-				var widgetState = $.parseJSON(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
 				//检查是否存在，如果存在则更新，反之则添加
 				if(HROS.widget.checkCookie(appid, type)){
+					var widgetState = JSON.parse(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
 					$(widgetState).each(function(){
 						if(this.appid == appid && this.type == type){
 							this.top = top;
@@ -193,7 +200,10 @@ HROS.widget = (function(){
 						}
 					});
 				}else{
-					if(widgetState == null){
+					var widgetState = Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID);
+					if(typeof widgetState !== 'undefined'){
+						widgetState = JSON.parse(widgetState);
+					}else{
 						widgetState = [];
 					}
 					widgetState.push({
@@ -209,7 +219,7 @@ HROS.widget = (function(){
 		removeCookie : function(appid, type){
 			if(type == 'widget' || type == 'pwidget'){
 				if(HROS.widget.checkCookie(appid, type)){
-					var widgetState = $.parseJSON(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
+					var widgetState = JSON.parse(Cookies.get(cookie_prefix + 'widgetState' + HROS.CONFIG.memberID));
 					$(widgetState).each(function(i){
 						if(this.appid == appid && this.type == type){
 							widgetState.splice(i, 1);

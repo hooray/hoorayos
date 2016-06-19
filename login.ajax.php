@@ -1,6 +1,6 @@
 <?php
 	require('global.php');
-		
+
 	switch($_REQUEST['ac']){
 		//登录
 		case 'login':
@@ -146,6 +146,8 @@
 			$userinfo['rememberMe'] = 0;
 			$userinfo['password'] = '';
 			cookie('userinfo', json_encode($userinfo));
+			$cb['status'] = 'y';
+			echo json_encode($cb);
 			break;
 		//解锁登录
 		case 'unlock':
@@ -159,6 +161,7 @@
 			if($row){
 				session('member_id', $row['tbid']);
 				cookie('memberID', $row['tbid'], 3600 * 24 * 7);
+				echo 1;
 			}else{
 				echo 'ERROR_LOCKPASSWORD';
 			}

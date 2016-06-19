@@ -73,11 +73,14 @@ HROS.lock = (function(){
 							data : 'ac=logout'
 						});
 						$('#desktop').hide();
-						var userinfo = $.parseJSON(Cookies.get(cookie_prefix + 'userinfo'));
-						$('body').append(lockTemp({
-							'avatar' : userinfo.avatar,
-							'username' : userinfo.username
-						}));
+						var userinfo = Cookies.get(cookie_prefix + 'userinfo');
+						if(typeof userinfo !== 'undefined'){
+							userinfo = JSON.parse(userinfo);
+							$('body').append(lockTemp({
+								'avatar' : userinfo.avatar,
+								'username' : userinfo.username
+							}));
+						}
 						//时间，日期，星期信息的显示
 						var getTimeDateWeek = function(){
 							var time = new Date();

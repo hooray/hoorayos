@@ -57,7 +57,7 @@ HROS.startMenu = (function(){
 					appid : 'zhsz',
 					title : '账号设置',
 					url : 'sysapp/account/index.php',
-					width : 680,
+					width : 780,
 					height : 580
 				});
 			}else{

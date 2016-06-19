@@ -1,5 +1,5 @@
-<script src="../../js/jquery-1.8.3.min.js"></script>
-<script src="../../js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/jquery-2.2.4.min.js"></script>
+<script src="../../js/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 <script src="../../js/HoorayLibs/hooraylibs.js"></script>
 <script src="../../js/artDialog-6.0.4/dist/dialog-min.js"></script>
 <script src="../../js/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
@@ -8,13 +8,7 @@
 <script>
 $(function(){
 	//toolTip
-	$('[rel="tooltip"]').tooltip();
-	//表单提示
-	$("[datatype]").focusin(function(){
-		$(this).parent().addClass('info').children('.infomsg').show().siblings('.help-inline').hide();
-	}).focusout(function(){
-		$(this).parent().removeClass('info').children('.infomsg').hide().siblings('.help-inline').show();
-	});
+	$('[data-toggle="tooltip"]').tooltip();
 	//detailIframe
 	openDetailIframe = function(url){
 		ZENG.msgbox.show('正在载入中，请稍后...', 6, 100000);

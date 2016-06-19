@@ -701,22 +701,22 @@ HROS.app = (function(){
 						**  获得桌面应用定位好后的实际高度
 						**  因为显示的高度是固定的，而实际的高度是根据应用个数会变化
 						*/
-						var deskH = parseInt(desk.children('.add').css('top')) + 108;
+						var deskH = parseInt(desk.children('.add').css('top')) + parseInt(desk.children('.add').outerHeight());
 						/*
 						**  计算滚动条高度
 						**  高度公式（应用纵向排列计算滚动条宽度以此类推）：
 						**  滚动条实际高度 = 桌面显示高度 / 桌面实际高度 * 滚动条总高度(桌面显示高度)
-						**  如果“桌面显示高度 / 桌面实际高度 >= 1”说明应用个数未能超出桌面，则不需要出现滚动条
+						**  如果“桌面显示高度 < 桌面实际高度”，则出现滚动条
 						*/
-						if(desk.height() / deskH < 1){
+						if(desk.height() < deskH){
 							desk.nextAll('.scrollbar-y').height(desk.height() / deskH * desk.height());
 							scrollbarTop = scrollbarTop + desk.nextAll('.scrollbar-y').height() > desk.height() ? desk.height() - desk.nextAll('.scrollbar-y').height() : scrollbarTop;
 							desk.nextAll('.scrollbar-y').css('top', scrollbarTop).show();
 							desk.scrollTop(scrollbarTop / desk.height() * deskH);
 						}
 					}else{
-						var deskW = parseInt(desk.children('.add').css('left')) + 106;
-						if(desk.width() / deskW < 1){
+						var deskW = parseInt(desk.children('.add').css('left')) + parseInt(desk.children('.add').outerWidth());
+						if(desk.width() < deskW){
 							desk.nextAll('.scrollbar-x').width(desk.width() / deskW * desk.width());
 							scrollbarLeft = scrollbarLeft + desk.nextAll('.scrollbar-x').width() > desk.width() ? desk.width() - desk.nextAll('.scrollbar-w').width() : scrollbarLeft;
 							desk.nextAll('.scrollbar-x').css('left', scrollbarLeft).show();
@@ -736,8 +736,8 @@ HROS.app = (function(){
 			$('#desk .scrollbar').on('mousedown', function(e){
 				var x, y, cx, cy, deskrealw, deskrealh, movew, moveh;
 				var scrollbar = $(this), desk = scrollbar.prevAll('.desktop-apps-container');
-				deskrealw = parseInt(desk.children('.add').css('left')) + 106;
-				deskrealh = parseInt(desk.children('.add').css('top')) + 108;
+				deskrealw = parseInt(desk.children('.add').css('left')) + parseInt(desk.children('.add').outerWidth());
+				deskrealh = parseInt(desk.children('.add').css('top')) + parseInt(desk.children('.add').outerHeight());
 				movew = desk.width() - scrollbar.width();
 				moveh = desk.height() - scrollbar.height();
 				if(scrollbar.hasClass('scrollbar-x')){
@@ -766,7 +766,7 @@ HROS.app = (function(){
 				$('#desk-' + i).on('mousewheel', function(event, delta){
 					var desk = $(this).find('.desktop-apps-container');
 					if(HROS.CONFIG.appXY == 'x'){
-						var deskrealh = parseInt(desk.find('.add').css('top')) + 108, scrollupdown;
+						var deskrealh = parseInt(desk.find('.add').css('top')) + parseInt(desk.children('.add').outerHeight()), scrollupdown;
 						/*
 						**  delta == -1   往下
 						**  delta == 1    往上
@@ -782,7 +782,7 @@ HROS.app = (function(){
 							top : scrollupdown / deskrealh * desk.height()
 						}, 300);
 					}else{
-						var deskrealw = parseInt(desk.find('.add').css('left')) + 106, scrollleftright;
+						var deskrealw = parseInt(desk.find('.add').css('left')) + parseInt(desk.children('.add').outerWidth()), scrollleftright;
 						if(delta < 0){
 							scrollleftright = desk.scrollLeft() + 200 > deskrealw - desk.width() ? deskrealw - desk.width() : desk.scrollLeft() + 200;
 						}else{

@@ -701,8 +701,8 @@ HROS.popupMenu = (function(){
 							appid : 'hoorayos-zmsz',
 							title : '桌面设置',
 							url : 'sysapp/desksetting/index.php',
-							width : 750,
-							height : 450,
+							width : 800,
+							height : 500,
 							isflash : false
 						});
 					}else{
