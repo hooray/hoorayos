@@ -53,7 +53,7 @@
 	<meta charset="utf-8">
 	<title>默认设置</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../img/ui/sys.css">
+	<link rel="stylesheet" href="../../static/css/sys.css">
 	<link rel="stylesheet" href="../../js/bootstrap-slider-7.1.1/dist/css/bootstrap-slider.min.css">
 	<style media="screen">
 		.slider.slider-horizontal{

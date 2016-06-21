@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <title>我的日历</title>
 <?php include('sysapp/global_css.php'); ?>
-<link rel="stylesheet" href="../../img/ui/sys.css">
+<link rel="stylesheet" href="../../static/css/sys.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
 <link rel="stylesheet" href="../../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">

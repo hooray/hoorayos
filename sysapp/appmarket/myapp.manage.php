@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <title>我的应用</title>
 <?php include('sysapp/global_css.php'); ?>
-<link rel="stylesheet" href="../../img/ui/sys.css">
+<link rel="stylesheet" href="../../static/css/sys.css">
 <style>
 body{margin:10px 10px 0}
 .appicon{width:32px;height:32px}

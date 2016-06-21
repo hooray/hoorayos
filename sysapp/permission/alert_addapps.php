@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <title>添加应用</title>
 <?php include('sysapp/global_css.php'); ?>
-<link rel="stylesheet" href="../../img/ui/sys.css">
+<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 
 <body>

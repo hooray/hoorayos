@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo - Validform - 一行代码搞定整站的表单验证！ &copy;瑞金佬的前端路</title>
+<link rel="stylesheet" href="demo/css/style.css" type="text/css" media="all" />
+<link href="demo/css/demo.css" type="text/css" rel="stylesheet" />
+<style>
+.registerform li{padding-bottom:20px;}
+.Validform_checktip{margin-left:10px;}
+.registerform .label{display:inline-block; width:70px;}
+.action{padding-left:92px;}
+</style>
+</head>
+
+<body>  
+<div class="header">
+    <div class="wraper">
+    	<h1><a href="http://validform.rjboy.cn">Validform</a></h1>
+        <ul class="nav">
+            <li><a href="http://validform.rjboy.cn/">关于Validform</a></li>
+            <li><a href="demo.html" class="current">Demo</a></li>
+            <li><a href="document.html">文档</a></li>
+            <li><a href="help.html">帮助</a></li>
+            <li><a href="http://validform.rjboy.cn/?p=1">网友讨论</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="wraper">
+        <p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>
+        
+    	<h2 class="green">智能的提示信息</h2>
+        
+        <form class="registerform" action="ajax_post.php">
+            <ul>
+                <li>
+                    <label class="label"><span class="need">*</span> 中文名：</label>
+                    <input type="text" value="" name="name" class="inputxt" />
+                </li>
+                <li>
+                    <label class="label"><span class="need">*</span> 密码：</label>
+                    <input type="password" value="" name="userpassword" class="inputxt" />
+                </li>
+                <li>
+                    <label class="label"><span class="need">*</span> 确认密码：</label>
+                    <input type="password" value="" name="userpassword2" class="inputxt" />
+                </li>
+                <li>
+                    <label class="label"><span class="need">*</span> 所在城市：</label>
+                    <select name="province" ><option value="">请选择城市</option><option value="1">瑞金市</option></select>
+                </li>
+                <li>
+                	<label class="label"><span class="need">*</span> 性别：</label>
+                    <input type="radio" value="1" name="gender" id="male" class="pr1" /><label for="male">男</label> <input type="radio" value="2" name="gender" id="female" class="pr1" /><label for="female">女</label>
+                </li>
+                <li>
+                    <label class="label"><span class="need">*</span> 购物网：</label>
+                    <input name="shoppingsite2" class="rt2" id="shoppingsite21" type="checkbox"  value="1" /><label for="shoppingsite21">新蛋</label>
+                    <input name="shoppingsite2" class="rt2" id="shoppingsite22" type="checkbox"  value="2" /><label for="shoppingsite22">淘宝</label>
+                    <input name="shoppingsite2" class="rt2" id="shoppingsite23" type="checkbox"  value="3" /><label for="shoppingsite23">京东</label>
+                </li>
+            </ul>
+            <div class="action">
+                <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+            </div>
+        </form>
+        
+        <h2>说明：</h2>
+        <div class="tipmsg">
+        	<p>1、没有找到Validform_checktip时，会根据tiptype自动创建显示提示信息的标签；</p>
+            <p>2、没有绑定nullmsg时，默认查找Validform_label标签内的文字做提示，传入了“label”参数时会查找label指定的选择符；</p>
+            <p>3、没有绑定errormsg时，自动根据datatype输出相应提示文字；</p>
+        </div>
+         
+    </div>
+</div>
+
+<div class="footer">
+    <div class="wraper">
+        <p class="fl">Copyright &copy; <a href="http://www.eloocor.com" target="_blank">易罗客</a></p>
+        <p class="fr"><a href="http://www.rjboy.cn" target="_blank">瑞金佬的前端路</a><b> | </b><a href="http://validform.rjboy.cn">Validform</a><b> | </b><a href="http://www.rjboy.cn/?p=789" target="_blank">hScrollpane</a><b> | </b><a href="http://www.rjboy.cn/?p=708" target="_blank">Xslider</a></p>
+    </div>
+</div>
+
+<script type="text/javascript" src="demo/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="demo/js/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+		
+	var demo=$(".registerform").Validform({
+		tiptype:3,
+		label:".label",
+		showAllError:true,
+		datatype:{
+			"zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
+		},
+		ajaxPost:true
+	});
+	
+	//通过$.Tipmsg扩展默认提示信息;
+	//$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
+	demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
+	
+	demo.addRule([{
+		ele:".inputxt:eq(0)",
+		datatype:"zh2-4"
+	},
+	{
+		ele:".inputxt:eq(1)",
+		datatype:"*6-20"
+	},
+	{
+		ele:".inputxt:eq(2)",
+		datatype:"*6-20",
+		recheck:"userpassword"
+	},
+	{
+		ele:"select",
+		datatype:"*"
+	},
+	{
+		ele:":radio:first",
+		datatype:"*"
+	},
+	{
+		ele:":checkbox:first",
+		datatype:"*"
+	}]);
+	
+})
+</script>
+</body>
+</html>

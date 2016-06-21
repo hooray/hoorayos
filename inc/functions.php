@@ -629,7 +629,7 @@
 		if(file_exists('uploads/member/'.$memberid.'/avatar/'.$size.'.jpg')){
 			$avatar = 'uploads/member/'.$memberid.'/avatar/'.$size.'.jpg';
 		}else{
-			$avatar = 'img/ui/avatar_'.$size.'.jpg';
+			$avatar = 'static/img/ui/avatar_'.$size.'.jpg';
 		}
 		return $avatar;
 	}
@@ -791,7 +791,7 @@
 				break;
 			case 'folder':
 				$appid = $db->insert('tb_member_app', array(
-					'icon' => 'img/ui/folder.png',
+					'icon' => 'static/img/ui/folder.png',
 					'name' => $opt['name'],
 					'width' => 610,
 					'height' => 400,

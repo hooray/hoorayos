@@ -26,7 +26,7 @@
 <meta charset="utf-8">
 <title>编辑私人应用</title>
 <?php include('sysapp/global_css.php'); ?>
-<link rel="stylesheet" href="../../img/ui/sys.css">
+<link rel="stylesheet" href="../../static/css/sys.css">
 <style type="text/css">
 .creatbox .middle{bottom:47px}
 .bottom-bar{height:48px}

@@ -1,0 +1,34 @@
+/*该皮肤参考lhgdialog插件皮肤，并在此基础上进行了修改*/
+/* lhgdialog : http://bbs.lhgcore.com/lhg4/index.html */
+
+/*窗口*/
+.window-container{border:1px solid #333;background:#559AEE}
+/*当前窗口*/
+.window-current{border:1px solid #000;background:#559AEE}
+/*标题*/
+.title-bar{height:24px;line-height:24px;background:url(chrome/chrome_s2.gif) repeat-x}
+/*标题图标*/
+.title-bar .icon{display:none}
+/*标题文字*/
+.title-bar .title{background:#559AEE;padding-left:6px;color:#fff;font-weight:bold;text-align:left}
+/*窗口右上角操作按钮*/
+.title-handle{top:0}
+.title-handle a{background:url(chrome/chrome_s.gif) no-repeat;font-size:0;width:25px;height:18px}
+.title-handle a b{display:none}
+.title-handle .ha-hide{background-position:0 0}
+.title-handle .ha-hide:hover{background-position:0 -18px}
+.title-handle .ha-max{background-position:-25px 0}
+.title-handle .ha-max:hover{background-position:-25px -18px}
+.title-handle .ha-revert{background-position:-50px 0}
+.title-handle .ha-revert:hover{background-position:-50px -18px}
+.title-handle .ha-fullscreen{background-position:-75px 0}
+.title-handle .ha-fullscreen:hover{background-position:-75px -18px}
+.title-handle .ha-close{background-position:-100px 0;line-height:0;overflow:hidden;width:44px}
+.title-handle .ha-close:hover,.ui_close:focus{background-position:-100px -18px}
+/*窗口内部iframe*/
+.window-frame{left:2px;right:2px;top:24px;border:none}
+/*底部*/
+.set-bar,
+.window-current .set-bar{background:#559AEE}
+.set-bar .btn,
+.window-current .set-bar .btn{border:1px solid #fff;background:#fff}

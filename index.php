@@ -46,12 +46,12 @@
 	<meta name="description" content="<?php echo $setting['description']; ?>" />
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<link rel="stylesheet" href="js/HoorayLibs/hooraylibs.css">
-	<link rel="stylesheet" href="img/ui/index.css">
-	<link rel="stylesheet" href="img/skins/<?php echo getSkin(); ?>.css" id="window-skin">
-	<link rel="stylesheet" href="js/font-awesome-4.6.3/css/font-awesome.min.css">
-	<link rel="stylesheet" href="js/artDialog-6.0.4/css/ui-dialog.css">
-	<link rel="stylesheet" href="js/sweetalert-1.1.1/dist/sweetalert.css">
+	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
+	<link rel="stylesheet" href="static/plugins/font-awesome-4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/plugins/artDialog-6.0.4/css/ui-dialog.css">
+	<link rel="stylesheet" href="static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 	<script type="text/javascript">
 	//cookie前缀，避免重名
@@ -73,7 +73,7 @@
 				<form action="login.ajax.php" method="post" id="loginForm" class="form">
 					<input type="hidden" name="ac" value="login">
 					<div class="avatar">
-						<img src="img/ui/avatar_120.jpg" id="avatar">
+						<img src="static/img/ui/avatar_120.jpg" id="avatar">
 					</div>
 					<div class="input_box">
 						<input type="input" name="username" id="username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
@@ -230,7 +230,7 @@
 			<div class="startmenu-selfinfo">
 				<a href="javascript:;" class="startmenu-feedback" title="反馈"></a>
 				<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L"></a>
-				<div class="startmenu-avatar"><img src="img/ui/loading_24.gif"></div>
+				<div class="startmenu-avatar"><img src="static/img/ui/loading_24.gif"></div>
 				<div class="startmenu-nick">
 					<?php if(checkLogin()){ ?>
 					<a href="javascript:;" title="编辑个人资料"><?php echo $db->get('tb_member', 'username', array('tbid' => session('member_id'))); ?></a>
@@ -313,38 +313,38 @@
 			<p>购买或定制请联系 QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" target="_blank">304327508</a></p>
 		</div>
 	</div>
-	<script src="js/jquery-3.0.0.min.js"></script>
-	<script src="js/HoorayLibs/hooraylibs.js"></script>
-	<script src="js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+	<script src="static/plugins/jquery-3.0.0.min.js"></script>
+	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
+	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
-	<script src="js/sugar/sugar-1.4.1.min.js"></script>
-	<script src="js/artDialog-6.0.4/dist/dialog-min.js"></script>
-	<script src="js/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
-	<script src="js/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
+	<script src="static/plugins/sugar/sugar-1.4.1.min.js"></script>
+	<script src="static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
+	<script src="static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
+	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
-	<script src="js/hros.core.js"></script>
-	<script src="js/hros.app.js"></script>
-	<script src="js/hros.appmanage.js"></script>
-	<script src="js/hros.base.js"></script>
-	<script src="js/hros.copyright.js"></script>
-	<script src="js/hros.desktop.js"></script>
-	<script src="js/hros.dock.js"></script>
-	<script src="js/hros.folderView.js"></script>
-	<script src="js/hros.grid.js"></script>
-	<script src="js/hros.hotkey.js"></script>
-	<script src="js/hros.lock.js"></script>
-	<script src="js/hros.maskBox.js"></script>
-	<script src="js/hros.popupMenu.js"></script>
-	<script src="js/hros.searchBar.js"></script>
-	<script src="js/hros.startMenu.js"></script>
-	<script src="js/hros.taskBar.js"></script>
-	<script src="js/hros.templates.js"></script>
-	<script src="js/hros.wallpaper.js"></script>
-	<script src="js/hros.widget.js"></script>
-	<script src="js/hros.window.js"></script>
-	<script src="js/hros.zoom.js"></script>
+	<script src="static/js/hros.core.js"></script>
+	<script src="static/js/hros.app.js"></script>
+	<script src="static/js/hros.appmanage.js"></script>
+	<script src="static/js/hros.base.js"></script>
+	<script src="static/js/hros.copyright.js"></script>
+	<script src="static/js/hros.desktop.js"></script>
+	<script src="static/js/hros.dock.js"></script>
+	<script src="static/js/hros.folderView.js"></script>
+	<script src="static/js/hros.grid.js"></script>
+	<script src="static/js/hros.hotkey.js"></script>
+	<script src="static/js/hros.lock.js"></script>
+	<script src="static/js/hros.maskBox.js"></script>
+	<script src="static/js/hros.popupMenu.js"></script>
+	<script src="static/js/hros.searchBar.js"></script>
+	<script src="static/js/hros.startMenu.js"></script>
+	<script src="static/js/hros.taskBar.js"></script>
+	<script src="static/js/hros.templates.js"></script>
+	<script src="static/js/hros.wallpaper.js"></script>
+	<script src="static/js/hros.widget.js"></script>
+	<script src="static/js/hros.window.js"></script>
+	<script src="static/js/hros.zoom.js"></script>
 	<!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
-	<!--script src="js/hros.min.js"></script-->
+	<!--script src="static/js/hros.min.js"></script-->
 	<script>
 	var childWindow, interval;
 	$(function(){

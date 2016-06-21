@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Demo - Validform - 一行代码搞定整站的表单验证！ &copy;瑞金佬的前端路</title>
+<link rel="stylesheet" href="demo/css/style.css" type="text/css" media="all" />
+<link href="demo/css/demo.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>  
+<div class="header">
+    <div class="wraper">
+    	<h1><a href="http://validform.rjboy.cn">Validform</a></h1>
+        <ul class="nav">
+            <li><a href="http://validform.rjboy.cn/">关于Validform</a></li>
+            <li><a href="demo.html" class="current">Demo</a></li>
+            <li><a href="document.html">文档</a></li>
+            <li><a href="help.html">帮助</a></li>
+            <li><a href="http://validform.rjboy.cn/?p=1">网友讨论</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="wraper">
+        <p class="tr"><a href="demo.html" class="blue ml10 fz12">返回示例首页&raquo;</a></p>
+        
+    	<h2 class="green">二选一的验证，如电话号码与手机号码只需其中之一有输入</h2>
+        
+        <form class="registerform" action="demo/ajax_post.php">
+            <table width="100%" style="table-layout:fixed;">
+                <tr>
+                    <td class="need" style="width:10px;"></td>
+                    <td style="width:70px;">手机号码：</td>
+                    <td style="width:205px;"><input type="text" value="" class="inputxt mobile" name="mobile" ignore="ignore" datatype="m" errormsg="手机号码格式不对！" /></td>
+                    <td><div class="Validform_checktip"></div></td>
+                </tr>
+                <tr>
+                    <td class="need">*</td>
+                    <td>固定电话：</td>
+                    <td><input type="text" value="" class="inputxt tel" name="tel" datatype="phone" errormsg="手机与固话至少填写一项！" nullmsg="手机与固话至少填写一项！" /></td>
+                    <td><div class="Validform_checktip">手机与固话至少填写一项</div></td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td></td>
+                    <td colspan="2" style="padding:10px 0 18px 0;">
+                        <input type="submit" value="提 交" /> <input type="reset" value="重 置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+        <h2>说明：</h2>
+        <div class="tipmsg">
+        	<p>给datatype传入自定义函数，实现强大功能。</p>
+            <p>函数内可以接收到4个参数，如上示例中是gets,obj,curform,regxp。</p>
+            <p>参数gets是获取到的表单元素值，<br />
+              obj为当前表单元素，<br />
+              curform为当前验证的表单，<br />
+              regxp为内置的一些正则表达式的引用。</p>
+            <p><span class="red">注意：</span>自定义的datatype名称，从5.0版本开始，如果该元素的值可以为空的话<span class="red">不需要</span>以 "option_" 开头。</p>
+        </div>
+         
+    </div>
+</div>
+
+<div class="footer">
+    <div class="wraper">
+        <p class="fl">Copyright &copy; <a href="http://www.eloocor.com" target="_blank">易罗客</a></p>
+        <p class="fr"><a href="http://www.rjboy.cn" target="_blank">瑞金佬的前端路</a><b> | </b><a href="http://validform.rjboy.cn">Validform</a><b> | </b><a href="http://www.rjboy.cn/?p=789" target="_blank">hScrollpane</a><b> | </b><a href="http://www.rjboy.cn/?p=708" target="_blank">Xslider</a></p>
+    </div>
+</div>
+
+<script type="text/javascript" src="demo/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="demo/js/Validform_v5.3.2_min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+		
+	$(".registerform").Validform({
+		datatype:{
+			"phone":function(gets,obj,curform,regxp){
+				/*参数gets是获取到的表单元素值，
+				  obj为当前表单元素，
+				  curform为当前验证的表单，
+				  regxp为内置的一些正则表达式的引用。*/
+
+				var reg1=regxp["m"],
+					reg2=/[\d]{7}/,
+					mobile=curform.find(".mobile");
+				
+				if(reg1.test(mobile.val())){return true;}
+				if(reg2.test(gets)){return true;}
+				
+				return false;
+			}	
+		},
+		ajaxPost:true
+	});
+})
+</script>
+</body>
+</html>

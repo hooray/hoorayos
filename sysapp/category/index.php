@@ -20,7 +20,7 @@
 <meta charset="utf-8">
 <title>类目管理</title>
 <?php include('sysapp/global_css.php'); ?>
-<link rel="stylesheet" href="../../img/ui/sys.css">
+<link rel="stylesheet" href="../../static/css/sys.css">
 <style>
 body{margin:10px 10px 0}
 </style>

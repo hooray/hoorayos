@@ -1,10 +1,10 @@
-<script src="../../js/jquery-2.2.4.min.js"></script>
-<script src="../../js/bootstrap-3.3.6/js/bootstrap.min.js"></script>
-<script src="../../js/HoorayLibs/hooraylibs.js"></script>
-<script src="../../js/artDialog-6.0.4/dist/dialog-min.js"></script>
-<script src="../../js/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
-<script src="../../js/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
-<script src="../../js/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="../../static/plugins/jquery-2.2.4.min.js"></script>
+<script src="../../static/plugins/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
+<script src="../../static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
+<script src="../../static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
+<script src="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
+<script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script>
 $(function(){
 	//toolTip
