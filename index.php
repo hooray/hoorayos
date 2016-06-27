@@ -313,7 +313,7 @@
 			<p>购买或定制请联系 QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" target="_blank">304327508</a></p>
 		</div>
 	</div>
-	<script src="static/plugins/jquery-3.0.0.min.js"></script>
+	<script src="static/plugins/jquery-2.2.4.min.js"></script>
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
@@ -407,9 +407,22 @@
 					location.reload();
 				}else{
 					if(data.info == 'ERROR_OPENID_IS_USED'){
-						ZENG.msgbox.show('该账号已经绑定过' + $('.disanfangdenglutip span').text() + '账号，请更换其它账号，或者取消绑定，直接登录', 5, 3000);
+						swal({
+							type : 'warning',
+							title : '温馨提示',
+							text : '该账号已经绑定过' + $('.disanfangdenglutip span').text() + '账号<br />请更换其它账号，或者取消绑定，直接登录',
+							html : true,
+							timer : 2500,
+							showConfirmButton : false
+						});
 					}else{
-						ZENG.msgbox.show('登录失败，请检查用户名或密码是否正确', 5, 2000);
+						swal({
+							type : 'error',
+							title : '登录失败',
+							text : '请检查用户名或密码是否正确',
+							timer : 2000,
+							showConfirmButton : false
+						});
 					}
 				}
 			}
@@ -455,15 +468,26 @@
 				$('#submit_register_btn').removeClass('disabled').prop('disabled', false);
 				registerForm.resetStatus();
 				if(data.status == 'y'){
-					$('#avatar').attr('src', 'img/ui/avatar_120.jpg');
+					$('#avatar').attr('src', 'static/img/ui/avatar_120.jpg');
 					$('#username').val(data.info);
 					$('#password').val('');
 					$('#rememberMe').prop('checked', false);
 					$('#reg_username, #reg_password, #reg_password2').val('');
 					changeTabindex('login');
-					ZENG.msgbox.show('注册成功', 4, 2000);
+					swal({
+						type : 'success',
+						title : '注册成功',
+						timer : 2000,
+						showConfirmButton : false
+					});
 				}else{
-					ZENG.msgbox.show('注册失败：' + data.info, 5, 2000);
+					swal({
+						type : 'error',
+						title : '注册失败',
+						text : data.info,
+						timer : 2000,
+						showConfirmButton : false
+					});
 				}
 			}
 		});
@@ -597,7 +621,13 @@
 				data:'ac=3login',
 				success: function(msg){
 					if(msg == 'ERROR_LACK_OF_DATA'){
-						ZENG.msgbox.show('未知错误，建议重启浏览器后重新操作', 1, 2000);
+						swal({
+							type : 'error',
+							title : '未知错误',
+							text : '建议重启浏览器后重新操作',
+							timer : 2000,
+							showConfirmButton : false
+						});
 					}else if(msg == 'ERROR_NOT_BIND'){
 						var title = '';
 						switch(Cookies.get(cookie_prefix + 'fromsite')){

@@ -60,9 +60,19 @@ HROS.app = (function(){
 						}).done(function(responseText){
 							dialog.get('star').close().remove();
 							if(responseText['response']){
-								ZENG.msgbox.show("打分成功！", 4, 2000);
+								swal({
+									type : 'success',
+									title : '打分成功',
+									timer : 2000,
+									showConfirmButton : false
+								});
 							}else{
-								ZENG.msgbox.show("你已经打过分了！", 1, 2000);
+								swal({
+									type : 'warning',
+									title : '你已经打过分了',
+									timer : 2000,
+									showConfirmButton : false
+								});
 							}
 						});
 					}else{
@@ -803,8 +813,8 @@ HROS.app = (function(){
 					type : 'warning',
 					title : '温馨提示',
 					text : '数据正在处理中，请稍后…',
-					timer: 2000,
-					showConfirmButton: false
+					timer : 2000,
+					showConfirmButton : false
 				});
 				rtn = true;
 			}else{
@@ -817,8 +827,8 @@ HROS.app = (function(){
 				type : 'error',
 				title : '温馨提示',
 				text : '数据错误，请刷新后重试',
-				timer: 2000,
-				showConfirmButton: false
+				timer : 2000,
+				showConfirmButton : false
 			});
 		},
 		dataDockToFolder : function(id, from, to){

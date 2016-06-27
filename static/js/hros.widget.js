@@ -118,15 +118,18 @@ HROS.widget = (function(){
 					}, 200);
 					HROS.CONFIG.widgetIndexid += 1;
 				}
-				ZENG.msgbox.show('小挂件正在加载中，请耐心等待...', 6, 100000);
 				$.ajax({
 					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
 					dataType : 'json'
 				}).done(function(widget){
-					ZENG.msgbox._hide();
 					if(widget != null){
 						if(widget['error'] == 'ERROR_NOT_FOUND'){
-							ZENG.msgbox.show('小挂件不存在，建议删除', 5, 2000);
+							swal({
+								type : 'error',
+								title : '小挂件不存在，建议删除',
+								timer : 2000,
+								showConfirmButton: false
+							});
 							HROS.widget.removeCookie(appid, type);
 						}else if(widget['error'] == 'ERROR_NOT_INSTALLED'){
 							HROS.window.createTemp({
@@ -153,7 +156,12 @@ HROS.widget = (function(){
 							});
 						}
 					}else{
-						ZENG.msgbox.show('小挂件加载失败', 5, 2000);
+						swal({
+							type : 'error',
+							title : '小挂件加载失败',
+							timer : 2000,
+							showConfirmButton: false
+						});
 					}
 					$('#d_' + appid).attr('opening', 0);
 				});

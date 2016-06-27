@@ -645,7 +645,9 @@ HROS.popupMenu = (function(){
 								HROS.app.get();
 								swal({
 									type : 'success',
-									title : '创建成功'
+									title : '创建成功',
+									timer : 2000,
+									showConfirmButton : false
 								});
 							});
 						});

@@ -112,7 +112,7 @@ HROS.window = (function(){
 					type : type,
 					appid : appid,
 					realappid : appid,
-					imgsrc : 'img/ui/default_icon.png',
+					imgsrc : 'static/img/ui/default_icon.png',
 					title : obj.title,
 					url : obj.url,
 					width : obj.width,
@@ -281,15 +281,18 @@ HROS.window = (function(){
 							break;
 					}
 				}
-				ZENG.msgbox.show('应用正在加载中，请耐心等待...', 6, 100000);
 				$.ajax({
 					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
 					dataType : 'json'
 				}).done(function(app){
-					ZENG.msgbox._hide();
 					if(app != null){
 						if(app['error'] == 'ERROR_NOT_FOUND'){
-							ZENG.msgbox.show('应用不存在，建议删除', 5, 2000);
+							swal({
+								type : 'error',
+								title : '应用不存在，建议删除',
+								timer : 2000,
+								showConfirmButton: false
+							});
 						}else if(app['error'] == 'ERROR_NOT_INSTALLED'){
 							HROS.window.createTemp({
 								appid : 'hoorayos-yysc',
@@ -317,7 +320,12 @@ HROS.window = (function(){
 							});
 						}
 					}else{
-						ZENG.msgbox.show('数据拉取失败', 5, 2000);
+						swal({
+							type : 'error',
+							title : '应用加载失败',
+							timer : 2000,
+							showConfirmButton: false
+						});
 					}
 					$('#d_' + appid).attr('opening', 0);
 				});
@@ -708,7 +716,13 @@ HROS.window = (function(){
 						refresh : true
 					});
 				}else{
-					ZENG.msgbox.show('对不起，该应用没有任何详细介绍', 1, 2000);
+					swal({
+						type : 'warning',
+						title : '温馨提示',
+						text : '该应用没有任何详细介绍',
+						timer : 2000,
+						showConfirmButton: false
+					});
 				}
 			}).on('click', '.window-container .star', function(){
 				var obj = $(this).parents('.window-container');

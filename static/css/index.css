@@ -445,7 +445,7 @@ input{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
 .grade-box{width:200px;height:20px;}
 .star-box,
 .star-box i,
-.star-box a{background-image:url(app_spr_img.png);_background-image:url(app_spr_img.gif);background-repeat:no-repeat;}
+.star-box a{background:url(../img/ui/app_spr_img.png) no-repeat;}
 .grade-box .star-box{float:right;}
 .grade-box .star-num{float:right;margin:0 30px 0 5px;}
 .star-box{position:relative;display:inline-block;width:85px;height:15px;margin-top:5px;background-position:0 -62px;}

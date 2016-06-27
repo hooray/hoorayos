@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
@@ -25,13 +25,13 @@
 <ul class="skin">
 	<?php
 		//读取皮肤目录
-		$fp = opendir('img/skins/');
+		$fp = opendir('static/css/skins/');
 		while($file = readdir($fp)){
 			if(($file != '.') && ($file != '..')){
 				$fileExt = strtolower(strrchr($file, '.'));
 				if($fileExt == '.css'){
 					$temp['name'] = basename($file, '.css');
-					$temp['img'] = 'img/skins/'.$temp['name'].'/preview.png';
+					$temp['img'] = 'static/css/skins/'.$temp['name'].'/preview.png';
 					$arr_file[] = $temp;
 				}
 			}

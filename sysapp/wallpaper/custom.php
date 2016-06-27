@@ -1,11 +1,11 @@
 <?php
 	require('../../global.php');
-	
+
 	//验证是否登入
 	if(!checkLogin()){
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
-	
+
 	$wallpaper = $db->get('tb_member', array('wallpaperstate', 'wallpapertype'), array(
 		'tbid' => session('member_id')
 	));
@@ -28,11 +28,11 @@
 </div>
 <div class="wallpapertype form-inline">
 	<div class="btn-group fl">
-		<a class="btn" href="index.php">系统壁纸</a><a class="btn disabled">自定义</a>
+		<a class="btn btn-default" href="index.php">系统壁纸</a><a class="btn btn-default disabled">自定义</a>
 	</div>
 	<div class="fr">
-		<label>显示方式：</label>
-		<select name="wallpapertype" id="wallpapertype" style="width:100px">
+		<label style="vertical-align:top">显示方式：</label>
+		<select class="form-control" name="wallpapertype" id="wallpapertype" style="width:100px;display:inline-block">
 			<option value="tianchong" <?php if($wallpaper['wallpapertype'] == 'tianchong'){echo 'selected';} ?>>填充</option>
 			<option value="shiying" <?php if($wallpaper['wallpapertype'] == 'shiying'){echo 'selected';} ?>>适应</option>
 			<option value="pingpu" <?php if($wallpaper['wallpapertype'] == 'pingpu'){echo 'selected';} ?>>平铺</option>
@@ -43,7 +43,7 @@
 </div>
 <div class="wapppapercustom">
 	<div class="tip">
-		<a href="javascript:;" id="upload" class="btn btn-mini fr" style="position:relative">上传壁纸</a>
+		<a href="javascript:;" id="upload" class="btn btn-primary btn-xs fr" style="position:relative">上传壁纸</a>
 		<strong>自定义壁纸：</strong>最多上传6张，每张上传的壁纸大小不超过1M
 	</div>
 	<div class="view">
@@ -60,12 +60,15 @@
 </div>
 <div class="wapppaperwebsite form-inline">
 	<label>网络壁纸：</label>
-	<div class="input-append">
-		<input type="text" id="wallpaperurl" style="width:350px" placeholder="请输入一个URL地址（建议以 jpg, jpeg, png, gif, html, htm 结尾）" value="<?php echo $wallpaper['wallpaperwebsite']; ?>"><button type="button" class="btn">应用</button>
+	<div class="input-group">
+		<input type="text" class="form-control" id="wallpaperurl" style="width:360px" placeholder="请输入一个URL地址" value="<?php echo $wallpaper['wallpaperwebsite']; ?>">
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-defalut">应用</button>
+		</span>
 	</div>
 </div>
 <?php include('sysapp/global_js.php'); ?>
-<script src="../../js/webuploader-0.1.5/webuploader.min.js"></script>
+<script src="../../static/plugins/webuploader-0.1.5/webuploader.min.js"></script>
 <script>
 $(function(){
 	var uploader = WebUploader.create({

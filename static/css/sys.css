@@ -41,25 +41,26 @@ form{padding:0 15px;}
 .list-table .list-count{font-family:'Courier New',Courier,mono;font-style:italic;font-weight:bold;margin:0 8px 0 5px;font-size:14px;}
 
 /* 壁纸设置 */
-.wallpapertype{width:500px;height:40px;line-height:40px;margin:auto;margin-top:10px;}
-.wallpaper{width:500px;margin:auto;margin-top:10px;}
-.wallpaper li{width:150px;height:110px;float:left;margin-right:10px;border:5px solid #fff;background:#fff;cursor:pointer;}
+.wallpapertype{width:500px;height:34px;line-height:34px;margin:auto;margin-top:10px;}
+.wallpaper{width:500px;margin:10px auto;}
+.wallpaper ul{width:510px;}
+.wallpaper li{width:160px;height:120px;float:left;margin-right:10px;border:5px solid #fff;background:#fff;cursor:pointer;}
 .wallpaper li.three{margin-right:0;}
 .wallpaper li:hover{border-color:#9FF;background:#9FF;}
 .wallpaper li div{width:150px;height:30px;line-height:30px;text-align:center;}
 .wapppapercustom{width:500px;margin:auto;margin-top:10px;border:1px solid #ccc;}
 .wapppapercustom .tip{padding:10px;}
-.wapppapercustom .view{width:500px;height:250px;}
-.wapppapercustom .view ul{width:480px;height:230px;line-height:230px;margin:auto;margin-bottom:15px;text-align:center;}
-.wapppapercustom .view ul li{border:5px solid #fff;overflow:hidden;float:left;width:150px;height:105px;margin:5px 0;position:relative;}
+.wapppapercustom .view{width:480px;height:250px;margin:0 auto;}
+.wapppapercustom .view ul{margin:0;}
+.wapppapercustom .view ul li{border:5px solid #fff;overflow:hidden;float:left;width:160px;height:115px;margin-bottom:10px;position:relative;}
 .wapppapercustom .view ul li a{display:none;position:absolute;z-index:2;top:-5px;right:-5px;text-decoration:none;width:48px;height:32px;line-height:32px;text-align:center;background-color:#ccc;}
 .wapppapercustom .view ul li:hover{border-color:#ccc;cursor:pointer;}
 .wapppapercustom .view ul li:hover a{display:block;}
-.wapppaperwebsite{width:480px;margin:auto;margin-top:10px;padding:10px;border:1px solid #ccc;}
+.wapppaperwebsite{width:500px;margin:auto;margin-top:10px;padding:10px;border:1px solid #ccc;}
 
 /* 皮肤设置 */
 .skin{width:550px;margin:auto;margin-top:10px;}
-.skin li{width:256px;height:156px;margin:0 4px 10px 4px;float:left;border:5px solid #fff;background:#fff;cursor:pointer;position:relative;}
+.skin li{width:266px;height:166px;margin:0 4px 10px 4px;float:left;border:5px solid #fff;background:#fff;cursor:pointer;position:relative;}
 .skin li:hover{border-color:#9FF;background:#9FF;}
 .skin li div{display:none;width:48px;height:48px;background:url(../img/ui/selected.png) no-repeat;position:absolute;right:-15px;bottom:-15px;}
 .skin li.selected div{display:block;}
