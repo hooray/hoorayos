@@ -6,7 +6,7 @@
 		redirect('../error.php?code='.$errorcode['noLogin']);
 	}
 
-	$wallpaper = $db->get('tb_member', array('wallpaperstate', 'wallpapertype'), array(
+	$wallpaper = $db->get('tb_member', '*', array(
 		'tbid' => session('member_id')
 	));
 ?>
@@ -58,12 +58,12 @@
 		</ul>
 	</div>
 </div>
-<div class="wapppaperwebsite form-inline">
-	<label>网络壁纸：</label>
+<div class="wapppaperwebsite">
 	<div class="input-group">
-		<input type="text" class="form-control" id="wallpaperurl" style="width:360px" placeholder="请输入一个URL地址" value="<?php echo $wallpaper['wallpaperwebsite']; ?>">
+		<span class="input-group-addon" id="basic-addon1">网络壁纸</span>
+		<input type="text" class="form-control" id="wallpaperurl" placeholder="请输入一个URL地址" value="<?php echo $wallpaper['wallpaperwebsite']; ?>">
 		<span class="input-group-btn">
-			<button type="button" class="btn btn-defalut">应用</button>
+			<button type="button" class="btn btn-default">应用</button>
 		</span>
 	</div>
 </div>

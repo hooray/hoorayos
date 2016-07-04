@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50524
+Source Server Version : 50711
 Source Host           : localhost:3306
 Source Database       : hoorayos
 
 Target Server Type    : MYSQL
-Target Server Version : 50524
+Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2013-06-08 09:16:40
+Date: 2016-07-05 01:38:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,18 +46,18 @@ CREATE TABLE `tb_app` (
 -- ----------------------------
 -- Records of tb_app
 -- ----------------------------
-INSERT INTO `tb_app` VALUES ('1', '应用管理', 'uploads/shortcut/20130505/13677343655235.png', 'sysapp/appmanage/index.php', 'window', '900', '650', '0', '0', '0', '0', '', '0', '0', '2012-02-26 22:51:53', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('2', '网站设置', 'img/ui/system-gear.png', 'sysapp/websitesetting/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '0', '0', '2012-02-26 22:52:40', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('3', '会员管理', 'img/ui/system-users.png', 'sysapp/member/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '0', '0', '2012-07-19 10:57:28', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('4', '权限管理', 'img/ui/system-puzzle.png', 'sysapp/permission/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '0', '0', '2012-07-19 10:59:41', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('5', '类目管理', 'img/ui/system-puzzle.png', 'sysapp/category/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '0', '0', '2012-07-19 11:11:41', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('1', '应用管理', 'uploads/shortcut/20130505/13677343655235.png', 'sysapp/appmanage/index.php', 'window', '900', '650', '0', '0', '0', '0', '', '1', '0', '2012-02-26 22:51:53', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('2', '网站设置', 'static/img/ui/system-gear.png', 'sysapp/websitesetting/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-02-26 22:52:40', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('3', '会员管理', 'static/img/ui/system-users.png', 'sysapp/member/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:57:28', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('4', '权限管理', 'static/img/ui/system-puzzle.png', 'sysapp/permission/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:59:41', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('5', '类目管理', 'static/img/ui/system-puzzle.png', 'sysapp/category/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 11:11:41', '0', '1', null, '1', '0');
 INSERT INTO `tb_app` VALUES ('6', '豆瓣FM', 'uploads/shortcut/20130505/13677359545258.png', 'http://douban.fm/partner/webqq?fromhoorayos', 'window', '420', '240', '0', '0', '1', '0', '豆瓣FM', '0', '0', '2012-02-26 22:52:03', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('7', '百度地图', 'uploads/shortcut/20130505/136773428052.png', 'http://map.baidu.com/', 'window', '1050', '550', '1', '0', '1', '1', '百度地图', '0', '0', '2012-02-26 22:52:55', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('8', '美图秀秀', 'uploads/shortcut/20130505/13677342371591.png', 'http://xiuxiu.web.meitu.com/main.html', 'window', '900', '620', '1', '0', '1', '1', '美图秀秀', '0', '0', '2012-02-26 22:52:58', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('9', 'AcFun弹幕视频网', 'uploads/shortcut/20130505/13677343281639.png', 'http://m.acfun.tv', 'window', '800', '480', '1', '0', '1', '1', 'AcFun弹幕视频网', '0', '0', '2012-02-26 22:52:24', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('10', '搜狐视频', 'uploads/shortcut/20130505/13677343162518.png', 'http://tv.sohu.com/upload/sohuapp/index.html', 'window', '800', '646', '1', '0', '1', '1', '搜狐视频', '0', '0', '2012-02-26 22:52:26', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('11', '哔哩哔哩弹幕视频网', 'uploads/shortcut/20130505/13677342975360.png', 'http://www.bilibili.com/mobile/index.html', 'window', '960', '650', '0', '0', '1', '1', '迅雷看看', '0', '0', '2012-02-26 22:52:29', '0', '1', null, '3', '0');
-INSERT INTO `tb_app` VALUES ('12', '时钟', 'img/ui/system-shapes.png', 'extapp/clock/index.php', 'widget', '130', '160', '0', '0', '1', '0', '时钟', '0', '0', '2012-08-05 23:01:51', '0', '1', null, '6', '0');
+INSERT INTO `tb_app` VALUES ('12', '时钟', 'static/img/ui/system-shapes.png', 'extapp/clock/index.php', 'widget', '130', '160', '0', '0', '1', '0', '时钟', '0', '0', '2012-08-05 23:01:51', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('13', '天气预报', 'uploads/shortcut/20130505/13677369315643.png', 'extapp/weather/index.php', 'widget', '200', '330', '0', '0', '1', '0', '天气预报', '0', '0', '2012-08-05 23:02:28', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('14', '日历', 'uploads/shortcut/20130505/13677342114330.png', 'sysapp/calendar/index.php', 'window', '800', '720', '1', '0', '1', '0', '', '0', '0', '2012-10-16 03:06:17', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('15', '愤怒的小鸟', 'uploads/shortcut/20130505/13677340436355.png', 'http://www.3366.com/swf.html?gid=63298&type=0&needframe=0&open=1&FlashParam=&IFrameName=&basedirexp=base20130108095114&adid=3366_1_12413&apiflag=1&NeedOutLink=0', 'window', '800', '512', '1', '0', '1', '1', '鼠标点击拉动弹弓射杀绿猪，滚轮滑动缩放场景。', '0', '0', '2013-05-05 14:07:28', '0', '1', null, '2', '0');
@@ -124,7 +124,7 @@ INSERT INTO `tb_app_category` VALUES ('5', '生活', '0');
 INSERT INTO `tb_app_category` VALUES ('6', '工具', '0');
 
 -- ----------------------------
--- Table structure for `tb_app_star`
+-- Table structure for tb_app_star
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_app_star`;
 CREATE TABLE `tb_app_star` (
@@ -141,7 +141,7 @@ CREATE TABLE `tb_app_star` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tb_calendar`
+-- Table structure for tb_calendar
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_calendar`;
 CREATE TABLE `tb_calendar` (
@@ -161,7 +161,27 @@ CREATE TABLE `tb_calendar` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tb_member`
+-- Table structure for tb_file
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_file`;
+CREATE TABLE `tb_file` (
+  `tbid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '图标地址',
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '文件名',
+  `ext` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '扩展名',
+  `size` int(11) DEFAULT NULL COMMENT '文件大小',
+  `url` text COLLATE utf8_unicode_ci COMMENT '文件存放地址',
+  `member_id` bigint(20) DEFAULT NULL,
+  `dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`tbid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of tb_file
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_member
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_member`;
 CREATE TABLE `tb_member` (
@@ -207,10 +227,10 @@ CREATE TABLE `tb_member` (
 -- ----------------------------
 -- Records of tb_member
 -- ----------------------------
-INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '', '', '', '', '', 'x', '1', 'top', '48', '50', '50', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null);
+INSERT INTO `tb_member` VALUES ('1', 'hoorayos', 'c5e9fe42f061fa6102857db920734c33ec7b0816', 'c5e9fe42f061fa6102857db920734c33ec7b0816', '1', '1', '', '1,2,3,4,5', '', '', '', '', 'x', '1', 'top', '48', '50', '50', '1', null, '1', 'lashen', 'default', '2012-02-29 00:00:00', '2012-02-29 00:00:00', '0.0.0.0', '2012-02-29 00:00:00', '0.0.0.0', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
--- Table structure for `tb_member_app`
+-- Table structure for tb_member_app
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_member_app`;
 CREATE TABLE `tb_member_app` (
@@ -233,11 +253,16 @@ CREATE TABLE `tb_member_app` (
   `folder_id` bigint(20) DEFAULT '0' COMMENT '文件夹id',
   `member_id` bigint(20) DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`tbid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tb_member_app
 -- ----------------------------
+INSERT INTO `tb_member_app` VALUES ('1', '1', '应用管理', 'uploads/shortcut/20130505/13677343655235.png', null, 'window', '900', '650', '0', '0', '0', '0', null, null, '2016-07-05 01:36:31', '2016-07-05 01:36:31', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('2', '2', '网站设置', 'static/img/ui/system-gear.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:32', '2016-07-05 01:36:32', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('3', '3', '会员管理', 'static/img/ui/system-users.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:33', '2016-07-05 01:36:33', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('4', '4', '权限管理', 'static/img/ui/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:34', '2016-07-05 01:36:34', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('5', '5', '类目管理', 'static/img/ui/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:35', '2016-07-05 01:36:35', '0', '1');
 
 -- ----------------------------
 -- Table structure for tb_permission
@@ -260,7 +285,7 @@ INSERT INTO `tb_permission` VALUES ('4', '网站设置管理员', '2');
 INSERT INTO `tb_permission` VALUES ('5', '类目管理员', '5');
 
 -- ----------------------------
--- Table structure for `tb_pwallpaper`
+-- Table structure for tb_pwallpaper
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_pwallpaper`;
 CREATE TABLE `tb_pwallpaper` (
@@ -277,29 +302,29 @@ CREATE TABLE `tb_pwallpaper` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tb_setting`
+-- Table structure for tb_setting
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_setting`;
 CREATE TABLE `tb_setting` (
   `tbid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `title` text COMMENT '网站标题',
-  `description` text COMMENT '网站描述',
-  `keywords` text COMMENT '网站关键字',
-  `dock` longtext COMMENT '[应用码头]应用id，用","相连',
-  `desk1` longtext COMMENT '[桌面1]应用id，用","相连',
-  `desk2` longtext COMMENT '[桌面2]应用id，用","相连',
-  `desk3` longtext COMMENT '[桌面3]应用id，用","相连',
-  `desk4` longtext COMMENT '[桌面4]应用id，用","相连',
-  `desk5` longtext COMMENT '[桌面5]应用id，用","相连',
+  `title` text COLLATE utf8_unicode_ci COMMENT '网站标题',
+  `description` text COLLATE utf8_unicode_ci COMMENT '网站描述',
+  `keywords` text COLLATE utf8_unicode_ci COMMENT '网站关键字',
+  `dock` longtext COLLATE utf8_unicode_ci COMMENT '[应用码头]应用id，用","相连',
+  `desk1` longtext COLLATE utf8_unicode_ci COMMENT '[桌面1]应用id，用","相连',
+  `desk2` longtext COLLATE utf8_unicode_ci COMMENT '[桌面2]应用id，用","相连',
+  `desk3` longtext COLLATE utf8_unicode_ci COMMENT '[桌面3]应用id，用","相连',
+  `desk4` longtext COLLATE utf8_unicode_ci COMMENT '[桌面4]应用id，用","相连',
+  `desk5` longtext COLLATE utf8_unicode_ci COMMENT '[桌面5]应用id，用","相连',
   `desk` tinyint(1) DEFAULT '1' COMMENT '默认显示第几桌面',
-  `appxy` varchar(255) DEFAULT 'x' COMMENT '图标排列方式，x（横向排列）y（纵向排列）',
+  `appxy` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'x' COMMENT '图标排列方式，x（横向排列）y（纵向排列）',
   `appsize` int(11) DEFAULT '48' COMMENT '图标尺寸',
   `appverticalspacing` int(11) DEFAULT '50' COMMENT '图标垂直间距',
   `apphorizontalspacing` int(11) DEFAULT '50' COMMENT '图标水平间距',
-  `dockpos` varchar(255) DEFAULT 'top' COMMENT '应用码头位置，top（顶部）left（左侧）right（右侧）none（隐藏）',
-  `skin` varchar(255) DEFAULT 'default' COMMENT '窗口皮肤',
+  `dockpos` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'top' COMMENT '应用码头位置，top（顶部）left（左侧）right（右侧）none（隐藏）',
+  `skin` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'default' COMMENT '窗口皮肤',
   `wallpaper_id` int(11) DEFAULT '1',
-  `wallpapertype` varchar(255) DEFAULT 'juzhong' COMMENT '壁纸显示方式，tianchong（填充）shiying（适应）pingpu（平铺）lashen（拉伸）juzhong（居中）',
+  `wallpapertype` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'juzhong' COMMENT '壁纸显示方式，tianchong（填充）shiying（适应）pingpu（平铺）lashen（拉伸）juzhong（居中）',
   `isforcedlogin` tinyint(1) DEFAULT '1' COMMENT '是否开启强制登录，1开启0不开启',
   PRIMARY KEY (`tbid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -310,7 +335,7 @@ CREATE TABLE `tb_setting` (
 INSERT INTO `tb_setting` VALUES ('1', 'HoorayOS桌面应用框架', 'HoorayOS是一套web桌面应用框架，你可以用它开发出类似于Q+web这类的桌面应用网站，也可以在它的基础上二次开发出适合项目的桌面式管理系统。', 'HoorayOS,web桌面,免费开源,桌面管理系统', '14', '55,54,53,52,51', '50,49,48,47,46', '45,44,43,41,42', '30,29,28,27,26', '20,19,18,17,16', '1', 'x', '32', '50', '50', 'top', 'default', '1', 'juzhong', '0');
 
 -- ----------------------------
--- Table structure for `tb_wallpaper`
+-- Table structure for tb_wallpaper
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_wallpaper`;
 CREATE TABLE `tb_wallpaper` (
@@ -325,12 +350,12 @@ CREATE TABLE `tb_wallpaper` (
 -- ----------------------------
 -- Records of tb_wallpaper
 -- ----------------------------
-INSERT INTO `tb_wallpaper` VALUES ('1', '壁纸1', 'img/wallpaper/wallpaper1.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('2', '壁纸2', 'img/wallpaper/wallpaper2.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('3', '壁纸3', 'img/wallpaper/wallpaper3.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('4', '壁纸4', 'img/wallpaper/wallpaper4.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('5', '壁纸5', 'img/wallpaper/wallpaper5.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('6', '壁纸6', 'img/wallpaper/wallpaper6.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('7', '壁纸7', 'img/wallpaper/wallpaper7.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('8', '壁纸8', 'img/wallpaper/wallpaper8.jpg', '1920', '1080');
-INSERT INTO `tb_wallpaper` VALUES ('9', '壁纸9', 'img/wallpaper/wallpaper9.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('1', '壁纸1', 'static/img/wallpaper/wallpaper1.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('2', '壁纸2', 'static/img/wallpaper/wallpaper2.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('3', '壁纸3', 'static/img/wallpaper/wallpaper3.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('4', '壁纸4', 'static/img/wallpaper/wallpaper4.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('5', '壁纸5', 'static/img/wallpaper/wallpaper5.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('6', '壁纸6', 'static/img/wallpaper/wallpaper6.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('7', '壁纸7', 'static/img/wallpaper/wallpaper7.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('8', '壁纸8', 'static/img/wallpaper/wallpaper8.jpg', '1920', '1080');
+INSERT INTO `tb_wallpaper` VALUES ('9', '壁纸9', 'static/img/wallpaper/wallpaper9.jpg', '1920', '1080');

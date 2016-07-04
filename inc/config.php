@@ -25,11 +25,13 @@ $_COOKIE = daddslashes($_COOKIE, 1, TRUE);
 
 $_CONFIG = array(
 	'authkey' => 'hoorayos', //站点加密密钥，可随意更改
-	'COOKIE_PREFIX' => '',
-	'COOKIE_EXPIRE' => 0,
-	'COOKIE_PATH' => '/',
-	'COOKIE_DOMAIN' => '',
-	'SESSION_PREFIX' => 'hoorayos'
+	'COOKIE_PREFIX' => '', // Cookie前缀 避免冲突
+	'COOKIE_EXPIRE' => 0, // Cookie有效期
+	'COOKIE_PATH' => '/', // Cookie路径
+	'COOKIE_DOMAIN' => '', // Cookie有效域名
+    'COOKIE_SECURE' => false, // Cookie安全传输
+    'COOKIE_HTTPONLY' => '', // Cookie httponly设置
+	'SESSION_PREFIX' => 'hoorayos' // session 前缀
 );
 
 //文件上传类型

@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	switch($_REQUEST['ac']){
 		case 'edit':
 			$data = array(
@@ -20,7 +20,7 @@
 			));
 			break;
 		case 'updateApps':
-			foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
+			foreach($db->select('tb_app', '*', array(
 				'tbid' => explode(',', $_POST['appsid'])
 			)) as $a){
 				echo '<div class="app" appid="'.$a['tbid'].'"><img src="../../'.$a['icon'].'" alt="'.$a['name'].'" title="'.$a['name'].'"><span class="del">删</span></div>';

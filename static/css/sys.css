@@ -189,11 +189,11 @@ form{padding:0 15px;}
 .app-text{margin:5px 10px;padding:5px;border-top:1px dotted #DDD;}
 
 /* 应用管理 */
-.bottom-bar{border-top:1px solid #ddd;width:100%;height:50px;position:fixed;z-index:999;bottom:0;}
-.bottom-bar .con{background:#F2F2F2;height:30px;padding:10px;}
+.title-bar{border-bottom:2px solid #ddd;font-size:18px;font-weight:bold;margin:0;width:100%;padding:10px;position:fixed;z-index:999;left:0;top:0;}
+.bottom-bar{border-top:1px solid #ddd;background:#F2F2F2;width:100%;padding:10px;position:fixed;z-index:999;left:0;bottom:0;}
 
-.creatbox{position:absolute;top:0;bottom:0;left:0;right:0;}
-.creatbox .middle{border-bottom:1px solid #fff;position:absolute;top:0;bottom:50px;left:0;right:0;overflow:auto;}
+.creatbox{position:absolute;top:54px;bottom:55px;left:0;right:0;overflow:auto;}
+.creatbox .panel{border:0;box-shadow:none;}
 
 .shortcutview img{width:48px;height:48px;margin-bottom:10px;}
 
