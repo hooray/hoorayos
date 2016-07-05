@@ -18,10 +18,8 @@
 				foreach($row as $v){
 					$tmp['name'] = $v['name'];
 					$tmp['do'] = '
-						<div class="btn-group">
-							<a href="javascript:openDetailIframe(\'detail.php?permissionid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a>
-							<a href="javascript:;" class="btn btn-danger btn-xs do-del" data-id="'.$v['tbid'].'" data-name="'.$v['name'].'">删除</a>
-						</div>
+						<a href="javascript:openDetailIframe(\'detail.php?permissionid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a>
+						<a href="javascript:;" class="btn btn-danger btn-xs do-del" data-id="'.$v['tbid'].'" data-name="'.$v['name'].'">删除</a>
 					';
 					$echo['rows'][] = $tmp;
 		            unset($tmp);
