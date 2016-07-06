@@ -31,7 +31,7 @@
 	<div id="toorbar">
 		<div class="form-inline">
 			<div class="form-group">
-				<a class="btn btn-primary fr" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 添加新用户</a>
+				<a class="btn btn-primary" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 添加新用户</a>
 			</div>
 			<div class="form-group">
 				<label class="control-label">类型：</label>

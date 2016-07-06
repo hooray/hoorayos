@@ -193,12 +193,11 @@ form{padding:0 15px;}
 .bottom-bar{border-top:1px solid #ddd;background:#F2F2F2;width:100%;padding:10px;position:fixed;z-index:999;left:0;bottom:0;}
 
 .creatbox{position:absolute;top:54px;bottom:55px;left:0;right:0;overflow:auto;}
-.creatbox .panel{border:0;box-shadow:none;}
+.creatbox > .panel{border:0;box-shadow:none;}
 
 .shortcutview img{width:48px;height:48px;margin-bottom:10px;}
 
-.shortcut-selicon{margin-top:10px;background:#fff;border:1px solid #ccc;width:340px;float:left;clear:both;}
-.shortcut-selicon a{display:block;float:left;width:24px;height:24px;padding:5px;}
+.shortcut-selicon a{display:block;float:left;width:34px;height:34px;padding:5px;}
 .shortcut-selicon a:hover{background:#CCC;}
 .shortcut-selicon img{float:left;width:24px;height:24px;}
 

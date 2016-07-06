@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-		
+
 	switch($_REQUEST['ac']){
 		case 'getList':
 			$appcategory = $db->select('tb_app_category', '*');
@@ -8,47 +8,51 @@
 				$category[$ac['tbid']] = $ac['name'];
 			}
 			$where = array();
-			if($_POST['search_1'] != ''){
-				$where['AND']['name[~]'] = $_POST['search_1'];
+			if($_GET['search'] != ''){
+				$where['AND']['name[~]'] = $_GET['search'];
 			}
-			if($_POST['search_2'] != ''){
-				$where['AND']['app_category_id'] = $_POST['search_2'];
+			if($_GET['app_category_id'] != ''){
+				$where['AND']['app_category_id'] = $_GET['app_category_id'];
 			}
-			if($_POST['search_3'] != ''){
-				$where['AND']['type'] = $_POST['search_3'];
+			if($_GET['type'] != ''){
+				$where['AND']['type'] = $_GET['type'];
 			}
-			$where['AND']['verifytype'] = $_POST['search_4'] == 1 ? 1 : 2;
-			echo $db->count('tb_app', $where).'<{|*|}>';
-			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);
-			$rs = $db->select('tb_app', '*', $where);
-			if($rs != NULL){
-				foreach($rs as $v){
-					echo '<tr class="list-bd">';
-						echo '<td>'.$v['tbid'].'</td>';
-						echo '<td style="text-align:left;padding-left:15px"><img src="../../'.$v['icon'].'" alt="'.$v['name'].'" class="appicon"><span class="appname">'.$v['name'].'</span></td>';
-						echo '<td>'.($v['type'] == 'window' ? '窗口' : '挂件').'</td>';
-						echo '<td>'.($v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']]).'</td>';
-						echo '<td>'.$v['usecount'].'</td>';
-						echo '<td>';
-							if($v['verifytype'] == 1){
-								if($v['isrecommend'] == 1){
-									echo '<a href="javascript:;" class="btn btn-link">今日推荐</a>';
-								}else{
-									echo '<a href="javascript:;" class="btn btn-link do-recommend" appid="'.$v['tbid'].'">设为今日推荐</a>';
-								}
-								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-link">编辑</a>';
-							}else{
-								echo '<a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-link">查看详情</a>';
-							}
-							echo '<a href="javascript:;" class="btn btn-link do-del" appid="'.$v['tbid'].'">删除</a>';
-						echo '</td>';
-					echo '</tr>';
+			$where['AND']['verifytype'] = $_GET['verifytype'] == 1 ? 1 : 2;
+			if($_GET['sort'] != '' && $_GET['order'] != ''){
+	            $where['ORDER'] = $_GET['sort'].' '.strtoupper($_GET['order']);
+	        }
+			$echo['total'] = $db->count('tb_app', '*', $where);
+			$where['LIMIT'] = array($_GET['offset'], $_GET['limit']);
+			$echo['rows'] = array();
+			$row = $db->select('tb_app', '*', $where);
+			if($row != NULL){
+				foreach($row as $v){
+					$tmp['icon'] = '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" class="appicon">';
+					$tmp['name'] = $v['name'];
+					$tmp['type'] = $v['type'] == 'window' ? '窗口' : '挂件';
+					$tmp['app_category_id'] = $v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']];
+					$tmp['usecount'] = $v['usecount'];
+					$tmp['do'] = '';
+					if($v['verifytype'] == 1){
+						if($v['isrecommend'] == 1){
+							$tmp['do'] .= ' <a href="javascript:;" class="btn btn-link btn-xs disabled">今日推荐</a> ';
+						}else{
+							$tmp['do'] .= ' <a href="javascript:;" class="btn btn-default btn-xs do-recommend" data-id="'.$v['tbid'].'">设为今日推荐</a> ';
+						}
+						$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a> ';
+					}else{
+						$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">查看详情</a> ';
+					}
+					$tmp['do'] .= ' <a href="javascript:;" class="btn btn-danger btn-xs do-del" data-id="'.$v['tbid'].'" data-name="'.$v['name'].'">删除</a> ';
+					$echo['rows'][] = $tmp;
+		            unset($tmp);
 				}
 			}
+			echo json_encode($echo);
 			break;
 		case 'del':
 			$db->delete('tb_app', array(
-				'tbid' => $_POST['appid']
+				'tbid' => $_POST['id']
 			));
 			break;
 		case 'recommend':
@@ -60,7 +64,7 @@
 			$db->update('tb_app', array(
 				'isrecommend' => 1
 			), array(
-				'tbid' => $_POST['appid']
+				'tbid' => $_POST['id']
 			));
 			break;
 	}

@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div id="toorbar">
-		<a class="btn btn-primary fr" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 创建新类目</a>
+		<a class="btn btn-primary" href="javascript:openDetailIframe('detail.php');"><i class="icon-white icon-plus"></i> 创建新类目</a>
 	</div>
 	<table id="table"></table>
 	<?php include('sysapp/global_module_detailIframe.php'); ?>
