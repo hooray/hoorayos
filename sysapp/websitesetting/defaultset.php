@@ -238,7 +238,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">图标垂直间距：</label>
 					<div class="col-sm-10">
-						<input id="inputAppverticalspacing" name="val_appverticalspacing" data-slider-id='inputAppverticalspacingSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-ticks="[0, 25, 50, 75, 100]" data-slider-ticks-labels='["0", "25", "50", "75", "100"]' data-slider-ticks-snap-bounds="1" data-slider-value="<?php echo $set['appverticalspacing']; ?>"/>
+						<input id="inputAppverticalspacing" name="val_appverticalspacing" data-slider-id='inputAppverticalspacingSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-ticks="[0, 25, 50, 75, 100]" data-slider-ticks-labels='["超紧缩", "紧缩", "标准", "加宽", "超加宽"]' data-slider-ticks-snap-bounds="1" data-slider-value="<?php echo $set['appverticalspacing']; ?>"/>
 					</div>
 				</div>
 				<div class="form-group">

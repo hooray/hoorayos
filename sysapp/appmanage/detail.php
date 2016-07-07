@@ -69,7 +69,7 @@
 									<a href="javascript:;"><img src="../../static/img/ui/system-puzzle.png" valsrc="static/img/ui/system-puzzle.png"></a>
 								</div>
 							</div>
-							<input type="hidden" name="val_icon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
+							<input type="hidden" name="inputIcon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -213,7 +213,7 @@
 			// 选完文件后，是否自动上传。
 			auto: true,
 			// swf文件路径
-			swf: '../../js/webuploader-0.1.5/Uploader.swf',
+			swf: '../../static/plugins/webuploader-0.1.5/Uploader.swf',
 			// 文件接收服务端。
 			server: 'detail.ajax.php?ac=uploadImg',
 			// 选择文件的按钮。可选。
@@ -235,7 +235,7 @@
 				return false;
 			}else{
 				$('.shortcutview img').remove();
-				$('#val_icon').val('');
+				$('#inputIcon').val('');
 			}
 		});
 		uploader.on('fileQueued', function(file){
@@ -252,7 +252,7 @@
 		});
 		uploader.on('uploadSuccess', function(file, cb){
 			$('.shortcutview img').attr('src', '../../' + cb.url);
-			$('#val_icon').val(cb.url);
+			$('#inputIcon').val(cb.url);
 			uploader.removeFile(file);
 		});
 		var form = $('#form').Validform({
@@ -313,7 +313,7 @@
 		});
 		$('input[name="val_type"]').change(function(){
 			if($(this).val() == 'window'){
-				$('.form-group-isresize, .form-group-isopenmax, .form-group-isflash').slideDown();
+				$('.form-group-isresize, .form-group-isopenmax, .form-group-isflash').removeClass('hide');
 			}else{
 				$('input[name="val_isresize"]').each(function(){
 					if($(this).val() == '1'){
@@ -330,14 +330,14 @@
 						$(this).prop('checked', true);
 					}
 				});
-				$('.form-group-isresize, .form-group-isopenmax, .form-group-isflash').slideUp();
+				$('.form-group-isresize, .form-group-isopenmax, .form-group-isflash').addClass('hide');
 			}
 		});
 		$('input[name="val_isresize"]').change(function(){
 			if($(this).val() == '1'){
-				$('.form-group-isopenmax').slideDown();
+				$('.form-group-isopenmax').removeClass('hide');
 			}else{
-				$('.form-group-isopenmax').slideUp();
+				$('.form-group-isopenmax').addClass('hide');
 			}
 		});
 		//选择应用图片

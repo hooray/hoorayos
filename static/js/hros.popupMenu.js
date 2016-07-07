@@ -134,8 +134,8 @@ HROS.popupMenu = (function(){
 						title : '编辑应用“' + obj.children('span').text() + '”',
 						url : 'sysapp/dialog/app.php?id=' + obj.attr('appid'),
 						padding : 0,
-						width : 600,
-						height : 350
+						width : 770,
+						height : 450
 					}).showModal();
 				}else{
 					HROS.base.login();
@@ -254,7 +254,7 @@ HROS.popupMenu = (function(){
 						title : '编辑私人应用“' + obj.children('span').text() + '”',
 						url : 'sysapp/dialog/papp.php?id=' + obj.attr('appid'),
 						padding : 0,
-						width : 600,
+						width : 770,
 						height : 450
 					}).showModal();
 				}else{
@@ -663,7 +663,7 @@ HROS.popupMenu = (function(){
 							title : '新建私人应用',
 							url : 'sysapp/dialog/papp.php?desk=' + HROS.CONFIG.desk,
 							padding : 0,
-							width : 600,
+							width : 770,
 							height : 450
 						}).showModal();
 					}else{
