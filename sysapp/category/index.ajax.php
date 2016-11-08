@@ -8,7 +8,7 @@
 	            $where['AND']['name[~]'] = $_GET['search'];
 	        }
 	        if($_GET['sort'] != '' && $_GET['order'] != ''){
-	            $where['ORDER'] = $_GET['sort'].' '.strtoupper($_GET['order']);
+	            $where['ORDER'][$_GET['sort']] = strtoupper($_GET['order']);
 	        }
 			$echo['total'] = $db->count('tb_app_category', '*', $where);
 			$where['LIMIT'] = array($_GET['offset'], $_GET['limit']);

@@ -69,7 +69,7 @@
 									<a href="javascript:;"><img src="../../static/img/ui/system-puzzle.png" valsrc="static/img/ui/system-puzzle.png"></a>
 								</div>
 							</div>
-							<input type="hidden" name="inputIcon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
+							<input type="hidden" name="val_icon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -280,7 +280,7 @@
 				if($('input[name="id"]').val() != ''){
 					if(data.status == 'y'){
 						window.parent.closeDetailIframe(function(){
-							window.parent.$('#pagination').trigger('currentPage');
+							window.parent.$('#table').bootstrapTable('refresh');
 						});
 						window.parent.swal({
 							type : 'success',
@@ -303,7 +303,7 @@
 								location.reload();
 							}else{
 								window.parent.closeDetailIframe(function(){
-									window.parent.$('#pagination').trigger('currentPage');
+									window.parent.$('#table').bootstrapTable('refresh');
 								});
 							}
 						});

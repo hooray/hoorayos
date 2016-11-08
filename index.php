@@ -322,7 +322,7 @@
 	<script src="static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
 	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
-	<script src="static/js/hros.core.js"></script>
+	<!-- <script src="static/js/hros.core.js"></script>
 	<script src="static/js/hros.app.js"></script>
 	<script src="static/js/hros.appmanage.js"></script>
 	<script src="static/js/hros.base.js"></script>
@@ -342,9 +342,9 @@
 	<script src="static/js/hros.wallpaper.js"></script>
 	<script src="static/js/hros.widget.js"></script>
 	<script src="static/js/hros.window.js"></script>
-	<script src="static/js/hros.zoom.js"></script>
+	<script src="static/js/hros.zoom.js"></script> -->
 	<!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
-	<!--script src="static/js/hros.min.js"></script-->
+	<script src="static/js/hros.min.js"></script>
 	<script>
 	var childWindow, interval;
 	$(function(){
@@ -608,7 +608,7 @@
 	function checkUserLogin(){
 		Cookies.remove(cookie_prefix + 'fromsite');
 		interval = setInterval(function(){
-			getLoginCookie(interval);
+			getLoginCookie();
 		}, 500);
 	}
 	function getLoginCookie(){

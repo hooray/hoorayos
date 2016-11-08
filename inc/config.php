@@ -36,24 +36,24 @@ $_CONFIG = array(
 
 //文件上传类型
 $uploadFileType = array(
-	'rar'  => 'img/ui/file_zip.png',
-	'zip'  => 'img/ui/file_zip.png',
-	'7z'   => 'img/ui/file_zip.png',
-	'jpeg' => 'img/ui/file_image.png',
-	'jpg'  => 'img/ui/file_image.png',
-	'gif'  => 'img/ui/file_image.png',
-	'bmp'  => 'img/ui/file_image.png',
-	'png'  => 'img/ui/file_image.png',
-	'doc'  => 'img/ui/file_word.png',
-	'docx' => 'img/ui/file_word.png',
-	'xls'  => 'img/ui/file_excel.png',
-	'xlsx' => 'img/ui/file_excel.png',
-	'ppt'  => 'img/ui/file_ppt.png',
-	'pptx' => 'img/ui/file_ppt.png',
-	'pdf'  => 'img/ui/file_pdf.png',
-	'wma'  => 'img/ui/file_music.png',
-	'mp3'  => 'img/ui/file_music.png',
-	'txt'  => 'img/ui/file_txt.png'
+	'rar'  => 'static/img/ui/file_zip.png',
+	'zip'  => 'static/img/ui/file_zip.png',
+	'7z'   => 'static/img/ui/file_zip.png',
+	'jpeg' => 'static/img/ui/file_image.png',
+	'jpg'  => 'static/img/ui/file_image.png',
+	'gif'  => 'static/img/ui/file_image.png',
+	'bmp'  => 'static/img/ui/file_image.png',
+	'png'  => 'static/img/ui/file_image.png',
+	'doc'  => 'static/img/ui/file_word.png',
+	'docx' => 'static/img/ui/file_word.png',
+	'xls'  => 'static/img/ui/file_excel.png',
+	'xlsx' => 'static/img/ui/file_excel.png',
+	'ppt'  => 'static/img/ui/file_ppt.png',
+	'pptx' => 'static/img/ui/file_ppt.png',
+	'pdf'  => 'static/img/ui/file_pdf.png',
+	'wma'  => 'static/img/ui/file_music.png',
+	'mp3'  => 'static/img/ui/file_music.png',
+	'txt'  => 'static/img/ui/file_txt.png'
 );
 //单个文件上传大小，单位MB
 $uploadFileSingleSize = 2;

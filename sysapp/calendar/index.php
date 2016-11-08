@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../../static/css/sys.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
 <link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
-<link rel="stylesheet" href="../../js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../../js/bootstrap-datetimepicker-2.3.8/css/bootstrap-datetimepicker-2.3.8.min.css">
 </head>
 
 <body>
@@ -78,9 +78,9 @@
 <?php include('sysapp/global_js.php'); ?>
 <script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
 <script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
-<script src="../../js/sugar/sugar-1.4.1.min.js"></script>
-<script src="../../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script src="../../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../../js/Sugar-2.0.0/dist/sugar.min.js"></script>
+<script src="../../js/bootstrap-datetimepicker-2.3.8/js/bootstrap-datetimepicker-2.3.8.min.js"></script>
+<script src="../../js/bootstrap-datetimepicker-2.3.8/js/locales/bootstrap-datetimepicker-2.3.8.zh-CN.js"></script>
 <script>
 $(function(){
 	var form = $('#form').Validform({

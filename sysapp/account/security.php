@@ -42,7 +42,7 @@
 				<div class="form-group">
 					<label for="inputPassword2" class="col-sm-2 control-label">确认新密码：</label>
 					<div class="col-sm-10">
-						<input type="password" name="password" class="form-control" id="inputPassword2" datatype="*" recheck="password" nullmsg="请确认新密码" errormsg="您两次输入的密码不一致">
+						<input type="password" name="password2" class="form-control" id="inputPassword2" datatype="*" recheck="password" nullmsg="请确认新密码" errormsg="您两次输入的密码不一致">
 						<span class="help-block"></span>
 					</div>
 				</div>

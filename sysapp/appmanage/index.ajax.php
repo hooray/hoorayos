@@ -19,7 +19,7 @@
 			}
 			$where['AND']['verifytype'] = $_GET['verifytype'] == 1 ? 1 : 2;
 			if($_GET['sort'] != '' && $_GET['order'] != ''){
-	            $where['ORDER'] = $_GET['sort'].' '.strtoupper($_GET['order']);
+	            $where['ORDER'][$_GET['sort']] = strtoupper($_GET['order']);
 	        }
 			$echo['total'] = $db->count('tb_app', '*', $where);
 			$where['LIMIT'] = array($_GET['offset'], $_GET['limit']);

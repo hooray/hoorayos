@@ -11,7 +11,7 @@
 				$where['AND']['type'] = $_GET['type'];
 			}
 			if($_GET['sort'] != '' && $_GET['order'] != ''){
-	            $where['ORDER'] = $_GET['sort'].' '.strtoupper($_GET['order']);
+	            $where['ORDER'][$_GET['sort']] = strtoupper($_GET['order']);
 	        }
 			$echo['total'] = $db->count('tb_member', '*', $where);
 			$where['LIMIT'] = array($_GET['offset'], $_GET['limit']);

@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	switch($_REQUEST['ac']){
 		case 'getList':
 			$myapplist = $db->select('tb_member_app', 'realid', array(
@@ -68,13 +68,13 @@
 			echo $db->count('tb_app', $where).'<{|*|}>';
 			switch($_POST['search_2']){
 				case '1':
-					$where['ORDER'] = 'dt DESC';
+					$where['ORDER']['dt'] = 'DESC';
 					break;
 				case '2':
-					$where['ORDER'] = 'usecount DESC';
+					$where['ORDER']['usecount'] = 'DESC';
 					break;
 				case '3':
-					$where['ORDER'] = 'starnum DESC';
+					$where['ORDER']['starnum'] = 'DESC';
 					break;
 			}
 			$where['LIMIT'] = array((int)$_POST['from'], (int)$_POST['to']);

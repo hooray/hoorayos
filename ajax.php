@@ -129,7 +129,9 @@
 					$data = array();
 					foreach($db->select('tb_member_app', '*', array(
 						'tbid' => explode(',', $appid['dock']),
-						'ORDER' => array('tbid', explode(',', $appid['dock']))
+						'ORDER' => array(
+							'tbid' => explode(',', $appid['dock'])
+						)
 					)) as $v){
 						$tmp = array();
 						if($v['type'] == 'folder'){
@@ -152,7 +154,9 @@
 						$data = array();
 						foreach($db->select('tb_member_app', '*', array(
 							'tbid' => explode(',', $appid['desk'.$i]),
-							'ORDER' => array('tbid', explode(',', $appid['desk'.$i]))
+							'ORDER' => array(
+								'tbid' => explode(',', $appid['desk'.$i])
+							)
 						)) as $v){
 							$tmp = array();
 							if($v['type'] == 'folder'){
@@ -205,7 +209,9 @@
 					$data = array();
 					foreach($db->select('tb_app', '*', array(
 						'tbid' => explode(',', $appid['dock']),
-						'ORDER' => array('tbid', explode(',', $appid['dock']))
+						'ORDER' => array(
+							'tbid' => explode(',', $appid['dock'])
+						)
 					)) as $v){
 						$tmp = array();
 						$tmp['type'] = $v['type'];
@@ -222,7 +228,9 @@
 						$data = array();
 						foreach($db->select('tb_app', '*', array(
 							'tbid' => explode(',', $appid['desk'.$i]),
-							'ORDER' => array('tbid', explode(',', $appid['desk'.$i]))
+							'ORDER' => array(
+								'tbid' => explode(',', $appid['desk'.$i])
+							)
 						)) as $v){
 							$tmp = array();
 							$tmp['type'] = $v['type'];
