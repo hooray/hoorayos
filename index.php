@@ -49,7 +49,7 @@
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
 	<link rel="stylesheet" href="static/css/index.css">
 	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
-	<link rel="stylesheet" href="static/plugins/font-awesome-4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="static/plugins/artDialog-6.0.4/css/ui-dialog.css">
 	<link rel="stylesheet" href="static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
@@ -317,12 +317,12 @@
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
-	<script src="static/plugins/sugar/sugar-1.4.1.min.js"></script>
+	<script src="static/plugins/Sugar-2.0.0/dist/sugar.min.js"></script>
 	<script src="static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
 	<script src="static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
 	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
-	<!-- <script src="static/js/hros.core.js"></script>
+	<script src="static/js/hros.core.js"></script>
 	<script src="static/js/hros.app.js"></script>
 	<script src="static/js/hros.appmanage.js"></script>
 	<script src="static/js/hros.base.js"></script>
@@ -342,9 +342,9 @@
 	<script src="static/js/hros.wallpaper.js"></script>
 	<script src="static/js/hros.widget.js"></script>
 	<script src="static/js/hros.window.js"></script>
-	<script src="static/js/hros.zoom.js"></script> -->
+	<script src="static/js/hros.zoom.js"></script>
 	<!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
-	<script src="static/js/hros.min.js"></script>
+	<!-- <script src="static/js/hros.min.js"></script> -->
 	<script>
 	var childWindow, interval;
 	$(function(){
