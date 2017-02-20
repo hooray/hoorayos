@@ -6,7 +6,7 @@ HROS.appmanage = (function(){
 		/*
 		**  初始化
 		*/
-		init : function(){
+		init: function(){
 			$('#appmanage .amg_close').off('click').on('click', function(){
 				HROS.appmanage.close();
 			});
@@ -16,7 +16,7 @@ HROS.appmanage = (function(){
 			HROS.appmanage.move();
 			HROS.appmanage.moveScrollbar();
 		},
-		set : function(){
+		set: function(){
 			$('#desktop').hide();
 			$('#appmanage').show();
 			$('#amg_folder_container .folderItem').show().addClass('folderItem_turn');
@@ -25,14 +25,14 @@ HROS.appmanage = (function(){
 			var dock_append = '';
 			if(HROS.VAR.dock != ''){
 				$(HROS.VAR.dock).each(function(i){
-					dock_append += appbtnTemp({
-						'title' : this.name,
-						'type' : this.type,
-						'id' : 'd_' + this.appid,
-						'appid' : this.appid,
-						'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-						'imgsrc' : this.icon,
-						'appsize' : 48
+					dock_append += HROS.template.appbtn({
+						'title': this.name,
+						'type': this.type,
+						'id': 'd_' + this.appid,
+						'appid': this.appid,
+						'realappid': this.realappid == 0 ? this.appid: this.realappid,
+						'imgsrc': this.icon,
+						'appsize': 48
 					});
 				});
 			}
@@ -43,14 +43,14 @@ HROS.appmanage = (function(){
 				var desk_append = '', desk = eval('HROS.VAR.desk' + (j + 1));
 				if(desk != ''){
 					$(desk).each(function(i){
-						desk_append += appbtnTemp({
-							'title' : this.name,
-							'type' : this.type,
-							'id' : 'd_' + this.appid,
-							'appid' : this.appid,
-							'realappid' : this.realappid == 0 ? this.appid : this.realappid,
-							'imgsrc' : this.icon,
-							'appsize' : 26
+						desk_append += HROS.template.appbtn({
+							'title': this.name,
+							'type': this.type,
+							'id': 'd_' + this.appid,
+							'appid': this.appid,
+							'realappid': this.realappid == 0 ? this.appid: this.realappid,
+							'imgsrc': this.icon,
+							'appsize': 26
 						});
 					});
 				}
@@ -60,24 +60,24 @@ HROS.appmanage = (function(){
 			HROS.appmanage.setPos();
 			HROS.appmanage.getScrollbar();
 		},
-		setPos : function(){
+		setPos: function(){
 			var manageDockGrid = HROS.grid.getManageDockAppGrid(), manageAppGrid = HROS.grid.getManageAppGrid();
 			$('#amg_dock_container .appbtn').each(function(i){
 				$(this).css({
-					top : 10,
-					left : manageDockGrid[i]['startX'] + 6
+					top: 10,
+					left: manageDockGrid[i]['startX'] + 6
 				});
 			});
 			for(var j = 0; j < 5; j++){
 				$('#amg_folder_container .folderItem:eq(' + j + ') .folderInner .appbtn').each(function(i){
 					$(this).css({
-						top : manageAppGrid[i]['startY'] + 5,
-						left : 0
+						top: manageAppGrid[i]['startY'] + 5,
+						left: 0
 					});
 				});
 			}
 		},
-		move : function(){
+		move: function(){
 			$('#amg_dock_container').on('mousedown', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
@@ -95,12 +95,12 @@ HROS.appmanage = (function(){
 					$(document).on('mousemove', function(e){
 						$('body').append(obj);
 						lay.show();
-						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
-						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
+						cx = e.clientX <= 0 ? 0: e.clientX >= $(window).width() ? $(window).width(): e.clientX;
+						cy = e.clientY <= 0 ? 0: e.clientY >= $(window).height() ? $(window).height(): e.clientY;
 						if(dx != cx || dy != cy){
 							obj.css({
-								left : cx - x,
-								top : cy - y
+								left: cx - x,
+								top: cy - y
 							}).show();
 						}
 					}).on('mouseup', function(){
@@ -130,12 +130,12 @@ HROS.appmanage = (function(){
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;
-								var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+								var boa = movegrid2 % 2 == 0 ? 'b': 'a';
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToDock(id, from, to, boa)){
 											$.ajax({
-												data : 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
+												data: 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -153,13 +153,13 @@ HROS.appmanage = (function(){
 								var id = oldobj.attr('appid');
 								var from = oldobj.index();
 								var to = movegrid;
-								var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+								var boa = movegrid2 % 2 == 0 ? 'b': 'a';
 								var desk = movedesk + 1;
 								if(HROS.base.checkLogin()){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToDesk(id, from, to, boa, desk)){
 											$.ajax({
-												data : 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+												data: 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -191,12 +191,12 @@ HROS.appmanage = (function(){
 					$(document).on('mousemove', function(e){
 						$('body').append(obj);
 						lay.show();
-						cx = e.clientX <= 0 ? 0 : e.clientX >= $(window).width() ? $(window).width() : e.clientX;
-						cy = e.clientY <= 0 ? 0 : e.clientY >= $(window).height() ? $(window).height() : e.clientY;
+						cx = e.clientX <= 0 ? 0: e.clientX >= $(window).width() ? $(window).width(): e.clientX;
+						cy = e.clientY <= 0 ? 0: e.clientY >= $(window).height() ? $(window).height(): e.clientY;
 						if(dx != cx || dy != cy){
 							obj.css({
-								left : cx - x,
-								top : cy - y
+								left: cx - x,
+								top: cy - y
 							}).show();
 						}
 					}).on('mouseup', function(){
@@ -227,13 +227,13 @@ HROS.appmanage = (function(){
 									var id = oldobj.attr('appid');
 									var from = oldobj.index();
 									var to = movegrid;
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+									var boa = movegrid2 % 2 == 0 ? 'b': 'a';
 									var desk = oldobj.parent().attr('desk');
 									if(HROS.base.checkLogin()){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDock(id, from, to, boa, desk)){
 												$.ajax({
-													data : 'ac=moveMyApp&movetype=desk-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: 'ac=moveMyApp&movetype=desk-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -246,12 +246,12 @@ HROS.appmanage = (function(){
 							}
 							if(HROS.CONFIG.dockPos == 'none'){
 								swal({
-									type : 'warning',
-									title : '温馨提示',
-									text : '当前应用码头处于停用状态，是否开启？',
-									showCancelButton : true,
-									confirmButtonText : '是的',
-									cancelButtonText : '不用'
+									type: 'warning',
+									title: '温馨提示',
+									text: '当前应用码头处于停用状态，是否开启？',
+									showCancelButton: true,
+									confirmButtonText: '是的',
+									cancelButtonText: '不用'
 								}, function(){
 									HROS.dock.updatePos('top');
 									next();
@@ -269,13 +269,13 @@ HROS.appmanage = (function(){
 									var id = oldobj.attr('appid');
 									var from = oldobj.index();
 									var to = movegrid;
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+									var boa = movegrid2 % 2 == 0 ? 'b': 'a';
 									var desk = movedesk + 1;
 									if(HROS.base.checkLogin()){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDesk(id, from, to, boa, desk)){
 												$.ajax({
-													data : 'ac=moveMyApp&movetype=desk-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: 'ac=moveMyApp&movetype=desk-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -291,14 +291,14 @@ HROS.appmanage = (function(){
 									var id = oldobj.attr('appid');
 									var from = oldobj.index();
 									var to = movegrid;
-									var boa = movegrid2 % 2 == 0 ? 'b' : 'a';
+									var boa = movegrid2 % 2 == 0 ? 'b': 'a';
 									var todesk = movedesk + 1;
 									var fromdesk = oldobj.parent().attr('desk');
 									if(HROS.base.checkLogin()){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToOtherdesk(id, from, to, boa, todesk, fromdesk)){
 												$.ajax({
-													data : 'ac=moveMyApp&movetype=desk-otherdesk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&fromdesk=' + fromdesk + '&todesk=' + todesk
+													data: 'ac=moveMyApp&movetype=desk-otherdesk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&fromdesk=' + fromdesk + '&todesk=' + todesk
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -315,7 +315,7 @@ HROS.appmanage = (function(){
 				return false;
 			});
 		},
-		getScrollbar : function(){
+		getScrollbar: function(){
 			$('#amg_folder_container .folderInner').height($(window).height() - 80);
 			$('#amg_folder_container .folderItem').each(function(){
 				var desk = $(this).find('.folderInner'), deskrealh = parseInt(desk.children('.appbtn:last').css('top')) + 41, scrollbar = desk.next('.scrollBar');
@@ -326,13 +326,13 @@ HROS.appmanage = (function(){
 				desk.scrollTop(0);
 				if(desk.height() / deskrealh < 1){
 					scrollbar.height(desk.height() / deskrealh * desk.height());
-					scrollbarTop = scrollbarTop + scrollbar.height() > desk.height() ? desk.height() - scrollbar.height() : scrollbarTop;
+					scrollbarTop = scrollbarTop + scrollbar.height() > desk.height() ? desk.height() - scrollbar.height(): scrollbarTop;
 					scrollbar.css('top', scrollbarTop).show();
 					desk.scrollTop(scrollbarTop / desk.height() * deskrealh);
 				}
 			});
 		},
-		moveScrollbar : function(){
+		moveScrollbar: function(){
 			/*
 			**  手动拖动
 			*/
@@ -344,7 +344,7 @@ HROS.appmanage = (function(){
 				y = e.clientY - scrollbar.offset().top;
 				$(document).on('mousemove', function(e){
 					//减80px是因为顶部dock区域的高度为80px，所以计算移动距离需要先减去80px
-					cy = e.clientY - y - 80 < 0 ? 0 : e.clientY - y - 80 > moveh ? moveh : e.clientY - y - 80;
+					cy = e.clientY - y - 80 < 0 ? 0: e.clientY - y - 80 > moveh ? moveh: e.clientY - y - 80;
 					scrollbar.css('top', cy);
 					desk.scrollTop(cy / desk.height() * deskrealh);
 				}).on('mouseup', function(){
@@ -361,22 +361,22 @@ HROS.appmanage = (function(){
 				**  delta == 1    往上
 				*/
 				if(delta < 0){
-					scrollupdown = desk.scrollTop() + 120 > deskrealh - desk.height() ? deskrealh - desk.height() : desk.scrollTop() + 120;
+					scrollupdown = desk.scrollTop() + 120 > deskrealh - desk.height() ? deskrealh - desk.height(): desk.scrollTop() + 120;
 				}else{
-					scrollupdown = desk.scrollTop() - 120 < 0 ? 0 : desk.scrollTop() - 120;
+					scrollupdown = desk.scrollTop() - 120 < 0 ? 0: desk.scrollTop() - 120;
 				}
 				desk.stop(false, true).animate({
-					scrollTop : scrollupdown
+					scrollTop: scrollupdown
 				}, 300);
 				desk.next('.scrollBar').stop(false, true).animate({
-					top : scrollupdown / deskrealh * desk.height()
+					top: scrollupdown / deskrealh * desk.height()
 				}, 300);
 			});
 		},
-		resize : function(){
+		resize: function(){
 			HROS.appmanage.getScrollbar();
 		},
-		close : function(){
+		close: function(){
 			$('#amg_dock_container').html('');
 			$('#amg_folder_container .folderInner').html('');
 			$('#desktop').show();

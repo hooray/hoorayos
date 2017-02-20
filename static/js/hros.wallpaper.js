@@ -6,16 +6,16 @@ HROS.wallpaper = (function(){
 		/*
 		**	初始化
 		*/
-		init : function(){
+		init: function(){
 			HROS.wallpaper.set();
 		},
 		/*
 		**	获得壁纸
 		**	通过ajax到后端获取壁纸信息，同时设置壁纸
 		*/
-		get : function(callback){
+		get: function(callback){
 			$.ajax({
-				data : 'ac=getWallpaper'
+				data: 'ac=getWallpaper'
 			}).done(function(wallpaper){
 				var w = wallpaper['wallpaper'].split('<{|}>');
 				HROS.CONFIG.wallpaperState = parseInt(w[0]);
@@ -39,12 +39,12 @@ HROS.wallpaper = (function(){
 		**	平铺和居中可直接用css样式background解决
 		**	而填充、适应和拉伸则需要进行模拟
 		*/
-		set : function(isreload){
+		set: function(isreload){
 			/*
 			**  判断壁纸是否需要重新载入
 			**  比如当浏览器尺寸改变时，只需更新壁纸，而无需重新载入
 			*/
-			var isreload = typeof(isreload) == 'undefined' ? true : isreload;
+			var isreload = typeof(isreload) == 'undefined' ? true: isreload;
 			if(isreload){
 				$('#zoomWallpaperGrid').attr('id', 'zoomWallpaperGrid-ready2remove').css('zIndex', -11);
 				setTimeout(function(){
@@ -76,12 +76,12 @@ HROS.wallpaper = (function(){
 								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + HROS.CONFIG.wallpaperHeight + 'px;width:' + HROS.CONFIG.wallpaperWidth + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid, #zoomWallpaperGrid div').css({
-									height : h + 'px',
-									width : w + 'px'
+									height: h + 'px',
+									width: w + 'px'
 								});
 								$('#zoomWallpaper').css({
-									top : t + 'px',
-									left : l + 'px'
+									top: t + 'px',
+									left: l + 'px'
 								});
 							}
 							break;
@@ -107,14 +107,14 @@ HROS.wallpaper = (function(){
 								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + imgH + 'px;width:' + imgW + 'px;top:' + t + 'px;left:' + l + 'px"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid, #zoomWallpaperGrid div').css({
-									height : h + 'px',
-									width : w + 'px'
+									height: h + 'px',
+									width: w + 'px'
 								});
 								$('#zoomWallpaper').css({
-									height : imgH + 'px',
-									width : imgW + 'px',
-									top : t + 'px',
-									left : l + 'px'
+									height: imgH + 'px',
+									width: imgW + 'px',
+									top: t + 'px',
+									left: l + 'px'
 								});
 							}
 							break;
@@ -124,11 +124,11 @@ HROS.wallpaper = (function(){
 								$('body').append('<div id="zoomWallpaperGrid" class="radi" style="position:absolute;z-index:-10;left:0;top:0;overflow:hidden;height:' + h + 'px;width:' + w + 'px;background:#fff"><img id="zoomWallpaper" src="' + HROS.CONFIG.wallpaper + '" style="position:absolute;height:' + h + 'px;width:' + w + 'px;top:0;left:0"><div style="position:absolute;height:' + h + 'px;width:' + w + 'px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div></div>');
 							}else{
 								$('#zoomWallpaperGrid').css({
-									height : h + 'px',
-									width : w + 'px'
+									height: h + 'px',
+									width: w + 'px'
 								}).children('#zoomWallpaper, div').css({
-									height : h + 'px',
-									width : w + 'px'
+									height: h + 'px',
+									width: w + 'px'
 								});
 							}
 							break;
@@ -145,7 +145,7 @@ HROS.wallpaper = (function(){
 		**	更新壁纸
 		**	通过ajax到后端进行更新，同时获得壁纸
 		*/
-		update : function(wallpaperstate, wallpapertype, wallpaper){
+		update: function(wallpaperstate, wallpapertype, wallpaper){
 			function done(){
 				HROS.wallpaper.get(function(){
 					HROS.wallpaper.set();
@@ -153,7 +153,7 @@ HROS.wallpaper = (function(){
 			}
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data : 'ac=setWallpaper&wpstate=' + wallpaperstate + '&wptype=' + wallpapertype + '&wp=' + wallpaper
+					data: 'ac=setWallpaper&wpstate=' + wallpaperstate + '&wptype=' + wallpapertype + '&wp=' + wallpaper
 				}).done(function(responseText){
 					done();
 				});

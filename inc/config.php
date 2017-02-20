@@ -68,7 +68,8 @@ $errorcode = array(
 );
 
 //创建数据库连接
-$db = new medoo(array(
+use Medoo\Medoo;
+$db = new Medoo(array(
 	'database_type' => 'mysql',
 	'database_name' => 'hoorayos',
 	'server' => 'localhost',

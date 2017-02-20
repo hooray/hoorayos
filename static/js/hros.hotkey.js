@@ -1,6 +1,6 @@
 HROS.hotkey = (function(){
 	return {
-		init : function(){
+		init: function(){
 			Mousetrap.bind(['backspace'], function(){
 				return false;
 			});

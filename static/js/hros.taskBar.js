@@ -6,7 +6,7 @@ HROS.taskBar = (function(){
 		/*
 		**  初始化
 		*/
-		init : function(){
+		init: function(){
 			//当浏览器窗口改变大小时，任务栏的显示也需进行刷新
 			$(window).on('resize', function(){
 				HROS.taskBar.resize();
@@ -20,16 +20,16 @@ HROS.taskBar = (function(){
 				$('.popup-menu').hide();
 				$('.quick_view_container').remove();
 				var popupmenu = HROS.popupMenu.task($(this));
-				var l = $(window).width() - e.clientX < popupmenu.width() ? e.clientX - popupmenu.width() : e.clientX;
+				var l = $(window).width() - e.clientX < popupmenu.width() ? e.clientX - popupmenu.width(): e.clientX;
 				var t = e.clientY - popupmenu.height();
 				popupmenu.css({
-					left : l,
-					top : t
+					left: l,
+					top: t
 				}).show();
 				return false;
 			});
 		},
-		pageClick : function(){
+		pageClick: function(){
 			$('#task-next-btn').on('click', function(){
 				if($(this).hasClass('disable') == false){
 					var taskW = $('#task-content-inner .task-item').width();
@@ -41,7 +41,7 @@ HROS.taskBar = (function(){
 					}
 					$('#task-pre a').removeClass('disable');
 					$('#task-content-inner').animate({
-						marginLeft : marginL
+						marginLeft: marginL
 					}, 200);
 				}
 			});
@@ -55,26 +55,26 @@ HROS.taskBar = (function(){
 					}
 					$('#task-next a').removeClass('disable');
 					$('#task-content-inner').animate({
-						marginLeft : marginL
+						marginLeft: marginL
 					}, 200);
 				}
 			});
 		},
-		resize : function(){
+		resize: function(){
 			if(HROS.CONFIG.dockPos == 'left'){
 				$('#task-bar').css({
-					left : $('#dock-bar').width(),
-					right : 0
+					left: $('#dock-bar').width(),
+					right: 0
 				});
 			}else if(HROS.CONFIG.dockPos == 'right'){
 				$('#task-bar').css({
-					left : 0,
-					right : $('#dock-bar').width()
+					left: 0,
+					right: $('#dock-bar').width()
 				});
 			}else{
 				$('#task-bar').css({
-					left : 0,
-					right : 0
+					left: 0,
+					right: 0
 				});
 			}
 			var realW = $('#task-content-inner .task-item').length * $('#task-content-inner .task-item').width();
@@ -83,7 +83,7 @@ HROS.taskBar = (function(){
 				$('#task-next, #task-pre').show();
 				$('#task-content').css('width', showW);
 				$('#task-content-inner').stop(true, false).animate({
-					marginLeft : 0
+					marginLeft: 0
 				}, 200);
 				$('#task-next a').removeClass('disable');
 				$('#task-pre a').addClass('disable');
@@ -91,11 +91,11 @@ HROS.taskBar = (function(){
 				$('#task-next, #task-pre').hide();
 				$('#task-content').css('width','100%');
 				$('#task-content-inner').css({
-					marginLeft : 0
+					marginLeft: 0
 				});
 			}
 		},
-		move : function(){
+		move: function(){
 			$('#task-content-inner').on('mousedown', '.task-item', function(e){
 				e.preventDefault();
 				e.stopPropagation();
@@ -104,7 +104,7 @@ HROS.taskBar = (function(){
 					var task_left = self.offset().left;
 					var task_width = self.width();
 					var drag = self.clone().addClass('task-dragging').css({
-						left : task_left
+						left: task_left
 					});
 					var current_animate_id;
 					var dx = e.clientX;
@@ -133,7 +133,7 @@ HROS.taskBar = (function(){
 						$(document).off('mousemove').off('mouseup');
 						lay.hide();
 						drag.animate({
-							left : self.offset().left
+							left: self.offset().left
 						}, 200, function(){
 							$(this).remove();
 							self.css('opacity', 1);
@@ -154,18 +154,18 @@ HROS.taskBar = (function(){
 							var temp = self.clone().insertAfter(self).addClass('task-temp');
 							if(boa == 'b'){
 								$('#' + id).before(self.css({
-									width : 0
+									width: 0
 								}));
 							}else{
 								$('#' + id).after(self.css({
-									width : 0
+									width: 0
 								}));
 							}
 							self.animate({
-								width : task_width
+								width: task_width
 							}, 100);
 							temp.animate({
-								width : 0
+								width: 0
 							}, 100, function(){
 								$(this).remove();
 							});

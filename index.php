@@ -317,7 +317,7 @@
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
-	<script src="static/plugins/Sugar-2.0.0/dist/sugar.min.js"></script>
+	<script src="static/plugins/Sugar-2.0.2/dist/sugar.min.js"></script>
 	<script src="static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
 	<script src="static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
 	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
@@ -352,14 +352,14 @@
 		var registerboxHeight = $('#lrbox .registerbox').outerHeight();
 		$('#lrbox .loginbox').css('marginTop', (loginboxHeight / 2) * -1);
 		$('#lrbox .registerbox').css('marginTop', (registerboxHeight / 2) * -1);
-		var lrboxHeight = loginboxHeight > registerboxHeight ? loginboxHeight : registerboxHeight;
+		var lrboxHeight = loginboxHeight > registerboxHeight ? loginboxHeight: registerboxHeight;
 		$('#lrbox .lrbox').css({
-			height : lrboxHeight,
-			marginTop : (loginboxHeight / 2) * -1
+			height: lrboxHeight,
+			marginTop: (loginboxHeight / 2) * -1
 		});
 		$('#lrbox .back').on('click', function(){
 			$('#lrbox').animate({
-				top : '-200%'
+				top: '-200%'
 			}, 1000);
 		});
 		changeTabindex();
@@ -408,20 +408,20 @@
 				}else{
 					if(data.info == 'ERROR_OPENID_IS_USED'){
 						swal({
-							type : 'warning',
-							title : '温馨提示',
-							text : '该账号已经绑定过' + $('.disanfangdenglutip span').text() + '账号<br />请更换其它账号，或者取消绑定，直接登录',
-							html : true,
-							timer : 2500,
-							showConfirmButton : false
+							type: 'warning',
+							title: '温馨提示',
+							text: '该账号已经绑定过' + $('.disanfangdenglutip span').text() + '账号<br />请更换其它账号，或者取消绑定，直接登录',
+							html: true,
+							timer: 2500,
+							showConfirmButton: false
 						});
 					}else{
 						swal({
-							type : 'error',
-							title : '登录失败',
-							text : '请检查用户名或密码是否正确',
-							timer : 2000,
-							showConfirmButton : false
+							type: 'error',
+							title: '登录失败',
+							text: '请检查用户名或密码是否正确',
+							timer: 2000,
+							showConfirmButton: false
 						});
 					}
 				}
@@ -475,25 +475,32 @@
 					$('#reg_username, #reg_password, #reg_password2').val('');
 					changeTabindex('login');
 					swal({
-						type : 'success',
-						title : '注册成功',
-						timer : 2000,
-						showConfirmButton : false
+						type: 'success',
+						title: '注册成功',
+						timer: 2000,
+						showConfirmButton: false
 					});
 				}else{
 					swal({
-						type : 'error',
-						title : '注册失败',
-						text : data.info,
-						timer : 2000,
-						showConfirmButton : false
+						type: 'error',
+						title: '注册失败',
+						text: data.info,
+						timer: 2000,
+						showConfirmButton: false
 					});
 				}
 			}
 		});
 		$('.disanfangdenglu a').click(function(){
 			checkUserLogin();
-			childWindow = window.open('connect/' + $(this).data('type') + '/redirect.php', 'LoginWindow', 'width=850,height=520,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1');
+			childWindow = dialog({
+				title: '第三方登录授权',
+				zIndex: 10000,
+				padding: 0,
+				width: 600,
+				height: 500,
+				url: 'connect/' + $(this).data('type') + '/redirect.php'
+			}).showModal();
 		});
 		$('.disanfangdenglutip .cancel').click(function(){
 			Cookies.remove(cookie_prefix + 'fromsite');
@@ -515,20 +522,20 @@
 			case 'login':
 				//登录面板动画
 				loginbox.transition({
-					marginLeft : loginboxMarginLeftOnMove
+					marginLeft: loginboxMarginLeftOnMove
 				}, 150, 'easeInOutSine', function(){
 					loginbox.css('zIndex', 2);
 				}).transition({
-					marginLeft : loginboxMarginLeftOnShow
+					marginLeft: loginboxMarginLeftOnShow
 				}, 200, 'easeInOutSine');
 				loginbox.children('.mask').transition({
-					opacity : 0
+					opacity: 0
 				}, 150, function(){
 					loginbox.children('.mask').hide();
 				});
 				loginbox.children('.form').transition({
-					opacity : 1,
-					delay : 150
+					opacity: 1,
+					delay: 150
 				}, 200, function(){
 					$('#username').attr('tabindex', 1);
 					$('#password').attr('tabindex', 2);
@@ -536,52 +543,52 @@
 				});
 				//注册面板动画
 				registerbox.transition({
-					marginRight : registerboxMarginRightOnMove
+					marginRight: registerboxMarginRightOnMove
 				}, 150, 'easeInOutSine', function(){
 					registerbox.css('zIndex', 1);
 				}).transition({
-					marginRight : registerboxMarginRightOnHide
+					marginRight: registerboxMarginRightOnHide
 				}, 200, 'easeInOutSine');
 				registerbox.children('.form').transition({
-					opacity : 0
+					opacity: 0
 				}, 150);
 				registerbox.children('.mask').show().transition({
-					opacity : 1,
-					delay : 150
+					opacity: 1,
+					delay: 150
 				}, 200);
 				break;
 			case 'register':
 				//登录面板动画
 				loginbox.transition({
-					marginLeft : loginboxMarginLeftOnMove
+					marginLeft: loginboxMarginLeftOnMove
 				}, 150, 'easeInOutSine', function(){
 					loginbox.css('zIndex', 1);
 				}).transition({
-					marginLeft : loginboxMarginLeftOnHide
+					marginLeft: loginboxMarginLeftOnHide
 				}, 200, 'easeInOutSine');
 				loginbox.children('.form').transition({
-					opacity : 0
+					opacity: 0
 				}, 150);
 				loginbox.children('.mask').show().transition({
-					opacity : 1,
-					delay : 150
+					opacity: 1,
+					delay: 150
 				}, 200);
 				//注册面板动画
 				registerbox.transition({
-					marginRight : registerboxMarginRightOnMove
+					marginRight: registerboxMarginRightOnMove
 				}, 150, 'easeInOutSine', function(){
 					registerbox.css('zIndex', 2);
 				}).transition({
-					marginRight : registerboxMarginRightOnShow
+					marginRight: registerboxMarginRightOnShow
 				}, 200, 'easeInOutSine');
 				registerbox.children('.mask').transition({
-					opacity : 0
+					opacity: 0
 				}, 150, function(){
 					registerbox.children('.mask').hide();
 				});
 				registerbox.children('.form').transition({
-					opacity : 1,
-					delay : 150
+					opacity: 1,
+					delay: 150
 				}, 200, function(){
 					$('#reg_username').attr('tabindex', 1);
 					$('#reg_password').attr('tabindex', 2);
@@ -594,13 +601,13 @@
 				$('#password').attr('tabindex', 2);
 				$('#submit_login_btn').attr('tabindex', 3);
 				loginbox.css({
-					zIndex : 2,
-					marginLeft : loginboxMarginLeftOnShow
+					zIndex: 2,
+					marginLeft: loginboxMarginLeftOnShow
 				});
 				loginbox.children('.mask').css('opacity', 0).hide();
 				registerbox.css({
-					zIndex : 1,
-					marginRight : registerboxMarginRightOnHide
+					zIndex: 1,
+					marginRight: registerboxMarginRightOnHide
 				});
 				registerbox.children('.form').css('opacity', 0);
 		}
@@ -613,20 +620,20 @@
 	}
 	function getLoginCookie(){
 		if(Cookies.get(cookie_prefix + 'fromsite')){
-			childWindow.close();
+			childWindow.remove();
 			window.clearInterval(interval);
 			//验证该三方登录账号是否已绑定过本地账号，有则直接登录，否则执行绑定账号流程
 			$.ajax({
-				url:'login.ajax.php',
-				data:'ac=3login',
+				url: 'login.ajax.php',
+				data: 'ac=3login',
 				success: function(msg){
 					if(msg == 'ERROR_LACK_OF_DATA'){
 						swal({
-							type : 'error',
-							title : '未知错误',
-							text : '建议重启浏览器后重新操作',
-							timer : 2000,
-							showConfirmButton : false
+							type: 'error',
+							title: '未知错误',
+							text: '建议重启浏览器后重新操作',
+							timer: 2000,
+							showConfirmButton: false
 						});
 					}else if(msg == 'ERROR_NOT_BIND'){
 						var title = '';
@@ -650,7 +657,9 @@
 	<script>
 	$(function(){
 		//IE下禁止选中
-		document.body.onselectstart = document.body.ondrag = function(){return false;}
+		document.body.onselectstart = document.body.ondrag = function(){
+			return false;
+		}
 		//隐藏加载遮罩层
 		$('.loading').hide();
 		if($('#lrbox').data('isforcedlogin') == 0 || Cookies.get(cookie_prefix + 'memberID') != 0){

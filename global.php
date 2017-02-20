@@ -5,6 +5,7 @@
 	require('inc/medoo.php');
 	//函数库
 	require('inc/functions.php');
+	require('inc/functions.private.php');
 	//配置文件
 	require('inc/config.php');
 ?>

@@ -6,7 +6,7 @@ HROS.dock = (function(){
 		/*
 		**	初始化
 		*/
-		init : function(){
+		init: function(){
 			HROS.dock.setPos();
 			//绑定应用码头拖动事件
 			HROS.dock.move();
@@ -25,11 +25,11 @@ HROS.dock = (function(){
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
 				var popupmenu = HROS.popupMenu.dock();
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
+				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
 				popupmenu.css({
-					left : l,
-					top : t
+					left: l,
+					top: t
 				}).show();
 				return false;
 			});
@@ -39,12 +39,12 @@ HROS.dock = (function(){
 			}).on('click',function(){
 				if(HROS.base.checkLogin()){
 					HROS.window.createTemp({
-						appid : 'hoorayos-zmsz',
-						title : '桌面设置',
-						url : 'sysapp/desksetting/index.php',
-						width : 750,
-						height : 450,
-						isflash : false
+						appid: 'hoorayos-zmsz',
+						title: '桌面设置',
+						url: 'sysapp/desksetting/index.php',
+						width: 750,
+						height: 450,
+						isflash: false
 					});
 				}else{
 					HROS.base.login();
@@ -55,12 +55,12 @@ HROS.dock = (function(){
 			}).on('click', function(){
 				if(HROS.base.checkLogin()){
 					HROS.window.createTemp({
-						appid : 'hoorayos-ztsz',
-						title : '主题设置',
-						url : 'sysapp/wallpaper/index.php',
-						width : 580,
-						height : 520,
-						isflash : false
+						appid: 'hoorayos-ztsz',
+						title: '主题设置',
+						url: 'sysapp/wallpaper/index.php',
+						width: 580,
+						height: 520,
+						isflash: false
 					});
 				}else{
 					HROS.base.login();
@@ -89,7 +89,7 @@ HROS.dock = (function(){
 				return false;
 			});
 		},
-		setPos : function(){
+		setPos: function(){
 			HROS.dock.switchDesk(HROS.CONFIG.desk);
 			var desktop = $('#desk-' + HROS.CONFIG.desk), desktops = $('#desk .desktop-container');
 			var desk_w = desktop.css('width', '100%').width(), desk_h = desktop.css('height', '100%').height();
@@ -99,54 +99,54 @@ HROS.dock = (function(){
 			if(HROS.CONFIG.dockPos == 'top'){
 				$('#dock-bar').addClass('top-bar').children('#dock-container').addClass('dock-top');
 				desktops.css({
-					width : desk_w,
-					height : desk_h - $('#task-bar').height() - $('#dock-bar').height(),
-					left : desk_w,
-					top : $('#dock-bar').height()
+					width: desk_w,
+					height: desk_h - $('#task-bar').height() - $('#dock-bar').height(),
+					left: desk_w,
+					top: $('#dock-bar').height()
 				});
 				desktop.css({
-					left : 0
+					left: 0
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'left'){
 				$('#dock-bar').addClass('left-bar').children('#dock-container').addClass('dock-left');
 				desktops.css({
-					width : desk_w - $('#dock-bar').width(),
-					height : desk_h - $('#task-bar').height(),
-					left : desk_w + $('#dock-bar').width(),
-					top : 0
+					width: desk_w - $('#dock-bar').width(),
+					height: desk_h - $('#task-bar').height(),
+					left: desk_w + $('#dock-bar').width(),
+					top: 0
 				});
 				desktop.css({
-					left : $('#dock-bar').width()
+					left: $('#dock-bar').width()
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'right'){
 				$('#dock-bar').addClass('right-bar').children('#dock-container').addClass('dock-right');
 				desktops.css({
-					width : desk_w - $('#dock-bar').width(),
-					height : desk_h - $('#task-bar').height(),
-					left : desk_w,
-					top : 0
+					width: desk_w - $('#dock-bar').width(),
+					height: desk_h - $('#task-bar').height(),
+					left: desk_w,
+					top: 0
 				});
 				desktop.css({
-					left : 0
+					left: 0
 				});
 				$('#dock-bar').show();
 			}else if(HROS.CONFIG.dockPos == 'none'){
 				desktops.css({
-					width : desk_w,
-					height : desk_h - $('#task-bar').height(),
-					left : desk_w,
-					top : 0
+					width: desk_w,
+					height: desk_h - $('#task-bar').height(),
+					left: desk_w,
+					top: 0
 				});
 				desktop.css({
-					left : 0
+					left: 0
 				});
 			}
 			HROS.taskBar.resize();
 			HROS.folderView.setPos();
 		},
-		updatePos : function(pos){
+		updatePos: function(pos){
 			if(pos != HROS.CONFIG.dockPos && typeof(pos) != 'undefined'){
 				HROS.CONFIG.dockPos = pos;
 				if(pos == 'none'){
@@ -158,22 +158,22 @@ HROS.dock = (function(){
 				HROS.app.set();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data : 'ac=setDockPos&dock=' + pos + '&desk=' + HROS.CONFIG.desk
+						data: 'ac=setDockPos&dock=' + pos + '&desk=' + HROS.CONFIG.desk
 					});
 				}
 			}
 		},
-		move : function(){
+		move: function(){
 			$('#dock-container').on('mousedown',function(e){
 				if(e.which == 1){
 					var lay = HROS.maskBox.dock(), location;
 					$(document).on('mousemove', function(e){
 						lay.show();
 						if(e.clientY < lay.height() * 0.2){
-							location = 'top';		
+							location = 'top';
 						}else if(e.clientX < lay.width() * 0.5){
 							location = 'left';
-						}else{				
+						}else{
 							location = 'right';
 						}
 						$('.dock_drap_effect').removeClass('hover');
@@ -189,20 +189,20 @@ HROS.dock = (function(){
 		/*
 		**  切换桌面
 		*/
-		switchDesk : function(deskNumber){
+		switchDesk: function(deskNumber){
 			//验证传入的桌面号是否为1-5的正整数
-			deskNumber = /^\+?[1-5]*$/.test(deskNumber) ? deskNumber : 1;
+			deskNumber = /^\+?[1-5]*$/.test(deskNumber) ? deskNumber: 1;
 			var pagination = $('#dock-bar .dock-pagination'), currindex = HROS.CONFIG.desk, switchindex = deskNumber,
 			currleft = $('#desk-' + currindex).offset().left, switchleft = $('#desk-' + switchindex).offset().left;
 			if(currindex != switchindex){
 				if(!$('#desk-' + switchindex).hasClass('animated') && !$('#desk-' + currindex).hasClass('animated')){
 					$('#desk-' + currindex).addClass('animated').animate({
-						left : switchleft
+						left: switchleft
 					}, 500, 'easeInOutCirc', function(){
 						$(this).removeClass('animated');
 					});
 					$('#desk-'+switchindex).addClass('animated').animate({
-						left : currleft
+						left: currleft
 					}, 500, 'easeInOutCirc', function(){
 						$(this).removeClass('animated');
 						pagination.removeClass('current-pagination-' + currindex).addClass('current-pagination-' + switchindex);

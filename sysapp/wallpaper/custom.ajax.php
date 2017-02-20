@@ -1,6 +1,6 @@
 <?php
 	require('../../global.php');
-	
+
 	switch($_REQUEST['ac']){
 		case 'del':
 			//检查当前准备删除的壁纸是否在使用
@@ -47,12 +47,13 @@
 					//缩略图上传
 					imageResize($source, $surl, 150, 105);
 					//上传完毕后，添加数据库记录
-					$tbid = $db->insert('tb_pwallpaper', array(
+					$db->insert('tb_pwallpaper', array(
 						'url' => $info['url'],
 						'width' => $w,
 						'height' => $h,
 						'member_id' => session('member_id')
 					));
+					$tbid = $db->id();
 				}
 				echo '{"tbid":"'.$tbid.'","surl":"'.$surl.'","url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
 			}else{

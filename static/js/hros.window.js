@@ -3,7 +3,7 @@
 */
 HROS.window = (function(){
 	return {
-		init : function(){
+		init: function(){
 			//窗口上各个按钮
 			HROS.window.handle();
 			//窗口移动
@@ -34,11 +34,11 @@ HROS.window = (function(){
 						var popupmenu = HROS.popupMenu.papp($(this));
 						break;
 				}
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
+				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
 				popupmenu.css({
-					left : l,
-					top : t
+					left: l,
+					top: t
 				}).show();
 				return false;
 			});
@@ -49,8 +49,8 @@ HROS.window = (function(){
 		**      后面参数依次为：标题、地址、宽、高、是否可拉伸、是否打开默认最大化、是否为flash
 		**      示例：HROS.window.createTemp({title:"百度",url:"http://www.baidu.com",width:800,height:400,isresize:false,isopenmax:false,isflash:false});
 		*/
-		createTemp : function(obj){
-			var type = 'window', appid = obj.appid == null ? Date.parse(new Date()) : obj.appid;
+		createTemp: function(obj){
+			var type = 'window', appid = obj.appid == null ? Date.parse(new Date()): obj.appid;
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner .task-item').each(function(){
@@ -65,62 +65,62 @@ HROS.window = (function(){
 				function nextDo(options){
 					var windowId = '#w_' + options.appid;
 					//新增任务栏
-					$('#task-content-inner').append(taskTemp({
-						'type' : options.type,
-						'id' : 't_' + options.appid,
-						'appid' : options.appid,
-						'realappid' : options.appid,
-						'title' : options.title,
-						'imgsrc' : options.imgsrc
+					$('#task-content-inner').append(HROS.template.task({
+						'type': options.type,
+						'id': 't_' + options.appid,
+						'appid': options.appid,
+						'realappid': options.appid,
+						'title': options.title,
+						'imgsrc': options.imgsrc
 					}));
 					HROS.taskBar.resize();
 					//新增窗口
-					TEMP.windowTemp = {
-						'top' : ($(window).height() - options.height) / 2 <= 0 ? 0 : ($(window).height() - options.height) / 2,
-						'left' : ($(window).width() - options.width) / 2 <= 0 ? 0 : ($(window).width() - options.width) / 2,
-						'emptyW' : $(window).width() - options.width,
-						'emptyH' : $(window).height() - options.height,
-						'width' : options.width,
-						'height' : options.height,
-						'zIndex' : HROS.CONFIG.windowIndexid,
-						'type' : options.type,
-						'id' : 'w_' + options.appid,
-						'appid' : options.appid,
-						'realappid' : options.appid,
-						'title' : options.title,
-						'url' : options.url,
-						'imgsrc' : options.imgsrc,
-						'isresize' : options.isresize,
-						'isopenmax' : options.isopenmax,
-						'istitlebar' : options.isresize,
-						'istitlebarFullscreen' : options.isresize ? window.fullScreenApi.supportsFullScreen == true ? true : false : false,
-						'issetbar' : options.issetbar,
-						'isflash' : options.isflash
+					var windowData = {
+						'top': ($(window).height() - options.height) / 2 <= 0 ? 0: ($(window).height() - options.height) / 2,
+						'left': ($(window).width() - options.width) / 2 <= 0 ? 0: ($(window).width() - options.width) / 2,
+						'emptyW': $(window).width() - options.width,
+						'emptyH': $(window).height() - options.height,
+						'width': options.width,
+						'height': options.height,
+						'zIndex': HROS.CONFIG.windowIndexid,
+						'type': options.type,
+						'id': 'w_' + options.appid,
+						'appid': options.appid,
+						'realappid': options.appid,
+						'title': options.title,
+						'url': options.url,
+						'imgsrc': options.imgsrc,
+						'isresize': options.isresize,
+						'isopenmax': options.isopenmax,
+						'istitlebar': options.isresize,
+						'istitlebarFullscreen': options.isresize ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
+						'issetbar': options.issetbar,
+						'isflash': options.isflash
 					};
-					$('#desk').append(windowTemp(TEMP.windowTemp));
-					$(windowId).data('info', TEMP.windowTemp).css({
-						opacity : 0,
-						scale : 1.1
+					$('#desk').append(HROS.template.window(windowData));
+					$(windowId).data('info', windowData).css({
+						opacity: 0,
+						scale: 1.1
 					}).transition({
-						opacity : 1,
-						scale : 1
+						opacity: 1,
+						scale: 1
 					}, 200);
 					HROS.CONFIG.windowIndexid += 1;
 					HROS.window.show2top(options.appid);
 				}
 				nextDo({
-					type : type,
-					appid : appid,
-					realappid : appid,
-					imgsrc : 'static/img/ui/default_icon.png',
-					title : obj.title,
-					url : obj.url,
-					width : obj.width,
-					height : obj.height,
-					isresize : typeof(obj.isresize) == 'undefined' ? false : obj.isresize,
-					isopenmax : typeof(obj.isopenmax) == 'undefined' ? false : obj.isopenmax,
-					issetbar : false,
-					isflash : typeof(obj.isflash) == 'undefined' ? true : obj.isflash
+					type: type,
+					appid: appid,
+					realappid: appid,
+					imgsrc: 'static/img/ui/default_icon.png',
+					title: obj.title,
+					url: obj.url,
+					width: obj.width,
+					height: obj.height,
+					isresize: typeof(obj.isresize) == 'undefined' ? false: obj.isresize,
+					isopenmax: typeof(obj.isopenmax) == 'undefined' ? false: obj.isopenmax,
+					issetbar: false,
+					isflash: typeof(obj.isflash) == 'undefined' ? true: obj.isflash
 				});
 			}else{
 				//如果设置强制刷新
@@ -135,8 +135,8 @@ HROS.window = (function(){
 		**  系统窗口：HROS.window.create(appid, [type]);
 		**      示例：HROS.window.create(12);
 		*/
-		create : function(appid, type, realappid){
-			var type = type == null ? 'window' : type;
+		create: function(appid, type, realappid){
+			var type = type == null ? 'window': type;
 			//判断窗口是否已打开
 			var iswindowopen = false;
 			$('#task-content-inner .task-item').each(function(){
@@ -151,89 +151,89 @@ HROS.window = (function(){
 				$('#d_' + appid).attr('opening', 1);
 				function nextDo(options){
 					var windowId = '#w_' + options.appid;
-					var top = ($(window).height() - options.height) / 2 <= 0 ? 0 : ($(window).height() - options.height) / 2;
-					var left = ($(window).width() - options.width) / 2 <= 0 ? 0 : ($(window).width() - options.width) / 2;
+					var top = ($(window).height() - options.height) / 2 <= 0 ? 0: ($(window).height() - options.height) / 2;
+					var left = ($(window).width() - options.width) / 2 <= 0 ? 0: ($(window).width() - options.width) / 2;
 					switch(options.type){
 						case 'window':
 						case 'pwindow':
 							//新增任务栏
-							$('#task-content-inner').append(taskTemp({
-								'type' : options.type,
-								'id' : 't_' + options.appid,
-								'appid' : options.appid,
-								'realappid' : options.realappid,
-								'title' : options.title,
-								'imgsrc' : options.imgsrc
+							$('#task-content-inner').append(HROS.template.task({
+								'type': options.type,
+								'id': 't_' + options.appid,
+								'appid': options.appid,
+								'realappid': options.realappid,
+								'title': options.title,
+								'imgsrc': options.imgsrc
 							}));
 							HROS.taskBar.resize();
 							//新增窗口
-							TEMP.windowTemp = {
-								'top' : top,
-								'left' : left,
-								'emptyW' : $(window).width() - options.width,
-								'emptyH' : $(window).height() - options.height,
-								'width' : options.width,
-								'height' : options.height,
-								'zIndex' : HROS.CONFIG.windowIndexid,
-								'type' : options.type,
-								'id' : 'w_' + options.appid,
-								'appid' : options.appid,
-								'realappid' : options.realappid,
-								'title' : options.title,
-								'url' : options.url,
-								'imgsrc' : options.imgsrc,
-								'isresize' : options.isresize == 1 ? true : false,
-								'isopenmax' : options.isresize == 1 ? options.isopenmax == 1 ? true : false : false,
-								'istitlebar' : options.isresize == 1 ? true : false,
-								'istitlebarFullscreen' : options.isresize == 1 ? window.fullScreenApi.supportsFullScreen == true ? true : false : false,
-								'issetbar' : options.issetbar == 1 ? true : false,
-								'isflash' : options.isflash == 1 ? true : false
+							var windowData = {
+								'top': top,
+								'left': left,
+								'emptyW': $(window).width() - options.width,
+								'emptyH': $(window).height() - options.height,
+								'width': options.width,
+								'height': options.height,
+								'zIndex': HROS.CONFIG.windowIndexid,
+								'type': options.type,
+								'id': 'w_' + options.appid,
+								'appid': options.appid,
+								'realappid': options.realappid,
+								'title': options.title,
+								'url': options.url,
+								'imgsrc': options.imgsrc,
+								'isresize': options.isresize == 1 ? true: false,
+								'isopenmax': options.isresize == 1 ? options.isopenmax == 1 ? true: false: false,
+								'istitlebar': options.isresize == 1 ? true: false,
+								'istitlebarFullscreen': options.isresize == 1 ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
+								'issetbar': options.issetbar == 1 ? true: false,
+								'isflash': options.isflash == 1 ? true: false
 							};
-							$('#desk').append(windowTemp(TEMP.windowTemp));
-							$(windowId).data('info', TEMP.windowTemp).css({
-								opacity : 0,
-								scale : 1.1
+							$('#desk').append(HROS.template.window(windowData));
+							$(windowId).data('info', windowData).css({
+								opacity: 0,
+								scale: 1.1
 							}).transition({
-								opacity : 1,
-								scale : 1
+								opacity: 1,
+								scale: 1
 							}, 200);
 							HROS.CONFIG.windowIndexid += 1;
 							HROS.window.show2top(options.appid);
 							break;
 						case 'folder':
 							//新增任务栏
-							$('#task-content-inner').append(taskTemp({
-								'type' : options.type,
-								'id' : 't_' + options.appid,
-								'appid' : options.appid,
-								'realappid' : options.realappid,
-								'title' : options.title,
-								'imgsrc' : options.imgsrc
+							$('#task-content-inner').append(HROS.template.task({
+								'type': options.type,
+								'id': 't_' + options.appid,
+								'appid': options.appid,
+								'realappid': options.realappid,
+								'title': options.title,
+								'imgsrc': options.imgsrc
 							}));
 							HROS.taskBar.resize();
 							//新增窗口
-							TEMP.folderWindowTemp = {
-								'top' : top,
-								'left' : left,
-								'emptyW' : $(window).width() - options.width,
-								'emptyH' : $(window).height() - options.height,
-								'width' : options.width,
-								'height' : options.height,
-								'zIndex' : HROS.CONFIG.windowIndexid,
-								'type' : options.type,
-								'id' : 'w_' + options.appid,
-								'appid' : options.appid,
-								'realappid' : options.realappid,
-								'title' : options.title,
-								'imgsrc' : options.imgsrc
+							var folderData = {
+								'top': top,
+								'left': left,
+								'emptyW': $(window).width() - options.width,
+								'emptyH': $(window).height() - options.height,
+								'width': options.width,
+								'height': options.height,
+								'zIndex': HROS.CONFIG.windowIndexid,
+								'type': options.type,
+								'id': 'w_' + options.appid,
+								'appid': options.appid,
+								'realappid': options.realappid,
+								'title': options.title,
+								'imgsrc': options.imgsrc
 							};
-							$('#desk').append(folderWindowTemp(TEMP.folderWindowTemp));
-							$(windowId).data('info', TEMP.folderWindowTemp).css({
-								opacity : 0,
-								scale : 1.1
+							$('#desk').append(HROS.template.folderWindow(folderData));
+							$(windowId).data('info', folderData).css({
+								opacity: 0,
+								scale: 1.1
 							}).transition({
-								opacity : 1,
-								scale : 1
+								opacity: 1,
+								scale: 1
 							}, 200);
 							HROS.CONFIG.windowIndexid += 1;
 							//载入文件夹内容
@@ -247,14 +247,14 @@ HROS.window = (function(){
 							if(sc != ''){
 								var folder_append = '';
 								$(sc).each(function(){
-									folder_append += appbtnTemp({
-										'title' : this.name,
-										'type' : this.type,
-										'id' : 'd_' + this.appid,
-										'appid' : this.appid,
-										'realappid' : this.realappid,
-										'imgsrc' : this.icon,
-										'appsize' : 48
+									folder_append += HROS.template.appbtn({
+										'title': this.name,
+										'type': this.type,
+										'id': 'd_' + this.appid,
+										'appid': this.appid,
+										'realappid': this.realappid,
+										'imgsrc': this.icon,
+										'appsize': 48
 									});
 								});
 								$(windowId).find('.folder_body').append(folder_append);
@@ -262,68 +262,68 @@ HROS.window = (function(){
 							HROS.window.show2top(options.appid);
 							break;
 						case 'file':
-							TEMP.fileWindowTemp = {
-								'top' : top,
-								'left' : left,
-								'emptyW' : $(window).width() - options.width,
-								'emptyH' : $(window).height() - options.height,
-								'width' : options.width,
-								'height' : options.height,
-								'zIndex' : HROS.CONFIG.windowIndexid,
-								'type' : options.type,
-								'id' : 'w_' + options.appid,
-								'appid' : options.appid,
-								'realappid' : options.realappid,
-								'title' : options.title,
-								'imgsrc' : options.imgsrc
+							var fileData = {
+								'top': top,
+								'left': left,
+								'emptyW': $(window).width() - options.width,
+								'emptyH': $(window).height() - options.height,
+								'width': options.width,
+								'height': options.height,
+								'zIndex': HROS.CONFIG.windowIndexid,
+								'type': options.type,
+								'id': 'w_' + options.appid,
+								'appid': options.appid,
+								'realappid': options.realappid,
+								'title': options.title,
+								'imgsrc': options.imgsrc
 							};
-							$('body').append(fileDownloadTemp(TEMP.fileWindowTemp));
+							$('body').append(HROS.template.fileDownload(fileData));
 							break;
 					}
 				}
 				$.ajax({
-					data : 'ac=getMyAppById&id=' + appid + '&type=' + type,
-					dataType : 'json'
+					data: 'ac=getMyAppById&id=' + appid + '&type=' + type,
+					dataType: 'json'
 				}).done(function(app){
 					if(app != null){
 						if(app['error'] == 'ERROR_NOT_FOUND'){
 							swal({
-								type : 'error',
-								title : '应用不存在，建议删除',
-								timer : 2000,
+								type: 'error',
+								title: '应用不存在，建议删除',
+								timer: 2000,
 								showConfirmButton: false
 							});
 						}else if(app['error'] == 'ERROR_NOT_INSTALLED'){
 							HROS.window.createTemp({
-								appid : 'hoorayos-yysc',
-								title : '应用市场',
-								url : 'sysapp/appmarket/index.php?id=' + (realappid == null ? $('#d_' + appid).attr('realappid') : realappid),
-								width : 800,
-								height : 484,
-								isflash : false,
-								refresh : true
+								appid: 'hoorayos-yysc',
+								title: '应用市场',
+								url: 'sysapp/appmarket/index.php?id=' + (realappid == null ? $('#d_' + appid).attr('realappid'): realappid),
+								width: 800,
+								height: 484,
+								isflash: false,
+								refresh: true
 							});
 						}else{
 							nextDo({
-								type : app['type'],
-								appid : app['appid'],
-								realappid : app['realappid'],
-								title : app['name'],
-								imgsrc : app['icon'],
-								url : app['url'],
-								width : app['width'],
-								height : app['height'],
-								isresize : app['isresize'],
-								isopenmax : app['isopenmax'],
-								issetbar : app['issetbar'],
-								isflash : app['isflash']
+								type: app['type'],
+								appid: app['appid'],
+								realappid: app['realappid'],
+								title: app['name'],
+								imgsrc: app['icon'],
+								url: app['url'],
+								width: app['width'],
+								height: app['height'],
+								isresize: app['isresize'],
+								isopenmax: app['isopenmax'],
+								issetbar: app['issetbar'],
+								isflash: app['isflash']
 							});
 						}
 					}else{
 						swal({
-							type : 'error',
-							title : '应用加载失败',
-							timer : 2000,
+							type: 'error',
+							title: '应用加载失败',
+							timer: 2000,
 							showConfirmButton: false
 						});
 					}
@@ -331,19 +331,19 @@ HROS.window = (function(){
 				});
 			}
 		},
-		setPos : function(){
+		setPos: function(){
 			$('#desk .window-container').each(function(){
 				var windowdata = $(this).data('info');
 				var currentW = $(window).width() - $(this).width();
 				var currentH = $(window).height() - $(this).height();
-				var left = windowdata['left'] / windowdata['emptyW'] * currentW >= currentW ? currentW : windowdata['left'] / windowdata['emptyW'] * currentW;
-				left = left <= 0 ? 0 : left;
-				var top = windowdata['top'] / windowdata['emptyH'] * currentH >= currentH ? currentH : windowdata['top'] / windowdata['emptyH'] * currentH;
-				top = top <= 0 ? 0 : top;
+				var left = windowdata['left'] / windowdata['emptyW'] * currentW >= currentW ? currentW: windowdata['left'] / windowdata['emptyW'] * currentW;
+				left = left <= 0 ? 0: left;
+				var top = windowdata['top'] / windowdata['emptyH'] * currentH >= currentH ? currentH: windowdata['top'] / windowdata['emptyH'] * currentH;
+				top = top <= 0 ? 0: top;
 				if($(this).attr('state') != 'hide'){
 					$(this).stop(true, false).animate({
-						'left' : left,
-						'top' : top
+						'left': left,
+						'top': top
 					}, 500, function(){
 						windowdata['left'] = left;
 						windowdata['top'] = top;
@@ -358,14 +358,14 @@ HROS.window = (function(){
 				}
 			});
 		},
-		close : function(appid){
+		close: function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			$(windowId).css({
-				opacity : 1,
-				scale : 1
+				opacity: 1,
+				scale: 1
 			}).transition({
-				opacity : 0,
-				scale : 1.1
+				opacity: 0,
+				scale: 1.1
 			}, 200, function(){
 				$(this).removeData('info').html('').remove();
 			});
@@ -382,21 +382,21 @@ HROS.window = (function(){
 			}
 			HROS.taskBar.resize();
 		},
-		closeAll : function(){
+		closeAll: function(){
 			$('#desk .window-container').each(function(){
 				HROS.window.close($(this).attr('appid'));
 			});
 		},
-		hide : function(appid){
+		hide: function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			$(windowId).css({
-				opacity : 1,
-				scale : 1,
-				y : 0
+				opacity: 1,
+				scale: 1,
+				y: 0
 			}).transition({
-				opacity : 0,
-				scale : 0.9,
-				y : 50
+				opacity: 0,
+				scale: 0.9,
+				y: 50
 			}, 200, function(){
 				$(this).css('left', -10000).attr('state', 'hide');
 			});
@@ -405,35 +405,35 @@ HROS.window = (function(){
 				$('#task-bar').removeClass('min-zIndex');
 			}
 		},
-		hideAll : function(){
+		hideAll: function(){
 			$('#task-content-inner .task-item').removeClass('task-item-current');
 			$('#desk-' + HROS.CONFIG.desk).nextAll('div.window-container').css('left', -10000).attr('state', 'hide');
 		},
-		max : function(appid){
+		max: function(appid){
 			HROS.window.show2top(appid);
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			$(windowId + ' .title-handle .ha-max').hide().next(".ha-revert").show();
 			$(windowId).addClass('window-maximize').attr('ismax',1).animate({
-				width : '100%',
-				height : '100%',
-				top : 0,
-				left : 0
+				width: '100%',
+				height: '100%',
+				top: 0,
+				left: 0
 			}, 200);
 			$('#task-bar').addClass('min-zIndex');
 		},
-		revert : function(appid){
+		revert: function(appid){
 			HROS.window.show2top(appid);
 			var windowId = '#w_' + appid, taskId = '#t_' + appid, windowdata = $(windowId).data('info');
 			$(windowId + ' .title-handle .ha-revert').hide().prev('.ha-max').show();
 			$(windowId).removeClass('window-maximize').attr('ismax',0).animate({
-				width : windowdata['width'],
-				height : windowdata['height'],
-				left : windowdata['left'],
-				top : windowdata['top']
+				width: windowdata['width'],
+				height: windowdata['height'],
+				left: windowdata['left'],
+				top: windowdata['top']
 			}, 500);
 			$('#task-bar').removeClass('min-zIndex');
 		},
-		refresh : function(appid){
+		refresh: function(appid){
 			HROS.window.show2top(appid);
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			//判断是应用窗口，还是文件夹窗口
@@ -443,8 +443,8 @@ HROS.window = (function(){
 				HROS.window.updateFolder(appid);
 			}
 		},
-		show2top : function(appid, isAnimate){
-			isAnimate = isAnimate == null ? false : isAnimate;
+		show2top: function(appid, isAnimate){
+			isAnimate = isAnimate == null ? false: isAnimate;
 			var windowId = '#w_' + appid, taskId = '#t_' + appid, windowdata = $(windowId).data('info');
 			var arr = [];
 			function show(){
@@ -456,15 +456,15 @@ HROS.window = (function(){
 				}
 				//改变当前窗口样式
 				$(windowId).addClass('window-current').css({
-					zIndex : HROS.CONFIG.windowIndexid,
-					left : windowdata['left'],
-					top : windowdata['top']
+					zIndex: HROS.CONFIG.windowIndexid,
+					left: windowdata['left'],
+					top: windowdata['top']
 				});
 				//如果窗口最小化前是最大化状态的，则坐标位置设为0
 				if($(windowId).attr('ismax') == 1){
 					$(windowId).css({
-						left : 0,
-						top : 0
+						left: 0,
+						top: 0
 					});
 				}
 				//改变当前窗口遮罩层样式
@@ -474,13 +474,13 @@ HROS.window = (function(){
 				HROS.CONFIG.windowIndexid += 1;
 				if($(windowId).attr('state') == 'hide'){
 					$(windowId).css({
-						opacity : 0,
-						scale : 0.9,
-						y : 50
+						opacity: 0,
+						scale: 0.9,
+						y: 50
 					}).transition({
-						opacity : 1,
-						scale : 1,
-						y : 0
+						opacity: 1,
+						scale: 1,
+						y: 0
 					}, 200, function(){
 						$(this).attr('state', 'show');
 					});
@@ -578,9 +578,9 @@ HROS.window = (function(){
 							}
 						}
 						arr.push({
-							id : $(this).attr('id'),
-							direction : direction, //移动方向
-							distance : distance //移动距离
+							id: $(this).attr('id'),
+							direction: direction, //移动方向
+							distance: distance //移动距离
 						});
 					}
 				});
@@ -590,27 +590,27 @@ HROS.window = (function(){
 					var baseLeft = $('#' + arr[i].id).offset().left, baseTop = $('#' + arr[i].id).offset().top;
 					if(arr[i].direction == 'left'){
 						$('#' + arr[i].id).delay(delayTime).animate({
-							left : baseLeft - arr[i].distance
+							left: baseLeft - arr[i].distance
 						}, 300).animate({
-							left : baseLeft
+							left: baseLeft
 						}, 300);
 					}else if(arr[i].direction == 'right'){
 						$('#' + arr[i].id).delay(delayTime).animate({
-							left : baseLeft + arr[i].distance
+							left: baseLeft + arr[i].distance
 						}, 300).animate({
-							left : baseLeft
+							left: baseLeft
 						}, 300);
 					}else if(arr[i].direction == 'top'){
 						$('#' + arr[i].id).delay(delayTime).animate({
-							top : baseTop - arr[i].distance
+							top: baseTop - arr[i].distance
 						}, 300).animate({
-							top : baseTop
+							top: baseTop
 						}, 300);
 					}else if(arr[i].direction == 'bottom'){
 						$('#' + arr[i].id).delay(delayTime).animate({
-							top : baseTop + arr[i].distance
+							top: baseTop + arr[i].distance
 						}, 300).animate({
-							top : baseTop
+							top: baseTop
 						}, 300);
 					}
 					delayTime += 100;
@@ -620,7 +620,7 @@ HROS.window = (function(){
 				show();
 			}
 		},
-		show2under : function(){
+		show2under: function(){
 			//改变任务栏样式
 			$('#task-content-inner .task-item').removeClass('task-item-current');
 			//改变窗口样式
@@ -630,7 +630,7 @@ HROS.window = (function(){
 			//改变iframe显示
 			$('#desk .window-container-flash iframe').hide();
 		},
-		updateFolder : function(appid){
+		updateFolder: function(appid){
 			var windowId = '#w_' + appid, taskId = '#t_' + appid;
 			var sc = '';
 			$(HROS.VAR.folder).each(function(){
@@ -642,33 +642,33 @@ HROS.window = (function(){
 			if(sc != null){
 				var folder_append = '';
 				for(var i = 0; i < sc.length; i++){
-					folder_append += appbtnTemp({
-						'top' : 0,
-						'left' : 0,
-						'title' : sc[i]['name'],
-						'type' : sc[i]['type'],
-						'id' : 'd_' + sc[i]['appid'],
-						'appid' : sc[i]['appid'],
-						'realappid' : sc[i]['realappid'],
-						'imgsrc' : sc[i]['icon'],
-						'appsize' : 48
+					folder_append += HROS.template.appbtn({
+						'top': 0,
+						'left': 0,
+						'title': sc[i]['name'],
+						'type': sc[i]['type'],
+						'id': 'd_' + sc[i]['appid'],
+						'appid': sc[i]['appid'],
+						'realappid': sc[i]['realappid'],
+						'imgsrc': sc[i]['icon'],
+						'appsize': 48
 					});
 				}
 				$(windowId).find('.folder_body').html('').append(folder_append).on('contextmenu', '.appbtn', function(e){
 					$('.popup-menu').hide();
 					$('.quick_view_container').remove();
-					TEMP.AppRight = HROS.popupMenu.app($(this));
-					var l = ($(window).width() - e.clientX) < TEMP.AppRight.width() ? (e.clientX - TEMP.AppRight.width()) : e.clientX;
-					var t = ($(window).height() - e.clientY) < TEMP.AppRight.height() ? (e.clientY - TEMP.AppRight.height()) : e.clientY;
-					TEMP.AppRight.css({
-						left : l,
-						top : t
+					var $popupMenu = HROS.popupMenu.app($(this));
+					var l = ($(window).width() - e.clientX) < $popupMenu.width() ? (e.clientX - $popupMenu.width()): e.clientX;
+					var t = ($(window).height() - e.clientY) < $popupMenu.height() ? (e.clientY - $popupMenu.height()): e.clientY;
+					$popupMenu.css({
+						left: l,
+						top: t
 					}).show();
 					return false;
 				});
 			}
 		},
-		handle : function(){
+		handle: function(){
 			$('#desk').on('mousedown', '.window-container .title-bar .title-handle a, .window-container .set-bar a', function(e){
 				e.preventDefault();
 				e.stopPropagation();
@@ -707,49 +707,49 @@ HROS.window = (function(){
 				var obj = $(this).parents('.window-container');
 				if(obj.attr('realappid') !== 0){
 					HROS.window.createTemp({
-						appid : 'hoorayos-yysc',
-						title : '应用市场',
-						url : 'sysapp/appmarket/index.php?id=' + obj.attr('realappid'),
-						width : 800,
-						height : 484,
-						isflash : false,
-						refresh : true
+						appid: 'hoorayos-yysc',
+						title: '应用市场',
+						url: 'sysapp/appmarket/index.php?id=' + obj.attr('realappid'),
+						width: 800,
+						height: 484,
+						isflash: false,
+						refresh: true
 					});
 				}else{
 					swal({
-						type : 'warning',
-						title : '温馨提示',
-						text : '该应用没有任何详细介绍',
-						timer : 2000,
+						type: 'warning',
+						title: '温馨提示',
+						text: '该应用没有任何详细介绍',
+						timer: 2000,
 						showConfirmButton: false
 					});
 				}
 			}).on('click', '.window-container .star', function(){
 				var obj = $(this).parents('.window-container');
 				$.ajax({
-					data : 'ac=getAppStar&id=' + obj.data('info').realappid
+					data: 'ac=getAppStar&id=' + obj.data('info').realappid
 				}).done(function(starnum){
 					starnum = starnum['starnum'];
 					dialog({
-						title : '给“' + obj.data('info').title + '”打分',
-						padding : '10px 40px 15px 40px',
-						id : 'star',
-						content : starDialogTemp({
-							'realappid' : obj.data('info').realappid,
-							'point' : Math.floor(starnum),
-							'realpoint' : starnum * 20
+						title: '给“' + obj.data('info').title + '”打分',
+						padding: '10px 40px 15px 40px',
+						id: 'star',
+						content: HROS.template.starDialog({
+							'realappid': obj.data('info').realappid,
+							'point': Math.floor(starnum),
+							'realpoint': starnum * 20
 						})
 					}).showModal();
 				});
 			}).on('click', '.window-container .share', function(){
 				var obj = $(this).parents('.window-container');
 				dialog({
-					title : '分享应用',
-					width : 320,
-					id : 'share',
-					content : shareDialogTemp({
-						'title' : '我正在使用 %23HoorayOS%23 中的 %23' + obj.data('info').title + '%23 应用，很不错哦，推荐你也来试试！',
-						'url' : HROS.CONFIG.website + '?run=' + obj.data('info').realappid + '%26type=app'
+					title: '分享应用',
+					width: 320,
+					id: 'share',
+					content: HROS.template.shareDialog({
+						'title': '我正在使用 %23HoorayOS%23 中的 %23' + obj.data('info').title + '%23 应用，很不错哦，推荐你也来试试！',
+						'url': HROS.CONFIG.website + '?run=' + obj.data('info').realappid + '%26type=app'
 					})
 				}).showModal();
 			}).on('contextmenu', '.window-container', function(){
@@ -758,7 +758,7 @@ HROS.window = (function(){
 				return false;
 			});
 		},
-		move : function(){
+		move: function(){
 			$('#desk').on('mousedown', '.window-container .title-bar, .window-container .set-bar', function(e){
 				var obj = $(this).parents('.window-container');
 				if(obj.attr('ismax') == 1){
@@ -776,10 +776,10 @@ HROS.window = (function(){
 					//强制把右上角还原按钮隐藏，最大化按钮显示
 					obj.find('.ha-revert').hide().prev('.ha-max').show();
 					obj.css({
-						width : windowdata['width'],
-						height : windowdata['height'],
-						left : e.clientX - x,
-						top : e.clientY - y <= 10 ? 0 : e.clientY - y >= lay.height()-30 ? lay.height()-30 : e.clientY - y
+						width: windowdata['width'],
+						height: windowdata['height'],
+						left: e.clientX - x,
+						top: e.clientY - y <= 10 ? 0: e.clientY - y >= lay.height()-30 ? lay.height()-30: e.clientY - y
 					});
 					obj.data('info').left = obj.offset().left;
 					obj.data('info').top = obj.offset().top;
@@ -791,7 +791,7 @@ HROS.window = (function(){
 				});
 			});
 		},
-		resize : function(obj){
+		resize: function(obj){
 			$('#desk').on('mousedown', '.window-container .window-resize', function(e){
 				var obj = $(this).parents('.window-container');
 				var resizeobj = $(this);
@@ -804,89 +804,89 @@ HROS.window = (function(){
 					lay = HROS.maskBox.desk();
 					lay.show();
 					//当拖动到屏幕边缘时，自动贴屏
-					var _x = e.clientX <= 10 ? 0 : e.clientX >= (lay.width() - 12) ? (lay.width() - 2) : e.clientX;
-					var _y = e.clientY <= 10 ? 0 : e.clientY >= (lay.height() - 12) ? lay.height() : e.clientY;
+					var _x = e.clientX <= 10 ? 0: e.clientX >= (lay.width() - 12) ? (lay.width() - 2): e.clientX;
+					var _y = e.clientY <= 10 ? 0: e.clientY >= (lay.height() - 12) ? lay.height(): e.clientY;
 					switch(resizeobj.attr('resize')){
 						case 't':
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h + y - _y,
-								top : _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h + y - _y,
+								top: _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 						case 'r':
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w - x + _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w - x + _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
 						case 'b':
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h - y + _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h - y + _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 						case 'l':
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w + x - _x,
-								left : _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w + x - _x,
+								left: _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
 						case 'rt':
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h + y - _y,
-								top : _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h + y - _y,
+								top: _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w - x + _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w - x + _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
 						case 'rb':
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w - x + _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w - x + _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h - y + _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h - y + _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 						case 'lt':
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w + x - _x,
-								left : _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w + x - _x,
+								left: _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h + y - _y,
-								top : _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h + y - _y,
+								top: _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 						case 'lb':
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
-								width : w + x - _x,
-								left : _x
-							}) : obj.css({
-								width : HROS.CONFIG.windowMinWidth
+								width: w + x - _x,
+								left: _x
+							}): obj.css({
+								width: HROS.CONFIG.windowMinWidth
 							});
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
-								height : h - y + _y
-							}) : obj.css({
-								height : HROS.CONFIG.windowMinHeight
+								height: h - y + _y
+							}): obj.css({
+								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 					}

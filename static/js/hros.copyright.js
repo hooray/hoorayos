@@ -6,17 +6,17 @@ HROS.copyright = (function(){
 		/*
 		**	初始化
 		*/
-		init : function(){
+		init: function(){
 			$('#copyright .close').on('click', function(){
 				HROS.copyright.hide();
 			});
 		},
-		show : function(){
+		show: function(){
 			var mask = HROS.maskBox.copyright();
 			mask.show();
 			$('#copyright').show();
 		},
-		hide : function(){
+		hide: function(){
 			var mask = HROS.maskBox.copyright();
 			mask.hide();
 			$('#copyright').hide();

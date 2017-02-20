@@ -1,6 +1,6 @@
 HROS.lock = (function(){
 	return {
-		init : function(){
+		init: function(){
 			Mousetrap.bind(['space'], function(){
 				$('#lock').click();
 				return false;
@@ -8,10 +8,10 @@ HROS.lock = (function(){
 			$('body').on('click', '#lock', function(){
 				if($('#lock-info').is(':visible')){
 					$('#lock .title').animate({
-						top : '10%'
+						top: '10%'
 					}, 500);
 					$('#lock .tip').animate({
-						top : '80%'
+						top: '80%'
 					}, 500);
 					$('#lock-info').fadeOut();
 					Mousetrap.bind(['space'], function(){
@@ -21,10 +21,10 @@ HROS.lock = (function(){
 					Mousetrap.unbind('esc');
 				}else{
 					$('#lock .title').animate({
-						top : '-200px'
+						top: '-200px'
 					}, 500);
 					$('#lock .tip').animate({
-						top : '100%'
+						top: '100%'
 					}, 500);
 					$('#lock-info').fadeIn();
 					$('#lockpassword').val('').focus();
@@ -42,8 +42,8 @@ HROS.lock = (function(){
 			$('body').on('click', '#lockbtn', function(){
 				if($('#lockpassword').val() != ''){
 					$.ajax({
-						url : 'login.ajax.php',
-						data : 'ac=unlock&password=' + $('#lockpassword').val(),
+						url: 'login.ajax.php',
+						data: 'ac=unlock&password=' + $('#lockpassword').val(),
 					}).done(function(responseText){
 						if(responseText == 'ERROR_LOCKPASSWORD'){
 							$('#lockpassword').val('').focus();
@@ -62,38 +62,38 @@ HROS.lock = (function(){
 				}
 			});
 		},
-		show : function(){
+		show: function(){
 			if($('#lock').length == 0){
 				if(!HROS.base.checkLogin()){
 					HROS.base.loginDialog('锁定功能需要登录后才能使用，为了更好的操作，是否登录？');
 				}else{
 					var lock = function(){
 						$.ajax({
-							url : 'login.ajax.php',
-							data : 'ac=logout'
+							url: 'login.ajax.php',
+							data: 'ac=logout'
 						});
 						$('#desktop').hide();
 						var userinfo = Cookies.get(cookie_prefix + 'userinfo');
 						if(typeof userinfo !== 'undefined'){
 							userinfo = JSON.parse(userinfo);
-							$('body').append(lockTemp({
-								'avatar' : userinfo.avatar,
-								'username' : userinfo.username
+							$('body').append(HROS.template.lock({
+								'avatar': userinfo.avatar,
+								'username': userinfo.username
 							}));
 						}
 						//时间，日期，星期信息的显示
 						var getTimeDateWeek = function(){
 							var time = new Date();
-							$('#lock .time').text((time.getHours() < 10 ? '0' + time.getHours() : time.getHours()) + ':' + (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()));
+							$('#lock .time').text((time.getHours() < 10 ? '0' + time.getHours(): time.getHours()) + ':' + (time.getMinutes() < 10 ? '0' + time.getMinutes(): time.getMinutes()));
 							var date = time.getFullYear() + '/' + (time.getMonth() + 1) + '/' + time.getDate() + '，星期';
 							switch(time.getDay()){
-								case '1' : date += '一'; break;
-								case '1' : date += '二'; break;
-								case '1' : date += '三'; break;
-								case '1' : date += '四'; break;
-								case '1' : date += '五'; break;
-								case '1' : date += '六'; break;
-								default : date += '日';
+								case '1': date += '一'; break;
+								case '1': date += '二'; break;
+								case '1': date += '三'; break;
+								case '1': date += '四'; break;
+								case '1': date += '五'; break;
+								case '1': date += '六'; break;
+								default: date += '日';
 							}
 							$('#lock .week').text(date);
 						};
@@ -122,22 +122,22 @@ HROS.lock = (function(){
 					if(Cookies.get(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID) == null){
 						Cookies.set(cookie_prefix + 'isfirstlock' + HROS.CONFIG.memberID, 1);
 						swal({
-							type : 'warning',
-							title : '温馨提示',
-							text : '解锁密码默认为登录密码，是否要先进行修改？',
-							showCancelButton : true,
-							confirmButtonText : '继续锁定',
-							cancelButtonText : '修改解锁密码'
+							type: 'warning',
+							title: '温馨提示',
+							text: '解锁密码默认为登录密码，是否要先进行修改？',
+							showCancelButton: true,
+							confirmButtonText: '继续锁定',
+							cancelButtonText: '修改解锁密码'
 						}, function(isConfirm){
 							if(isConfirm){
 								lock();
 							}else{
 								HROS.window.createTemp({
-									appid : 'zhsz',
-									title : '账号设置',
-									url : 'sysapp/account/security.php',
-									width : 550,
-									height : 580
+									appid: 'zhsz',
+									title: '账号设置',
+									url: 'sysapp/account/security.php',
+									width: 550,
+									height: 580
 								});
 							}
 						});
@@ -147,7 +147,7 @@ HROS.lock = (function(){
 				}
 			}
 		},
-		hide : function(){
+		hide: function(){
 			clearInterval(lockFunc);
 			$('#lock').remove();
 			$('#desktop').show();

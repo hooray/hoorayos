@@ -6,7 +6,7 @@ HROS.searchBar = (function(){
 		/*
 		**  初始化
 		*/
-		init : function(){
+		init: function(){
 			$('#pageletSearchInput').on('click', function(){
 				return false;
 			});
@@ -33,7 +33,7 @@ HROS.searchBar = (function(){
 				}
 			});
 		},
-		get : function(){
+		get: function(){
 			var oldSearchVal = '';
 			searchFunc = setInterval(function(){
 				var searchVal = $('#pageletSearchInput').val();
@@ -110,12 +110,12 @@ HROS.searchBar = (function(){
 			});
 			Mousetrap.bind(['backspace'], function(){});
 		},
-		set : function(){
+		set: function(){
 			$('#search-bar').show();
 			$('#search-suggest .resultList a').removeClass('selected');
 			$('#pageletSearchInput').focus();
 		},
-		getSuggest : function(val){
+		getSuggest: function(val){
 			var apps = [];
 			$(HROS.VAR.dock).each(function(){
 				if($.inArray(this.type, ['window', 'widget']) >= 0){
@@ -140,11 +140,11 @@ HROS.searchBar = (function(){
 			var suggest = '';
 			$(apps).each(function(){
 				if(this.name.indexOf(val) >= 0){
-					suggest += suggestTemp({
-						'name' : this.name,
-						'appid' : this.appid,
-						'realappid' : this.realappid,
-						'type' : this.type
+					suggest += HROS.template.suggest({
+						'name': this.name,
+						'appid': this.appid,
+						'realappid': this.realappid,
+						'type': this.type
 					});
 				}
 			});
@@ -156,21 +156,21 @@ HROS.searchBar = (function(){
 			}
 			HROS.searchBar.set();
 		},
-		openAppMarket : function(searchkey){
+		openAppMarket: function(searchkey){
 			if(searchkey != ''){
 				HROS.window.createTemp({
-					appid : 'hoorayos-yysc',
-					title : '应用市场',
-					url : 'sysapp/appmarket/index.php?searchkey=' + searchkey,
-					width : 800,
-					height : 484,
-					isflash : false,
-					refresh : true
+					appid: 'hoorayos-yysc',
+					title: '应用市场',
+					url: 'sysapp/appmarket/index.php?searchkey=' + searchkey,
+					width: 800,
+					height: 484,
+					isflash: false,
+					refresh: true
 				});
 			}
 			HROS.searchBar.hide();
 		},
-		hide : function(){
+		hide: function(){
 			if(typeof(searchFunc) != 'undefined'){
 				clearInterval(searchFunc);
 			}

@@ -1,6 +1,6 @@
 HROS.folderView = (function(){
 	return {
-		init : function(){
+		init: function(){
 			$('body').on('click', '.quick_view_container', function(){
 				HROS.popupMenu.hide();
 			}).on('click', '.quick_view_container_open', function(){
@@ -14,7 +14,7 @@ HROS.folderView = (function(){
 			});
 			HROS.folderView.moveScrollbar();
 		},
-		get : function(obj){
+		get: function(obj){
 			setTimeout(function(){
 				//判断文件夹窗口是否已打开
 				var iswindowopen = false;
@@ -39,13 +39,13 @@ HROS.folderView = (function(){
 				var folderViewHtml = '', height = 0;
 				if(sc != ''){
 					$(sc).each(function(){
-						folderViewHtml += appbtnTemp({
-							'title' : this.name,
-							'type' : this.type,
-							'id' : 'd_' + this.appid,
-							'appid' : this.appid,
-							'realappid' : this.realappid,
-							'imgsrc' : this.icon
+						folderViewHtml += HROS.template.appbtn({
+							'title': this.name,
+							'type': this.type,
+							'id': 'd_' + this.appid,
+							'appid': this.appid,
+							'realappid': this.realappid,
+							'imgsrc': this.icon
 						});
 					});
 					if(sc.length % 4 == 0){
@@ -83,58 +83,58 @@ HROS.folderView = (function(){
 					//预览居左
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
-						$(folderViewId).stop(true, false).animate({'left' : left, 'top' : top}, 500);
-						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 24) / 2)}, 200);
-						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2)}, 200).hide();
-						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2), 'height' : Math.ceil((height + 24) / 2) + 20}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : obj.offset().top - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 24 - (parseInt(obj.attr('top')) - top) - 20 + 20}, 200);
-						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height' : height}, 200);
+						$(folderViewId).stop(true, false).animate({'left': left, 'top': top}, 500);
+						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top': 0, 'height': Math.ceil((height + 24) / 2)}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top': Math.ceil((height + 24) / 2)}, 200).hide();
+						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top': Math.ceil((height + 24) / 2), 'height': Math.ceil((height + 24) / 2) + 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top': 0, 'height': obj.offset().top - top}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top': parseInt(obj.attr('top')) - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top': parseInt(obj.attr('top')) - top + 20, 'height': height + 24 - (parseInt(obj.attr('top')) - top) - 20 + 20}, 200);
+						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height': height}, 200);
 					}else{
-						$('body').append(folderViewTemp({
-							'id' : 'qv_' + obj.attr('appid'),
-							'appid' : obj.attr('appid'),
-							'realappid' : obj.attr('realappid'),
-							'apps' : folderViewHtml,
-							'top' : top,
-							'left' : left,
-							'height' : height,
-							'mlt' : Math.ceil((height + 24) / 2),
-							'mlm' : false,
-							'mlb' : Math.ceil((height + 24) / 2),
-							'mrt' : obj.offset().top - top,
-							'mrm' : true,
-							'mrb' : height + 24 - (obj.offset().top - top) - 20
+						$('body').append(HROS.template.folderView({
+							'id': 'qv_' + obj.attr('appid'),
+							'appid': obj.attr('appid'),
+							'realappid': obj.attr('realappid'),
+							'apps': folderViewHtml,
+							'top': top,
+							'left': left,
+							'height': height,
+							'mlt': Math.ceil((height + 24) / 2),
+							'mlm': false,
+							'mlb': Math.ceil((height + 24) / 2),
+							'mrt': obj.offset().top - top,
+							'mrm': true,
+							'mrb': height + 24 - (obj.offset().top - top) - 20
 						}));
 					}
 				}else{
 					//预览居右
 					if(iswindowopen){
 						$(folderViewId + ' .quick_view_container_list_in').html('').append(folderViewHtml);
-						$(folderViewId).stop(true, false).animate({'left' : left, 'top' : top}, 500);
-						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top' : 0, 'height' : parseInt(obj.attr('top')) - top}, 200);
-						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top}, 200).show();
-						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top' : parseInt(obj.attr('top')) - top + 20, 'height' : height + 24 - (parseInt(obj.attr('top')) - top) - 20}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top' : 0, 'height' : Math.ceil((height + 24) / 2)}, 200);
-						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2)}, 200).hide();
-						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top' : Math.ceil((height + 24) / 2), 'height' : Math.ceil((height + 24) / 2)}, 200);
-						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height' : height}, 200);
+						$(folderViewId).stop(true, false).animate({'left': left, 'top': top}, 500);
+						$(folderViewId + ' .perfect_nine_m_l_t').stop(true, false).animate({'top': 0, 'height': parseInt(obj.attr('top')) - top}, 200);
+						$(folderViewId + ' .perfect_nine_m_l_m').stop(true, false).animate({'top': parseInt(obj.attr('top')) - top}, 200).show();
+						$(folderViewId + ' .perfect_nine_m_l_b').stop(true, false).animate({'top': parseInt(obj.attr('top')) - top + 20, 'height': height + 24 - (parseInt(obj.attr('top')) - top) - 20}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_t').stop(true, false).animate({'top': 0, 'height': Math.ceil((height + 24) / 2)}, 200);
+						$(folderViewId + ' .perfect_nine_m_r_m').stop(true, false).animate({'top': Math.ceil((height + 24) / 2)}, 200).hide();
+						$(folderViewId + ' .perfect_nine_m_r_b').stop(true, false).animate({'top': Math.ceil((height + 24) / 2), 'height': Math.ceil((height + 24) / 2)}, 200);
+						$(folderViewId + ' .quick_view_container_list_in').stop(true, false).animate({'height': height}, 200);
 					}else{
-						$('body').append(folderViewTemp({
-							'id' : 'qv_' + obj.attr('appid'),
-							'appid' : obj.attr('appid'),
-							'realappid' : obj.attr('realappid'),
-							'apps' : folderViewHtml,
-							'top' : top,
-							'left' : left,
-							'height' : height,
-							'mlt' : obj.offset().top - top,
-							'mlm' : true,
-							'mlb' : height + 24 - (obj.offset().top - top) - 20,
-							'mrt' : Math.ceil((height + 24) / 2),
-							'mrm' : false,
-							'mrb' : Math.ceil((height + 24) / 2)
+						$('body').append(HROS.template.folderView({
+							'id': 'qv_' + obj.attr('appid'),
+							'appid': obj.attr('appid'),
+							'realappid': obj.attr('realappid'),
+							'apps': folderViewHtml,
+							'top': top,
+							'left': left,
+							'height': height,
+							'mlt': obj.offset().top - top,
+							'mlm': true,
+							'mlb': height + 24 - (obj.offset().top - top) - 20,
+							'mrt': Math.ceil((height + 24) / 2),
+							'mrm': false,
+							'mrb': Math.ceil((height + 24) / 2)
 						}));
 					}
 				}
@@ -148,12 +148,12 @@ HROS.folderView = (function(){
 				}
 			}, 0);
 		},
-		setPos : function(){
+		setPos: function(){
 			$('body .quick_view_container').each(function(){
 				HROS.folderView.get($('#d_' + $(this).attr('appid')));
 			});
 		},
-		moveScrollbar : function(){
+		moveScrollbar: function(){
 			/*
 			**  手动拖动
 			*/
@@ -165,7 +165,7 @@ HROS.folderView = (function(){
 				moveh = container.height() - scrollbar.height();
 				y = e.clientY - scrollbar.offset().top;
 				$(document).on('mousemove', function(e){
-					cy = e.clientY - y - offsetTop < 0 ? 0 : e.clientY - y - offsetTop > moveh ? moveh : e.clientY - y - offsetTop;
+					cy = e.clientY - y - offsetTop < 0 ? 0: e.clientY - y - offsetTop > moveh ? moveh: e.clientY - y - offsetTop;
 					scrollbar.css('top', cy);
 					container.scrollTop(cy / container.height() * containerrealh);
 				}).on('mouseup', function(){
@@ -182,19 +182,19 @@ HROS.folderView = (function(){
 				**  delta == 1    往上
 				*/
 				if(delta < 0){
-					scrollupdown = desk.scrollTop() + 40 > deskrealh - desk.height() ? deskrealh - desk.height() : desk.scrollTop() + 40;
+					scrollupdown = desk.scrollTop() + 40 > deskrealh - desk.height() ? deskrealh - desk.height(): desk.scrollTop() + 40;
 				}else{
-					scrollupdown = desk.scrollTop() - 40 < 0 ? 0 : desk.scrollTop() - 40;
+					scrollupdown = desk.scrollTop() - 40 < 0 ? 0: desk.scrollTop() - 40;
 				}
 				desk.stop(false, true).animate({
-					scrollTop : scrollupdown
+					scrollTop: scrollupdown
 				}, 300);
 				$(this).next('.scrollBar').stop(false, true).animate({
-					top : scrollupdown / deskrealh * desk.height()
+					top: scrollupdown / deskrealh * desk.height()
 				}, 300);
 			});
 		},
-		hide : function(){
+		hide: function(){
 			$('.quick_view_container').remove();
 		}
 	}

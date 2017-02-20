@@ -6,7 +6,7 @@ HROS.startMenu = (function(){
 		/*
 		**	初始化
 		*/
-		init : function(){
+		init: function(){
 			HROS.startMenu.getAvatar();
 			$('#startmenu-container').on('mousedown', function(e){
 				e.preventDefault();
@@ -22,12 +22,12 @@ HROS.startMenu = (function(){
 			});
 			$('#startmenu-container .startmenu-feedback').on('click', function(){
 				HROS.window.createTemp({
-					appid : 'hoorayos-feedback',
-					title : '反馈',
-					url : 'http://hoorayos.com/feedback.html',
-					width : 700,
-					height : 500,
-					isflash : false
+					appid: 'hoorayos-feedback',
+					title: '反馈',
+					url: 'http://hoorayos.com/feedback.html',
+					width: 700,
+					height: 500,
+					isflash: false
 				});
 			});
 			$('#startmenu-container .startmenu a').on('click', function(){
@@ -41,9 +41,9 @@ HROS.startMenu = (function(){
 		/*
 		**  获取头像
 		*/
-		getAvatar : function(){
+		getAvatar: function(){
 			$.ajax({
-				data : 'ac=getAvatar'
+				data: 'ac=getAvatar'
 			}).done(function(avatar){
 				$('#startmenu-container .startmenu-avatar img').attr('src', avatar['avatar'] + '?' + Date.parse(new Date()));
 			});
@@ -51,51 +51,51 @@ HROS.startMenu = (function(){
 		/*
 		**  账号设置窗口
 		*/
-		openAccount : function(){
+		openAccount: function(){
 			if(HROS.CONFIG.memberID != 0){
 				HROS.window.createTemp({
-					appid : 'zhsz',
-					title : '账号设置',
-					url : 'sysapp/account/index.php',
-					width : 780,
-					height : 580
+					appid: 'zhsz',
+					title: '账号设置',
+					url: 'sysapp/account/index.php',
+					width: 780,
+					height: 580
 				});
 			}else{
 				HROS.base.login();
 			}
 		},
-		show : function(){
+		show: function(){
 			HROS.popupMenu.hide();
 			HROS.folderView.hide();
 			HROS.searchBar.hide();
 			$('#startmenu-container').css({
-				top : 'auto',
-				left : 'auto',
-				right : 'auto',
-				bottom : 'auto'
+				top: 'auto',
+				left: 'auto',
+				right: 'auto',
+				bottom: 'auto'
 			}).show();
 			switch(HROS.CONFIG.dockPos){
 				case 'top':
 					$('#startmenu-container').css({
-						top : $('#dock-container').height() - 1,
-						right : $('#dock-container').offset().left
+						top: $('#dock-container').height() - 1,
+						right: $('#dock-container').offset().left
 					});
 					break;
 				case 'left':
 					$('#startmenu-container').css({
-						bottom : $('#dock-container').offset().top,
-						left : $('#dock-container').width() - 1
+						bottom: $('#dock-container').offset().top,
+						left: $('#dock-container').width() - 1
 					});
 					break;
 				case 'right':
 					$('#startmenu-container').css({
-						bottom : $('#dock-container').offset().top,
-						right : $('#dock-container').width() - 1
+						bottom: $('#dock-container').offset().top,
+						right: $('#dock-container').width() - 1
 					});
 					break;
 			}
 		},
-		hide : function(){
+		hide: function(){
 			$('#startmenu-container').hide();
 		}
 	}

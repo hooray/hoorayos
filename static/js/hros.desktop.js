@@ -3,7 +3,7 @@
 */
 HROS.deskTop = (function(){
 	return {
-		init : function(){
+		init: function(){
 			//绑定浏览器resize事件
 			$(window).on('resize', function(){
 				HROS.deskTop.resize();
@@ -19,11 +19,11 @@ HROS.deskTop = (function(){
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
 				var popupmenu = HROS.popupMenu.desk();
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()) : e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()) : e.clientY;
+				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
+				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
 				popupmenu.css({
-					left : l,
-					top : t
+					left: l,
+					top: t
 				}).show();
 				return false;
 			});
@@ -31,7 +31,7 @@ HROS.deskTop = (function(){
 		/*
 		**  处理浏览器改变大小后的事件
 		*/
-		resize : function(){
+		resize: function(){
 			if($('#desktop').is(':visible')){
 				HROS.dock.setPos();
 				//更新应用定位
@@ -45,10 +45,10 @@ HROS.deskTop = (function(){
 			}
 			HROS.wallpaper.set(false);
 		},
-		updateDefaultDesk : function(i){
+		updateDefaultDesk: function(i){
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data : 'ac=setDesk&desk=' + i
+					data: 'ac=setDesk&desk=' + i
 				});
 			}
 		}

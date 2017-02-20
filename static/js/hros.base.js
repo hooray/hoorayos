@@ -6,12 +6,12 @@ HROS.base = (function(){
 		/*
 		**	系统初始化
 		*/
-		init : function(){
+		init: function(){
 			//ajax默认设置
 			$.ajaxSetup({
-				url : ajaxUrl,
-				type : 'POST',
-				dataType : 'json'
+				url: ajaxUrl,
+				type: 'POST',
+				dataType: 'json'
 			});
 			//绑定ajax全局验证
 			$(document).ajaxSuccess(function(event, request, settings){
@@ -72,40 +72,40 @@ HROS.base = (function(){
 			//页面加载后运行
 			HROS.base.run();
 		},
-		loginDialog : function(text){
-			text = typeof text === 'undefined' ? '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？' : text;
+		loginDialog: function(text){
+			text = typeof text === 'undefined' ? '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？': text;
 			HROS.CONFIG.memberID = 0;
 			swal({
-				type : 'warning',
-				title : '温馨提示',
-				text : text,
-				html : true,
-				showCancelButton : true,
-				confirmButtonText : '走，去登录！',
-				cancelButtonText : '我再逛逛…'
+				type: 'warning',
+				title: '温馨提示',
+				text: text,
+				html: true,
+				showCancelButton: true,
+				confirmButtonText: '走，去登录！',
+				cancelButtonText: '我再逛逛…'
 			}, function(){
 				HROS.base.login();
 			});
 		},
-		login : function(){
+		login: function(){
 			$('#lrbox').animate({
-				top : 0
+				top: 0
 			}, 500, function(){
 				changeTabindex();
 			});
 		},
-		logout : function(){
+		logout: function(){
 			$.ajax({
-				url : 'login.ajax.php',
-				data : 'ac=logout'
+				url: 'login.ajax.php',
+				data: 'ac=logout'
 			}).done(function(){
 				location.reload();
 			});
 		},
-		checkLogin : function(){
-			return HROS.CONFIG.memberID != 0 ? true : false;
+		checkLogin: function(){
+			return HROS.CONFIG.memberID != 0 ? true: false;
 		},
-		setSkin : function(skin, callback){
+		setSkin: function(skin, callback){
 			//将原样式修改id，并载入新样式
 			$('#window-skin').attr('id', 'window-skin-ready2remove');
 			var stylesheet = loadCSS('static/img/skins/' + skin + '.css?' + version);
@@ -116,7 +116,7 @@ HROS.base = (function(){
 				callback && callback();
 			});
 		},
-		run : function(){
+		run: function(){
 			var url = location.search;
 			var request = new Object();
 			if(url.indexOf('?') != -1){
@@ -129,7 +129,7 @@ HROS.base = (function(){
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data : 'ac=getAppidByRealappid&id=' + request['run']
+						data: 'ac=getAppidByRealappid&id=' + request['run']
 					}).done(function(appid){
 						if(request['type'] == 'app'){
 							HROS.window.create(appid);
@@ -142,13 +142,13 @@ HROS.base = (function(){
 					});
 				}else{
 					HROS.window.createTemp({
-						appid : 'hoorayos-yysc',
-						title : '应用市场',
-						url : 'sysapp/appmarket/index.php?id=' + request['run'],
-						width : 800,
-						height : 484,
-						isflash : false,
-						refresh : true
+						appid: 'hoorayos-yysc',
+						title: '应用市场',
+						url: 'sysapp/appmarket/index.php?id=' + request['run'],
+						width: 800,
+						height: 484,
+						isflash: false,
+						refresh: true
 					});
 				}
 			}
