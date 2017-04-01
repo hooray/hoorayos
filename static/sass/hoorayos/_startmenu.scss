@@ -1,0 +1,92 @@
+/* 开始菜单 */
+#startmenu-container{
+    display: none;
+    position: absolute;
+    z-index: 21;
+    color: #fff;
+    width: 182px;
+    .startmenu-selfinfo{
+        @include desktop-sprite(startmenu-head-bg);
+        width: desktop-sprite-width(startmenu-head-bg) - 5;
+        height: desktop-sprite-height(startmenu-head-bg) - 10;
+        float: left;
+        padding: 5px 0 5px 5px;
+        .startmenu-avatar{
+            @include border-radius(12px);
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            float: left;
+            margin: 3px 0 0 8px;
+            img{
+                @include border-radius(10px);
+                float: left;
+                width: 20px;
+                height: 20px;
+                margin: 2px 0 0 2px;
+                background-color: #fff;
+                cursor: pointer;
+            }
+        }
+        .startmenu-nick{
+            @include ellipsis();
+            float: left;
+            margin-left: 8px;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            display: inline;
+            color: #4ce4ff;
+            a{
+                color: #4ce4ff;
+            }
+        }
+    }
+    .startmenu{
+        float: left;
+        width: 182px;
+        li{
+            @include desktop-sprite(startmenu-item-bg);
+            width: desktop-sprite-width(startmenu-item-bg);
+            height: desktop-sprite-height(startmenu-item-bg);
+            list-style: none;
+            a{
+                display: block;
+                color: #fff;
+                padding: 4px 10px 6px 15px;
+                line-height: 22px;
+            }
+        }
+    }
+    .startmenu-exit{
+        @include desktop-sprite(startmenu-foot-bg);
+        width: desktop-sprite-width(startmenu-foot-bg);
+        height: desktop-sprite-height(startmenu-foot-bg);
+        float: left;
+        margin-top: -1px;
+        a{
+            @include desktop-sprite(startmenu-exit);
+            width: desktop-sprite-width(startmenu-exit);
+            height: desktop-sprite-height(startmenu-exit);
+            display: block;
+            margin: 7px auto 0;
+        }
+    }
+    .startmenu-feedback{
+        @include desktop-sprite(startmenu-feedback);
+        width: desktop-sprite-width(startmenu-feedback);
+        height: desktop-sprite-height(startmenu-feedback);
+        display: block;
+        float: right;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+    .startmenu-lock{
+        @include desktop-sprite(startmenu-lock);
+        width: desktop-sprite-width(startmenu-lock);
+        height: desktop-sprite-height(startmenu-lock);
+        display: block;
+        float: right;
+        margin-top: 5px;
+    }
+}

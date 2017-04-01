@@ -45,7 +45,8 @@ HROS.folderView = (function(){
 							'id': 'd_' + this.appid,
 							'appid': this.appid,
 							'realappid': this.realappid,
-							'imgsrc': this.icon
+							'imgsrc': this.icon,
+							'appsize': 32
 						});
 					});
 					if(sc.length % 4 == 0){

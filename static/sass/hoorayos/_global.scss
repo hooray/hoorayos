@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    font: 12px 'Segoe UI', 'Microsoft YaHei', 微软雅黑, 'STHei', 华文黑体, sans-serif;
+}
+form, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, p{
+    list-style: none outside none;
+}
+a{
+    text-decoration: none;
+    color: #ccc;
+    outline: none;
+    &:hover{
+        text-decoration: none;
+    }
+    img{
+        border: none;
+    }
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: left;
+}
+.disn{
+    display: none;
+}
+
+/* webkit滚动条样式 */
+::-webkit-scrollbar-track-piece{
+    background-color: #f5f5f5;
+    border-left: 1px solid #d2d2d2;
+}
+::-webkit-scrollbar{
+    width: 13px;
+    height: 13px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #c2c2c2;
+    background-clip: padding-box;
+    border: 1px solid #979797;
+    min-height: 28px;
+    &:hover{
+        border: 1px solid #636363;
+        background-color: #929292;
+    }
+}
+
+*{
+    @include user-select(none);
+}
+html{
+    height: 100%;
+    overflow: hidden;
+}
+input{
+    @include user-select(text);
+}
+
+#desktop{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+#accessory_zoom{
+    position: absolute;
+}
+.loading{
+    background: url(../img/loading.gif) no-repeat center center #fff;
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+@keyframes radi{
+	0%{
+        -webkit-mask-size: 0%;
+        -webkit-animation-timing-function: ease-in-out;
+    }
+	100%{
+        -webkit-mask-size: 300%;
+    }
+}
+@include keyframes(radi);
+.radi{
+    -webkit-mask-image: url(../img/circle_mask.png);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    -webkit-mask-size: 300%;
+    -webkit-animation: radi 1.5s;
+}
+/* 新建私人应用 */
+#addpapp{
+    width: 320px;
+    td.tar{
+        text-align: right;
+    }
+    input[type='text']{
+        height: 22px;
+    }
+}

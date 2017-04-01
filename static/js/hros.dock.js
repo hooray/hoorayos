@@ -42,7 +42,7 @@ HROS.dock = (function(){
 						appid: 'hoorayos-zmsz',
 						title: '桌面设置',
 						url: 'sysapp/desksetting/index.php',
-						width: 750,
+						width: 800,
 						height: 450,
 						isflash: false
 					});
@@ -158,7 +158,11 @@ HROS.dock = (function(){
 				HROS.app.set();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=setDockPos&dock=' + pos + '&desk=' + HROS.CONFIG.desk
+						data: {
+							ac: 'setDockPos',
+							dock: pos,
+							desk: HROS.CONFIG.desk
+						}
 					});
 				}
 			}

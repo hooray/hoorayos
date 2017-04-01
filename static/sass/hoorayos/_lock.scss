@@ -1,0 +1,111 @@
+/* 锁定 */
+#lock{
+    z-index: 9000000;
+    cursor: default;
+    background: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: none rgba(0, 0, 0, 0.5);
+    .title{
+        position: absolute;
+        top: 10%;
+        width: 100%;
+        height: 200px;
+        color: #fff;
+        text-align: center;
+        .time{
+            width: 100%;
+            height: 150px;
+            line-height: 150px;
+            font-size: 120px;
+            font-family: Tahoma;
+        }
+        .week{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            font-size: 24px;
+        }
+    }
+    @keyframes lock-breathing{
+        0%{
+            @include opacity(1);
+            color: #fff;
+        }
+    	50%{
+            @include opacity(0);
+            color: #aaa;
+        }
+    	100%{
+            @include opacity(1);
+            color: #fff;
+        }
+    }
+    @include keyframes(lock-breathing);
+    .tip{
+        @include animation(lock-breathing 2s infinite 0 infinite);
+        position: absolute;
+        top: 80%;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        color: #fff;
+        text-align: center;
+        font-size: 24px;
+    }
+}
+#lock-info{
+    @include border-radius(10px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+    width: 198px;
+    height: 198px;
+    border: 1px solid #999;
+    background: #ccc;
+    display: none;
+    .img{
+        width: 100%;
+        height: 100px;
+        margin-top: -50px;
+        text-align: center;
+        img{
+            @include border-radius(50px);
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border: 1px solid #999;
+        }
+    }
+    .text{
+        width: 100%;
+        text-align: center;
+        margin-top: 25px;
+    }
+    input[type='password']{
+        width: 100px;
+        height: 20px;
+        line-height: 20px;
+        padding: 5px 10px;
+        font-size: 14px;
+        outline: none;
+    }
+    input[type='button']{
+        width: 70px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .text-tip{
+        width: 100%;
+        height: 15px;
+        line-height: 15px;
+        margin-top: 5px;
+        color: #F00;
+        text-align: center;
+    }
+}

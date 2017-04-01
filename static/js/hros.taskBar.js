@@ -34,24 +34,24 @@ HROS.taskBar = (function(){
 				if($(this).hasClass('disable') == false){
 					var taskW = $('#task-content-inner .task-item').width();
 					var marginL = parseInt($('#task-content-inner').css('margin-left')) - taskW;
-					var overW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-pre').outerWidth(true) - $('#task-content-inner .task-item').length * taskW;
+					var overW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-prev').outerWidth(true) - $('#task-content-inner .task-item').length * taskW;
 					if(marginL <= overW){
 						marginL = overW;
 						$('#task-next a').addClass('disable');
 					}
-					$('#task-pre a').removeClass('disable');
+					$('#task-prev a').removeClass('disable');
 					$('#task-content-inner').animate({
 						marginLeft: marginL
 					}, 200);
 				}
 			});
-			$('#task-pre-btn').on('click', function(){
+			$('#task-prev-btn').on('click', function(){
 				if($(this).hasClass('disable') == false){
 					var taskW = $('#task-content-inner .task-item').width();
 					var marginL = parseInt($('#task-content-inner').css('margin-left')) + taskW;
 					if(marginL >= 0){
 						marginL = 0;
-						$('#task-pre a').addClass('disable');
+						$('#task-prev a').addClass('disable');
 					}
 					$('#task-next a').removeClass('disable');
 					$('#task-content-inner').animate({
@@ -78,17 +78,17 @@ HROS.taskBar = (function(){
 				});
 			}
 			var realW = $('#task-content-inner .task-item').length * $('#task-content-inner .task-item').width();
-			var showW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-pre').outerWidth(true);
+			var showW = $('#task-bar').width() - $('#task-next').outerWidth(true) - $('#task-prev').outerWidth(true);
 			if(realW >= showW){
-				$('#task-next, #task-pre').show();
+				$('#task-next, #task-prev').show();
 				$('#task-content').css('width', showW);
 				$('#task-content-inner').stop(true, false).animate({
 					marginLeft: 0
 				}, 200);
 				$('#task-next a').removeClass('disable');
-				$('#task-pre a').addClass('disable');
+				$('#task-prev a').addClass('disable');
 			}else{
-				$('#task-next, #task-pre').hide();
+				$('#task-next, #task-prev').hide();
 				$('#task-content').css('width','100%');
 				$('#task-content-inner').css({
 					marginLeft: 0

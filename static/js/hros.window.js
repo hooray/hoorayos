@@ -112,7 +112,7 @@ HROS.window = (function(){
 					type: type,
 					appid: appid,
 					realappid: appid,
-					imgsrc: 'static/img/ui/default_icon.png',
+					imgsrc: 'static/img/default_icon.png',
 					title: obj.title,
 					url: obj.url,
 					width: obj.width,
@@ -282,8 +282,11 @@ HROS.window = (function(){
 					}
 				}
 				$.ajax({
-					data: 'ac=getMyAppById&id=' + appid + '&type=' + type,
-					dataType: 'json'
+					data: {
+						ac: 'getMyAppById',
+						id: appid,
+						type: type
+					}
 				}).done(function(app){
 					if(app != null){
 						if(app['error'] == 'ERROR_NOT_FOUND'){
@@ -727,7 +730,10 @@ HROS.window = (function(){
 			}).on('click', '.window-container .star', function(){
 				var obj = $(this).parents('.window-container');
 				$.ajax({
-					data: 'ac=getAppStar&id=' + obj.data('info').realappid
+					data: {
+						ac: 'getAppStar',
+						id: obj.data('info').realappid
+					}
 				}).done(function(starnum){
 					starnum = starnum['starnum'];
 					dialog({

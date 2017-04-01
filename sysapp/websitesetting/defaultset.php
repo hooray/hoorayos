@@ -70,12 +70,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">是否开启游客访问：</label>
 					<div class="col-sm-10">
-						<label class="radio-inline">
-							<input type="radio" name="val_isforcedlogin" value="0" <?php if($set['isforcedlogin'] == 0){echo 'checked';} ?>>是
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="val_isforcedlogin" value="1" <?php if($set['isforcedlogin'] == 1){echo 'checked';} ?>>否
-						</label>
+						<input type="checkbox" name="val_isforcedlogin" <?php if($set['isforcedlogin'] == 1){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-on-text="开启" data-off-text="关闭">
 					</div>
 				</div>
 				<div class="form-group">
@@ -287,7 +282,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">默认壁纸：</label>
 					<div class="col-sm-10">
-						<select name="val_wallpaper_id" class="form-control">
+						<select name="val_wallpaper_id" class="form-control" data-plugin="bootstrapSelect">
 						<?php
 							foreach($db->select('tb_wallpaper', '*') as $v){
 								if($v['tbid'] == $set['wallpaper_id']){

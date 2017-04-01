@@ -48,7 +48,10 @@ HROS.deskTop = (function(){
 		updateDefaultDesk: function(i){
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data: 'ac=setDesk&desk=' + i
+					data: {
+						ac: 'setDesk',
+						desk: i
+					}
 				});
 			}
 		}

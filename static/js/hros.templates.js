@@ -10,7 +10,7 @@ HROS.template = (function(){
 		//桌面"添加应用"应用
 		addbtn: template.compile(
 			'<div class="appbtn add">'+
-				'<img src="static/img/ui/addicon.png" style="width:<%=appsize%>px;height:<%=appsize%>px;">'+
+				'<img src="static/img/addicon.png" style="width:<%=appsize%>px;height:<%=appsize%>px;">'+
 				'<span style="width:<%=appsize+10%>px;">添加应用</span>'+
 			'</div>'
 		),

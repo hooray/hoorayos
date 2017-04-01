@@ -135,7 +135,14 @@ HROS.appmanage = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToDock(id, from, to, boa)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'dock-dock',
+													id: id,
+													from: from,
+													to: to,
+													boa: boa
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -159,7 +166,15 @@ HROS.appmanage = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToDesk(id, from, to, boa, desk)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'dock-desk',
+													id: id,
+													from: from,
+													to: to,
+													boa: boa,
+													desk: desk
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -233,7 +248,15 @@ HROS.appmanage = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDock(id, from, to, boa, desk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=desk-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'desk-dock',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa,
+														desk: desk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -275,7 +298,15 @@ HROS.appmanage = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDesk(id, from, to, boa, desk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=desk-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'desk-desk',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa,
+														desk: desk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -298,7 +329,16 @@ HROS.appmanage = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToOtherdesk(id, from, to, boa, todesk, fromdesk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=desk-otherdesk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&fromdesk=' + fromdesk + '&todesk=' + todesk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'desk-otherdesk',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa,
+														fromdesk: fromdesk,
+														todesk: todesk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});

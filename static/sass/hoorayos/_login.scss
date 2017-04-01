@@ -1,0 +1,243 @@
+/* 登录注册 */
+#lrbox{
+    background: url(../img/login_bg.jpg) repeat;
+    position: absolute;
+    z-index: 9997;
+    top: -200%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .lrbox{
+        position: absolute;
+        width: 100%;
+        top: 50%;
+    }
+    .title{
+        position: absolute;
+        top: -120px;
+        left: 50%;
+        margin-left: -900px;
+        width: 1800px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        font-size: 68px;
+        color: #fff;
+        text-shadow: 2px 2px 2px #000;
+    }
+    .back{
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        margin-left: -100px;
+        display: block;
+        width: 200px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+    }
+    .loginbox, .registerbox{
+        @include border-radius(5px);
+        background-color: #fafafa;
+        width: 300px;
+        padding: 40px 50px;
+        position: absolute;
+        top: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    }
+    .loginbox{
+        left: 50%;
+        .avatar{
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            padding-bottom: 30px;
+            img{
+                @include border-radius(50%);
+                width: 90px;
+                height: 90px;
+                border: 5px solid #eee;
+                box-shadow: 1px 1px 50px #999;
+            }
+        }
+        .mask_title{
+            left: 10px;
+            margin-top: -100px;
+            height: 200px;
+        }
+    }
+    .registerbox{
+        right: 50%;
+        .maintitle{
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff8000;
+        }
+        .mask_title{
+            right: 10px;
+            margin-top: -50px;
+            height: 100px;
+        }
+    }
+    .input_box{
+        width: 100%;
+        height: 50px;
+        padding: 10px 0 20px 0;
+        position: relative;
+        input{
+            font-family: 'Segoe UI', 'Microsoft YaHei', 微软雅黑, 'STHei', 华文黑体, sans-serif;
+            border: 1px solid #ccc;
+            outline: none;
+            width: 278px;
+            height: 48px;
+            line-height: 50px;
+            padding: 0 10px;
+            font-size: 24px;
+            color: #333;
+            box-shadow: 1px 1px 50px #ccc;
+        }
+        .tip{
+            display: none;
+            height: 36px;
+            position: absolute;
+            right: 0;
+            top: 59px;
+            z-index: 1;
+            .text{
+                position: relative;
+                height: 16px;
+                line-height: 16px;
+                padding: 5px;
+                border: 1px solid red;
+                background: #f00;
+                color: #fff;
+                .arrow{
+                    font-family: sans-serif;
+                    position: absolute;
+                    top: -8px;
+                    right: 10px;
+                    font-size: 12px;
+                    color: #f00;
+                }
+                p{
+                    font-size: 12px;
+                }
+            }
+        }
+        button{
+            font-family: 'Segoe UI', 'Microsoft YaHei', 微软雅黑, 'STHei', 华文黑体, sans-serif;
+            width: 100%;
+            height: 50px;
+            border: none;
+            color: #eee;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 20px;
+            text-indent: 20px;
+            cursor: pointer;
+            box-shadow: 1px 1px 50px #ccc;
+            transition: all 300ms;
+            &.login_btn{
+                background: #0f82f5;
+                &:hover{
+                    background: #0072e6;
+                    color: #fff;
+                    box-shadow: 1px 1px 50px #0f82f5;
+                }
+                &.disabled{
+                    background: #c6c6c6;
+                }
+            }
+            &.register_btn{
+                background: #ff8000;
+                &:hover{
+                    background: #e74002;
+                    color: #fff;
+                    box-shadow: 1px 1px 50px #ff8000;
+                }
+                &.disabled{
+                    background: #c6c6c6;
+                }
+            }
+        }
+    }
+    .label_box{
+        height: 30px;
+        padding: 10px 0 0 0;
+        label{
+            height: 30px;
+            line-height: 30px;
+            color: #666;
+            text-shadow: 1px 1px 10px #999;
+        }
+        input[type='checkbox']{
+            width: auto;
+            height: 30px;
+            margin-right: 5px;
+            float: left;
+        }
+    }
+    .mask{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: #c9dfec;
+        cursor: pointer;
+        .mask_title{
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            line-height: 25px;
+            font-size: 18px;
+            text-align: center;
+            color: #aaa;
+            text-shadow: 1px 1px 2px #fff;
+        }
+    }
+    .disanfangdenglu{
+        width: 100%;
+        height: 24px;
+        text-align: center;
+        margin-top: 10px;
+        a{
+            display: inline-block;
+            margin: 0 10px;
+            &.weibo{
+                width: 126px;
+                height: 24px;
+                background: url(../img/login_weibo.png) no-repeat;
+            }
+            &.qq{
+                width: 76px;
+                height: 24px;
+                background: url(../img/login_qq.png) no-repeat;
+            }
+        }
+    }
+    .disanfangdenglutip{
+        border: 1px solid #000;
+        width: 278px;
+        line-height: 20px;
+        padding: 5px 10px;
+        background: #ff0;
+        display: none;
+        span{
+            font-weight: bold;
+        }
+        .cancel{
+            float: right;
+            color: #666;
+            &:hover{
+                color: #333;
+            }
+        }
+    }
+}

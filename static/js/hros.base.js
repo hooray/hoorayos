@@ -97,7 +97,9 @@ HROS.base = (function(){
 		logout: function(){
 			$.ajax({
 				url: 'login.ajax.php',
-				data: 'ac=logout'
+				data: {
+					ac: 'logout'
+				}
 			}).done(function(){
 				location.reload();
 			});
@@ -129,7 +131,10 @@ HROS.base = (function(){
 			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=getAppidByRealappid&id=' + request['run']
+						data: {
+							ac: 'getAppidByRealappid',
+							id: request['run']
+						}
 					}).done(function(appid){
 						if(request['type'] == 'app'){
 							HROS.window.create(appid);

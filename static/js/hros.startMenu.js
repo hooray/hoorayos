@@ -43,7 +43,9 @@ HROS.startMenu = (function(){
 		*/
 		getAvatar: function(){
 			$.ajax({
-				data: 'ac=getAvatar'
+				data: {
+					ac: 'getAvatar'
+				}
 			}).done(function(avatar){
 				$('#startmenu-container .startmenu-avatar img').attr('src', avatar['avatar'] + '?' + Date.parse(new Date()));
 			});

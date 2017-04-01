@@ -43,7 +43,10 @@ HROS.lock = (function(){
 				if($('#lockpassword').val() != ''){
 					$.ajax({
 						url: 'login.ajax.php',
-						data: 'ac=unlock&password=' + $('#lockpassword').val(),
+						data: {
+							ac: 'unlock',
+							password: $('#lockpassword').val()
+						}
 					}).done(function(responseText){
 						if(responseText == 'ERROR_LOCKPASSWORD'){
 							$('#lockpassword').val('').focus();
@@ -70,7 +73,9 @@ HROS.lock = (function(){
 					var lock = function(){
 						$.ajax({
 							url: 'login.ajax.php',
-							data: 'ac=logout'
+							data: {
+								ac: 'logout'
+							}
 						});
 						$('#desktop').hide();
 						var userinfo = Cookies.get(cookie_prefix + 'userinfo');

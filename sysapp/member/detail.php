@@ -68,8 +68,7 @@
 					<div class="form-group form-group-permission <?php if($member['type'] == 0){echo 'hide';} ?>">
 						<label class="col-sm-2 control-label">用户权限：</label>
 						<div class="col-sm-10">
-							<select class="form-control" name="val_permission_id">
-								<option value="">请选择权限</option>
+							<select class="form-control" name="val_permission_id" data-plugin="bootstrapSelect" title="请选择权限">
 								<?php
 								foreach($db->select('tb_permission', array('tbid', 'name')) as $v){
 									if($member['permission_id'] == $v['tbid']){
@@ -151,9 +150,9 @@
 		});
 		$('input[name="val_type"]').change(function(){
 			if($(this).val() == 1){
-				$('.form-group-permission').show();
+				$('.form-group-permission').removeClass('hide');
 			}else{
-				$('.form-group-permission').hide();
+				$('.form-group-permission').addClass('hide');
 			}
 		});
 	});

@@ -1,0 +1,86 @@
+@import "compass";
+@import "_sprites";
+
+*{
+    margin: 0;
+    padding: 0;
+    font: 12px/1.8 'Segoe UI', 'Microsoft YaHei', 微软雅黑, 'STHei', 华文黑体, sans-serif;
+}
+a{
+    text-decoration: none;
+    color: #ccc;
+    outline: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+/* 浏览器升级提示 */
+#update_browser_box{
+    background: url(../img/browser_bg.png) repeat;
+    position: absolute;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    _height: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight));
+    .update_browser{
+        width: 718px;
+        height: 496px;
+        background: url(../img/browser_bg_wrapper.png) no-repeat;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -359px;
+        margin-top: -248px;
+        h1, h2, h3, h4{
+            text-align: center;
+            color: #999;
+            font-weight: normal;
+            font-size: 14px;
+        }
+        h1{
+            padding: 70px 0 0 0;
+            font-size: 30px;
+            line-height: 30px;
+            color: #333;
+            letter-spacing: 3px;
+        }
+        h2{
+            padding: 30px 55px 10px;
+        }
+        h3{
+            padding: 20px 0 30px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        ul{
+            width: 600px;
+            margin: 0 auto;
+            clear: both;
+            li{
+                display: block;
+                float: left;
+                width: 128px;
+                height: 128px;
+                text-align: center;
+                margin: 0 36px;
+                &.ie{
+                    @include browser-sprite(ie);
+                }
+                &.chrome{
+                    @include browser-sprite(chrome);
+                }
+                &.firefox{
+                    @include browser-sprite(firefox);
+                }
+                a{
+                    display: block;
+                    width: 100%;
+                    padding: 135px 0 0 0;
+                }
+            }
+        }
+    }
+}

@@ -47,17 +47,17 @@ CREATE TABLE `tb_app` (
 -- Records of tb_app
 -- ----------------------------
 INSERT INTO `tb_app` VALUES ('1', '应用管理', 'uploads/shortcut/20130505/13677343655235.png', 'sysapp/appmanage/index.php', 'window', '900', '650', '0', '0', '0', '0', '', '1', '0', '2012-02-26 22:51:53', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('2', '网站设置', 'static/img/ui/system-gear.png', 'sysapp/websitesetting/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-02-26 22:52:40', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('3', '会员管理', 'static/img/ui/system-users.png', 'sysapp/member/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:57:28', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('4', '权限管理', 'static/img/ui/system-puzzle.png', 'sysapp/permission/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:59:41', '0', '1', null, '1', '0');
-INSERT INTO `tb_app` VALUES ('5', '类目管理', 'static/img/ui/system-puzzle.png', 'sysapp/category/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 11:11:41', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('2', '网站设置', 'static/img/system-gear.png', 'sysapp/websitesetting/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-02-26 22:52:40', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('3', '会员管理', 'static/img/system-users.png', 'sysapp/member/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:57:28', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('4', '权限管理', 'static/img/system-puzzle.png', 'sysapp/permission/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 10:59:41', '0', '1', null, '1', '0');
+INSERT INTO `tb_app` VALUES ('5', '类目管理', 'static/img/system-puzzle.png', 'sysapp/category/index.php', 'window', '900', '550', '0', '0', '0', '0', '', '1', '0', '2012-07-19 11:11:41', '0', '1', null, '1', '0');
 INSERT INTO `tb_app` VALUES ('6', '豆瓣FM', 'uploads/shortcut/20130505/13677359545258.png', 'http://douban.fm/partner/webqq?fromhoorayos', 'window', '420', '240', '0', '0', '1', '0', '豆瓣FM', '0', '0', '2012-02-26 22:52:03', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('7', '百度地图', 'uploads/shortcut/20130505/136773428052.png', 'http://map.baidu.com/', 'window', '1050', '550', '1', '0', '1', '1', '百度地图', '0', '0', '2012-02-26 22:52:55', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('8', '美图秀秀', 'uploads/shortcut/20130505/13677342371591.png', 'http://xiuxiu.web.meitu.com/main.html', 'window', '900', '620', '1', '0', '1', '1', '美图秀秀', '0', '0', '2012-02-26 22:52:58', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('9', 'AcFun弹幕视频网', 'uploads/shortcut/20130505/13677343281639.png', 'http://m.acfun.tv', 'window', '800', '480', '1', '0', '1', '1', 'AcFun弹幕视频网', '0', '0', '2012-02-26 22:52:24', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('10', '搜狐视频', 'uploads/shortcut/20130505/13677343162518.png', 'http://tv.sohu.com/upload/sohuapp/index.html', 'window', '800', '646', '1', '0', '1', '1', '搜狐视频', '0', '0', '2012-02-26 22:52:26', '0', '1', null, '3', '0');
 INSERT INTO `tb_app` VALUES ('11', '哔哩哔哩弹幕视频网', 'uploads/shortcut/20130505/13677342975360.png', 'http://www.bilibili.com/mobile/index.html', 'window', '960', '650', '0', '0', '1', '1', '迅雷看看', '0', '0', '2012-02-26 22:52:29', '0', '1', null, '3', '0');
-INSERT INTO `tb_app` VALUES ('12', '时钟', 'static/img/ui/system-shapes.png', 'extapp/clock/index.php', 'widget', '130', '160', '0', '0', '1', '0', '时钟', '0', '0', '2012-08-05 23:01:51', '0', '1', null, '6', '0');
+INSERT INTO `tb_app` VALUES ('12', '时钟', 'static/img/system-shapes.png', 'extapp/clock/index.php', 'widget', '130', '160', '0', '0', '1', '0', '时钟', '0', '0', '2012-08-05 23:01:51', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('13', '天气预报', 'uploads/shortcut/20130505/13677369315643.png', 'extapp/weather/index.php', 'widget', '200', '330', '0', '0', '1', '0', '天气预报', '0', '0', '2012-08-05 23:02:28', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('14', '日历', 'uploads/shortcut/20130505/13677342114330.png', 'sysapp/calendar/index.php', 'window', '800', '720', '1', '0', '1', '0', '', '0', '0', '2012-10-16 03:06:17', '0', '1', null, '6', '0');
 INSERT INTO `tb_app` VALUES ('15', '愤怒的小鸟', 'uploads/shortcut/20130505/13677340436355.png', 'http://www.3366.com/swf.html?gid=63298&type=0&needframe=0&open=1&FlashParam=&IFrameName=&basedirexp=base20130108095114&adid=3366_1_12413&apiflag=1&NeedOutLink=0', 'window', '800', '512', '1', '0', '1', '1', '鼠标点击拉动弹弓射杀绿猪，滚轮滑动缩放场景。', '0', '0', '2013-05-05 14:07:28', '0', '1', null, '2', '0');
@@ -259,10 +259,10 @@ CREATE TABLE `tb_member_app` (
 -- Records of tb_member_app
 -- ----------------------------
 INSERT INTO `tb_member_app` VALUES ('1', '1', '应用管理', 'uploads/shortcut/20130505/13677343655235.png', null, 'window', '900', '650', '0', '0', '0', '0', null, null, '2016-07-05 01:36:31', '2016-07-05 01:36:31', '0', '1');
-INSERT INTO `tb_member_app` VALUES ('2', '2', '网站设置', 'static/img/ui/system-gear.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:32', '2016-07-05 01:36:32', '0', '1');
-INSERT INTO `tb_member_app` VALUES ('3', '3', '会员管理', 'static/img/ui/system-users.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:33', '2016-07-05 01:36:33', '0', '1');
-INSERT INTO `tb_member_app` VALUES ('4', '4', '权限管理', 'static/img/ui/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:34', '2016-07-05 01:36:34', '0', '1');
-INSERT INTO `tb_member_app` VALUES ('5', '5', '类目管理', 'static/img/ui/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:35', '2016-07-05 01:36:35', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('2', '2', '网站设置', 'static/img/system-gear.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:32', '2016-07-05 01:36:32', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('3', '3', '会员管理', 'static/img/system-users.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:33', '2016-07-05 01:36:33', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('4', '4', '权限管理', 'static/img/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:34', '2016-07-05 01:36:34', '0', '1');
+INSERT INTO `tb_member_app` VALUES ('5', '5', '类目管理', 'static/img/system-puzzle.png', null, 'window', '900', '550', '0', '0', '0', '0', null, null, '2016-07-05 01:36:35', '2016-07-05 01:36:35', '0', '1');
 
 -- ----------------------------
 -- Table structure for tb_permission

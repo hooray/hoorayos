@@ -1,0 +1,89 @@
+/* 遮罩层 */
+#maskbox, #maskbox-copyright, #maskbox-dockdrap{
+    z-index: 9000000;
+    display: none;
+    cursor: default;
+    background: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#maskbox-dockdrap, #maskbox-copyright{
+    background: none rgba(0, 0, 0, 0.7);
+}
+#maskbox-dockdrap{
+    .dock_drap_effect{
+        border: 3px solid #3c9dff;
+        position: absolute;
+        z-index: 4000000;
+        &.dock_drap_effect_top{
+            width: 620px;
+            height: 80px;
+            margin: 0 0 0 -313px;
+            top: -3px;
+            left: 50%;
+        }
+        &.dock_drap_effect_left{
+            height: 620px;
+            width: 80px;
+            margin: -313px 0 0;
+            left: -3px;
+            top: 50%;
+        }
+        &.dock_drap_effect_right{
+            height: 620px;
+            width: 80px;
+            margin: -313px 0 0;
+            right: -3px;
+            top: 50%;
+        }
+        &.hover{
+            border-color: #e1f0fd;
+        }
+    }
+    .dock_drap_mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 300000;
+        top: 0;
+        left: 0;
+        .dock_drop_region_top{
+            border-bottom: 1px dashed #eee;
+            width: 100%;
+            height: 20%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .dock_drop_region_left{
+            border-right: 1px dashed #eee;
+            width: 50%;
+            height: 80%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .dock_drop_region_right{
+            width: 50%;
+            height: 80%;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .dock_drop_region_top .text,
+        .dock_drop_region_left .text,
+        .dock_drop_region_right .text{
+            position: relative;
+            top: 40%;
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+        }
+        .dock_drop_region_top .text{
+            top: 10px;
+        }
+    }
+}

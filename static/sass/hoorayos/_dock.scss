@@ -1,0 +1,288 @@
+/* 应用码头 */
+#dock-bar{
+    position: absolute;
+    display: none;
+    &.top-bar{
+        width: 100%;
+        height: 80px;
+        left: 0;
+        top: 0;
+    }
+    &.left-bar{
+        width: 80px;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+    &.right-bar{
+        width: 80px;
+        height: 100%;
+        right: 0;
+        top: 0;
+    }
+    @at-root{
+        #dock-container{
+            position: absolute;
+            z-index: 0;
+            &.showtop{
+                z-index: 100000;
+            }
+            .dock-middle{
+                .dock-applist{
+                    position: relative;
+                    .appbtn{
+                        width: 58px;
+                        height: 58px;
+                        padding: 0;
+                        img{
+                            margin-top: 5px;
+                        }
+                        span{
+                            display: none;
+                        }
+                    }
+                }
+                .dock-tools-container{
+                    .dock-tools{
+                        a{
+                            float: left;
+                            display: block;
+                            width: 20px;
+                            height: 20px;
+                            cursor: pointer;
+                            &.dock-tool-setting{
+                                @include desktop-sprite(dock-tool-setting);
+                            }
+                            &.dock-tool-style{
+                                @include desktop-sprite(dock-tool-style);
+                            }
+                            &.dock-tool-appmanage{
+                                @include desktop-sprite(dock-tool-appmanage);
+                            }
+                            &.dock-tool-search{
+                                @include desktop-sprite(dock-tool-search);
+                            }
+                        }
+                    }
+                    .dock-startbtn{
+                        width: desktop-sprite-width(dock-start);
+                        height: desktop-sprite-height(dock-start);
+                        padding: 8px;
+                        .dock-tool-start{
+                            @include desktop-sprite(dock-start);
+                            width: desktop-sprite-width(dock-start);
+                            height: desktop-sprite-height(dock-start);
+                            display: block;
+                            cursor: pointer;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+                .dock-pagination{
+                    .pagination-icon-bg{
+                        @include desktop-sprite(pagination-bg);
+                        width: desktop-sprite-width(pagination-bg);
+                        height: desktop-sprite-height(pagination-bg);
+                        display: none;
+                        position: absolute;
+                        right: 2px;
+                        bottom: 1px;
+                        z-index: 1;
+                    }
+                    .pagination{
+                        width: 20px;
+                        height: 20px;
+                        line-height: 1.5;
+                        color: #0dbbf1;
+                        cursor: pointer;
+                        display: inline-block;
+                        float: left;
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin: 1px;
+                        outline: 0 none;
+                        position: relative;
+                        text-indent: -999em;
+                        .pagination-icon{
+                            float: left;
+                            height: 100%;
+                            overflow: hidden;
+                            position: relative;
+                            width: 100%;
+                            z-index: 1;
+                            &.pagination-icon-1{
+                                @include desktop-sprite(pagination-1);
+                            }
+                            &.pagination-icon-2{
+                                @include desktop-sprite(pagination-2);
+                            }
+                            &.pagination-icon-3{
+                                @include desktop-sprite(pagination-3);
+                            }
+                            &.pagination-icon-4{
+                                @include desktop-sprite(pagination-4);
+                            }
+                            &.pagination-icon-5{
+                                @include desktop-sprite(pagination-5);
+                            }
+                        }
+                    }
+                    &.current-pagination-1 .pagination-1 .pagination-icon-bg,
+                    &.current-pagination-2 .pagination-2 .pagination-icon-bg,
+                    &.current-pagination-3 .pagination-3 .pagination-icon-bg,
+                    &.current-pagination-4 .pagination-4 .pagination-icon-bg,
+                    &.current-pagination-5 .pagination-5 .pagination-icon-bg{
+                        display: block;
+                    }
+                    &.current-pagination-1 .pagination .pagination-icon-1{
+                        @include desktop-sprite(pagination-1_hover);
+                    }
+                    &.current-pagination-2 .pagination .pagination-icon-2{
+                        @include desktop-sprite(pagination-2_hover);
+                    }
+                    &.current-pagination-3 .pagination .pagination-icon-3{
+                        @include desktop-sprite(pagination-3_hover);
+                    }
+                    &.current-pagination-4 .pagination .pagination-icon-4{
+                        @include desktop-sprite(pagination-4_hover);
+                    }
+                    &.current-pagination-5 .pagination .pagination-icon-5{
+                        @include desktop-sprite(pagination-5_hover);
+                    }
+                }
+            }
+            &.dock-top{
+                width: desktop-sprite-width(dock-bg-top);
+                height: desktop-sprite-height(dock-bg-top);
+                top: 0;
+                left: 50%;
+                margin: 0 0 0 -310px;
+                .dock-middle{
+                    @include desktop-sprite(dock-bg-top);
+                    width: desktop-sprite-width(dock-bg-top);
+                    height: desktop-sprite-height(dock-bg-top);
+                    .dock-applist{
+                        width: 476px;
+                        height: 58px;
+                        margin: 11px 14px;
+                        float: left;
+                    }
+                    .dock-tools-container{
+                        height: 56px;
+                        float: left;
+                        .dock-tools{
+                            width: 20px;
+                            height: 46px;
+                            padding: 5px;
+                            float: left;
+                            overflow: hidden;
+                            .dock-tool-setting, .dock-tool-appmanage{
+                                margin-bottom: 3px;
+                            }
+                            .dock-tool-style, .dock-tool-search{
+                                margin-top: 3px;
+                            }
+                        }
+                        .dock-startbtn{
+                            float: left;
+                        }
+                    }
+                    .dock-pagination{
+                        width: 110px;
+                        height: 22px;
+                        padding: 1px 3px;
+                        float: left;
+                    }
+                }
+            }
+            &.dock-left{
+                width: desktop-sprite-width(dock-bg-left);
+                height: desktop-sprite-height(dock-bg-left);
+                top: 50%;
+                left: 0;
+                margin: -310px 0 0 0;
+                .dock-middle{
+                    @include desktop-sprite(dock-bg-left);
+                    width: desktop-sprite-width(dock-bg-left);
+                    height: desktop-sprite-height(dock-bg-left);
+                    .dock-applist{
+                        width: 58px;
+                        height: 476px;
+                        margin: 14px 11px;
+                        float: left;
+                    }
+                    .dock-tools-container{
+                        width: 56px;
+                        float: left;
+                        .dock-tools{
+                            width: 46px;
+                            height: 20px;
+                            padding: 5px;
+                            float: left;
+                            overflow: hidden;
+                            .dock-tool-setting, .dock-tool-appmanage{
+                                margin-right: 3px;
+                            }
+                            .dock-tool-style, .dock-tool-search{
+                                margin-left: 3px;
+                            }
+                        }
+                        .dock-startbtn{
+                            float: left;
+                        }
+                    }
+                    .dock-pagination{
+                        width: 22px;
+                        height: 110px;
+                        padding: 3px 1px;
+                        float: left;
+                    }
+                }
+            }
+            &.dock-right{
+                width: desktop-sprite-width(dock-bg-right);
+                height: desktop-sprite-height(dock-bg-right);
+                top: 50%;
+                left: 0;
+                margin: -310px 0 0 0;
+                .dock-middle{
+                    @include desktop-sprite(dock-bg-right);
+                    width: desktop-sprite-width(dock-bg-right);
+                    height: desktop-sprite-height(dock-bg-right);
+                    .dock-applist{
+                        width: 58px;
+                        height: 476px;
+                        margin: 14px 11px;
+                        float: right;
+                    }
+                    .dock-tools-container{
+                        width: 56px;
+                        float: right;
+                        .dock-tools{
+                            width: 46px;
+                            height: 20px;
+                            padding: 5px;
+                            float: right;
+                            overflow: hidden;
+                            .dock-tool-setting, .dock-tool-appmanage{
+                                margin-right: 3px;
+                            }
+                            .dock-tool-style, .dock-tool-search{
+                                margin-left: 3px;
+                            }
+                        }
+                        .dock-startbtn{
+                            float: right;
+                        }
+                    }
+                    .dock-pagination{
+                        width: 22px;
+                        height: 110px;
+                        padding: 3px 1px;
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -119,8 +119,11 @@ HROS.widget = (function(){
 					HROS.CONFIG.widgetIndexid += 1;
 				}
 				$.ajax({
-					data: 'ac=getMyAppById&id=' + appid + '&type=' + type,
-					dataType: 'json'
+					data: {
+						ac: 'getMyAppById',
+						id: appid,
+						type: type
+					}
 				}).done(function(widget){
 					if(widget != null){
 						if(widget['error'] == 'ERROR_NOT_FOUND'){
@@ -297,7 +300,10 @@ HROS.widget = (function(){
 			}).on('click', '.widget .ha-star', function(){
 				var obj = $(this).parents('.widget');
 				$.ajax({
-					data: 'ac=getAppStar&id=' + obj.data('info').realappid
+					data: {
+						ac: 'getAppStar',
+						id: obj.data('info').realappid
+					}
 				}).done(function(starnum){
 					starnum = starnum['starnum'];
 					dialog({

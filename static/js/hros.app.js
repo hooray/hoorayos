@@ -56,7 +56,11 @@ HROS.app = (function(){
 				if(!isNaN(num) && /^[1-5]$/.test(num)){
 					if(HROS.base.checkLogin()){
 						$.ajax({
-							data: 'ac=updateAppStar&id=' + $('#star').attr('realappid') + '&starnum=' + num
+							data: {
+								ac: 'updateAppStar',
+								id: $('#star').attr('realappid'),
+								starnum: num
+							}
 						}).done(function(responseText){
 							dialog.get('star').close().remove();
 							if(responseText['response']){
@@ -94,7 +98,10 @@ HROS.app = (function(){
 				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=setAppXY&appxy=' + i
+						data: {
+							ac: 'setAppXY',
+							appxy: i
+						}
 					});
 				}
 			}
@@ -108,7 +115,10 @@ HROS.app = (function(){
 				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=setAppSize&appsize=' + i
+						data: {
+							ac: 'setAppSize',
+							appsize: i
+						}
 					});
 				}
 			}
@@ -122,7 +132,10 @@ HROS.app = (function(){
 				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=setAppVerticalSpacing&appverticalspacing=' + i
+						data: {
+							ac: 'setAppVerticalSpacing',
+							appverticalspacing: i
+						}
 					});
 				}
 			}
@@ -136,7 +149,10 @@ HROS.app = (function(){
 				HROS.deskTop.resize();
 				if(HROS.base.checkLogin()){
 					$.ajax({
-						data: 'ac=setAppHorizontalSpacing&apphorizontalspacing=' + i
+						data: {
+							ac: 'setAppHorizontalSpacing',
+							apphorizontalspacing: i
+						}
 					});
 				}
 			}
@@ -147,8 +163,9 @@ HROS.app = (function(){
 		get: function(){
 			//获取json数组并循环输出每个应用
 			$.ajax({
-				data: 'ac=getMyApp',
-				dataType: 'json',
+				data: {
+					ac: 'getMyApp'
+				},
 				beforeSend: function(){
 					HROS.VAR.isAppMoving = true;
 				}
@@ -282,7 +299,11 @@ HROS.app = (function(){
 			}
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data: 'ac=addMyApp&id=' + id + '&desk=' + HROS.CONFIG.desk
+					data: {
+						ac: 'addMyApp',
+						id: id,
+						desk: HROS.CONFIG.desk
+					}
 				}).done(function(responseText){
 					done();
 				});
@@ -300,7 +321,10 @@ HROS.app = (function(){
 			}
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data: 'ac=delMyApp&id=' + id
+					data: {
+						ac: 'delMyApp',
+						id: id
+					}
 				}).done(function(responseText){
 					done();
 				});
@@ -374,7 +398,13 @@ HROS.app = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDockToFolder(id, from, to)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=dock-folder&id=' + id + '&from=' + from + '&to=' + to
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'dock-folder',
+													id: id,
+													from: from,
+													to: to
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -399,7 +429,14 @@ HROS.app = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDockToDock(id, from, to, boa)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=dock-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'dock-dock',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -426,7 +463,15 @@ HROS.app = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDockToDesk(id, from, to, boa, desk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=dock-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'dock-desk',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa,
+														desk: desk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -500,7 +545,14 @@ HROS.app = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDeskToFolder(id, from, to, desk)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=desk-folder&id=' + id + '&from=' + from + '&to=' + to + '&desk=' + desk
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'desk-folder',
+													id: id,
+													from: from,
+													to: to,
+													desk: desk
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -525,7 +577,15 @@ HROS.app = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataDeskToDock(id, from, to, boa, desk)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=desk-dock&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'desk-dock',
+													id: id,
+													from: from,
+													to: to,
+													boa: boa,
+													desk: desk
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -551,7 +611,15 @@ HROS.app = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataDeskToDesk(id, from, to, boa, desk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=desk-desk&id=' + id + '&from=' + from + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'desk-desk',
+														id: id,
+														from: from,
+														to: to,
+														boa: boa,
+														desk: desk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});
@@ -622,7 +690,13 @@ HROS.app = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataFolderToFolder(id, from, to, fromFolderId)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=folder-folder&id=' + id + '&from=' + from + '&to=' + to
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'folder-folder',
+													id: id,
+													from: from,
+													to: to
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -648,7 +722,14 @@ HROS.app = (function(){
 									if(!HROS.app.checkIsMoving()){
 										if(HROS.app.dataFolderToDock(id, from, to, fromFolderId, boa, desk)){
 											$.ajax({
-												data: 'ac=moveMyApp&movetype=folder-dock&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+												data: {
+													ac: 'moveMyApp',
+													movetype: 'folder-dock',
+													id: id,
+													to: to,
+													boa: boa,
+													desk: desk
+												}
 											}).done(function(responseText){
 												HROS.VAR.isAppMoving = false;
 											});
@@ -675,7 +756,14 @@ HROS.app = (function(){
 										if(!HROS.app.checkIsMoving()){
 											if(HROS.app.dataFolderToDesk(id, from, to, fromFolderId, boa, desk)){
 												$.ajax({
-													data: 'ac=moveMyApp&movetype=folder-desk&id=' + id + '&to=' + to + '&boa=' + boa + '&desk=' + desk
+													data: {
+														ac: 'moveMyApp',
+														movetype: 'folder-desk',
+														id: id,
+														to: to,
+														boa: boa,
+														desk: desk
+													}
 												}).done(function(responseText){
 													HROS.VAR.isAppMoving = false;
 												});

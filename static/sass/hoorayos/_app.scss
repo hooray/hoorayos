@@ -1,0 +1,42 @@
+/* 图标 */
+.appbtn{
+    @include border-radius(5px);
+    @include transition(background 0.2s);
+    position: absolute;
+    z-index: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+        background: rgba(0, 0, 0, 0.3);
+    }
+    img{
+        @include border-radius(3px);
+        display: block;
+        margin: 0 auto;
+    }
+    span{
+        @include border-radius(10px);
+        @include ellipsis();
+        @include text-shadow(1px 1px 1px #000);
+        position: relative;
+        z-index: 1;
+        display: block;
+        color: #fff;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 8px;
+        padding: 0 5px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.3);
+    }
+}
+#shortcut_shadow, #shortcut_shadow2{
+    @extend .appbtn;
+    display: none;
+    position: absolute;
+    z-index: 9999999;
+    img, span{
+        @include opacity(0.5);
+    }
+}

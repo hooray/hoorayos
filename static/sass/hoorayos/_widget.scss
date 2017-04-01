@@ -1,0 +1,44 @@
+/* 小挂件 */
+.widget{
+    position: absolute;
+    .move{
+        @include border-radius(5px);
+        display: none;
+        width: 100%;
+        height: 29px;
+        background: url(../img/widget_title_bg.png) repeat-x;
+        cursor: move;
+    }
+    a{
+        position: absolute;
+        top: 4px;
+        width: 21px;
+        height: 21px;
+        &.ha-close{
+            @include desktop-sprite(widget-close);
+            right: 5px;
+        }
+        &.ha-star{
+            @include desktop-sprite(widget-star);
+            right: 30px;
+        }
+        &.ha-share{
+            @include desktop-sprite(widget-share);
+            right: 55px;
+        }
+    }
+    .frame{
+        position: absolute;
+        top: 30px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        iframe{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

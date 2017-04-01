@@ -1,0 +1,84 @@
+/* 搜索 */
+#search-bar{
+    @include desktop-sprite(searchbar-bg);
+    width: desktop-sprite-width(searchbar-bg);
+    height: desktop-sprite-height(searchbar-bg);
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    z-index: 20;
+    &.above{
+        @include desktop-sprite(searchbar-above-bg);
+    }
+    @at-root{
+        #pageletSearchInput{
+            outline: none;
+            border: 0;
+            width: 170px;
+            height: 20px;
+            line-height: 20px;
+            margin: 6px 0 0 7px;
+            padding: 0;
+            float: left;
+            color: #fff;
+            background-color: transparent;
+        }
+        #pageletSearchButton{
+            @include desktop-sprite(dock-tool-search);
+            width: desktop-sprite-width(dock-tool-search);
+            height: desktop-sprite-height(dock-tool-search);
+            border: 0;
+            float: right;
+            cursor: pointer;
+            margin: 6px 8px 0 0;
+            padding: 0;
+            background-color: transparent;
+        }
+    }
+}
+#search-suggest{
+    display: none;
+    width: 212px;
+    position: absolute;
+    top: 33px;
+    right: 20px;
+    z-index: 20;
+    .resultBox{
+        width: 212px;
+        margin: 0;
+        padding-top: 5px;
+        line-height: 0;
+        color: #fff;
+        background: url(../img/suggess_list_bg.png) repeat-y;
+    }
+    .resultList{
+        overflow: hidden;
+        vertical-align: middle;
+        &.openAppMarket{
+            @include desktop-sprite(searchbar-foot-bg);
+            width: desktop-sprite-width(searchbar-foot-bg);
+            height: desktop-sprite-height(searchbar-foot-bg);
+            padding-top: 10px;
+        }
+        a{
+            width: desktop-sprite-width(searchbar-item-bg_hover);
+            height: desktop-sprite-height(searchbar-item-bg_hover);
+            display: block;
+            outline: 0;
+            color: #fff;
+            &:hover, &.selected{
+                @include desktop-sprite(searchbar-item-bg_hover);
+            }
+            div{
+                @include ellipsis();
+                height: 28px;
+                line-height: 28px;
+                vertical-align: middle;
+                padding-left: 12px;
+                width: 190px;
+                cursor: pointer;
+            }
+        }
+    }
+}

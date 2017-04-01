@@ -1,0 +1,38 @@
+/*桌面*/
+#desk{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .desktop-container, .desktop-apps-container{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+    }
+    .desktop-container{
+        .scrollbar{
+            @include border-radius(5px);
+            position: absolute;
+            z-index: 2;
+            background: #ccc;
+            display: none;
+            &:hover{
+                background: #999;
+            }
+        }
+        .scrollbar-x{
+            bottom: 0;
+            height: 10px;
+        }
+        .scrollbar-y{
+            right: 0;
+            width: 10px;
+        }
+    }
+}

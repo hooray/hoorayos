@@ -1,0 +1,45 @@
+/* 关于我们 */
+#copyright{
+    @include desktop-sprite(copyright-bg);
+    width: desktop-sprite-width(copyright-bg);
+    height: desktop-sprite-height(copyright-bg);
+    display: none;
+    position: absolute;
+    z-index: 9999999;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -165px;
+    box-shadow: 0 0 100px #fff;
+    .close{
+        @include desktop-sprite(copyright-close);
+        width: desktop-sprite-width(copyright-close);
+        height: desktop-sprite-height(copyright-close);
+        display: block;
+        position: absolute;
+        top: 6px;
+        right: 4px;
+    }
+    .title{
+        padding-left: 20px;
+        height: 55px;
+        line-height: 55px;
+        color: #fff;
+        font-size: 28px;
+    }
+    .body{
+        padding: 10px 20px;
+        color: #fff;
+        p{
+            margin-bottom: 5px;
+            line-height: 22px;
+        }
+        a{
+            color: #fff;
+            &:hover{
+                color: #ccc;
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,0 +1,129 @@
+/*任务栏*/
+#task-bar-bg1, #task-bar-bg2{
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    @at-root{
+        #task-bar-bg1{
+            height: 130px;
+            background: url(../img/task_bg1.png) repeat-x;
+        }
+        #task-bar-bg2{
+            height: 23px;
+            background: url(../img/task_bg2.png) repeat-x;
+        }
+    }
+}
+#task-bar{
+    height: 64px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    &.min-zIndex{
+        z-index: -1;
+    }
+    @at-root{
+        #task-next, #task-prev{
+            display: none;
+            float: left;
+            margin: 0 1px;
+            overflow: hidden;
+            position: relative;
+            z-index: 9990;
+            a{
+                display: block;
+                cursor: pointer;
+                &.disable{
+                    cursor: default;
+                }
+            }
+            @at-root{
+                #task-next{
+                    @include desktop-sprite(task-next-bg);
+                    width: desktop-sprite-width(task-next-bg);
+                    height: desktop-sprite-height(task-next-bg);
+                    a{
+                        @include desktop-sprite(task-next);
+                        width: desktop-sprite-width(task-next);
+                        height: desktop-sprite-height(task-next);
+                        margin-top: (desktop-sprite-height(task-next-bg) - desktop-sprite-height(task-next)) / 2;
+                        margin-left: (desktop-sprite-width(task-next-bg) - desktop-sprite-width(task-next)) / 2;
+                        &.disable{
+                            @include desktop-sprite(task-next-disabled);
+                        }
+                    }
+                }
+                #task-prev{
+                    @include desktop-sprite(task-prev-bg);
+                    width: desktop-sprite-width(task-prev-bg);
+                    height: desktop-sprite-height(task-prev-bg);
+                    a{
+                        @include desktop-sprite(task-prev);
+                        width: desktop-sprite-width(task-prev);
+                        height: desktop-sprite-height(task-prev);
+                        margin-top: (desktop-sprite-height(task-prev-bg) - desktop-sprite-height(task-prev)) / 2;
+                        margin-left: (desktop-sprite-width(task-prev-bg) - desktop-sprite-width(task-prev)) / 2;
+                        &.disable{
+                            @include desktop-sprite(task-prev-disabled);
+                        }
+                    }
+                }
+            }
+        }
+        #task-content{
+            height: 64px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            @at-root{
+                #task-content-inner{
+                    width: 10000px;
+                    height: 64px;
+                    float: left;
+                    @at-root{
+                        .task-item{
+                            @include desktop-sprite(task-bg);
+                            width: desktop-sprite-width(task-bg);
+                            height: desktop-sprite-height(task-bg);
+                            position: relative;
+                            z-index: 9990;
+                            display: block;
+                            float: left;
+                            vertical-align: middle;
+                            overflow: hidden;
+                            cursor: pointer;
+                            &.task-item-current{
+                                @include desktop-sprite(task-current-bg);
+                            }
+                            &.task-dragging{
+                                position: absolute;
+                                bottom: 0;
+                            }
+                            .task-item-icon{
+                                width: 32px;
+                                height: 32px;
+                                margin: 22px 5px;
+                                float: left;
+                                img{
+                                    width: 32px;
+                                    height: 32px;
+                                    float: left;
+                                }
+                            }
+                            .task-item-txt{
+                                width: 70px;
+                                height: 36px;
+                                line-height: 36px;
+                                margin-top: 27px;
+                                color: #fff;
+                                float: left;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

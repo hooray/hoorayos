@@ -15,7 +15,9 @@ HROS.wallpaper = (function(){
 		*/
 		get: function(callback){
 			$.ajax({
-				data: 'ac=getWallpaper'
+				data: {
+					ac: 'getWallpaper'
+				}
 			}).done(function(wallpaper){
 				var w = wallpaper['wallpaper'].split('<{|}>');
 				HROS.CONFIG.wallpaperState = parseInt(w[0]);
@@ -153,7 +155,12 @@ HROS.wallpaper = (function(){
 			}
 			if(HROS.base.checkLogin()){
 				$.ajax({
-					data: 'ac=setWallpaper&wpstate=' + wallpaperstate + '&wptype=' + wallpapertype + '&wp=' + wallpaper
+					data: {
+						ac: 'setWallpaper',
+						wpstate: wallpaperstate,
+						wptype: wallpapertype,
+						wp: wallpaper
+					}
 				}).done(function(responseText){
 					done();
 				});

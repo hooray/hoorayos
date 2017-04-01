@@ -3,6 +3,9 @@
 <script src="../../static/plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script src="../../static/plugins/bootstrap-table-1.11.0/dist/bootstrap-table.min.js"></script>
 <script src="../../static/plugins/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/bootstrap-select.min.js"></script>
+<script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="../../static/plugins/bootstrap-switch-3.3.3/dist/js/bootstrap-switch.min.js"></script>
 <script src="../../static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
 <script src="../../static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
 <script src="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
@@ -11,6 +14,10 @@
 $(function(){
 	//toolTip
 	$('[data-toggle="tooltip"]').tooltip();
+	//下拉列表
+	$('[data-plugin="bootstrapSelect"]').selectpicker();
+	//开关滑块
+	$('[data-plugin="bootstrapSwitch"]').bootstrapSwitch();
 	//detailIframe
 	openDetailIframe = function(url){
 		ZENG.msgbox.show('正在载入中，请稍后...', 6, 100000);

@@ -36,24 +36,24 @@ $_CONFIG = array(
 
 //文件上传类型
 $uploadFileType = array(
-	'rar'  => 'static/img/ui/file_zip.png',
-	'zip'  => 'static/img/ui/file_zip.png',
-	'7z'   => 'static/img/ui/file_zip.png',
-	'jpeg' => 'static/img/ui/file_image.png',
-	'jpg'  => 'static/img/ui/file_image.png',
-	'gif'  => 'static/img/ui/file_image.png',
-	'bmp'  => 'static/img/ui/file_image.png',
-	'png'  => 'static/img/ui/file_image.png',
-	'doc'  => 'static/img/ui/file_word.png',
-	'docx' => 'static/img/ui/file_word.png',
-	'xls'  => 'static/img/ui/file_excel.png',
-	'xlsx' => 'static/img/ui/file_excel.png',
-	'ppt'  => 'static/img/ui/file_ppt.png',
-	'pptx' => 'static/img/ui/file_ppt.png',
-	'pdf'  => 'static/img/ui/file_pdf.png',
-	'wma'  => 'static/img/ui/file_music.png',
-	'mp3'  => 'static/img/ui/file_music.png',
-	'txt'  => 'static/img/ui/file_txt.png'
+	'rar'  => 'static/img/fileicon/zip.png',
+	'zip'  => 'static/img/fileicon/zip.png',
+	'7z'   => 'static/img/fileicon/zip.png',
+	'jpeg' => 'static/img/fileicon/image.png',
+	'jpg'  => 'static/img/fileicon/image.png',
+	'gif'  => 'static/img/fileicon/image.png',
+	'bmp'  => 'static/img/fileicon/image.png',
+	'png'  => 'static/img/fileicon/image.png',
+	'doc'  => 'static/img/fileicon/word.png',
+	'docx' => 'static/img/fileicon/word.png',
+	'xls'  => 'static/img/fileicon/excel.png',
+	'xlsx' => 'static/img/fileicon/excel.png',
+	'ppt'  => 'static/img/fileicon/ppt.png',
+	'pptx' => 'static/img/fileicon/ppt.png',
+	'pdf'  => 'static/img/fileicon/pdf.png',
+	'wma'  => 'static/img/fileicon/music.png',
+	'mp3'  => 'static/img/fileicon/music.png',
+	'txt'  => 'static/img/fileicon/txt.png'
 );
 //单个文件上传大小，单位MB
 $uploadFileSingleSize = 2;

@@ -1,0 +1,60 @@
+/* 右键提示 */
+.popup-menu{
+    display: none;
+    width: 160px;
+    position: absolute;
+    z-index: 9990;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.4);
+    ul{
+        position: relative;
+        li{
+            padding: 0 3px;
+            margin: 3px 0;
+            position: relative;
+            vertical-align: middle;
+            &.separator{
+                padding: 0;
+                border-bottom: 1px solid #eee;
+            }
+            a{
+                @include border-radius(2px);
+                display: block;
+                color: #333;
+                height: 24px;
+                line-height: 24px;
+                overflow: hidden;
+                padding-left: 40px;
+                .fa{
+                    position: absolute;
+                    top: 5px;
+                    left: 13px;
+                    font-size: 14px;
+                    color: #888;
+                    &.arrow{
+                        left: auto;
+                        right: 15px;
+                    }
+                }
+                &:hover{
+                    background-color: #3B7CE6;
+                    color: #fff;
+                    text-decoration: none;
+                    .fa{
+                        color: #fff;
+                    }
+                }
+                &.disabled, &.disabled:hover{
+                    background-color: inherit;
+                    color: #ccc;
+                    cursor: not-allowed;
+                    .fa{
+                        color: #ccc;
+                    }
+                }
+            }
+        }
+    }
+}

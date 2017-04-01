@@ -97,8 +97,7 @@
 						));
 					}else{
 				?>
-					<select name="val_app_category_id" datatype="*" nullmsg="请选择应用分类">
-						<option value="">请选择应用分类</option>
+					<select name="val_app_category_id" datatype="*" data-plugin="bootstrapSelect" nullmsg="请选择应用分类" title="请选择应用分类">
 						<?php
 							$appcategory = $db->select('tb_app_category', '*', array(
 								'issystem' => 0

@@ -26,7 +26,6 @@
 	.membername{margin-left:10px}
 	</style>
 </head>
-
 <body>
 	<div id="toorbar">
 		<div class="form-inline">

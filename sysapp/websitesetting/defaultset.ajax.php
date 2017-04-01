@@ -4,7 +4,7 @@
 	switch($_REQUEST['ac']){
 		case 'edit':
 			$db->update('tb_setting', array(
-				'isforcedlogin' => $_POST['val_isforcedlogin'],
+				'isforcedlogin' => isset($_POST['val_isforcedlogin']) ? 1 : 0,
 				'dock' => $_POST['val_dock'],
 				'desk1' => $_POST['val_desk1'],
 				'desk2' => $_POST['val_desk2'],

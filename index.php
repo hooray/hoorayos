@@ -58,7 +58,6 @@
 	var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
 	</script>
 </head>
-
 <body>
 	<div class="loading"></div>
 	<!-- 登录&注册 -->
@@ -73,7 +72,7 @@
 				<form action="login.ajax.php" method="post" id="loginForm" class="form">
 					<input type="hidden" name="ac" value="login">
 					<div class="avatar">
-						<img src="static/img/ui/avatar_120.jpg" id="avatar">
+						<img src="static/img/avatar_120.jpg" id="avatar">
 					</div>
 					<div class="input_box">
 						<input type="input" name="username" id="username" autocomplete="off" placeholder="请输入用户名" datatype="s6-18" nullmsg="请输入用户名" errormsg="用户名长度为6-18个字符">
@@ -230,7 +229,7 @@
 			<div class="startmenu-selfinfo">
 				<a href="javascript:;" class="startmenu-feedback" title="反馈"></a>
 				<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L"></a>
-				<div class="startmenu-avatar"><img src="static/img/ui/loading_24.gif"></div>
+				<div class="startmenu-avatar"><img src="static/img/loading_24.gif"></div>
 				<div class="startmenu-nick">
 					<?php if(checkLogin()){ ?>
 					<a href="javascript:;" title="编辑个人资料"><?php echo $db->get('tb_member', 'username', array('tbid' => session('member_id'))); ?></a>
@@ -247,7 +246,7 @@
 		<div id="task-bar-bg1"></div>
 		<div id="task-bar-bg2"></div>
 		<div id="task-bar">
-			<div id="task-pre"><a href="javascript:;" id="task-pre-btn" hidefocus="true"></a></div>
+			<div id="task-prev"><a href="javascript:;" id="task-prev-btn" hidefocus="true"></a></div>
 			<div id="task-content">
 				<div id="task-content-inner"></div>
 			</div>
@@ -468,7 +467,7 @@
 				$('#submit_register_btn').removeClass('disabled').prop('disabled', false);
 				registerForm.resetStatus();
 				if(data.status == 'y'){
-					$('#avatar').attr('src', 'static/img/ui/avatar_120.jpg');
+					$('#avatar').attr('src', 'static/img/avatar_120.jpg');
 					$('#username').val(data.info);
 					$('#password').val('');
 					$('#rememberMe').prop('checked', false);

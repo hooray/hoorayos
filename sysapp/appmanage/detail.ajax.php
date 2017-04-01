@@ -11,10 +11,10 @@
 				'url' => $_POST['val_url'],
 				'width' => $_POST['val_width'],
 				'height' => $_POST['val_height'],
-				'isresize' => $_POST['val_isresize'],
-				'isopenmax' => $_POST['val_isopenmax'],
+				'isresize' => isset($_POST['val_isresize']) ? 1 : 0,
+				'isopenmax' => isset($_POST['val_isopenmax']) ? 1 : 0,
 				'issetbar' => $_POST['val_issetbar'],
-				'isflash' => $_POST['val_isflash'],
+				'isflash' => isset($_POST['val_isflash']) ? 1 : 0,
 				'remark' => $_POST['val_remark']
 			);
 			if($_POST['id'] == ''){

@@ -1,0 +1,150 @@
+/* 全局视图 */
+#appmanage{
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .amg_close{
+        @include desktop-sprite(appmanage-close);
+        width: desktop-sprite-width(appmanage-close);
+        height: desktop-sprite-height(appmanage-close);
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    @at-root{
+        #amg_dock_container{
+            background: url(../img/amg_top.png) repeat-x;
+            height: 60px;
+            overflow: hidden;
+            padding: 10px;
+            border-bottom: 1px solid #666;
+            .appbtn{
+                padding: 6px;
+                span{
+                    display: none;
+                }
+            }
+        }
+        #amg_folder_container{
+            background: url(../img/amg_body.png) repeat;
+            overflow: hidden;
+            height: 100%;
+            .folderItem{
+                @include rotateY(70deg);
+                @include transition(transform 0.8s linear);
+                border-left: 1px solid #666;
+                margin-left: -1px;
+                width: 20%;
+                height: 100%;
+                overflow: hidden;
+                float: left;
+                position: relative;
+                &:first-child{
+                    border-left: 0;
+                    margin-left: auto;
+                }
+                &.folderItem_turn{
+                    @include rotateY(0deg);
+                }
+                .folder_bg{
+                    width: 70px;
+                    height: 100px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    &.folder_bg1{
+                        background: url(../img/amg_1.png) no-repeat right top;
+                    }
+                    &.folder_bg2{
+                        background: url(../img/amg_2.png) no-repeat right top;
+                    }
+                    &.folder_bg3{
+                        background: url(../img/amg_3.png) no-repeat right top;
+                    }
+                    &.folder_bg4{
+                        background: url(../img/amg_4.png) no-repeat right top;
+                    }
+                    &.folder_bg5{
+                        background: url(../img/amg_5.png) no-repeat right top;
+                    }
+                }
+                .folderOuter{
+                    height: 100%;
+                    overflow: hidden;
+                    position: relative;
+                    .folderInner{
+                        margin: 5px 0;
+                        min-width: 180px;
+                        position: relative;
+                        z-index: 1;
+                        height: 100%;
+                        overflow: hidden;
+                        .appbtn{
+                            @include border-radius(0);
+                            height: 26px;
+                            width: 100%;
+                            padding: 2px 0;
+                            overflow: hidden;
+                            &:hover{
+                                border-radius: 0;
+                                background: rgba(255, 255, 255, 0.3);
+                            }
+                            img{
+                                margin-left: 20px;
+                            }
+                            span{
+                                color: #fff;
+                                width: 100%!important;
+                                height: 26px;
+                                line-height: 26px;
+                                margin-top: -26px;
+                                margin-left: 50px;
+                                float: left;
+                                text-align: left;
+                                background: none;
+                            }
+                        }
+                    }
+                    .scrollBar{
+                        @include border-radius(6px);
+                        display: none;
+                        position: absolute;
+                        z-index: 10;
+                        right: 2px;
+                        top: 0;
+                        width: 7px;
+                        height: 20px;
+                        background: url(../img/scrollbar_bgy.png) repeat-y;
+                    }
+                }
+            }
+        }
+        #shortcut_shadow2{
+            @include border-radius(0);
+            height: 26px;
+            width: 100%;
+            padding: 2px 0;
+            overflow: hidden;
+            img{
+                margin-left: 20px;
+            }
+            span{
+                color: #fff;
+                width: 100%!important;
+                height: 26px;
+                line-height: 26px;
+                margin-top: -26px;
+                margin-left: 50px;
+                float: left;
+                text-align: left;
+                background: none;
+            }
+        }
+    }
+}
