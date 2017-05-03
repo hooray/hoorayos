@@ -6,13 +6,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>啊，出错了</title>
-	<link rel="stylesheet" href="../img/ui/globle.css">
-	<link rel="stylesheet" href="../js/HoorayLibs/hooraylibs.css">
-	<link rel="stylesheet" href="../img/ui/sys.css">
+	<link rel="stylesheet" href="../static/plugins/HoorayLibs/hooraylibs.css">
+	<link rel="stylesheet" href="../static/css/sys.css">
 </head>
 <body>
-	<script src="../js/jquery-2.2.4.min.js"></script>
-	<script src="../js/HoorayLibs/hooraylibs.js"></script>
+	<script src="../static/plugins/jquery-2.2.4.min.js"></script>
+	<script src="../static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		<?php if($_GET['code'] == $errorcode['noLogin']){ ?>
