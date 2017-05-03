@@ -5,7 +5,7 @@
 <script src="../../static/plugins/bootstrap-table-1.11.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/bootstrap-select.min.js"></script>
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/i18n/defaults-zh_CN.min.js"></script>
-<script src="../../static/plugins/bootstrap-switch-3.3.3/dist/js/bootstrap-switch.min.js"></script>
+<script src="../../static/plugins/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js"></script>
 <script src="../../static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
 <script src="../../static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
 <script src="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
