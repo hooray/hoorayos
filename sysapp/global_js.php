@@ -6,7 +6,6 @@
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/bootstrap-select.min.js"></script>
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="../../static/plugins/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js"></script>
-<script src="../../static/plugins/artDialog-7.0.0/dist/dialog.js"></script>
 <script src="../../static/plugins/artDialog-7.0.0/dist/dialog-plus.js"></script>
 <script src="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 <script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
