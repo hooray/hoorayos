@@ -1,8 +1,8 @@
 <script src="../../static/plugins/jquery-2.2.4.min.js"></script>
 <script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
 <script src="../../static/plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="../../static/plugins/bootstrap-table-1.11.0/dist/bootstrap-table.min.js"></script>
-<script src="../../static/plugins/bootstrap-table-1.11.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../static/plugins/bootstrap-table-1.11.1/dist/bootstrap-table.min.js"></script>
+<script src="../../static/plugins/bootstrap-table-1.11.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/bootstrap-select.min.js"></script>
 <script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="../../static/plugins/bootstrap-switch-3.3.3/dist/js/bootstrap-switch.min.js"></script>

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../../static/css/globle.css">
 <link rel="stylesheet" href="../../static/plugins/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../static/plugins/bootstrap-table-1.11.0/dist/bootstrap-table.min.css">
+<link rel="stylesheet" href="../../static/plugins/bootstrap-table-1.11.1/dist/bootstrap-table.min.css">
 <link rel="stylesheet" href="../../static/plugins/bootstrap-select-1.12.2/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="../../static/plugins/bootstrap-switch-3.3.3/dist/css/bootstrap3/bootstrap-switch.min.css">
 <link rel="stylesheet" href="../../static/plugins/artDialog-6.0.4/css/ui-dialog.css">
