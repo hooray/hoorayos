@@ -50,7 +50,7 @@
 	<link rel="stylesheet" href="static/css/index.css">
 	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 	<link rel="stylesheet" href="static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="static/plugins/artDialog-6.0.4/css/ui-dialog.css">
+	<link rel="stylesheet" href="static/plugins/artDialog-7.0.0/css/ui-dialog.css">
 	<link rel="stylesheet" href="static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 	<script type="text/javascript">
@@ -317,8 +317,8 @@
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
 	<script src="static/plugins/Sugar-2.0.2/dist/sugar.min.js"></script>
-	<script src="static/plugins/artDialog-6.0.4/dist/dialog-min.js"></script>
-	<script src="static/plugins/artDialog-6.0.4/dist/dialog-plus-min.js"></script>
+	<script src="static/plugins/artDialog-7.0.0/dist/dialog-min.js"></script>
+	<script src="static/plugins/artDialog-7.0.0/dist/dialog-plus-min.js"></script>
 	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 	<script src="static/js/hros.core.js"></script>
