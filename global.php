@@ -2,7 +2,7 @@
 	define('ROOT', dirname(__FILE__));
 	chdir(ROOT);
 	//数据库操作类
-	require('inc/medoo.php');
+	require('inc/Medoo.php');
 	//函数库
 	require('inc/functions.php');
 	require('inc/functions.private.php');
