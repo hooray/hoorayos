@@ -6,15 +6,15 @@
 HROS.maskBox = (function(){
 	return {
 		desk: function(){
-			if(!TEMP.maskBoxDesk){
-				TEMP.maskBoxDesk = $('<div id="maskbox"></div>');
-				$('body').append(TEMP.maskBoxDesk);
+			if(!HROS.maskBoxCache.desk){
+				HROS.maskBoxCache.desk = $('<div id="maskbox"></div>');
+				$('body').append(HROS.maskBoxCache.desk);
 			}
-			return TEMP.maskBoxDesk;
+			return HROS.maskBoxCache.desk;
 		},
 		dock: function(){
-			if(!TEMP.maskBoxDock){
-				TEMP.maskBoxDock = $(
+			if(!HROS.maskBoxCache.dock){
+				HROS.maskBoxCache.dock = $(
 					'<div id="maskbox-dockdrap">'+
 						'<div id="docktop" class="dock_drap_effect dock_drap_effect_top"></div>'+
 						'<div id="dockleft" class="dock_drap_effect dock_drap_effect_left"></div>'+
@@ -26,16 +26,16 @@ HROS.maskBox = (function(){
 						'</div>'+
 					'</div>'
 				);
-				$('body').append(TEMP.maskBoxDock);
+				$('body').append(HROS.maskBoxCache.dock);
 			}
-			return TEMP.maskBoxDock;
+			return HROS.maskBoxCache.dock;
 		},
 		copyright: function(){
-			if(!TEMP.maskBoxCopyright){
-				TEMP.maskBoxCopyright = $('<div id="maskbox-copyright"></div>');
-				$('body').append(TEMP.maskBoxCopyright);
+			if(!HROS.maskBoxCache.copyright){
+				HROS.maskBoxCache.copyright = $('<div id="maskbox-copyright"></div>');
+				$('body').append(HROS.maskBoxCache.copyright);
 			}
-			return TEMP.maskBoxCopyright;
+			return HROS.maskBoxCache.copyright;
 		}
 	}
 })();

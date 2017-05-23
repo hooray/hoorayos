@@ -39,8 +39,8 @@ HROS.popupMenu = (function(){
 		*/
 		app: function(obj){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuApp){
-				TEMP.popupMenuApp = $(
+			if(!HROS.popupMenuCache.app){
+				HROS.popupMenuCache.app = $(
 					'<div class="popup-menu app-menu"><ul>'+
 						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-external-link"></i>打开</a></li>'+
 						'<li class="separator"></li>'+
@@ -58,7 +58,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>卸载</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuApp);
+				$('body').append(HROS.popupMenuCache.app);
 			}
 			$('.app-menu a[menu="moveto"]').removeClass('disabled').children('i.fa-check').hide();
 			if(obj.parent().hasClass('desktop-apps-container')){
@@ -178,12 +178,12 @@ HROS.popupMenu = (function(){
 				});
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuApp;
+			return HROS.popupMenuCache.app;
 		},
 		papp: function(obj){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuPapp){
-				TEMP.popupMenuPapp = $(
+			if(!HROS.popupMenuCache.papp){
+				HROS.popupMenuCache.papp = $(
 					'<div class="popup-menu papp-menu"><ul>'+
 						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-external-link"></i>打开</a></li>'+
 						'<li class="separator"></li>'+
@@ -201,7 +201,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuPapp);
+				$('body').append(HROS.popupMenuCache.papp);
 			}
 			$('.papp-menu a[menu="moveto"]').removeClass('disabled');
 			if(obj.parent().hasClass('desktop-apps-container')){
@@ -319,15 +319,15 @@ HROS.popupMenu = (function(){
 				});
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuPapp;
+			return HROS.popupMenuCache.papp;
 		},
 		/*
 		**  文件夹右键
 		*/
 		folder: function(obj){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuFolder){
-				TEMP.popupMenuFolder = $(
+			if(!HROS.popupMenuCache.folder){
+				HROS.popupMenuCache.folder = $(
 					'<div class="popup-menu folder-menu"><ul>'+
 						'<li><a menu="view" href="javascript:;"><i class="fa fa-fw fa-eye"></i>预览</a></li>'+
 						'<li><a menu="open" href="javascript:;"><i class="fa fa-fw fa-folder-open-o"></i>打开</a></li>'+
@@ -346,7 +346,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuFolder);
+				$('body').append(HROS.popupMenuCache.folder);
 			}
 			$('.folder-menu a[menu="moveto"]').removeClass('disabled');
 			if(obj.parent().hasClass('desktop-apps-container')){
@@ -493,22 +493,22 @@ HROS.popupMenu = (function(){
 				});
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuFolder;
+			return HROS.popupMenuCache.folder;
 		},
 		/*
 		**  文件右键
 		*/
 		file: function(obj){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuFile){
-				TEMP.popupMenuFile = $(
+			if(!HROS.popupMenuCache.file){
+				HROS.popupMenuCache.file = $(
 					'<div class="popup-menu file-menu"><ul>'+
 						'<li><a menu="download" href="javascript:;"><i class="fa fa-fw fa-cloud-download"></i>下载</a></li>'+
 						'<li class="separator"></li>'+
 						'<li><a menu="del" href="javascript:;"><i class="fa fa-fw fa-trash"></i>删除</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuFile);
+				$('body').append(HROS.popupMenuCache.file);
 			}
 			//绑定事件
 			$('.file-menu a[menu="download"]').off('click').on('click', function(){
@@ -531,15 +531,15 @@ HROS.popupMenu = (function(){
 				});
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuFile;
+			return HROS.popupMenuCache.file;
 		},
 		/*
 		**  应用码头右键
 		*/
 		dock: function(){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuDock){
-				TEMP.popupMenuDock = $(
+			if(!HROS.popupMenuCache.dock){
+				HROS.popupMenuCache.dock = $(
 					'<div class="popup-menu dock-menu"><ul>'+
 						'<li><a menu="dockPos" pos="top" href="javascript:;"><i class="fa fa-fw fa-check"></i>向上停靠</a></li>'+
 						'<li><a menu="dockPos" pos="left" href="javascript:;"><i class="fa fa-fw fa-check"></i>向左停靠</a></li>'+
@@ -548,7 +548,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="dockPos" pos="none" href="javascript:;"><i class="fa fa-fw fa-eye-slash"></i>隐藏</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuDock);
+				$('body').append(HROS.popupMenuCache.dock);
 				//绑定事件
 				$('.dock-menu a[menu="dockPos"]').on('click', function(){
 					if($(this).attr('pos') == 'none'){
@@ -579,15 +579,15 @@ HROS.popupMenu = (function(){
 				}
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuDock;
+			return HROS.popupMenuCache.dock;
 		},
 		/*
 		**  任务栏右键
 		*/
 		task: function(obj){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuTask){
-				TEMP.popupMenuTask = $(
+			if(!HROS.popupMenuCache.task){
+				HROS.popupMenuCache.task = $(
 					'<div class="popup-menu task-menu"><ul>'+
 						'<li><a menu="show" href="javascript:;"><i class="fa fa-fw fa-caret-up"></i>还原</a></li>'+
 						'<li><a menu="hide" href="javascript:;"><i class="fa fa-fw fa-caret-down"></i>最小化</a></li>'+
@@ -595,7 +595,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="close" href="javascript:;"><i class="fa fa-fw fa-close"></i>关闭</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuTask);
+				$('body').append(HROS.popupMenuCache.task);
 			}
 			if($('#w_' + obj.attr('appid')).attr('state') == 'hide'){
 				$('.task-menu a[menu="show"]').parent().show();
@@ -617,15 +617,15 @@ HROS.popupMenu = (function(){
 				HROS.window.close(obj.attr('appid'));
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuTask;
+			return HROS.popupMenuCache.task;
 		},
 		/*
 		**  桌面右键
 		*/
 		desk: function(){
 			HROS.window.show2under();
-			if(!TEMP.popupMenuDesk){
-				TEMP.popupMenuDesk = $(
+			if(!HROS.popupMenuCache.desk){
+				HROS.popupMenuCache.desk = $(
 					'<div class="popup-menu desk-menu"><ul>'+
 						'<li><a menu="hideall" href="javascript:;"><i class="fa fa-fw fa-desktop"></i>显示桌面</a></li>'+
 						'<li><a menu="closeall" href="javascript:;"><i class="fa fa-fw fa-close"></i>关闭所有窗口</a></li>'+
@@ -666,7 +666,7 @@ HROS.popupMenu = (function(){
 						'<li><a menu="logout" href="javascript:;"><i class="fa fa-fw fa-sign-out"></i>注销</a></li>'+
 					'</ul></div>'
 				);
-				$('body').append(TEMP.popupMenuDesk);
+				$('body').append(HROS.popupMenuCache.desk);
 				if(!HROS.base.checkLogin()){
 					$('body .desk-menu li a[menu="logout"]').parent().remove();
 				}
@@ -806,7 +806,7 @@ HROS.popupMenu = (function(){
 				}
 				$('.popup-menu').hide();
 			});
-			return TEMP.popupMenuDesk;
+			return HROS.popupMenuCache.desk;
 		},
 		hide: function(){
 			$('.popup-menu').hide();
