@@ -1,0 +1,16 @@
+<div id="star" realappid="<%=realappid%>">
+    <div class="grade-box">
+        <div class="star-num"><%=point%></div>
+        <div class="star-box">
+            <div>打分：</div>
+            <i style="width:<%=realpoint%>%"></i>
+            <ul>
+                <li class="grade-1" num="1"><a href="javascript:;"><em>很不好用</em></a></li>
+                <li class="grade-2" num="2"><a href="javascript:;"><em>体验一般般</em></a></li>
+                <li class="grade-3" num="3"><a href="javascript:;"><em>比较好用</em></a></li>
+                <li class="grade-4" num="4"><a href="javascript:;"><em>很好用</em></a></li>
+                <li class="grade-5" num="5"><a href="javascript:;"><em>棒极了，推荐</em></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

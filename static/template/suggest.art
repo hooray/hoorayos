@@ -1,0 +1,3 @@
+<li class="resultList" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">
+    <a href="javascript:;"><div><%=name%></div></a>
+</li>

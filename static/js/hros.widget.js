@@ -48,7 +48,7 @@ HROS.widget = (function(){
 						'zIndex': HROS.CONFIG.widgetIndexid,
 						'issetbar': 0
 					};
-					$('#desk').append(HROS.template.widgetWindow(widgetData));
+					$('#desk').append(HROS.template.widget(widgetData));
 					$(widgetId).data('info', widgetData).css({
 						opacity: 0,
 						scale: 1.1
@@ -108,7 +108,7 @@ HROS.widget = (function(){
 						'zIndex': HROS.CONFIG.widgetIndexid,
 						'issetbar': 1
 					};
-					$('#desk').append(HROS.template.widgetWindow(widgetData));
+					$('#desk').append(HROS.template.widget(widgetData));
 					$(widgetId).data('info', widgetData).css({
 						opacity: 0,
 						scale: 1.1

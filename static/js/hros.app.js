@@ -206,7 +206,7 @@ HROS.app = (function(){
 			var dock_append = '';
 			if(HROS.VAR.dock != ''){
 				$(HROS.VAR.dock).each(function(){
-					dock_append += HROS.template.appbtn({
+					dock_append += HROS.template.app({
 						'title': this.name,
 						'type': this.type,
 						'id': 'd_' + this.appid,
@@ -225,7 +225,7 @@ HROS.app = (function(){
 				var desk = eval('HROS.VAR.desk' + j);
 				if(desk != ''){
 					$(desk).each(function(){
-						desk_append += HROS.template.appbtn({
+						desk_append += HROS.template.app({
 							'title': this.name,
 							'type': this.type,
 							'id': 'd_' + this.appid,
@@ -236,7 +236,7 @@ HROS.app = (function(){
 						});
 					});
 				}
-				desk_append += HROS.template.addbtn({
+				desk_append += HROS.template.add({
 					'appsize': HROS.CONFIG.appSize
 				});
 				$('#desk-' + j + ' .desktop-apps-container .appbtn').remove();

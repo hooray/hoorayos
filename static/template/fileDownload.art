@@ -1,0 +1,1 @@
+<iframe src="filedownload.php?appid=<%=appid%>" frameborder="0" style="display:none"></iframe>

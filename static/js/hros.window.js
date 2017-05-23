@@ -227,7 +227,7 @@ HROS.window = (function(){
 								'title': options.title,
 								'imgsrc': options.imgsrc
 							};
-							$('#desk').append(HROS.template.folderWindow(folderData));
+							$('#desk').append(HROS.template.folder(folderData));
 							$(windowId).data('info', folderData).css({
 								opacity: 0,
 								scale: 1.1
@@ -247,7 +247,7 @@ HROS.window = (function(){
 							if(sc != ''){
 								var folder_append = '';
 								$(sc).each(function(){
-									folder_append += HROS.template.appbtn({
+									folder_append += HROS.template.app({
 										'title': this.name,
 										'type': this.type,
 										'id': 'd_' + this.appid,
@@ -645,7 +645,7 @@ HROS.window = (function(){
 			if(sc != null){
 				var folder_append = '';
 				for(var i = 0; i < sc.length; i++){
-					folder_append += HROS.template.appbtn({
+					folder_append += HROS.template.app({
 						'top': 0,
 						'left': 0,
 						'title': sc[i]['name'],

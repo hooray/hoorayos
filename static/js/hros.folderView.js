@@ -39,7 +39,7 @@ HROS.folderView = (function(){
 				var folderViewHtml = '', height = 0;
 				if(sc != ''){
 					$(sc).each(function(){
-						folderViewHtml += HROS.template.appbtn({
+						folderViewHtml += HROS.template.app({
 							'title': this.name,
 							'type': this.type,
 							'id': 'd_' + this.appid,

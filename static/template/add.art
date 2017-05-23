@@ -1,0 +1,4 @@
+<div class="appbtn add">
+    <img src="static/img/addicon.png" style="width:<%=appsize%>px;height:<%=appsize%>px;">
+    <span style="width:<%=appsize+10%>px;">添加应用</span>
+</div>

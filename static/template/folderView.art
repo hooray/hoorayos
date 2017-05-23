@@ -1,0 +1,38 @@
+<div id="<%=id%>" class="quick_view_container" appid="<%=appid%>" realappid="<%=realappid%>" style="top:<%=top%>px;left:<%=left%>px">
+    <div class="perfect_nine_box">
+        <div class="perfect_nine_t">
+            <div class="perfect_nine_t_m"></div>
+        </div>
+        <span class="perfect_nine_t_l"></span>
+        <span class="perfect_nine_t_r"></span>
+        <div class="perfect_nine_middle">
+            <span class="perfect_nine_m_l">
+                <div class="perfect_nine_m_l_t" style="top:0px;height:<%=mlt%>px"></div>
+                <div class="perfect_nine_m_l_m" style="top:<%=mlt%>px;height:20px;display:<% if(mlm){ %>block<% }else{ %>none<% } %>"></div>
+                <div class="perfect_nine_m_l_b" style="top:<% if(mlm){ %><%=mlt+20%><% }else{ %><%=mlt%><% } %>px;height:<%=mlb%>px"></div>
+            </span>
+            <span class="perfect_nine_m_r">
+                <div class="perfect_nine_m_r_t" style="top:0px;height:<%=mrt%>px"></div>
+                <div class="perfect_nine_m_r_m" style="top:<%=mrt%>px;height:20px;display:<% if(mrm){ %>block<% }else{ %>none<% } %>"></div>
+                <div class="perfect_nine_m_r_b" style="top:<% if(mrm){ %><%=mrt+20%><% }else{ %><%=mrt%><% } %>px;height:<%=mrb%>px"></div>
+            </span>
+            <div class="perfect_nine_context">
+                <div class="quick_view_container_control">
+                    <a href="javascript:;" class="quick_view_container_open">打开</a>
+                </div>
+                <div class="quick_view_container_list" id="quick_view_container_list_<%=appid%>" realid="<%=appid%>">
+                    <div class="quick_view_container_list_in" id="quick_view_container_list_in_<%=appid%>" style="height:<%=height%>px">
+                        <%==apps%>
+                    </div>
+                    <div class="scrollBar"></div>
+                    <div class="scrollBar_bgc"></div>
+                </div>
+            </div>
+        </div>
+        <div class="perfect_nine_b">
+            <div class="perfect_nine_b_m"></div>
+        </div>
+        <span class="perfect_nine_b_l"></span>
+        <span class="perfect_nine_b_r"></span>
+    </div>
+</div>

@@ -3,6 +3,8 @@ var ajaxUrl   = 'ajax.php';     //所有ajax操作指向页面
 var HROS      = {};
 var TEMP      = {};
 
+HROS.templateCache = {};
+
 HROS.CONFIG = {
 	website        : 'http://' + location.hostname + location.pathname, //网站地址，用于分享应用时调用。一般无需修改
 	memberID             : 0,         //用户id

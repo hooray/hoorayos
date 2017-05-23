@@ -1,0 +1,6 @@
+<a id="<%=id%>" class="task-item task-item-current" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">
+    <div class="task-item-icon">
+        <img src="<%=imgsrc%>" alt="<%=title%>">
+    </div>
+    <div class="task-item-txt"><%=title%></div>
+</a>

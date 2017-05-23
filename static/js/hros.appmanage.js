@@ -25,7 +25,7 @@ HROS.appmanage = (function(){
 			var dock_append = '';
 			if(HROS.VAR.dock != ''){
 				$(HROS.VAR.dock).each(function(i){
-					dock_append += HROS.template.appbtn({
+					dock_append += HROS.template.app({
 						'title': this.name,
 						'type': this.type,
 						'id': 'd_' + this.appid,
@@ -43,7 +43,7 @@ HROS.appmanage = (function(){
 				var desk_append = '', desk = eval('HROS.VAR.desk' + (j + 1));
 				if(desk != ''){
 					$(desk).each(function(i){
-						desk_append += HROS.template.appbtn({
+						desk_append += HROS.template.app({
 							'title': this.name,
 							'type': this.type,
 							'id': 'd_' + this.appid,

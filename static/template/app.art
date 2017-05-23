@@ -1,0 +1,4 @@
+<div id="<%=id%>" class="appbtn" title="<%=title%>" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>">
+    <img src="<%=imgsrc%>" alt="<%=title%>" style="width:<%=appsize%>px;height:<%=appsize%>px;">
+    <span style="width:<%=appsize+10%>px;"><%=title%></span>
+</div>

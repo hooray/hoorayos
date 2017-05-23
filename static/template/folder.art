@@ -1,0 +1,31 @@
+<div id="<%=id%>" class="folder-window window-container window-current" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" state="show" style="width:<%=width%>px;height:<%=height%>px;z-index:<%=zIndex%>">
+    <div style="height:100%">
+        <div class="title-bar">
+            <img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>
+            <div class="title-handle">
+                <a class="ha-hide" btn="hide" href="javascript:;" title="最小化"><b class="hide-b"></b></a>
+                <% if(istitlebar){ %>
+                    <a class="ha-max" btn="max" href="javascript:;" title="最大化"><b class="max-b"></b></a>
+                    <a class="ha-revert" btn="revert" href="javascript:;" title="还原" style="display:none"><b class="revert-b"></b><b class="revert-t"></b></a>
+                <% } %>
+                <a class="ha-close" btn="close" href="javascript:;" title="关闭">×</a>
+            </div>
+        </div>
+        <div class="window-frame">
+            <div class="folder_body"></div>
+        </div>
+        <div class="set-bar"><div class="fr">
+            <a class="btn refresh"><i class="icon icon158"></i><span class="btn-con">刷新</span></a>
+        </div></div>
+    </div>
+    <% if(isresize){ %>
+        <div class="window-resize window-resize-t" resize="t"></div>
+        <div class="window-resize window-resize-r" resize="r"></div>
+        <div class="window-resize window-resize-b" resize="b"></div>
+        <div class="window-resize window-resize-l" resize="l"></div>
+        <div class="window-resize window-resize-rt" resize="rt"></div>
+        <div class="window-resize window-resize-rb" resize="rb"></div>
+        <div class="window-resize window-resize-lt" resize="lt"></div>
+        <div class="window-resize window-resize-lb" resize="lb"></div>
+    <% } %>
+</div>
