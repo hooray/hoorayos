@@ -1,0 +1,64 @@
+<div class="popup-menu app-menu">
+    <ul>
+        <li>
+            <a menu="open" href="javascript:;">
+                <i class="fa fa-fw fa-external-link"></i>
+                打开
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="move" href="javascript:;">
+                <i class="fa fa-fw fa-share"></i>
+                移动到
+                <i class="fa fa-caret-right arrow"></i>
+            </a>
+            <div class="popup-menu">
+                <ul>
+                    <li>
+                        <a menu="moveto" desk="1" href="javascript:;" <% if(desk == 1){ %>class="disabled"<% } %>>
+                            <% if(desk == 1){ %><i class="fa fa-fw fa-check"></i><% } %>
+                            桌面1
+                        </a>
+                    </li>
+                    <li>
+                        <a menu="moveto" desk="2" href="javascript:;" <% if(desk == 2){ %>class="disabled"<% } %>>
+                            <% if(desk == 2){ %><i class="fa fa-fw fa-check"></i><% } %>
+                            桌面2
+                        </a>
+                    </li>
+                    <li>
+                        <a menu="moveto" desk="3" href="javascript:;" <% if(desk == 3){ %>class="disabled"<% } %>>
+                            <% if(desk == 3){ %><i class="fa fa-fw fa-check"></i><% } %>
+                            桌面3
+                        </a>
+                    </li>
+                    <li>
+                        <a menu="moveto" desk="4" href="javascript:;" <% if(desk == 4){ %>class="disabled"<% } %>>
+                            <% if(desk == 4){ %><i class="fa fa-fw fa-check"></i><% } %>
+                            桌面4
+                        </a>
+                    </li>
+                    <li>
+                        <a menu="moveto" desk="5" href="javascript:;" <% if(desk == 5){ %>class="disabled"<% } %>>
+                            <% if(desk == 5){ %><i class="fa fa-fw fa-check"></i><% } %>
+                            桌面5
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a menu="edit" href="javascript:;">
+                <i class="fa fa-fw fa-pencil"></i>
+                编辑
+            </a>
+        </li>
+        <li>
+            <a menu="del" href="javascript:;">
+                <i class="fa fa-fw fa-trash"></i>
+                卸载
+            </a>
+        </li>
+    </ul>
+</div>

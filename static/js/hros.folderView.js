@@ -2,12 +2,12 @@ HROS.folderView = (function(){
 	return {
 		init: function(){
 			$('body').on('click', '.quick_view_container', function(){
-				HROS.popupMenu.hide();
+				HROS.popupMenu.remove();
 			}).on('click', '.quick_view_container_open', function(){
 				HROS.window.create($(this).parents('.quick_view_container').attr('appid'), 'folder');
 				HROS.folderView.hide();
 			}).on('click', '.appbtn', function(){
-				HROS.popupMenu.hide();
+				HROS.popupMenu.remove();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();

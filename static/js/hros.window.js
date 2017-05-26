@@ -27,19 +27,13 @@ HROS.window = (function(){
 				switch($(this).attr('type')){
 					case 'window':
 					case 'widget':
-						var popupmenu = HROS.popupMenu.app($(this));
+						HROS.popupMenu.app(e, $(this));
 						break;
 					case 'pwindow':
 					case 'pwidget':
-						var popupmenu = HROS.popupMenu.papp($(this));
+						HROS.popupMenu.papp(e, $(this));
 						break;
 				}
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
-				popupmenu.css({
-					left: l,
-					top: t
-				}).show();
 				return false;
 			});
 		},
@@ -660,13 +654,7 @@ HROS.window = (function(){
 				$(windowId).find('.folder_body').html('').append(folder_append).on('contextmenu', '.appbtn', function(e){
 					$('.popup-menu').hide();
 					$('.quick_view_container').remove();
-					var $popupMenu = HROS.popupMenu.app($(this));
-					var l = ($(window).width() - e.clientX) < $popupMenu.width() ? (e.clientX - $popupMenu.width()): e.clientX;
-					var t = ($(window).height() - e.clientY) < $popupMenu.height() ? (e.clientY - $popupMenu.height()): e.clientY;
-					$popupMenu.css({
-						left: l,
-						top: t
-					}).show();
+					HROS.popupMenu.app(e, $(this));
 					return false;
 				});
 			}

@@ -24,30 +24,23 @@ HROS.app = (function(){
 			HROS.app.moveScrollbar();
 			//绑定应用右击事件
 			$('body').on('contextmenu', '.appbtn:not(.add)', function(e){
-				HROS.popupMenu.hide();
-				var popupmenu;
+				HROS.popupMenu.remove();
 				switch($(this).attr('type')){
 					case 'window':
 					case 'widget':
-						popupmenu = HROS.popupMenu.app($(this));
+						HROS.popupMenu.app(e, $(this));
 						break;
 					case 'pwindow':
 					case 'pwidget':
-						popupmenu = HROS.popupMenu.papp($(this));
+						HROS.popupMenu.papp(e, $(this));
 						break;
 					case 'folder':
-						popupmenu = HROS.popupMenu.folder($(this));
+						HROS.popupMenu.folder(e, $(this));
 						break;
 					case 'file':
-						popupmenu = HROS.popupMenu.file($(this));
+						HROS.popupMenu.file(e, $(this));
 						break;
 				}
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
-				popupmenu.css({
-					left: l,
-					top: t
-				}).show();
 				return false;
 			});
 			//应用窗口上的评分、分享按钮事件

@@ -19,13 +19,7 @@ HROS.taskBar = (function(){
 			$('#task-content-inner').on('contextmenu', '.task-item', function(e){
 				$('.popup-menu').hide();
 				$('.quick_view_container').remove();
-				var popupmenu = HROS.popupMenu.task($(this));
-				var l = $(window).width() - e.clientX < popupmenu.width() ? e.clientX - popupmenu.width(): e.clientX;
-				var t = e.clientY - popupmenu.height();
-				popupmenu.css({
-					left: l,
-					top: t
-				}).show();
+				HROS.popupMenu.task(e, $(this));
 				return false;
 			});
 		},

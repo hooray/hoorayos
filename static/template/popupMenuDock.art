@@ -1,0 +1,29 @@
+<div class="popup-menu dock-menu">
+    <ul>
+        <li>
+            <a menu="dockPos" pos="top" href="javascript:;" <% if(pos == 'top'){ %>class="disabled"<% } %>>
+                <% if(pos == 'top'){ %><i class="fa fa-fw fa-check"></i><% } %>
+                向上停靠
+            </a>
+        </li>
+        <li>
+            <a menu="dockPos" pos="left" href="javascript:;" <% if(pos == 'left'){ %>class="disabled"<% } %>>
+                <% if(pos == 'left'){ %><i class="fa fa-fw fa-check"></i><% } %>
+                向左停靠
+            </a>
+        </li>
+        <li>
+            <a menu="dockPos" pos="right" href="javascript:;" <% if(pos == 'right'){ %>class="disabled"<% } %>>
+                <% if(pos == 'right'){ %><i class="fa fa-fw fa-check"></i><% } %>
+                向右停靠
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="dockPos" pos="none" href="javascript:;">
+                <i class="fa fa-fw fa-eye-slash"></i>
+                隐藏
+            </a>
+        </li>
+    </ul>
+</div>

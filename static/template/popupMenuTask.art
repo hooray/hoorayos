@@ -1,0 +1,23 @@
+<div class="popup-menu task-menu">
+    <ul>
+        <li>
+            <a menu="show" href="javascript:;" <% if(state == 'show'){ %>class="disabled"<% } %>>
+                <i class="fa fa-fw fa-caret-up"></i>
+                还原
+            </a>
+        </li>
+        <li>
+            <a menu="hide" href="javascript:;" <% if(state == 'hide'){ %>class="disabled"<% } %>>
+                <i class="fa fa-fw fa-caret-down"></i>
+                最小化
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="close" href="javascript:;">
+                <i class="fa fa-fw fa-close"></i>
+                关闭
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,9 +1,13 @@
 HROS.template = (function(){
 	return {
+		//检查模版缓存是否存在
+		checkCache: function(path){
+			return HROS.templateCache.hasOwnProperty(path) ? true : false;
+		},
 		//渲染模版文件
 		renderFile: function(path, data){
 			var html;
-			if(HROS.templateCache.hasOwnProperty(path)){
+			if(HROS.template.checkCache(path)){
 				html = HROS.templateCache[path](data);
 			}else{
 				$.ajax({

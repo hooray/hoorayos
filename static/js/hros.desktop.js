@@ -9,22 +9,16 @@ HROS.deskTop = (function(){
 				HROS.deskTop.resize();
 			});
 			$('body').on('click', '#desktop', function(){
-				HROS.popupMenu.hide();
+				HROS.popupMenu.remove();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
 			}).on('contextmenu', '#desktop', function(e){
-				HROS.popupMenu.hide();
+				HROS.popupMenu.remove();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
-				var popupmenu = HROS.popupMenu.desk();
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
-				popupmenu.css({
-					left: l,
-					top: t
-				}).show();
+				HROS.popupMenu.desk(e);
 				return false;
 			});
 		},

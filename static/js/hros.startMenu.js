@@ -67,7 +67,7 @@ HROS.startMenu = (function(){
 			}
 		},
 		show: function(){
-			HROS.popupMenu.hide();
+			HROS.popupMenu.remove();
 			HROS.folderView.hide();
 			HROS.searchBar.hide();
 			$('#startmenu-container').css({

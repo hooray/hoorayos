@@ -1,0 +1,17 @@
+<div class="popup-menu file-menu">
+    <ul>
+        <li>
+            <a menu="download" href="javascript:;">
+                <i class="fa fa-fw fa-cloud-download"></i>
+                下载
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="del" href="javascript:;">
+                <i class="fa fa-fw fa-trash"></i>
+                删除
+            </a>
+        </li>
+    </ul>
+</div>

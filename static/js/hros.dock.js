@@ -20,17 +20,11 @@ HROS.dock = (function(){
 				$(this).removeClass('showtop');
 			});
 			$('body').on('contextmenu', '#dock-container', function(e){
-				HROS.popupMenu.hide();
+				HROS.popupMenu.remove();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
-				var popupmenu = HROS.popupMenu.dock();
-				var l = ($(window).width() - e.clientX) < popupmenu.width() ? (e.clientX - popupmenu.width()): e.clientX;
-				var t = ($(window).height() - e.clientY) < popupmenu.height() ? (e.clientY - popupmenu.height()): e.clientY;
-				popupmenu.css({
-					left: l,
-					top: t
-				}).show();
+				HROS.popupMenu.dock(e);
 				return false;
 			});
 			//绑定应用码头上各个按钮的点击事件

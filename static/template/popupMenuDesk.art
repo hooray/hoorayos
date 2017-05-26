@@ -1,0 +1,128 @@
+<div class="popup-menu desk-menu">
+    <ul>
+        <li>
+            <a menu="hideall" href="javascript:;">
+                <i class="fa fa-fw fa-desktop"></i>
+                显示桌面
+            </a>
+        </li>
+        <li>
+            <a menu="closeall" href="javascript:;">
+                <i class="fa fa-fw fa-close"></i>
+                关闭所有窗口
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a href="javascript:;">
+                <i class="fa fa-fw fa-folder-o"></i>
+                新建
+                <i class="fa fa-caret-right arrow"></i>
+            </a>
+            <div class="popup-menu">
+                <ul>
+                    <li>
+                        <a menu="addfolder" href="javascript:;">
+                            <i class="fa fa-fw fa-folder-o"></i>
+                            新建文件夹</a>
+                        </li>
+                    <li>
+                        <a menu="addpapp" href="javascript:;">
+                            <i class="fa fa-fw fa-edge"></i>
+                            新建私人应用
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a menu="uploadfile" href="javascript:;">
+                <i class="fa fa-fw fa-cloud-upload"></i>
+                上传文件
+            </a>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="themes" href="javascript:;">
+                <i class="fa fa-fw fa-photo"></i>
+                主题设置
+            </a>
+        </li>
+        <li>
+            <a menu="setting" href="javascript:;">
+                <i class="fa fa-fw fa-cog"></i>
+                桌面设置
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"><i class="fa fa-fw fa-th"></i>图标设置<i class="fa fa-caret-right arrow"></i></a>
+            <div class="popup-menu"><ul>
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-fw fa-th"></i>
+                        排列
+                        <i class="fa fa-caret-right arrow"></i>
+                    </a>
+                    <div class="popup-menu">
+                        <ul>
+                            <li>
+                                <a menu="orderby" orderby="x" href="javascript:;" <% if(xy == 'x'){ %>class="disabled"<% } %>>
+                                    <% if(xy == 'x'){ %><i class="fa fa-fw fa-check"></i><% } %>
+                                    横向排列
+                                </a>
+                            </li>
+                            <li>
+                                <a menu="orderby" orderby="y" href="javascript:;" <% if(xy == 'y'){ %>class="disabled"<% } %>>
+                                    <% if(xy == 'y'){ %><i class="fa fa-fw fa-check"></i><% } %>
+                                    纵向排列
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-fw fa-square-o"></i>
+                        尺寸
+                        <i class="fa fa-caret-right arrow"></i>
+                    </a>
+                    <div class="popup-menu">
+                        <ul>
+                            <li>
+                                <a menu="size" size="32" href="javascript:;" <% if(size == 32){ %>class="disabled"<% } %>>
+                                    <% if(size == 32){ %><i class="fa fa-fw fa-check"></i><% } %>
+                                    小图标
+                                </a>
+                            </li>
+                            <li>
+                                <a menu="size" size="48" href="javascript:;" <% if(size == 48){ %>class="disabled"<% } %>>
+                                    <% if(size == 48){ %><i class="fa fa-fw fa-check"></i><% } %>
+                                    常规图标
+                                </a>
+                            </li>
+                            <li>
+                                <a menu="size" size="64" href="javascript:;" <% if(size == 64){ %>class="disabled"<% } %>>
+                                    <% if(size == 64){ %><i class="fa fa-fw fa-check"></i><% } %>
+                                    大图标
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul></div>
+        </li>
+        <li class="separator"></li>
+        <li>
+            <a menu="lock" href="javascript:;">
+                <i class="fa fa-fw fa-lock"></i>
+                锁定
+            </a>
+        </li>
+        <li>
+            <a menu="logout" href="javascript:;">
+                <i class="fa fa-fw fa-sign-out"></i>
+                注销
+            </a>
+        </li>
+    </ul>
+</div>
