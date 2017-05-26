@@ -40,7 +40,7 @@ HROS.template = (function(){
 			return HROS.template.renderFile('window.art', data);
 		},
 		//文件夹窗口
-		folderWindow: function(data){
+		folder: function(data){
 			return HROS.template.renderFile('folder.art', data);
 		},
 		//文件夹预览
