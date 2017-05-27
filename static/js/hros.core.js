@@ -3,7 +3,6 @@ var ajaxUrl   = 'ajax.php';     //所有ajax操作指向页面
 var HROS      = {};
 
 HROS.maskBoxCache = {};
-HROS.popupMenuCache = {};
 HROS.templateCache = {};
 
 HROS.CONFIG = {
