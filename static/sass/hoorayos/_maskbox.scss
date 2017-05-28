@@ -1,5 +1,5 @@
 /* 遮罩层 */
-#maskbox, #maskbox-copyright, #maskbox-dockdrap{
+.maskbox{
     z-index: 9000000;
     display: none;
     cursor: default;
@@ -10,12 +10,12 @@
     top: 0;
     left: 0;
 }
-#maskbox-dockdrap, #maskbox-copyright{
+.maskbox-dark{
     background: none rgba(0, 0, 0, 0.7);
 }
-#maskbox-dockdrap{
+.maskbox{
     .dock_drap_effect{
-        border: 3px solid #3c9dff;
+        border: 3px solid #e1f0fd;
         position: absolute;
         z-index: 4000000;
         &.dock_drap_effect_top{
@@ -40,7 +40,7 @@
             top: 50%;
         }
         &.hover{
-            border-color: #e1f0fd;
+            border-color: #3c9dff;
         }
     }
     .dock_drap_mask{

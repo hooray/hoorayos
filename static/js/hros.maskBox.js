@@ -7,7 +7,7 @@ HROS.maskBox = (function(){
 	return {
 		desk: function(){
 			if(!HROS.maskBoxCache.desk){
-				HROS.maskBoxCache.desk = $('<div id="maskbox"></div>');
+				HROS.maskBoxCache.desk = $('<div class="maskbox"></div>');
 				$('body').append(HROS.maskBoxCache.desk);
 			}
 			return HROS.maskBoxCache.desk;
@@ -15,11 +15,11 @@ HROS.maskBox = (function(){
 		dock: function(){
 			if(!HROS.maskBoxCache.dock){
 				HROS.maskBoxCache.dock = $(
-					'<div id="maskbox-dockdrap">'+
-						'<div id="docktop" class="dock_drap_effect dock_drap_effect_top"></div>'+
-						'<div id="dockleft" class="dock_drap_effect dock_drap_effect_left"></div>'+
-						'<div id="dockright" class="dock_drap_effect dock_drap_effect_right"></div>'+
-						'<div id="dockmask" class="dock_drap_mask">'+
+					'<div class="maskbox maskbox-dark">'+
+						'<div class="dock_drap_effect dock_drap_effect_top"></div>'+
+						'<div class="dock_drap_effect dock_drap_effect_left"></div>'+
+						'<div class="dock_drap_effect dock_drap_effect_right"></div>'+
+						'<div class="dock_drap_mask">'+
 							'<div class="dock_drop_region_top"><div class="text">拖放至顶部</div></div>'+
 							'<div class="dock_drop_region_left"><div class="text">拖放至左侧</div></div>'+
 							'<div class="dock_drop_region_right"><div class="text">拖放至右侧</div></div>'+
@@ -32,7 +32,7 @@ HROS.maskBox = (function(){
 		},
 		copyright: function(){
 			if(!HROS.maskBoxCache.copyright){
-				HROS.maskBoxCache.copyright = $('<div id="maskbox-copyright"></div>');
+				HROS.maskBoxCache.copyright = $('<div class="maskbox maskbox-dark"></div>');
 				$('body').append(HROS.maskBoxCache.copyright);
 			}
 			return HROS.maskBoxCache.copyright;

@@ -63,10 +63,6 @@ HROS.template = (function(){
 		starDialog: function(data){
 			return HROS.template.renderFile('starDialog.art', data);
 		},
-		//分享
-		shareDialog: function(data){
-			return HROS.template.renderFile('shareDialog.art', data);
-		},
 		//锁定
 		lock: function(data){
 			return HROS.template.renderFile('lock.art', data);

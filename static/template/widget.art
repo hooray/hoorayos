@@ -3,7 +3,6 @@
         <a class="ha-close" href="javascript:;" title="关闭"></a>
         <% if(issetbar){ %>
             <a class="ha-star" href="javascript:;" title="评分"></a>
-            <a class="ha-share" href="javascript:;" title="分享"></a>
         <% } %>
     </div>
     <div class="frame">

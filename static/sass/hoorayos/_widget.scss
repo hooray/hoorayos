@@ -22,10 +22,6 @@
             @include desktop-sprite(widget-star);
             right: 30px;
         }
-        &.ha-share{
-            @include desktop-sprite(widget-share);
-            right: 55px;
-        }
     }
     .frame{
         position: absolute;

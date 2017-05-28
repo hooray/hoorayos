@@ -317,17 +317,6 @@ HROS.widget = (function(){
 						})
 					}).showModal();
 				});
-			}).on('click', '.widget .ha-share', function(){
-				var obj = $(this).parents('.widget');
-				dialog({
-					title: '分享应用',
-					width: 320,
-					id: 'share',
-					content: HROS.template.shareDialog({
-						'title': '我正在使用 %23HoorayOS%23 中的 %23' + obj.data('info').title + '%23 应用，很不错哦，推荐你也来试试！',
-						'url': HROS.CONFIG.website + '?run=' + obj.data('info').realappid + '%26type=app'
-					})
-				}).showModal();
 			});
 		}
 	}
