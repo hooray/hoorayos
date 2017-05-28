@@ -24,7 +24,6 @@
         </div>
         <div class="set-bar"><div class="fr">
             <% if(issetbar){ %>
-                <a class="btn star"><i class="fa fa-star"></i><span class="btn-con">评分</span></a>
                 <a class="btn detail"><i class="fa fa-info-circle"></i><span class="btn-con">详情</span></a>
             <% } %>
             <a class="btn refresh"><i class="fa fa-refresh"></i><span class="btn-con">刷新</span></a>

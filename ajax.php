@@ -618,33 +618,5 @@
 			]);
 			echo json_encode(['status' => true]);
 			break;
-		//获取应用评分
-		case 'getAppStar':
-			$starnum = $db->get('tb_app', 'starnum', ['tbid' => $_POST['id']]);
-			$cb['starnum'] = is_int($starnum) || $starnum == 0 ? (int)$starnum : sprintf('%.1f', $starnum);
-			echo json_encode($cb);
-			break;
-		//更新应用评分
-		case 'updateAppStar':
-			if(!$db->has('tb_app_star', [
-				'AND' => [
-					'app_id' => $_POST['id'],
-					'member_id' => session('member_id')
-				]
-			])){
-				$db->insert('tb_app_star', [
-					'app_id' => $_POST['id'],
-					'starnum' => $_POST['starnum'],
-					'dt' => date('Y-m-d H:i:s'),
-					'member_id' => session('member_id')
-				]);
-				$starnumavg = $db->avg('tb_app_star', 'starnum', ['app_id' => $_POST['id']]);
-				$db->update('tb_app', ['starnum' => $starnumavg], ['tbid' => $_POST['id']]);
-				$cb['response'] = true;
-			}else{
-				$cb['response'] = false;
-			}
-			echo json_encode($cb);
-			break;
 	}
 ?>

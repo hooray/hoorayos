@@ -297,26 +297,6 @@ HROS.widget = (function(){
 			$('#desk').on('click', '.widget .ha-close', function(e){
 				var obj = $(this).parents('.widget');
 				HROS.widget.close(obj.attr('appid'));
-			}).on('click', '.widget .ha-star', function(){
-				var obj = $(this).parents('.widget');
-				$.ajax({
-					data: {
-						ac: 'getAppStar',
-						id: obj.data('info').realappid
-					}
-				}).done(function(starnum){
-					starnum = starnum['starnum'];
-					dialog({
-						title: '给“' + obj.data('info').title + '”打分',
-						padding: '10px 40px 15px 40px',
-						id: 'star',
-						content: HROS.template.starDialog({
-							'realappid': obj.data('info').realappid,
-							'point': Math.floor(starnum),
-							'realpoint': starnum * 20
-						})
-					}).showModal();
-				});
 			});
 		}
 	}

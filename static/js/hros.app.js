@@ -43,42 +43,6 @@ HROS.app = (function(){
 				}
 				return false;
 			});
-			//应用窗口上的评分、分享按钮事件
-			$('body').on('click', '#star ul li', function(){
-				var num = $(this).attr('num');
-				if(!isNaN(num) && /^[1-5]$/.test(num)){
-					if(HROS.base.checkLogin()){
-						$.ajax({
-							data: {
-								ac: 'updateAppStar',
-								id: $('#star').attr('realappid'),
-								starnum: num
-							}
-						}).done(function(responseText){
-							dialog.get('star').close().remove();
-							if(responseText['response']){
-								swal({
-									type: 'success',
-									title: '打分成功',
-									timer: 2000,
-									showConfirmButton: false
-								});
-							}else{
-								swal({
-									type: 'warning',
-									title: '你已经打过分了',
-									timer: 2000,
-									showConfirmButton: false
-								});
-							}
-						});
-					}else{
-						HROS.base.login();
-					}
-				}
-			}).on('click', '#share a', function(){
-				dialog.get('share').close().remove();
-			});
 			//获取桌面应用数据
 			HROS.app.get();
 		},

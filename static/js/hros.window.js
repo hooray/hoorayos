@@ -715,26 +715,6 @@ HROS.window = (function(){
 						showConfirmButton: false
 					});
 				}
-			}).on('click', '.window-container .star', function(){
-				var obj = $(this).parents('.window-container');
-				$.ajax({
-					data: {
-						ac: 'getAppStar',
-						id: obj.data('info').realappid
-					}
-				}).done(function(starnum){
-					starnum = starnum['starnum'];
-					dialog({
-						title: '给“' + obj.data('info').title + '”打分',
-						padding: '10px 40px 15px 40px',
-						id: 'star',
-						content: HROS.template.starDialog({
-							'realappid': obj.data('info').realappid,
-							'point': Math.floor(starnum),
-							'realpoint': starnum * 20
-						})
-					}).showModal();
-				});
 			}).on('contextmenu', '.window-container', function(){
 				$('.popup-menu').hide();
 				$('.quick_view_container').remove();

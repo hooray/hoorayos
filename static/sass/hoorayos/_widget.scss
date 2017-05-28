@@ -18,10 +18,6 @@
             @include desktop-sprite(widget-close);
             right: 5px;
         }
-        &.ha-star{
-            @include desktop-sprite(widget-star);
-            right: 30px;
-        }
     }
     .frame{
         position: absolute;

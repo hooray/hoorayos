@@ -1,9 +1,6 @@
 <div id="<%=id%>" class="widget" appid="<%=appid%>" realappid="<%=realappid%>" type="<%=type%>" style="z-index:<%=zIndex%>;width:<%=width%>px;height:<%=height%>px;top:<%=top%>px;right:<%=right%>px">
     <div class="move">
         <a class="ha-close" href="javascript:;" title="关闭"></a>
-        <% if(issetbar){ %>
-            <a class="ha-star" href="javascript:;" title="评分"></a>
-        <% } %>
     </div>
     <div class="frame">
         <iframe src="<%=url%>" frameborder="0" allowtransparency="true"></iframe>
