@@ -111,7 +111,7 @@
 					field : 'do',
 					align : 'center',
 					valign : 'middle',
-					width : 200
+					width : 120
 				}
 			],
 			striped : true, // 开启隔行换色
@@ -129,7 +129,7 @@
 		$('#s_app_category_id, #s_type').change(function(){
 			$('#table').bootstrapTable('refresh');
 		});
-		//删除，推荐
+		//删除
 		$('#table').on('click', '.do-del', function(){
 			var id = $(this).data().id;
 			var name = $(this).data().name;
@@ -148,15 +148,6 @@
 				}).done(function(){
 					$('#table').bootstrapTable('refresh');
 				});
-			});
-		}).on('click', '.do-recommend', function(){
-			var id = $(this).data().id;
-			$.ajax({
-				type : 'POST',
-				url : 'index.ajax.php',
-				data : 'ac=recommend&id=' + id
-			}).done(function(){
-				$('#table').bootstrapTable('refresh');
 			});
 		});
 	});

@@ -222,22 +222,6 @@ form{
 .btn-run:hover{background-position:-94px -31px;}
 .btn-run:active{background-position:-188px -31px;}
 
-.commend-day{height:176px;margin-bottom:10px;overflow:hidden;}
-.commend-day h3{margin:0;padding:0 10px;height:30px;line-height:31px;font-size:12px;overflow:hidden;border-bottom:1px solid #DDD;background:url(../img/ui/app_spr_x.png) repeat-x;background-position:0 -37px;}
-.commend-day .star-box,
-.commend-day .star-box i{background:url(../img/ui/app_spr_img.png) no-repeat;}
-.commend-day .star-box{position:relative;left:0;top:0;float:left;margin:5px 0 0 8px;display:inline-block;width:85px;height:15px;background-position:0 -62px;}
-.commend-day .star-box i{position:absolute;font-style:normal;top:0;left:0;height:15px;overflow:hidden;background-position:0 -78px;}
-.commend-container{position:relative;float:left;width:48px;height:48px;margin:10px 0 0 5px;overflow:hidden;padding:7px 21px 45px;background:url(../img/ui/commend_day.gif) no-repeat 0 0;_display:inline;}
-.commend-text{float:right;width:100px;padding:0 10px 0 0;line-height:18px;color:#999;}
-.commend-text h4{margin-top:0;margin-bottom:3px;padding:3px 0;font-size:12px;color:#555;border-bottom:1px solid #DDD;}
-.commend-text h4 strong,
-.commend-text h4 span{display:block;}
-.commend-text h4 span{font-weight:normal;color:#999;}
-.commend-text .con{width:100px;height:54px;word-wrap:break-word;overflow:hidden;}
-.commend-text .btn-add,
-.commend-text .btn-run{margin-top:5px;margin-right:5px;color:#fff;text-decoration:none;}
-
 .detail-wrap{background:#EEE;}
 .detail-wrap .btn-back{display:inline-block;width:35px;height:20px;padding-left:15px;line-height:21px;overflow:hidden;color:#fff;background:url(../img/ui/app_spr_img.png) no-repeat -129px -83px;text-decoration:none;}
 .detail-wrap .btn-back:hover{background-position:-180px -83px;}

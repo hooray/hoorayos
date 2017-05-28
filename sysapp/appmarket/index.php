@@ -42,46 +42,6 @@
 				<button id="search_3_do" class="btn" style="padding:4px 5px"><i class="icon-search"></i></button>
 			</div>
 		</div>
-		<div class="mbox commend-day">
-			<?php
-				$recommendApp = $db->get('tb_app', '*', array(
-					'isrecommend' => 1
-				));
-			?>
-			<h3>今日推荐</h3>
-			<div class="commend-container">
-				<a href="javascript:openDetailIframe2('detail.php?id=<?php echo $recommendApp['tbid']; ?>');">
-					<img src="../../<?php echo $recommendApp['icon']; ?>" alt="<?php echo $recommendApp['name']; ?>">
-				</a>
-			</div>
-			<div class="commend-text">
-				<h4>
-					<strong><?php echo $recommendApp['name']; ?></strong>
-					<span><?php echo $recommendApp['usecount']; ?>人在用</span>
-				</h4>
-				<div class="con" title="<?php echo $recommendApp['remark']; ?>"><?php echo $recommendApp['remark']; ?></div>
-				<?php
-					$myapplist = $db->select('tb_member_app', 'realid', array(
-						'member_id' => session('member_id')
-					));
-					$myapplist2 = array();
-					foreach($db->select('tb_member_app', array('tbid', 'realid'), array(
-						'AND' => array(
-							'member_id' => session('member_id'),
-							'realid[!]' => null
-						)
-					)) as $value){
-						$myapplist2[$value['realid']] = $value['tbid'];
-					}
-					if(in_array($recommendApp['tbid'], $myapplist)){
-						echo '<a href="javascript:;" app_id="'.$myapplist2[$recommendApp['tbid']].'" real_app_id="'.$recommendApp['tbid'].'" app_type="'.$recommendApp['type'].'" class="btn-run">打开应用</a>';
-					}else{
-						echo '<a href="javascript:;" real_app_id="'.$recommendApp['tbid'].'" class="btn-add">添加应用</a>';
-					}
-				?>
-			</div>
-			<span class="star-box"><i style="width:<?php echo $recommendApp['starnum'] * 20; ?>%"></i></span>
-		</div>
 	</div>
 	<div class="col-main">
 		<div class="mbox app-list-box">
@@ -189,23 +149,6 @@ $(function(){
 			window.parent.HROS.base.login();
 		}
 	}).on('click', '.btn-run-s', function(){
-		if($(this).attr('app_type') == 'window'){
-			window.parent.HROS.window.create($(this).attr('app_id'), 'window', $(this).attr('real_app_id'));
-		}else{
-			window.parent.HROS.widget.create($(this).attr('app_id'), 'widget', $(this).attr('real_app_id'));
-		}
-	});
-	$('.commend-day').on('click', '.btn-add', function(){
-		if(window.parent.HROS.base.checkLogin()){
-			var appid = $(this).attr('real_app_id');
-			window.parent.HROS.app.add(appid, function(){
-				window.parent.HROS.app.get();
-				location.reload();
-			});
-		}else{
-			window.parent.HROS.base.loginDialog('您尚未登录，赶快登录去添加您喜爱的应用吧！');
-		}
-	}).on('click', '.btn-run', function(){
 		if($(this).attr('app_type') == 'window'){
 			window.parent.HROS.window.create($(this).attr('app_id'), 'window', $(this).attr('real_app_id'));
 		}else{

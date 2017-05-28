@@ -31,13 +31,7 @@
 					$tmp['type'] = $v['type'] == 'window' ? '窗口' : '挂件';
 					$tmp['app_category_id'] = $v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']];
 					$tmp['usecount'] = $v['usecount'];
-					$tmp['do'] = '';
-					if($v['isrecommend'] == 1){
-						$tmp['do'] .= ' <a href="javascript:;" class="btn btn-link btn-xs disabled">今日推荐</a> ';
-					}else{
-						$tmp['do'] .= ' <a href="javascript:;" class="btn btn-default btn-xs do-recommend" data-id="'.$v['tbid'].'">设为今日推荐</a> ';
-					}
-					$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a> ';
+					$tmp['do'] = ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a> ';
 					$tmp['do'] .= ' <a href="javascript:;" class="btn btn-danger btn-xs do-del" data-id="'.$v['tbid'].'" data-name="'.$v['name'].'">删除</a> ';
 					$echo['rows'][] = $tmp;
 		            unset($tmp);
@@ -47,18 +41,6 @@
 			break;
 		case 'del':
 			$db->delete('tb_app', array(
-				'tbid' => $_POST['id']
-			));
-			break;
-		case 'recommend':
-			$db->update('tb_app', array(
-				'isrecommend' => 0
-			), array(
-				'isrecommend' => 1
-			));
-			$db->update('tb_app', array(
-				'isrecommend' => 1
-			), array(
 				'tbid' => $_POST['id']
 			));
 			break;
