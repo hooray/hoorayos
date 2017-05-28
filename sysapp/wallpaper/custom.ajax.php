@@ -55,9 +55,13 @@
 					));
 					$tbid = $db->id();
 				}
-				echo '{"tbid":"'.$tbid.'","surl":"'.$surl.'","url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
+				$info['tbid'] = $tbid;
+				$info['surl'] = $surl;
+				echo json_encode($info);
 			}else{
-				echo '{"state":"您已经上传满6张壁纸，可以删除之后再进行上传"}';
+				echo json_encode([
+					'state' => '您已经上传满6张壁纸，可以删除之后再进行上传'
+				]);
 			}
 			break;
 	}

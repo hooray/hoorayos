@@ -24,8 +24,7 @@
 			'type' => 'window',
 			'isresize' => 1,
 			'isopenmax' => 0,
-			'isflash' => 0,
-			'verifytype' => 0
+			'isflash' => 0
 		);
 	}
 ?>
@@ -167,13 +166,7 @@
 			</div>
 		</div>
 		<div class="bottom-bar">
-			<?php if($app['verifytype'] == 2){ ?>
-			<a class="btn btn-success pull-right" id="btn-pass" href="javascript:;" appid="<?php echo $_GET['appid']; ?>"><i class="icon-white icon-ok"></i> 审核通过</a>
-			<a class="btn btn-default pull-right" id="btn-unpass" href="javascript:;" appid="<?php echo $_GET['appid']; ?>" style="margin-left:10px"><i class="icon-remove"></i> 审核不通过</a>
-			<a class="btn btn-default" id="btn-preview" href="javascript:;" style="margin-left:10px"><i class="icon-eye-open"></i> 预览应用</a>
-			<?php }else{ ?>
 			<a class="btn btn-default" id="btn-preview" href="javascript:;"><i class="icon-eye-open"></i> 预览应用</a>
-			<?php } ?>
 			<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="icon-white icon-ok"></i> 确定</a>
 			<a class="btn btn-default pull-right" href="javascript:window.parent.closeDetailIframe();" style="margin-right:10px"><i class="icon-chevron-up"></i> 返回应用列表</a>
 		</div>
@@ -329,49 +322,6 @@
 			$('.shortcutview img').remove();
 			$('.shortcutview').append($(this).html());
 			$('#inputIcon').val($(this).children('img').attr('valsrc'));
-		});
-		$('#btn-pass').on('click', function(){
-			var appid = $(this).attr('appid');
-			swal({
-				type : 'warning',
-				title : '确认审核通过该应用',
-				showCancelButton : true,
-				confirmButtonText : '确认',
-				cancelButtonText : '取消',
-				closeOnConfirm : false
-			}, function(){
-				$.ajax({
-					type : 'POST',
-					url : 'detail.ajax.php',
-					data : 'ac=pass&appid=' + appid
-				}).done(function(){
-					window.parent.closeDetailIframe(function(){
-						window.parent.$('#pagination').trigger('currentPage');
-					});
-				});
-			});
-		});
-		$('#btn-unpass').on('click', function(){
-			var appid = $(this).attr('appid');
-			dialog({
-				id : 'del',
-				title : '拒绝审核通过理由',
-				content : document.getElementById('unpassinfo'),
-				ok : function(){
-					$.ajax({
-						type : 'POST',
-						url : 'detail.ajax.php',
-						data : 'ac=unpass&appid=' + appid + '&info=' + $('#unpassinfo input[name="unpassinfo"]').val()
-					}).done(function(){
-						window.parent.closeDetailIframe(function(){
-							window.parent.$('#pagination').trigger('currentPage');
-						});
-					});
-				},
-				okValue : '确认',
-				cancel : true,
-				cancelValue : '取消'
-			}).showModal();
 		});
 		$('#btn-preview').on('click', function(){
 			if(form.check()){

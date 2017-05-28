@@ -82,36 +82,6 @@
 			</div>
 			<span class="star-box"><i style="width:<?php echo $recommendApp['starnum'] * 20; ?>%"></i></span>
 		</div>
-		<div class="mbox develop">
-			<h3>我是开发者</h3>
-			<div class="developer">
-				<?php if(checkLogin()){ ?>
-					<?php
-						$username = $db->get('tb_member', 'username', array(
-							'tbid' => session('member_id')
-						));
-						$myappcount = $db->count('tb_app', array(
-							'AND' => array(
-								'member_id' => session('member_id'),
-								'verifytype' => 1
-							)
-						));
-						$myappunverifycount = $db->count('tb_app', array(
-							'AND' => array(
-								'member_id' => session('member_id'),
-								'verifytype[!]' => 1
-							)
-						));
-					?>
-					<p>开发者：<?php echo $username; ?></p>
-					<p>我开发的应用：<font style="font-weight:bold"><?php echo $myappcount; ?></font> 个</p>
-					<p>未发布的应用：<font style="font-weight:bold"><?php echo $myappunverifycount; ?></font> 个</p>
-					<div class="text-center"><a href="javascript:openDetailIframe2('myapp.manage.php');" class="btn btn-primary">管理我的应用</a> <a href="javascript:openDetailIframe2('myapp.manage.php?add=1');" class="btn btn-danger">开发新应用</a></div>
-				<?php }else{ ?>
-					<div class="text-center" style="margin-top:45px"><a href="javascript:window.parent.HROS.base.login();;" class="btn btn-primary">您还没登录，点我登录</a></div>
-				<?php } ?>
-			</div>
-		</div>
 	</div>
 	<div class="col-main">
 		<div class="mbox app-list-box">

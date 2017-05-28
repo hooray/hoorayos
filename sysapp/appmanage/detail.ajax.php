@@ -20,7 +20,6 @@
 			if($_POST['id'] == ''){
 				$data['type'] = $_POST['val_type'];
 				$data['dt'] = date('Y-m-d H:i:s');
-				$data['verifytype'] = 1;
 				$db->insert('tb_app', $data);
 			}else{
 				$db->update('tb_app', $data, array(
@@ -32,21 +31,6 @@
 				'status' => 'y'
 			));
 			break;
-		case 'pass':
-			$db->update('tb_app', array(
-				'verifytype' => 1
-			), array(
-				'tbid' => $_POST['appid']
-			));
-			break;
-		case 'unpass':
-			$db->update('tb_app', array(
-				'verifytype' => 3,
-				'verifyinfo' => $_POST['info']
-			), array(
-				'tbid' => $_POST['appid']
-			));
-			break;
 		case 'uploadImg':
 			include('libs/Uploader.class.php');
 			$config = array(
@@ -56,7 +40,7 @@
 			);
 			$up = new Uploader('file', $config);
 			$info = $up->getFileInfo();
-			echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
+			echo json_encode($info);
 			break;
 	}
 ?>

@@ -39,7 +39,7 @@
 			);
 			$up = new Uploader('file', $config);
 			$info = $up->getFileInfo();
-			echo '{"url":"'.$info['url'].'","fileType":"'.$info['type'].'","original":"'.$info['originalName'].'","state":"'.$info['state'].'"}';
+			echo json_encode($info);
 			break;
 	}
 ?>

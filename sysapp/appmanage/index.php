@@ -54,13 +54,6 @@
 					<option value="widget">挂件</option>
 				</select>
 			</div>
-			<div class="form-group">
-				<label class="control-label">状态：</label>
-				<select class="form-control" id="s_verifytype">
-					<option value="1">已上线应用</option>
-					<option value="2">待审核应用</option>
-				</select>
-			</div>
 		</div>
 	</div>
 	<table id="table"></table>
@@ -75,7 +68,6 @@
 				params['ac'] = 'getList';
 				params['app_category_id'] = $('#s_app_category_id').val();
 				params['type'] = $('#s_type').val();
-				params['verifytype'] = $('#s_verifytype').val();
 				return params;
 			},
 			columns : [
@@ -134,7 +126,7 @@
 			paginationPreText : '上一页',
 			paginationNextText : '下一页',
 		});
-		$('#s_app_category_id, #s_type, #s_verifytype').change(function(){
+		$('#s_app_category_id, #s_type').change(function(){
 			$('#table').bootstrapTable('refresh');
 		});
 		//删除，推荐

@@ -17,7 +17,6 @@
 			if($_GET['type'] != ''){
 				$where['AND']['type'] = $_GET['type'];
 			}
-			$where['AND']['verifytype'] = $_GET['verifytype'] == 1 ? 1 : 2;
 			if($_GET['sort'] != '' && $_GET['order'] != ''){
 	            $where['ORDER'][$_GET['sort']] = strtoupper($_GET['order']);
 	        }
@@ -33,16 +32,12 @@
 					$tmp['app_category_id'] = $v['app_category_id'] == 0 ? '未分类' : $category[$v['app_category_id']];
 					$tmp['usecount'] = $v['usecount'];
 					$tmp['do'] = '';
-					if($v['verifytype'] == 1){
-						if($v['isrecommend'] == 1){
-							$tmp['do'] .= ' <a href="javascript:;" class="btn btn-link btn-xs disabled">今日推荐</a> ';
-						}else{
-							$tmp['do'] .= ' <a href="javascript:;" class="btn btn-default btn-xs do-recommend" data-id="'.$v['tbid'].'">设为今日推荐</a> ';
-						}
-						$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a> ';
+					if($v['isrecommend'] == 1){
+						$tmp['do'] .= ' <a href="javascript:;" class="btn btn-link btn-xs disabled">今日推荐</a> ';
 					}else{
-						$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">查看详情</a> ';
+						$tmp['do'] .= ' <a href="javascript:;" class="btn btn-default btn-xs do-recommend" data-id="'.$v['tbid'].'">设为今日推荐</a> ';
 					}
+					$tmp['do'] .= ' <a href="javascript:openDetailIframe(\'detail.php?appid='.$v['tbid'].'\');" class="btn btn-primary btn-xs">编辑</a> ';
 					$tmp['do'] .= ' <a href="javascript:;" class="btn btn-danger btn-xs do-del" data-id="'.$v['tbid'].'" data-name="'.$v['name'].'">删除</a> ';
 					$echo['rows'][] = $tmp;
 		            unset($tmp);
