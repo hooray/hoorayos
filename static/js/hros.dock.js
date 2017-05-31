@@ -20,7 +20,7 @@ HROS.dock = (function(){
 				$(this).removeClass('showtop');
 			});
 			$('body').on('contextmenu', '#dock-container', function(e){
-				HROS.popupMenu.remove();
+				HROS.popupMenu.hide();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();

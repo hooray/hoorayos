@@ -9,12 +9,12 @@ HROS.deskTop = (function(){
 				HROS.deskTop.resize();
 			});
 			$('body').on('click', '#desktop', function(){
-				HROS.popupMenu.remove();
+				HROS.popupMenu.hide();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();
 			}).on('contextmenu', '#desktop', function(e){
-				HROS.popupMenu.remove();
+				HROS.popupMenu.hide();
 				HROS.folderView.hide();
 				HROS.searchBar.hide();
 				HROS.startMenu.hide();

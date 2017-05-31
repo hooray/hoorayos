@@ -24,7 +24,7 @@ HROS.app = (function(){
 			HROS.app.moveScrollbar();
 			//绑定应用右击事件
 			$('body').on('contextmenu', '.appbtn:not(.add)', function(e){
-				HROS.popupMenu.remove();
+				HROS.popupMenu.hide();
 				switch($(this).attr('type')){
 					case 'window':
 					case 'widget':

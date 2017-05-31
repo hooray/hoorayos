@@ -774,21 +774,21 @@ HROS.window = (function(){
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h + y - _y,
 								top: _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
 						case 'r':
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w - x + _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
 						case 'b':
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h - y + _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
@@ -796,7 +796,7 @@ HROS.window = (function(){
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w + x - _x,
 								left: _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
@@ -804,24 +804,24 @@ HROS.window = (function(){
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h + y - _y,
 								top: _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w - x + _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							break;
 						case 'rb':
 							w - x + _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w - x + _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h - y + _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
@@ -829,13 +829,13 @@ HROS.window = (function(){
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w + x - _x,
 								left: _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h + y - _y,
 								top: _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							break;
@@ -843,12 +843,12 @@ HROS.window = (function(){
 							w + x - _x > HROS.CONFIG.windowMinWidth ? obj.css({
 								width: w + x - _x,
 								left: _x
-							}): obj.css({
+							}) : obj.css({
 								width: HROS.CONFIG.windowMinWidth
 							});
 							h - y + _y > HROS.CONFIG.windowMinHeight ? obj.css({
 								height: h - y + _y
-							}): obj.css({
+							}) : obj.css({
 								height: HROS.CONFIG.windowMinHeight
 							});
 							break;

@@ -119,7 +119,7 @@ HROS.popupMenu = (function(){
 							HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 						}
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.app-menu a[menu="open"]', function(){
 					var data = $(this).parents('.app-menu').data();
@@ -131,7 +131,7 @@ HROS.popupMenu = (function(){
 							HROS.widget.create(data.obj.attr('appid'), data.obj.attr('type'));
 							break;
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.app-menu a[menu="edit"]', function(){
 					var data = $(this).parents('.app-menu').data();
@@ -147,7 +147,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.app-menu a[menu="del"]', function(){
 					var data = $(this).parents('.app-menu').data();
@@ -163,7 +163,7 @@ HROS.popupMenu = (function(){
 							HROS.deskTop.resize();
 						});
 					});
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -244,7 +244,7 @@ HROS.popupMenu = (function(){
 							HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 						}
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.papp-menu a[menu="open"]', function(){
 					var data = $(this).parents('.papp-menu').data();
@@ -256,7 +256,7 @@ HROS.popupMenu = (function(){
 							HROS.widget.create(data.obj.attr('appid'), data.obj.attr('type'));
 							break;
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.papp-menu a[menu="edit"]', function(){
 					var data = $(this).parents('.papp-menu').data();
@@ -272,7 +272,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.papp-menu a[menu="del"]', function(){
 					var data = $(this).parents('.papp-menu').data();
@@ -288,7 +288,7 @@ HROS.popupMenu = (function(){
 							HROS.deskTop.resize();
 						});
 					});
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -310,12 +310,12 @@ HROS.popupMenu = (function(){
 				$('body').on('click', '.folder-menu a[menu="view"]', function(){
 					var data = $(this).parents('.folder-menu').data();
 					HROS.folderView.get(data.obj);
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.folder-menu a[menu="open"]', function(){
 					var data = $(this).parents('.folder-menu').data();
 					HROS.window.create(data.obj.attr('appid'), data.obj.attr('type'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.folder-menu a[menu="moveto"]:not(.disabled)', function(){
 					var data = $(this).parents('.folder-menu').data();
@@ -382,7 +382,7 @@ HROS.popupMenu = (function(){
 							HROS.app.dataFolderToOtherdesk(id, from, todesk, fromfolderid);
 						}
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.folder-menu a[menu="rename"]', function(){
 					var data = $(this).parents('.folder-menu').data();
@@ -422,7 +422,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.folder-menu a[menu="del"]', function(){
 					var data = $(this).parents('.folder-menu').data();
@@ -446,7 +446,7 @@ HROS.popupMenu = (function(){
 							});
 						});
 					});
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -470,7 +470,7 @@ HROS.popupMenu = (function(){
 					$('body').append(HROS.template.fileDownload({
 						appid: data.obj.attr('appid')
 					}));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.file-menu a[menu="del"]', function(){
 					var data = $(this).parents('.file-menu').data();
@@ -485,7 +485,7 @@ HROS.popupMenu = (function(){
 							HROS.deskTop.resize();
 						});
 					});
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -522,7 +522,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.dock.updatePos($(this).attr('pos'));
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -543,17 +543,17 @@ HROS.popupMenu = (function(){
 				$('body').on('click', '.task-menu a[menu="show"]:not(.disabled)', function(){
 					var data = $(this).parents('.task-menu').data();
 					HROS.window.show2top(data.obj.attr('appid'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.task-menu a[menu="hide"]:not(.disabled)', function(){
 					var data = $(this).parents('.task-menu').data();
 					HROS.window.hide(data.obj.attr('appid'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.task-menu a[menu="close"]', function(){
 					var data = $(this).parents('.task-menu').data();
 					HROS.window.close(data.obj.attr('appid'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -574,19 +574,19 @@ HROS.popupMenu = (function(){
 				//绑定事件
 				$('body').on('click', '.desk-menu a[menu="orderby"]:not(.disabled)', function(){
 					HROS.app.updateXY($(this).attr('orderby'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="size"]:not(.disabled)', function(){
 					HROS.app.updateSize($(this).attr('size'));
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="hideall"]', function(){
 					HROS.window.hideAll();
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="closeall"]', function(){
 					HROS.window.closeAll();
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="addfolder"]', function(){
 					if(HROS.base.checkLogin()){
@@ -626,7 +626,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="addpapp"]', function(){
 					if(HROS.base.checkLogin()){
@@ -641,7 +641,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="uploadfile"]', function(){
 					HROS.window.createTemp({
@@ -652,7 +652,7 @@ HROS.popupMenu = (function(){
 						height: 600,
 						isflash: false
 					});
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="themes"]', function(){
 					if(HROS.base.checkLogin()){
@@ -667,7 +667,7 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="setting"]', function(){
 					if(HROS.base.checkLogin()){
@@ -682,15 +682,15 @@ HROS.popupMenu = (function(){
 					}else{
 						HROS.base.login();
 					}
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="lock"]', function(){
 					HROS.lock.show();
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 				$('body').on('click', '.desk-menu a[menu="logout"]', function(){
 					HROS.base.logout();
-					HROS.popupMenu.remove();
+					HROS.popupMenu.hide();
 				});
 			}
 			var data = {
@@ -702,7 +702,7 @@ HROS.popupMenu = (function(){
 			popupMenu.data(data);
 			HROS.popupMenu.calcPosition(e, popupMenu);
 		},
-		remove: function(){
+		hide: function(){
 			$('.popup-menu').remove();
 		}
 	}
