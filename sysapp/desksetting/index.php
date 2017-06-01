@@ -19,7 +19,6 @@
 	<meta charset="utf-8">
 	<title>桌面设置</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 	<link rel="stylesheet" href="../../static/plugins/bootstrap-switch-9.8.0/dist/css/bootstrap-slider.min.css">
 	<style media="screen">
 		.slider.slider-horizontal{

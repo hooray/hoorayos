@@ -45,8 +45,7 @@ HROS.widget = (function(){
 						'top': options.top,
 						'right': options.right,
 						'url': options.url,
-						'zIndex': HROS.CONFIG.widgetIndexid,
-						'issetbar': 0
+						'zIndex': HROS.CONFIG.widgetIndexid
 					};
 					$('#desk').append(HROS.template.widget(widgetData));
 					$(widgetId).data('info', widgetData).css({
@@ -105,8 +104,7 @@ HROS.widget = (function(){
 						'top': typeof(options.top) == 'undefined' ? 0: options.top,
 						'right': typeof(options.right) == 'undefined' ? 0: options.right,
 						'url': options.url,
-						'zIndex': HROS.CONFIG.widgetIndexid,
-						'issetbar': 1
+						'zIndex': HROS.CONFIG.widgetIndexid
 					};
 					$('#desk').append(HROS.template.widget(widgetData));
 					$(widgetId).data('info', widgetData).css({

@@ -26,7 +26,6 @@
 	<meta charset="utf-8">
 	<title>用户管理</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 <body>
 	<form action="detail.ajax.php" method="post" name="form" id="form" class="form-horizontal">

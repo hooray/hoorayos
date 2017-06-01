@@ -22,12 +22,14 @@
             <% } %>
             <iframe id="<%=id%>_iframe" frameborder="0" src="<%=url%>"></iframe>
         </div>
-        <div class="set-bar"><div class="fr">
-            <% if(issetbar){ %>
-                <a class="btn detail"><i class="fa fa-info-circle"></i><span class="btn-con">详情</span></a>
-            <% } %>
-            <a class="btn refresh"><i class="fa fa-refresh"></i><span class="btn-con">刷新</span></a>
-        </div></div>
+        <div class="set-bar">
+            <div class="fr">
+                <a class="btn refresh">
+                    <i class="fa fa-refresh"></i>
+                    <span class="btn-con">刷新</span>
+                </a>
+            </div>
+        </div>
     </div>
     <% if(isresize){ %>
         <div class="window-resize window-resize-t" resize="t"></div>

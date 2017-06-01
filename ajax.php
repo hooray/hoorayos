@@ -239,7 +239,6 @@
 								if($rs['type'] == 'window'){
 									$app['isresize'] = $rs['isresize'];
 									$app['isopenmax'] = $rs['isopenmax'];
-									$app['issetbar'] = $rs['issetbar'];
 									$app['isflash'] = $rs['isflash'];
 								}
 							}
@@ -269,7 +268,6 @@
 							if($rs['type'] == 'pwindow'){
 								$app['isresize'] = $rs['isresize'];
 								$app['isopenmax'] = $rs['isopenmax'];
-								$app['issetbar'] = $rs['issetbar'];
 								$app['isflash'] = $rs['isflash'];
 							}else if($rs['type'] == 'file'){
 								$app['ext'] = $rs['ext'];
@@ -296,7 +294,6 @@
 					if($rs['type'] == 'window'){
 						$app['isresize'] = $rs['isresize'];
 						$app['isopenmax'] = $rs['isopenmax'];
-						$app['issetbar'] = $rs['issetbar'];
 						$app['isflash'] = $rs['isflash'];
 					}
 				}else{

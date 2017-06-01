@@ -13,8 +13,8 @@ HROS.app = (function(){
 					appid: 'hoorayos-yysc',
 					title: '应用市场',
 					url: 'sysapp/appmarket/index.php',
-					width: 800,
-					height: 484,
+					width: 880,
+					height: 590,
 					isflash: false
 				});
 			});

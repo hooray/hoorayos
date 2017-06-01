@@ -53,7 +53,6 @@
 	<meta charset="utf-8">
 	<title>默认设置</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 	<style media="screen">
 		.slider.slider-horizontal{
 			margin-top: 8px;

@@ -206,7 +206,6 @@
                         'height' => $app['height'],
                         'isresize' => $app['isresize'],
                         'isopenmax' => $app['isopenmax'],
-                        'issetbar' => $app['issetbar'],
                         'isflash' => $app['isflash'],
                         'dt' => date('Y-m-d H:i:s'),
                         'lastdt' => date('Y-m-d H:i:s'),

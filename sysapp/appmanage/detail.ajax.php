@@ -3,7 +3,6 @@
 	
 	switch($_REQUEST['ac']){
 		case 'edit':
-			$_POST['val_issetbar'] = $_POST['val_app_category_id'] == 1 ? 0 : 1;
 			$data = array(
 				'icon' => $_POST['val_icon'],
 				'name' => $_POST['val_name'],
@@ -13,7 +12,6 @@
 				'height' => $_POST['val_height'],
 				'isresize' => isset($_POST['val_isresize']) ? 1 : 0,
 				'isopenmax' => isset($_POST['val_isopenmax']) ? 1 : 0,
-				'issetbar' => $_POST['val_issetbar'],
 				'isflash' => isset($_POST['val_isflash']) ? 1 : 0,
 				'remark' => $_POST['val_remark']
 			);

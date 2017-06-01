@@ -88,7 +88,6 @@ HROS.window = (function(){
 						'isopenmax': options.isopenmax,
 						'istitlebar': options.isresize,
 						'istitlebarFullscreen': options.isresize ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
-						'issetbar': options.issetbar,
 						'isflash': options.isflash
 					};
 					$('#desk').append(HROS.template.window(windowData));
@@ -113,7 +112,6 @@ HROS.window = (function(){
 					height: obj.height,
 					isresize: typeof(obj.isresize) == 'undefined' ? false: obj.isresize,
 					isopenmax: typeof(obj.isopenmax) == 'undefined' ? false: obj.isopenmax,
-					issetbar: false,
 					isflash: typeof(obj.isflash) == 'undefined' ? true: obj.isflash
 				});
 			}else{
@@ -180,7 +178,6 @@ HROS.window = (function(){
 								'isopenmax': options.isresize == 1 ? options.isopenmax == 1 ? true: false: false,
 								'istitlebar': options.isresize == 1 ? true: false,
 								'istitlebarFullscreen': options.isresize == 1 ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
-								'issetbar': options.issetbar == 1 ? true: false,
 								'isflash': options.isflash == 1 ? true: false
 							};
 							$('#desk').append(HROS.template.window(windowData));
@@ -312,7 +309,6 @@ HROS.window = (function(){
 								height: app['height'],
 								isresize: app['isresize'],
 								isopenmax: app['isopenmax'],
-								issetbar: app['issetbar'],
 								isflash: app['isflash']
 							});
 						}

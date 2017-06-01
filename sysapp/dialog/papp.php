@@ -26,7 +26,6 @@
 	<meta charset="utf-8">
 	<title>编辑私人应用</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 <body>
 	<form action="papp.ajax.php" method="post" name="form" id="form" class="form-horizontal">

@@ -16,7 +16,6 @@
 	<meta charset="utf-8">
 	<title>基本信息</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 	<script type="text/javascript">
 	//cookie前缀，避免重名
 	var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';

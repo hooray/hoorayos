@@ -7,7 +7,6 @@
 	<meta charset="utf-8">
 	<title>添加应用</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 <body>
 	<ul class="nav nav-tabs" style="margin-top:5px;margin-bottom:0">
@@ -28,10 +27,7 @@
 				foreach($category as $c){
 					echo '<div class="alert_addapps tab-pane fade" id="category_'.$c['tbid'].'">';
 					foreach($db->select('tb_app', array('tbid', 'name', 'icon'), array(
-						'AND' => array(
-							'app_category_id' => $c['tbid'],
-							'verifytype' => 1
-						)
+						'app_category_id' => $c['tbid']
 					)) as $v){
 						echo '<div class="app" title="'.$v['name'].'" appid="'.$v['tbid'].'">';
 							echo '<img src="../../'.$v['icon'].'" alt="'.$v['name'].'" title="'.$v['name'].'">';

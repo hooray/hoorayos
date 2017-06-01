@@ -20,10 +20,13 @@
 	<meta charset="utf-8">
 	<title>用户管理</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 	<style>
-	body{margin:0 10px}
-	.membername{margin-left:10px}
+		body{
+			margin: 0 10px;
+		}
+		.membername{
+			margin-left: 10px;
+		}
 	</style>
 </head>
 <body>

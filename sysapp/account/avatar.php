@@ -14,7 +14,6 @@
 	<meta charset="utf-8">
 	<title>修改头像</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 <body>
 	<?php include('global_title.php'); ?>

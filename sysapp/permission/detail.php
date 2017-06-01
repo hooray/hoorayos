@@ -31,7 +31,6 @@
 	<meta charset="utf-8">
 	<title>权限管理</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../static/css/sys.css">
 </head>
 <body>
 	<form action="detail.ajax.php" method="post" name="form" id="form" class="form-horizontal">
