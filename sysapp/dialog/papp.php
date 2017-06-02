@@ -59,7 +59,7 @@
 									<a href="javascript:;"><img src="../../static/img/system-puzzle.png" valsrc="static/img/system-puzzle.png"></a>
 								</div>
 							</div>
-							<input type="hidden" name="inputIcon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
+							<input type="hidden" name="val_icon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">
 							<span class="help-block"></span>
 						</div>
 					</div>
