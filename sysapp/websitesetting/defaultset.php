@@ -53,6 +53,7 @@
 	<meta charset="utf-8">
 	<title>默认设置</title>
 	<?php include('sysapp/global_css.php'); ?>
+	<link rel="stylesheet" href="../../static/plugins/bootstrap-slider-9.8.0/dist/css/bootstrap-slider.min.css">
 	<style media="screen">
 		.slider.slider-horizontal{
 			margin-top: 8px;
@@ -322,7 +323,7 @@
 		</div>
 	</form>
 	<?php include('sysapp/global_js.php'); ?>
-	<script src="../../static/plugins/bootstrap-slider-9.8.0/src/js/bootstrap-slider.js"></script>
+	<script src="../../static/plugins/bootstrap-slider-9.8.0/dist/bootstrap-slider.min.js"></script>
 	<script>
 	$(function(){
 		$('#form').Validform({
