@@ -169,7 +169,7 @@ form{
             display: none;
             width: 48px;
             height: 48px;
-            background: url(../img/ui/selected.png) no-repeat;
+            background: url(../img/selected.png) no-repeat;
             position: absolute;
             right: -15px;
             bottom: -15px;
@@ -420,7 +420,7 @@ form{
             height: 16px;
             right: 0;
             bottom: 0;
-            background: url(../img/ui/selected.gif) no-repeat;
+            background: url(../img/selected.gif) no-repeat;
         }
         &.act .selected{
             display: block;

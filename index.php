@@ -45,7 +45,7 @@
 	<title><?php echo $setting['title']; ?></title>
 	<meta name="description" content="<?php echo $setting['description']; ?>" />
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
 	<link rel="stylesheet" href="static/css/index.css">
 	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
@@ -64,7 +64,7 @@
 	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="top:0"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
 		<div class="lrbox">
 			<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
-			<div class="title"><?php echo $setting['title']; ?> <font style="font-size:18px">专业版</font></div>
+			<!-- <div class="title"><?php echo $setting['title']; ?></div> -->
 			<div class="loginbox">
 				<div class="mask">
 					<div class="mask_title">已有帐号点击登录</div>
@@ -512,82 +512,88 @@
 		var registerbox = $('#lrbox .registerbox');
 		var loginboxMarginLeftOnShow = (loginbox.outerWidth() / 2) * -1;
 		var loginboxMarginLeftOnMove = loginbox.outerWidth() * -1;
-		var loginboxMarginLeftOnHide = (loginbox.outerWidth() / 2) * -1 - 50;
+		var loginboxMarginLeftOnHide = (loginbox.outerWidth() / 2) * -1 - 80;
 		var registerboxMarginRightOnShow = (registerbox.outerWidth() / 2) * -1;
 		var registerboxMarginRightOnMove = registerbox.outerWidth() * -1;
-		var registerboxMarginRightOnHide = (registerbox.outerWidth() / 2) * -1 - 50;
+		var registerboxMarginRightOnHide = (registerbox.outerWidth() / 2) * -1 - 80;
+		var onShowTime = 200, onMoveTime = 250;
+		var onShowScale = 1, onMoveScale = 0.9, onHideScale = 0.8;
 		switch(mode){
 			case 'login':
 				//登录面板动画
 				loginbox.transition({
+					scale: onMoveScale,
 					marginLeft: loginboxMarginLeftOnMove
-				}, 150, 'easeInOutSine', function(){
+				}, onMoveTime, 'linear', function(){
 					loginbox.css('zIndex', 2);
 				}).transition({
+					scale: onShowScale,
 					marginLeft: loginboxMarginLeftOnShow
-				}, 200, 'easeInOutSine');
+				}, onShowTime, 'linear');
 				loginbox.children('.mask').transition({
 					opacity: 0
-				}, 150, function(){
+				}, onShowTime + onMoveTime, function(){
 					loginbox.children('.mask').hide();
 				});
 				loginbox.children('.form').transition({
-					opacity: 1,
-					delay: 150
-				}, 200, function(){
+					opacity: 1
+				}, onShowTime + onMoveTime, function(){
 					$('#username').attr('tabindex', 1);
 					$('#password').attr('tabindex', 2);
 					$('#submit_login_btn').attr('tabindex', 3);
 				});
 				//注册面板动画
 				registerbox.transition({
+					scale: onMoveScale,
 					marginRight: registerboxMarginRightOnMove
-				}, 150, 'easeInOutSine', function(){
+				}, onMoveTime, 'linear', function(){
 					registerbox.css('zIndex', 1);
 				}).transition({
+					scale: onHideScale,
 					marginRight: registerboxMarginRightOnHide
-				}, 200, 'easeInOutSine');
+				}, onShowTime, 'linear');
 				registerbox.children('.form').transition({
 					opacity: 0
-				}, 150);
+				}, onShowTime + onMoveTime);
 				registerbox.children('.mask').show().transition({
-					opacity: 1,
-					delay: 150
-				}, 200);
+					opacity: 1
+				}, onShowTime + onMoveTime);
 				break;
 			case 'register':
 				//登录面板动画
 				loginbox.transition({
+					scale: onMoveScale,
 					marginLeft: loginboxMarginLeftOnMove
-				}, 150, 'easeInOutSine', function(){
+				}, onMoveTime, 'linear', function(){
 					loginbox.css('zIndex', 1);
 				}).transition({
+					scale: onHideScale,
 					marginLeft: loginboxMarginLeftOnHide
-				}, 200, 'easeInOutSine');
+				}, onShowTime, 'linear');
 				loginbox.children('.form').transition({
 					opacity: 0
-				}, 150);
+				}, onShowTime + onMoveTime);
 				loginbox.children('.mask').show().transition({
-					opacity: 1,
-					delay: 150
-				}, 200);
+					opacity: 1
+				}, onShowTime + onMoveTime);
 				//注册面板动画
 				registerbox.transition({
+					scale: onMoveScale,
 					marginRight: registerboxMarginRightOnMove
-				}, 150, 'easeInOutSine', function(){
+				}, onMoveTime, 'linear', function(){
 					registerbox.css('zIndex', 2);
 				}).transition({
+					scale: onShowScale,
 					marginRight: registerboxMarginRightOnShow
-				}, 200, 'easeInOutSine');
+				}, onShowTime, 'linear');
 				registerbox.children('.mask').transition({
 					opacity: 0
-				}, 150, function(){
+				}, onShowTime + onMoveTime, function(){
 					registerbox.children('.mask').hide();
 				});
 				registerbox.children('.form').transition({
-					opacity: 1,
-					delay: 150
-				}, 200, function(){
+					opacity: 1
+				}, onShowTime + onMoveTime, function(){
 					$('#reg_username').attr('tabindex', 1);
 					$('#reg_password').attr('tabindex', 2);
 					$('#reg_password2').attr('tabindex', 3);
@@ -600,11 +606,13 @@
 				$('#submit_login_btn').attr('tabindex', 3);
 				loginbox.css({
 					zIndex: 2,
+					scale: onShowScale,
 					marginLeft: loginboxMarginLeftOnShow
 				});
 				loginbox.children('.mask').css('opacity', 0).hide();
 				registerbox.css({
 					zIndex: 1,
+					scale: onHideScale,
 					marginRight: registerboxMarginRightOnHide
 				});
 				registerbox.children('.form').css('opacity', 0);
