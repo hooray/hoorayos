@@ -38,16 +38,9 @@
 							<div class="panel panel-default" style="margin-top:10px;margin-bottom:0;">
 								<div class="panel-heading">系统推荐的图标：</div>
 								<div class="panel-body shortcut-selicon">
-									<a href="javascript:;"><img src="../../static/img/system-gear.png" valsrc="static/img/system-gear.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-users.png" valsrc="static/img/system-users.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-wrench.png" valsrc="static/img/system-wrench.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-star.png" valsrc="static/img/system-star.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-shapes.png" valsrc="static/img/system-shapes.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-chart-bar.png" valsrc="static/img/system-chart-bar.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-document-edit.png" valsrc="static/img/system-document-edit.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-documents.png" valsrc="static/img/system-documents.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-mail.png" valsrc="static/img/system-mail.png"></a>
-									<a href="javascript:;"><img src="../../static/img/system-puzzle.png" valsrc="static/img/system-puzzle.png"></a>
+									<?php for($i = 1; $i <= 40; $i++){ ?>
+										<a href="javascript:;"><img src="../../static/img/icon/system/<?php echo $i; ?>.png" valsrc="static/img/icon/system/<?php echo $i; ?>.png"></a>
+									<?php } ?>
 								</div>
 							</div>
 							<input type="hidden" name="val_icon" id="inputIcon" value="<?php echo $app['icon']; ?>" datatype="*" nullmsg="请选择或上传应用图片">

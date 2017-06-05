@@ -340,17 +340,15 @@ form{
         a{
             display: block;
             float: left;
-            width: 34px;
-            height: 34px;
             padding: 5px;
             &:hover{
-                background: #ccc;
+                background: #ddd;
             }
         }
         img{
             float: left;
-            width: 24px;
-            height: 24px;
+            width: 36px;
+            height: 36px;
         }
     }
 }

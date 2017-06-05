@@ -27,8 +27,6 @@ HROS.base = (function(){
 			});
 			//版权信息初始化并显示
 			HROS.copyright.init();
-			//用于判断网页是否缩放
-			HROS.zoom.init();
 			//桌面(容器)初始化
 			HROS.deskTop.init();
 			//初始化壁纸
@@ -69,8 +67,6 @@ HROS.base = (function(){
 			HROS.lock.init();
 			//初始化快捷键
 			HROS.hotkey.init();
-			//页面加载后运行
-			HROS.base.run();
 		},
 		loginDialog: function(text){
 			text = typeof text === 'undefined' ? '系统检测到您尚未登录，或者长时间未操作已登出<br>为了更好的操作，是否登录？': text;
@@ -118,7 +114,7 @@ HROS.base = (function(){
 				callback && callback();
 			});
 		},
-		run: function(){
+		getParameter: function(){
 			var url = location.search;
 			var request = new Object();
 			if(url.indexOf('?') != -1){
@@ -128,35 +124,7 @@ HROS.base = (function(){
 					request[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
 				}
 			}
-			if(typeof(request['run']) != 'undefined' && typeof(request['type']) != 'undefined'){
-				if(HROS.base.checkLogin()){
-					$.ajax({
-						data: {
-							ac: 'getAppidByRealappid',
-							id: request['run']
-						}
-					}).done(function(appid){
-						if(request['type'] == 'app'){
-							HROS.window.create(appid);
-						}else{
-							//判断挂件是否存在cookie中，因为如果存在则自动会启动
-							if(!HROS.widget.checkCookie(appid, request['type'])){
-								HROS.widget.create(appid);
-							}
-						}
-					});
-				}else{
-					HROS.window.createTemp({
-						appid: 'hoorayos-yysc',
-						title: '应用市场',
-						url: 'sysapp/appmarket/index.php?id=' + request['run'],
-						width: 800,
-						height: 484,
-						isflash: false,
-						refresh: true
-					});
-				}
-			}
+			return request;
 		}
 	}
 })();

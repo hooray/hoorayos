@@ -340,7 +340,6 @@
 	<script src="static/js/hros.wallpaper.js"></script>
 	<script src="static/js/hros.widget.js"></script>
 	<script src="static/js/hros.window.js"></script>
-	<script src="static/js/hros.zoom.js"></script>
 	<!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
 	<!-- <script src="static/js/hros.min.js"></script> -->
 	<script>

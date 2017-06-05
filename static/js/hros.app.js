@@ -43,6 +43,19 @@ HROS.app = (function(){
 				}
 				return false;
 			});
+			//绑定桌面缩放事件
+			$(document).on('mousewheel', function(event, delta){
+				if(event.ctrlKey){
+					event.preventDefault();
+					var size;
+					if(delta < 0){
+						size = HROS.CONFIG.appSize - 8 < 32 ? 32 : HROS.CONFIG.appSize - 8;
+					}else{
+						size = HROS.CONFIG.appSize + 8 > 128 ? 128 : HROS.CONFIG.appSize + 8;
+					}
+					HROS.app.updateSize(size);
+				}
+			});
 			//获取桌面应用数据
 			HROS.app.get();
 		},
