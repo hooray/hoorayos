@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">是否开启游客访问：</label>
 					<div class="col-sm-10">
-						<input type="checkbox" name="val_isforcedlogin" <?php if($set['isforcedlogin'] == 1){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-on-text="开启" data-off-text="关闭">
+						<input type="checkbox" name="val_isforcedlogin" <?php if($set['isforcedlogin'] == 0){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-on-text="开启" data-off-text="关闭">
 					</div>
 				</div>
 				<div class="form-group">
