@@ -160,7 +160,6 @@
 	</div>
 	<!-- 桌面 -->
 	<div id="desktop">
-		<div id="zoom-tip"><div><i>​</i>​<span></span></div><a href="javascript:;" class="close" onClick="HROS.zoom.close();">×</a></div>
 		<div id="desk">
 			<div id="desk-1" class="desktop-container">
 				<div class="desktop-apps-container"></div>
