@@ -25,14 +25,14 @@
             background-color: transparent;
         }
         #pageletSearchButton{
-            @include desktop-sprite(dock-tool-search);
-            width: desktop-sprite-width(dock-tool-search);
-            height: desktop-sprite-height(dock-tool-search);
-            border: 0;
+            width: 20px;
+            height: 20px;
             float: right;
             cursor: pointer;
+            border: 0;
             margin: 6px 8px 0 0;
             padding: 0;
+            color: #fff;
             background-color: transparent;
         }
     }

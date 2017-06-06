@@ -45,109 +45,119 @@
                 .dock-tools-container{
                     .dock-tools{
                         a{
+                            @include text-shadow(1px 1px 1px #000);
                             float: left;
                             display: block;
                             width: 20px;
                             height: 20px;
-                            cursor: pointer;
-                            &.dock-tool-setting{
-                                @include desktop-sprite(dock-tool-setting);
-                            }
-                            &.dock-tool-style{
-                                @include desktop-sprite(dock-tool-style);
-                            }
-                            &.dock-tool-appmanage{
-                                @include desktop-sprite(dock-tool-appmanage);
-                            }
-                            &.dock-tool-search{
-                                @include desktop-sprite(dock-tool-search);
+                            line-height: 20px;
+                            text-align: center;
+                            color: #fff;
+                            &:hover{
+                                color: #f6fa27;
                             }
                         }
                     }
                     .dock-startbtn{
-                        width: desktop-sprite-width(dock-start);
-                        height: desktop-sprite-height(dock-start);
+                        width: 40px;
+                        height: 40px;
                         padding: 8px;
                         .dock-tool-start{
-                            @include desktop-sprite(dock-start);
-                            width: desktop-sprite-width(dock-start);
-                            height: desktop-sprite-height(dock-start);
+                            @include text-shadow(1px 1px 1px #000);
+                            width: 40px;
+                            height: 40px;
+                            line-height: 40px;
                             display: block;
-                            cursor: pointer;
+                            text-align: center;
                             margin: 0 auto;
+                            color: #fff;
+                            &:hover{
+                                color: #f6fa27;
+                            }
+                            i.hrosfont{
+                                font-size: 36px;
+                            }
                         }
                     }
                 }
                 .dock-pagination{
-                    .pagination-icon-bg{
-                        @include desktop-sprite(pagination-bg);
-                        width: desktop-sprite-width(pagination-bg);
-                        height: desktop-sprite-height(pagination-bg);
-                        display: none;
-                        position: absolute;
-                        right: 2px;
-                        bottom: 1px;
-                        z-index: 1;
-                    }
                     .pagination{
                         width: 20px;
                         height: 20px;
                         line-height: 1.5;
-                        color: #0dbbf1;
-                        cursor: pointer;
+                        color: #fff;
                         display: inline-block;
                         float: left;
-                        font-size: 18px;
-                        font-weight: bold;
                         margin: 1px;
-                        outline: 0 none;
-                        position: relative;
-                        text-indent: -999em;
-                        .pagination-icon{
-                            float: left;
-                            height: 100%;
-                            overflow: hidden;
-                            position: relative;
-                            width: 100%;
-                            z-index: 1;
-                            &.pagination-icon-1{
-                                @include desktop-sprite(pagination-1);
+                        text-align: center;
+                        i.hrosfont{
+                            @include text-shadow(1px 1px 1px #000);
+                            font-size: 12px;
+                            &.hros-num1,
+                            &.hros-num2,
+                            &.hros-num3,
+                            &.hros-num4,
+                            &.hros-num5{
+                                display: none;
                             }
-                            &.pagination-icon-2{
-                                @include desktop-sprite(pagination-2);
+                        }
+                        &:hover{
+                            i.hros-dot{
+                                display: none;
                             }
-                            &.pagination-icon-3{
-                                @include desktop-sprite(pagination-3);
-                            }
-                            &.pagination-icon-4{
-                                @include desktop-sprite(pagination-4);
-                            }
-                            &.pagination-icon-5{
-                                @include desktop-sprite(pagination-5);
+                            &.pagination-1 i.hros-num1,
+                            &.pagination-2 i.hros-num2,
+                            &.pagination-3 i.hros-num3,
+                            &.pagination-4 i.hros-num4,
+                            &.pagination-5 i.hros-num5{
+                                display: inline;
                             }
                         }
                     }
-                    &.current-pagination-1 .pagination-1 .pagination-icon-bg,
-                    &.current-pagination-2 .pagination-2 .pagination-icon-bg,
-                    &.current-pagination-3 .pagination-3 .pagination-icon-bg,
-                    &.current-pagination-4 .pagination-4 .pagination-icon-bg,
-                    &.current-pagination-5 .pagination-5 .pagination-icon-bg{
-                        display: block;
+                    &.current-pagination-1 .pagination-1{
+                        color: #f6fa27;
+                        i.hros-dot{
+                            display: none;
+                        }
+                        i.hros-num1{
+                            display: inline;
+                        }
                     }
-                    &.current-pagination-1 .pagination .pagination-icon-1{
-                        @include desktop-sprite(pagination-1_hover);
+                    &.current-pagination-2 .pagination-2{
+                        color: #f6fa27;
+                        i.hros-dot{
+                            display: none;
+                        }
+                        i.hros-num2{
+                            display: inline;
+                        }
                     }
-                    &.current-pagination-2 .pagination .pagination-icon-2{
-                        @include desktop-sprite(pagination-2_hover);
+                    &.current-pagination-3 .pagination-3{
+                        color: #f6fa27;
+                        i.hros-dot{
+                            display: none;
+                        }
+                        i.hros-num3{
+                            display: inline;
+                        }
                     }
-                    &.current-pagination-3 .pagination .pagination-icon-3{
-                        @include desktop-sprite(pagination-3_hover);
+                    &.current-pagination-4 .pagination-4{
+                        color: #f6fa27;
+                        i.hros-dot{
+                            display: none;
+                        }
+                        i.hros-num4{
+                            display: inline;
+                        }
                     }
-                    &.current-pagination-4 .pagination .pagination-icon-4{
-                        @include desktop-sprite(pagination-4_hover);
-                    }
-                    &.current-pagination-5 .pagination .pagination-icon-5{
-                        @include desktop-sprite(pagination-5_hover);
+                    &.current-pagination-5 .pagination-5{
+                        color: #f6fa27;
+                        i.hros-dot{
+                            display: none;
+                        }
+                        i.hros-num5{
+                            display: inline;
+                        }
                     }
                 }
             }

@@ -73,20 +73,30 @@
         }
     }
     .startmenu-feedback{
-        @include desktop-sprite(startmenu-feedback);
-        width: desktop-sprite-width(startmenu-feedback);
-        height: desktop-sprite-height(startmenu-feedback);
+        width: 24px;
+        height: 24px;
+        line-height: 1.5;
         display: block;
         float: right;
         margin-right: 5px;
         margin-top: 5px;
+        text-align: center;
+        color: #fff;
+        &:hover{
+            color: #f6fa27;
+        }
     }
     .startmenu-lock{
-        @include desktop-sprite(startmenu-lock);
-        width: desktop-sprite-width(startmenu-lock);
-        height: desktop-sprite-height(startmenu-lock);
+        width: 24px;
+        height: 24px;
+        line-height: 1.5;
         display: block;
         float: right;
         margin-top: 5px;
+        text-align: center;
+        color: #fff;
+        &:hover{
+            color: #f6fa27;
+        }
     }
 }

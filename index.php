@@ -14,22 +14,22 @@
 			$userinfo = json_decode(stripslashes(cookie('userinfo')), true);
 			//用户信息存在并且开启下次自动登入，则进行登录操作
 			if($userinfo['rememberMe'] == 1){
-				$row = $db->get('tb_member', '*', array(
-					'AND' => array(
+				$row = $db->get('tb_member', '*', [
+					'AND' => [
 						'username' => $userinfo['username'],
 						'password' => sha1(authcode($userinfo['password'], 'DECODE'))
-					)
-				));
+					]
+				]);
 				//检查登录是否成功
 				if($row){
 					session('member_id', $row['tbid']);
 					cookie('memberID', $row['tbid'], time() + 3600 * 24 * 7);
-					$db->update('tb_member', array(
+					$db->update('tb_member', [
 						'lastlogindt' => date('Y-m-d H:i:s'),
 						'lastloginip' => getIp()
-					), array(
+					], [
 						'tbid' => $row['tbid']
-					));
+					]);
 				}
 			}
 		}
@@ -47,12 +47,13 @@
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
-	<link rel="stylesheet" href="static/css/index.css">
-	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 	<link rel="stylesheet" href="static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_3qtd7uxnh21n61or.css">
 	<link rel="stylesheet" href="static/plugins/artDialog-7.0.0/css/dialog.css">
 	<link rel="stylesheet" href="static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
 	<script type="text/javascript">
 	//cookie前缀，避免重名
 	var cookie_prefix = '<?php echo $_CONFIG['COOKIE_PREFIX']; ?>';
@@ -64,7 +65,7 @@
 	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="top:0"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
 		<div class="lrbox">
 			<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
-			<!-- <div class="title"><?php echo $setting['title']; ?></div> -->
+			<div class="title"><?php echo $setting['title']; ?></div>
 			<div class="loginbox">
 				<div class="mask">
 					<div class="mask_title">已有帐号点击登录</div>
@@ -187,37 +188,47 @@
 						<div class="dock-applist"></div>
 						<div class="dock-tools-container">
 							<div class="dock-tools">
-								<a href="javascript:;" class="dock-tool-setting" title="桌面设置"></a>
-								<a href="javascript:;" class="dock-tool-style" title="主题设置"></a>
+								<a href="javascript:;" class="dock-tool-setting" title="桌面设置">
+									<i class="hrosfont hros-config"></i>
+								</a>
+								<a href="javascript:;" class="dock-tool-style" title="主题设置">
+									<i class="hrosfont hros-style"></i>
+								</a>
 							</div>
 							<div class="dock-tools">
-								<a href="javascript:;" class="dock-tool-appmanage" title="全局视图，快捷键：Ctrl + ↑"></a>
-								<a href="javascript:;" class="dock-tool-search" title="搜索，Ctrl + F"></a>
+								<a href="javascript:;" class="dock-tool-appmanage" title="全局视图，快捷键：Ctrl + ↑">
+									<i class="hrosfont hros-grid"></i>
+								</a>
+								<a href="javascript:;" class="dock-tool-search" title="搜索，快捷键：Ctrl + F">
+									<i class="hrosfont hros-search"></i>
+								</a>
 							</div>
 							<div class="dock-startbtn">
-								<a href="javascript:;" class="dock-tool-start" title="点击这里开始"></a>
+								<a href="javascript:;" class="dock-tool-start" title="点击这里开始">
+									<i class="hrosfont hros-box"></i>
+								</a>
 							</div>
 						</div>
 						<div class="dock-pagination">
 							<a class="pagination pagination-1" href="javascript:;" index="1" title="切换至桌面1，快捷键：Ctrl + 1">
-								<span class="pagination-icon-bg"></span>
-								<span class="pagination-icon pagination-icon-1">1</span>
+								<i class="hrosfont hros-dot"></i>
+								<i class="hrosfont hros-num1"></i>
 							</a>
 							<a class="pagination pagination-2" href="javascript:;" index="2" title="切换至桌面2，快捷键：Ctrl + 2">
-								<span class="pagination-icon-bg"></span>
-								<span class="pagination-icon pagination-icon-2">2</span>
+								<i class="hrosfont hros-dot"></i>
+								<i class="hrosfont hros-num2"></i>
 							</a>
 							<a class="pagination pagination-3" href="javascript:;" index="3" title="切换至桌面3，快捷键：Ctrl + 3">
-								<span class="pagination-icon-bg"></span>
-								<span class="pagination-icon pagination-icon-3">3</span>
+								<i class="hrosfont hros-dot"></i>
+								<i class="hrosfont hros-num3"></i>
 							</a>
 							<a class="pagination pagination-4" href="javascript:;" index="4" title="切换至桌面4，快捷键：Ctrl + 4">
-								<span class="pagination-icon-bg"></span>
-								<span class="pagination-icon pagination-icon-4">4</span>
+								<i class="hrosfont hros-dot"></i>
+								<i class="hrosfont hros-num4"></i>
 							</a>
 							<a class="pagination pagination-5" href="javascript:;" index="5" title="切换至桌面5，快捷键：Ctrl + 5">
-								<span class="pagination-icon-bg"></span>
-								<span class="pagination-icon pagination-icon-5">5</span>
+								<i class="hrosfont hros-dot"></i>
+								<i class="hrosfont hros-num5"></i>
 							</a>
 						</div>
 					</div>
@@ -226,12 +237,16 @@
 		</div>
 		<div id="startmenu-container">
 			<div class="startmenu-selfinfo">
-				<a href="javascript:;" class="startmenu-feedback" title="反馈"></a>
-				<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L"></a>
+				<a href="javascript:;" class="startmenu-feedback" title="反馈">
+					<i class="fa fa-question"></i>
+				</a>
+				<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L">
+					<i class="fa fa-lock"></i>
+				</a>
 				<div class="startmenu-avatar"><img src="static/img/loading_24.gif"></div>
 				<div class="startmenu-nick">
 					<?php if(checkLogin()){ ?>
-					<a href="javascript:;" title="编辑个人资料"><?php echo $db->get('tb_member', 'username', array('tbid' => session('member_id'))); ?></a>
+					<a href="javascript:;" title="编辑个人资料"><?php echo $db->get('tb_member', 'username', ['tbid' => session('member_id')]); ?></a>
 					<?php }else{ ?>
 					<a href="javascript:;">请登录</a>
 					<?php } ?>
@@ -253,7 +268,7 @@
 		</div>
 		<div id="search-bar">
 			<input id="pageletSearchInput" class="mousetrap" placeholder="搜索应用...">
-			<input type="button" value="" id="pageletSearchButton" title="搜索...">
+			<button type="button" id="pageletSearchButton" title="搜索"><i class="fa fa-search"></i></button>
 		</div>
 		<div id="search-suggest">
 			<ul class="resultBox"></ul>
