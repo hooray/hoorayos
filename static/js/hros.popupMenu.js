@@ -661,7 +661,7 @@ HROS.popupMenu = (function(){
 							title: '主题设置',
 							url: 'sysapp/wallpaper/index.php',
 							width: 580,
-							height: 520,
+							height: 550,
 							isflash: false
 						});
 					}else{
