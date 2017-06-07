@@ -62,7 +62,7 @@
 <body>
 	<div class="loading"></div>
 	<!-- 登录&注册 -->
-	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="top:0"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
+	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>class="disn"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
 		<div class="lrbox">
 			<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
 			<div class="title"><?php echo $setting['title']; ?></div>
@@ -359,6 +359,16 @@
 	<script>
 	var childWindow, interval;
 	$(function(){
+		if($('#lrbox').data('isforcedlogin') == 0){
+			$('#lrbox').css({
+				scale: 0.9
+			});
+			$('#lrbox .lrbox').css({
+				y: -300,
+				perspective: '1000px',
+				rotateX: '60deg'
+			});
+		}
 		var loginboxHeight = $('#lrbox .loginbox').outerHeight();
 		var registerboxHeight = $('#lrbox .registerbox').outerHeight();
 		$('#lrbox .loginbox').css('marginTop', (loginboxHeight / 2) * -1);
@@ -369,9 +379,15 @@
 			marginTop: (loginboxHeight / 2) * -1
 		});
 		$('#lrbox .back').on('click', function(){
-			$('#lrbox').animate({
-				top: '-200%'
-			}, 1000);
+			$('#lrbox').transition({
+				scale: 0.9,
+				opacity: 0,
+				visibility: 'hidden'
+			}, 200);
+			$('#lrbox .lrbox').transition({
+				y: -300,
+				rotateX: '60deg'
+			}, 500);
 		});
 		changeTabindex();
 		$('#lrbox .loginbox .mask').click(function(){
@@ -623,12 +639,14 @@
 					marginLeft: loginboxMarginLeftOnShow
 				});
 				loginbox.children('.mask').css('opacity', 0).hide();
+				loginbox.children('form').css('opacity', 1);
 				registerbox.css({
 					zIndex: 1,
 					scale: onHideScale,
 					marginRight: registerboxMarginRightOnHide
 				});
-				registerbox.children('.form').css('opacity', 0);
+				registerbox.children('.mask').css('opacity', 1).show();
+				registerbox.children('form').css('opacity', 0);
 		}
 	}
 	function checkUserLogin(){

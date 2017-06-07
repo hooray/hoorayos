@@ -1,21 +1,30 @@
+$dock-bg: rgba(0, 0, 0, 0.4);
+$dock-line-bg: rgba(0, 0, 0, 0.2);
+$dock-top-width: 620px;
+$dock-top-height: 80px;
+$dock-left-widht: 80px;
+$dock-left-height: 620px;
+$dock-right-widht: 80px;
+$dock-right-height: 620px;
+
 /* 应用码头 */
 #dock-bar{
-    position: absolute;
     display: none;
+    position: absolute;
     &.top-bar{
         width: 100%;
-        height: 80px;
+        height: $dock-top-height;
         left: 0;
         top: 0;
     }
     &.left-bar{
-        width: 80px;
+        width: $dock-left-widht;
         height: 100%;
         left: 0;
         top: 0;
     }
     &.right-bar{
-        width: 80px;
+        width: $dock-right-widht;
         height: 100%;
         right: 0;
         top: 0;
@@ -28,6 +37,8 @@
                 z-index: 100000;
             }
             .dock-middle{
+                position: relative;
+                background-color: $dock-bg;
                 .dock-applist{
                     position: relative;
                     .appbtn{
@@ -46,8 +57,8 @@
                     .dock-tools{
                         a{
                             @include text-shadow(1px 1px 1px #000);
-                            float: left;
                             display: block;
+                            float: left;
                             width: 20px;
                             height: 20px;
                             line-height: 20px;
@@ -162,30 +173,78 @@
                 }
             }
             &.dock-top{
-                width: desktop-sprite-width(dock-bg-top);
-                height: desktop-sprite-height(dock-bg-top);
+                width: $dock-top-width;
+                height: $dock-top-height;
                 top: 0;
                 left: 50%;
                 margin: 0 0 0 -310px;
                 .dock-middle{
-                    @include desktop-sprite(dock-bg-top);
-                    width: desktop-sprite-width(dock-bg-top);
-                    height: desktop-sprite-height(dock-bg-top);
+                    @include border-bottom-radius(5px);
+                    width: $dock-top-width;
+                    height: $dock-top-height;
+                    //背景辅助线
+                    &::after{
+                        @include border-bottom-radius(5px);
+                        content: '';
+                        position: absolute;
+                        z-index: -1;
+                        left: 0;
+                        top: 0;
+                        width: $dock-top-width - 2;
+                        height: $dock-top-height - 1;
+                        border: 1px solid $dock-line-bg;
+                        border-top: 0;
+                    }
                     .dock-applist{
+                        position: relative;
                         width: 476px;
                         height: 58px;
                         margin: 11px 14px;
                         float: left;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            left: 490px;
+                            top: -11px;
+                            width: 0;
+                            height: 80px;
+                            border-left: 1px solid $dock-line-bg;
+                        }
                     }
                     .dock-tools-container{
+                        position: relative;
                         height: 56px;
                         float: left;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            left: 0;
+                            top: 55px;
+                            width: 115px;
+                            height: 0;
+                            border-top: 1px solid $dock-line-bg;
+                        }
                         .dock-tools{
+                            position: relative;
                             width: 20px;
                             height: 46px;
                             padding: 5px;
                             float: left;
-                            overflow: hidden;
+                            //背景辅助线
+                            &::after{
+                                content: '';
+                                position: absolute;
+                                z-index: -1;
+                                left: 30px;
+                                top: 0;
+                                width: 0;
+                                height: 56px;
+                                border-left: 1px solid $dock-line-bg;
+                            }
                             .dock-tool-setting, .dock-tool-appmanage{
                                 margin-bottom: 3px;
                             }
@@ -206,30 +265,78 @@
                 }
             }
             &.dock-left{
-                width: desktop-sprite-width(dock-bg-left);
-                height: desktop-sprite-height(dock-bg-left);
+                width: $dock-left-widht;
+                height: $dock-left-height;
                 top: 50%;
                 left: 0;
                 margin: -310px 0 0 0;
                 .dock-middle{
-                    @include desktop-sprite(dock-bg-left);
-                    width: desktop-sprite-width(dock-bg-left);
-                    height: desktop-sprite-height(dock-bg-left);
+                    @include border-right-radius(5px);
+                    width: $dock-left-widht;
+                    height: $dock-left-height;
+                    //背景辅助线
+                    &::after{
+                        @include border-right-radius(5px);
+                        content: '';
+                        position: absolute;
+                        z-index: -1;
+                        left: 0;
+                        top: 0;
+                        width: $dock-left-widht - 1;
+                        height: $dock-left-height - 2;
+                        border: 1px solid $dock-line-bg;
+                        border-left: 0;
+                    }
                     .dock-applist{
+                        position: relative;
                         width: 58px;
                         height: 476px;
                         margin: 14px 11px;
                         float: left;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            left: -11px;
+                            top: 490px;
+                            width: 80px;
+                            height: 0;
+                            border-top: 1px solid $dock-line-bg;
+                        }
                     }
                     .dock-tools-container{
+                        position: relative;
                         width: 56px;
                         float: left;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            left: 55px;
+                            top: 0;
+                            width: 0;
+                            height: 115px;
+                            border-left: 1px solid $dock-line-bg;
+                        }
                         .dock-tools{
+                            position: relative;
                             width: 46px;
                             height: 20px;
                             padding: 5px;
                             float: left;
-                            overflow: hidden;
+                            //背景辅助线
+                            &::after{
+                                content: '';
+                                position: absolute;
+                                z-index: -1;
+                                left: 0;
+                                top: 30px;
+                                width: 56px;
+                                height: 0;
+                                border-top: 1px solid $dock-line-bg;
+                            }
                             .dock-tool-setting, .dock-tool-appmanage{
                                 margin-right: 3px;
                             }
@@ -250,30 +357,78 @@
                 }
             }
             &.dock-right{
-                width: desktop-sprite-width(dock-bg-right);
-                height: desktop-sprite-height(dock-bg-right);
+                width: $dock-right-widht;
+                height: $dock-right-height;
                 top: 50%;
                 left: 0;
                 margin: -310px 0 0 0;
                 .dock-middle{
-                    @include desktop-sprite(dock-bg-right);
-                    width: desktop-sprite-width(dock-bg-right);
-                    height: desktop-sprite-height(dock-bg-right);
+                    @include border-left-radius(5px);
+                    width: $dock-right-widht;
+                    height: $dock-right-height;
+                    //背景辅助线
+                    &::after{
+                        @include border-left-radius(5px);
+                        content: '';
+                        position: absolute;
+                        z-index: -1;
+                        left: 0;
+                        top: 0;
+                        width: $dock-right-widht - 1;
+                        height: $dock-right-height - 2;
+                        border: 1px solid $dock-line-bg;
+                        border-right: 0;
+                    }
                     .dock-applist{
+                        position: relative;
                         width: 58px;
                         height: 476px;
                         margin: 14px 11px;
                         float: right;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            left: -11px;
+                            top: 490px;
+                            width: 80px;
+                            height: 0;
+                            border-top: 1px solid $dock-line-bg;
+                        }
                     }
                     .dock-tools-container{
+                        position: relative;
                         width: 56px;
                         float: right;
+                        //背景辅助线
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            z-index: -1;
+                            right: 55px;
+                            top: 0;
+                            width: 0;
+                            height: 115px;
+                            border-left: 1px solid $dock-line-bg;
+                        }
                         .dock-tools{
+                            position: relative;
                             width: 46px;
                             height: 20px;
                             padding: 5px;
                             float: right;
-                            overflow: hidden;
+                            //背景辅助线
+                            &::after{
+                                content: '';
+                                position: absolute;
+                                z-index: -1;
+                                left: 0;
+                                top: 30px;
+                                width: 56px;
+                                height: 0;
+                                border-top: 1px solid $dock-line-bg;
+                            }
                             .dock-tool-setting, .dock-tool-appmanage{
                                 margin-right: 3px;
                             }

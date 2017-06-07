@@ -84,11 +84,16 @@ HROS.base = (function(){
 			});
 		},
 		login: function(){
-			$('#lrbox').animate({
-				top: 0
-			}, 500, function(){
-				changeTabindex();
-			});
+			changeTabindex();
+			$('#lrbox').transition({
+				scale: 1,
+				opacity: 1,
+				visibility: 'visible'
+			}, 200);
+			$('#lrbox .lrbox').transition({
+				y: 0,
+				rotateX: '0deg'
+			}, 500);
 		},
 		logout: function(){
 			$.ajax({
