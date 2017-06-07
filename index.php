@@ -62,7 +62,7 @@
 <body>
 	<div class="loading"></div>
 	<!-- 登录&注册 -->
-	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>class="disn"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
+	<div id="lrbox" <?php if($setting['isforcedlogin'] == 1 && !checkLogin()){ ?>style="visibility:visible;"<?php } ?> data-isforcedlogin="<?php echo $setting['isforcedlogin']; ?>">
 		<div class="lrbox">
 			<?php if($setting['isforcedlogin'] == 0){ ?><a href="javascript:;" class="back">取消登录</a><?php } ?>
 			<div class="title"><?php echo $setting['title']; ?></div>
