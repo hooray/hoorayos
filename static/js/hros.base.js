@@ -89,7 +89,7 @@ HROS.base = (function(){
 				scale: 1,
 				opacity: 1,
 				visibility: 'visible'
-			}, 200);
+			}, 300);
 			$('#lrbox .lrbox').transition({
 				y: 0,
 				rotateX: '0deg'

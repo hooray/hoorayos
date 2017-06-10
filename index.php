@@ -360,12 +360,10 @@
 	var childWindow, interval;
 	$(function(){
 		if($('#lrbox').data('isforcedlogin') == 0){
-			$('#lrbox').css({
-				scale: 0.9
-			});
+			$('#lrbox').css('scale', 0.9);
 			$('#lrbox .lrbox').css({
 				y: -300,
-				perspective: '1000px',
+				perspective: 1000,
 				rotateX: '60deg'
 			});
 		}
@@ -383,7 +381,7 @@
 				scale: 0.9,
 				opacity: 0,
 				visibility: 'hidden'
-			}, 200);
+			}, 300);
 			$('#lrbox .lrbox').transition({
 				y: -300,
 				rotateX: '60deg'
