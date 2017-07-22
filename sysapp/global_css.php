@@ -1,10 +1,11 @@
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-select/1.12.3/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap-slider/9.8.1/css/bootstrap-slider.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../static/plugins/HoorayLibs/hooraylibs.css">
-<link rel="stylesheet" href="../../static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../static/plugins/bootstrap-3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../static/plugins/bootstrap-table-1.11.1/dist/bootstrap-table.min.css">
-<link rel="stylesheet" href="../../static/plugins/bootstrap-select-1.12.2/dist/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="../../static/plugins/bootstrap-switch-3.3.4/dist/css/bootstrap3/bootstrap-switch.min.css">
 <link rel="stylesheet" href="../../static/plugins/artDialog-7.0.0/css/dialog.css">
-<link rel="stylesheet" href="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 <link rel="stylesheet" href="../../static/plugins/webuploader-0.1.5/webuploader.css">
 <link rel="stylesheet" href="../../static/css/sys.css">

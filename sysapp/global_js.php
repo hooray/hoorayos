@@ -1,13 +1,14 @@
-<script src="../../static/plugins/jquery-2.2.4.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.12.3/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-slider/9.8.1/bootstrap-slider.min.js"></script>
+<script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
-<script src="../../static/plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="../../static/plugins/bootstrap-table-1.11.1/dist/bootstrap-table.min.js"></script>
-<script src="../../static/plugins/bootstrap-table-1.11.1/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/bootstrap-select.min.js"></script>
-<script src="../../static/plugins/bootstrap-select-1.12.2/dist/js/i18n/defaults-zh_CN.min.js"></script>
-<script src="../../static/plugins/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js"></script>
 <script src="../../static/plugins/artDialog-7.0.0/dist/dialog-plus.js"></script>
-<script src="../../static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
 <script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script>
 $(function(){

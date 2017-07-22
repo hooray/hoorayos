@@ -12,73 +12,72 @@
 	<meta charset="utf-8">
 	<title>我的日历</title>
 	<?php include('sysapp/global_css.php'); ?>
-	<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.css">
-	<link rel="stylesheet" href="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css" media="print">
-	<link rel="stylesheet" href="../../js/bootstrap-datetimepicker-2.4.4/css/bootstrap-datetimepicker.min.css">
+	<link href="//cdn.bootcss.com/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../static/plugins/bootstrap-datetimepicker-2.4.4/css/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 	<div id="editbox" style="display:none">
-		<form action="index.ajax.php" method="post" name="form" id="form">
-		<input type="hidden" name="ac" value="edit">
-		<input type="hidden" name="id">
-		<div class="creatbox">
-			<div class="middle">
-				<p class="detile-title">编辑日程</p>
-				<div class="input-label">
-					<label class="label-text">日程标题：</label>
-					<div class="label-box form-inline control-group">
-						<input type="text" class="text" name="val_title" style="width:335px" datatype="*" nullmsg="请填写日程标题">
-						<span class="help-inline errormsg"></span>
-					</div>
-				</div>
-				<div class="input-label">
-					<label class="label-text">日期：</label>
-					<div class="label-box form-inline control-group">
-						<input type="text" class="text start_datetime_d" name="val_startd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-						<input type="text" class="text start_datetime_t" name="val_startt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-						<span class="help-inline" style="padding-right:5px">到</span>
-						<input type="text" class="text end_datetime_d" name="val_endd" style="width:70px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-						<input type="text" class="text end_datetime_t" name="val_endt" style="width:60px;text-align:center" datatype="*" nullmsg="请填写完整日期">
-						<span class="help-inline errormsg"></span>
-					</div>
-				</div>
-				<div class="input-label">
-					<label class="label-text">全天活动：</label>
-					<div class="label-box form-inline control-group">
-						<label class="radio"><input type="radio" name="val_isallday" value="1"> 是</label>
-						<label class="radio" style="margin-left:10px"><input type="radio" name="val_isallday" value="0"> 否</label>
-					</div>
-				</div>
-				<div class="input-label">
-					<label class="label-text">链接：</label>
-					<div class="label-box form-inline control-group">
-						<input type="text" class="text" name="val_url" style="width:335px">
-					</div>
-				</div>
-				<div class="input-label">
-					<label class="label-text">内容：</label>
-					<div class="label-box form-inline control-group">
-						<textarea style="width:335px" rows="5" name="val_content"></textarea>
+		<form action="index.ajax.php" method="post" name="form" id="form" class="form-horizontal">
+			<div class="title-bar">编辑应用</div>
+			<div class="creatbox">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<input type="hidden" name="ac" value="edit">
+						<input type="hidden" name="id">
+						<div class="form-group">
+							<label for="inputName" class="col-sm-2 control-label">日程标题：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="val_title" datatype="*" nullmsg="请填写日程标题">
+								<span class="help-inline errormsg"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">日期：</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon">开始</span>
+									<input type="text" class="form-control" name="val_startdt" style="text-align:center" datatype="*" nullmsg="请填写完整日期">
+									<span class="input-group-addon">结束</span>
+									<input type="text" class="form-control" name="val_enddt" style="text-align:center" datatype="*" nullmsg="请填写完整日期">
+								</div>
+								<span class="help-inline errormsg"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">全天活动：</label>
+							<div class="col-sm-10">
+								<input type="checkbox" name="val_isallday" data-plugin="bootstrapSwitch" data-on-color="info" data-on-text="是" data-off-text="否">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">链接：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="val_url">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">内容：</label>
+							<div class="col-sm-10">
+								<textarea rows="5" class="form-control" name="val_content"></textarea>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="bottom-bar">
-			<div class="con">
-				<a class="btn btn-primary fr" id="btn-submit" href="javascript:;"><i class="icon-white icon-ok"></i> 确定</a>
-				<a class="btn fr" id="btn-back" href="javascript:;" style="margin-right:10px">返回</a>
+			<div class="bottom-bar">
+				<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="glyphicon glyphicon-ok"></i> 确定</a>
+				<a class="btn btn-default pull-right" id="btn-back" href="javascript:;" style="margin-right:10px"><i class="glyphicon glyphicon-chevron-up"></i> 返回</a>
 			</div>
-			<input type="text" autocomplete="off">
-		</div>
 		</form>
 	</div>
 	<div id="calendar" style="margin:30px"></div>
 	<?php include('sysapp/global_js.php'); ?>
-	<script src="../../js/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js"></script>
-	<script src="../../js/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js"></script>
-	<script src="../../js/Sugar-2.0.0/dist/sugar.min.js"></script>
-	<script src="../../js/bootstrap-datetimepicker-2.4.4/js/bootstrap-datetimepicker.min.js"></script>
-	<script src="../../js/bootstrap-datetimepicker-2.4.4/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="//cdn.bootcss.com/sugar/2.0.4/sugar.min.js"></script>
+	<script src="//cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
+	<script src="//cdn.bootcss.com/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+	<script src="//cdn.bootcss.com/fullcalendar/3.4.0/locale/zh-cn.js"></script>
+	<script src="../../static/plugins/bootstrap-datetimepicker-2.4.4/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../../static/plugins/bootstrap-datetimepicker-2.4.4/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script>
 	$(function(){
 		var form = $('#form').Validform({
@@ -108,49 +107,53 @@
 				$('#calendar').fullCalendar('refetchEvents');
 			}
 		});
-		$('.start_datetime_d').datetimepicker({
-			language : 'zh-CN',
-			format : 'yyyy-mm-dd',
-			weekStart : 1,
-			startView : 2,
-			minView : 2,
-			todayBtn : true,
-			todayHighlight : true
-		}).on('hide', function(ev){
-			$('.start_datetime_t').datetimepicker('setStartDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 0:0:0'));
-			$('.start_datetime_t').datetimepicker('setEndDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 23:59:59'));
-		});
-		$('.end_datetime_d').datetimepicker({
-			language : 'zh-CN',
-			format : 'yyyy-mm-dd',
-			weekStart : 1,
-			startView : 2,
-			minView : 2,
-			todayBtn : true,
-			todayHighlight : true
-		}).on('hide', function(ev){
-			$('.end_datetime_t').datetimepicker('setStartDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 0:0:0'));
-			$('.end_datetime_t').datetimepicker('setEndDate', Date.create(ev.date).format('{yyyy}-{MM}-{dd} 23:59:59'));
-		});
-		$('.start_datetime_t').datetimepicker({
-			language : 'zh-CN',
-			format : 'hh:ii',
-			startView : 1,
-			maxView : 1
-		});
-		$('.end_datetime_t').datetimepicker({
-			language : 'zh-CN',
-			format : 'hh:ii',
-			startView : 1,
-			maxView : 1
-		});
-		$('input[name="val_isallday"]').change(function(){
-			if($(this).val() == 1){
-				$('input[name="val_startt"], input[name="val_endt"]').hide();
-				form.ignore('input[name="val_startt"], input[name="val_endt"]');
+		$('input[name="val_isallday"]').on('switchChange.bootstrapSwitch', function(event, state) {
+			var startdt = $('input[name="val_startdt"]').val();
+			var enddt = $('input[name="val_enddt"]').val();
+			$('input[name="val_startdt"]').datetimepicker('remove');
+			$('input[name="val_enddt"]').datetimepicker('remove');
+			if(state){
+				$('input[name="val_startdt"]').datetimepicker({
+					language : 'zh-CN',
+					format : 'yyyy-mm-dd',
+					weekStart : 1,
+					startView : 2,
+					minView : 2,
+					todayBtn : true,
+					todayHighlight : true
+				});
+				$('input[name="val_enddt"]').datetimepicker({
+					language : 'zh-CN',
+					format : 'yyyy-mm-dd',
+					weekStart : 1,
+					startView : 2,
+					minView : 2,
+					todayBtn : true,
+					todayHighlight : true
+				});
+				$('input[name="val_startdt"]').val(moment(startdt).format('YYYY-MM-DD'));
+				$('input[name="val_enddt"]').val(moment(startdt).format('YYYY-MM-DD'));
 			}else{
-				$('input[name="val_startt"], input[name="val_endt"]').show();
-				form.unignore('input[name="val_startt"], input[name="val_endt"]');
+				$('input[name="val_startdt"]').datetimepicker({
+					language : 'zh-CN',
+					format : 'yyyy-mm-dd hh:ii',
+					weekStart : 1,
+					startView : 2,
+					minView : 0,
+					todayBtn : true,
+					todayHighlight : true
+				});
+				$('input[name="val_enddt"]').datetimepicker({
+					language : 'zh-CN',
+					format : 'yyyy-mm-dd hh:ii',
+					weekStart : 1,
+					startView : 2,
+					minView : 0,
+					todayBtn : true,
+					todayHighlight : true
+				});
+				$('input[name="val_startdt"]').val(moment(startdt).format('YYYY-MM-DD HH:mm'));
+				$('input[name="val_enddt"]').val(moment(enddt).format('YYYY-MM-DD HH:mm'));
 			}
 		});
 		$('#btn-back').click(function(){
@@ -162,53 +165,26 @@
 			header: {
 				left: 'today prev,next',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
-			},
-			monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-			monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-			dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-			dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-			allDayText: '全天',
-			axisFormat: 'h(:mm)tt',
-			buttonText: {
-				prevYear: '&nbsp;&lt;&lt;&nbsp;',
-				nextYear: '&nbsp;&gt;&gt;&nbsp;',
-				today: '&nbsp;今天&nbsp;',
-				month: '&nbsp;月&nbsp;',
-				week: '&nbsp;周&nbsp;',
-				day: '&nbsp;日&nbsp;'
-			},
-			titleFormat: {
-				month: 'yyyy年MMMM',
-				week: "yyyy年 MMMd日[ yyyy]{'-'[ MMM]d'日'}",
-				day: 'yyyy年MMMd日 dddd'
-			},
-			columnFormat: {
-				month: 'ddd',
-				week: 'M月d日 ddd',
-				day: 'M月d日 dddd'
-			},
-			timeFormat: {
-				'': 'H:mm - '
+				right: 'month,agendaWeek,agendaDay,listYear'
 			},
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end, allDay){
 				var content = '', isallday = 1;
-				var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());
-				var enddText = Date.create(end).format('{M}月{dd}日 ') + getMyDay(end.getDay());
-				var starttText = Date.create(start).format(' {H}:{m}');
-				var endtText = Date.create(end).format(' {H}:{m}');
-				if(starttText != ' 0:0' || endtText != ' 0:0'){
+				var startdText = start.format('M月D日 ') + getMyDay(start.day());
+				var enddText = end.format('M月D日 ') + getMyDay(end.day());
+				var starttText = start.format(' HH:mm');
+				var endtText = end.format(' HH:mm');
+				if(starttText != ' 00:00' || endtText != ' 00:00'){
 					isallday = 0;
 				}
 				if(isallday == 0){
-					content += startdText + starttText + '&nbsp;&nbsp;–&nbsp;' + endtText;
+					content += startdText + starttText + ' - ' + endtText;
 				}else{
 					if(startdText == enddText){
 						content += startdText;
 					}else{
-						content += startdText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText;
+						content += startdText + ' - ' + enddText;
 					}
 				}
 				//创建对话框
@@ -224,7 +200,7 @@
 									$.ajax({
 										type: 'POST',
 										url: 'index.ajax.php',
-										data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + Date.create(start).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&end=' + Date.create(end).format('{yyyy}-{MM}-{dd} {H}:{m}') + '&isallday=' + isallday,
+										data: 'ac=quick&do=add&title=' + document.getElementById('title').value + '&start=' + start.format('YYYY-MM-DD HH:mm') + '&end=' + end.format('YYYY-MM-DD HH:mm') + '&isallday=' + isallday,
 										success: function(){
 											//添加成功后刷新日历
 											calendar.fullCalendar('refetchEvents');
@@ -251,17 +227,15 @@
 								clearEditForm();
 								//初始化表单
 								$('#editbox input[name="val_title"]').val(document.getElementById('title').value);
-								$('#editbox input[name="val_startd"]').val(Date.create(start).format('{yyyy}-{MM}-{dd}'));
-								$('#editbox input[name="val_endd"]').val(Date.create(end).format('{yyyy}-{MM}-{dd}'));
-								$('#editbox input[name="val_startt"]').val(Date.create(start).format('{H}:{m}'));
-								$('#editbox input[name="val_endt"]').val(Date.create(end).format('{H}:{m}'));
 								if(isallday == 0){
-									$('#editbox input[name="val_isallday"]:eq(1)').click();
+									$('#editbox input[name="val_startdt"]').val(start.format('YYYY-MM-DD HH:mm'));
+									$('#editbox input[name="val_enddt"]').val(end.format('YYYY-MM-DD HH:mm'));
+									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
+								}else{
+									$('#editbox input[name="val_startdt"]').val(start.format('YYYY-MM-DD'));
+									$('#editbox input[name="val_enddt"]').val(end.format('YYYY-MM-DD'));
+									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 								}
-								$('.start_datetime_t').datetimepicker('setStartDate', Date.create(start).format('{yyyy}-{MM}-{dd} 00:00:00'));
-								$('.start_datetime_t').datetimepicker('setEndDate', Date.create(start).format('{yyyy}-{MM}-{dd} 23:59:59'));
-								$('.end_datetime_t').datetimepicker('setStartDate', Date.create(end).format('{yyyy}-{MM}-{dd} 00:00:00'));
-								$('.end_datetime_t').datetimepicker('setEndDate', Date.create(end).format('{yyyy}-{MM}-{dd} 23:59:59'));
 							}
 						}
 					]
@@ -269,34 +243,33 @@
 				calendar.fullCalendar('unselect');
 			},
 			editable: true,
-			events: function(start, end, callback){
+			events: function(start, end, timezone, callback){
 				$.ajax({
 					type: 'POST',
 					url: 'index.ajax.php',
 					data: {
 						ac: 'getCalendar',
-						start: Math.round(start.getTime() / 1000),
-						end: Math.round(end.getTime() / 1000)
+						start: start.unix(),
+						end: end.unix()
 					},
-					dataType: 'json',
-					success: function(msg){
-						callback(msg);
-					}
+					dataType: 'json'
+				}).done(function(msg){
+					callback(msg);
 				});
 			},
 			eventClick: function(event){
-				var start = new Date(event._start), end = new Date(event._end), content = '';
-				var startdText = Date.create(start).format('{M}月{dd}日 ') + getMyDay(start.getDay());
-				var enddText = Date.create(end).format('{M}月{dd}日 ') + getMyDay(end.getDay());
-				var starttText = Date.create(start).format(' {H}:{m}');
-				var endtText = Date.create(end).format(' {H}:{m}');
+				var start = event._start, end = event._end, content = '';
+				var startdText = start.format('M月D日 ') + getMyDay(start.day());
+				var enddText = end.format('M月D日 ') + getMyDay(end.day());
+				var starttText = start.format('HH:mm');
+				var endtText = end.format('HH:mm');
 				if(!event.allDay){
-					content += startdText + starttText + '&nbsp;&nbsp;–&nbsp;' + endtText;
+					content += startdText + starttText + ' - ' + endtText;
 				}else{
 					if(startdText == enddText){
 						content += startdText;
 					}else{
-						content += startdText + '&nbsp;&nbsp;–&nbsp;&nbsp;' + enddText;
+						content += startdText + ' - ' + enddText;
 					}
 				}
 				dialog({
@@ -344,25 +317,17 @@
 										//初始化表单
 										$('#editbox input[name="id"]').val(msg['tbid']);
 										$('#editbox input[name="val_title"]').val(msg['title']);
-										$('#editbox input[name="val_startd"]').val(msg['startd']);
-										$('#editbox input[name="val_startt"]').val(msg['startt']);
-										$('#editbox input[name="val_endd"]').val(msg['endd']);
-										$('#editbox input[name="val_endt"]').val(msg['endt']);
 										$('#editbox input[name="val_url"]').val(msg['url']);
 										$('#editbox textarea[name="val_content"]').val(msg['content']);
 										if(msg['isallday'] == '1'){
-											$('#editbox input[name="val_isallday"]:eq(0)').prop('checked', true);
-											$('#editbox input[name="val_isallday"]:eq(1)').prop('checked', false);
-											$('#editbox input[name="val_startt"], #editbox input[name="val_endt"]').hide();
+											$('#editbox input[name="val_startdt"]').val(moment(msg['startdt']).format('YYYY-MM-DD'));
+											$('#editbox input[name="val_enddt"]').val(moment(msg['enddt']).format('YYYY-MM-DD'));
+											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 										}else{
-											$('#editbox input[name="val_isallday"]:eq(0)').prop('checked', false);
-											$('#editbox input[name="val_isallday"]:eq(1)').prop('checked', true);
-											$('#editbox input[name="val_startt"], #editbox input[name="val_endt"]').show();
+											$('#editbox input[name="val_startdt"]').val(moment(msg['startdt']).format('YYYY-MM-DD HH:mm'));
+											$('#editbox input[name="val_enddt"]').val(moment(msg['enddt']).format('YYYY-MM-DD HH:mm'));
+											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
 										}
-										$('.start_datetime_t').datetimepicker('setStartDate', Date.create(msg['startd']).format('{yyyy}-{MM}-{dd} 00:00:00'));
-										$('.start_datetime_t').datetimepicker('setEndDate', Date.create(msg['startd']).format('{yyyy}-{MM}-{dd} 23:59:59'));
-										$('.end_datetime_t').datetimepicker('setStartDate', Date.create(msg['endd']).format('{yyyy}-{MM}-{dd} 00:00:00'));
-										$('.end_datetime_t').datetimepicker('setEndDate', Date.create(msg['endd']).format('{yyyy}-{MM}-{dd} 23:59:59'));
 									}
 								});
 							},
@@ -418,10 +383,8 @@
 	}
 	function clearEditForm(){
 		$('#editbox input[name="id"], #editbox input[name="val_title"], #editbox input[name="val_url"]').val('');
-		$('#editbox input[name="val_startd"], #editbox input[name="val_endd"]').val('');
-		$('#editbox input[name="val_startt"], #editbox input[name="val_endt"]').val('').hide();
-		$('#editbox input[name="val_isallday"]:eq(0)').prop('checked', true);
-		$('#editbox input[name="val_isallday"]:eq(1)').prop('checked', false);
+		$('#editbox input[name="val_startdt"], #editbox input[name="val_enddt"]').val('');
+		$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 		$('#editbox textarea[name="val_content"]').val('');
 	}
 	</script>

@@ -18,7 +18,7 @@
     border: 1px solid #000;
     // 最大化窗口
     &.window-maximize{
-        border: none!important;
+        border: none;
     }
     // 标题
     .title-bar{
@@ -60,76 +60,12 @@
                 text-align: center;
                 display: inline-block;
                 zoom: 1;
-                vertical-align: top;
-                font-family: tahoma, arial, \5b8b\4f53, sans-serif;
                 color: #000;
-                font-size: 22px;
                 width: 22px;
                 height: 22px;
                 line-height: 22px;
-                b{
-                    display: block;
-                    position: absolute;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-                &.ha-close{
-                    &:hover{
-                        color: #03F;
-                    }
-                }
-                &.ha-fullscreen{
-                    &:hover{
-                        color: #03F;
-                    }
-                }
-                &.ha-max{
-                    .max-b{
-                        top: 6px;
-                        left: 4px;
-                        width: 10px;
-                        height: 5px;
-                        border: 2px solid #000;
-                        border-top-width: 4px;
-                    }
-                    &:hover .max-b{
-                        border-color: #03f;
-                    }
-                }
-                &.ha-revert{
-                    .revert-b{
-                        top: 5px;
-                        left: 6px;
-                        width: 8px;
-                        height: 4px;
-                        border: 2px solid #000;
-                        border-top-width: 3px;
-                    }
-                    .revert-t{
-                        top: 9px;
-                        left: 3px;
-                        width: 8px;
-                        height: 4px;
-                        border: 2px solid #000;
-                        border-top-width: 3px;
-                        background: #fff;
-                    }
-                    &:hover .revert-b,
-                    &:hover .revert-t{
-                        border-color: #03f;
-                    }
-                }
-                &.ha-hide{
-                    .hide-b{
-                        top: 12px;
-                        left: 5px;
-                        width: 12px;
-                        height: 2px;
-                        border-bottom: 2px solid #000;
-                    }
-                    &:hover .hide-b{
-                        border-color: #03f;
-                    }
+                i{
+                    font-size: 20px;
                 }
             }
         }

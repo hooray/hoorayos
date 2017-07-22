@@ -46,11 +46,11 @@
 	<meta name="description" content="<?php echo $setting['description']; ?>" />
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+	<link href="//at.alicdn.com/t/font_2dkt72ag040io1or.css" rel="stylesheet">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
-	<link rel="stylesheet" href="static/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="//at.alicdn.com/t/font_3qtd7uxnh21n61or.css">
 	<link rel="stylesheet" href="static/plugins/artDialog-7.0.0/css/dialog.css">
-	<link rel="stylesheet" href="static/plugins/sweetalert-1.1.1/dist/sweetalert.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 	<link rel="stylesheet" href="static/css/index.css">
 	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
@@ -326,13 +326,13 @@
 			<p>购买或定制请联系 QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" target="_blank">304327508</a></p>
 		</div>
 	</div>
-	<script src="static/plugins/jquery-2.2.4.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/sugar/2.0.4/sugar.min.js"></script>
+	<script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
-	<script src="libs/clicaptcha/clicaptcha.js"></script>
-	<script src="static/plugins/Sugar-2.0.2/dist/sugar.min.js"></script>
 	<script src="static/plugins/artDialog-7.0.0/dist/dialog-plus.js"></script>
-	<script src="static/plugins/sweetalert-1.1.1/dist/sweetalert.min.js"></script>
+	<script src="libs/clicaptcha/clicaptcha.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 	<script src="static/js/hros.core.js"></script>
 	<script src="static/js/hros.app.js"></script>

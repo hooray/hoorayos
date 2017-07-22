@@ -12,17 +12,6 @@
 .title-bar .title{text-shadow:0 1px 1px #fff}
 /*窗口右上角操作按钮*/
 .title-handle a{color:#505050}
-.title-handle .ha-hide .hide-b{border-bottom:2px solid #505050}
-.title-handle .ha-max .max-b{border:1px solid #505050;border-top-width:3px;top:8px}
-.title-handle .ha-revert .revert-b{border:1px solid #505050;border-top-width:3px}
-.title-handle .ha-revert .revert-t{border:1px solid #505050;border-top-width:3px;background:#D2D2D2}
-.title-handle .ha-hide:hover b,
-.title-handle .ha-max:hover b,
-.title-handle .ha-revert:hover b{border-color:#2492FF}
-.title-handle .ha-fullscreen{color:#505050}
-.title-handle .ha-fullscreen:hover{color:#2492FF}
-.title-handle .ha-close{color:#BF160B}
-.title-handle .ha-close:hover{color:#BF160B}
 /*窗口内部iframe*/
 .window-frame{border-top:1px solid #666;border-bottom:1px solid #666}
 /*底部*/

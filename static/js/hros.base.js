@@ -111,7 +111,7 @@ HROS.base = (function(){
 		setSkin: function(skin, callback){
 			//将原样式修改id，并载入新样式
 			$('#window-skin').attr('id', 'window-skin-ready2remove');
-			var stylesheet = loadCSS('static/img/skins/' + skin + '.css?' + version);
+			var stylesheet = loadCSS('static/css/skins/' + skin + '.css?' + version);
 			onloadCSS(stylesheet, function(){
 				$('body link').last().attr('id', 'window-skin');
 				$('#window-skin-ready2remove').remove();
