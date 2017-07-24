@@ -327,7 +327,6 @@
 		</div>
 	</div>
 	<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-	<script src="//cdn.bootcss.com/sugar/2.0.4/sugar.min.js"></script>
 	<script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>

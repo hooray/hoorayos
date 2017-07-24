@@ -93,26 +93,34 @@
 			}
 			break;
 		case 'edit':
-			$data = [
-				'title' => $_POST['val_title'],
-				'startdt' => $_POST['val_startdt'],
-				'enddt' => $_POST['val_enddt'],
-				'url' => $_POST['val_url'],
-				'content' => $_POST['val_content'],
-				'isallday' => $_POST['val_isallday'],
-				'member_id' => session('member_id')
-			];
-			if($_POST['id'] == ''){
-				$db->insert('tb_calendar', $data);
+			if(strtotime($_POST['val_startdt']) <= strtotime($_POST['val_enddt'])){
+				$data = [
+					'title' => $_POST['val_title'],
+					'startdt' => $_POST['val_startdt'],
+					'enddt' => $_POST['val_enddt'],
+					'url' => $_POST['val_url'],
+					'content' => $_POST['val_content'],
+					'isallday' => isset($_POST['val_isallday']) ? 1 : 0,
+					'member_id' => session('member_id')
+				];
+				if($_POST['id'] == ''){
+					$db->insert('tb_calendar', $data);
+				}else{
+					$db->update('tb_calendar', $data, [
+						'tbid' => $_POST['id']
+					]);
+				}
+				$rs = [
+					'info' => '',
+					'status' => 'y'
+				];
 			}else{
-				$db->update('tb_calendar', $data, [
-					'tbid' => $_POST['id']
-				]);
+				$rs = [
+					'info' => '时间选择有误，请检查',
+					'status' => 'n'
+				];
 			}
-			echo json_encode([
-				'info' => '',
-				'status' => 'y'
-			]);
+			echo json_encode($rs);
 			break;
 	}
 ?>

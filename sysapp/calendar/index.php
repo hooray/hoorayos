@@ -28,7 +28,7 @@
 							<label for="inputName" class="col-sm-2 control-label">日程标题：</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="val_title" datatype="*" nullmsg="请填写日程标题">
-								<span class="help-inline errormsg"></span>
+								<span class="help-block"></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -40,7 +40,7 @@
 									<span class="input-group-addon">结束</span>
 									<input type="text" class="form-control" name="val_enddt" style="text-align:center" datatype="*" nullmsg="请填写完整日期">
 								</div>
-								<span class="help-inline errormsg"></span>
+								<span class="help-block"></span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -72,7 +72,6 @@
 	</div>
 	<div id="calendar" style="margin:30px"></div>
 	<?php include('sysapp/global_js.php'); ?>
-	<script src="//cdn.bootcss.com/sugar/2.0.4/sugar.min.js"></script>
 	<script src="//cdn.bootcss.com/moment.js/2.18.1/moment.min.js"></script>
 	<script src="//cdn.bootcss.com/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 	<script src="//cdn.bootcss.com/fullcalendar/3.4.0/locale/zh-cn.js"></script>
@@ -89,68 +88,78 @@
 			//cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）;
 			tiptype: function(msg, o){
 				if(!o.obj.is('form')){//验证表单元素时o.obj为该表单元素，全部验证通过提交表单时o.obj为该表单对象;
-					var B = o.obj.parents('.control-group');
-					var T = B.children('.errormsg');
+					var B = o.obj.parents('.form-group');
+					var T = B.find('.help-block');
 					if(o.type == 2){
-						B.removeClass('error');
+						B.removeClass('has-error');
 						T.text('');
 					}else{
-						B.addClass('error');
+						B.addClass('has-error');
 						T.text(msg);
 					}
 				}
 			},
 			ajaxPost: true,
-			callback: function(){
-				$('#calendar').show();
-				$('#editbox').hide();
-				$('#calendar').fullCalendar('refetchEvents');
+			callback: function(data){
+				if(data.status == 'y'){
+					$('#calendar').show();
+					$('#editbox').hide();
+					$('#calendar').fullCalendar('refetchEvents');
+				}else{
+					swal({
+						type: 'error',
+						title: '警告',
+						text: data.info,
+						timer: 2000,
+						showConfirmButton: false
+					});
+				}
 			}
 		});
-		$('input[name="val_isallday"]').on('switchChange.bootstrapSwitch', function(event, state) {
+		$('#editbox input[name="val_isallday"]').on('switchChange.bootstrapSwitch', function(event, state) {
 			var startdt = $('input[name="val_startdt"]').val();
 			var enddt = $('input[name="val_enddt"]').val();
 			$('input[name="val_startdt"]').datetimepicker('remove');
 			$('input[name="val_enddt"]').datetimepicker('remove');
 			if(state){
 				$('input[name="val_startdt"]').datetimepicker({
-					language : 'zh-CN',
-					format : 'yyyy-mm-dd',
-					weekStart : 1,
-					startView : 2,
-					minView : 2,
-					todayBtn : true,
-					todayHighlight : true
+					language: 'zh-CN',
+					format: 'yyyy-mm-dd',
+					weekStart: 1,
+					startView: 2,
+					minView: 2,
+					todayBtn: true,
+					todayHighlight: true
 				});
 				$('input[name="val_enddt"]').datetimepicker({
-					language : 'zh-CN',
-					format : 'yyyy-mm-dd',
-					weekStart : 1,
-					startView : 2,
-					minView : 2,
-					todayBtn : true,
-					todayHighlight : true
+					language: 'zh-CN',
+					format: 'yyyy-mm-dd',
+					weekStart: 1,
+					startView: 2,
+					minView: 2,
+					todayBtn: true,
+					todayHighlight: true
 				});
 				$('input[name="val_startdt"]').val(moment(startdt).format('YYYY-MM-DD'));
 				$('input[name="val_enddt"]').val(moment(startdt).format('YYYY-MM-DD'));
 			}else{
 				$('input[name="val_startdt"]').datetimepicker({
-					language : 'zh-CN',
-					format : 'yyyy-mm-dd hh:ii',
-					weekStart : 1,
-					startView : 2,
-					minView : 0,
-					todayBtn : true,
-					todayHighlight : true
+					language: 'zh-CN',
+					format: 'yyyy-mm-dd hh:ii',
+					weekStart: 1,
+					startView: 2,
+					minView: 0,
+					todayBtn: true,
+					todayHighlight: true
 				});
 				$('input[name="val_enddt"]').datetimepicker({
-					language : 'zh-CN',
-					format : 'yyyy-mm-dd hh:ii',
-					weekStart : 1,
-					startView : 2,
-					minView : 0,
-					todayBtn : true,
-					todayHighlight : true
+					language: 'zh-CN',
+					format: 'yyyy-mm-dd hh:ii',
+					weekStart: 1,
+					startView: 2,
+					minView: 0,
+					todayBtn: true,
+					todayHighlight: true
 				});
 				$('input[name="val_startdt"]').val(moment(startdt).format('YYYY-MM-DD HH:mm'));
 				$('input[name="val_enddt"]').val(moment(enddt).format('YYYY-MM-DD HH:mm'));
@@ -208,10 +217,10 @@
 									});
 								}else{
 									swal({
-										type : 'error',
-										title : '请填写活动标题',
-										showConfirmButton : false,
-										timer : 1000
+										type: 'error',
+										title: '请填写活动标题',
+										showConfirmButton: false,
+										timer: 1000
 									});
 									return false;
 								}
@@ -228,13 +237,13 @@
 								//初始化表单
 								$('#editbox input[name="val_title"]').val(document.getElementById('title').value);
 								if(isallday == 0){
+									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
 									$('#editbox input[name="val_startdt"]').val(start.format('YYYY-MM-DD HH:mm'));
 									$('#editbox input[name="val_enddt"]').val(end.format('YYYY-MM-DD HH:mm'));
-									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
 								}else{
+									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 									$('#editbox input[name="val_startdt"]').val(start.format('YYYY-MM-DD'));
 									$('#editbox input[name="val_enddt"]').val(end.format('YYYY-MM-DD'));
-									$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 								}
 							}
 						}
@@ -320,13 +329,13 @@
 										$('#editbox input[name="val_url"]').val(msg['url']);
 										$('#editbox textarea[name="val_content"]').val(msg['content']);
 										if(msg['isallday'] == '1'){
+											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 											$('#editbox input[name="val_startdt"]').val(moment(msg['startdt']).format('YYYY-MM-DD'));
 											$('#editbox input[name="val_enddt"]').val(moment(msg['enddt']).format('YYYY-MM-DD'));
-											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 										}else{
+											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
 											$('#editbox input[name="val_startdt"]').val(moment(msg['startdt']).format('YYYY-MM-DD HH:mm'));
 											$('#editbox input[name="val_enddt"]').val(moment(msg['enddt']).format('YYYY-MM-DD HH:mm'));
-											$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', false);
 										}
 									}
 								});
@@ -384,7 +393,6 @@
 	function clearEditForm(){
 		$('#editbox input[name="id"], #editbox input[name="val_title"], #editbox input[name="val_url"]').val('');
 		$('#editbox input[name="val_startdt"], #editbox input[name="val_enddt"]').val('');
-		$('#editbox input[name="val_isallday"]').bootstrapSwitch('state', true);
 		$('#editbox textarea[name="val_content"]').val('');
 	}
 	</script>

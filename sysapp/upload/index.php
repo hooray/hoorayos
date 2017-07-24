@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="bottom-bar">
-		<button class="btn btn-default pull-right" disabled id="btn-upload"><i class="icon-upload"></i> 开始上传</button>
+		<button class="btn btn-default pull-right" disabled id="btn-upload"><i class="glyphicon glyphicon-upload"></i> 开始上传</button>
 		<a class="btn btn-primary pull-right" id="btn-filePicker" style="margin-right:10px">选择文件</a>
 		<button class="btn btn-default pull-right" disabled id="btn-paused" style="margin-right:10px">暂停上传</button>
 		<button class="btn btn-default pull-right" disabled id="btn-goonupload" style="margin-right:10px">继续上传</button>

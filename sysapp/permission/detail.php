@@ -71,8 +71,8 @@
 			</div>
 		</div>
 		<div class="bottom-bar">
-			<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="icon-white icon-ok"></i> 确定</a>
-			<a class="btn btn-default pull-right" href="javascript:window.parent.closeDetailIframe();" style="margin-right:10px"><i class="icon-chevron-up"></i> 返回权限列表</a>
+			<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="glyphicon glyphicon-ok"></i> 确定</a>
+			<a class="btn btn-default pull-right" href="javascript:window.parent.closeDetailIframe();" style="margin-right:10px"><i class="glyphicon glyphicon-chevron-up"></i> 返回权限列表</a>
 		</div>
 	</form>
 	<?php include('sysapp/global_js.php'); ?>

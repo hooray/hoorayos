@@ -353,7 +353,6 @@
 						timer: 2000,
 						showConfirmButton: false
 					});
-					//ZENG.msgbox.show('设置已保存！', 4, 2000);
 				}
 			}
 		});

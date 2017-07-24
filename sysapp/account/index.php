@@ -72,7 +72,7 @@
 						<a href="<?php echo $member['openurl_weibo']; ?>" target="_blank">
 							<img src="<?php echo $member['openavatar_weibo']; ?>" class="img-circle img-thumbnail" width="36" height="36">
 							<?php echo $member['openname_weibo']; ?>
-							<i class="icon-share"></i>
+							<i class="glyphicon glyphicon-share"></i>
 						</a>
 						<a href="javascript:;" class="btn btn-default unbind" data-type="weibo">解除绑定</a>
 					<?php }else{ ?>

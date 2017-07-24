@@ -141,8 +141,8 @@
 			</div>
 		</div>
 		<div class="bottom-bar">
-			<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="icon-white icon-ok"></i> 确定</a>
-			<a class="btn btn-default pull-right" href="javascript:window.parent.dialog.get('editdialog').close().remove();" style="margin-right:10px"><i class="icon-remove"></i> 关闭</a>
+			<a class="btn btn-primary pull-right" id="btn-submit" href="javascript:;"><i class="glyphicon glyphicon-ok"></i> 确定</a>
+			<a class="btn btn-default pull-right" href="javascript:window.parent.dialog.get('editdialog').close().remove();" style="margin-right:10px"><i class="glyphicon glyphicon-remove"></i> 关闭</a>
 		</div>
 	</form>
 	<?php include('sysapp/global_js.php'); ?>
