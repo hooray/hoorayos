@@ -79,34 +79,19 @@
 					<div class="form-group form-group-isresize <?php if($app['type'] == 'widget'){echo 'hide';} ?>">
 						<label class="col-sm-2 control-label">窗口是否拉伸：</label>
 						<div class="col-sm-10">
-							<label class="radio-inline">
-								<input type="radio" name="val_isresize" value="1" <?php if($app['isresize'] == 1){echo 'checked';} ?>>是
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="val_isresize" value="0" <?php if($app['isresize'] == 0){echo 'checked';} ?>>否
-							</label>
+							<input type="checkbox" name="val_isresize" <?php if($app['isresize'] == 1){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-size="small" data-on-text="是" data-off-text="否">
 						</div>
 					</div>
 					<div class="form-group form-group-isopenmax <?php if($app['type'] == 'widget' || $app['isresize'] == 0){echo 'hide';} ?>">
 						<label class="col-sm-2 control-label">打开默认最大化：</label>
 						<div class="col-sm-10">
-							<label class="radio-inline">
-								<input type="radio" name="val_isopenmax" value="1" <?php if($app['isopenmax'] == 1){echo 'checked';} ?>>是
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="val_isopenmax" value="0" <?php if($app['isopenmax'] == 0){echo 'checked';} ?>>否
-							</label>
+							<input type="checkbox" name="val_isopenmax" <?php if($app['isopenmax'] == 1){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-size="small" data-on-text="是" data-off-text="否">
 						</div>
 					</div>
 					<div class="form-group form-group-isflash <?php if($app['type'] == 'widget'){echo 'hide';} ?>">
 						<label class="col-sm-2 control-label">是否为Flash：</label>
 						<div class="col-sm-10">
-							<label class="radio-inline">
-								<input type="radio" name="val_isflash" value="1" <?php if($app['isflash'] == 1){echo 'checked';} ?>>是
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="val_isflash" value="0" <?php if($app['isflash'] == 0){echo 'checked';} ?>>否
-							</label>
+							<input type="checkbox" name="val_isflash" <?php if($app['isflash'] == 1){echo 'checked';} ?> data-plugin="bootstrapSwitch" data-on-color="info" data-size="small" data-on-text="是" data-off-text="否">
 							<span class="help-block">如果设置为Flash应用，当窗口处于非当前窗口时，会显示遮罩层</span>
 						</div>
 					</div>
@@ -196,8 +181,8 @@
 				}
 			}
 		});
-		$('input[name="val_isresize"]').change(function(){
-			if($(this).val() == '1'){
+		$('input[name="val_isresize"]').on('switchChange.bootstrapSwitch', function(){
+			if($(this).bootstrapSwitch('state')){
 				$('.form-group-isopenmax').removeClass('hide');
 			}else{
 				$('.form-group-isopenmax').addClass('hide');

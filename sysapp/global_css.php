@@ -6,6 +6,5 @@
 <link href="//cdn.bootcss.com/bootstrap-slider/9.8.1/css/bootstrap-slider.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../static/plugins/HoorayLibs/hooraylibs.css">
-<link rel="stylesheet" href="../../static/plugins/artDialog-7.0.0/css/dialog.css">
 <link rel="stylesheet" href="../../static/plugins/webuploader-0.1.5/webuploader.css">
 <link rel="stylesheet" href="../../static/css/sys.css">

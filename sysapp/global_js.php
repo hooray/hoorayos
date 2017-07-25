@@ -7,8 +7,8 @@
 <script src="//cdn.bootcss.com/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap-slider/9.8.1/bootstrap-slider.min.js"></script>
 <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="//cdn.bootcss.com/artDialog/7.0.0/dialog-plus.js"></script>
 <script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
-<script src="../../static/plugins/artDialog-7.0.0/dist/dialog-plus.js"></script>
 <script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 <script>
 $(function(){

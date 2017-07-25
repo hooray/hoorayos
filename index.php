@@ -50,7 +50,6 @@
 	<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 	<link href="//at.alicdn.com/t/font_2dkt72ag040io1or.css" rel="stylesheet">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
-	<link rel="stylesheet" href="static/plugins/artDialog-7.0.0/css/dialog.css">
 	<link rel="stylesheet" href="libs/clicaptcha/css/captcha.css">
 	<link rel="stylesheet" href="static/css/index.css">
 	<link rel="stylesheet" href="static/css/skins/<?php echo getSkin(); ?>.css" id="window-skin">
@@ -328,9 +327,9 @@
 	</div>
 	<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 	<script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+	<script src="//cdn.bootcss.com/artDialog/7.0.0/dialog-plus.js"></script>
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
-	<script src="static/plugins/artDialog-7.0.0/dist/dialog-plus.js"></script>
 	<script src="libs/clicaptcha/clicaptcha.js"></script>
 	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 	<script src="static/js/hros.core.js"></script>
