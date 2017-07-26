@@ -7,4 +7,5 @@
 <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../static/plugins/HoorayLibs/hooraylibs.css">
 <link rel="stylesheet" href="../../static/plugins/webuploader-0.1.5/webuploader.css">
+<link rel="stylesheet" href="../../static/plugins/Waves-0.7.5/dist/waves.min.css">
 <link rel="stylesheet" href="../../static/css/sys.css">

@@ -10,6 +10,7 @@
 <script src="//cdn.bootcss.com/artDialog/7.0.0/dialog-plus.js"></script>
 <script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
 <script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
+<script src="../../static/plugins/Waves-0.7.5/dist/waves.min.js"></script>
 <script>
 $(function(){
 	//toolTip
@@ -18,6 +19,9 @@ $(function(){
 	$('[data-plugin="bootstrapSelect"]').selectpicker();
 	//开关滑块
 	$('[data-plugin="bootstrapSwitch"]').bootstrapSwitch();
+	//Material Design风格按钮效果
+	Waves.attach('.btn', ['waves-float']);
+    Waves.init();
 	//detailIframe
 	openDetailIframe = function(url){
 		ZENG.msgbox.show('正在载入中，请稍后...', 6, 100000);
