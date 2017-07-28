@@ -22,7 +22,7 @@ body{margin:0;padding:0}
 	<div class="m animate"></div>
 	<div class="s animate"></div>
 </div>
-<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	var clock = $('#clock-box');

@@ -666,51 +666,34 @@ HROS.window = (function(){
 				var obj = $(this).parents('.window-container');
 				//判断当前窗口是否已经是最大化
 				if(obj.find('.ha-max').is(':hidden')){
-					obj.find('.ha-revert').click();
+					HROS.window.revert(obj.attr('appid'));
 				}else{
-					obj.find('.ha-max').click();
+					HROS.window.max(obj.attr('appid'));
 				}
 			}).on('click', '.window-container .set-bar', function(){
 				var obj = $(this).parents('.window-container');
 				HROS.window.show2top(obj.attr('appid'));
-			}).on('click', '.window-container .ha-hide', function(){
+			}).on('click', '.window-container .title-bar .title-handle a, .window-container .set-bar a', function(){
 				var obj = $(this).parents('.window-container');
-				HROS.window.hide(obj.attr('appid'));
-			}).on('click', '.window-container .ha-max', function(){
-				var obj = $(this).parents('.window-container');
-				HROS.window.max(obj.attr('appid'));
-			}).on('click', '.window-container .ha-revert', function(){
-				var obj = $(this).parents('.window-container');
-				HROS.window.revert(obj.attr('appid'));
-			}).on('click', '.window-container .ha-fullscreen', function(){
-				var obj = $(this).parents('.window-container');
-				window.fullScreenApi.requestFullScreen(document.getElementById(obj.find('iframe').attr('id')));
-			}).on('click', '.window-container .ha-close', function(e){
-				var obj = $(this).parents('.window-container');
-				HROS.window.close(obj.attr('appid'));
-			}).on('click', '.window-container .refresh', function(){
-				var obj = $(this).parents('.window-container');
-				HROS.window.refresh(obj.attr('appid'));
-			}).on('click', '.window-container .detail', function(){
-				var obj = $(this).parents('.window-container');
-				if(obj.attr('realappid') !== 0){
-					HROS.window.createTemp({
-						appid: 'hoorayos-yysc',
-						title: '应用市场',
-						url: 'sysapp/appmarket/index.php?id=' + obj.attr('realappid'),
-						width: 800,
-						height: 484,
-						isflash: false,
-						refresh: true
-					});
-				}else{
-					swal({
-						type: 'warning',
-						title: '温馨提示',
-						text: '该应用没有任何详细介绍',
-						timer: 2000,
-						showConfirmButton: false
-					});
+				switch($(this).attr('btn')){
+					case 'hide':
+						HROS.window.hide(obj.attr('appid'));
+						break;
+					case 'max':
+						HROS.window.max(obj.attr('appid'));
+						break;
+					case 'revert':
+						HROS.window.revert(obj.attr('appid'));
+						break;
+					case 'fullscreen':
+						window.fullScreenApi.requestFullScreen(document.getElementById(obj.find('iframe').attr('id')));
+						break;
+					case 'close':
+						HROS.window.close(obj.attr('appid'));
+						break;
+					case 'refresh':
+						HROS.window.refresh(obj.attr('appid'));
+						break;
 				}
 			}).on('contextmenu', '.window-container', function(){
 				$('.popup-menu').hide();

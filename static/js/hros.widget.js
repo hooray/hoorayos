@@ -293,8 +293,10 @@ HROS.widget = (function(){
 			HROS.CONFIG.widgetIndexid += 1;
 		},
 		handle: function(){
-			$('#desk').on('mousedown', '.widget a', function(e){
-				e.preventDefault();
+			$('#desk').on('mousedown touchstart', '.widget a', function(e){
+				if(e.type == 'mousedown'){
+					e.preventDefault();
+				}
 				e.stopPropagation();
 			});
 			$('#desk').on('click', '.widget .ha-close', function(e){
