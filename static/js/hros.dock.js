@@ -162,22 +162,24 @@ HROS.dock = (function(){
 			}
 		},
 		move: function(){
-			$('#dock-container').on('mousedown',function(e){
-				if(e.which == 1){
+			$('#dock-container').on('mousedown touchstart',function(e){
+				if(e.which == 0 || e.which == 1){
 					var lay = HROS.maskBox.dock(), location;
-					$(document).on('mousemove', function(e){
+					$(document).on('mousemove touchmove', function(e){
+						var cx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+						var cy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 						lay.show();
-						if(e.clientY < lay.height() * 0.2){
+						if(cy < lay.height() * 0.2){
 							location = 'top';
-						}else if(e.clientX < lay.width() * 0.5){
+						}else if(cx < lay.width() * 0.5){
 							location = 'left';
 						}else{
 							location = 'right';
 						}
 						$('.dock_drap_effect').removeClass('hover');
 						$('.dock_drap_effect_' + location).addClass('hover');
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
+					}).on('mouseup touchend', function(){
+						$(document).off('mousemove touchmove mouseup touchend');
 						lay.hide();
 						HROS.dock.updatePos(location);
 					});

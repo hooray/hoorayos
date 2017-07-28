@@ -311,33 +311,35 @@ HROS.app = (function(){
 		*/
 		move: function(){
 			//应用码头应用拖动
-			$('#dock-bar .dock-applist').on('mousedown', '.appbtn', function(e){
+			$('#dock-bar .dock-applist').on('mousedown touchstart', '.appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.which == 1){
+				if(e.which == 0 || e.which == 1){
 					var oldobj = $(this);
 					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
-					var dx = e.clientX;
-					var dy = e.clientY;
-					var cx = e.clientX;
-					var cy = e.clientY;
+					var dx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
+					var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var cy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					var x = dx - oldobj.offset().left;
 					var y = dy - oldobj.offset().top;
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
-					$(document).on('mousemove', function(e){
+					$(document).on('mousemove touchmove', function(e){
+						var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+						var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 						$('body').append(obj);
 						lay.show();
-						cx = e.clientX <= 0 ? 0: e.clientX >= $(window).width() ? $(window).width(): e.clientX;
-						cy = e.clientY <= 0 ? 0: e.clientY >= $(window).height() ? $(window).height(): e.clientY;
+						cx = dcx <= 0 ? 0: dcx >= $(window).width() ? $(window).width(): dcx;
+						cy = dcy <= 0 ? 0: dcy >= $(window).height() ? $(window).height(): dcy;
 						if(dx != cx || dy != cy){
 							obj.css({
 								left: cx - x,
 								top: cy - y
 							}).show();
 						}
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
+					}).on('mouseup touchend', function(){
+						$(document).off('mousemove touchmove mouseup touchend');
 						obj.remove();
 						lay.hide();
 						//判断是否移动应用，如果没有则判断为click事件
@@ -457,33 +459,35 @@ HROS.app = (function(){
 				}
 			});
 			//桌面应用拖动
-			$('#desktop .desktop-apps-container').on('mousedown', '.appbtn', function(e){
+			$('#desktop .desktop-apps-container').on('mousedown touchstart', '.appbtn:not(.add)', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.which == 1 && !$(this).hasClass('add')){
+				if(e.which == 0 || e.which == 1){
 					var oldobj = $(this);
 					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
-					var dx = e.clientX;
-					var dy = e.clientY;
-					var cx = e.clientX;
-					var cy = e.clientY;
+					var dx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
+					var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var cy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					var x = dx - oldobj.offset().left;
 					var y = dy - oldobj.offset().top;
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
-					$(document).on('mousemove', function(e){
+					$(document).on('mousemove touchmove', function(e){
+						var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+						var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 						$('body').append(obj);
 						lay.show();
-						cx = e.clientX <= 0 ? 0: e.clientX >= $(window).width() ? $(window).width(): e.clientX;
-						cy = e.clientY <= 0 ? 0: e.clientY >= $(window).height() ? $(window).height(): e.clientY;
+						cx = dcx <= 0 ? 0: dcx >= $(window).width() ? $(window).width(): dcx;
+						cy = dcy <= 0 ? 0: dcy >= $(window).height() ? $(window).height(): dcy;
 						if(dx != cx || dy != cy){
 							obj.css({
 								left: cx - x,
 								top: cy - y
 							}).show();
 						}
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
+					}).on('mouseup touchend', function(){
+						$(document).off('mousemove touchmove mouseup touchend');
 						obj.remove();
 						lay.hide();
 						//判断是否移动应用，如果没有则判断为click事件
@@ -605,33 +609,35 @@ HROS.app = (function(){
 				}
 			});
 			//文件夹内应用拖动
-			$('body').on('mousedown', '.folder_body .appbtn, .quick_view_container .appbtn', function(e){
+			$('body').on('mousedown touchstart', '.folder_body .appbtn, .quick_view_container .appbtn', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.which == 1){
+				if(e.which == 0 || e.which == 1){
 					var oldobj = $(this);
 					var obj = $('<div id="shortcut_shadow">' + oldobj.html() + '</div>');
-					var dx = e.clientX;
-					var dy = e.clientY;
-					var cx = e.clientX;
-					var cy = e.clientY;
+					var dx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
+					var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var cy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					var x = dx - oldobj.offset().left;
 					var y = dy - oldobj.offset().top;
 					var lay = HROS.maskBox.desk();
 					//绑定鼠标移动事件
-					$(document).on('mousemove', function(e){
+					$(document).on('mousemove touchmove', function(e){
+						var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+						var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 						$('body').append(obj);
 						lay.show();
-						cx = e.clientX <= 0 ? 0: e.clientX >= $(window).width() ? $(window).width(): e.clientX;
-						cy = e.clientY <= 0 ? 0: e.clientY >= $(window).height() ? $(window).height(): e.clientY;
+						cx = dcx <= 0 ? 0: dcx >= $(window).width() ? $(window).width(): dcx;
+						cy = dcy <= 0 ? 0: dcy >= $(window).height() ? $(window).height(): dcy;
 						if(dx != cx || dy != cy){
 							obj.css({
 								left: cx - x,
 								top: cy - y
 							}).show();
 						}
-					}).on('mouseup', function(){
-						$(document).off('mousemove').off('mouseup');
+					}).on('mouseup touchend', function(){
+						$(document).off('mousemove touchmove mouseup touchend');
 						obj.remove();
 						lay.hide();
 						//判断是否移动应用，如果没有则判断为click事件

@@ -656,12 +656,13 @@ HROS.window = (function(){
 			}
 		},
 		handle: function(){
-			$('#desk').on('mousedown', '.window-container .title-bar .title-handle a, .window-container .set-bar a', function(e){
-				e.preventDefault();
+			$('#desk').on('mousedown touchstart', '.window-container .title-bar .title-handle a, .window-container .set-bar a', function(e){
+				if(e.type == 'mousedown'){
+					e.preventDefault();
+				}
 				e.stopPropagation();
 			});
 			$('#desk').on('dblclick', '.window-container .title-bar .title', function(e){
-				console.log(1);
 				var obj = $(this).parents('.window-container');
 				//判断当前窗口是否已经是最大化
 				if(obj.find('.ha-max').is(':hidden')){
@@ -684,7 +685,7 @@ HROS.window = (function(){
 			}).on('click', '.window-container .ha-fullscreen', function(){
 				var obj = $(this).parents('.window-container');
 				window.fullScreenApi.requestFullScreen(document.getElementById(obj.find('iframe').attr('id')));
-			}).on('click', '.window-container .ha-close', function(){
+			}).on('click', '.window-container .ha-close', function(e){
 				var obj = $(this).parents('.window-container');
 				HROS.window.close(obj.attr('appid'));
 			}).on('click', '.window-container .refresh', function(){
@@ -718,18 +719,23 @@ HROS.window = (function(){
 			});
 		},
 		move: function(){
-			$('#desk').on('mousedown', '.window-container .title-bar, .window-container .set-bar', function(e){
+			$('#desk').on('mousedown touchstart', '.window-container .title-bar, .window-container .set-bar', function(e){
+				e.preventDefault();
 				var obj = $(this).parents('.window-container');
 				if(obj.attr('ismax') == 1){
 					return false;
 				}
 				HROS.window.show2top(obj.attr('appid'));
 				var windowdata = obj.data('info');
-				var x = e.clientX - obj.offset().left;
-				var y = e.clientY - obj.offset().top;
+				var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+				var cy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
+				var x = cx - obj.offset().left;
+				var y = cy - obj.offset().top;
 				var lay;
 				//绑定鼠标移动事件
-				$(document).on('mousemove', function(e){
+				$(document).on('mousemove touchmove', function(e){
+					var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					lay = HROS.maskBox.desk();
 					lay.show();
 					//强制把右上角还原按钮隐藏，最大化按钮显示
@@ -737,13 +743,13 @@ HROS.window = (function(){
 					obj.css({
 						width: windowdata['width'],
 						height: windowdata['height'],
-						left: e.clientX - x,
-						top: e.clientY - y <= 10 ? 0: e.clientY - y >= lay.height()-30 ? lay.height()-30: e.clientY - y
+						left: dcx - x,
+						top: dcy - y <= 10 ? 0: dcy - y >= lay.height() - 30 ? lay.height() - 30: dcy - y
 					});
 					obj.data('info').left = obj.offset().left;
 					obj.data('info').top = obj.offset().top;
-				}).on('mouseup', function(){
-					$(this).off('mousemove').off('mouseup');
+				}).on('mouseup touchend', function(){
+					$(this).off('mousemove touchmove mouseup touchend');
 					if(typeof(lay) !== 'undefined'){
 						lay.hide();
 					}
@@ -751,20 +757,23 @@ HROS.window = (function(){
 			});
 		},
 		resize: function(obj){
-			$('#desk').on('mousedown', '.window-container .window-resize', function(e){
+			$('#desk').on('mousedown touchstart', '.window-container .window-resize', function(e){
+				e.preventDefault();
 				var obj = $(this).parents('.window-container');
 				var resizeobj = $(this);
 				var lay;
-				var x = e.clientX;
-				var y = e.clientY;
+				var x = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+				var y = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 				var w = obj.width();
 				var h = obj.height();
-				$(document).on('mousemove', function(e){
+				$(document).on('mousemove touchmove', function(e){
+					var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					lay = HROS.maskBox.desk();
 					lay.show();
 					//当拖动到屏幕边缘时，自动贴屏
-					var _x = e.clientX <= 10 ? 0: e.clientX >= (lay.width() - 12) ? (lay.width() - 2): e.clientX;
-					var _y = e.clientY <= 10 ? 0: e.clientY >= (lay.height() - 12) ? lay.height(): e.clientY;
+					var _x = dcx <= 10 ? 0 : (dcx >= (lay.width() - 12) ? (lay.width() - 2) : dcx);
+					var _y = dcy <= 10 ? 0 : (dcy >= (lay.height() - 12) ? lay.height() : dcy);
 					switch(resizeobj.attr('resize')){
 						case 't':
 							h + y - _y > HROS.CONFIG.windowMinHeight ? obj.css({
@@ -849,7 +858,7 @@ HROS.window = (function(){
 							});
 							break;
 					}
-				}).on('mouseup',function(){
+				}).on('mouseup touchend',function(){
 					if(typeof(lay) !== 'undefined'){
 						lay.hide();
 					}
@@ -859,7 +868,7 @@ HROS.window = (function(){
 					obj.data('info').top = obj.offset().top;
 					obj.data('info').emptyW = $(window).width() - obj.width();
 					obj.data('info').emptyH = $(window).height() - obj.height();
-					$(this).off('mousemove').off('mouseup');
+					$(this).off('mousemove touchmove mouseup touchend');
 				});
 			});
 		}

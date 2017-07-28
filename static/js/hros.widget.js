@@ -240,26 +240,31 @@ HROS.widget = (function(){
 			}
 		},
 		move: function(){
-			$('#desk').on('mousedown', '.widget .move', function(e){
+			$('#desk').on('mousedown touchstart', '.widget .move', function(e){
+				e.preventDefault();
 				var obj = $(this).parents('.widget');
 				HROS.widget.show2top(obj.attr('appid'));
-				var x = e.clientX - obj.offset().left;
-				var y = e.clientY - obj.offset().top;
+				var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+				var cy = e.type == 'mousedown' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
+				var x = cx - obj.offset().left;
+				var y = cy - obj.offset().top;
 				var lay;
 				var t;
 				var r;
 				//绑定鼠标移动事件
-				$(document).on('mousemove', function(e){
+				$(document).on('mousemove touchmove', function(e){
+					var dcx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var dcy = e.type == 'mousemove' ? e.clientY : e.originalEvent.targetTouches[0].clientY;
 					lay = HROS.maskBox.desk();
 					lay.show();
-					t = e.clientY - y < 0 ? 0: e.clientY - y;
-					r = $(window).width() - obj.width() - (e.clientX - x);
+					t = dcy - y < 0 ? 0: dcy - y;
+					r = $(window).width() - obj.width() - (dcx - x);
 					obj.css({
 						top: t,
 						right: r
 					});
-				}).on('mouseup', function(){
-					$(this).off('mousemove').off('mouseup');
+				}).on('mouseup touchend', function(){
+					$(this).off('mousemove touchmove mouseup touchend');
 					if(typeof(lay) !== 'undefined'){
 						lay.hide();
 					}

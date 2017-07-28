@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../static/css/sys.css">
 </head>
 <body>
-	<script src="../static/plugins/jquery-2.2.4.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 	<script src="../static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script type="text/javascript">
 	$(function(){

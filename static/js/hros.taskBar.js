@@ -90,10 +90,10 @@ HROS.taskBar = (function(){
 			}
 		},
 		move: function(){
-			$('#task-content-inner').on('mousedown', '.task-item', function(e){
+			$('#task-content-inner').on('mousedown touchstart', '.task-item', function(e){
 				e.preventDefault();
 				e.stopPropagation();
-				if(e.which == 1){
+				if(e.which == 0 || e.which == 1){
 					var self = $(this);
 					var task_left = self.offset().left;
 					var task_width = self.width();
@@ -101,14 +101,14 @@ HROS.taskBar = (function(){
 						left: task_left
 					});
 					var current_animate_id;
-					var dx = e.clientX;
-					var cx = e.clientX;
+					var dx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
+					var cx = e.type == 'mousedown' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
 					var lay = HROS.maskBox.desk();
-					$(document).on('mousemove', function(e){
+					$(document).on('mousemove touchmove', function(e){
 						$('body').append(drag);
 						self.css('opacity', 0);
 						lay.show();
-						cx = e.clientX;
+						cx = e.type == 'mousemove' ? e.clientX : e.originalEvent.targetTouches[0].clientX;
 						var left = cx - dx + task_left;
 						drag.css('left', left);
 						$('#task-content-inner').find('.task-item').each(function(i){
@@ -123,8 +123,8 @@ HROS.taskBar = (function(){
 								}
 							}
 						});
-					}).on('mouseup', function(e){
-						$(document).off('mousemove').off('mouseup');
+					}).on('mouseup touchend', function(e){
+						$(document).off('mousemove touchmove mouseup touchend');
 						lay.hide();
 						drag.animate({
 							left: self.offset().left
