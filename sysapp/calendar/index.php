@@ -252,6 +252,7 @@
 				calendar.fullCalendar('unselect');
 			},
 			editable: true,
+			eventLimit: true,
 			events: function(start, end, timezone, callback){
 				$.ajax({
 					type: 'POST',
