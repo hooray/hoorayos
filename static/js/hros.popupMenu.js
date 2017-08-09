@@ -38,8 +38,8 @@ HROS.popupMenu = (function(){
 		**  计算右键菜单位置
 		*/
 		calcPosition: function(e, obj){
-			var l = ($(window).width() - e.clientX) < obj.width() ? (e.clientX - obj.width()): e.clientX;
-			var t = ($(window).height() - e.clientY) < obj.height() ? (e.clientY - obj.height()): e.clientY;
+			var l = ($(window).width() - e.clientX) < obj.width() ? (e.clientX - obj.width()) : e.clientX;
+			var t = ($(window).height() - e.clientY) < obj.height() ? (e.clientY - obj.height()) : e.clientY;
 			obj.css({
 				left: l,
 				top: t

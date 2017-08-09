@@ -2,7 +2,7 @@
 /*!
  * Medoo database framework
  * https://medoo.in
- * Version 1.4.3
+ * Version 1.4.5
  *
  * Copyright 2017, Angel Lai
  * Released under the MIT license
@@ -298,16 +298,23 @@ class Medoo
 
 		$statement = $this->pdo->prepare($query);
 
-		foreach ($map as $key => $value)
+		if ($statement)
 		{
-			$statement->bindValue($key, $value[ 0 ], $value[ 1 ]);
+			foreach ($map as $key => $value)
+			{
+				$statement->bindValue($key, $value[ 0 ], $value[ 1 ]);
+			}
+
+			$statement->execute();
+
+			$this->statement = $statement;
+
+			return $statement;
 		}
-
-		$statement->execute();
-
-		$this->statement = $statement;
-
-		return $statement;
+		else
+		{
+			return false;
+		}
 	}
 
 	protected function generate($query, $map)
@@ -343,7 +350,7 @@ class Medoo
 
 	protected function mapKey()
 	{
-		return ':MeDoOmEdOo_' . $this->guid++;
+		return ':MeDoO_' . $this->guid++ . '_mEdOo';
 	}
 
 	protected function columnQuote($string)
@@ -464,6 +471,15 @@ class Medoo
 					preg_match('/(#?)([a-zA-Z0-9_\.]+)(\[(?<operator>\>|\>\=|\<|\<\=|\!|\<\>|\>\<|\!?~)\])?/i', $key, $match);
 					$column = $this->columnQuote($match[ 2 ]);
 
+					if (!empty($match[ 1 ]))
+					{
+						$wheres[] = $column .
+							(isset($match[ 'operator' ]) ? ' ' . $match[ 'operator' ] . ' ' : ' = ') .
+							$this->fnQuote($key, $value);
+
+						continue;
+					}
+
 					if (isset($match[ 'operator' ]))
 					{
 						$operator = $match[ 'operator' ];
@@ -539,8 +555,6 @@ class Medoo
 
 							foreach ($value as $index => $item)
 							{
-								$map_key .= 'L' . $index;
-
 								$item = strval($item);
 
 								if (!preg_match('/(\[.+\]|_|%.+|.+%)/', $item))
@@ -548,8 +562,8 @@ class Medoo
 									$item = '%' . $item . '%';
 								}
 
-								$like_clauses[] = $column . ($operator === '!~' ? ' NOT' : '') . ' LIKE ' . $map_key;
-								$map[ $map_key ] = [$item, PDO::PARAM_STR];
+								$like_clauses[] = $column . ($operator === '!~' ? ' NOT' : '') . ' LIKE ' . $map_key . 'L' . $index;
+								$map[ $map_key . 'L' . $index ] = [$item, PDO::PARAM_STR];
 							}
 
 							$wheres[] = '(' . implode($connector, $like_clauses) . ')';
@@ -563,10 +577,6 @@ class Medoo
 							{
 								$condition .= $map_key;
 								$map[ $map_key ] = [$value, PDO::PARAM_INT];
-							}
-							elseif (strpos($key, '#') === 0)
-							{
-								$condition .= $this->fnQuote($key, $value);
 							}
 							else
 							{
@@ -1458,7 +1468,7 @@ class Medoo
 
 	public function error()
 	{
-		return $this->statement->errorInfo();
+		return $this->statement ? $this->statement->errorInfo() : null;
 	}
 
 	public function last()

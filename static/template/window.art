@@ -38,7 +38,7 @@
         </div>
         <div class="set-bar">
             <div class="fr">
-                <a class="btn refresh" btn="refresh">
+                <a class="btn" btn="refresh">
                     <i class="fa fa-refresh"></i>
                     <span class="btn-con">刷新</span>
                 </a>
