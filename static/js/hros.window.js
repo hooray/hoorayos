@@ -87,7 +87,7 @@ HROS.window = (function(){
 						'isresize': options.isresize,
 						'isopenmax': options.isopenmax,
 						'istitlebar': options.isresize,
-						'istitlebarFullscreen': options.isresize ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
+						'istitlebarFullscreen': options.isresize ? (screenfull.enabled ? true : false) : false,
 						'isflash': options.isflash
 					};
 					$('#desk').append(HROS.template.window(windowData));
@@ -177,7 +177,7 @@ HROS.window = (function(){
 								'isresize': options.isresize == 1 ? true: false,
 								'isopenmax': options.isresize == 1 ? options.isopenmax == 1 ? true: false: false,
 								'istitlebar': options.isresize == 1 ? true: false,
-								'istitlebarFullscreen': options.isresize == 1 ? window.fullScreenApi.supportsFullScreen == true ? true: false: false,
+								'istitlebarFullscreen': options.isresize == 1 ? (screenfull.enabled ? true : false) : false,
 								'isflash': options.isflash == 1 ? true: false
 							};
 							$('#desk').append(HROS.template.window(windowData));
@@ -686,7 +686,7 @@ HROS.window = (function(){
 						HROS.window.revert(obj.attr('appid'));
 						break;
 					case 'fullscreen':
-						window.fullScreenApi.requestFullScreen(document.getElementById(obj.find('iframe').attr('id')));
+						screenfull.request(obj.find('iframe')[0]);
 						break;
 					case 'close':
 						HROS.window.close(obj.attr('appid'));
