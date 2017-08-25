@@ -99,7 +99,7 @@
 			break;
 		//注册
 		case 'register':
-			require('libs/clicaptcha/clicaptcha.class.php');
+			require('libs/system/clicaptcha/clicaptcha.class.php');
 			$clicaptcha = new clicaptcha();
 			if($clicaptcha->check($_POST['clicaptcha_info'])){
 				if(!$db->has('tb_member', array(

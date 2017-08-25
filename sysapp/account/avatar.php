@@ -21,11 +21,11 @@
 		<p id="swfContainer">本组件需要安装Flash Player后才可使用，请从<a href="http://www.adobe.com/go/getflashplayer">这里</a>下载安装。</p>
 	</div>
 	<?php include('sysapp/global_js.php'); ?>
-	<script src="../../libs/fullAvatarEditor-2.3/scripts/swfobject.js"></script>
-	<script src="../../libs/fullAvatarEditor-2.3/scripts/fullAvatarEditor.js"></script>
+	<script src="../../libs/system/fullAvatarEditor-2.3/scripts/swfobject.js"></script>
+	<script src="../../libs/system/fullAvatarEditor-2.3/scripts/fullAvatarEditor.js"></script>
 	<script>
 	swfobject.addDomLoadEvent(function () {
-		var swf = new fullAvatarEditor('../../libs/fullAvatarEditor-2.3/fullAvatarEditor.swf', '../../libs/fullAvatarEditor-2.3/expressInstall.swf', 'swfContainer', {
+		var swf = new fullAvatarEditor('../../libs/system/fullAvatarEditor-2.3/fullAvatarEditor.swf', '../../libs/system/fullAvatarEditor-2.3/expressInstall.swf', 'swfContainer', {
 				id: 'swf',
 				upload_url: 'ajax.php?ac=avatar', //上传接口
 				method: 'post', //传递到上传接口中的查询参数的提交方式。更改该值时，请注意更改上传接口中的查询参数的接收方式
