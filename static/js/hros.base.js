@@ -121,15 +121,15 @@ HROS.base = (function(){
 		},
 		getParameter: function(){
 			var url = location.search;
-			var request = new Object();
+			var parameter = new Object();
 			if(url.indexOf('?') != -1){
 				var str = url.substr(1);
 				strs = str.split('&');
 				for(var i = 0; i < strs.length; i++){
-					request[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1]);
+					parameter[strs[i].split('=')[0]] = decodeURIComponent(strs[i].split('=')[1]);
 				}
 			}
-			return request;
+			return parameter;
 		}
 	}
 })();
