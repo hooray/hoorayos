@@ -3,12 +3,20 @@
         <div class="title-bar">
             <img class="icon" src="<%=imgsrc%>" alt="<%=title%>"><span class="title"><%=title%></span>
             <div class="title-handle">
-                <a class="ha-hide" btn="hide" href="javascript:;" title="最小化"><b class="hide-b"></b></a>
+                <a class="ha-hide" btn="hide" href="javascript:;" title="最小化">
+                    <i class="hrosfont hros-window-hide"></i>
+                </a>
                 <% if(istitlebar){ %>
-                    <a class="ha-max" btn="max" href="javascript:;" title="最大化"><b class="max-b"></b></a>
-                    <a class="ha-revert" btn="revert" href="javascript:;" title="还原" style="display:none"><b class="revert-b"></b><b class="revert-t"></b></a>
+                    <a class="ha-max" btn="max" href="javascript:;" title="最大化" <% if(isopenmax){ %>style="display:none"<% } %>>
+                        <i class="hrosfont hros-window-max"></i>
+                    </a>
+                    <a class="ha-revert" btn="revert" href="javascript:;" title="还原" <% if(!isopenmax){ %>style="display:none"<% } %>>
+                        <i class="hrosfont hros-window-revert"></i>
+                    </a>
                 <% } %>
-                <a class="ha-close" btn="close" href="javascript:;" title="关闭">×</a>
+                <a class="ha-close" btn="close" href="javascript:;" title="关闭">
+                    <i class="hrosfont hros-window-close"></i>
+                </a>
             </div>
         </div>
         <div class="window-frame">

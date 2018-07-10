@@ -12,7 +12,7 @@ HROS.template = (function(){
 			}else{
 				$.ajax({
 					type: 'GET',
-					url: location.origin + 'static/template/' + path + '?' + new Date().getTime(),
+					url: location.origin + '/static/template/' + path + '?' + new Date().getTime(),
 					dataType: 'text',
 					async: false
 				}).done(function(cb){
