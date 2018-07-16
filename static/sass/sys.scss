@@ -259,20 +259,22 @@ form{
             overflow: auto;
             .app{
                 float: left;
-                width: 120px;
+                width: calc(20% - 12px);
                 height: 170px;
                 background-color: #eee;
                 margin-right: 15px;
                 margin-bottom: 15px;
+                &:nth-child(5n){
+                    margin-right: 0;
+                }
                 img{
+                    display: inherit;
                     width: 60px;
                     height: 60px;
-                    margin: 20px 30px 15px;
-                    border-radius: 5px;
+                    margin: 20px auto 15px;
                 }
                 .title{
                     @include ellipsis();
-                    width: 100px;
                     height: 20px;
                     line-height: 20px;
                     margin: 0 10px;
