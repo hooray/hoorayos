@@ -1,16 +1,16 @@
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-select/1.12.3/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-select/1.13.1/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-slider/9.8.1/bootstrap-slider.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap-slider/10.0.2/bootstrap-slider.min.js"></script>
 <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="//cdn.bootcss.com/artDialog/7.0.0/dialog-plus.js"></script>
+<script src="//cdn.bootcss.com/node-waves/0.7.6/waves.min.js"></script>
 <script src="../../static/plugins/HoorayLibs/hooraylibs.js"></script>
 <script src="../../static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
-<script src="../../static/plugins/Waves-0.7.5/dist/waves.min.js"></script>
 <script>
 $(function(){
 	//toolTip
