@@ -39,7 +39,7 @@
         <div class="set-bar">
             <div class="fr">
                 <a class="btn" btn="refresh">
-                    <i class="fa fa-refresh"></i>
+                    <i class="fas fa-sync"></i>
                     <span class="btn-con">刷新</span>
                 </a>
             </div>

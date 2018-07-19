@@ -76,13 +76,13 @@
 							echo '<div class="btn-group">';
 								if(in_array($v['tbid'], $myapplist)){
 									if($_POST['search_1'] == -2){
-										echo '<button type="button" class="btn btn-default btn-xs btn-run" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="打开应用"><i class="fa fa-share"></i> 打开应用</button>';
-										echo '<button type="button" class="btn btn-danger btn-xs btn-remove" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="删除应用"><i class="fa fa-remove"></i></button>';
+										echo '<button type="button" class="btn btn-default btn-xs btn-run" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="打开应用"><i class="fas fa-share"></i> 打开应用</button>';
+										echo '<button type="button" class="btn btn-danger btn-xs btn-remove" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="删除应用"><i class="fas fa-trash-alt"></i></button>';
 									}else{
-										echo '<button type="button" class="btn btn-default btn-xs btn-run" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="打开应用"><i class="fa fa-share"></i> 打开应用</button>';
+										echo '<button type="button" class="btn btn-default btn-xs btn-run" app_id="'.$myapplist2[$v['tbid']].'" real_app_id="'.$v['tbid'].'" app_type="'.$v['type'].'" title="打开应用"><i class="fas fa-share"></i> 打开应用</button>';
 									}
 								}else{
-									echo '<button type="button" class="btn btn-primary btn-xs btn-add" real_app_id="'.$v['tbid'].'" title="添加应用"><i class="fa fa-plus"></i> 添加应用</button>';
+									echo '<button type="button" class="btn btn-primary btn-xs btn-add" real_app_id="'.$v['tbid'].'" title="添加应用"><i class="fas fa-plus"></i> 添加应用</button>';
 								}
 							echo '</div>';
 						echo '</div>';

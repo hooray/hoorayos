@@ -2,14 +2,14 @@
     <ul>
         <li>
             <a menu="download" href="javascript:;">
-                <i class="fa fa-fw fa-cloud-download"></i>
+                <i class="fas fa-fw fa-file-download"></i>
                 下载
             </a>
         </li>
         <li class="separator"></li>
         <li>
             <a menu="del" href="javascript:;">
-                <i class="fa fa-fw fa-trash"></i>
+                <i class="fas fa-fw fa-trash-alt"></i>
                 删除
             </a>
         </li>

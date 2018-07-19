@@ -46,7 +46,7 @@
 	<meta name="description" content="<?php echo $setting['description']; ?>" />
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 	<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 	<link href="//at.alicdn.com/t/font_2dkt72ag040io1or.css" rel="stylesheet">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
@@ -237,10 +237,10 @@
 		<div id="startmenu-container">
 			<div class="startmenu-selfinfo">
 				<a href="javascript:;" class="startmenu-feedback" title="反馈">
-					<i class="fa fa-question"></i>
+					<i class="fas fa-question-circle"></i>
 				</a>
 				<a href="javascript:;" class="startmenu-lock" title="锁定，快捷键：Ctrl + L">
-					<i class="fa fa-lock"></i>
+					<i class="fas fa-lock"></i>
 				</a>
 				<div class="startmenu-avatar"><img src="static/img/loading_24.gif"></div>
 				<div class="startmenu-nick">
@@ -267,7 +267,7 @@
 		</div>
 		<div id="search-bar">
 			<input id="pageletSearchInput" class="mousetrap" placeholder="搜索应用...">
-			<button type="button" id="pageletSearchButton" title="搜索"><i class="fa fa-search"></i></button>
+			<button type="button" id="pageletSearchButton" title="搜索"><i class="fas fa-search"></i></button>
 		</div>
 		<div id="search-suggest">
 			<ul class="resultBox"></ul>

@@ -41,7 +41,7 @@
 						<input type="text" class="form-control" id="search_2" placeholder="请输入搜索关键字" value="<?php echo $_GET['searchkey']; ?>">
 						<span class="input-group-btn">
 							<button id="search_2_do" class="btn btn-primary">
-								<i class="fa fa-search"></i> 搜索
+								<i class="fas fa-search"></i> 搜索
 							</button>
 						</span>
 					</div>
