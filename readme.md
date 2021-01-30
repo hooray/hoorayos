@@ -16,6 +16,28 @@
 
 推荐使用 [WampServer](https://sourceforge.net/projects/wampserver/) 运行，需要安装 composer 并在项目内执行 `composer i` 安装依赖，然后将 `_sql/hoorayos.sql` 数据库文件导入到 mysql 中，最后在 `inc/config.php` 里修改数据库连接配置即可。
 
+管理员默认帐号/密码均为：`hoorayos`
+
 ## 主要技术栈
 
 php + mysql + jquery
+
+## 预览
+
+<table>
+    <tr>
+        <td><img src="preview/1.png" /></td>
+        <td><img src="preview/2.png" /></td>
+        <td><img src="preview/3.png" /></td>
+    </tr>
+    <tr>
+        <td><img src="preview/4.png" /></td>
+        <td><img src="preview/5.png" /></td>
+        <td><img src="preview/6.png" /></td>
+    </tr>
+    <tr>
+        <td><img src="preview/7.png" /></td>
+        <td><img src="preview/8.png" /></td>
+        <td><img src="preview/9.png" /></td>
+    </tr>
+</table>
