@@ -46,7 +46,7 @@
 	<meta name="description" content="<?php echo $setting['description']; ?>" />
 	<meta name="keywords" content="<?php echo $setting['keywords']; ?>" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<link href="//cdn.bootcdn.net/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
 	<link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
 	<link href="//at.alicdn.com/t/font_2dkt72ag040io1or.css" rel="stylesheet">
 	<link rel="stylesheet" href="static/plugins/HoorayLibs/hooraylibs.css">
