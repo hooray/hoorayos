@@ -332,7 +332,6 @@
 	<script src="static/plugins/HoorayLibs/hooraylibs.js"></script>
 	<script src="static/plugins/Validform_v5.3.2/Validform_v5.3.2_min.js"></script>
 	<script src="libs/system/clicaptcha/clicaptcha.js"></script>
-	<!-- 通过js目录下的两个批处理文件，可以合并并压缩js代码 -->
 	<script src="static/js/hros.core.js"></script>
 	<script src="static/js/hros.app.js"></script>
 	<script src="static/js/hros.appmanage.js"></script>
@@ -353,8 +352,6 @@
 	<script src="static/js/hros.wallpaper.js"></script>
 	<script src="static/js/hros.widget.js"></script>
 	<script src="static/js/hros.window.js"></script>
-	<!-- 执行完毕后可将上面所有hros开头的js文件引用删除，然后去掉下面这句代码的注释即可 -->
-	<!-- <script src="static/js/hros.min.js"></script> -->
 	<script>
 	var childWindow, interval;
 	$(function(){
