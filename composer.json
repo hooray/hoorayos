@@ -3,7 +3,7 @@
         "vendor-dir": "libs/vendor"
     },
     "require": {
-        "catfan/Medoo": "~1.4"
+        "catfan/medoo": "~1.4"
     },
     "autoload": {
         "files": [
